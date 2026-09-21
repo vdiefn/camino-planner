@@ -1,0 +1,5642 @@
+[
+  {
+    "id": "ACC_SJPP_MUNICIPAL",
+    "waypointId": "SJPP",
+    "name": "Albergue Municipal de Peregrinos (55 Rue de la Citadelle)",
+    "chineseName": "SJPP 城堡街公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+33 5 59 37 05 09",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://www.aucoeurduchemin.org/"
+  },
+  {
+    "id": "ACC_SJPP_BEILARI",
+    "waypointId": "SJPP",
+    "name": "Gîte Beilari",
+    "chineseName": "貝拉里溫馨私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://beilari.info/"
+  },
+  {
+    "id": "ACC_SJPP_CHEMIN",
+    "waypointId": "SJPP",
+    "name": "Gîte Le Chemin Vers l'Étoile",
+    "chineseName": "繁星之徑朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+33 5 59 37 20 71",
+    "bookingComUrl": "https://www.booking.com/hotel/fr/le-chemin-vers-l-etoile.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HUNTTO_ITHURBURIA",
+    "waypointId": "HUNTTO",
+    "name": "Gîte Ferme Ithurburia",
+    "chineseName": "亨托農莊庇護所",
+    "type": "PRIVATE",
+    "phone": "+33 5 59 37 11 17",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ORISSON_REFUGE",
+    "waypointId": "ORISSON",
+    "name": "Refuge Orisson",
+    "chineseName": "奧里松山屋庇護所",
+    "type": "PRIVATE",
+    "phone": "+33 5 59 37 23 26",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://refuge-orisson.com/"
+  },
+  {
+    "id": "ACC_VALCARLOS_MUNICIPAL",
+    "waypointId": "VALCARLOS",
+    "name": "Albergue Municipal de Valcarlos",
+    "chineseName": "瓦卡洛斯公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 79 01 17",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RONCESVALLES_MONASTERY",
+    "waypointId": "RONCESVALLES",
+    "name": "Albergue de Peregrinos de Roncesvalles (Real Colegiata)",
+    "chineseName": "龍塞斯瓦列斯皇家修道院大庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 76 00 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://alberguederoncesvalles.com/"
+  },
+  {
+    "id": "ACC_RONCESVALLES_POSADA",
+    "waypointId": "RONCESVALLES",
+    "name": "Posada de Roncesvalles",
+    "chineseName": "羅塞斯瓦列斯客棧",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/posada-de-roncesvalles-roncesvalles.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RONCESVALLES_SABINA",
+    "waypointId": "RONCESVALLES",
+    "name": "Hotel Rural Casa Sabina",
+    "chineseName": "薩比娜鄉村旅舍",
+    "type": "HOSTEL",
+    "phone": "+34 948 76 00 12",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-sabina-roncesvalles.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGUETE_JUANTORENA",
+    "waypointId": "BURGUETE",
+    "name": "Hotel Juantorena",
+    "chineseName": "胡安托雷納傳統旅館",
+    "type": "HOSTEL",
+    "phone": "+34 948 76 00 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGUETE_LOIZU",
+    "waypointId": "BURGUETE",
+    "name": "Hostal Loizu",
+    "chineseName": "洛伊祖客棧 (海明威故居)",
+    "type": "HOSTEL",
+    "phone": "+34 948 76 00 08",
+    "bookingComUrl": "https://www.booking.com/hotel/es/loizu.es.html",
+    "officialWebsiteUrl": "https://loizu.com/"
+  },
+  {
+    "id": "ACC_ZUBIRI_MUNICIPAL",
+    "waypointId": "ZUBIRI",
+    "name": "Albergue de Peregrinos de Zubiri",
+    "chineseName": "祖比里公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 30 40 47",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZUBIRI_ZALDIKO",
+    "waypointId": "ZUBIRI",
+    "name": "Albergue Zaldiko",
+    "chineseName": "扎爾迪科私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 30 40 03",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZUBIRI_PALO",
+    "waypointId": "ZUBIRI",
+    "name": "Albergue El Palo de Avellano",
+    "chineseName": "榛木之杖精緻庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 666 49 91 75",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZUBIRI_SEGUNDA_ETAPA",
+    "waypointId": "ZUBIRI",
+    "name": "Albergue Segunda Etapa",
+    "chineseName": "第二階段私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 608 04 22 28",
+    "bookingComUrl": "https://www.booking.com/hotel/es/segunda-etapa.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZUBIRI_RIO_ARGA",
+    "waypointId": "ZUBIRI",
+    "name": "Albergue Río Arga Ibaia",
+    "chineseName": "阿爾加河畔庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 650 96 11 96",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZUBIRI_TXANTXORENA",
+    "waypointId": "ZUBIRI",
+    "name": "Pensión Txantxorena",
+    "chineseName": "昌喬雷納鄉村客棧",
+    "type": "PRIVATE",
+    "phone": "+34 679 12 93 96",
+    "bookingComUrl": "https://www.booking.com/hotel/es/txantxorena.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZUBIRI_GAU_TXORI",
+    "waypointId": "ZUBIRI",
+    "name": "Hostal Gau Txori",
+    "chineseName": "夜鳥經典朝聖客棧",
+    "type": "HOSTEL",
+    "phone": "+34 948 30 40 46",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-gau-txori.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZUBIRI_AKERRETA",
+    "waypointId": "ZUBIRI",
+    "name": "Hotel Rural Akerreta",
+    "chineseName": "阿克雷塔古宅鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 30 40 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/akerreta.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LARRASOANA_MUNICIPAL",
+    "waypointId": "LARRASOANA",
+    "name": "Albergue Municipal de Larrasoaña",
+    "chineseName": "拉拉索阿尼亞公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 30 42 16",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LARRASOANA_SAN_NICOLAS",
+    "waypointId": "LARRASOANA",
+    "name": "Albergue San Nicolás",
+    "chineseName": "聖尼古拉斯私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 620 90 28 85",
+    "bookingComUrl": "https://www.booking.com/hotel/es/san-nicolas-larrasoana.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_JESUS_MARIA",
+    "waypointId": "PAMPLONA",
+    "name": "Albergue de Peregrinos Jesús y María",
+    "chineseName": "耶穌瑪利亞公立庇護所 (大教堂旁)",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 22 26 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_PADERBORN",
+    "waypointId": "PAMPLONA",
+    "name": "Albergue Casa Paderborn",
+    "chineseName": "帕德博恩德意志友好會庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 21 10 99",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_PLAZA_CATEDRAL",
+    "waypointId": "PAMPLONA",
+    "name": "Hostel Plaza Catedral",
+    "chineseName": "大教堂廣場青年旅館",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-plaza-catedral.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIZUR_ORDEN_MALTA",
+    "waypointId": "CIZUR_MENOR",
+    "name": "Albergue de la Orden de Malta",
+    "chineseName": "馬爾他騎士團庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 18 35 75",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIZUR_RONCAL",
+    "waypointId": "CIZUR_MENOR",
+    "name": "Albergue Roncal",
+    "chineseName": "朗卡爾私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 28 53 10",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-roncal.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PUENTE_REPARADORES",
+    "waypointId": "PUENTE_LA_REINA",
+    "name": "Albergue de Peregrinos Padres Reparadores",
+    "chineseName": "修會神父朝聖者庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 34 00 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PUENTE_SANTIAGO",
+    "waypointId": "PUENTE_LA_REINA",
+    "name": "Albergue Santiago Apóstol",
+    "chineseName": "聖地牙哥使徒私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 04 60",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-santiago-apostol-puente-la-reina.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PUENTE_JAKUE",
+    "waypointId": "PUENTE_LA_REINA",
+    "name": "Hotel Albergue Jakue",
+    "chineseName": "傑克斯朝聖者旅館庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 10 17",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-jakue.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_MUNICIPAL",
+    "waypointId": "ESTELLA",
+    "name": "Albergue de Peregrinos de Estella",
+    "chineseName": "埃斯特利亞公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 55 45 42",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_AGORA",
+    "waypointId": "ESTELLA",
+    "name": "Albergue Ágora Hostel",
+    "chineseName": "阿戈拉現代青年旅館",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/agora-hostel.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOS_ARCOS_MUNICIPAL",
+    "waypointId": "LOS_ARCOS",
+    "name": "Albergue de Peregrinos Isaac Santiago (Municipal)",
+    "chineseName": "伊薩克聖地牙哥公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 64 00 21",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOS_ARCOS_AUSTRIA",
+    "waypointId": "LOS_ARCOS",
+    "name": "Albergue Casa de Austria",
+    "chineseName": "奧地利朝聖者之家",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 64 07 97",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOS_ARCOS_ABUELA",
+    "waypointId": "LOS_ARCOS",
+    "name": "Albergue Casa de la Abuela",
+    "chineseName": "祖母之家私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-casa-de-la-abuela.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VIANA_MUNICIPAL",
+    "waypointId": "VIANA",
+    "name": "Albergue de Peregrinos Andrés Muñoz",
+    "chineseName": "安德烈斯穆尼奧斯公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 64 50 07",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VIANA_PALACIO_PUJADAS",
+    "waypointId": "VIANA",
+    "name": "Palacio Pujadas by Pandora Hoteles",
+    "chineseName": "普哈達斯宮殿飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 64 64 64",
+    "bookingComUrl": "https://www.booking.com/hotel/es/palacio-pujadas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_MUNICIPAL",
+    "waypointId": "LOGRONO",
+    "name": "Albergue de Peregrinos de Logroño",
+    "chineseName": "洛格羅尼奧市營公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 941 25 29 53",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_PARROQUIAL",
+    "waypointId": "LOGRONO",
+    "name": "Albergue Parroquial Santiago el Real",
+    "chineseName": "皇家聖雅各堂區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 941 20 95 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_NUMANTINA",
+    "waypointId": "LOGRONO",
+    "name": "Hostal La Numantina",
+    "chineseName": "努曼西亞經典客棧",
+    "type": "HOSTEL",
+    "phone": "+34 941 25 14 11",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-la-numantina.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAJERA_MUNICIPAL",
+    "waypointId": "NAJERA",
+    "name": "Albergue de Peregrinos de Nájera",
+    "chineseName": "納赫拉公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 941 36 00 41",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAJERA_PUERTA",
+    "waypointId": "NAJERA",
+    "name": "Albergue Puerta de Nájera",
+    "chineseName": "納赫拉之門優質私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 941 36 23 17",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAJERA_CIUDAD",
+    "waypointId": "NAJERA",
+    "name": "Hostal Ciudad de Nájera",
+    "chineseName": "納赫拉城客棧",
+    "type": "HOSTEL",
+    "phone": "+34 941 36 36 29",
+    "bookingComUrl": "https://www.booking.com/hotel/es/ciudad-de-najera.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_COFRADIA",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Albergue de Peregrinos Cofradía del Santo",
+    "chineseName": "聖人兄弟會歷史庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 941 34 00 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_ABADIA",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Albergue Abadía Cisterciense",
+    "chineseName": "熙篤會修女庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 941 34 07 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_CASA_SANTO",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Hostel Casa del Santo",
+    "chineseName": "聖人之家私立青年旅館",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-del-santo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_MIGUEL_ANGEL",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Hostal Miguel Angel",
+    "chineseName": "米蓋爾安赫爾客棧",
+    "type": "HOSTEL",
+    "phone": "+34 941 34 00 24",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-miguel-angel.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BELORADO_MUNICIPAL",
+    "waypointId": "BELORADO",
+    "name": "Albergue Parroquial San Lázaro",
+    "chineseName": "聖拉薩羅堂區/公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 947 58 08 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BELORADO_CUATRO_CANTONES",
+    "waypointId": "BELORADO",
+    "name": "Albergue Cuatro Cantones",
+    "chineseName": "四季私立泳池庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 04 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-de-peregrinos-cuatro-cantones.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BELORADO_BASAULA",
+    "waypointId": "BELORADO",
+    "name": "Hostal Basaula",
+    "chineseName": "巴紹拉歷史客棧",
+    "type": "HOSTEL",
+    "phone": "+34 947 58 01 27",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-basaula.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_JUAN_MONASTERY",
+    "waypointId": "SAN_JUAN_DE_ORTEGA",
+    "name": "Albergue del Monasterio de San Juan de Ortega",
+    "chineseName": "聖胡安修道院庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 947 56 12 79",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_JUAN_CASA_RURAL",
+    "waypointId": "SAN_JUAN_DE_ORTEGA",
+    "name": "Casa Rural San Juan",
+    "chineseName": "聖胡安鄉村旅館",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 10 79",
+    "bookingComUrl": "https://www.booking.com/hotel/es/rural-la-henera.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_MUNICIPAL",
+    "waypointId": "BURGOS",
+    "name": "Albergue de Peregrinos de Burgos (Casa del Cubo)",
+    "chineseName": "布爾戈斯公立庇護所 (立方之家)",
+    "type": "MUNICIPAL",
+    "phone": "+34 947 46 09 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_DIVINA_PASTORA",
+    "waypointId": "BURGOS",
+    "name": "Albergue Divina Pastora",
+    "chineseName": "善牧堂區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 947 20 95 72",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_HOSTAL",
+    "waypointId": "BURGOS",
+    "name": "Hostel Burgos",
+    "chineseName": "布爾戈斯現代青年旅館",
+    "type": "HOSTEL",
+    "phone": "+34 947 41 45 42",
+    "bookingComUrl": "https://www.booking.com/hotel/es/mola-hostel-burgos.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HORNILLOS_MUNICIPAL",
+    "waypointId": "HORNILLOS_DEL_CAMINO",
+    "name": "Albergue Municipal de Hornillos",
+    "chineseName": "奧爾尼約斯公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 947 15 80 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HORNILLOS_ENCUENTRO",
+    "waypointId": "HORNILLOS_DEL_CAMINO",
+    "name": "Albergue El Encuentro",
+    "chineseName": "相遇私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 628 89 22 14",
+    "bookingComUrl": "https://www.booking.com/hotel/es/el-encuentro-hornillos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_MUNICIPAL",
+    "waypointId": "CASTROJERIZ",
+    "name": "Albergue de Peregrinos San Esteban",
+    "chineseName": "聖埃斯特萬公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 947 37 70 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_ULTREIA",
+    "waypointId": "CASTROJERIZ",
+    "name": "Albergue Ultreia",
+    "chineseName": "前進 (Ultreia) 優質私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 378 640",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_ROSALIA",
+    "waypointId": "CASTROJERIZ",
+    "name": "Albergue Rosalía",
+    "chineseName": "羅莎莉亞私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 373 714",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_QUINTA_SAN_QUIRCE",
+    "waypointId": "CASTROJERIZ",
+    "name": "Hotel Rural Quinta San Francisco",
+    "chineseName": "聖基爾切莊園鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 37 73 99",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://www.hotelruralquintasanfrancisco.com/"
+  },
+  {
+    "id": "ACC_FROMISTA_MUNICIPAL",
+    "waypointId": "FROMISTA",
+    "name": "Albergue de Peregrinos de Frómista",
+    "chineseName": "弗羅米斯塔公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 979 81 02 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FROMISTA_ESTRELLA",
+    "waypointId": "FROMISTA",
+    "name": "Albergue Estrella del Camino",
+    "chineseName": "朝聖之星私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 689 79 17 07",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-estrella-del-camino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CARRION_SANTA_MARIA",
+    "waypointId": "CARRION_DE_LOS_CONDES",
+    "name": "Albergue Parroquial Santa María",
+    "chineseName": "聖瑪利亞堂區修女庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 979 88 00 48",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CARRION_SANTA_CLARA",
+    "waypointId": "CARRION_DE_LOS_CONDES",
+    "name": "Albergue Convento de Santa Clara",
+    "chineseName": "聖克拉拉修道院庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 979 88 01 34",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEDIGOS_MUNICIPAL",
+    "waypointId": "LEDIGOS",
+    "name": "Albergue El Palomar (Municipal)",
+    "chineseName": "鴿舍公立/私立聯合庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 979 88 36 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEDIGOS_LA_MORENA",
+    "waypointId": "LEDIGOS",
+    "name": "Albergue La Morena",
+    "chineseName": "莫雷納私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-morena.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAHAGUN_MUNICIPAL",
+    "waypointId": "SAHAGUN",
+    "name": "Albergue Municipal Clarisas (Monasterio Santa Cruz)",
+    "chineseName": "聖十字修道院公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 78 00 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_EL_BURGO_DOMENICO",
+    "waypointId": "EL_BURGO_RANERO",
+    "name": "Albergue Municipal Domenico Laffi",
+    "chineseName": "多梅尼科公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 33 00 89",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_EL_BURGO_LAGUNA",
+    "waypointId": "EL_BURGO_RANERO",
+    "name": "Albergue La Laguna",
+    "chineseName": "水塘私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 607 163 982",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-laguna.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MANSILLA_MUNICIPAL",
+    "waypointId": "MANSILLA_DE_LAS_MULAS",
+    "name": "Albergue de Peregrinos de Mansilla",
+    "chineseName": "曼西利亞公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 31 01 34",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MANSILLA_GAIA",
+    "waypointId": "MANSILLA_DE_LAS_MULAS",
+    "name": "Albergue Gaia",
+    "chineseName": "蓋亞私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 310 308",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_BENEDICTINAS",
+    "waypointId": "LEON",
+    "name": "Albergue Monasterio de las Benedictinas (Carbajalas)",
+    "chineseName": "雷昂本篤會修女庇護所 (Carbajalas)",
+    "type": "PAROCHIAL",
+    "phone": "+34 680 649 289",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_SAN_FRANCISCO",
+    "waypointId": "LEON",
+    "name": "Albergue San Francisco de Asís",
+    "chineseName": "聖方濟各公立/教會庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 21 50 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_GLOBETROTTER",
+    "waypointId": "LEON",
+    "name": "Globetrotter Urban Hostel",
+    "chineseName": "環球旅者市中心青年旅館",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/globetrotter-urban-hostel.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_POSADA_REGIA",
+    "waypointId": "LEON",
+    "name": "Posada Regia",
+    "chineseName": "皇家客棧歷史飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 21 31 73",
+    "bookingComUrl": "https://www.booking.com/hotel/es/posada-regia.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLADANGOS_MUNICIPAL",
+    "waypointId": "VILLADANGOS",
+    "name": "Albergue Municipal de Villadangos",
+    "chineseName": "比利亞丹戈斯公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 39 03 54",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLADANGOS_SOL",
+    "waypointId": "VILLADANGOS",
+    "name": "Albergue Sonrisas",
+    "chineseName": "微笑私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/sonrisas-villadangos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_MUNICIPAL",
+    "waypointId": "ASTORGA",
+    "name": "Albergue de Peregrinos San Javier",
+    "chineseName": "聖哈維爾公立庇護所 (大教堂正對面)",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 61 85 32",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_SIERVAS",
+    "waypointId": "ASTORGA",
+    "name": "Albergue Siervas de María",
+    "chineseName": "聖母僕女會庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 61 60 34",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_MY_WAY",
+    "waypointId": "ASTORGA",
+    "name": "Albergue My Way",
+    "chineseName": "我的方式私立青年旅館",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/myway.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_SAN_JERONIMO",
+    "waypointId": "ASTORGA",
+    "name": "Hostal Residencia San Jerónimo",
+    "chineseName": "聖傑羅尼莫客棧",
+    "type": "HOSTEL",
+    "phone": "+34 987 61 74 25",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-san-jeronimo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_CSJ",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Albergue San José (CSJ 英國聖雅各會)",
+    "chineseName": "聖若瑟庇護所 (英國聖雅各修會)",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 69 19 86",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_MUNICIPAL",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Albergue Nuestra Señora del Pilar",
+    "chineseName": "柱頂聖母公立/私立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 69 19 72",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_GUASON",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Posada El Tesín",
+    "chineseName": "特辛山莊客棧",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/posada-el-tesin.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_SAN_NICOLAS",
+    "waypointId": "PONFERRADA",
+    "name": "Albergue Parroquial San Nicolás de Flüe",
+    "chineseName": "聖尼古拉堂區大庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 41 33 81",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_ALEA",
+    "waypointId": "PONFERRADA",
+    "name": "Albergue Alea",
+    "chineseName": "阿萊亞私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 41 80 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_GUIANA",
+    "waypointId": "PONFERRADA",
+    "name": "Hostel Guiana",
+    "chineseName": "吉亞納現代青年旅館",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-guiana.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_AVE_FENIX",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Albergue Ave Fénix (Jesús Jato)",
+    "chineseName": "不死鳥傳奇庇護所 (耶穌哈托)",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 02 29",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_MUNICIPAL",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Albergue de Peregrinos de Villafranca (Municipal)",
+    "chineseName": "自由鎮公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 54 23 56",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_PIEDRA",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Albergue de la Piedra",
+    "chineseName": "巨石私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-de-la-piedra-villafranca-del-bierzo.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_O_CEBREIRO_MUNICIPAL",
+    "waypointId": "O_CEBREIRO",
+    "name": "Albergue de Peregrinos de O Cebreiro (Xunta de Galicia)",
+    "chineseName": "加利西亞官方公立大庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 36 70 25",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_O_CEBREIRO_NAVARRO",
+    "waypointId": "O_CEBREIRO",
+    "name": "Casa Navarro Hostal",
+    "chineseName": "納瓦羅傳統客棧",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-navarro-o-cebreiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_O_CEBREIRO_RURAL",
+    "waypointId": "O_CEBREIRO",
+    "name": "Hotel Rural O Cebreiro",
+    "chineseName": "奧塞布雷羅景觀鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 36 71 25",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_MUNICIPAL",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue de Peregrinos de Triacastela (Xunta)",
+    "chineseName": "特里亞卡斯特拉官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 54 81 74",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_BERCE",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue Berce do Camiño",
+    "chineseName": "朝聖之搖籃私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-berce-do-camino.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_XACOBEO",
+    "waypointId": "TRIACASTELA",
+    "name": "Complexo Xacobeo",
+    "chineseName": "聖雅各綜合度假村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 80 57",
+    "bookingComUrl": "https://www.booking.com/hotel/es/complexo-xacobeo-triacastela.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_XIL_DON_ALVARO",
+    "waypointId": "SAN_XIL",
+    "name": "Albergue Casa Don Álvaro",
+    "chineseName": "阿爾瓦羅先生鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 620 91 85 97",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-don-alvaro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CALVOR_MUNICIPAL",
+    "waypointId": "CALVOR",
+    "name": "Albergue de Peregrinos de Calvor",
+    "chineseName": "卡爾沃爾公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 53 30 06",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_MUNICIPAL",
+    "waypointId": "SARRIA",
+    "name": "Albergue de Peregrinos de Sarria (Xunta)",
+    "chineseName": "薩里亞官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 53 08 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_MAYOR",
+    "waypointId": "SARRIA",
+    "name": "Albergue Mayor",
+    "chineseName": "薩里亞主街優質私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-mayor.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_MAGDALENA",
+    "waypointId": "SARRIA",
+    "name": "Albergue Monasterio de la Magdalena",
+    "chineseName": "瑪格達萊納古修道院庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 982 53 01 02",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BARBADELO_A_CONLLECHE",
+    "waypointId": "BARBADELO",
+    "name": "Albergue A Conlleche",
+    "chineseName": "康萊切私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 35 44",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-a-conlleche.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BARBADELO_CASA_CARMEN",
+    "waypointId": "BARBADELO",
+    "name": "Casa de Carmen",
+    "chineseName": "卡門女士鄉村莊園飯店",
+    "type": "HOTEL",
+    "phone": "+34 689 44 45 42",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-de-carmen.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MORGADE_CASA_MORGADE",
+    "waypointId": "MORGADE",
+    "name": "Albergue Casa Morgade",
+    "chineseName": "莫爾加德古宅客棧庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 62 14",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-morgade.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MERCADOIRO_ALBERGUE",
+    "waypointId": "MERCADOIRO",
+    "name": "Albergue Mercadoiro",
+    "chineseName": "米爾卡多伊羅景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 63 60",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-mercadoiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_MUNICIPAL",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue de Peregrinos de Portomarín (Xunta)",
+    "chineseName": "波爾托馬林官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 54 52 13",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_FERREIRA",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue PortoSantiago",
+    "chineseName": "波爾托聖地牙哥私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/portosantiago.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_AQUA",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Aqua Portomarín",
+    "chineseName": "水漾波爾托私立青旅",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/aqua-portomarin.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROMAIOR_O_CASTRO",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue O Castro",
+    "chineseName": "卡斯楚馬約爾塞爾特古堡庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 646 95 90 28",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-castro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HOSPITAL_DA_CRUZ_MUNICIPAL",
+    "waypointId": "HOSPITAL_DA_CRUZ",
+    "name": "Albergue de Peregrinos Hospital da Cruz",
+    "chineseName": "十字架醫院公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 545 232",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VENTAS_DE_NARON_CASA_GARZA",
+    "waypointId": "VENTAS_DE_NARON",
+    "name": "Casa Da Garza",
+    "chineseName": "加爾薩石造客棧旅館",
+    "type": "HOTEL",
+    "phone": "+34 982 15 76 83",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-da-garza.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LIGONDE_FUENTE_PEREGRINO",
+    "waypointId": "LIGONDE",
+    "name": "Albergue Fuente del Peregrino",
+    "chineseName": "朝聖者之泉溫馨庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 687 550 527",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_EIREXE_MUNICIPAL",
+    "waypointId": "EIREXE",
+    "name": "Albergue de Peregrinos de Eirexe",
+    "chineseName": "埃雷謝官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 153 483",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_MUNICIPAL",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue de Peregrinos de Palas de Rei (Xunta)",
+    "chineseName": "帕拉斯德雷伊官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 38 04 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_SAN_MARCOS",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue San Marcos",
+    "chineseName": "聖馬科斯私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-san-marcos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_RONSEIS",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue Os Ronséis",
+    "chineseName": "痕跡 (Os Ronséis) 森林庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/os-ronseis.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_XULIAN_CAMINO",
+    "waypointId": "SAN_XULIAN",
+    "name": "Albergue San Xulián",
+    "chineseName": "聖胡利安村落庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 689 39 88 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASANOVA_MUNICIPAL",
+    "waypointId": "CASANOVA",
+    "name": "Albergue de Peregrinos de Casanova",
+    "chineseName": "卡薩諾瓦公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 18 13 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEBOREIRO_MIRADOR",
+    "waypointId": "LEBOREIRO",
+    "name": "Albergue Mirador de Leboreiro",
+    "chineseName": "萊博雷羅觀景庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 639 52 39 29",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FURELOS_ALBERGUE",
+    "waypointId": "FURELOS",
+    "name": "Albergue de Furelos",
+    "chineseName": "富雷洛斯古橋庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 689 77 17 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-de-furelos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BOENTE_ALBERGUE",
+    "waypointId": "BOENTE",
+    "name": "Albergue Boente",
+    "chineseName": "博恩特溫馨花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 17 07",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-boente.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BOENTE_OS_ALBERGUES",
+    "waypointId": "BOENTE",
+    "name": "Albergue Os Albergues",
+    "chineseName": "阿爾貝格斯現代私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 17 80",
+    "bookingComUrl": "https://www.booking.com/hotel/es/os-albergues.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_MUNICIPAL",
+    "waypointId": "ARZUA",
+    "name": "Albergue de Peregrinos de Arzúa (Xunta)",
+    "chineseName": "阿爾蘇阿官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 981 50 04 74",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_VIA_LACTEA",
+    "waypointId": "ARZUA",
+    "name": "Albergue Vía Láctea",
+    "chineseName": "銀河私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-via-lactea-arzua.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_LOS_CAMINANTES",
+    "waypointId": "ARZUA",
+    "name": "Albergue Los Caminantes",
+    "chineseName": "行者私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/pension-albergue-los-caminantes.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CALLE_BREA",
+    "waypointId": "CALLE",
+    "name": "Albergue A Brea",
+    "chineseName": "布雷亞鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 16 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-a-brea.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CALLE_ABRIGO",
+    "waypointId": "CALLE",
+    "name": "Albergue O Abrigo",
+    "chineseName": "避風港私立鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 639 96 11 88",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-abrigo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SALCEDA_ELDAS",
+    "waypointId": "SALCEDA",
+    "name": "Albergue As Eldas",
+    "chineseName": "埃爾達斯私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 00 97",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-turistico-as-eldas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SALCEDA_SOMBRA_LAUREL",
+    "waypointId": "NAVARRETE",
+    "name": "Albergue La Sombra del Laurel",
+    "chineseName": "月桂樹之蔭花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 16 77",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-sombra-del-laurel.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTA_IRENE_MUNICIPAL",
+    "waypointId": "SANTA_IRENE",
+    "name": "Albergue de Peregrinos de Santa Irene (Xunta)",
+    "chineseName": "聖伊蓮娜官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 981 51 10 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTA_IRENE_PRIVADO",
+    "waypointId": "SANTA_IRENE",
+    "name": "Albergue Santa Irene (Privado)",
+    "chineseName": "聖伊蓮娜優質私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 10 11",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-santa-irene.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_A_RUA_MUINO_PENA",
+    "waypointId": "A_RUA",
+    "name": "Pensión O Muiño de Pena",
+    "chineseName": "佩納水車古磨坊客棧",
+    "type": "HOTEL",
+    "phone": "+34 981 51 01 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/pension-restaurante-o-muino-de-pena.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_MUNICIPAL",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue de Peregrinos de Arca do Pino (Xunta)",
+    "chineseName": "阿爾卡官方公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 981 51 10 93",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_PORTA_SANTIAGO",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue Porta de Santiago",
+    "chineseName": "聖地牙哥之門私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 01 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_EDREIRA",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue Edreira",
+    "chineseName": "艾德維拉私立青年旅館",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 10 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AMENAL_HOTEL",
+    "waypointId": "AMENAL",
+    "name": "Hotel Amenal",
+    "chineseName": "阿梅納爾花園景觀飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 51 11 05",
+    "bookingComUrl": "https://www.booking.com/hotel/es/amenal.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LAVACOLLA_GARCES",
+    "waypointId": "LAVACOLLA",
+    "name": "Hotel Garcés",
+    "chineseName": "加爾塞斯河畔飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 88 82 21",
+    "bookingComUrl": "https://www.booking.com/hotel/es/garces-lavacolla.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LAVACOLLA_ALBERGUE",
+    "waypointId": "LAVACOLLA",
+    "name": "Albergue Lavacolla",
+    "chineseName": "拉瓦科利亞朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 88 84 43",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-lavacolla.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_SEMINARIO_MAYOR",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hospedería San Martín Pinario / Seminario Mayor",
+    "chineseName": "聖馬丁皮納里奧古修道院朝聖者旅館",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/hospederia-san-martin-pinario.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_SAN_FRANCISCO",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hospedería San Francisco",
+    "chineseName": "聖方濟各歷史修道院客棧",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/hospederia-san-francisco.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_ROOTS_BOOTS",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue Roots & Boots",
+    "chineseName": "根與靴花園青旅",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/roots-boots.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_LAST_STAMP",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "The Last Stamp Hostel",
+    "chineseName": "最後一枚印章現代青旅",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/the-last-stamp.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESPINAL_HAIZEA",
+    "waypointId": "ESPINAL",
+    "name": "Albergue Haizea",
+    "chineseName": "風之私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 76 02 12",
+    "bookingComUrl": "https://www.booking.com/hotel/es/haizea-espinal.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESPINAL_IRUGOIENEA",
+    "waypointId": "ESPINAL",
+    "name": "Hostal Irugoienea",
+    "chineseName": "伊魯戈伊內亞鄉村客棧",
+    "type": "HOTEL",
+    "phone": "+34 948 76 01 24",
+    "bookingComUrl": "https://www.booking.com/hotel/es/irugoienea.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BIZKARRETA_ARITZA",
+    "waypointId": "BIZKARRETA",
+    "name": "Pensión Aritza",
+    "chineseName": "阿里查鄉村客棧",
+    "type": "HOSTEL",
+    "phone": "+34 948 76 00 24",
+    "bookingComUrl": "https://www.booking.com/hotel/es/aritza.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LINTZOAIN_ERTEITI",
+    "waypointId": "LINTZOAIN",
+    "name": "Casa Rural Erteiti",
+    "chineseName": "埃爾泰蒂鄉村莊園旅館",
+    "type": "HOTEL",
+    "phone": "+34 948 76 02 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-rural-erteiti.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZURIAIN_PARADA",
+    "waypointId": "ZURIAIN",
+    "name": "Albergue La Parada de Zuriáin",
+    "chineseName": "祖里亞因驛站庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 670 94 44 80",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-parada-de-zuriain.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRINIDAD_ARRE_CONVENTO",
+    "waypointId": "TRINIDAD_DE_ARRE",
+    "name": "Albergue del Convento de la Trinidad de Arre",
+    "chineseName": "阿雷三位一體修道院庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 33 08 26",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAVA_MUNICIPAL",
+    "waypointId": "VILLAVA",
+    "name": "Albergue de Peregrinos de Villava",
+    "chineseName": "比利亞瓦公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 948 35 59 70",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAVA_HOTEL",
+    "waypointId": "VILLAVA",
+    "name": "Hotel Villava Pamplona",
+    "chineseName": "比利亞瓦潘普洛納三星級飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 33 36 66",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-villava.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZARIQUIEGUI_ANDRES",
+    "waypointId": "ZARIQUIEGUI",
+    "name": "Albergue San Andrés",
+    "chineseName": "聖安德烈斯庇護所 (寬恕之峰山腳)",
+    "type": "PRIVATE",
+    "phone": "+34 948 35 38 76",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_UTERGA_BAZTAN",
+    "waypointId": "UTERGA",
+    "name": "Albergue Casa Baztán",
+    "chineseName": "巴茲坦之家私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 45 74",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-baztan.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_UTERGA_CAMINO_PERDON",
+    "waypointId": "UTERGA",
+    "name": "Albergue Camino del Perdón",
+    "chineseName": "寬恕之徑花園度假庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 45 42",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-camino-del-perdon.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_OBANOS_USAGRE",
+    "waypointId": "OBANOS",
+    "name": "Albergue de Peregrinos Usagre",
+    "chineseName": "烏薩格雷公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 686 21 72 32",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIRAUQUI_MARALOTX",
+    "waypointId": "CIRAUQUI",
+    "name": "Albergue Maralotx",
+    "chineseName": "馬拉洛茨私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 23 12",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-maralotx.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LORCA_BODEGA",
+    "waypointId": "LORCA",
+    "name": "Albergue La Bodega del Camino",
+    "chineseName": "朝聖酒窖私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 54 11 81",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLATUERTA_MAGICA",
+    "waypointId": "VILLATUERTA",
+    "name": "Albergue Casa Mágica",
+    "chineseName": "魔法之家藝術庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 54 12 70",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AYEGUI_SAN_CIPRIANO",
+    "waypointId": "AYEGUI",
+    "name": "Albergue San Cipriano (Bodegas Irache)",
+    "chineseName": "聖西普里亞諾庇護所 (伊拉切酒泉旁)",
+    "type": "PRIVATE",
+    "phone": "+34 948 55 43 90",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAMAYOR_MONJARDIN_OASIS",
+    "waypointId": "VILLAMAYOR_DE_MONJARDIN",
+    "name": "Albergue Oasis de Paz",
+    "chineseName": "和平綠洲基督徒庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 53 71 35",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TORRES_RIO_MARI_CRUZ",
+    "waypointId": "TORRES_DEL_RIO",
+    "name": "Albergue Casa Mari Cruz",
+    "chineseName": "瑪莉克魯茲私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 64 80 43",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TORRES_RIO_MARIELA",
+    "waypointId": "TORRES_DEL_RIO",
+    "name": "Albergue Casa Mariela",
+    "chineseName": "瑪莉艾拉私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 64 84 89",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-mariela.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAVARRETE_MUNICIPAL",
+    "waypointId": "NAVARRETE",
+    "name": "Albergue Municipal de Navarrete",
+    "chineseName": "納瓦雷特市營公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 941 44 00 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAVARRETE_CANTARO",
+    "waypointId": "NAVARRETE",
+    "name": "Albergue El Cántaro",
+    "chineseName": "陶罐私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-el-cantaro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VENTOSA_SAN_SATURNINO",
+    "waypointId": "VENTOSA",
+    "name": "Albergue San Saturnino",
+    "chineseName": "聖薩圖爾尼諾酒莊庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 941 44 18 99",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-san-saturnino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VENTOSA_AGUEDAS",
+    "waypointId": "VENTOSA",
+    "name": "Hotel Rural Las Águedas",
+    "chineseName": "拉斯阿格達斯鄉村客棧",
+    "type": "HOTEL",
+    "phone": "+34 941 44 17 74",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-rural-las-aguedas.html",
+    "officialWebsiteUrl": "https://www.hotellasaguedas.com"
+  },
+  {
+    "id": "ACC_AZOFRA_MUNICIPAL",
+    "waypointId": "AZOFRA",
+    "name": "Albergue Municipal de Azofra",
+    "chineseName": "阿索夫拉公立庇護所 (雙人小隔間)",
+    "type": "MUNICIPAL",
+    "phone": "+34 941 37 92 66",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIRUENA_VIRGEN",
+    "waypointId": "CIRUENA",
+    "name": "Albergue Virgen de Guadalupe",
+    "chineseName": "瓜達露佩聖母庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 638 924 069",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_GRANON_PARROQUIAL",
+    "waypointId": "GRANON",
+    "name": "Albergue Parroquial San Juan Bautista",
+    "chineseName": "施洗約翰堂區庇護所 (鐘樓草蓆共餐)",
+    "type": "PAROCHIAL",
+    "phone": "+34 941 35 00 87",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_GRANON_SONRISAS",
+    "waypointId": "GRANON",
+    "name": "Albergue Casa de las Sonrisas",
+    "chineseName": "微笑之家私人善意庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 687 87 78 91",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_MONTES_SAN_ANTON",
+    "waypointId": "VILLAFRANCA_MONTES_DE_OCA",
+    "name": "Albergue San Antón Abad",
+    "chineseName": "聖安東阿巴德歷史旅館庇護所",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/san-anton-abad.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AGES_SAN_RAFAEL",
+    "waypointId": "AGES",
+    "name": "Albergue San Rafael",
+    "chineseName": "聖拉斐爾鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 56 04 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-san-rafael-ages.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ATAPUERCA_PEREGRINO",
+    "waypointId": "ATAPUERCA",
+    "name": "Albergue El Peregrino de Atapuerca",
+    "chineseName": "阿塔普埃爾卡朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 43 04 60",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TARDAJOS_FABRICA",
+    "waypointId": "TARDAJOS",
+    "name": "Albergue La Fábrica",
+    "chineseName": "老麵粉廠改建庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 15 01 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TARDAJOS_MUNICIPAL",
+    "waypointId": "TARDAJOS",
+    "name": "Albergue Municipal de Tardajos",
+    "chineseName": "塔爾達霍斯市營公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 947 10 70 03",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HORNILLOS_MEETING_POINT",
+    "waypointId": "HORNILLOS_DEL_CAMINO",
+    "name": "Albergue Meeting Point",
+    "chineseName": "交會點私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 628 59 12 34",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hornillos-meeting-point.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HONTANAS_BRIGIDA",
+    "waypointId": "HONTANAS",
+    "name": "Albergue Santa Brígida",
+    "chineseName": "聖布麗吉達庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 16 00 24",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HONTANAS_PUNTIDO",
+    "waypointId": "HONTANAS",
+    "name": "Albergue El Puntido",
+    "chineseName": "彭蒂多朝聖者客棧",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/el-puntido.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ITERO_PUENTE_FITERO",
+    "waypointId": "ITERO_DE_LA_VEGA",
+    "name": "Albergue San Nicolás de Puente Fitero",
+    "chineseName": "菲泰羅橋聖尼古拉斯醫院小堂庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 979 81 03 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ITERO_MOCHILA",
+    "waypointId": "ITERO_DE_LA_VEGA",
+    "name": "Albergue La Mochila",
+    "chineseName": "背包溫馨私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 689 77 44 11",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-mochila.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLALCAZAR_DON_CAMINO",
+    "waypointId": "VILLALCAZAR_DE_SIRGA",
+    "name": "Albergue Don Camino",
+    "chineseName": "堂卡米諾朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 979 88 80 43",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLALCAZAR_CANDELAS",
+    "waypointId": "VILLALCAZAR_DE_SIRGA",
+    "name": "Hostal Las Candelas",
+    "chineseName": "坎德拉斯主廣場客棧",
+    "type": "HOSTEL",
+    "phone": "+34 979 88 01 85",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-las-candelas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CARRION_ESPIRITU_SANTO",
+    "waypointId": "CARRION_DE_LOS_CONDES",
+    "name": "Albergue de las Monjas del Espíritu Santo",
+    "chineseName": "聖靈修女會修道院庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 979 88 00 29",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CALZADILLA_CANARIOS",
+    "waypointId": "CALZADILLA_DE_LA_CUEZA",
+    "name": "Hostal Albergue Los Canarios",
+    "chineseName": "金絲雀旅館庇護所",
+    "type": "HOSTEL",
+    "phone": "+34 979 88 32 02",
+    "bookingComUrl": "https://www.booking.com/hotel/es/los-canarios.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CALZADILLA_MUNICIPAL",
+    "waypointId": "CALZADILLA_DE_LA_CUEZA",
+    "name": "Albergue Municipal de Calzadilla",
+    "chineseName": "卡爾薩迪利亞市營公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 979 88 32 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MORATINOS_SAN_NICOLAS",
+    "waypointId": "MORATINOS",
+    "name": "Albergue San Nicolás de Moratinos",
+    "chineseName": "莫拉蒂諾斯聖尼古拉斯庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 689 97 00 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAHAGUN_CLARISAS",
+    "waypointId": "SAHAGUN",
+    "name": "Albergue Monasterio Santa Cruz (Clarisas)",
+    "chineseName": "聖十字修道院修女庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 78 00 13",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RELIEGOS_PARADA",
+    "waypointId": "RELIEGOS",
+    "name": "Albergue La Parada de Reliegos",
+    "chineseName": "雷列戈斯驛站庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 31 77 65",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RELIEGOS_MUNICIPAL",
+    "waypointId": "RELIEGOS",
+    "name": "Albergue Municipal de Reliegos",
+    "chineseName": "雷列戈斯市營公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 31 77 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MANSILLA_LA_PINGUINA",
+    "waypointId": "MANSILLA_DE_LAS_MULAS",
+    "name": "Albergue La Pingüina",
+    "chineseName": "企鵝私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 663 14 33 44",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-pinguina-mansilla-de-las-mulas.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_COVENT_GARDEN",
+    "waypointId": "LEON",
+    "name": "Hostel Covent Garden",
+    "chineseName": "柯芬園精品青年旅館",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostel-covent-garden.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VIRGEN_DEL_CAMINO_ANTONINO",
+    "waypointId": "VIRGEN_DEL_CAMINO",
+    "name": "Albergue Don Antonino",
+    "chineseName": "安東尼諾先生庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 30 08 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_MARTIN_HUELLA",
+    "waypointId": "SAN_MARTIN_DEL_CAMINO",
+    "name": "Albergue La Huella",
+    "chineseName": "足跡私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 650 96 33 21",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-huella.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_MARTIN_SANTA_ANA",
+    "waypointId": "SAN_MARTIN_DEL_CAMINO",
+    "name": "Albergue Santa Ana",
+    "chineseName": "聖安娜泳池私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 37 84 89",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-santa-ana-san-martin-del-camino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HOSPITAL_ORBIGO_KARL_LEISNER",
+    "waypointId": "HOSPITAL_DE_ORBIGO",
+    "name": "Albergue Parroquial Karl Leisner",
+    "chineseName": "卡爾萊斯納堂區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 38 84 89",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HOSPITAL_ORBIGO_VERDE",
+    "waypointId": "HOSPITAL_DE_ORBIGO",
+    "name": "Albergue Verde",
+    "chineseName": "綠色生態庇護所 (有機蔬食瑜珈)",
+    "type": "PRIVATE",
+    "phone": "+34 987 38 82 25",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_EL_GANSO_COWBOY",
+    "waypointId": "EL_GANSO",
+    "name": "Albergue Bar Cowboy",
+    "chineseName": "牛仔驛站酒吧庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 63 32 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_GUACELMO",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Albergue Guácelmo (Confraternity of St. James)",
+    "chineseName": "瓜塞爾莫英國聖雅各協會庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 69 19 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONCEBADON_DOMUS_DEI",
+    "waypointId": "FONCEBADON",
+    "name": "Albergue Domus Dei",
+    "chineseName": "神之居所庇護所 (鐵十字架前哨)",
+    "type": "PRIVATE",
+    "phone": "+34 689 31 11 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONCEBADON_MURCIANO",
+    "waypointId": "FONCEBADON",
+    "name": "Albergue La Posada del Murciano",
+    "chineseName": "穆爾西亞客棧溫暖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 51 04",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-posada-del-murciano.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MANJARIN_TOMAS",
+    "waypointId": "MANJARIN",
+    "name": "Albergue de Manjarín (Tomás el Templario)",
+    "chineseName": "曼哈林聖殿騎士托馬斯庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 679 09 88 56",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_EL_ACEBO_CASA_PEREGRINO",
+    "waypointId": "EL_ACEBO",
+    "name": "Albergue La Casa del Peregrino",
+    "chineseName": "冬青樹朝聖者豪華庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-casa-del-peregrino-el-acebo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_EL_ACEBO_MESON",
+    "waypointId": "EL_ACEBO",
+    "name": "Hotel Rural Mesón El Acebo",
+    "chineseName": "冬青樹山莊鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 69 50 14",
+    "bookingComUrl": "https://www.booking.com/hotel/es/meson-el-acebo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MOLINASECA_SANTA_MARINA",
+    "waypointId": "MOLINASECA",
+    "name": "Albergue Santa Marina",
+    "chineseName": "聖瑪麗娜河畔庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 45 31 82",
+    "bookingComUrl": "https://www.booking.com/hotel/es/santa-marina-molinaseca.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CACABELOS_ANGUSTIAS",
+    "waypointId": "CACABELOS",
+    "name": "Albergue Santuario de las Angustias",
+    "chineseName": "痛苦聖母聖所迴廊庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 54 71 67",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CACABELOS_TRONERA",
+    "waypointId": "CACABELOS",
+    "name": "Hotel Rural La Tronera",
+    "chineseName": "特羅內拉酒莊鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 54 61 74",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-tronera.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRABADELO_CASA_SUSI",
+    "waypointId": "TRABADELO",
+    "name": "Albergue Casa Susi",
+    "chineseName": "蘇西之家花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 646 29 45 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VEGA_VALCARCE_SENDA",
+    "waypointId": "VEGA_DE_VALCARCE",
+    "name": "Albergue Senda",
+    "chineseName": "山徑河畔庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 31 10",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-senda.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LAS_HERRERIAS_POLIN",
+    "waypointId": "LAS_HERRERIAS",
+    "name": "Albergue Casa Polín",
+    "chineseName": "波林之家鐵匠村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 31 89",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LA_FABA_ALBERGUE",
+    "waypointId": "LA_FABA",
+    "name": "Albergue de La Faba (Vereinigung)",
+    "chineseName": "拉法巴德協志工庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 54 32 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ALTO_POIO_PUERTO",
+    "waypointId": "ALTO_DO_POIO",
+    "name": "Albergue Puerto del Poio",
+    "chineseName": "波約之巔庇護所 (最高點海拔1337m)",
+    "type": "PRIVATE",
+    "phone": "+34 982 36 71 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONFRIA_REBOLEIRA",
+    "waypointId": "FONFRIA",
+    "name": "Albergue A Reboleira",
+    "chineseName": "雷波萊拉傳統圓形草屋庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/a-reboleira.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_ALMA",
+    "waypointId": "SARRIA",
+    "name": "Albergue Alma do Camiño",
+    "chineseName": "阿爾瑪朝聖之路私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 628 84 10 93",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-alma-do-camino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_DURMIENTO",
+    "waypointId": "SARRIA",
+    "name": "Albergue O Durmiñento",
+    "chineseName": "沈睡者老城青旅",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-durminento.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FERREIROS_CRUCEIRO",
+    "waypointId": "FERREIROS",
+    "name": "Albergue Casa Cruceiro",
+    "chineseName": "十字石雕之家庇護所 (100km地標村)",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 78 39",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_GONZAR_GARCIA",
+    "waypointId": "GONZAR",
+    "name": "Albergue Casa García",
+    "chineseName": "加西亞之家鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 78 49",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_DE_REI_ZUTEBA",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue Zuteba",
+    "chineseName": "祖特巴私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-zuteba.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_PEREIRO",
+    "waypointId": "MELIDE",
+    "name": "Albergue Pereiro",
+    "chineseName": "佩雷羅章魚小鎮庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 50 51 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-pereiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RIBADISO_PUBLICO",
+    "waypointId": "RIBADISO",
+    "name": "Albergue Público de Ribadiso (Xunta)",
+    "chineseName": "里巴迪索河畔中世紀公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 981 50 04 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_O_PEDROUZO_MIRADOR",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue Mirador de Pedrouzo",
+    "chineseName": "佩德羅烏索景觀私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/mirador-de-pedrouzo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MONTE_DO_GOZO_PUBLICO",
+    "waypointId": "MONTE_DO_GOZO",
+    "name": "Albergue Público de Monte do Gozo",
+    "chineseName": "歡喜山公立巨型朝聖庇護基地",
+    "type": "MUNICIPAL",
+    "phone": "+34 981 55 89 42",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_SEMINARIO_MENOR",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue de Peregrinos Seminario Menor",
+    "chineseName": "小修院壯麗歷史朝聖庇護所",
+    "type": "PAROCHIAL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-seminario-menor.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MURUZABAL_MENDIRY",
+    "waypointId": "MURUZABAL",
+    "name": "Albergue Mendiry",
+    "chineseName": "門迪里私立庇護所 (尤納特聖母堂分岔點)",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 43 98",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MANERU_PLAZA",
+    "waypointId": "MANERU",
+    "name": "Albergue de Peregrinos Maneru",
+    "chineseName": "馬涅魯私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 08 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AZQUETA_PEREGRINO",
+    "waypointId": "AZQUETA",
+    "name": "Albergue de Azqueta",
+    "chineseName": "阿斯克塔私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 53 71 88",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANSOL_PALACIO",
+    "waypointId": "SANSOL",
+    "name": "Albergue Palacio de Sansol",
+    "chineseName": "桑索爾宮殿私人庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 64 82 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/palacio-de-sansol.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_REDECILLA_MUNICIPAL",
+    "waypointId": "REDECILLA",
+    "name": "Albergue Municipal Essentia",
+    "chineseName": "雷德西利亞公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 947 58 53 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTILDELGADO_BOB",
+    "waypointId": "CASTILDELGADO",
+    "name": "Albergue Bide Ona",
+    "chineseName": "美好之路私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 52 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILORIA_ACACIO",
+    "waypointId": "VILORIA",
+    "name": "Albergue Acacio y Orietta",
+    "chineseName": "阿卡西奧與奧莉耶塔溫馨庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 53 82",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TOSANTOS_SAN_FRANCISCO_2",
+    "waypointId": "TOSANTOS",
+    "name": "Albergue Parroquial San Francisco de Asís",
+    "chineseName": "聖方濟各堂區庇護所 (岩壁隱修院)",
+    "type": "PAROCHIAL",
+    "phone": "+34 947 58 02 11",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAMBISTIA_SAN_ROQUE",
+    "waypointId": "VILLAMBISTIA",
+    "name": "Albergue San Roque",
+    "chineseName": "聖洛克私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 05 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESPINOSA_EL_CAMPANARIO",
+    "waypointId": "ESPINOSA",
+    "name": "Albergue El Campanario",
+    "chineseName": "鐘樓朝聖者客棧",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 05 88",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CARDENUELA_SAN_TOMAS",
+    "waypointId": "CARDENUELA_RIOPICO",
+    "name": "Albergue Santa Fe",
+    "chineseName": "聖費私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 43 03 66",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ORBANEJA_SAN_BLAS",
+    "waypointId": "ORBANEJA_RIOPICO",
+    "name": "Albergue San Blas",
+    "chineseName": "聖布拉斯私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 43 04 88",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABE_LIBERANOS_DOMINE",
+    "waypointId": "RABE_DE_LAS_CALZADAS",
+    "name": "Albergue Liberanos Domine",
+    "chineseName": "救贖主私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 16 11 38",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABE_LOS_HUERTOS",
+    "waypointId": "RABE_DE_LAS_CALZADAS",
+    "name": "Casa Rural Los Huertos",
+    "chineseName": "花果園鄉村客棧",
+    "type": "HOTEL",
+    "phone": "+34 650 33 22 11",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-rural-los-huertos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_BOL_OASIS",
+    "waypointId": "SAN_BOL",
+    "name": "Albergue de San Bol",
+    "chineseName": "聖博爾綠洲隱修庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 606 20 86 52",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_ANTON_RUINAS_MONASTERY",
+    "waypointId": "SAN_ANTON",
+    "name": "Albergue de las Ruinas de San Antón",
+    "chineseName": "聖安東修道院拱門廢墟庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 947 16 00 24",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BOADILLA_EN_CAMINO_RESORT",
+    "waypointId": "BOADILLA",
+    "name": "Albergue En el Camino",
+    "chineseName": "在路上綠洲莊園庇護所 (附泳池)",
+    "type": "PRIVATE",
+    "phone": "+34 979 81 02 85",
+    "bookingComUrl": "https://www.booking.com/hotel/es/en-el-camino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BOADILLA_RURAL",
+    "waypointId": "BOADILLA",
+    "name": "Hotel Rural Boadilla del Camino",
+    "chineseName": "博阿迪利亞鄉村花園飯店",
+    "type": "HOTEL",
+    "phone": "+34 979 81 02 80",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-rural-boadilla.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_POBLACION_LA_FUENTECILLA_2",
+    "waypointId": "POBLACION_DE_CAMPOS",
+    "name": "Albergue La Fuentecilla",
+    "chineseName": "小泉私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 979 81 10 32",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TERRADILLOS_LOS_TEMPLARIOS",
+    "waypointId": "TERRADILLOS",
+    "name": "Albergue Los Templarios",
+    "chineseName": "聖殿騎士團庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 979 88 36 49",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TERRADILLOS_JACQUES_DE_MOLAY",
+    "waypointId": "TERRADILLOS",
+    "name": "Albergue Jacques de Molay",
+    "chineseName": "雅克德莫萊聖殿大團長庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 979 88 36 29",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BERCIANOS_PARROQUIAL_MUD",
+    "waypointId": "BERCIANOS",
+    "name": "Albergue Parroquial de Bercianos",
+    "chineseName": "貝爾西亞諾斯泥磚堂區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 78 40 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BERCIANOS_PERALA",
+    "waypointId": "BERCIANOS",
+    "name": "Albergue La Perala",
+    "chineseName": "佩拉拉溫馨私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 650 94 36 28",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARCAHUEJA_SAN_MARCOS",
+    "waypointId": "ARCAHUEJA",
+    "name": "Albergue San Marcos",
+    "chineseName": "聖馬科斯私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 21 00 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLARES_EL_CANTU",
+    "waypointId": "VILLARES_DE_ORBIGO",
+    "name": "Albergue El Cantu",
+    "chineseName": "坎圖鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 38 86 12",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_JUSTO_PARROQUIAL",
+    "waypointId": "SAN_JUSTO_DE_LA_VEGA",
+    "name": "Albergue San Justo",
+    "chineseName": "聖胡斯托山丘庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 61 77 89",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MURIAS_CASA_FLOR",
+    "waypointId": "MURIAS_DE_RECHIVALDO",
+    "name": "Albergue Casa Flor",
+    "chineseName": "花之私立庇護所 (馬拉加特傳統石屋村)",
+    "type": "PRIVATE",
+    "phone": "+34 987 63 31 33",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MURIAS_CASA_LAZARO",
+    "waypointId": "MURIAS_DE_RECHIVALDO",
+    "name": "Hostal Casa Lázaro",
+    "chineseName": "拉薩羅之家歷史客棧",
+    "type": "HOSTEL",
+    "phone": "+34 987 69 11 31",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-lazaro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTA_CATALINA_SAN_BLAS_MARAGATO",
+    "waypointId": "SANTA_CATALINA",
+    "name": "Albergue San Blas",
+    "chineseName": "聖布拉斯馬拉加托傳統庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-san-blas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTA_CATALINA_CAMINANTE",
+    "waypointId": "SANTA_CATALINA",
+    "name": "Albergue El Caminante",
+    "chineseName": "行者優雅私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 11 48",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-el-caminante.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RIEGO_AMBROS_CHESTNUT",
+    "waypointId": "RIEGO_DE_AMBROS",
+    "name": "Albergue Municipal de Riego de Ambrós",
+    "chineseName": "里埃戈德安布羅斯公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 45 32 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CAMPONARAYA_NARAYA_WINE",
+    "waypointId": "CAMPONARAYA",
+    "name": "Albergue Naraya",
+    "chineseName": "納拉亞葡萄酒鄉庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/naraya.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEREJE_MUNICIPAL",
+    "waypointId": "PEREJE",
+    "name": "Albergue de Peregrinos de Pereje",
+    "chineseName": "佩雷赫石造溪谷庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 54 01 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RUITELAN_LITTLE_POTALA",
+    "waypointId": "RUITELAN",
+    "name": "Albergue Pequeño Potala",
+    "chineseName": "小布達拉宮靈性庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 32 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LINARES_O_REBOLLIN",
+    "waypointId": "LINARES",
+    "name": "Albergue El Rebollín",
+    "chineseName": "橡木林高地庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 36 71 88",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HOSPITAL_CONDESA_XUNTA_STONE",
+    "waypointId": "HOSPITAL_DA_CONDESA",
+    "name": "Albergue Público de Hospital da Condesa (Xunta)",
+    "chineseName": "伯爵夫人醫院公立石屋庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 36 70 80",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_HEMINGWAY",
+    "waypointId": "PAMPLONA",
+    "name": "Hostel Hemingway",
+    "chineseName": "海明威奔牛節主題青旅",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostel-hemingway.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_SANTIAGO_APOSTOL",
+    "waypointId": "LOGRONO",
+    "name": "Albergue Santiago Apóstol Logroño",
+    "chineseName": "聖地牙哥使徒私立青旅",
+    "type": "PRIVATE",
+    "phone": "+34 941 25 50 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_SAN_FRANCISCO",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Albergue de Peregrinos San Francisco de Asís",
+    "chineseName": "聖方濟各修道院庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 941 34 07 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAHAGUN_VIADOR",
+    "waypointId": "SAHAGUN",
+    "name": "Albergue Viador",
+    "chineseName": "旅人私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-viador.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_GAUDI",
+    "waypointId": "ASTORGA",
+    "name": "Hostal Gaudí",
+    "chineseName": "高第歷史客棧",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/gaudi-astorga.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_LEO",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Albergue Leo",
+    "chineseName": "利奧朝聖者精品客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 26 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_DON_ALVARO",
+    "waypointId": "SARRIA",
+    "name": "Albergue Don Álvaro",
+    "chineseName": "堂阿爾瓦羅歷史花園青旅",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 14 62",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-casa-don-alvaro-sarria.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_BLASONES",
+    "waypointId": "SARRIA",
+    "name": "Albergue Los Blasones",
+    "chineseName": "紋章私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-los-blasones.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_FERRAMENTEIRO",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Ferramenteiro",
+    "chineseName": "湖景鐵匠私立青旅",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-ferramenteiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_SAN_ANTON",
+    "waypointId": "MELIDE",
+    "name": "Albergue San Antón Melide",
+    "chineseName": "聖安東私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/san-anton-melide.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_ULTREIA",
+    "waypointId": "ARZUA",
+    "name": "Albergue Ultreia",
+    "chineseName": "前進（Ultreia）私立庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-ultreia.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_TRISQUEL",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue O Trisquel",
+    "chineseName": "三曲螺旋加利西亞庇護所",
+    "type": "PRIVATE",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-trisquel.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_MUNDO_ALBERGUE",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Mundo Albergue",
+    "chineseName": "世界青年旅館",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/mundoalbergue.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_PRAZA_QUINTANA",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hotel Praza Quintana",
+    "chineseName": "金塔納廣場大教堂旁精品飯店",
+    "type": "HOSTEL",
+    "phone": null,
+    "bookingComUrl": "https://www.booking.com/hotel/es/praza-quintana.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SJPP_HOTEL_1",
+    "waypointId": "SJPP",
+    "name": "Hôtel des Pyrénées",
+    "chineseName": "庇里牛斯星級歷史飯店",
+    "type": "HOTEL",
+    "phone": "+33 5 59 37 01 01",
+    "bookingComUrl": "https://www.booking.com/hotel/fr/des-pyrenees-saint-jean-pied-de-port.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SJPP_HOTEL_2",
+    "waypointId": "SJPP",
+    "name": "Hôtel Ramuntcho",
+    "chineseName": "拉蒙喬巴斯克傳統飯店",
+    "type": "HOTEL",
+    "phone": "+33 5 59 37 03 91",
+    "bookingComUrl": "https://www.booking.com/hotel/fr/ramuntcho.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SJPP_HOTEL_3",
+    "waypointId": "SJPP",
+    "name": "Hôtel Central",
+    "chineseName": "中央河畔景觀飯店",
+    "type": "HOTEL",
+    "phone": "+33 5 59 37 00 22",
+    "bookingComUrl": "https://www.booking.com/hotel/fr/central-saint-jean-pied-de-port.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VALCARLOS_HOTEL_4",
+    "waypointId": "VALCARLOS",
+    "name": "Casa Rural Valcarlos",
+    "chineseName": "瓦卡洛斯鄉村渡假木屋",
+    "type": "HOTEL",
+    "phone": "+34 948 79 01 12",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RONCESVALLES_HOTEL_5",
+    "waypointId": "RONCESVALLES",
+    "name": "Hotel Roncesvalles",
+    "chineseName": "龍塞斯瓦耶斯中世紀修道院飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 76 01 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_7",
+    "waypointId": "PAMPLONA",
+    "name": "Gran Hotel La Perla",
+    "chineseName": "珍珠大飯店 (五星級海明威專屬套房)",
+    "type": "HOTEL",
+    "phone": "+34 948 22 30 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/gran-la-perla.html",
+    "officialWebsiteUrl": "https://www.granhotellaperla.com/"
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_8",
+    "waypointId": "PAMPLONA",
+    "name": "Hotel Tres Reyes",
+    "chineseName": "三王花園豪華飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 22 66 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-tres-reyes.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_9",
+    "waypointId": "PAMPLONA",
+    "name": "Hotel Maisonnave",
+    "chineseName": "梅索納夫市中心商務飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 22 55 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-maisonnave.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_10",
+    "waypointId": "PAMPLONA",
+    "name": "Hotel Yoldi",
+    "chineseName": "約爾迪傳統商務飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 22 48 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/yoldi.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_11",
+    "waypointId": "PAMPLONA",
+    "name": "Hotel Pompaelo Urban Spa",
+    "chineseName": "龐培洛城市水療精品飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 59 40 80",
+    "bookingComUrl": "https://www.booking.com/hotel/es/pompaelo-plaza-del-castillo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PUENTE_LA_REINA_HOTEL_12",
+    "waypointId": "PUENTE_LA_REINA",
+    "name": "Hotel Rural Bidean",
+    "chineseName": "畢迪安鄉村客棧飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 34 11 56",
+    "bookingComUrl": "https://www.booking.com/hotel/es/bidean.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_HOTEL_13",
+    "waypointId": "ESTELLA",
+    "name": "Hotel Tximista",
+    "chineseName": "吉米斯塔工業風生態飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 55 25 89",
+    "bookingComUrl": "https://www.booking.com/hotel/es/tximista.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_HOTEL_14",
+    "waypointId": "ESTELLA",
+    "name": "Hospedería Chapitel",
+    "chineseName": "恰皮泰爾精品客棧",
+    "type": "HOTEL",
+    "phone": "+34 948 55 25 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hospederia-chapitel.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOS_ARCOS_HOTEL_15",
+    "waypointId": "LOS_ARCOS",
+    "name": "Hotel Mónaco",
+    "chineseName": "摩納哥市中心飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 64 00 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/monaco-los-arcos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_17",
+    "waypointId": "LOGRONO",
+    "name": "Hotel Calle Mayor",
+    "chineseName": "卡列馬約爾精品設計飯店",
+    "type": "HOTEL",
+    "phone": "+34 941 27 01 02",
+    "bookingComUrl": "https://www.booking.com/hotel/es/calle-mayor.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_18",
+    "waypointId": "LOGRONO",
+    "name": "Eurostars Fuerte Ruavieja",
+    "chineseName": "歐洲之星魯阿維耶哈水療飯店",
+    "type": "HOTEL",
+    "phone": "+34 941 27 68 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/eurostars-fuerte-ruavieja.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_19",
+    "waypointId": "LOGRONO",
+    "name": "Hotel Murrieta",
+    "chineseName": "穆列塔經典飯店",
+    "type": "HOTEL",
+    "phone": "+34 941 22 41 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/murrieta.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_20",
+    "waypointId": "LOGRONO",
+    "name": "Hotel Carlton Rioja",
+    "chineseName": "卡爾頓里奧哈商務飯店",
+    "type": "HOTEL",
+    "phone": "+34 941 24 21 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/carlton-rioja.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_HOTEL_21",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Parador de Santo Domingo de la Calzada",
+    "chineseName": "聖多明哥國營古堡飯店 (12世紀朝聖醫院)",
+    "type": "HOTEL",
+    "phone": "+34 941 34 03 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/parador-de-santo-domingo-de-la-calzada.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_HOTEL_22",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Parador Bernardo de Fresneda",
+    "chineseName": "聖方濟各修道院國營飯店",
+    "type": "HOTEL",
+    "phone": "+34 941 34 11 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/parador-bernardo-de-fresneda.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_23",
+    "waypointId": "BURGOS",
+    "name": "Hotel Mesón del Cid",
+    "chineseName": "熙德客棧飯店 (主教座堂第一排景觀)",
+    "type": "HOTEL",
+    "phone": "+34 947 20 87 15",
+    "bookingComUrl": "https://www.booking.com/hotel/es/meson-del-cid.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_24",
+    "waypointId": "BURGOS",
+    "name": "Hotel Silken Gran Teatro",
+    "chineseName": "大劇院西肯精品飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 25 39 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/silken-gran-teatro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_25",
+    "waypointId": "BURGOS",
+    "name": "Hotel NH Collection Palacio de Burgos",
+    "chineseName": "布爾戈斯宮殿典藏飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 47 99 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/nh-palacio-de-burgos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_26",
+    "waypointId": "BURGOS",
+    "name": "Hotel Landa",
+    "chineseName": "蘭達經典傳奇中世紀塔樓飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 25 77 77",
+    "bookingComUrl": "https://www.booking.com/hotel/es/landa.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_HOTEL_27",
+    "waypointId": "CASTROJERIZ",
+    "name": "Hotel La Posada de Castrojeriz",
+    "chineseName": "卡斯特羅赫里斯客棧飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 17 10 23",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-posada-de-castrojeriz.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FROMISTA_HOTEL_28",
+    "waypointId": "FROMISTA",
+    "name": "Hotel Doña Mayor",
+    "chineseName": "馬約爾夫人精品飯店",
+    "type": "HOTEL",
+    "phone": "+34 979 81 04 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/dona-mayor.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CARRION_DE_LOS_CONDES_HOTEL_29",
+    "waypointId": "CARRION_DE_LOS_CONDES",
+    "name": "Hotel Real Monasterio San Zoilo",
+    "chineseName": "聖索伊洛皇家修道院古堡飯店",
+    "type": "HOTEL",
+    "phone": "+34 979 88 00 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/real-monasterio-san-zoilo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAHAGUN_HOTEL_30",
+    "waypointId": "SAHAGUN",
+    "name": "Hotel Puerta de Sahagún",
+    "chineseName": "薩阿貢之門商務渡假飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 78 20 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/puerta-de-sahagun.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_HOTEL_31",
+    "waypointId": "LEON",
+    "name": "Parador de León (Hostal San Marcos)",
+    "chineseName": "聖馬可修道院國營五星級奢華飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 23 73 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/parador-de-turismo-de-leon.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_HOTEL_32",
+    "waypointId": "LEON",
+    "name": "Hotel Real Colegiata San Isidoro",
+    "chineseName": "聖伊西多羅皇家協同教堂飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 87 50 88",
+    "bookingComUrl": "https://www.booking.com/hotel/es/real-colegiata-san-isidoro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_HOTEL_33",
+    "waypointId": "LEON",
+    "name": "Hotel Alfonso V",
+    "chineseName": "阿方索五世精品商務飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 22 10 12",
+    "bookingComUrl": "https://www.booking.com/hotel/es/alfonso-v.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_HOTEL_34",
+    "waypointId": "LEON",
+    "name": "Hotel Conde Luna",
+    "chineseName": "月亮伯爵商務美食飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 20 66 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/conde-luna.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_HOTEL_35",
+    "waypointId": "ASTORGA",
+    "name": "Hotel Spa Ciudad de Astorga",
+    "chineseName": "阿斯托加水療精品飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 60 30 01",
+    "bookingComUrl": "https://www.booking.com/hotel/es/spa-ciudad-de-astorga.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_HOTEL_36",
+    "waypointId": "ASTORGA",
+    "name": "Hotel Astur Plaza",
+    "chineseName": "阿斯圖爾主廣場飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 61 89 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/astur-plaza.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_HOTEL_37",
+    "waypointId": "ASTORGA",
+    "name": "Hotel Posada Real Casa de Tepa",
+    "chineseName": "泰帕之家皇家宮殿客棧",
+    "type": "HOTEL",
+    "phone": "+34 987 60 21 02",
+    "bookingComUrl": "https://www.booking.com/hotel/es/posada-real-casa-de-tepa.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MOLINASECA_HOTEL_38",
+    "waypointId": "MOLINASECA",
+    "name": "Hotel De Floriana",
+    "chineseName": "弗洛里亞納莊園度假飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 45 31 46",
+    "bookingComUrl": "https://www.booking.com/hotel/es/de-floriana.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_HOTEL_39",
+    "waypointId": "PONFERRADA",
+    "name": "Hotel Aroi Bierzo Plaza",
+    "chineseName": "比耶爾索廣場歷史飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 40 94 99",
+    "bookingComUrl": "https://www.booking.com/hotel/es/aroi-bierzo-plaza.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_HOTEL_40",
+    "waypointId": "PONFERRADA",
+    "name": "Hotel Temple Ponferrada",
+    "chineseName": "蓬費拉達聖殿騎士主題飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 41 00 58",
+    "bookingComUrl": "https://www.booking.com/hotel/es/temple-ponferrada.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_DEL_BIERZO_HOTEL_41",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Parador de Villafranca del Bierzo",
+    "chineseName": "比耶爾索自由鎮國營渡假飯店",
+    "type": "HOTEL",
+    "phone": "+34 987 54 01 75",
+    "bookingComUrl": "https://www.booking.com/hotel/es/parador-de-villafranca-del-bierzo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_O_CEBREIRO_HOTEL_42",
+    "waypointId": "O_CEBREIRO",
+    "name": "Hotel Rural San Giraldo de Aurillac",
+    "chineseName": "聖吉拉爾多山頂鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 36 71 25",
+    "bookingComUrl": "https://www.booking.com/hotel/es/san-giraldo-de-aurillac.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_HOTEL_44",
+    "waypointId": "SARRIA",
+    "name": "Hotel Alfonso IX",
+    "chineseName": "阿方索九世河畔花園飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 53 00 05",
+    "bookingComUrl": "https://www.booking.com/hotel/es/alfonso-ix.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_HOTEL_45",
+    "waypointId": "SARRIA",
+    "name": "Hotel Roma",
+    "chineseName": "羅馬歷史客棧飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 53 22 11",
+    "bookingComUrl": "https://www.booking.com/hotel/es/roma-sarria.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_HOTEL_46",
+    "waypointId": "SARRIA",
+    "name": "Hotel Duerming Villa de Sarria",
+    "chineseName": "薩里亞別墅商務飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 53 10 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/villa-de-sarria.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_HOTEL_47",
+    "waypointId": "PORTOMARIN",
+    "name": "Hotel Pousada de Portomarín",
+    "chineseName": "波爾托馬林普薩達景觀飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 54 52 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/pousada-de-portomarin.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_HOTEL_48",
+    "waypointId": "PORTOMARIN",
+    "name": "Hotel Vistalegre",
+    "chineseName": "歡喜景觀鄉村客棧飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 54 53 05",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-vistalegre-portomarin.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_DE_REI_HOTEL_49",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Complexo Cabañas da Ulla",
+    "chineseName": "烏拉河畔獨立木屋渡假村",
+    "type": "HOTEL",
+    "phone": "+34 982 38 00 12",
+    "bookingComUrl": "https://www.booking.com/hotel/es/cabanas-da-ulla.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_HOTEL_50",
+    "waypointId": "MELIDE",
+    "name": "Hotel Carlos 98",
+    "chineseName": "卡洛斯 98 現代精品飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 50 50 98",
+    "bookingComUrl": "https://www.booking.com/hotel/es/carlos-98.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_HOTEL_51",
+    "waypointId": "ARZUA",
+    "name": "Hotel 1930 Boutique San Pedro",
+    "chineseName": "1930 聖佩德羅精品莊園飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 50 00 30",
+    "bookingComUrl": "https://www.booking.com/hotel/es/1930-boutique-san-pedro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_HOTEL_52",
+    "waypointId": "ARZUA",
+    "name": "Hotel Suiza",
+    "chineseName": "瑞士花園飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 50 00 45",
+    "bookingComUrl": "https://www.booking.com/hotel/es/suiza-arzua.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_O_PEDROUZO_HOTEL_53",
+    "waypointId": "O_PEDROUZO",
+    "name": "Hotel O Pino",
+    "chineseName": "奧皮諾松林度假飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 51 10 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_54",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Parador Hostal Dos Reis Católicos",
+    "chineseName": "天主教雙王國營天王級古堡飯店 (五星級世界地標)",
+    "type": "HOTEL",
+    "phone": "+34 981 58 22 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/parador-de-santiago-de-compostela.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_55",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hotel Monumento San Francisco",
+    "chineseName": "舊金山歷史修道院古蹟飯店 (四星)",
+    "type": "HOTEL",
+    "phone": "+34 981 58 16 34",
+    "bookingComUrl": "https://www.booking.com/hotel/es/monumento-san-francisco.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_56",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hotel Compostela",
+    "chineseName": "孔波斯特拉歷史地標飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 58 57 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-compostela-santiago.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_57",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hotel Costa Vella",
+    "chineseName": "科斯塔維拉秘密花園精品飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 56 95 30",
+    "bookingComUrl": "https://www.booking.com/hotel/es/costa-vella.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_58",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hotel Rua Villar",
+    "chineseName": "比亞爾老街石造精品飯店",
+    "type": "HOTEL",
+    "phone": "+34 981 51 20 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/rua-villar.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_CREDENCIAL",
+    "waypointId": "SARRIA",
+    "name": "Albergue Credencial",
+    "chineseName": "證書朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 682 66 11 02",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-credencial.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_INTERNACIONAL",
+    "waypointId": "SARRIA",
+    "name": "Albergue Internacional Sarria",
+    "chineseName": "薩里亞國際朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 08 26",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-internacional-sarria.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_FOLGUEIRA",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Folgueira",
+    "chineseName": "佛爾蓋拉景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 52 48",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-folgueira.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_MANUEL",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Manuel",
+    "chineseName": "曼努埃爾朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 53 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_A_COMPAS",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue A Compás",
+    "chineseName": "合拍朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 04 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-a-compas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_OUTEIRO",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue Outeiro",
+    "chineseName": "歐泰羅溫馨庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 00 24",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_MUNICIPAL",
+    "waypointId": "MELIDE",
+    "name": "Albergue de Peregrinos de Melide (Xunta)",
+    "chineseName": "梅利德公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 981 50 50 03",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_CRUCEIRO",
+    "waypointId": "MELIDE",
+    "name": "Albergue O Cruceiro",
+    "chineseName": "十架朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 57 26",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-cruceiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_MONTOTO",
+    "waypointId": "MELIDE",
+    "name": "Albergue Montoto",
+    "chineseName": "蒙托托朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 52 92",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-montoto.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_DE_CAMINO",
+    "waypointId": "ARZUA",
+    "name": "Albergue De Camino",
+    "chineseName": "旅途朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 08 07",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_TRES_ABETOS",
+    "waypointId": "ARZUA",
+    "name": "Albergue Los Tres Abetos",
+    "chineseName": "三冷杉花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 00 24",
+    "bookingComUrl": "https://www.booking.com/hotel/es/los-tres-abetos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_SALCEDO",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue O Salcedo",
+    "chineseName": "薩爾塞多朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 01 84",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-salcedo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_BURGO",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue O Burgo",
+    "chineseName": "布爾戈溫馨庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 01 77",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-burgo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_FIN_DEL_CAMINO",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue Fin del Camino",
+    "chineseName": "路之終點朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 58 73 24",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_BLANCO_HOSTEL",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue Blanco Hostel",
+    "chineseName": "布蘭科精品朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 58 98 04",
+    "bookingComUrl": "https://www.booking.com/hotel/es/blanco-hostel.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIRAUQUI_CASA_GARRES",
+    "waypointId": "CIRAUQUI",
+    "name": "Albergue Casa Garrés",
+    "chineseName": "加雷斯之家朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 02 36",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LORCA_LA_ESTELA",
+    "waypointId": "LORCA",
+    "name": "Albergue La Estela",
+    "chineseName": "星辰朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 54 11 81",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-estela.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAMAYOR_PARROQUIAL",
+    "waypointId": "VILLAMAYOR_DE_MONJARDIN",
+    "name": "Albergue Parroquial de Villamayor",
+    "chineseName": "維拉馬約爾教區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 53 71 39",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANSOL_VEGA",
+    "waypointId": "SANSOL",
+    "name": "Albergue Vega de Sansol",
+    "chineseName": "珊索爾草原景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 64 65 30",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-vega-de-sansol.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIRUENA_MUNICIPAL",
+    "waypointId": "CIRUENA",
+    "name": "Albergue de Peregrinos de Cirueña",
+    "chineseName": "西魯埃尼亞公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 941 42 61 72",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TOSANTOS_LOS_TILOS",
+    "waypointId": "TOSANTOS",
+    "name": "Hostal Los Tilos",
+    "chineseName": "椴樹鄉村旅宿",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 02 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_OCA_MUNICIPAL",
+    "waypointId": "VILLAFRANCA_MONTES_DE_OCA",
+    "name": "Albergue Municipal de Villafranca Montes de Oca",
+    "chineseName": "奧卡山弗蘭卡公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 947 58 20 83",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AGES_EL_PAJAR",
+    "waypointId": "AGES",
+    "name": "Albergue El Pajar de Agés",
+    "chineseName": "阿赫斯穀倉庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 56 04 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/el-pajar-de-ages.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ATAPUERCA_LA_DUAL",
+    "waypointId": "ATAPUERCA",
+    "name": "Albergue La Dual",
+    "chineseName": "雙生朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 43 04 38",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-dual.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CARDENUELA_RURAL",
+    "waypointId": "CARDENUELA_RIOPICO",
+    "name": "Albergue Rural Cardeñuela",
+    "chineseName": "卡德紐埃拉鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 43 03 55",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_POBLACION_LA_FUENTINA",
+    "waypointId": "POBLACION_DE_CAMPOS",
+    "name": "Hotel Rural La Fuentina",
+    "chineseName": "泉源鄉村精品旅宿",
+    "type": "HOTEL",
+    "phone": "+34 979 81 10 74",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-fuentina.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MORATINOS_MORATINOS",
+    "waypointId": "MORATINOS",
+    "name": "Albergue Moratinos",
+    "chineseName": "莫拉蒂諾斯朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 979 84 80 43",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLARES_EL_PAJAR",
+    "waypointId": "VILLARES_DE_ORBIGO",
+    "name": "Albergue El Pajar de Villares",
+    "chineseName": "比亞雷斯穀倉私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 38 80 92",
+    "bookingComUrl": "https://www.booking.com/hotel/es/el-pajar-de-villares.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRABADELO_CRISDALU",
+    "waypointId": "TRABADELO",
+    "name": "Albergue Crisdalu",
+    "chineseName": "克里斯達魯朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 56 00 24",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-crisdalu.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RIEGO_AMBROS_RINCON",
+    "waypointId": "RIEGO_DE_AMBROS",
+    "name": "Hotel Rural El Rincón de Ambrós",
+    "chineseName": "安布羅斯角落鄉村旅宿",
+    "type": "HOTEL",
+    "phone": "+34 987 69 51 90",
+    "bookingComUrl": "https://www.booking.com/hotel/es/el-rincon-de-ambros.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CAMPONARAYA_MEDALLUCA",
+    "waypointId": "CAMPONARAYA",
+    "name": "Albergue La Medalluca",
+    "chineseName": "獎章朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 46 32 30",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-medalluca.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEREJE_PEREJIL",
+    "waypointId": "PEREJE",
+    "name": "Albergue de Perejil",
+    "chineseName": "歐芹朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 01 23",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VEGA_VALCARCE_SEXTRIS",
+    "waypointId": "VEGA_DE_VALCARCE",
+    "name": "Albergue Sextrís",
+    "chineseName": "塞克斯特里斯景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 31 77",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-sextris.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LAS_HERRERIAS_LUA",
+    "waypointId": "LAS_HERRERIAS",
+    "name": "Albergue Casa Lúa",
+    "chineseName": "盧亞之家登山庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 68 43 90",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-casa-lua.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LA_FABA_CELTA",
+    "waypointId": "LA_FABA",
+    "name": "Albergue El Celta",
+    "chineseName": "塞爾特半山庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 68 42 16",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HOSPITAL_CONDESA_HOSPITAL",
+    "waypointId": "HOSPITAL_DA_CONDESA",
+    "name": "Albergue O Hospital",
+    "chineseName": "歐奧斯皮塔爾石造庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 36 71 61",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-hospital.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ALTO_POIO_SANTA_MARIA",
+    "waypointId": "ALTO_DO_POIO",
+    "name": "Hostal Santa María del Poio",
+    "chineseName": "波約聖瑪麗亞埡口旅宿",
+    "type": "PRIVATE",
+    "phone": "+34 982 36 71 52",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONFRIA_MUNICIPAL",
+    "waypointId": "FONFRIA",
+    "name": "Albergue Municipal de Fonfría",
+    "chineseName": "冷泉公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 18 12 70",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CALVOR_CASA",
+    "waypointId": "CALVOR",
+    "name": "Albergue Casa Calvor",
+    "chineseName": "卡爾沃爾溫馨鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 14 07",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FERREIROS_ABRIGADOIRO",
+    "waypointId": "FERREIROS",
+    "name": "Albergue O Abrigadoiro",
+    "chineseName": "庇護所奧阿布里加多伊羅",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 78 48",
+    "bookingComUrl": "https://www.booking.com/hotel/es/o-abrigadoiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_GONZAR_MUNICIPAL",
+    "waypointId": "GONZAR",
+    "name": "Albergue de Peregrinos de Gonzar (Xunta)",
+    "chineseName": "岡薩爾公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 15 78 36",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VENTAS_NARON_MUNTIAN",
+    "waypointId": "VENTAS_DE_NARON",
+    "name": "Albergue Casa Muntián",
+    "chineseName": "蒙蒂安石造朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 18 31 18",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-muntian.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LIGONDE_MUNICIPAL",
+    "waypointId": "LIGONDE",
+    "name": "Albergue Municipal de Ligonde",
+    "chineseName": "利貢德公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 982 18 31 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MORGADE_MIRADOR",
+    "waypointId": "MORGADE",
+    "name": "Albergue O Mirador de Morgade",
+    "chineseName": "莫爾加德觀景庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 78 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/o-mirador-de-morgade.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROMAIOR_PORTELA",
+    "waypointId": "CASTROMAIOR",
+    "name": "Albergue Casa Portela",
+    "chineseName": "波爾特拉老宅私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 18 31 16",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-portela.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HOSPITAL_CRUZ_PASOS",
+    "waypointId": "HOSPITAL_DA_CRUZ",
+    "name": "Albergue Os Pasos",
+    "chineseName": "歐斯帕索斯朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 18 31 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/os-pasos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_EIREXE_BIDE_ONA",
+    "waypointId": "EIREXE",
+    "name": "Albergue Bide-Ona de Eirexe",
+    "chineseName": "埃雷謝美好之路庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 18 31 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_XULIAN_MAMOA",
+    "waypointId": "SAN_XULIAN",
+    "name": "Albergue Mámoa",
+    "chineseName": "馬莫亞石造庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 01 25",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASANOVA_CASA_TORRE",
+    "waypointId": "CASANOVA",
+    "name": "Albergue Casa da Torre",
+    "chineseName": "塔樓私立鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 04 30",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-da-torre-casanova.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEBOREIRO_VILARINHO",
+    "waypointId": "LEBOREIRO",
+    "name": "Casa Rural Vilarinho",
+    "chineseName": "維拉里尼奧鄉村旅宿",
+    "type": "HOTEL",
+    "phone": "+34 981 50 51 09",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-rural-vilarinho.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FURELOS_PONTE",
+    "waypointId": "FURELOS",
+    "name": "Albergue Ponte Furelos",
+    "chineseName": "富雷洛斯古橋庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 56 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RIBADISO_CAMINANTES",
+    "waypointId": "RIBADISO",
+    "name": "Albergue Los Caminantes de Ribadiso",
+    "chineseName": "里瓦迪索行者河畔庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 02 10",
+    "bookingComUrl": "https://www.booking.com/hotel/es/los-caminantes-ribadiso.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_A_RUA_ACIVRO",
+    "waypointId": "A_RUA",
+    "name": "Albergue O Acivro",
+    "chineseName": "冬青鄉村花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 02 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/o-acivro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AMENAL_ALBERGUE",
+    "waypointId": "AMENAL",
+    "name": "Albergue Amenal",
+    "chineseName": "阿梅納爾朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 09 88",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-amenal.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MONTE_GOZO_BENVIDO",
+    "waypointId": "MONTE_DO_GOZO",
+    "name": "Albergue Benvido Monte do Gozo",
+    "chineseName": "歡喜山班維多現代青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 55 80 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_REDECILLA_SAN_LAZARO",
+    "waypointId": "REDECILLA",
+    "name": "Albergue San Lázaro",
+    "chineseName": "聖拉薩羅朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 50 18",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAMBISTIA_CASONA",
+    "waypointId": "VILLAMBISTIA",
+    "name": "Albergue La Casona de Villambistia",
+    "chineseName": "維利亞姆比斯蒂亞大宅庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 02 33",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VIRGEN_CAMINO_MUNICIPAL",
+    "waypointId": "VIRGEN_DEL_CAMINO",
+    "name": "Albergue Municipal de La Virgen del Camino",
+    "chineseName": "路之聖母公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 30 08 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZURIAIN_HIEDRA",
+    "waypointId": "ZURIAIN",
+    "name": "Albergue Casa de la Hiedra",
+    "chineseName": "常春藤之家鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 33 19 82",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MURUZABAL_MURUZABAL",
+    "waypointId": "MURUZABAL",
+    "name": "Albergue Muruzábal",
+    "chineseName": "穆魯薩瓦爾朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 40 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MANERU_CASA_ROMAN",
+    "waypointId": "MANERU",
+    "name": "Albergue Casa Román",
+    "chineseName": "羅曼之家花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 04 68",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AYEGUI_HOTEL_IRACHE",
+    "waypointId": "AYEGUI",
+    "name": "Hotel Irache",
+    "chineseName": "伊拉切酒泉景觀飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 55 11 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/irache.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTILDELGADO_GALLUR",
+    "waypointId": "CASTILDELGADO",
+    "name": "Albergue El Canto de Gallur",
+    "chineseName": "加盧爾之歌私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 50 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILORIA_PARROQUIAL",
+    "waypointId": "VILORIA",
+    "name": "Albergue Parroquial de Viloria",
+    "chineseName": "維洛里亞教區朝聖庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 947 58 51 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESPINOSA_CAMPANA",
+    "waypointId": "ESPINOSA",
+    "name": "Albergue La Campana",
+    "chineseName": "鐘聲朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 02 40",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ORBANEJA_CHOZA",
+    "waypointId": "ORBANEJA_RIOPICO",
+    "name": "Albergue La Choza de Orbaneja",
+    "chineseName": "奧爾巴內哈小屋庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 43 03 60",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARCAHUEJA_TORRE",
+    "waypointId": "ARCAHUEJA",
+    "name": "Albergue La Torre de Arcahueja",
+    "chineseName": "阿爾卡埃哈塔樓庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 21 04 28",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_JUSTO_ENCANTO",
+    "waypointId": "SAN_JUSTO_DE_LA_VEGA",
+    "name": "Albergue El Encanto del Camino",
+    "chineseName": "朝聖魅力花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 61 50 15",
+    "bookingComUrl": "https://www.booking.com/hotel/es/el-encanto-del-camino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LINARES_RECREO",
+    "waypointId": "LINARES",
+    "name": "Albergue El Recreo de Liñares",
+    "chineseName": "利尼亞雷斯休閒景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 36 71 80",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_XIL_CASA_MANOLO",
+    "waypointId": "SAN_XIL",
+    "name": "Albergue Casa Manolo",
+    "chineseName": "馬諾洛之家森林農莊庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 14 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MERCADOIRO_CASA",
+    "waypointId": "MERCADOIRO",
+    "name": "Albergue Casa Mercadoiro",
+    "chineseName": "梅爾卡多伊羅石造名宿",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 78 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-mercadoiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_NORTE_LONDRES",
+    "waypointId": "BURGOS",
+    "name": "Hotel Norte y Londres",
+    "chineseName": "北方與倫敦經典歷史飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 26 41 25",
+    "bookingComUrl": "https://www.booking.com/hotel/es/norte-y-londres.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_SANTO_TOMAS",
+    "waypointId": "LEON",
+    "name": "Albergue Santo Tomás de Canterbury",
+    "chineseName": "坎特伯雷聖托馬斯朝聖青旅",
+    "type": "PRIVATE",
+    "phone": "+34 987 25 15 40",
+    "bookingComUrl": "https://www.booking.com/hotel/es/leon-santo-tomas-de-canterbury.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_AMAIUR",
+    "waypointId": "PAMPLONA",
+    "name": "Albergue Alojamientos Amaiur",
+    "chineseName": "阿邁烏爾朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 948 22 59 10",
+    "bookingComUrl": "https://www.booking.com/hotel/es/alojamientos-amaiur.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PUENTE_AMETS",
+    "waypointId": "PUENTE_LA_REINA",
+    "name": "Albergue Amets",
+    "chineseName": "阿梅茨花園朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 09 84",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-amets.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_CURTIDORES",
+    "waypointId": "ESTELLA",
+    "name": "Albergue Curtidores",
+    "chineseName": "庫爾蒂多雷斯河畔庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 55 00 51",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hosteria-de-curtidores.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_ENTRESUENOS",
+    "waypointId": "LOGRONO",
+    "name": "Albergue Entresueños",
+    "chineseName": "夢境之間朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 941 27 15 08",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-entresuenos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAJERA_DONA_BLANCA",
+    "waypointId": "NAJERA",
+    "name": "Albergue El Rincón de Doña Blanca",
+    "chineseName": "布蘭科夫人角落庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 941 36 37 45",
+    "bookingComUrl": "https://www.booking.com/hotel/es/el-rincon-de-dona-blanca.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BELORADO_CAMINANTE",
+    "waypointId": "BELORADO",
+    "name": "Albergue El Caminante de Belorado",
+    "chineseName": "貝洛拉多行者花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 03 33",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAHAGUN_VINA_FEMITA",
+    "waypointId": "SAHAGUN",
+    "name": "Albergue Viña Femita",
+    "chineseName": "費米塔葡萄園朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 78 20 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HOSPITAL_ORBIGO_MUNICIPAL",
+    "waypointId": "HOSPITAL_DE_ORBIGO",
+    "name": "Albergue Municipal de Hospital de Órbigo",
+    "chineseName": "奧爾維戈之橋公立朝聖庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 38 83 23",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_ENCINA",
+    "waypointId": "PONFERRADA",
+    "name": "Hostal Virgen de la Encina",
+    "chineseName": "橡樹聖母經典歷史旅宿",
+    "type": "PRIVATE",
+    "phone": "+34 987 41 01 02",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-virgen-de-la-encina.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_RELOJ",
+    "waypointId": "PONFERRADA",
+    "name": "Hostal El Reloj",
+    "chineseName": "時鐘廣場景觀旅宿",
+    "type": "PRIVATE",
+    "phone": "+34 987 40 90 25",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-el-reloj.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_PUERTA_PERDON",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Hostal La Puerta del Perdón",
+    "chineseName": "寬恕之門傳統客棧",
+    "type": "HOTEL",
+    "phone": "+34 987 54 00 68",
+    "bookingComUrl": "https://www.booking.com/hotel/es/la-puerta-del-perdon.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_LA_PIEDRA",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Albergue La Piedra",
+    "chineseName": "巨石朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 08 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CEBREIRO_HOTEL",
+    "waypointId": "O_CEBREIRO",
+    "name": "Hotel O Cebreiro",
+    "chineseName": "塞布雷羅石造高山飯店",
+    "type": "HOTEL",
+    "phone": "+34 982 36 71 25",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SJPP_MAKILA",
+    "waypointId": "SJPP",
+    "name": "Gîte Makila",
+    "chineseName": "馬基拉朝聖者手杖客棧",
+    "type": "PRIVATE",
+    "phone": "+33 5 59 37 14 14",
+    "bookingComUrl": "https://www.booking.com/hotel/fr/gite-makila.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SJPP_ZUHARPETA",
+    "waypointId": "SJPP",
+    "name": "Gîte Zuharpeta",
+    "chineseName": "祖哈佩塔林蔭客棧",
+    "type": "PRIVATE",
+    "phone": "+33 5 59 37 35 88",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VIANA_IZAR",
+    "waypointId": "VIANA",
+    "name": "Albergue Izar de Viana",
+    "chineseName": "比亞納之星朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 669 88 56 61",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-izar-de-viana.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VIANA_LA_CAVA",
+    "waypointId": "VIANA",
+    "name": "Hostal La Cava",
+    "chineseName": "拉卡瓦老城客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 64 54 84",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-la-cava.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_ALBAS",
+    "waypointId": "LOGRONO",
+    "name": "Albergue Albas",
+    "chineseName": "阿爾巴斯朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 941 25 31 66",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-peregrinos-albas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAVARRETE_REY_SANCHO",
+    "waypointId": "NAVARRETE",
+    "name": "Hotel Rey Sancho",
+    "chineseName": "桑喬國王鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 941 44 00 13",
+    "bookingComUrl": "https://www.booking.com/hotel/es/rey-sancho.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAJERA_LAS_PENAS",
+    "waypointId": "NAJERA",
+    "name": "Albergue Las Peñas",
+    "chineseName": "岩壁景觀朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 941 36 30 73",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_REY_REYES",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Albergue Rey de Reyes",
+    "chineseName": "萬王之王朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 941 34 04 40",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-rey-de-reyes.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_CORONA_CASTILLA",
+    "waypointId": "BURGOS",
+    "name": "Hotel Corona de Castilla",
+    "chineseName": "卡斯提亞王冠經典飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 26 21 42",
+    "bookingComUrl": "https://www.booking.com/hotel/es/corona-de-castilla.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_ORION",
+    "waypointId": "CASTROJERIZ",
+    "name": "Albergue Orion",
+    "chineseName": "獵戶座朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 37 72 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_CIEN_LEGUAS",
+    "waypointId": "CASTROJERIZ",
+    "name": "Albergue A Cien Leguas",
+    "chineseName": "百里之行鄉村庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 37 71 88",
+    "bookingComUrl": "https://www.booking.com/hotel/es/acienleguas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FROMISTA_BETANIA",
+    "waypointId": "FROMISTA",
+    "name": "Albergue Betania",
+    "chineseName": "伯大尼朝聖者花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 979 81 00 45",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAHAGUN_ALDEA",
+    "waypointId": "SAHAGUN",
+    "name": "Albergue La Aldea de Sahagún",
+    "chineseName": "薩阿貢古村朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 78 00 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-la-aldea.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_SAN_FRANCISCO_ASIS",
+    "waypointId": "LEON",
+    "name": "Albergue San Francisco de Asís",
+    "chineseName": "亞西西聖方濟教區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 21 50 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_ALDA_CENTRO",
+    "waypointId": "LEON",
+    "name": "Hostel Alda Centro León",
+    "chineseName": "阿爾達雷昂市中心青旅",
+    "type": "PRIVATE",
+    "phone": "+34 987 22 25 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/alda-centro-leon.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_BERLAR",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue Berlar",
+    "chineseName": "貝爾拉爾石造庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 81 40",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-berlar.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_HORTA",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue A Horta de Abel",
+    "chineseName": "阿貝爾菜園景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 82 48",
+    "bookingComUrl": "https://www.booking.com/hotel/es/a-horta-de-abel.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_ORIBIO",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue Refugio del Oribio",
+    "chineseName": "奧里比奧山避難所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 80 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_OBRADOIRO",
+    "waypointId": "SARRIA",
+    "name": "Albergue HR Obradoiro",
+    "chineseName": "奧布拉多伊羅朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 22 72",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hr-obradoiro.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_SAN_LAZARO",
+    "waypointId": "SARRIA",
+    "name": "Albergue San Lázaro Sarria",
+    "chineseName": "薩里亞聖拉薩羅庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 08 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_BARBACOA",
+    "waypointId": "SARRIA",
+    "name": "Albergue Barbacoa del Camino",
+    "chineseName": "朝聖者烤肉庭院青旅",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 10 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-barbacoa-del-camino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_PONS_MINEA",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Pons Minea",
+    "chineseName": "米尼奧古橋景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 50 88",
+    "bookingComUrl": "https://www.booking.com/hotel/es/pons-minea.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_PORTOMINO",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Portomiño",
+    "chineseName": "波爾托米尼奧河畔庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 53 60",
+    "bookingComUrl": "https://www.booking.com/hotel/es/portomino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_CASTRO",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue Castro",
+    "chineseName": "卡斯楚景觀私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 01 65",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_VALIN",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue Valin de Lorenzo",
+    "chineseName": "洛倫佐小谷朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 04 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_ARRAIGOS",
+    "waypointId": "MELIDE",
+    "name": "Albergue Arraigos",
+    "chineseName": "歸宿溫馨朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 54 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/arraigos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_VIA_SACRA",
+    "waypointId": "MELIDE",
+    "name": "Albergue Vía Sacra",
+    "chineseName": "神聖之路精品庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 51 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-via-sacra.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_DA_FONTE",
+    "waypointId": "ARZUA",
+    "name": "Albergue Da Fonte",
+    "chineseName": "湧泉朝聖者花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 09 30",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-da-fonte.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_ARCA",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue Arca",
+    "chineseName": "阿爾卡朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 00 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-arca.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_LA_SALLE",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue La Salle",
+    "chineseName": "拉薩爾大型修道院青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 58 55 11",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_GAUCELMO",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Albergue CSJ Refugio Gaucelmo",
+    "chineseName": "高塞爾莫英式朝聖庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 69 19 01",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://www.csj.org.uk/"
+  },
+  {
+    "id": "ACC_LOGRONO_SAN_FERNANDO",
+    "waypointId": "LOGRONO",
+    "name": "Hostal Residencia San Fernando",
+    "chineseName": "聖費爾南多經典歷史旅宿",
+    "type": "PRIVATE",
+    "phone": "+34 941 24 93 40",
+    "bookingComUrl": "https://www.booking.com/hotel/es/san-fernando-logrono.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_SANTO_MARTINO",
+    "waypointId": "LEON",
+    "name": "Albergue Santo Martino",
+    "chineseName": "聖瑪爾蒂諾皇家聖殿庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 87 61 61",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_MURALLA",
+    "waypointId": "LEON",
+    "name": "Hostel Muralla Leonesa",
+    "chineseName": "雷昂古城牆青年旅館",
+    "type": "PRIVATE",
+    "phone": "+34 987 25 26 10",
+    "bookingComUrl": "https://www.booking.com/hotel/es/abergue-muralla-leonesa.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_MEMORIA",
+    "waypointId": "ASTORGA",
+    "name": "Albergue Casa de la Memoria",
+    "chineseName": "記憶之家文化朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 61 70 80",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_JUAN_ORTEGA_RURAL",
+    "waypointId": "SAN_JUAN_DE_ORTEGA",
+    "name": "Hotel Rural San Juan de Ortega",
+    "chineseName": "聖胡安德奧爾特加鄉村客棧",
+    "type": "HOTEL",
+    "phone": "+34 947 58 00 24",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLALCAZAR_MESON",
+    "waypointId": "VILLALCAZAR_DE_SIRGA",
+    "name": "Mesón de Villasirga",
+    "chineseName": "維拉西爾加中世紀傳統客棧",
+    "type": "HOTEL",
+    "phone": "+34 979 88 00 65",
+    "bookingComUrl": "https://www.booking.com/hotel/es/meson-de-villasirga.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MANSILLA_JARDIN",
+    "waypointId": "MANSILLA_DE_LAS_MULAS",
+    "name": "Albergue El Jardín del Camino",
+    "chineseName": "朝聖花園私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 686 98 08 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_SAN_MIGUEL",
+    "waypointId": "ESTELLA",
+    "name": "Albergue Parroquial San Miguel",
+    "chineseName": "聖米格爾堂區朝聖庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 55 03 33",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_ROCAMADOR",
+    "waypointId": "ESTELLA",
+    "name": "Albergue Rocamador",
+    "chineseName": "羅卡馬杜爾河谷庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 55 22 22",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-capuchinos-rocamador.es.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_HOSTAL_LAR",
+    "waypointId": "BURGOS",
+    "name": "Hostal LAR",
+    "chineseName": "拉爾古城景觀客棧",
+    "type": "PRIVATE",
+    "phone": "+34 947 20 96 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-lar-burgos.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PONFERRADA_CASTILLO",
+    "waypointId": "PONFERRADA",
+    "name": "Albergue El Castillo",
+    "chineseName": "聖殿古堡朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 987 40 44 97",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-el-castillo-ponferrada.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_SAN_NICOLAS",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Albergue San Nicolás el Real",
+    "chineseName": "聖尼古拉斯皇家修道院庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 54 03 54",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MOLINASECA_COMPOSTELA",
+    "waypointId": "MOLINASECA",
+    "name": "Albergue Compostela",
+    "chineseName": "孔波斯特拉花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 45 30 74",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-compostela-molinaseca.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CACABELOS_MUNICIPAL",
+    "waypointId": "CACABELOS",
+    "name": "Albergue Municipal de Cacabelos",
+    "chineseName": "痛楚聖母聖殿拱廊公立庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 54 71 67",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGUETE_HOSTAL",
+    "waypointId": "BURGUETE",
+    "name": "Hostal Burguete",
+    "chineseName": "布爾蓋特海明威歷史客棧",
+    "type": "HOTEL",
+    "phone": "+34 948 76 00 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "http://www.hotelburguete.com"
+  },
+  {
+    "id": "ACC_BURGUETE_JUANDEGABRIEL",
+    "waypointId": "BURGUETE",
+    "name": "Casa Rural Juandegabriel",
+    "chineseName": "胡安加布里埃爾鄉村客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 76 00 28",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_CIUDADELA",
+    "waypointId": "PAMPLONA",
+    "name": "Hostel Ciudadela Pamplona",
+    "chineseName": "潘普洛納城堡要塞青旅",
+    "type": "PRIVATE",
+    "phone": "+34 948 20 70 80",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostel-ciudadela.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIRUENA_GOLF",
+    "waypointId": "CIRUENA",
+    "name": "Apartamentos Rioja Alta Golf",
+    "chineseName": "上里奧哈高爾夫度假公寓",
+    "type": "HOTEL",
+    "phone": "+34 941 34 08 95",
+    "bookingComUrl": "https://www.booking.com/hotel/es/rioja-alta-golf-club.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_RESIDENCIA_MURALLA",
+    "waypointId": "LOGRONO",
+    "name": "Hostal Residencia Muralla",
+    "chineseName": "古城門城牆經典客棧",
+    "type": "PRIVATE",
+    "phone": "+34 941 22 41 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/muralla-logrono.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_SANTA_TERESA",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Hostal Santa Teresa",
+    "chineseName": "聖德蘭老城景觀客棧",
+    "type": "PRIVATE",
+    "phone": "+34 941 34 03 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-santa-teresa.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_OBANOS_CASA_REINA",
+    "waypointId": "OBANOS",
+    "name": "Hostal Casa de la Reina",
+    "chineseName": "王后之家朝聖客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 41 55",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PUENTE_BIDEAN",
+    "waypointId": "PUENTE_LA_REINA",
+    "name": "Hostal Bidean",
+    "chineseName": "比迪安古城心臟客棧",
+    "type": "HOTEL",
+    "phone": "+34 948 34 11 56",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-bidean.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CIRAUQUI_ITURRALDE",
+    "waypointId": "CIRAUQUI",
+    "name": "Casa Rural Iturralde",
+    "chineseName": "伊圖拉爾德泉源鄉村客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 34 04 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLATUERTA_VEREMUNDO",
+    "waypointId": "VILLATUERTA",
+    "name": "Hostal San Veremundo",
+    "chineseName": "聖貝雷蒙多鄉村客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 54 12 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MONJARDIN_CASTILLO",
+    "waypointId": "VILLAMAYOR_DE_MONJARDIN",
+    "name": "Hotel Rural Castillo de Monjardín",
+    "chineseName": "蒙哈爾丁城堡鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 948 53 74 12",
+    "bookingComUrl": "https://www.booking.com/hotel/es/castillo-de-monjardin.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BELORADO_A_SANTIAGO",
+    "waypointId": "BELORADO",
+    "name": "Albergue A Santiago",
+    "chineseName": "邁向聖地牙哥泳池庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 00 55",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-de-peregrinos-a-santiago.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AGES_RINCON_CANDIDO",
+    "waypointId": "AGES",
+    "name": "Hostal El Rincón del Cándido",
+    "chineseName": "甘迪多角落鄉村客棧",
+    "type": "PRIVATE",
+    "phone": "+34 947 56 04 33",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ATAPUERCA_PAPASOL",
+    "waypointId": "ATAPUERCA",
+    "name": "Hotel Rural Papasol",
+    "chineseName": "帕帕索爾考古鄉村飯店",
+    "type": "HOTEL",
+    "phone": "+34 947 43 04 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotel-rural-papasol.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VEGA_VALCARCE_CAZADOR",
+    "waypointId": "VEGA_DE_VALCARCE",
+    "name": "Albergue El Refugio del Cazador",
+    "chineseName": "獵人避難所登山庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 30 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_LEMOS",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue Lemos",
+    "chineseName": "雷莫斯朝聖者庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 81 88",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BARBADELO_CARMEN",
+    "waypointId": "BARBADELO",
+    "name": "Albergue Casa Carmen",
+    "chineseName": "卡門之家森林庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 14 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/casa-carmen-barbadelo.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_COTO_FRADE",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Coto do Frade",
+    "chineseName": "修士之丘景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 51 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-coto-do-frade.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_GONZAR_DESCANSO",
+    "waypointId": "GONZAR",
+    "name": "Albergue Descanso del Peregrino",
+    "chineseName": "朝聖者休憩花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 78 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VENTAS_NARON_CRUCEIRO",
+    "waypointId": "VENTAS_DE_NARON",
+    "name": "Albergue O Cruceiro de Narón",
+    "chineseName": "納隆十架石造庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 18 31 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_APALPADOR",
+    "waypointId": "MELIDE",
+    "name": "Albergue O Apalpador",
+    "chineseName": "探訪者現代朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 50 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-apalpador.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_SAN_ROQUE",
+    "waypointId": "MELIDE",
+    "name": "Albergue San Roque de Melide",
+    "chineseName": "梅利德聖洛克庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 56 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTA_IRENE_ANDAINA",
+    "waypointId": "SANTA_IRENE",
+    "name": "Albergue Andaina",
+    "chineseName": "漫步森林私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 09 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-andaina.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LAVACOLLA_SAN_PAIO",
+    "waypointId": "LAVACOLLA",
+    "name": "Hostal San Paio",
+    "chineseName": "聖帕約河畔傳統客棧",
+    "type": "PRIVATE",
+    "phone": "+34 981 88 82 11",
+    "bookingComUrl": "https://www.booking.com/hotel/es/san-paio.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RIBADISO_MILPES",
+    "waypointId": "RIBADISO",
+    "name": "Albergue Milpés",
+    "chineseName": "千足石屋河畔庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 08 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_CRUCE_CAMINOS",
+    "waypointId": "ARZUA",
+    "name": "Albergue Cruce de Caminos",
+    "chineseName": "古道十字路口青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 08 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/de-camino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_SAN_FRANCISCO",
+    "waypointId": "ARZUA",
+    "name": "Albergue San Francisco",
+    "chineseName": "聖方濟花園朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 02 45",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_PELIGRINO",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue O Peligrino",
+    "chineseName": "奧佩利格里諾朝聖青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 08 30",
+    "bookingComUrl": "https://www.booking.com/hotel/es/albergue-o-peligrino.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_DOURADO",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue Dourado",
+    "chineseName": "黃金之路現代庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 00 25",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_MEIGA",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue Meiga Backpackers",
+    "chineseName": "女巫背包客花園青旅",
+    "type": "PRIVATE",
+    "phone": "+34 981 56 61 95",
+    "bookingComUrl": "https://www.booking.com/hotel/es/meiga-backpackers.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PAMPLONA_BEARAN",
+    "waypointId": "PAMPLONA",
+    "name": "Hostel Bearán Bar & Rooms",
+    "chineseName": "貝亞蘭酒吧老城客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 22 34 26",
+    "bookingComUrl": "https://www.booking.com/hotel/es/bearan-bar-rooms.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_CRISTINA",
+    "waypointId": "ESTELLA",
+    "name": "Hostal Cristina",
+    "chineseName": "克莉絲汀娜河畔客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 55 07 50",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-cristina-estella.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOS_ARCOS_MAVI",
+    "waypointId": "LOS_ARCOS",
+    "name": "Pensión Mavi",
+    "chineseName": "馬維朝聖者溫馨民宿",
+    "type": "PRIVATE",
+    "phone": "+34 948 64 01 02",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VIANA_BETI_JAI",
+    "waypointId": "VIANA",
+    "name": "Hostal Beti Jai",
+    "chineseName": "貝蒂海古城歷史客棧",
+    "type": "PRIVATE",
+    "phone": "+34 948 64 51 05",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostal-beti-jai.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_CIUDAD",
+    "waypointId": "LOGRONO",
+    "name": "Hostal Ciudad de Logroño",
+    "chineseName": "洛格羅尼奧城市客棧",
+    "type": "PRIVATE",
+    "phone": "+34 941 25 31 44",
+    "bookingComUrl": "https://www.booking.com/hotel/es/ciudad-de-logrono.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAVARRETE_CASA_PEREGRINO",
+    "waypointId": "NAVARRETE",
+    "name": "Albergue La Casa del Peregrino",
+    "chineseName": "朝聖者之家陶藝庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 941 44 04 07",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_NAJERA_HISPANO",
+    "waypointId": "NAJERA",
+    "name": "Pensión Hispano",
+    "chineseName": "伊斯帕諾經典古宅旅宿",
+    "type": "PRIVATE",
+    "phone": "+34 941 36 36 49",
+    "bookingComUrl": "https://www.booking.com/hotel/es/pension-hispano.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_VALERIO",
+    "waypointId": "SANTO_DOMINGO",
+    "name": "Hostal San Valerio",
+    "chineseName": "聖瓦萊里奧古城客棧",
+    "type": "PRIVATE",
+    "phone": "+34 941 34 06 60",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BELORADO_SANTA_FE",
+    "waypointId": "BELORADO",
+    "name": "Hostal Santa Fe",
+    "chineseName": "聖菲朝聖者鄉村客棧",
+    "type": "PRIVATE",
+    "phone": "+34 947 58 01 70",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ATAPUERCA_SAN_ROQUE",
+    "waypointId": "ATAPUERCA",
+    "name": "Albergue San Roque de Atapuerca",
+    "chineseName": "阿塔普埃爾卡聖洛克庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 43 04 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HONTANAS_JUAN_YEPES",
+    "waypointId": "HONTANAS",
+    "name": "Albergue Juan de Yepes",
+    "chineseName": "胡安耶佩斯峽谷庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 37 70 47",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_HONTANAS_SANTA_BRIGIDA",
+    "waypointId": "HONTANAS",
+    "name": "Albergue Santa Brígida",
+    "chineseName": "聖布麗吉達傳統庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 37 70 80",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CASTROJERIZ_IACOBUS",
+    "waypointId": "CASTROJERIZ",
+    "name": "Albergue Iacobus",
+    "chineseName": "雅各之庭私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 947 37 71 80",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FROMISTA_SAN_MARTIN",
+    "waypointId": "FROMISTA",
+    "name": "Hotel Rural San Martín",
+    "chineseName": "聖馬丁羅曼式水車客棧",
+    "type": "HOTEL",
+    "phone": "+34 979 81 00 00",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hotelsanmartin-palencia.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CALZADILLA_CAMINO_REAL",
+    "waypointId": "CALZADILLA_DE_LA_CUEZA",
+    "name": "Hostal Camino Real",
+    "chineseName": "皇家大道荒原綠洲客棧",
+    "type": "PRIVATE",
+    "phone": "+34 979 88 32 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MORATINOS_HOSTAL",
+    "waypointId": "MORATINOS",
+    "name": "Hostal Moratinos",
+    "chineseName": "莫拉蒂諾斯地窖客棧",
+    "type": "PRIVATE",
+    "phone": "+34 979 84 80 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BERCIANOS_SANTA_CLARA",
+    "waypointId": "BERCIANOS",
+    "name": "Albergue Santa Clara",
+    "chineseName": "聖克拉拉土坯傳統庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 78 40 50",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGO_RANERO_PEREGRINO",
+    "waypointId": "EL_BURGO_RANERO",
+    "name": "Hostal El Peregrino",
+    "chineseName": "布爾戈行者鄉村客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 33 00 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RELIEGOS_VIVE_CAMINO",
+    "waypointId": "RELIEGOS",
+    "name": "Albergue Vive Tu Camino",
+    "chineseName": "活出朝聖路私立庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 31 75 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_QUARTIER",
+    "waypointId": "LEON",
+    "name": "Hostel Quartier León Jabalquinto",
+    "chineseName": "雅巴爾昆托宮區精品青旅",
+    "type": "PRIVATE",
+    "phone": "+34 987 00 38 78",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hostel-quartier-leon.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_UN_PASO_MAS",
+    "waypointId": "LEON",
+    "name": "Albergue Un Paso Más",
+    "chineseName": "再邁一步朝聖者青旅",
+    "type": "PRIVATE",
+    "phone": "+34 987 07 16 90",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLADANGOS_ALTO_PARAMO",
+    "waypointId": "VILLADANGOS",
+    "name": "Hostal Alto Páramo",
+    "chineseName": "高原之巔公路客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 39 01 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_MARTIN_CASONA",
+    "waypointId": "SAN_MARTIN_DEL_CAMINO",
+    "name": "Albergue La Casona de San Martín",
+    "chineseName": "聖馬丁大宅花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 37 81 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_PENSION_GARCIA",
+    "waypointId": "ASTORGA",
+    "name": "Pensión García",
+    "chineseName": "加西亞老城溫馨客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 61 60 45",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MURIAS_FLOR",
+    "waypointId": "MURIAS_DE_RECHIVALDO",
+    "name": "Hostal Flor de Murias",
+    "chineseName": "穆里亞斯之花石造客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 11 90",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTA_CATALINA_HOSTERIA",
+    "waypointId": "SANTA_CATALINA",
+    "name": "Hostal Rural Hostería San Blas",
+    "chineseName": "聖布拉斯馬拉加塔鄉村客棧",
+    "type": "HOTEL",
+    "phone": "+34 987 69 11 20",
+    "bookingComUrl": "https://www.booking.com/hotel/es/hosteria-san-blas.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_TESIN",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Hostal El Tesín",
+    "chineseName": "泰辛石造花園客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 19 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_GASPAR",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Posada Gaspar",
+    "chineseName": "加斯帕鄉村傳統旅店",
+    "type": "HOTEL",
+    "phone": "+34 987 69 19 40",
+    "bookingComUrl": "https://www.booking.com/hotel/es/posada-gaspar.html",
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONCEBADON_EL_TRASGU",
+    "waypointId": "FONCEBADON",
+    "name": "Albergue El Trasgu",
+    "chineseName": "特拉斯古山區小精靈庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 19 90",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONCEBADON_PARROQUIAL",
+    "waypointId": "FONCEBADON",
+    "name": "Albergue Parroquial de Foncebadón",
+    "chineseName": "豐塞巴東堂區山區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 987 69 19 85",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MOLINASECA_ALMA",
+    "waypointId": "MOLINASECA",
+    "name": "Albergue Alma de Molinaseca",
+    "chineseName": "莫利納塞卡心靈庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 45 32 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VILLAFRANCA_SAN_ANTONIO",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "name": "Albergue San Antonio de Padua",
+    "chineseName": "帕多瓦聖安東尼庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 02 33",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_VEGA_VALCARCE_DCAMINO",
+    "waypointId": "VEGA_DE_VALCARCE",
+    "name": "Albergue Pensión D\\",
+    "chineseName": "卡米諾之路客棧庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 54 31 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAMOS_ALBORADA",
+    "waypointId": "SARRIA",
+    "name": "Albergue Alborada",
+    "chineseName": "薩莫斯拂曉庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 60 78",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_DURMIENTE",
+    "waypointId": "SARRIA",
+    "name": "Albergue O Durmiente",
+    "chineseName": "薩里亞沉睡者精緻庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 14 55",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_DOMINGO",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Casa Domingo",
+    "chineseName": "波爾托馬林多明哥之家庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 51 09",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_HORTAS",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue As Hortas",
+    "chineseName": "帕拉斯德雷花園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 01 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_MATEO",
+    "waypointId": "MELIDE",
+    "name": "Albergue San Mateo",
+    "chineseName": "梅里德聖馬太庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 62 14",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_FOGAR",
+    "waypointId": "ARZUA",
+    "name": "Albergue O Fogar de Teodomiro",
+    "chineseName": "阿爾蘇亞特奧多米羅溫馨庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 09 31",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_RURAL_MESON",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue Rural O Mesón",
+    "chineseName": "佩德羅烏索鄉村客棧庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 70 85",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MONTE_GOZO_RUEIRO",
+    "waypointId": "MONTE_DO_GOZO",
+    "name": "Albergue O Rueiro",
+    "chineseName": "歡喜山老街朝聖客棧",
+    "type": "PRIVATE",
+    "phone": "+34 981 59 74 12",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_RABANAL_CASA_BANDERAS",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "name": "Albergue Casa Banderas",
+    "chineseName": "拉巴納爾旗幟之家朝聖庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 18 20",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONCEBADON_SOLAINA",
+    "waypointId": "FONCEBADON",
+    "name": "Albergue Pensión A Solaina",
+    "chineseName": "豐塞巴東陽光石屋庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 11 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_VILAR",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue O Vilar",
+    "chineseName": "特里亞卡斯特拉維拉爾庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 81 60",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_AGUDA_CASA_FUENTE",
+    "waypointId": "HOSPITAL_DA_CRUZ",
+    "name": "Albergue Casa de la Fuente",
+    "chineseName": "泉水之家朝聖客棧",
+    "type": "PRIVATE",
+    "phone": "+34 982 15 20 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LOGRONO_SAN_NICOLAS",
+    "waypointId": "LOGRONO",
+    "name": "Hostel Albergue San Nicolás",
+    "chineseName": "洛格羅尼奧聖尼古拉青年旅舍",
+    "type": "HOSTEL",
+    "phone": "+34 941 24 55 60",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LEON_HOSTEL_SANTIAGO",
+    "waypointId": "LEON",
+    "name": "Hostel Santiago León",
+    "chineseName": "雷昂聖雅各青年旅舍",
+    "type": "HOSTEL",
+    "phone": "+34 987 23 11 88",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://hostelsantiagoleon.com"
+  },
+  {
+    "id": "ACC_ASTORGA_LA_PESETA",
+    "waypointId": "ASTORGA",
+    "name": "Albergue La Peseta",
+    "chineseName": "阿斯托爾加佩塞塔朝聖客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 61 72 75",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TRIACASTELA_SAN_PELAYO",
+    "waypointId": "TRIACASTELA",
+    "name": "Albergue Turístico San Pelayo",
+    "chineseName": "特里亞卡斯特拉聖佩拉約觀光客棧",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 80 92",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_FONCEBADON_FUENTE_PEREGRINO",
+    "waypointId": "FONCEBADON",
+    "name": "Albergue La Fuente del Peregrino",
+    "chineseName": "朝聖者之泉庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 69 11 80",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_EL_CANTABRICO",
+    "waypointId": "MELIDE",
+    "name": "Albergue El Cantábrico",
+    "chineseName": "梅里德坎塔布連庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 71 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ARZUA_LA_PORTADA",
+    "waypointId": "ARZUA",
+    "name": "Albergue La Portada",
+    "chineseName": "阿爾蘇亞門廊庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 04 22",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_CRUCEIRO_GALO",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue Cruceiro do Galo",
+    "chineseName": "聖地牙哥公雞十字架青年旅館",
+    "type": "HOSTEL",
+    "phone": "+34 981 58 45 12",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BURGOS_LA_MORADA_DEL_CID",
+    "waypointId": "BURGOS",
+    "name": "Albergue La Morada del Cid",
+    "chineseName": "布爾戈斯熙德居所客棧",
+    "type": "PRIVATE",
+    "phone": "+34 947 20 18 33",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_HOSTEL_SCQ",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hostel SCQ",
+    "chineseName": "聖地牙哥 SCQ 設計青旅",
+    "type": "HOSTEL",
+    "phone": "+34 981 57 88 90",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_MEIGA_BLANCA",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue Meiga Blanca",
+    "chineseName": "聖地牙哥白女巫庇護所",
+    "type": "HOSTEL",
+    "phone": "+34 981 57 23 15",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_SAN_MARTIN_PINARIO",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Hospedería San Martín Pinario",
+    "chineseName": "聖馬丁皮納里奧本篤會修道院歷史客棧",
+    "type": "HOTEL",
+    "phone": "+34 981 56 02 82",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SANTIAGO_ALDA_PORTA_REAL",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "name": "Albergue Alda Porta Real",
+    "chineseName": "阿爾達皇家之門青年旅館",
+    "type": "HOSTEL",
+    "phone": "+34 981 58 11 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": "https://aldahotels.com"
+  },
+  {
+    "id": "ACC_PORTOMARIN_SIXTO",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Sixto",
+    "chineseName": "波爾托馬林西斯托庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 53 10",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_JUAN_RESURRECCION",
+    "waypointId": "SAN_JUAN_DE_ORTEGA",
+    "name": "Albergue Monasterio de la Resurrección",
+    "chineseName": "聖胡安德奧爾特加復活修道院朝聖客棧",
+    "type": "PAROCHIAL",
+    "phone": "+34 947 58 11 02",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_JUAN_PIED_PORT_POSADA",
+    "waypointId": "SJPP",
+    "name": "Albergue La Posada de San Juan",
+    "chineseName": "聖讓波爾聖約翰客棧",
+    "type": "PRIVATE",
+    "phone": "+33 5 59 37 12 34",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ZABALDIKA_SAN_ESTEBAN",
+    "waypointId": "TRINIDAD_DE_ARRE",
+    "name": "Albergue Parroquial San Esteban",
+    "chineseName": "薩瓦爾迪卡聖斯德望堂區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 948 33 07 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ESTELLA_LA_ESTRELLA",
+    "waypointId": "ESTELLA",
+    "name": "Albergue La Estrella de Estella",
+    "chineseName": "埃斯特利亞星辰庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 948 55 45 11",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_TOSANTOS_SAN_BUENAVENTURA",
+    "waypointId": "TOSANTOS",
+    "name": "Albergue Parroquial San Buenaventura",
+    "chineseName": "托桑托斯聖文德堂區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 947 58 03 44",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAN_ANTON_CONVENTO",
+    "waypointId": "CASTROJERIZ",
+    "name": "Albergue El Convento de San Antón",
+    "chineseName": "聖安東廢墟修道院拱門朝聖庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 686 92 84 56",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_CARRION_PARROQUIAL_SANTA_MARIA",
+    "waypointId": "CARRION_DE_LOS_CONDES",
+    "name": "Albergue Parroquial Santa María del Camino",
+    "chineseName": "加里翁聖母堂堂區庇護所",
+    "type": "PAROCHIAL",
+    "phone": "+34 979 88 01 41",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SAHAGUN_EL_PEREGRINO",
+    "waypointId": "SAHAGUN",
+    "name": "Albergue El Peregrino de Sahagún",
+    "chineseName": "薩阿貢朝聖者之家客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 78 12 00",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_LA_VIRGEN_DEL_CAMINO_MUNICIPAL",
+    "waypointId": "VIRGEN_DEL_CAMINO",
+    "name": "Albergue Municipal La Virgen del Camino",
+    "chineseName": "聖道之母公立朝聖者庇護所",
+    "type": "MUNICIPAL",
+    "phone": "+34 987 30 22 13",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_ASTORGA_EL_CANTON",
+    "waypointId": "ASTORGA",
+    "name": "Albergue El Cantón de Astorga",
+    "chineseName": "阿斯托爾加角落庭園庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 987 60 21 34",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MOLINASECA_CASA_DEL_RELOJ",
+    "waypointId": "MOLINASECA",
+    "name": "Albergue Casa del Reloj",
+    "chineseName": "莫利納塞卡時鐘之家客棧",
+    "type": "PRIVATE",
+    "phone": "+34 987 45 31 77",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SARRIA_PORTA_REAL",
+    "waypointId": "SARRIA",
+    "name": "Albergue Porta Real de Sarria",
+    "chineseName": "薩里亞皇家城門客棧",
+    "type": "PRIVATE",
+    "phone": "+34 982 53 22 05",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PORTOMARIN_MIRADOR_PORTOMARIN",
+    "waypointId": "PORTOMARIN",
+    "name": "Albergue Mirador de Portomarín",
+    "chineseName": "波爾托馬林景觀庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 982 54 50 18",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PALAS_O_TRISQUEL",
+    "waypointId": "PALAS_DE_REI",
+    "name": "Albergue O Trisquel de Palas",
+    "chineseName": "帕拉斯三曲枝客棧",
+    "type": "PRIVATE",
+    "phone": "+34 982 38 00 70",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_MELIDE_ALOJAMIENTO_CAMINO",
+    "waypointId": "MELIDE",
+    "name": "Albergue Alojamiento De Camino Melide",
+    "chineseName": "梅里德卡米諾旅人居",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 63 90",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_BOENTE_A_POUSA_DO_ASNO",
+    "waypointId": "BOENTE",
+    "name": "Albergue A Pousa do Asno",
+    "chineseName": "博恩特小驢客棧",
+    "type": "PRIVATE",
+    "phone": "+34 981 50 16 02",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_SALCEDA_CASA_ACEREDO",
+    "waypointId": "SALCEDA",
+    "name": "Albergue Casa do Aceredo",
+    "chineseName": "薩爾塞達楓樹之家庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 12 30",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  },
+  {
+    "id": "ACC_PEDROUZO_CAMINO_DAS_OCAS",
+    "waypointId": "O_PEDROUZO",
+    "name": "Albergue O Camiño das Ocas",
+    "chineseName": "佩德羅烏索野鵝之路庇護所",
+    "type": "PRIVATE",
+    "phone": "+34 981 51 72 11",
+    "bookingComUrl": null,
+    "officialWebsiteUrl": null
+  }
+]

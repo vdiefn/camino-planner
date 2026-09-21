@@ -1,0 +1,1424 @@
+[
+  {
+    "waypoint": "SJPP",
+    "count": 9,
+    "names": [
+      "Albergue Municipal de Peregrinos (55 Rue de la Citadelle)",
+      "Gîte Beilari",
+      "Gîte Le Chemin Vers l'Étoile",
+      "Hôtel des Pyrénées",
+      "Hôtel Ramuntcho",
+      "Hôtel Central",
+      "Gîte Makila",
+      "Gîte Zuharpeta",
+      "Albergue La Posada de San Juan"
+    ]
+  },
+  {
+    "waypoint": "HUNTTO",
+    "count": 1,
+    "names": [
+      "Gîte Ferme Ithurburia"
+    ]
+  },
+  {
+    "waypoint": "ORISSON",
+    "count": 1,
+    "names": [
+      "Refuge Orisson"
+    ]
+  },
+  {
+    "waypoint": "VALCARLOS",
+    "count": 2,
+    "names": [
+      "Albergue Municipal de Valcarlos",
+      "Casa Rural Valcarlos"
+    ]
+  },
+  {
+    "waypoint": "RONCESVALLES",
+    "count": 4,
+    "names": [
+      "Albergue de Peregrinos de Roncesvalles (Real Colegiata)",
+      "Posada de Roncesvalles",
+      "Hotel Rural Casa Sabina",
+      "Hotel Roncesvalles"
+    ]
+  },
+  {
+    "waypoint": "BURGUETE",
+    "count": 4,
+    "names": [
+      "Hotel Juantorena",
+      "Hostal Loizu",
+      "Hostal Burguete",
+      "Casa Rural Juandegabriel"
+    ]
+  },
+  {
+    "waypoint": "ZUBIRI",
+    "count": 8,
+    "names": [
+      "Albergue de Peregrinos de Zubiri",
+      "Albergue Zaldiko",
+      "Albergue El Palo de Avellano",
+      "Albergue Segunda Etapa",
+      "Albergue Río Arga Ibaia",
+      "Pensión Txantxorena",
+      "Hostal Gau Txori",
+      "Hotel Rural Akerreta"
+    ]
+  },
+  {
+    "waypoint": "LARRASOANA",
+    "count": 2,
+    "names": [
+      "Albergue Municipal de Larrasoaña",
+      "Albergue San Nicolás"
+    ]
+  },
+  {
+    "waypoint": "PAMPLONA",
+    "count": 12,
+    "names": [
+      "Albergue de Peregrinos Jesús y María",
+      "Albergue Casa Paderborn",
+      "Hostel Plaza Catedral",
+      "Hostel Hemingway",
+      "Gran Hotel La Perla",
+      "Hotel Tres Reyes",
+      "Hotel Maisonnave",
+      "Hotel Yoldi",
+      "Hotel Pompaelo Urban Spa",
+      "Albergue Alojamientos Amaiur",
+      "Hostel Ciudadela Pamplona",
+      "Hostel Bearán Bar & Rooms"
+    ]
+  },
+  {
+    "waypoint": "CIZUR_MENOR",
+    "count": 2,
+    "names": [
+      "Albergue de la Orden de Malta",
+      "Albergue Roncal"
+    ]
+  },
+  {
+    "waypoint": "PUENTE_LA_REINA",
+    "count": 6,
+    "names": [
+      "Albergue de Peregrinos Padres Reparadores",
+      "Albergue Santiago Apóstol",
+      "Hotel Albergue Jakue",
+      "Hotel Rural Bidean",
+      "Albergue Amets",
+      "Hostal Bidean"
+    ]
+  },
+  {
+    "waypoint": "ESTELLA",
+    "count": 9,
+    "names": [
+      "Albergue de Peregrinos de Estella",
+      "Albergue Ágora Hostel",
+      "Hotel Tximista",
+      "Hospedería Chapitel",
+      "Albergue Curtidores",
+      "Albergue Parroquial San Miguel",
+      "Albergue Rocamador",
+      "Hostal Cristina",
+      "Albergue La Estrella de Estella"
+    ]
+  },
+  {
+    "waypoint": "LOS_ARCOS",
+    "count": 5,
+    "names": [
+      "Albergue de Peregrinos Isaac Santiago (Municipal)",
+      "Albergue Casa de Austria",
+      "Albergue Casa de la Abuela",
+      "Hotel Mónaco",
+      "Pensión Mavi"
+    ]
+  },
+  {
+    "waypoint": "VIANA",
+    "count": 5,
+    "names": [
+      "Albergue de Peregrinos Andrés Muñoz",
+      "Palacio Pujadas by Pandora Hoteles",
+      "Albergue Izar de Viana",
+      "Hostal La Cava",
+      "Hostal Beti Jai"
+    ]
+  },
+  {
+    "waypoint": "LOGRONO",
+    "count": 14,
+    "names": [
+      "Albergue de Peregrinos de Logroño",
+      "Albergue Parroquial Santiago el Real",
+      "Hostal La Numantina",
+      "Albergue Santiago Apóstol Logroño",
+      "Hotel Calle Mayor",
+      "Eurostars Fuerte Ruavieja",
+      "Hotel Murrieta",
+      "Hotel Carlton Rioja",
+      "Albergue Entresueños",
+      "Albergue Albas",
+      "Hostal Residencia San Fernando",
+      "Hostal Residencia Muralla",
+      "Hostal Ciudad de Logroño",
+      "Hostel Albergue San Nicolás"
+    ]
+  },
+  {
+    "waypoint": "NAJERA",
+    "count": 6,
+    "names": [
+      "Albergue de Peregrinos de Nájera",
+      "Albergue Puerta de Nájera",
+      "Hostal Ciudad de Nájera",
+      "Albergue El Rincón de Doña Blanca",
+      "Albergue Las Peñas",
+      "Pensión Hispano"
+    ]
+  },
+  {
+    "waypoint": "SANTO_DOMINGO",
+    "count": 10,
+    "names": [
+      "Albergue de Peregrinos Cofradía del Santo",
+      "Albergue Abadía Cisterciense",
+      "Hostel Casa del Santo",
+      "Hostal Miguel Angel",
+      "Albergue de Peregrinos San Francisco de Asís",
+      "Parador de Santo Domingo de la Calzada",
+      "Parador Bernardo de Fresneda",
+      "Albergue Rey de Reyes",
+      "Hostal Santa Teresa",
+      "Hostal San Valerio"
+    ]
+  },
+  {
+    "waypoint": "BELORADO",
+    "count": 6,
+    "names": [
+      "Albergue Parroquial San Lázaro",
+      "Albergue Cuatro Cantones",
+      "Hostal Basaula",
+      "Albergue El Caminante de Belorado",
+      "Albergue A Santiago",
+      "Hostal Santa Fe"
+    ]
+  },
+  {
+    "waypoint": "SAN_JUAN_DE_ORTEGA",
+    "count": 4,
+    "names": [
+      "Albergue del Monasterio de San Juan de Ortega",
+      "Casa Rural San Juan",
+      "Hotel Rural San Juan de Ortega",
+      "Albergue Monasterio de la Resurrección"
+    ]
+  },
+  {
+    "waypoint": "BURGOS",
+    "count": 11,
+    "names": [
+      "Albergue de Peregrinos de Burgos (Casa del Cubo)",
+      "Albergue Divina Pastora",
+      "Hostel Burgos",
+      "Hotel Mesón del Cid",
+      "Hotel Silken Gran Teatro",
+      "Hotel NH Collection Palacio de Burgos",
+      "Hotel Landa",
+      "Hotel Norte y Londres",
+      "Hotel Corona de Castilla",
+      "Hostal LAR",
+      "Albergue La Morada del Cid"
+    ]
+  },
+  {
+    "waypoint": "HORNILLOS_DEL_CAMINO",
+    "count": 3,
+    "names": [
+      "Albergue Municipal de Hornillos",
+      "Albergue El Encuentro",
+      "Albergue Meeting Point"
+    ]
+  },
+  {
+    "waypoint": "CASTROJERIZ",
+    "count": 9,
+    "names": [
+      "Albergue de Peregrinos San Esteban",
+      "Albergue Ultreia",
+      "Albergue Rosalía",
+      "Hotel Rural Quinta San Francisco",
+      "Hotel La Posada de Castrojeriz",
+      "Albergue Orion",
+      "Albergue A Cien Leguas",
+      "Albergue Iacobus",
+      "Albergue El Convento de San Antón"
+    ]
+  },
+  {
+    "waypoint": "FROMISTA",
+    "count": 5,
+    "names": [
+      "Albergue de Peregrinos de Frómista",
+      "Albergue Estrella del Camino",
+      "Hotel Doña Mayor",
+      "Albergue Betania",
+      "Hotel Rural San Martín"
+    ]
+  },
+  {
+    "waypoint": "CARRION_DE_LOS_CONDES",
+    "count": 5,
+    "names": [
+      "Albergue Parroquial Santa María",
+      "Albergue Convento de Santa Clara",
+      "Albergue de las Monjas del Espíritu Santo",
+      "Hotel Real Monasterio San Zoilo",
+      "Albergue Parroquial Santa María del Camino"
+    ]
+  },
+  {
+    "waypoint": "LEDIGOS",
+    "count": 2,
+    "names": [
+      "Albergue El Palomar (Municipal)",
+      "Albergue La Morena"
+    ]
+  },
+  {
+    "waypoint": "SAHAGUN",
+    "count": 7,
+    "names": [
+      "Albergue Municipal Clarisas (Monasterio Santa Cruz)",
+      "Albergue Monasterio Santa Cruz (Clarisas)",
+      "Albergue Viador",
+      "Hotel Puerta de Sahagún",
+      "Albergue Viña Femita",
+      "Albergue La Aldea de Sahagún",
+      "Albergue El Peregrino de Sahagún"
+    ]
+  },
+  {
+    "waypoint": "EL_BURGO_RANERO",
+    "count": 3,
+    "names": [
+      "Albergue Municipal Domenico Laffi",
+      "Albergue La Laguna",
+      "Hostal El Peregrino"
+    ]
+  },
+  {
+    "waypoint": "MANSILLA_DE_LAS_MULAS",
+    "count": 4,
+    "names": [
+      "Albergue de Peregrinos de Mansilla",
+      "Albergue Gaia",
+      "Albergue La Pingüina",
+      "Albergue El Jardín del Camino"
+    ]
+  },
+  {
+    "waypoint": "LEON",
+    "count": 17,
+    "names": [
+      "Albergue Monasterio de las Benedictinas (Carbajalas)",
+      "Albergue San Francisco de Asís",
+      "Globetrotter Urban Hostel",
+      "Posada Regia",
+      "Hostel Covent Garden",
+      "Parador de León (Hostal San Marcos)",
+      "Hotel Real Colegiata San Isidoro",
+      "Hotel Alfonso V",
+      "Hotel Conde Luna",
+      "Albergue Santo Tomás de Canterbury",
+      "Albergue San Francisco de Asís",
+      "Hostel Alda Centro León",
+      "Albergue Santo Martino",
+      "Hostel Muralla Leonesa",
+      "Hostel Quartier León Jabalquinto",
+      "Albergue Un Paso Más",
+      "Hostel Santiago León"
+    ]
+  },
+  {
+    "waypoint": "VILLADANGOS",
+    "count": 3,
+    "names": [
+      "Albergue Municipal de Villadangos",
+      "Albergue Sonrisas",
+      "Hostal Alto Páramo"
+    ]
+  },
+  {
+    "waypoint": "ASTORGA",
+    "count": 12,
+    "names": [
+      "Albergue de Peregrinos San Javier",
+      "Albergue Siervas de María",
+      "Albergue My Way",
+      "Hostal Residencia San Jerónimo",
+      "Hostal Gaudí",
+      "Hotel Spa Ciudad de Astorga",
+      "Hotel Astur Plaza",
+      "Hotel Posada Real Casa de Tepa",
+      "Albergue Casa de la Memoria",
+      "Pensión García",
+      "Albergue La Peseta",
+      "Albergue El Cantón de Astorga"
+    ]
+  },
+  {
+    "waypoint": "RABANAL_DEL_CAMINO",
+    "count": 8,
+    "names": [
+      "Albergue San José (CSJ 英國聖雅各會)",
+      "Albergue Nuestra Señora del Pilar",
+      "Posada El Tesín",
+      "Albergue Guácelmo (Confraternity of St. James)",
+      "Albergue CSJ Refugio Gaucelmo",
+      "Hostal El Tesín",
+      "Posada Gaspar",
+      "Albergue Casa Banderas"
+    ]
+  },
+  {
+    "waypoint": "PONFERRADA",
+    "count": 8,
+    "names": [
+      "Albergue Parroquial San Nicolás de Flüe",
+      "Albergue Alea",
+      "Hostel Guiana",
+      "Hotel Aroi Bierzo Plaza",
+      "Hotel Temple Ponferrada",
+      "Hostal Virgen de la Encina",
+      "Hostal El Reloj",
+      "Albergue El Castillo"
+    ]
+  },
+  {
+    "waypoint": "VILLAFRANCA_DEL_BIERZO",
+    "count": 9,
+    "names": [
+      "Albergue Ave Fénix (Jesús Jato)",
+      "Albergue de Peregrinos de Villafranca (Municipal)",
+      "Albergue de la Piedra",
+      "Albergue Leo",
+      "Parador de Villafranca del Bierzo",
+      "Hostal La Puerta del Perdón",
+      "Albergue La Piedra",
+      "Albergue San Nicolás el Real",
+      "Albergue San Antonio de Padua"
+    ]
+  },
+  {
+    "waypoint": "O_CEBREIRO",
+    "count": 5,
+    "names": [
+      "Albergue de Peregrinos de O Cebreiro (Xunta de Galicia)",
+      "Casa Navarro Hostal",
+      "Hotel Rural O Cebreiro",
+      "Hotel Rural San Giraldo de Aurillac",
+      "Hotel O Cebreiro"
+    ]
+  },
+  {
+    "waypoint": "TRIACASTELA",
+    "count": 9,
+    "names": [
+      "Albergue de Peregrinos de Triacastela (Xunta)",
+      "Albergue Berce do Camiño",
+      "Complexo Xacobeo",
+      "Albergue Berlar",
+      "Albergue A Horta de Abel",
+      "Albergue Refugio del Oribio",
+      "Albergue Lemos",
+      "Albergue O Vilar",
+      "Albergue Turístico San Pelayo"
+    ]
+  },
+  {
+    "waypoint": "SAN_XIL",
+    "count": 2,
+    "names": [
+      "Albergue Casa Don Álvaro",
+      "Albergue Casa Manolo"
+    ]
+  },
+  {
+    "waypoint": "CALVOR",
+    "count": 2,
+    "names": [
+      "Albergue de Peregrinos de Calvor",
+      "Albergue Casa Calvor"
+    ]
+  },
+  {
+    "waypoint": "SARRIA",
+    "count": 18,
+    "names": [
+      "Albergue de Peregrinos de Sarria (Xunta)",
+      "Albergue Mayor",
+      "Albergue Monasterio de la Magdalena",
+      "Albergue Alma do Camiño",
+      "Albergue O Durmiñento",
+      "Albergue Don Álvaro",
+      "Albergue Los Blasones",
+      "Hotel Alfonso IX",
+      "Hotel Roma",
+      "Hotel Duerming Villa de Sarria",
+      "Albergue Credencial",
+      "Albergue Internacional Sarria",
+      "Albergue HR Obradoiro",
+      "Albergue San Lázaro Sarria",
+      "Albergue Barbacoa del Camino",
+      "Albergue Alborada",
+      "Albergue O Durmiente",
+      "Albergue Porta Real de Sarria"
+    ]
+  },
+  {
+    "waypoint": "BARBADELO",
+    "count": 3,
+    "names": [
+      "Albergue A Conlleche",
+      "Casa de Carmen",
+      "Albergue Casa Carmen"
+    ]
+  },
+  {
+    "waypoint": "MORGADE",
+    "count": 2,
+    "names": [
+      "Albergue Casa Morgade",
+      "Albergue O Mirador de Morgade"
+    ]
+  },
+  {
+    "waypoint": "MERCADOIRO",
+    "count": 2,
+    "names": [
+      "Albergue Mercadoiro",
+      "Albergue Casa Mercadoiro"
+    ]
+  },
+  {
+    "waypoint": "PORTOMARIN",
+    "count": 14,
+    "names": [
+      "Albergue de Peregrinos de Portomarín (Xunta)",
+      "Albergue PortoSantiago",
+      "Albergue Aqua Portomarín",
+      "Albergue Ferramenteiro",
+      "Hotel Pousada de Portomarín",
+      "Hotel Vistalegre",
+      "Albergue Folgueira",
+      "Albergue Manuel",
+      "Albergue Pons Minea",
+      "Albergue Portomiño",
+      "Albergue Coto do Frade",
+      "Albergue Casa Domingo",
+      "Albergue Sixto",
+      "Albergue Mirador de Portomarín"
+    ]
+  },
+  {
+    "waypoint": "PALAS_DE_REI",
+    "count": 12,
+    "names": [
+      "Albergue O Castro",
+      "Albergue de Peregrinos de Palas de Rei (Xunta)",
+      "Albergue San Marcos",
+      "Albergue Os Ronséis",
+      "Albergue Zuteba",
+      "Complexo Cabañas da Ulla",
+      "Albergue A Compás",
+      "Albergue Outeiro",
+      "Albergue Castro",
+      "Albergue Valin de Lorenzo",
+      "Albergue As Hortas",
+      "Albergue O Trisquel de Palas"
+    ]
+  },
+  {
+    "waypoint": "HOSPITAL_DA_CRUZ",
+    "count": 3,
+    "names": [
+      "Albergue de Peregrinos Hospital da Cruz",
+      "Albergue Os Pasos",
+      "Albergue Casa de la Fuente"
+    ]
+  },
+  {
+    "waypoint": "VENTAS_DE_NARON",
+    "count": 3,
+    "names": [
+      "Casa Da Garza",
+      "Albergue Casa Muntián",
+      "Albergue O Cruceiro de Narón"
+    ]
+  },
+  {
+    "waypoint": "LIGONDE",
+    "count": 2,
+    "names": [
+      "Albergue Fuente del Peregrino",
+      "Albergue Municipal de Ligonde"
+    ]
+  },
+  {
+    "waypoint": "EIREXE",
+    "count": 2,
+    "names": [
+      "Albergue de Peregrinos de Eirexe",
+      "Albergue Bide-Ona de Eirexe"
+    ]
+  },
+  {
+    "waypoint": "SAN_XULIAN",
+    "count": 2,
+    "names": [
+      "Albergue San Xulián",
+      "Albergue Mámoa"
+    ]
+  },
+  {
+    "waypoint": "CASANOVA",
+    "count": 2,
+    "names": [
+      "Albergue de Peregrinos de Casanova",
+      "Albergue Casa da Torre"
+    ]
+  },
+  {
+    "waypoint": "LEBOREIRO",
+    "count": 2,
+    "names": [
+      "Albergue Mirador de Leboreiro",
+      "Casa Rural Vilarinho"
+    ]
+  },
+  {
+    "waypoint": "FURELOS",
+    "count": 2,
+    "names": [
+      "Albergue de Furelos",
+      "Albergue Ponte Furelos"
+    ]
+  },
+  {
+    "waypoint": "BOENTE",
+    "count": 3,
+    "names": [
+      "Albergue Boente",
+      "Albergue Os Albergues",
+      "Albergue A Pousa do Asno"
+    ]
+  },
+  {
+    "waypoint": "ARZUA",
+    "count": 13,
+    "names": [
+      "Albergue de Peregrinos de Arzúa (Xunta)",
+      "Albergue Vía Láctea",
+      "Albergue Los Caminantes",
+      "Albergue Ultreia",
+      "Hotel 1930 Boutique San Pedro",
+      "Hotel Suiza",
+      "Albergue De Camino",
+      "Albergue Los Tres Abetos",
+      "Albergue Da Fonte",
+      "Albergue Cruce de Caminos",
+      "Albergue San Francisco",
+      "Albergue O Fogar de Teodomiro",
+      "Albergue La Portada"
+    ]
+  },
+  {
+    "waypoint": "CALLE",
+    "count": 2,
+    "names": [
+      "Albergue A Brea",
+      "Albergue O Abrigo"
+    ]
+  },
+  {
+    "waypoint": "SALCEDA",
+    "count": 2,
+    "names": [
+      "Albergue As Eldas",
+      "Albergue Casa do Aceredo"
+    ]
+  },
+  {
+    "waypoint": "NAVARRETE",
+    "count": 5,
+    "names": [
+      "Albergue La Sombra del Laurel",
+      "Albergue Municipal de Navarrete",
+      "Albergue El Cántaro",
+      "Hotel Rey Sancho",
+      "Albergue La Casa del Peregrino"
+    ]
+  },
+  {
+    "waypoint": "SANTA_IRENE",
+    "count": 3,
+    "names": [
+      "Albergue de Peregrinos de Santa Irene (Xunta)",
+      "Albergue Santa Irene (Privado)",
+      "Albergue Andaina"
+    ]
+  },
+  {
+    "waypoint": "A_RUA",
+    "count": 2,
+    "names": [
+      "Pensión O Muiño de Pena",
+      "Albergue O Acivro"
+    ]
+  },
+  {
+    "waypoint": "O_PEDROUZO",
+    "count": 13,
+    "names": [
+      "Albergue de Peregrinos de Arca do Pino (Xunta)",
+      "Albergue Porta de Santiago",
+      "Albergue Edreira",
+      "Albergue Mirador de Pedrouzo",
+      "Albergue O Trisquel",
+      "Hotel O Pino",
+      "Albergue O Salcedo",
+      "Albergue O Burgo",
+      "Albergue Arca",
+      "Albergue O Peligrino",
+      "Albergue Dourado",
+      "Albergue Rural O Mesón",
+      "Albergue O Camiño das Ocas"
+    ]
+  },
+  {
+    "waypoint": "AMENAL",
+    "count": 2,
+    "names": [
+      "Hotel Amenal",
+      "Albergue Amenal"
+    ]
+  },
+  {
+    "waypoint": "LAVACOLLA",
+    "count": 3,
+    "names": [
+      "Hotel Garcés",
+      "Albergue Lavacolla",
+      "Hostal San Paio"
+    ]
+  },
+  {
+    "waypoint": "SANTIAGO_DE_COMPOSTELA",
+    "count": 21,
+    "names": [
+      "Hospedería San Martín Pinario / Seminario Mayor",
+      "Hospedería San Francisco",
+      "Albergue Roots & Boots",
+      "The Last Stamp Hostel",
+      "Albergue de Peregrinos Seminario Menor",
+      "Mundo Albergue",
+      "Hotel Praza Quintana",
+      "Parador Hostal Dos Reis Católicos",
+      "Hotel Monumento San Francisco",
+      "Hotel Compostela",
+      "Hotel Costa Vella",
+      "Hotel Rua Villar",
+      "Albergue Fin del Camino",
+      "Albergue Blanco Hostel",
+      "Albergue La Salle",
+      "Albergue Meiga Backpackers",
+      "Albergue Cruceiro do Galo",
+      "Hostel SCQ",
+      "Albergue Meiga Blanca",
+      "Hospedería San Martín Pinario",
+      "Albergue Alda Porta Real"
+    ]
+  },
+  {
+    "waypoint": "ESPINAL",
+    "count": 2,
+    "names": [
+      "Albergue Haizea",
+      "Hostal Irugoienea"
+    ]
+  },
+  {
+    "waypoint": "BIZKARRETA",
+    "count": 1,
+    "names": [
+      "Pensión Aritza"
+    ]
+  },
+  {
+    "waypoint": "LINTZOAIN",
+    "count": 1,
+    "names": [
+      "Casa Rural Erteiti"
+    ]
+  },
+  {
+    "waypoint": "ZURIAIN",
+    "count": 2,
+    "names": [
+      "Albergue La Parada de Zuriáin",
+      "Albergue Casa de la Hiedra"
+    ]
+  },
+  {
+    "waypoint": "TRINIDAD_DE_ARRE",
+    "count": 2,
+    "names": [
+      "Albergue del Convento de la Trinidad de Arre",
+      "Albergue Parroquial San Esteban"
+    ]
+  },
+  {
+    "waypoint": "VILLAVA",
+    "count": 2,
+    "names": [
+      "Albergue de Peregrinos de Villava",
+      "Hotel Villava Pamplona"
+    ]
+  },
+  {
+    "waypoint": "ZARIQUIEGUI",
+    "count": 1,
+    "names": [
+      "Albergue San Andrés"
+    ]
+  },
+  {
+    "waypoint": "UTERGA",
+    "count": 2,
+    "names": [
+      "Albergue Casa Baztán",
+      "Albergue Camino del Perdón"
+    ]
+  },
+  {
+    "waypoint": "OBANOS",
+    "count": 2,
+    "names": [
+      "Albergue de Peregrinos Usagre",
+      "Hostal Casa de la Reina"
+    ]
+  },
+  {
+    "waypoint": "CIRAUQUI",
+    "count": 3,
+    "names": [
+      "Albergue Maralotx",
+      "Albergue Casa Garrés",
+      "Casa Rural Iturralde"
+    ]
+  },
+  {
+    "waypoint": "LORCA",
+    "count": 2,
+    "names": [
+      "Albergue La Bodega del Camino",
+      "Albergue La Estela"
+    ]
+  },
+  {
+    "waypoint": "VILLATUERTA",
+    "count": 2,
+    "names": [
+      "Albergue Casa Mágica",
+      "Hostal San Veremundo"
+    ]
+  },
+  {
+    "waypoint": "AYEGUI",
+    "count": 2,
+    "names": [
+      "Albergue San Cipriano (Bodegas Irache)",
+      "Hotel Irache"
+    ]
+  },
+  {
+    "waypoint": "VILLAMAYOR_DE_MONJARDIN",
+    "count": 3,
+    "names": [
+      "Albergue Oasis de Paz",
+      "Albergue Parroquial de Villamayor",
+      "Hotel Rural Castillo de Monjardín"
+    ]
+  },
+  {
+    "waypoint": "TORRES_DEL_RIO",
+    "count": 2,
+    "names": [
+      "Albergue Casa Mari Cruz",
+      "Albergue Casa Mariela"
+    ]
+  },
+  {
+    "waypoint": "VENTOSA",
+    "count": 2,
+    "names": [
+      "Albergue San Saturnino",
+      "Hotel Rural Las Águedas"
+    ]
+  },
+  {
+    "waypoint": "AZOFRA",
+    "count": 1,
+    "names": [
+      "Albergue Municipal de Azofra"
+    ]
+  },
+  {
+    "waypoint": "CIRUENA",
+    "count": 3,
+    "names": [
+      "Albergue Virgen de Guadalupe",
+      "Albergue de Peregrinos de Cirueña",
+      "Apartamentos Rioja Alta Golf"
+    ]
+  },
+  {
+    "waypoint": "GRANON",
+    "count": 2,
+    "names": [
+      "Albergue Parroquial San Juan Bautista",
+      "Albergue Casa de las Sonrisas"
+    ]
+  },
+  {
+    "waypoint": "VILLAFRANCA_MONTES_DE_OCA",
+    "count": 2,
+    "names": [
+      "Albergue San Antón Abad",
+      "Albergue Municipal de Villafranca Montes de Oca"
+    ]
+  },
+  {
+    "waypoint": "AGES",
+    "count": 3,
+    "names": [
+      "Albergue San Rafael",
+      "Albergue El Pajar de Agés",
+      "Hostal El Rincón del Cándido"
+    ]
+  },
+  {
+    "waypoint": "ATAPUERCA",
+    "count": 4,
+    "names": [
+      "Albergue El Peregrino de Atapuerca",
+      "Albergue La Dual",
+      "Hotel Rural Papasol",
+      "Albergue San Roque de Atapuerca"
+    ]
+  },
+  {
+    "waypoint": "TARDAJOS",
+    "count": 2,
+    "names": [
+      "Albergue La Fábrica",
+      "Albergue Municipal de Tardajos"
+    ]
+  },
+  {
+    "waypoint": "HONTANAS",
+    "count": 4,
+    "names": [
+      "Albergue Santa Brígida",
+      "Albergue El Puntido",
+      "Albergue Juan de Yepes",
+      "Albergue Santa Brígida"
+    ]
+  },
+  {
+    "waypoint": "ITERO_DE_LA_VEGA",
+    "count": 2,
+    "names": [
+      "Albergue San Nicolás de Puente Fitero",
+      "Albergue La Mochila"
+    ]
+  },
+  {
+    "waypoint": "VILLALCAZAR_DE_SIRGA",
+    "count": 3,
+    "names": [
+      "Albergue Don Camino",
+      "Hostal Las Candelas",
+      "Mesón de Villasirga"
+    ]
+  },
+  {
+    "waypoint": "CALZADILLA_DE_LA_CUEZA",
+    "count": 3,
+    "names": [
+      "Hostal Albergue Los Canarios",
+      "Albergue Municipal de Calzadilla",
+      "Hostal Camino Real"
+    ]
+  },
+  {
+    "waypoint": "MORATINOS",
+    "count": 3,
+    "names": [
+      "Albergue San Nicolás de Moratinos",
+      "Albergue Moratinos",
+      "Hostal Moratinos"
+    ]
+  },
+  {
+    "waypoint": "RELIEGOS",
+    "count": 3,
+    "names": [
+      "Albergue La Parada de Reliegos",
+      "Albergue Municipal de Reliegos",
+      "Albergue Vive Tu Camino"
+    ]
+  },
+  {
+    "waypoint": "VIRGEN_DEL_CAMINO",
+    "count": 3,
+    "names": [
+      "Albergue Don Antonino",
+      "Albergue Municipal de La Virgen del Camino",
+      "Albergue Municipal La Virgen del Camino"
+    ]
+  },
+  {
+    "waypoint": "SAN_MARTIN_DEL_CAMINO",
+    "count": 3,
+    "names": [
+      "Albergue La Huella",
+      "Albergue Santa Ana",
+      "Albergue La Casona de San Martín"
+    ]
+  },
+  {
+    "waypoint": "HOSPITAL_DE_ORBIGO",
+    "count": 3,
+    "names": [
+      "Albergue Parroquial Karl Leisner",
+      "Albergue Verde",
+      "Albergue Municipal de Hospital de Órbigo"
+    ]
+  },
+  {
+    "waypoint": "EL_GANSO",
+    "count": 1,
+    "names": [
+      "Albergue Bar Cowboy"
+    ]
+  },
+  {
+    "waypoint": "FONCEBADON",
+    "count": 6,
+    "names": [
+      "Albergue Domus Dei",
+      "Albergue La Posada del Murciano",
+      "Albergue El Trasgu",
+      "Albergue Parroquial de Foncebadón",
+      "Albergue Pensión A Solaina",
+      "Albergue La Fuente del Peregrino"
+    ]
+  },
+  {
+    "waypoint": "MANJARIN",
+    "count": 1,
+    "names": [
+      "Albergue de Manjarín (Tomás el Templario)"
+    ]
+  },
+  {
+    "waypoint": "EL_ACEBO",
+    "count": 2,
+    "names": [
+      "Albergue La Casa del Peregrino",
+      "Hotel Rural Mesón El Acebo"
+    ]
+  },
+  {
+    "waypoint": "MOLINASECA",
+    "count": 5,
+    "names": [
+      "Albergue Santa Marina",
+      "Hotel De Floriana",
+      "Albergue Compostela",
+      "Albergue Alma de Molinaseca",
+      "Albergue Casa del Reloj"
+    ]
+  },
+  {
+    "waypoint": "CACABELOS",
+    "count": 3,
+    "names": [
+      "Albergue Santuario de las Angustias",
+      "Hotel Rural La Tronera",
+      "Albergue Municipal de Cacabelos"
+    ]
+  },
+  {
+    "waypoint": "TRABADELO",
+    "count": 2,
+    "names": [
+      "Albergue Casa Susi",
+      "Albergue Crisdalu"
+    ]
+  },
+  {
+    "waypoint": "VEGA_DE_VALCARCE",
+    "count": 4,
+    "names": [
+      "Albergue Senda",
+      "Albergue Sextrís",
+      "Albergue El Refugio del Cazador",
+      "Albergue Pensión D\\"
+    ]
+  },
+  {
+    "waypoint": "LAS_HERRERIAS",
+    "count": 2,
+    "names": [
+      "Albergue Casa Polín",
+      "Albergue Casa Lúa"
+    ]
+  },
+  {
+    "waypoint": "LA_FABA",
+    "count": 2,
+    "names": [
+      "Albergue de La Faba (Vereinigung)",
+      "Albergue El Celta"
+    ]
+  },
+  {
+    "waypoint": "ALTO_DO_POIO",
+    "count": 2,
+    "names": [
+      "Albergue Puerto del Poio",
+      "Hostal Santa María del Poio"
+    ]
+  },
+  {
+    "waypoint": "FONFRIA",
+    "count": 2,
+    "names": [
+      "Albergue A Reboleira",
+      "Albergue Municipal de Fonfría"
+    ]
+  },
+  {
+    "waypoint": "FERREIROS",
+    "count": 2,
+    "names": [
+      "Albergue Casa Cruceiro",
+      "Albergue O Abrigadoiro"
+    ]
+  },
+  {
+    "waypoint": "GONZAR",
+    "count": 3,
+    "names": [
+      "Albergue Casa García",
+      "Albergue de Peregrinos de Gonzar (Xunta)",
+      "Albergue Descanso del Peregrino"
+    ]
+  },
+  {
+    "waypoint": "MELIDE",
+    "count": 13,
+    "names": [
+      "Albergue Pereiro",
+      "Albergue San Antón Melide",
+      "Hotel Carlos 98",
+      "Albergue de Peregrinos de Melide (Xunta)",
+      "Albergue O Cruceiro",
+      "Albergue Montoto",
+      "Albergue Arraigos",
+      "Albergue Vía Sacra",
+      "Albergue O Apalpador",
+      "Albergue San Roque de Melide",
+      "Albergue San Mateo",
+      "Albergue El Cantábrico",
+      "Albergue Alojamiento De Camino Melide"
+    ]
+  },
+  {
+    "waypoint": "RIBADISO",
+    "count": 3,
+    "names": [
+      "Albergue Público de Ribadiso (Xunta)",
+      "Albergue Los Caminantes de Ribadiso",
+      "Albergue Milpés"
+    ]
+  },
+  {
+    "waypoint": "MONTE_DO_GOZO",
+    "count": 3,
+    "names": [
+      "Albergue Público de Monte do Gozo",
+      "Albergue Benvido Monte do Gozo",
+      "Albergue O Rueiro"
+    ]
+  },
+  {
+    "waypoint": "MURUZABAL",
+    "count": 2,
+    "names": [
+      "Albergue Mendiry",
+      "Albergue Muruzábal"
+    ]
+  },
+  {
+    "waypoint": "MANERU",
+    "count": 2,
+    "names": [
+      "Albergue de Peregrinos Maneru",
+      "Albergue Casa Román"
+    ]
+  },
+  {
+    "waypoint": "AZQUETA",
+    "count": 1,
+    "names": [
+      "Albergue de Azqueta"
+    ]
+  },
+  {
+    "waypoint": "SANSOL",
+    "count": 2,
+    "names": [
+      "Albergue Palacio de Sansol",
+      "Albergue Vega de Sansol"
+    ]
+  },
+  {
+    "waypoint": "REDECILLA",
+    "count": 2,
+    "names": [
+      "Albergue Municipal Essentia",
+      "Albergue San Lázaro"
+    ]
+  },
+  {
+    "waypoint": "CASTILDELGADO",
+    "count": 2,
+    "names": [
+      "Albergue Bide Ona",
+      "Albergue El Canto de Gallur"
+    ]
+  },
+  {
+    "waypoint": "VILORIA",
+    "count": 2,
+    "names": [
+      "Albergue Acacio y Orietta",
+      "Albergue Parroquial de Viloria"
+    ]
+  },
+  {
+    "waypoint": "TOSANTOS",
+    "count": 3,
+    "names": [
+      "Albergue Parroquial San Francisco de Asís",
+      "Hostal Los Tilos",
+      "Albergue Parroquial San Buenaventura"
+    ]
+  },
+  {
+    "waypoint": "VILLAMBISTIA",
+    "count": 2,
+    "names": [
+      "Albergue San Roque",
+      "Albergue La Casona de Villambistia"
+    ]
+  },
+  {
+    "waypoint": "ESPINOSA",
+    "count": 2,
+    "names": [
+      "Albergue El Campanario",
+      "Albergue La Campana"
+    ]
+  },
+  {
+    "waypoint": "CARDENUELA_RIOPICO",
+    "count": 2,
+    "names": [
+      "Albergue Santa Fe",
+      "Albergue Rural Cardeñuela"
+    ]
+  },
+  {
+    "waypoint": "ORBANEJA_RIOPICO",
+    "count": 2,
+    "names": [
+      "Albergue San Blas",
+      "Albergue La Choza de Orbaneja"
+    ]
+  },
+  {
+    "waypoint": "RABE_DE_LAS_CALZADAS",
+    "count": 2,
+    "names": [
+      "Albergue Liberanos Domine",
+      "Casa Rural Los Huertos"
+    ]
+  },
+  {
+    "waypoint": "SAN_BOL",
+    "count": 1,
+    "names": [
+      "Albergue de San Bol"
+    ]
+  },
+  {
+    "waypoint": "SAN_ANTON",
+    "count": 1,
+    "names": [
+      "Albergue de las Ruinas de San Antón"
+    ]
+  },
+  {
+    "waypoint": "BOADILLA",
+    "count": 2,
+    "names": [
+      "Albergue En el Camino",
+      "Hotel Rural Boadilla del Camino"
+    ]
+  },
+  {
+    "waypoint": "POBLACION_DE_CAMPOS",
+    "count": 2,
+    "names": [
+      "Albergue La Fuentecilla",
+      "Hotel Rural La Fuentina"
+    ]
+  },
+  {
+    "waypoint": "TERRADILLOS",
+    "count": 2,
+    "names": [
+      "Albergue Los Templarios",
+      "Albergue Jacques de Molay"
+    ]
+  },
+  {
+    "waypoint": "BERCIANOS",
+    "count": 3,
+    "names": [
+      "Albergue Parroquial de Bercianos",
+      "Albergue La Perala",
+      "Albergue Santa Clara"
+    ]
+  },
+  {
+    "waypoint": "ARCAHUEJA",
+    "count": 2,
+    "names": [
+      "Albergue San Marcos",
+      "Albergue La Torre de Arcahueja"
+    ]
+  },
+  {
+    "waypoint": "VILLARES_DE_ORBIGO",
+    "count": 2,
+    "names": [
+      "Albergue El Cantu",
+      "Albergue El Pajar de Villares"
+    ]
+  },
+  {
+    "waypoint": "SAN_JUSTO_DE_LA_VEGA",
+    "count": 2,
+    "names": [
+      "Albergue San Justo",
+      "Albergue El Encanto del Camino"
+    ]
+  },
+  {
+    "waypoint": "MURIAS_DE_RECHIVALDO",
+    "count": 3,
+    "names": [
+      "Albergue Casa Flor",
+      "Hostal Casa Lázaro",
+      "Hostal Flor de Murias"
+    ]
+  },
+  {
+    "waypoint": "SANTA_CATALINA",
+    "count": 3,
+    "names": [
+      "Albergue San Blas",
+      "Albergue El Caminante",
+      "Hostal Rural Hostería San Blas"
+    ]
+  },
+  {
+    "waypoint": "RIEGO_DE_AMBROS",
+    "count": 2,
+    "names": [
+      "Albergue Municipal de Riego de Ambrós",
+      "Hotel Rural El Rincón de Ambrós"
+    ]
+  },
+  {
+    "waypoint": "CAMPONARAYA",
+    "count": 2,
+    "names": [
+      "Albergue Naraya",
+      "Albergue La Medalluca"
+    ]
+  },
+  {
+    "waypoint": "PEREJE",
+    "count": 2,
+    "names": [
+      "Albergue de Peregrinos de Pereje",
+      "Albergue de Perejil"
+    ]
+  },
+  {
+    "waypoint": "RUITELAN",
+    "count": 1,
+    "names": [
+      "Albergue Pequeño Potala"
+    ]
+  },
+  {
+    "waypoint": "LINARES",
+    "count": 2,
+    "names": [
+      "Albergue El Rebollín",
+      "Albergue El Recreo de Liñares"
+    ]
+  },
+  {
+    "waypoint": "HOSPITAL_DA_CONDESA",
+    "count": 2,
+    "names": [
+      "Albergue Público de Hospital da Condesa (Xunta)",
+      "Albergue O Hospital"
+    ]
+  },
+  {
+    "waypoint": "CASTROMAIOR",
+    "count": 1,
+    "names": [
+      "Albergue Casa Portela"
+    ]
+  }
+]

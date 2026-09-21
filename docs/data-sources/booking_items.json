@@ -1,0 +1,2172 @@
+[
+  {
+    "id": "ACC_SJPP_CHEMIN",
+    "name": "Gîte Le Chemin Vers l",
+    "waypointId": "SJPP",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/fr/gite-le-chemin-vers-l-etoile.html"
+  },
+  {
+    "id": "ACC_ORISSON_REFUGE",
+    "name": "Refuge Orisson",
+    "waypointId": "ORISSON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/fr/refuge-orisson.html"
+  },
+  {
+    "id": "ACC_RONCESVALLES_POSADA",
+    "name": "Posada de Roncesvalles",
+    "waypointId": "RONCESVALLES",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/posada-de-roncesvalles.html"
+  },
+  {
+    "id": "ACC_RONCESVALLES_SABINA",
+    "name": "Hotel Rural Casa Sabina",
+    "waypointId": "RONCESVALLES",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/casa-sabina.html"
+  },
+  {
+    "id": "ACC_BURGUETE_JUANTORENA",
+    "name": "Hotel Juantorena",
+    "waypointId": "BURGUETE",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/juantorena.html"
+  },
+  {
+    "id": "ACC_BURGUETE_LOIZU",
+    "name": "Hostal Loizu",
+    "waypointId": "BURGUETE",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-loizu.html"
+  },
+  {
+    "id": "ACC_ZUBIRI_ZALDIKO",
+    "name": "Albergue Zaldiko",
+    "waypointId": "ZUBIRI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-zaldiko.html"
+  },
+  {
+    "id": "ACC_ZUBIRI_PALO",
+    "name": "Albergue El Palo de Avellano",
+    "waypointId": "ZUBIRI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-palo-de-avellano.html"
+  },
+  {
+    "id": "ACC_ZUBIRI_SEGUNDA_ETAPA",
+    "name": "Albergue Segunda Etapa",
+    "waypointId": "ZUBIRI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-segunda-etapa.html"
+  },
+  {
+    "id": "ACC_ZUBIRI_RIO_ARGA",
+    "name": "Albergue Río Arga Ibaia",
+    "waypointId": "ZUBIRI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-rio-arga-ibaia.html"
+  },
+  {
+    "id": "ACC_ZUBIRI_TXANTXORENA",
+    "name": "Pensión Txantxorena",
+    "waypointId": "ZUBIRI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/txantxorena.html"
+  },
+  {
+    "id": "ACC_ZUBIRI_GAU_TXORI",
+    "name": "Hostal Gau Txori",
+    "waypointId": "ZUBIRI",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-gau-txori.html"
+  },
+  {
+    "id": "ACC_ZUBIRI_AKERRETA",
+    "name": "Hotel Rural Akerreta",
+    "waypointId": "ZUBIRI",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-rural-akerreta.html"
+  },
+  {
+    "id": "ACC_LARRASOANA_SAN_NICOLAS",
+    "name": "Albergue San Nicolás",
+    "waypointId": "LARRASOANA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/san-nicolas-larrasoana.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_PLAZA_CATEDRAL",
+    "name": "Hostel Plaza Catedral",
+    "waypointId": "PAMPLONA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostel-plaza-catedral.html"
+  },
+  {
+    "id": "ACC_CIZUR_RONCAL",
+    "name": "Albergue Roncal",
+    "waypointId": "CIZUR_MENOR",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-roncal.html"
+  },
+  {
+    "id": "ACC_PUENTE_SANTIAGO",
+    "name": "Albergue Santiago Apóstol",
+    "waypointId": "PUENTE_LA_REINA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-santiago-apostol.html"
+  },
+  {
+    "id": "ACC_PUENTE_JAKUE",
+    "name": "Hotel Albergue Jakue",
+    "waypointId": "PUENTE_LA_REINA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-jakue.html"
+  },
+  {
+    "id": "ACC_ESTELLA_AGORA",
+    "name": "Albergue Ágora Hostel",
+    "waypointId": "ESTELLA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/agora-hostel.html"
+  },
+  {
+    "id": "ACC_LOS_ARCOS_ABUELA",
+    "name": "Albergue Casa de la Abuela",
+    "waypointId": "LOS_ARCOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-de-la-abuela.html"
+  },
+  {
+    "id": "ACC_VIANA_PALACIO_PUJADAS",
+    "name": "Palacio Pujadas by Pandora Hoteles",
+    "waypointId": "VIANA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/palacio-pujadas.html"
+  },
+  {
+    "id": "ACC_LOGRONO_NUMANTINA",
+    "name": "Hostal La Numantina",
+    "waypointId": "LOGRONO",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-la-numantina.html"
+  },
+  {
+    "id": "ACC_NAJERA_PUERTA",
+    "name": "Albergue Puerta de Nájera",
+    "waypointId": "NAJERA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/puerta-de-najera.html"
+  },
+  {
+    "id": "ACC_NAJERA_CIUDAD",
+    "name": "Hostal Ciudad de Nájera",
+    "waypointId": "NAJERA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/ciudad-de-najera.html"
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_CASA_SANTO",
+    "name": "Hostel Casa del Santo",
+    "waypointId": "SANTO_DOMINGO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-del-santo.html"
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_MIGUEL_ANGEL",
+    "name": "Hostal Miguel Angel",
+    "waypointId": "SANTO_DOMINGO",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-miguel-angel.html"
+  },
+  {
+    "id": "ACC_BELORADO_CUATRO_CANTONES",
+    "name": "Albergue Cuatro Cantones",
+    "waypointId": "BELORADO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/cuatro-cantones.html"
+  },
+  {
+    "id": "ACC_BELORADO_BASAULA",
+    "name": "Hostal Basaula",
+    "waypointId": "BELORADO",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-basaula.html"
+  },
+  {
+    "id": "ACC_SAN_JUAN_CASA_RURAL",
+    "name": "Casa Rural San Juan",
+    "waypointId": "SAN_JUAN_DE_ORTEGA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-rural-san-juan.html"
+  },
+  {
+    "id": "ACC_BURGOS_HOSTAL",
+    "name": "Hostel Burgos",
+    "waypointId": "BURGOS",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostel-burgos.html"
+  },
+  {
+    "id": "ACC_HORNILLOS_ENCUENTRO",
+    "name": "Albergue El Encuentro",
+    "waypointId": "HORNILLOS_DEL_CAMINO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-encuentro-hornillos.html"
+  },
+  {
+    "id": "ACC_CASTROJERIZ_ULTREIA",
+    "name": "Albergue Ultreia",
+    "waypointId": "CASTROJERIZ",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-ultreia.html"
+  },
+  {
+    "id": "ACC_CASTROJERIZ_QUINTA_SAN_QUIRCE",
+    "name": "Hotel Rural Quinta de San Quirce",
+    "waypointId": "CASTROJERIZ",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/quinta-de-san-quirce.html"
+  },
+  {
+    "id": "ACC_FROMISTA_ESTRELLA",
+    "name": "Albergue Estrella del Camino",
+    "waypointId": "FROMISTA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/estrella-del-camino.html"
+  },
+  {
+    "id": "ACC_LEDIGOS_LA_MORENA",
+    "name": "Albergue La Morena",
+    "waypointId": "LEDIGOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-la-morena.html"
+  },
+  {
+    "id": "ACC_SAHAGUN_VICTORIANO",
+    "name": "Albergue Viñafalces",
+    "waypointId": "SAHAGUN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/vinafalces.html"
+  },
+  {
+    "id": "ACC_EL_BURGO_LAGUNA",
+    "name": "Albergue La Laguna",
+    "waypointId": "EL_BURGO_RANERO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-la-laguna.html"
+  },
+  {
+    "id": "ACC_MANSILLA_GAIA",
+    "name": "Albergue Gaia",
+    "waypointId": "MANSILLA_DE_LAS_MULAS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-gaia.html"
+  },
+  {
+    "id": "ACC_LEON_GLOBETROTTER",
+    "name": "Globetrotter Urban Hostel",
+    "waypointId": "LEON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/globetrotter-urban-hostel.html"
+  },
+  {
+    "id": "ACC_LEON_POSADA_REGIA",
+    "name": "Posada Regia",
+    "waypointId": "LEON",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/posada-regia.html"
+  },
+  {
+    "id": "ACC_VILLADANGOS_SOL",
+    "name": "Albergue Sonrisas",
+    "waypointId": "VILLADANGOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/sonrisas-villadangos.html"
+  },
+  {
+    "id": "ACC_ASTORGA_MY_WAY",
+    "name": "Albergue My Way",
+    "waypointId": "ASTORGA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/my-way-astorga.html"
+  },
+  {
+    "id": "ACC_ASTORGA_SAN_JERONIMO",
+    "name": "Hostal Residencia San Jerónimo",
+    "waypointId": "ASTORGA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-san-jeronimo.html"
+  },
+  {
+    "id": "ACC_RABANAL_GUASON",
+    "name": "Posada El Tesín",
+    "waypointId": "RABANAL_DEL_CAMINO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/posada-el-tesin.html"
+  },
+  {
+    "id": "ACC_PONFERRADA_ALEA",
+    "name": "Albergue Alea",
+    "waypointId": "PONFERRADA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-alea.html"
+  },
+  {
+    "id": "ACC_PONFERRADA_GUIANA",
+    "name": "Hostel Guiana",
+    "waypointId": "PONFERRADA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostel-guiana.html"
+  },
+  {
+    "id": "ACC_VILLAFRANCA_PIEDRA",
+    "name": "Albergue de la Piedra",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-de-la-piedra.html"
+  },
+  {
+    "id": "ACC_O_CEBREIRO_NAVARRO",
+    "name": "Casa Navarro Hostal",
+    "waypointId": "O_CEBREIRO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-navarro-o-cebreiro.html"
+  },
+  {
+    "id": "ACC_O_CEBREIRO_RURAL",
+    "name": "Hotel Rural O Cebreiro",
+    "waypointId": "O_CEBREIRO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/rural-o-cebreiro.html"
+  },
+  {
+    "id": "ACC_TRIACASTELA_BERCE",
+    "name": "Albergue Berce do Camiño",
+    "waypointId": "TRIACASTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-berce-do-camino.html"
+  },
+  {
+    "id": "ACC_TRIACASTELA_XACOBEO",
+    "name": "Complexo Xacobeo",
+    "waypointId": "TRIACASTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/complexo-xacobeo.html"
+  },
+  {
+    "id": "ACC_SAN_XIL_DON_ALVARO",
+    "name": "Albergue Casa Don Álvaro",
+    "waypointId": "SAN_XIL",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-don-alvaro.html"
+  },
+  {
+    "id": "ACC_SARRIA_MAYOR",
+    "name": "Albergue Mayor",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-mayor-sarria.html"
+  },
+  {
+    "id": "ACC_BARBADELO_A_CONLLECHE",
+    "name": "Albergue A Conlleche",
+    "waypointId": "BARBADELO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-a-conlleche.html"
+  },
+  {
+    "id": "ACC_BARBADELO_CASA_CARMEN",
+    "name": "Casa de Carmen",
+    "waypointId": "BARBADELO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/casa-de-carmen.html"
+  },
+  {
+    "id": "ACC_MORGADE_CASA_MORGADE",
+    "name": "Albergue Casa Morgade",
+    "waypointId": "MORGADE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-morgade.html"
+  },
+  {
+    "id": "ACC_MERCADOIRO_ALBERGUE",
+    "name": "Albergue Mercadoiro",
+    "waypointId": "MERCADOIRO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-mercadoiro.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_FERREIRA",
+    "name": "Albergue PortoSantiago",
+    "waypointId": "PORTOMARIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-portosantiago.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_AQUA",
+    "name": "Albergue Aqua Portomarín",
+    "waypointId": "PORTOMARIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/aqua-portomarin.html"
+  },
+  {
+    "id": "ACC_CASTROMAIOR_O_CASTRO",
+    "name": "Albergue O Castro",
+    "waypointId": "CASTROMAIOR",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-castro.html"
+  },
+  {
+    "id": "ACC_VENTAS_DE_NARON_CASA_GARZA",
+    "name": "Casa Da Garza",
+    "waypointId": "VENTAS_DE_NARON",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/casa-da-garza.html"
+  },
+  {
+    "id": "ACC_PALAS_SAN_MARCOS",
+    "name": "Albergue San Marcos",
+    "waypointId": "PALAS_DE_REI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-san-marcos.html"
+  },
+  {
+    "id": "ACC_PALAS_RONSEIS",
+    "name": "Albergue Os Ronséis",
+    "waypointId": "PALAS_DE_REI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/os-ronseis.html"
+  },
+  {
+    "id": "ACC_FURELOS_ALBERGUE",
+    "name": "Albergue de Furelos",
+    "waypointId": "FURELOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-de-furelos.html"
+  },
+  {
+    "id": "ACC_BOENTE_ALBERGUE",
+    "name": "Albergue Boente",
+    "waypointId": "BOENTE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-boente.html"
+  },
+  {
+    "id": "ACC_BOENTE_OS_ALBERGUES",
+    "name": "Albergue Os Albergues",
+    "waypointId": "BOENTE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/os-albergues.html"
+  },
+  {
+    "id": "ACC_ARZUA_VIA_LACTEA",
+    "name": "Albergue Vía Láctea",
+    "waypointId": "ARZUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-via-lactea.html"
+  },
+  {
+    "id": "ACC_ARZUA_LOS_CAMINANTES",
+    "name": "Albergue Los Caminantes",
+    "waypointId": "ARZUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/los-caminantes.html"
+  },
+  {
+    "id": "ACC_CALLE_BREA",
+    "name": "Albergue A Brea",
+    "waypointId": "CALLE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-a-brea.html"
+  },
+  {
+    "id": "ACC_CALLE_ABRIGO",
+    "name": "Albergue O Abrigo",
+    "waypointId": "CALLE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-abrigo.html"
+  },
+  {
+    "id": "ACC_SALCEDA_ELDAS",
+    "name": "Albergue As Eldas",
+    "waypointId": "SALCEDA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-turistico-as-eldas.html"
+  },
+  {
+    "id": "ACC_SALCEDA_SOMBRA_LAUREL",
+    "name": "Albergue La Sombra del Laurel",
+    "waypointId": "SALCEDA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/la-sombra-del-laurel.html"
+  },
+  {
+    "id": "ACC_SANTA_IRENE_PRIVADO",
+    "name": "Albergue Santa Irene (Privado)",
+    "waypointId": "SANTA_IRENE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-santa-irene.html"
+  },
+  {
+    "id": "ACC_A_RUA_MUINO_PENA",
+    "name": "Pensión O Muiño de Pena",
+    "waypointId": "A_RUA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/pension-restaurante-o-muino-de-pena.html"
+  },
+  {
+    "id": "ACC_PEDROUZO_PORTA_SANTIAGO",
+    "name": "Albergue Porta de Santiago",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/porta-de-santiago.html"
+  },
+  {
+    "id": "ACC_PEDROUZO_EDREIRA",
+    "name": "Albergue Edreira",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-edreira.html"
+  },
+  {
+    "id": "ACC_AMENAL_HOTEL",
+    "name": "Hotel Amenal",
+    "waypointId": "AMENAL",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/amenal.html"
+  },
+  {
+    "id": "ACC_LAVACOLLA_GARCES",
+    "name": "Hotel Garcés",
+    "waypointId": "LAVACOLLA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/garces-lavacolla.html"
+  },
+  {
+    "id": "ACC_LAVACOLLA_ALBERGUE",
+    "name": "Albergue Lavacolla",
+    "waypointId": "LAVACOLLA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-lavacolla.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_SEMINARIO_MAYOR",
+    "name": "Hospedería San Martín Pinario / Seminario Mayor",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hospederia-san-martin-pinario.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_SAN_FRANCISCO",
+    "name": "Hospedería San Francisco",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hospederia-san-francisco.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_ROOTS_BOOTS",
+    "name": "Albergue Roots & Boots",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/roots-boots.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_LAST_STAMP",
+    "name": "The Last Stamp Hostel",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/the-last-stamp.html"
+  },
+  {
+    "id": "ACC_ESPINAL_HAIZEA",
+    "name": "Albergue Haizea",
+    "waypointId": "ESPINAL",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/haizea-espinal.html"
+  },
+  {
+    "id": "ACC_ESPINAL_IRUGOIENEA",
+    "name": "Hostal Irugoienea",
+    "waypointId": "ESPINAL",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/irugoienea.html"
+  },
+  {
+    "id": "ACC_BIZKARRETA_ARITZA",
+    "name": "Pensión Aritza",
+    "waypointId": "BIZKARRETA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/aritza.html"
+  },
+  {
+    "id": "ACC_LINTZOAIN_ERTEITI",
+    "name": "Casa Rural Erteiti",
+    "waypointId": "LINTZOAIN",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/casa-rural-erteiti.html"
+  },
+  {
+    "id": "ACC_ZURIAIN_PARADA",
+    "name": "Albergue La Parada de Zuriáin",
+    "waypointId": "ZURIAIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/la-parada-de-zuriain.html"
+  },
+  {
+    "id": "ACC_VILLAVA_HOTEL",
+    "name": "Hotel Villava Pamplona",
+    "waypointId": "VILLAVA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-villava.html"
+  },
+  {
+    "id": "ACC_ZARIQUIEGUI_BIDE_IZKINA",
+    "name": "Albergue Bide Izkina",
+    "waypointId": "ZARIQUIEGUI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-bide-izkina.html"
+  },
+  {
+    "id": "ACC_UTERGA_BAZTAN",
+    "name": "Albergue Casa Baztán",
+    "waypointId": "UTERGA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-baztan.html"
+  },
+  {
+    "id": "ACC_UTERGA_CAMINO_PERDON",
+    "name": "Albergue Camino del Perdón",
+    "waypointId": "UTERGA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-camino-del-perdon.html"
+  },
+  {
+    "id": "ACC_OBANOS_USANSOLO",
+    "name": "Albergue Usansolo",
+    "waypointId": "OBANOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-usansolo.html"
+  },
+  {
+    "id": "ACC_CIRAUQUI_MARALOTX",
+    "name": "Albergue Maralotx",
+    "waypointId": "CIRAUQUI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-maralotx.html"
+  },
+  {
+    "id": "ACC_TORRES_RIO_MARIELA",
+    "name": "Albergue Casa Mariela",
+    "waypointId": "TORRES_DEL_RIO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-mariela.html"
+  },
+  {
+    "id": "ACC_NAVARRETE_CANTARO",
+    "name": "Albergue El Cántaro",
+    "waypointId": "NAVARRETE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-el-cantaro.html"
+  },
+  {
+    "id": "ACC_VENTOSA_SAN_SATURNINO",
+    "name": "Albergue San Saturnino",
+    "waypointId": "VENTOSA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-san-saturnino.html"
+  },
+  {
+    "id": "ACC_VENTOSA_AGUEDAS",
+    "name": "Hotel Rural Las Águedas",
+    "waypointId": "VENTOSA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-rural-las-aguedas.html"
+  },
+  {
+    "id": "ACC_AZOFRA_CANTERIA",
+    "name": "Albergue Privado La Cantería",
+    "waypointId": "AZOFRA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-la-canteria.html"
+  },
+  {
+    "id": "ACC_VILLAFRANCA_MONTES_SAN_ANTON",
+    "name": "Albergue San Antón Abad",
+    "waypointId": "VILLAFRANCA_MONTES_DE_OCA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/san-anton-abad.html"
+  },
+  {
+    "id": "ACC_AGES_SAN_RAFAEL",
+    "name": "Albergue San Rafael",
+    "waypointId": "AGES",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-san-rafael-ages.html"
+  },
+  {
+    "id": "ACC_HORNILLOS_MEETING_POINT",
+    "name": "Albergue Meeting Point",
+    "waypointId": "HORNILLOS_DEL_CAMINO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/meeting-point-hornillos.html"
+  },
+  {
+    "id": "ACC_HONTANAS_PUNTIDO",
+    "name": "Albergue El Puntido",
+    "waypointId": "HONTANAS",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/el-puntido.html"
+  },
+  {
+    "id": "ACC_ITERO_MOCHILA",
+    "name": "Albergue La Mochila",
+    "waypointId": "ITERO_DE_LA_VEGA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-la-mochila.html"
+  },
+  {
+    "id": "ACC_VILLALCAZAR_CANDELAS",
+    "name": "Hostal Las Candelas",
+    "waypointId": "VILLALCAZAR_DE_SIRGA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-las-candelas.html"
+  },
+  {
+    "id": "ACC_CALZADILLA_CANARIOS",
+    "name": "Hostal Albergue Los Canarios",
+    "waypointId": "CALZADILLA_DE_LA_CUEZA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/los-canarios.html"
+  },
+  {
+    "id": "ACC_MANSILLA_HORREO",
+    "name": "Albergue El Hórreo",
+    "waypointId": "MANSILLA_DE_LAS_MULAS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-horreo.html"
+  },
+  {
+    "id": "ACC_LEON_COVENT_GARDEN",
+    "name": "Hostel Covent Garden",
+    "waypointId": "LEON",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostel-covent-garden.html"
+  },
+  {
+    "id": "ACC_SAN_MARTIN_HUELLA",
+    "name": "Albergue La Huella",
+    "waypointId": "SAN_MARTIN_DEL_CAMINO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/la-huella.html"
+  },
+  {
+    "id": "ACC_SAN_MARTIN_SANTA_ANA",
+    "name": "Albergue Santa Ana",
+    "waypointId": "SAN_MARTIN_DEL_CAMINO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-santa-ana.html"
+  },
+  {
+    "id": "ACC_FONCEBADON_DOMUS_DEI",
+    "name": "Albergue Domus Dei",
+    "waypointId": "FONCEBADON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/domus-dei.html"
+  },
+  {
+    "id": "ACC_FONCEBADON_MURCIANO",
+    "name": "Albergue La Posada del Murciano",
+    "waypointId": "FONCEBADON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/la-posada-del-murciano.html"
+  },
+  {
+    "id": "ACC_EL_ACEBO_CASA_PEREGRINO",
+    "name": "Albergue La Casa del Peregrino",
+    "waypointId": "EL_ACEBO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/la-casa-del-peregrino-el-acebo.html"
+  },
+  {
+    "id": "ACC_EL_ACEBO_MESON",
+    "name": "Hotel Rural Mesón El Acebo",
+    "waypointId": "EL_ACEBO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/meson-el-acebo.html"
+  },
+  {
+    "id": "ACC_MOLINASECA_SANTA_MARINA",
+    "name": "Albergue Santa Marina",
+    "waypointId": "MOLINASECA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/santa-marina-molinaseca.html"
+  },
+  {
+    "id": "ACC_CACABELOS_TRONERA",
+    "name": "Hotel Rural La Tronera",
+    "waypointId": "CACABELOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/la-tronera.html"
+  },
+  {
+    "id": "ACC_VEGA_VALCARCE_SENDA",
+    "name": "Albergue Senda",
+    "waypointId": "VEGA_DE_VALCARCE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-senda.html"
+  },
+  {
+    "id": "ACC_FONFRIA_REBOLEIRA",
+    "name": "Albergue A Reboleira",
+    "waypointId": "FONFRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/a-reboleira.html"
+  },
+  {
+    "id": "ACC_SARRIA_ALMA",
+    "name": "Albergue Alma do Camiño",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-alma-do-camino.html"
+  },
+  {
+    "id": "ACC_SARRIA_DURMIENTO",
+    "name": "Albergue O Durmiñento",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/o-durminento.html"
+  },
+  {
+    "id": "ACC_PALAS_DE_REI_ZUTEBA",
+    "name": "Albergue Zuteba",
+    "waypointId": "PALAS_DE_REI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-zuteba.html"
+  },
+  {
+    "id": "ACC_MELIDE_PEREIRO",
+    "name": "Albergue Pereiro",
+    "waypointId": "MELIDE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-pereiro.html"
+  },
+  {
+    "id": "ACC_O_PEDROUZO_MIRADOR",
+    "name": "Albergue Mirador de Pedrouzo",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/mirador-de-pedrouzo.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_SEMINARIO_MENOR",
+    "name": "Albergue de Peregrinos Seminario Menor",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "PAROCHIAL",
+    "url": "https://www.booking.com/hotel/es/albergue-seminario-menor.html"
+  },
+  {
+    "id": "ACC_SANSOL_PALACIO",
+    "name": "Albergue Palacio de Sansol",
+    "waypointId": "SANSOL",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/palacio-de-sansol.html"
+  },
+  {
+    "id": "ACC_RABE_LOS_HUERTOS",
+    "name": "Casa Rural Los Huertos",
+    "waypointId": "RABE_DE_LAS_CALZADAS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/casa-rural-los-huertos.html"
+  },
+  {
+    "id": "ACC_BOADILLA_EN_CAMINO_RESORT",
+    "name": "Albergue En el Camino",
+    "waypointId": "BOADILLA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/en-el-camino.html"
+  },
+  {
+    "id": "ACC_BOADILLA_RURAL",
+    "name": "Hotel Rural Boadilla del Camino",
+    "waypointId": "BOADILLA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-rural-boadilla.html"
+  },
+  {
+    "id": "ACC_TERRADILLOS_LOS_TEMPLARIOS",
+    "name": "Albergue Los Templarios",
+    "waypointId": "TERRADILLOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/los-templarios.html"
+  },
+  {
+    "id": "ACC_TERRADILLOS_JACQUES_DE_MOLAY",
+    "name": "Albergue Jacques de Molay",
+    "waypointId": "TERRADILLOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/jacques-de-molay.html"
+  },
+  {
+    "id": "ACC_BERCIANOS_PERALA",
+    "name": "Albergue La Perala",
+    "waypointId": "BERCIANOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/la-perala.html"
+  },
+  {
+    "id": "ACC_MURIAS_CASA_LAZARO",
+    "name": "Hostal Casa Lázaro",
+    "waypointId": "MURIAS_DE_RECHIVALDO",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/casa-lazaro.html"
+  },
+  {
+    "id": "ACC_SANTA_CATALINA_SAN_BLAS_MARAGATO",
+    "name": "Albergue San Blas",
+    "waypointId": "SANTA_CATALINA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-san-blas.html"
+  },
+  {
+    "id": "ACC_SANTA_CATALINA_CAMINANTE",
+    "name": "Albergue El Caminante",
+    "waypointId": "SANTA_CATALINA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-el-caminante.html"
+  },
+  {
+    "id": "ACC_CAMPONARAYA_NARAYA_WINE",
+    "name": "Albergue Naraya",
+    "waypointId": "CAMPONARAYA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/naraya.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_HEMINGWAY",
+    "name": "Hostel Hemingway",
+    "waypointId": "PAMPLONA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/hostel-hemingway.html"
+  },
+  {
+    "id": "ACC_SAHAGUN_VIADOR",
+    "name": "Albergue Viador",
+    "waypointId": "SAHAGUN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-viador.html"
+  },
+  {
+    "id": "ACC_ASTORGA_GAUDI",
+    "name": "Hostal Gaudí",
+    "waypointId": "ASTORGA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/gaudi-astorga.html"
+  },
+  {
+    "id": "ACC_VILLAFRANCA_LEO",
+    "name": "Albergue Leo",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-leo.html"
+  },
+  {
+    "id": "ACC_SARRIA_DON_ALVARO",
+    "name": "Albergue Don Álvaro",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/don-alvaro.html"
+  },
+  {
+    "id": "ACC_SARRIA_BLASONES",
+    "name": "Albergue Los Blasones",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/los-blasones.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_FERRAMENTEIRO",
+    "name": "Albergue Ferramenteiro",
+    "waypointId": "PORTOMARIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/ferramenteiro.html"
+  },
+  {
+    "id": "ACC_MELIDE_SAN_ANTON",
+    "name": "Albergue San Antón Melide",
+    "waypointId": "MELIDE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/san-anton-melide.html"
+  },
+  {
+    "id": "ACC_ARZUA_ULTREIA",
+    "name": "Albergue Ultreia",
+    "waypointId": "ARZUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/ultreia-arzua.html"
+  },
+  {
+    "id": "ACC_PEDROUZO_TRISQUEL",
+    "name": "Albergue O Trisquel",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/o-trisquel.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_MUNDO_ALBERGUE",
+    "name": "Mundo Albergue",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/mundo-albergue.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_PRAZA_QUINTANA",
+    "name": "Hotel Praza Quintana",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOSTEL",
+    "url": "https://www.booking.com/hotel/es/praza-quintana.html"
+  },
+  {
+    "id": "ACC_SJPP_HOTEL_1",
+    "name": "Hôtel des Pyrénées",
+    "waypointId": "SJPP",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/fr/des-pyrenees-saint-jean-pied-de-port.html"
+  },
+  {
+    "id": "ACC_SJPP_HOTEL_2",
+    "name": "Hôtel Ramuntcho",
+    "waypointId": "SJPP",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/fr/ramuntcho.html"
+  },
+  {
+    "id": "ACC_SJPP_HOTEL_3",
+    "name": "Hôtel Central",
+    "waypointId": "SJPP",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/fr/central-saint-jean-pied-de-port.html"
+  },
+  {
+    "id": "ACC_VALCARLOS_HOTEL_4",
+    "name": "Casa Rural Valcarlos",
+    "waypointId": "VALCARLOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/casa-rural-valcarlos.html"
+  },
+  {
+    "id": "ACC_RONCESVALLES_HOTEL_5",
+    "name": "Hotel Roncesvalles",
+    "waypointId": "RONCESVALLES",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/roncesvalles.html"
+  },
+  {
+    "id": "ACC_BURGUETE_HOTEL_6",
+    "name": "Hostal Rural Loizu",
+    "waypointId": "BURGUETE",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-loizu.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_7",
+    "name": "Gran Hotel La Perla",
+    "waypointId": "PAMPLONA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/gran-la-perla.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_8",
+    "name": "Hotel Tres Reyes",
+    "waypointId": "PAMPLONA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-tres-reyes.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_9",
+    "name": "Hotel Maisonnave",
+    "waypointId": "PAMPLONA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-maisonnave.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_10",
+    "name": "Hotel Yoldi",
+    "waypointId": "PAMPLONA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/yoldi.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_HOTEL_11",
+    "name": "Hotel Pompaelo Urban Spa",
+    "waypointId": "PAMPLONA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/pompaelo-plaza-del-castillo.html"
+  },
+  {
+    "id": "ACC_PUENTE_LA_REINA_HOTEL_12",
+    "name": "Hotel Rural Bidean",
+    "waypointId": "PUENTE_LA_REINA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/bidean.html"
+  },
+  {
+    "id": "ACC_ESTELLA_HOTEL_13",
+    "name": "Hotel Tximista",
+    "waypointId": "ESTELLA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/tximista.html"
+  },
+  {
+    "id": "ACC_ESTELLA_HOTEL_14",
+    "name": "Hospedería Chapitel",
+    "waypointId": "ESTELLA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hospederia-chapitel.html"
+  },
+  {
+    "id": "ACC_LOS_ARCOS_HOTEL_15",
+    "name": "Hotel Mónaco",
+    "waypointId": "LOS_ARCOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/monaco-los-arcos.html"
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_17",
+    "name": "Hotel Calle Mayor",
+    "waypointId": "LOGRONO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/calle-mayor.html"
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_18",
+    "name": "Eurostars Fuerte Ruavieja",
+    "waypointId": "LOGRONO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/eurostars-fuerte-ruavieja.html"
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_19",
+    "name": "Hotel Murrieta",
+    "waypointId": "LOGRONO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/murrieta.html"
+  },
+  {
+    "id": "ACC_LOGRONO_HOTEL_20",
+    "name": "Hotel Carlton Rioja",
+    "waypointId": "LOGRONO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/carlton-rioja.html"
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_HOTEL_21",
+    "name": "Parador de Santo Domingo de la Calzada",
+    "waypointId": "SANTO_DOMINGO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/parador-de-santo-domingo-de-la-calzada.html"
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_HOTEL_22",
+    "name": "Parador Bernardo de Fresneda",
+    "waypointId": "SANTO_DOMINGO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/parador-bernardo-de-fresneda.html"
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_23",
+    "name": "Hotel Mesón del Cid",
+    "waypointId": "BURGOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/meson-del-cid.html"
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_24",
+    "name": "Hotel Silken Gran Teatro",
+    "waypointId": "BURGOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/silken-gran-teatro.html"
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_25",
+    "name": "Hotel NH Collection Palacio de Burgos",
+    "waypointId": "BURGOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/nh-palacio-de-burgos.html"
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_26",
+    "name": "Hotel Landa",
+    "waypointId": "BURGOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/landa.html"
+  },
+  {
+    "id": "ACC_CASTROJERIZ_HOTEL_27",
+    "name": "Hotel La Posada de Castrojeriz",
+    "waypointId": "CASTROJERIZ",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/la-posada-de-castrojeriz.html"
+  },
+  {
+    "id": "ACC_FROMISTA_HOTEL_28",
+    "name": "Hotel Doña Mayor",
+    "waypointId": "FROMISTA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/dona-mayor.html"
+  },
+  {
+    "id": "ACC_CARRION_DE_LOS_CONDES_HOTEL_29",
+    "name": "Hotel Real Monasterio San Zoilo",
+    "waypointId": "CARRION_DE_LOS_CONDES",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/real-monasterio-san-zoilo.html"
+  },
+  {
+    "id": "ACC_SAHAGUN_HOTEL_30",
+    "name": "Hotel Puerta de Sahagún",
+    "waypointId": "SAHAGUN",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/puerta-de-sahagun.html"
+  },
+  {
+    "id": "ACC_LEON_HOTEL_31",
+    "name": "Parador de León (Hostal San Marcos)",
+    "waypointId": "LEON",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/parador-de-turismo-de-leon.html"
+  },
+  {
+    "id": "ACC_LEON_HOTEL_32",
+    "name": "Hotel Real Colegiata San Isidoro",
+    "waypointId": "LEON",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/real-colegiata-san-isidoro.html"
+  },
+  {
+    "id": "ACC_LEON_HOTEL_33",
+    "name": "Hotel Alfonso V",
+    "waypointId": "LEON",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/alfonso-v.html"
+  },
+  {
+    "id": "ACC_LEON_HOTEL_34",
+    "name": "Hotel Conde Luna",
+    "waypointId": "LEON",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/conde-luna.html"
+  },
+  {
+    "id": "ACC_ASTORGA_HOTEL_35",
+    "name": "Hotel Spa Ciudad de Astorga",
+    "waypointId": "ASTORGA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/spa-ciudad-de-astorga.html"
+  },
+  {
+    "id": "ACC_ASTORGA_HOTEL_36",
+    "name": "Hotel Astur Plaza",
+    "waypointId": "ASTORGA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/astur-plaza.html"
+  },
+  {
+    "id": "ACC_ASTORGA_HOTEL_37",
+    "name": "Hotel Posada Real Casa de Tepa",
+    "waypointId": "ASTORGA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/posada-real-casa-de-tepa.html"
+  },
+  {
+    "id": "ACC_MOLINASECA_HOTEL_38",
+    "name": "Hotel De Floriana",
+    "waypointId": "MOLINASECA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/de-floriana.html"
+  },
+  {
+    "id": "ACC_PONFERRADA_HOTEL_39",
+    "name": "Hotel Aroi Bierzo Plaza",
+    "waypointId": "PONFERRADA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/aroi-bierzo-plaza.html"
+  },
+  {
+    "id": "ACC_PONFERRADA_HOTEL_40",
+    "name": "Hotel Temple Ponferrada",
+    "waypointId": "PONFERRADA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/temple-ponferrada.html"
+  },
+  {
+    "id": "ACC_VILLAFRANCA_DEL_BIERZO_HOTEL_41",
+    "name": "Parador de Villafranca del Bierzo",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/parador-de-villafranca-del-bierzo.html"
+  },
+  {
+    "id": "ACC_O_CEBREIRO_HOTEL_42",
+    "name": "Hotel Rural San Giraldo de Aurillac",
+    "waypointId": "O_CEBREIRO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/san-giraldo-de-aurillac.html"
+  },
+  {
+    "id": "ACC_SARRIA_HOTEL_44",
+    "name": "Hotel Alfonso IX",
+    "waypointId": "SARRIA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/alfonso-ix.html"
+  },
+  {
+    "id": "ACC_SARRIA_HOTEL_45",
+    "name": "Hotel Roma",
+    "waypointId": "SARRIA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/roma-sarria.html"
+  },
+  {
+    "id": "ACC_SARRIA_HOTEL_46",
+    "name": "Hotel Duerming Villa de Sarria",
+    "waypointId": "SARRIA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/villa-de-sarria.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_HOTEL_47",
+    "name": "Hotel Pousada de Portomarín",
+    "waypointId": "PORTOMARIN",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/pousada-de-portomarin.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_HOTEL_48",
+    "name": "Hotel Vistalegre",
+    "waypointId": "PORTOMARIN",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-vistalegre-portomarin.html"
+  },
+  {
+    "id": "ACC_PALAS_DE_REI_HOTEL_49",
+    "name": "Complexo Cabañas da Ulla",
+    "waypointId": "PALAS_DE_REI",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/cabanas-da-ulla.html"
+  },
+  {
+    "id": "ACC_MELIDE_HOTEL_50",
+    "name": "Hotel Carlos 98",
+    "waypointId": "MELIDE",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/carlos-98.html"
+  },
+  {
+    "id": "ACC_ARZUA_HOTEL_51",
+    "name": "Hotel 1930 Boutique San Pedro",
+    "waypointId": "ARZUA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/1930-boutique-san-pedro.html"
+  },
+  {
+    "id": "ACC_ARZUA_HOTEL_52",
+    "name": "Hotel Suiza",
+    "waypointId": "ARZUA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/suiza-arzua.html"
+  },
+  {
+    "id": "ACC_O_PEDROUZO_HOTEL_53",
+    "name": "Hotel O Pino",
+    "waypointId": "O_PEDROUZO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/o-pino.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_54",
+    "name": "Parador Hostal Dos Reis Católicos",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/parador-de-santiago-de-compostela.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_55",
+    "name": "Hotel Monumento San Francisco",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/monumento-san-francisco.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_56",
+    "name": "Hotel Compostela",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-compostela-santiago.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_57",
+    "name": "Hotel Costa Vella",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/costa-vella.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_DE_COMPOSTELA_HOTEL_58",
+    "name": "Hotel Rua Villar",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/rua-villar.html"
+  },
+  {
+    "id": "ACC_SARRIA_CREDENCIAL",
+    "name": "Albergue Credencial",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-credencial.html"
+  },
+  {
+    "id": "ACC_SARRIA_INTERNACIONAL",
+    "name": "Albergue Internacional Sarria",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-internacional-sarria.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_FOLGUEIRA",
+    "name": "Albergue Folgueira",
+    "waypointId": "PORTOMARIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-folgueira.html"
+  },
+  {
+    "id": "ACC_PALAS_A_COMPAS",
+    "name": "Albergue A Compás",
+    "waypointId": "PALAS_DE_REI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-a-compas.html"
+  },
+  {
+    "id": "ACC_MELIDE_CRUCEIRO",
+    "name": "Albergue O Cruceiro",
+    "waypointId": "MELIDE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-cruceiro.html"
+  },
+  {
+    "id": "ACC_MELIDE_MONTOTO",
+    "name": "Albergue Montoto",
+    "waypointId": "MELIDE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-montoto.html"
+  },
+  {
+    "id": "ACC_ARZUA_DE_CAMINO",
+    "name": "Albergue De Camino",
+    "waypointId": "ARZUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-de-camino.html"
+  },
+  {
+    "id": "ACC_ARZUA_TRES_ABETOS",
+    "name": "Albergue Los Tres Abetos",
+    "waypointId": "ARZUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/los-tres-abetos.html"
+  },
+  {
+    "id": "ACC_PEDROUZO_SALCEDO",
+    "name": "Albergue O Salcedo",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-salcedo.html"
+  },
+  {
+    "id": "ACC_PEDROUZO_BURGO",
+    "name": "Albergue O Burgo",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-burgo.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_FIN_DEL_CAMINO",
+    "name": "Albergue Fin del Camino",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-fin-del-camino.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_BLANCO_HOSTEL",
+    "name": "Albergue Blanco Hostel",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/blanco-hostel.html"
+  },
+  {
+    "id": "ACC_LORCA_LA_ESTELA",
+    "name": "Albergue La Estela",
+    "waypointId": "LORCA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-la-estela.html"
+  },
+  {
+    "id": "ACC_SANSOL_VEGA",
+    "name": "Albergue Vega de Sansol",
+    "waypointId": "SANSOL",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-vega-de-sansol.html"
+  },
+  {
+    "id": "ACC_AGES_EL_PAJAR",
+    "name": "Albergue El Pajar de Agés",
+    "waypointId": "AGES",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-pajar-de-ages.html"
+  },
+  {
+    "id": "ACC_ATAPUERCA_LA_DUAL",
+    "name": "Albergue La Dual",
+    "waypointId": "ATAPUERCA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/la-dual.html"
+  },
+  {
+    "id": "ACC_POBLACION_LA_FUENTINA",
+    "name": "Hotel Rural La Fuentina",
+    "waypointId": "POBLACION_DE_CAMPOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/la-fuentina.html"
+  },
+  {
+    "id": "ACC_VILLARES_EL_PAJAR",
+    "name": "Albergue El Pajar de Villares",
+    "waypointId": "VILLARES_DE_ORBIGO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-pajar-de-villares.html"
+  },
+  {
+    "id": "ACC_TRABADELO_CRISDALU",
+    "name": "Albergue Crisdalu",
+    "waypointId": "TRABADELO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-crisdalu.html"
+  },
+  {
+    "id": "ACC_RIEGO_AMBROS_RINCON",
+    "name": "Hotel Rural El Rincón de Ambrós",
+    "waypointId": "RIEGO_DE_AMBROS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/el-rincon-de-ambros.html"
+  },
+  {
+    "id": "ACC_CAMPONARAYA_MEDALLUCA",
+    "name": "Albergue La Medalluca",
+    "waypointId": "CAMPONARAYA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-la-medalluca.html"
+  },
+  {
+    "id": "ACC_VEGA_VALCARCE_SEXTRIS",
+    "name": "Albergue Sextrís",
+    "waypointId": "VEGA_DE_VALCARCE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-sextris.html"
+  },
+  {
+    "id": "ACC_LAS_HERRERIAS_LUA",
+    "name": "Albergue Casa Lúa",
+    "waypointId": "LAS_HERRERIAS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-casa-lua.html"
+  },
+  {
+    "id": "ACC_HOSPITAL_CONDESA_HOSPITAL",
+    "name": "Albergue O Hospital",
+    "waypointId": "HOSPITAL_DA_CONDESA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-hospital.html"
+  },
+  {
+    "id": "ACC_FERREIROS_ABRIGADOIRO",
+    "name": "Albergue O Abrigadoiro",
+    "waypointId": "FERREIROS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/o-abrigadoiro.html"
+  },
+  {
+    "id": "ACC_VENTAS_NARON_MUNTIAN",
+    "name": "Albergue Casa Muntián",
+    "waypointId": "VENTAS_DE_NARON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-muntian.html"
+  },
+  {
+    "id": "ACC_MORGADE_MIRADOR",
+    "name": "Albergue O Mirador de Morgade",
+    "waypointId": "MORGADE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/o-mirador-de-morgade.html"
+  },
+  {
+    "id": "ACC_CASTROMAIOR_PORTELA",
+    "name": "Albergue Casa Portela",
+    "waypointId": "CASTROMAIOR",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-portela.html"
+  },
+  {
+    "id": "ACC_HOSPITAL_CRUZ_PASOS",
+    "name": "Albergue Os Pasos",
+    "waypointId": "HOSPITAL_DA_CRUZ",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/os-pasos.html"
+  },
+  {
+    "id": "ACC_CASANOVA_CASA_TORRE",
+    "name": "Albergue Casa da Torre",
+    "waypointId": "CASANOVA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-da-torre-casanova.html"
+  },
+  {
+    "id": "ACC_LEBOREIRO_VILARINHO",
+    "name": "Casa Rural Vilarinho",
+    "waypointId": "LEBOREIRO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/casa-rural-vilarinho.html"
+  },
+  {
+    "id": "ACC_RIBADISO_CAMINANTES",
+    "name": "Albergue Los Caminantes de Ribadiso",
+    "waypointId": "RIBADISO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/los-caminantes-ribadiso.html"
+  },
+  {
+    "id": "ACC_A_RUA_ACIVRO",
+    "name": "Albergue O Acivro",
+    "waypointId": "A_RUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/o-acivro.html"
+  },
+  {
+    "id": "ACC_AMENAL_ALBERGUE",
+    "name": "Albergue Amenal",
+    "waypointId": "AMENAL",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-amenal.html"
+  },
+  {
+    "id": "ACC_AYEGUI_HOTEL_IRACHE",
+    "name": "Hotel Irache",
+    "waypointId": "AYEGUI",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/irache.html"
+  },
+  {
+    "id": "ACC_SAN_JUSTO_ENCANTO",
+    "name": "Albergue El Encanto del Camino",
+    "waypointId": "SAN_JUSTO_DE_LA_VEGA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-encanto-del-camino.html"
+  },
+  {
+    "id": "ACC_MERCADOIRO_CASA",
+    "name": "Albergue Casa Mercadoiro",
+    "waypointId": "MERCADOIRO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-mercadoiro.html"
+  },
+  {
+    "id": "ACC_BURGOS_HOTEL_NORTE_LONDRES",
+    "name": "Hotel Norte y Londres",
+    "waypointId": "BURGOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/norte-y-londres.html"
+  },
+  {
+    "id": "ACC_LEON_SANTO_TOMAS",
+    "name": "Albergue Santo Tomás de Canterbury",
+    "waypointId": "LEON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-santo-tomas-de-canterbury.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_AMAIUR",
+    "name": "Albergue Alojamientos Amaiur",
+    "waypointId": "PAMPLONA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/alojamientos-amaiur.html"
+  },
+  {
+    "id": "ACC_PUENTE_AMETS",
+    "name": "Albergue Amets",
+    "waypointId": "PUENTE_LA_REINA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-amets.html"
+  },
+  {
+    "id": "ACC_ESTELLA_CURTIDORES",
+    "name": "Albergue Curtidores",
+    "waypointId": "ESTELLA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-curtidores.html"
+  },
+  {
+    "id": "ACC_LOGRONO_ENTRESUENOS",
+    "name": "Albergue Entresueños",
+    "waypointId": "LOGRONO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-entresuenos.html"
+  },
+  {
+    "id": "ACC_NAJERA_DONA_BLANCA",
+    "name": "Albergue El Rincón de Doña Blanca",
+    "waypointId": "NAJERA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-rincon-de-dona-blanca.html"
+  },
+  {
+    "id": "ACC_BELORADO_CAMINANTE",
+    "name": "Albergue El Caminante de Belorado",
+    "waypointId": "BELORADO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/el-caminante-belorado.html"
+  },
+  {
+    "id": "ACC_ASTORGA_SAN_JAVIER",
+    "name": "Albergue San Javier",
+    "waypointId": "ASTORGA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-san-javier-astorga.html"
+  },
+  {
+    "id": "ACC_PONFERRADA_ENCINA",
+    "name": "Hostal Virgen de la Encina",
+    "waypointId": "PONFERRADA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostal-virgen-de-la-encina.html"
+  },
+  {
+    "id": "ACC_PONFERRADA_RELOJ",
+    "name": "Hostal El Reloj",
+    "waypointId": "PONFERRADA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostal-el-reloj.html"
+  },
+  {
+    "id": "ACC_VILLAFRANCA_PUERTA_PERDON",
+    "name": "Hostal La Puerta del Perdón",
+    "waypointId": "VILLAFRANCA_DEL_BIERZO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/la-puerta-del-perdon.html"
+  },
+  {
+    "id": "ACC_CEBREIRO_HOTEL",
+    "name": "Hotel O Cebreiro",
+    "waypointId": "O_CEBREIRO",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/o-cebreiro.html"
+  },
+  {
+    "id": "ACC_SJPP_MAKILA",
+    "name": "Gîte Makila",
+    "waypointId": "SJPP",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/fr/gite-makila.html"
+  },
+  {
+    "id": "ACC_VIANA_IZAR",
+    "name": "Albergue Izar de Viana",
+    "waypointId": "VIANA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-izar-de-viana.html"
+  },
+  {
+    "id": "ACC_VIANA_LA_CAVA",
+    "name": "Hostal La Cava",
+    "waypointId": "VIANA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostal-la-cava.html"
+  },
+  {
+    "id": "ACC_LOGRONO_ALBAS",
+    "name": "Albergue Albas",
+    "waypointId": "LOGRONO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-albas.html"
+  },
+  {
+    "id": "ACC_NAVARRETE_REY_SANCHO",
+    "name": "Hotel Rey Sancho",
+    "waypointId": "NAVARRETE",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/rey-sancho.html"
+  },
+  {
+    "id": "ACC_NAJERA_LAS_PENAS",
+    "name": "Albergue Las Peñas",
+    "waypointId": "NAJERA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-las-penas.html"
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_REY_REYES",
+    "name": "Albergue Rey de Reyes",
+    "waypointId": "SANTO_DOMINGO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-rey-de-reyes.html"
+  },
+  {
+    "id": "ACC_BURGOS_CORONA_CASTILLA",
+    "name": "Hotel Corona de Castilla",
+    "waypointId": "BURGOS",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/corona-de-castilla.html"
+  },
+  {
+    "id": "ACC_CASTROJERIZ_CIEN_LEGUAS",
+    "name": "Albergue A Cien Leguas",
+    "waypointId": "CASTROJERIZ",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/a-cien-leguas.html"
+  },
+  {
+    "id": "ACC_FROMISTA_BETANIA",
+    "name": "Albergue Betania",
+    "waypointId": "FROMISTA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-betania.html"
+  },
+  {
+    "id": "ACC_SAHAGUN_ALDEA",
+    "name": "Albergue La Aldea de Sahagún",
+    "waypointId": "SAHAGUN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-la-aldea.html"
+  },
+  {
+    "id": "ACC_LEON_ALDA_CENTRO",
+    "name": "Hostel Alda Centro León",
+    "waypointId": "LEON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/alda-centro-leon.html"
+  },
+  {
+    "id": "ACC_TRIACASTELA_BERLAR",
+    "name": "Albergue Berlar",
+    "waypointId": "TRIACASTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-berlar.html"
+  },
+  {
+    "id": "ACC_TRIACASTELA_HORTA",
+    "name": "Albergue A Horta de Abel",
+    "waypointId": "TRIACASTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/a-horta-de-abel.html"
+  },
+  {
+    "id": "ACC_SARRIA_OBRADOIRO",
+    "name": "Albergue HR Obradoiro",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hr-obradoiro.html"
+  },
+  {
+    "id": "ACC_SARRIA_BARBACOA",
+    "name": "Albergue Barbacoa del Camino",
+    "waypointId": "SARRIA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-barbacoa-del-camino.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_PONS_MINEA",
+    "name": "Albergue Pons Minea",
+    "waypointId": "PORTOMARIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-pons-minea.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_PORTOMINO",
+    "name": "Albergue Portomiño",
+    "waypointId": "PORTOMARIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/portomino.html"
+  },
+  {
+    "id": "ACC_PALAS_CASTRO",
+    "name": "Albergue Castro",
+    "waypointId": "PALAS_DE_REI",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-castro.html"
+  },
+  {
+    "id": "ACC_MELIDE_ARRAIGOS",
+    "name": "Albergue Arraigos",
+    "waypointId": "MELIDE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/arraigos.html"
+  },
+  {
+    "id": "ACC_MELIDE_VIA_SACRA",
+    "name": "Albergue Vía Sacra",
+    "waypointId": "MELIDE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-via-sacra.html"
+  },
+  {
+    "id": "ACC_ARZUA_DA_FONTE",
+    "name": "Albergue Da Fonte",
+    "waypointId": "ARZUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-da-fonte.html"
+  },
+  {
+    "id": "ACC_PEDROUZO_ARCA",
+    "name": "Albergue Arca",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-arca.html"
+  },
+  {
+    "id": "ACC_LOGRONO_SAN_FERNANDO",
+    "name": "Hostal Residencia San Fernando",
+    "waypointId": "LOGRONO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/san-fernando-logrono.html"
+  },
+  {
+    "id": "ACC_LEON_MURALLA",
+    "name": "Hostel Muralla Leonesa",
+    "waypointId": "LEON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostel-muralla-leonesa.html"
+  },
+  {
+    "id": "ACC_SAN_JUAN_ORTEGA_RURAL",
+    "name": "Hotel Rural San Juan de Ortega",
+    "waypointId": "SAN_JUAN_DE_ORTEGA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-rural-san-juan-de-ortega.html"
+  },
+  {
+    "id": "ACC_VILLALCAZAR_MESON",
+    "name": "Mesón de Villasirga",
+    "waypointId": "VILLALCAZAR_DE_SIRGA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/meson-de-villasirga.html"
+  },
+  {
+    "id": "ACC_ESTELLA_ROCAMADOR",
+    "name": "Albergue Rocamador",
+    "waypointId": "ESTELLA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-rocamador.html"
+  },
+  {
+    "id": "ACC_BURGOS_HOSTAL_LAR",
+    "name": "Hostal LAR",
+    "waypointId": "BURGOS",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostal-lar-burgos.html"
+  },
+  {
+    "id": "ACC_PONFERRADA_CASTILLO",
+    "name": "Albergue El Castillo",
+    "waypointId": "PONFERRADA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-el-castillo-ponferrada.html"
+  },
+  {
+    "id": "ACC_MOLINASECA_COMPOSTELA",
+    "name": "Albergue Compostela",
+    "waypointId": "MOLINASECA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-compostela-molinaseca.html"
+  },
+  {
+    "id": "ACC_BURGUETE_HOSTAL",
+    "name": "Hostal Burguete",
+    "waypointId": "BURGUETE",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-burguete.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_CIUDADELA",
+    "name": "Hostel Ciudadela Pamplona",
+    "waypointId": "PAMPLONA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostel-ciudadela.html"
+  },
+  {
+    "id": "ACC_CIRUENA_GOLF",
+    "name": "Apartamentos Rioja Alta Golf",
+    "waypointId": "CIRUENA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/rioja-alta-golf-club.html"
+  },
+  {
+    "id": "ACC_LOGRONO_RESIDENCIA_MURALLA",
+    "name": "Hostal Residencia Muralla",
+    "waypointId": "LOGRONO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/muralla-logrono.html"
+  },
+  {
+    "id": "ACC_SANTO_DOMINGO_SANTA_TERESA",
+    "name": "Hostal Santa Teresa",
+    "waypointId": "SANTO_DOMINGO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostal-santa-teresa.html"
+  },
+  {
+    "id": "ACC_PUENTE_BIDEAN",
+    "name": "Hostal Bidean",
+    "waypointId": "PUENTE_LA_REINA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hostal-bidean.html"
+  },
+  {
+    "id": "ACC_MONJARDIN_CASTILLO",
+    "name": "Hotel Rural Castillo de Monjardín",
+    "waypointId": "VILLAMAYOR_DE_MONJARDIN",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/castillo-de-monjardin.html"
+  },
+  {
+    "id": "ACC_BELORADO_A_SANTIAGO",
+    "name": "Albergue A Santiago",
+    "waypointId": "BELORADO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-a-santiago.html"
+  },
+  {
+    "id": "ACC_ATAPUERCA_PAPASOL",
+    "name": "Hotel Rural Papasol",
+    "waypointId": "ATAPUERCA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hotel-rural-papasol.html"
+  },
+  {
+    "id": "ACC_BARBADELO_CARMEN",
+    "name": "Albergue Casa Carmen",
+    "waypointId": "BARBADELO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/casa-carmen-barbadelo.html"
+  },
+  {
+    "id": "ACC_PORTOMARIN_COTO_FRADE",
+    "name": "Albergue Coto do Frade",
+    "waypointId": "PORTOMARIN",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-coto-do-frade.html"
+  },
+  {
+    "id": "ACC_MELIDE_APALPADOR",
+    "name": "Albergue O Apalpador",
+    "waypointId": "MELIDE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-apalpador.html"
+  },
+  {
+    "id": "ACC_SANTA_IRENE_ANDAINA",
+    "name": "Albergue Andaina",
+    "waypointId": "SANTA_IRENE",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-andaina.html"
+  },
+  {
+    "id": "ACC_LAVACOLLA_SAN_PAIO",
+    "name": "Hostal San Paio",
+    "waypointId": "LAVACOLLA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/san-paio.html"
+  },
+  {
+    "id": "ACC_ARZUA_CRUCE_CAMINOS",
+    "name": "Albergue Cruce de Caminos",
+    "waypointId": "ARZUA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-cruce-de-caminos.html"
+  },
+  {
+    "id": "ACC_PEDROUZO_PELIGRINO",
+    "name": "Albergue O Peligrino",
+    "waypointId": "O_PEDROUZO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/albergue-o-peligrino.html"
+  },
+  {
+    "id": "ACC_SANTIAGO_MEIGA",
+    "name": "Albergue Meiga Backpackers",
+    "waypointId": "SANTIAGO_DE_COMPOSTELA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/meiga-backpackers.html"
+  },
+  {
+    "id": "ACC_PAMPLONA_BEARAN",
+    "name": "Hostel Bearán Bar & Rooms",
+    "waypointId": "PAMPLONA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/bearan-bar-rooms.html"
+  },
+  {
+    "id": "ACC_ESTELLA_CRISTINA",
+    "name": "Hostal Cristina",
+    "waypointId": "ESTELLA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostal-cristina-estella.html"
+  },
+  {
+    "id": "ACC_VIANA_BETI_JAI",
+    "name": "Hostal Beti Jai",
+    "waypointId": "VIANA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostal-beti-jai.html"
+  },
+  {
+    "id": "ACC_LOGRONO_CIUDAD",
+    "name": "Hostal Ciudad de Logroño",
+    "waypointId": "LOGRONO",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/ciudad-de-logrono.html"
+  },
+  {
+    "id": "ACC_NAJERA_HISPANO",
+    "name": "Pensión Hispano",
+    "waypointId": "NAJERA",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/pension-hispano.html"
+  },
+  {
+    "id": "ACC_FROMISTA_SAN_MARTIN",
+    "name": "Hotel Rural San Martín",
+    "waypointId": "FROMISTA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/san-martin-fromista.html"
+  },
+  {
+    "id": "ACC_LEON_QUARTIER",
+    "name": "Hostel Quartier León Jabalquinto",
+    "waypointId": "LEON",
+    "type": "PRIVATE",
+    "url": "https://www.booking.com/hotel/es/hostel-quartier-leon.html"
+  },
+  {
+    "id": "ACC_SANTA_CATALINA_HOSTERIA",
+    "name": "Hostal Rural Hostería San Blas",
+    "waypointId": "SANTA_CATALINA",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/hosteria-san-blas.html"
+  },
+  {
+    "id": "ACC_RABANAL_GASPAR",
+    "name": "Posada Gaspar",
+    "waypointId": "RABANAL",
+    "type": "HOTEL",
+    "url": "https://www.booking.com/hotel/es/posada-gaspar.html"
+  }
+]

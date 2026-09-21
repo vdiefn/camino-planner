@@ -1,0 +1,115 @@
+import type { TransportRoute } from '@/types/camino'
+
+export const transportRoutes: TransportRoute[] = [
+  // --- 1. 巴黎出發 (PARIS) ---
+  {
+    id: 'ROUTE_PARIS_TO_SJPP',
+    originCity: 'PARIS',
+    title: '巴黎出發：TGV 高鐵 + TER 景觀區間車',
+    totalDurationHours: 6.5,
+    totalCostEur: { min: 65, max: 150 },
+    operatingMonths: '全年營運 (班次充足)',
+    steps: [
+      {
+        stepOrder: 1,
+        type: 'TRAIN',
+        carrierName: 'SNCF RER B / 地鐵',
+        from: '巴黎戴高樂機場 (CDG) / 巴黎市區',
+        to: '巴黎蒙帕納斯車站 (Paris Montparnasse)',
+        durationMinutes: 50,
+        estimatedCostEur: { min: 11, max: 14 },
+        warningTip: '請注意蒙帕納斯車站分為多個 Hall，搭乘高鐵建議至少提早 30 分鐘抵達月台。',
+      },
+      {
+        stepOrder: 2,
+        type: 'TRAIN',
+        carrierName: 'SNCF TGV Inoui (法國高鐵)',
+        from: '巴黎蒙帕納斯 (Paris Montparnasse)',
+        to: '巴約訥 (Bayonne)',
+        durationMinutes: 240,
+        estimatedCostEur: { min: 45, max: 120 },
+        bookingUrl: 'https://www.sncf-connect.com/',
+        warningTip: 'TGV 需強制劃位，建議行前 2~3 個月前於 SNCF 官網搶購早鳥票（Prem\'s）。',
+      },
+      {
+        stepOrder: 3,
+        type: 'TRAIN',
+        carrierName: 'SNCF TER (庇里牛斯山區間車)',
+        from: '巴約訥 (Bayonne)',
+        to: '聖讓皮耶德波爾 (SJPP)',
+        durationMinutes: 60,
+        estimatedCostEur: { min: 11, max: 13 },
+        bookingUrl: 'https://www.sncf-connect.com/',
+        warningTip: '抵達 Bayonne 後在同車站轉乘 TER 即可直達 SJPP。若遇鐵路維修會改以接駁巴士（Autocar）行駛。',
+      },
+    ],
+  },
+
+  // --- 2. 馬德里出發 (MADRID) ---
+  {
+    id: 'ROUTE_MADRID_TO_SJPP',
+    originCity: 'MADRID',
+    title: '馬德里出發：Renfe 高鐵/長途車 + 直達巴士',
+    totalDurationHours: 6.0,
+    totalCostEur: { min: 45, max: 95 },
+    operatingMonths: '直達巴士 4月~10月每日開行 (冬季需轉乘計程車)',
+    steps: [
+      {
+        stepOrder: 1,
+        type: 'TRAIN',
+        carrierName: 'Renfe Alvia / Cercanías',
+        from: '馬德里阿托查/查馬丁車站 (Madrid Atocha/Chamartín)',
+        to: '潘普洛納 (Pamplona)',
+        durationMinutes: 190,
+        estimatedCostEur: { min: 25, max: 65 },
+        bookingUrl: 'https://www.renfe.com/',
+        warningTip: '若從馬德里機場 (MAD) T4 可搭乘 Cercanías C1/C10 免費轉乘至市區大站。',
+      },
+      {
+        stepOrder: 2,
+        type: 'BUS',
+        carrierName: 'ALSA / Conda 季候直達巴士',
+        from: '潘普洛納巴士總站 (Pamplona Estación de Autobuses)',
+        to: '聖讓皮耶德波爾 (SJPP)',
+        durationMinutes: 105,
+        estimatedCostEur: { min: 18, max: 22 },
+        bookingUrl: 'https://www.alsa.es/',
+        warningTip: '每年 4/1~10/31 每日有直達巴士（通常為中午與下午班次）。冬季需搭乘巴士至 Roncesvalles 再轉計程車過境。',
+      },
+    ],
+  },
+
+  // --- 3. 巴塞隆納出發 (BARCELONA) ---
+  {
+    id: 'ROUTE_BARCELONA_TO_SJPP',
+    originCity: 'BARCELONA',
+    title: '巴塞隆納出發：Renfe 鐵路 + ALSA 巴士',
+    totalDurationHours: 7.0,
+    totalCostEur: { min: 55, max: 110 },
+    operatingMonths: '4月~10月直達巴士銜接最佳',
+    steps: [
+      {
+        stepOrder: 1,
+        type: 'TRAIN',
+        carrierName: 'Renfe Alvia / AV City',
+        from: '巴塞隆納桑斯車站 (Barcelona Sants)',
+        to: '潘普洛納 (Pamplona)',
+        durationMinutes: 240,
+        estimatedCostEur: { min: 35, max: 80 },
+        bookingUrl: 'https://www.renfe.com/',
+        warningTip: 'Barcelona Sants 進站需進行行李 X 光安檢，請提早抵達。',
+      },
+      {
+        stepOrder: 2,
+        type: 'BUS',
+        carrierName: 'ALSA 巴士',
+        from: '潘普洛納巴士總站 (Pamplona)',
+        to: '聖讓皮耶德波爾 (SJPP)',
+        durationMinutes: 105,
+        estimatedCostEur: { min: 18, max: 22 },
+        bookingUrl: 'https://www.alsa.es/',
+        warningTip: '若班次接不上，亦可在 Pamplona 巴士站找其他朝聖者共乘計程車（每車約 90~110 歐元，4 人均分極划算）。',
+      },
+    ],
+  },
+]

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor">
+  <!-- 外環圓圈 -->
+  <circle cx="12" cy="12" r="10" stroke="#f59e0b" stroke-width="2" />
+  <!-- 指針北向（朝聖金色） -->
+  <polygon points="16.24,7.76 12,12 14.436,13.171" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" stroke-linejoin="round" />
+  <polygon points="16.24,7.76 12,12 9.564,10.829" fill="#fbbf24" stroke="#f59e0b" stroke-width="1" stroke-linejoin="round" />
+  <!-- 指針南向（洗鍊深灰） -->
+  <polygon points="7.76,16.24 12,12 9.564,10.829" fill="#64748b" stroke="#64748b" stroke-width="1" stroke-linejoin="round" />
+  <polygon points="7.76,16.24 12,12 14.436,13.171" fill="#94a3b8" stroke="#64748b" stroke-width="1" stroke-linejoin="round" />
+  <!-- 中心樞紐小圓點 -->
+  <circle cx="12" cy="12" r="1.5" fill="#ffffff" stroke="#f59e0b" stroke-width="1" />
+</svg>
