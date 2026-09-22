@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { usePackingStore } from '../src/stores/packing'
+import { usePackingStore, sanitizePackingState } from '../src/stores/packing'
 
 describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
   beforeEach(() => {
@@ -100,28 +100,125 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
     expect(store.wornWeightGrams).toBe(initialWorn + jacketWeight)
   })
 
-  it('執行 syncWithLatestDefaults 時應自動補齊官方新增的裝備，且保留使用者既有自訂設定', () => {
+  it('差集架構下，官方裝備永遠即時繼承最新文字，同時完美保留使用者之重量與勾選微調', () => {
     const store = usePackingStore()
 
-    // 模擬本機僅存有 1 筆舊裝備，且使用者手動修改了重量
-    store.packingItems = [
-      {
-        ...store.packingItems[0],
-        unitWeightGrams: 9999,
-        isChecked: false,
+    // 模擬使用者自訂修改了雨衣的重量與勾選狀態
+    store.updateItemWeight('RAIN_JACKET', 888)
+    store.toggleItemCheck('RAIN_JACKET')
+
+    const targetItem = store.packingItems.find((i) => i.id === 'RAIN_JACKET')!
+
+    // 驗證使用者的個人自訂狀態被存放在差集中並正確反映在清單上
+    expect(targetItem.unitWeightGrams).toBe(888)
+    expect(targetItem.isChecked).toBe(false)
+
+    // 驗證官方文字永遠動態繼承自最新程式碼資料庫
+    expect(targetItem.chineseName).toBe('雨衣')
+    expect(targetItem.englishName).toBe('Rain Jacket / Poncho')
+    expect(targetItem.spanishName).toBe('Chubasquero / Chaqueta impermeable')
+  })
+
+  it('執行 resetToDefaults 時應清空所有使用者差集與自訂裝備，還原為純淨官方預設清單', () => {
+    const store = usePackingStore()
+
+    // 進行微調並加入自訂裝備
+    store.updateItemWeight('RAIN_JACKET', 9999)
+    store.addCustomItem({
+      chineseName: '自訂物品',
+      englishName: 'Custom Item',
+      category: 'OTHER',
+      priority: 'OPTIONAL',
+      referenceRangeText: '100g',
+      isChecked: true,
+      unitWeightGrams: 100,
+      quantity: 1,
+      isWornOnBody: false,
+    })
+
+    expect(store.customItems.length).toBe(1)
+    expect(Object.keys(store.userItemStates).length).toBeGreaterThan(0)
+
+    // 執行重設
+    store.resetToDefaults()
+
+    // 驗證差集與自訂項目清空
+    expect(store.customItems.length).toBe(0)
+    expect(Object.keys(store.userItemStates).length).toBe(0)
+    expect(store.bodyWeightKg).toBe(60)
+
+    // 清單應完全還原為官方預設值
+    const rainJacket = store.packingItems.find((i) => i.id === 'RAIN_JACKET')!
+    expect(rainJacket.unitWeightGrams).not.toBe(9999)
+  })
+
+  it('自我修復防衛層：應校正負數或非法體重，並安全回退至預設值 60', () => {
+    // 模擬受污染的非數字或負數體重
+    const corruptedState1 = sanitizePackingState({ bodyWeightKg: -10 })
+    expect(corruptedState1.bodyWeightKg).toBe(60)
+
+    const corruptedState2 = sanitizePackingState({ bodyWeightKg: NaN })
+    expect(corruptedState2.bodyWeightKg).toBe(60)
+
+    const corruptedState3 = sanitizePackingState({ bodyWeightKg: '75' })
+    expect(corruptedState3.bodyWeightKg).toBe(60)
+
+    const validState = sanitizePackingState({ bodyWeightKg: 72 })
+    expect(validState.bodyWeightKg).toBe(72)
+  })
+
+  it('自我修復防衛層：應逐欄修復官方狀態字典之異常數值（負重轉為0、數量最少為1），其餘欄位完好保留', () => {
+    const raw = {
+      userItemStates: {
+        RAIN_JACKET: {
+          isChecked: true,
+          unitWeightGrams: -50, // 異常負重量
+          quantity: -2, // 異常負數量
+        },
+        SLEEP_BAG: {
+          isChecked: false,
+          unitWeightGrams: 750,
+          quantity: 2,
+        },
       },
-    ]
+    }
 
-    expect(store.packingItems.length).toBe(1)
+    const sanitized = sanitizePackingState(raw)
 
-    // 執行同步
-    store.syncWithLatestDefaults()
+    // 驗證 RAIN_JACKET 異常欄位已自動修復
+    expect(sanitized.userItemStates.RAIN_JACKET.isChecked).toBe(true)
+    expect(sanitized.userItemStates.RAIN_JACKET.unitWeightGrams).toBe(0)
+    expect(sanitized.userItemStates.RAIN_JACKET.quantity).toBe(1)
 
-    // 驗證原本第一筆的自訂修改完全保留
-    expect(store.packingItems[0].unitWeightGrams).toBe(9999)
-    expect(store.packingItems[0].isChecked).toBe(false)
+    // 驗證 SLEEP_BAG 正常欄位 100% 完整保留
+    expect(sanitized.userItemStates.SLEEP_BAG.isChecked).toBe(false)
+    expect(sanitized.userItemStates.SLEEP_BAG.unitWeightGrams).toBe(750)
+    expect(sanitized.userItemStates.SLEEP_BAG.quantity).toBe(2)
+  })
 
-    // 驗證官方其餘 22 筆裝備成功被自動補齊
-    expect(store.packingItems.length).toBeGreaterThan(20)
+  it('自我修復防衛層：自訂裝備缺少新欄位時應自動補齊預設值，杜絕執行時期例外', () => {
+    // 模擬歷史舊資料中的自訂裝備（缺少 spanishName、缺少 quantity、重量為 undefined）
+    const legacyCustomItem = {
+      id: 'CUSTOM_LEGACY_01',
+      chineseName: '老式手電筒',
+      category: 'ELECTRONICS',
+    }
+
+    const sanitized = sanitizePackingState({
+      customItems: [legacyCustomItem],
+    })
+
+    expect(sanitized.customItems.length).toBe(1)
+    const item = sanitized.customItems[0]
+
+    // 驗證缺漏欄位已被安全賦予預設值，避免程式調用 string 或 number 方法時當機
+    expect(item.id).toBe('CUSTOM_LEGACY_01')
+    expect(item.chineseName).toBe('老式手電筒')
+    expect(item.spanishName).toBe('')
+    expect(item.englishName).toBe('')
+    expect(item.quantity).toBe(1)
+    expect(item.unitWeightGrams).toBe(0)
+    expect(item.isChecked).toBe(true)
+    expect(item.isWornOnBody).toBe(false)
   })
 })
