@@ -21,7 +21,7 @@ export const useScheduleStore = defineStore(
       targetDays: 33,
       restDays: 0,
       dailyTargetKm: 23.5,
-      bodyWeightKg: 65,
+      bodyWeightKg: 60,
       day1RouteVariant: 'NAPOLEON',
     })
 
@@ -44,6 +44,7 @@ export const useScheduleStore = defineStore(
       config.value.endWaypointId = 'SANTIAGO_DE_COMPOSTELA'
       config.value.targetDays = 33
       config.value.restDays = 0
+      config.value.bodyWeightKg = 60
       config.value.day1RouteVariant = 'NAPOLEON'
       initSchedule()
     }
