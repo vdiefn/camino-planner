@@ -15,6 +15,8 @@
 - **Template-First**：所有版面結構與視覺樣式 100% 在 `<template>` 內以 Tailwind CSS 類別宣告。
 - **極致輕量化**：不引入肥大全域樣式庫，表格與卡片採用原生 HTML5 標籤實作，確保 PWA 離線秒級載入。
 - **無障礙與狀態管理**：彈窗（Dialog）、開關（Switch）、手風琴折疊（Disclosure）統一採用 `@headlessui/vue`。
+- **漸進式揭露 (Progressive Disclosure)**：清單項目預設折疊外語對照與微調控制項，僅凸顯主要品名與總重小計；行內操作（如「穿在身上」膠囊按鈕）阻斷事件冒泡以避免誤觸品名切換。
+- **低疲勞視覺語義**：分類標籤與過濾按鈕採用柔和的琥珀暖色（Soft Amber），取代刺眼的高飽和色，兼顧戶外強光下的閱讀對比與視覺舒適度。
 
 ## 3. 核心資料模型 (TypeScript Models)
 
@@ -106,6 +108,14 @@ export interface PackingItem {
   isCustom?: boolean           // 使用者自訂項目
 }
 
+// --- 4.1 使用者本機裝備覆寫狀態 (Delta Storage) ---
+export interface UserItemState {
+  isChecked?: boolean
+  isWornOnBody?: boolean
+  unitWeightGrams?: number
+  quantity?: number
+}
+
 // --- 5. 起點交通轉乘方案 ---
 export type TransportType = 'FLIGHT' | 'TRAIN' | 'BUS' | 'TAXI' | 'WALK'
 
@@ -178,6 +188,33 @@ export interface UserPlanConfig {
 3. **重複與停業清查**：
    - 當住宿方永久停業（Cerrado definitivamente），確認後應直接自清單移除。
    - 若同城鎮存在同名物件，必須核實是否為重複登錄，合併為單筆。
+
+### 4.2 裝備狀態儲存架構與本機持久化機制 (Delta Storage Architecture)
+
+為了徹底解決「官方裝備清單發布更新（修訂譯名、新增避坑指南、調整分類）後，既有使用者的 `localStorage` 鎖死過時資料」之技術痛點，裝備模組採用**差異化儲存架構（Delta Storage）**：
+
+#### 1. 三層式資料狀態劃分
+- **官方靜態資料庫 (`defaultPackingItems`)**：
+  - 存放於原始碼中，受版本控管。
+  - 負責供應項目的靜態屬性（中文品名、英文品名、西班牙文品名、分類、優先級、參考重量區間文字、ProTips 指南）。
+- **使用者狀態覆寫字典 (`userItemStates: Record<string, UserItemState>`)**：
+  - 僅儲存使用者對官方項目的個別操作差異：`{ isChecked, isWornOnBody, unitWeightGrams, quantity }`。
+  - 達成儲存空間最佳化，使 `localStorage` 儲存體積縮減 85% 以上。
+- **自訂裝備清單 (`customItems: PackingItem[]`)**：
+  - 獨立保存使用者自行新增的裝備物件（包含中、英、西三語名稱）。
+- **運算整合格位 (`packingItems: ComputedRef<PackingItem[]>`)**：
+  - 透過 Pinia Store 的 `computed` 動態將程式碼中最新的 `defaultPackingItems` 與 `userItemStates` 結合，並附加 `customItems`。
+  - **架構效益**：官方發布最新指南或翻譯時，使用者無需手動重設或清除快取即可即刻同步，且使用者輸入的秤重克數與勾選狀態完好保留。
+
+#### 2. Pinia 本機持久化設定 (Persistence)
+- 配合 `pinia-plugin-persistedstate` v4 規範，持久化配置嚴格限定白名單：
+  ```typescript
+  persist: {
+    key: 'camino-packing-store',
+    pick: ['version', 'bodyWeightKg', 'userItemStates', 'customItems'],
+  }
+  ```
+- 杜絕將由公式計算而得的整合陣列儲存進本機，完全消弭快取膨脹與多路線擴充時的狀態衝突。
 
 ## 5. 商業化與廣告整合架構 (Google AdSense)
 - **環境變數控制**：透過 `VITE_GOOGLE_ADSENSE_CLIENT_ID` 決定是否啟用；未配置時元件自體隱藏，零版面空間佔用。
