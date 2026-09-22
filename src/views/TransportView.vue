@@ -62,103 +62,95 @@ function getTransportBadge(type: TransportType) {
 </script>
 
 <template>
-  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-    <!-- 頁面標題 -->
+  <div class="container mx-auto px-4 py-6 max-w-7xl mt-2">
+    <!-- 頂部標題區 -->
     <div class="mb-4 sm:mb-6">
-      <div class="flex items-center gap-2 text-amber-600">
-        <Compass class="h-4 w-4 sm:h-5 sm:w-5" />
-        <span class="text-xs font-bold uppercase tracking-wider">起點交通決策指南</span>
-      </div>
-      <h2 class="mt-1 text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
-        前往朝聖起點 SJPP (聖讓皮耶德波爾)
+      <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2">
+        前往朝聖起點交通指南
       </h2>
-      <p class="mt-1.5 text-xs sm:text-sm text-slate-500">
-        專為台灣出發者整理之最佳歐洲鐵公路轉乘步驟、預估票價與官方購票防呆指引。
-      </p>
     </div>
 
-    <!-- 電腦版三欄式佈局 (左:城市切換 / 中:步驟時間軸 / 右:廣告與避坑) -->
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
-      <!-- 1. 左欄：出發城市切換與方案概況 (Sticky) -->
-      <div class="lg:col-span-4">
-        <div class="sticky top-20 space-y-4">
-          <!-- 城市選擇卡片群 -->
-          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 class="text-sm font-bold text-slate-900">
-              1. 選擇你的歐洲抵達城市
-            </h3>
-            <div class="mt-3 space-y-2">
-              <button
-                type="button"
-                :class="[
-                  'w-full flex items-center justify-between rounded-xl border p-3.5 text-left transition-all',
-                  selectedCity === 'PARIS'
-                    ? 'border-amber-500 bg-amber-50/50 shadow-sm ring-1 ring-amber-500'
-                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50',
-                ]"
-                @click="selectedCity = 'PARIS'"
-              >
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-base">🇫🇷</span>
-                    <span class="font-bold text-slate-900">巴黎 (Paris CDG / 市區)</span>
-                  </div>
-                  <p class="mt-0.5 text-xs text-slate-500">
-                    TGV 高鐵 + TER 景觀區間車 (約 6.5h)
-                  </p>
+    <!-- 二欄式響應式佈局 (左:城市決策與實戰避坑 / 右:轉乘時間軸步驟) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <!-- 左欄：出發城市切換、方案概況、實戰避坑與廣告 (lg: 4 欄) -->
+      <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
+        <!-- 城市選擇卡片群 -->
+        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+          <h3 class="text-sm font-bold text-slate-900">
+            1. 選擇你的歐洲抵達城市
+          </h3>
+          <div class="mt-3 space-y-2">
+            <button
+              type="button"
+              :class="[
+                'w-full flex items-center justify-between rounded-xl border p-3.5 text-left transition-all cursor-pointer',
+                selectedCity === 'PARIS'
+                  ? 'border-orange-400 bg-orange-50/60 shadow-xs ring-1 ring-orange-400'
+                  : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50',
+              ]"
+              @click="selectedCity = 'PARIS'"
+            >
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🇫🇷</span>
+                  <span class="font-bold text-slate-900">巴黎 (Paris CDG / 市區)</span>
                 </div>
-                <div :class="selectedCity === 'PARIS' ? 'text-amber-600' : 'text-slate-300'">
-                  ●
-                </div>
-              </button>
+                <p class="mt-0.5 text-xs text-slate-500">
+                  TGV 高鐵 + TER 景觀區間車 (約 6.5h)
+                </p>
+              </div>
+              <div :class="selectedCity === 'PARIS' ? 'text-orange-500 font-bold' : 'text-slate-300'">
+                ●
+              </div>
+            </button>
 
-              <button
-                type="button"
-                :class="[
-                  'w-full flex items-center justify-between rounded-xl border p-3.5 text-left transition-all',
-                  selectedCity === 'MADRID'
-                    ? 'border-amber-500 bg-amber-50/50 shadow-sm ring-1 ring-amber-500'
-                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50',
-                ]"
-                @click="selectedCity = 'MADRID'"
-              >
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-base">🇪🇸</span>
-                    <span class="font-bold text-slate-900">馬德里 (Madrid MAD)</span>
-                  </div>
-                  <p class="mt-0.5 text-xs text-slate-500">
-                    國鐵至 Pamplona + 直達巴士 (約 6.0h)
-                  </p>
+            <button
+              type="button"
+              :class="[
+                'w-full flex items-center justify-between rounded-xl border p-3.5 text-left transition-all cursor-pointer',
+                selectedCity === 'MADRID'
+                  ? 'border-orange-400 bg-orange-50/60 shadow-xs ring-1 ring-orange-400'
+                  : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50',
+              ]"
+              @click="selectedCity = 'MADRID'"
+            >
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🇪🇸</span>
+                  <span class="font-bold text-slate-900">馬德里 (Madrid MAD)</span>
                 </div>
-                <div :class="selectedCity === 'MADRID' ? 'text-amber-600' : 'text-slate-300'">
-                  ●
-                </div>
-              </button>
+                <p class="mt-0.5 text-xs text-slate-500">
+                  國鐵至 Pamplona + 直達巴士 (約 6.0h)
+                </p>
+              </div>
+              <div :class="selectedCity === 'MADRID' ? 'text-orange-500 font-bold' : 'text-slate-300'">
+                ●
+              </div>
+            </button>
 
-              <button
-                type="button"
-                :class="[
-                  'w-full flex items-center justify-between rounded-xl border p-3.5 text-left transition-all',
-                  selectedCity === 'BARCELONA'
-                    ? 'border-amber-500 bg-amber-50/50 shadow-sm ring-1 ring-amber-500'
-                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50',
-                ]"
-                @click="selectedCity = 'BARCELONA'"
-              >
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-base">🇪🇸</span>
-                    <span class="font-bold text-slate-900">巴塞隆納 (Barcelona BCN)</span>
-                  </div>
-                  <p class="mt-0.5 text-xs text-slate-500">
-                    鐵路至 Pamplona + 巴士/共乘 (約 7.0h)
-                  </p>
+            <button
+              type="button"
+              :class="[
+                'w-full flex items-center justify-between rounded-xl border p-3.5 text-left transition-all cursor-pointer',
+                selectedCity === 'BARCELONA'
+                  ? 'border-orange-400 bg-orange-50/60 shadow-xs ring-1 ring-orange-400'
+                  : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50',
+              ]"
+              @click="selectedCity = 'BARCELONA'"
+            >
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🇪🇸</span>
+                  <span class="font-bold text-slate-900">巴塞隆納 (Barcelona BCN)</span>
                 </div>
-                <div :class="selectedCity === 'BARCELONA' ? 'text-amber-600' : 'text-slate-300'">
-                  ●
-                </div>
-              </button>
+                <p class="mt-0.5 text-xs text-slate-500">
+                  鐵路至 Pamplona + 巴士/共乘 (約 7.0h)
+                </p>
+              </div>
+              <div :class="selectedCity === 'BARCELONA' ? 'text-orange-500 font-bold' : 'text-slate-300'">
+                ●
+              </div>
+            </button>
             </div>
           </div>
 
@@ -195,55 +187,83 @@ function getTransportBadge(type: TransportType) {
             </div>
           </div>
 
-          <!-- 官方購票平台快速連結 -->
-          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 class="text-sm font-bold text-slate-900">
-              官方購票平台快速傳送門
-            </h3>
-            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
-              <a
-                href="https://www.sncf-connect.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700"
-              >
-                <span>法國國鐵 SNCF</span>
-                <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
-              </a>
-              <a
-                href="https://www.renfe.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700"
-              >
-                <span>西班牙國鐵 Renfe</span>
-                <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
-              </a>
-              <a
-                href="https://www.alsa.es/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700"
-              >
-                <span>ALSA 長途巴士</span>
-                <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
-              </a>
-              <a
-                href="https://www.omio.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700"
-              >
-                <span>Omio 跨國比價</span>
-                <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
-              </a>
-            </div>
+        <!-- 官方購票平台快速連結 -->
+        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+          <h3 class="text-sm font-bold text-slate-900">
+            官方購票平台快速傳送門
+          </h3>
+          <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+            <a
+              href="https://www.sncf-connect.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700 cursor-pointer"
+            >
+              <span>法國國鐵 SNCF</span>
+              <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
+            </a>
+            <a
+              href="https://www.renfe.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700 cursor-pointer"
+            >
+              <span>西班牙國鐵 Renfe</span>
+              <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
+            </a>
+            <a
+              href="https://www.alsa.es/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700 cursor-pointer"
+            >
+              <span>ALSA 長途巴士</span>
+              <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
+            </a>
+            <a
+              href="https://www.omio.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 font-medium text-slate-700 hover:bg-slate-50 hover:text-amber-700 cursor-pointer"
+            >
+              <span>Omio 跨國比價</span>
+              <ExternalLink class="h-3.5 w-3.5 text-slate-400" />
+            </a>
           </div>
         </div>
+
+        <!-- 朝聖起點交通實戰避坑 -->
+        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+          <h3 class="flex items-center gap-2 text-sm font-bold text-slate-900">
+            <span>💡</span>
+            <span>起點交通實戰避坑</span>
+          </h3>
+          <ul class="mt-3 space-y-2.5 text-xs text-slate-600 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-500 font-bold">•</span>
+              <span><strong>提早搶高鐵早鳥票</strong>：巴黎至 Bayonne 的 TGV 於行前 3 個月開放預購，早鳥票常只要 €45（現場買動輒 €120+）。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-500 font-bold">•</span>
+              <span><strong>西班牙週日巴士減班</strong>：馬德里至 Pamplona 的客運週日班次大幅縮減，建議避開週日過境。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-500 font-bold">•</span>
+              <span><strong>Pamplona 共乘計程車</strong>：若搭不上下午直達巴士，在巴士總站找朝聖者共乘計程車至 SJPP（約 €90~110 / 車，4 人均分約 €25）。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-500 font-bold">•</span>
+              <span><strong>抵達 SJPP 第一件事</strong>：直奔朝聖者辦公室 (39 Rue de la Citadelle) 領取 Credencial 護照與最新庇護所開門清單。</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 側邊商業廣告欄位 -->
+        <GoogleAd slot-id="transport-sidebar-ad" format="rectangle" />
       </div>
 
-      <!-- 2. 中欄：逐步轉乘時間軸步驟卡片 (主內容區) -->
-      <div class="lg:col-span-5 space-y-4">
+      <!-- 右欄：逐步轉乘時間軸步驟卡片 (lg: 8 欄) -->
+      <div class="lg:col-span-8 space-y-4">
         <div class="flex items-center justify-between">
           <h3 class="text-base font-bold text-slate-900">
             轉乘步驟詳情 (共 {{ currentRoute.steps.length }} 步)
@@ -255,7 +275,7 @@ function getTransportBadge(type: TransportType) {
           <div
             v-for="step in currentRoute.steps"
             :key="step.stepOrder"
-            class="relative rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-amber-300"
+            class="relative rounded-xl border border-slate-200 bg-white p-5 shadow-xs transition-all hover:border-amber-300"
           >
             <!-- 步驟標頭 -->
             <div class="flex items-center justify-between">
@@ -308,7 +328,7 @@ function getTransportBadge(type: TransportType) {
                 :href="step.bookingUrl"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-300 hover:bg-orange-200 py-2.5 text-xs font-normal text-slate-800 shadow-xs transition-all"
+                class="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-400 hover:bg-orange-50 text-white hover:text-gray-700 py-2.5 text-xs font-normal shadow-xs transition-all cursor-pointer"
               >
                 <span>前往 {{ step.carrierName || '官方平台' }} 購票 / 查班次</span>
                 <ExternalLink class="h-3.5 w-3.5" />
@@ -320,45 +340,6 @@ function getTransportBadge(type: TransportType) {
               <AlertTriangle class="h-4 w-4 shrink-0 text-orange-600 mt-0.5" />
               <p class="leading-relaxed">{{ step.warningTip }}</p>
             </div>
-          </div>
-        </div>
-
-        <!-- 手機版/中螢幕底部廣告插槽 -->
-        <div class="lg:hidden">
-          <GoogleAd />
-        </div>
-      </div>
-
-      <!-- 3. 右欄：電腦版側邊吸頂廣告與實戰避坑指南 (Sticky) -->
-      <div class="hidden lg:col-span-3 lg:block">
-        <div class="sticky top-20 space-y-4">
-          <!-- 側邊吸頂廣告 -->
-          <GoogleAd is-sidebar />
-
-          <!-- 朝聖起點交通實戰避坑 -->
-          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 class="flex items-center gap-2 text-sm font-bold text-slate-900">
-              <span>💡</span>
-              <span>起點交通實戰避坑</span>
-            </h3>
-            <ul class="mt-3 space-y-2.5 text-xs text-slate-600 leading-relaxed">
-              <li class="flex items-start gap-2">
-                <span class="text-amber-500 font-bold">•</span>
-                <span><strong>提早搶高鐵早鳥票</strong>：巴黎至 Bayonne 的 TGV 於行前 3 個月開放預購，早鳥票常只要 €45（現場買動輒 €120+）。</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-amber-500 font-bold">•</span>
-                <span><strong>西班牙週日巴士減班</strong>：馬德里至 Pamplona 的客運週日班次大幅縮減，建議避開週日過境。</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-amber-500 font-bold">•</span>
-                <span><strong>Pamplona 共乘計程車</strong>：若搭不上下午直達巴士，在巴士總站找朝聖者共乘計程車至 SJPP（約 €90~110 / 車，4 人均分約 €25）。</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-amber-500 font-bold">•</span>
-                <span><strong>抵達 SJPP 第一件事</strong>：直奔朝聖者辦公室 (39 Rue de la Citadelle) 領取 Credencial 護照與最新庇護所開門清單。</span>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
