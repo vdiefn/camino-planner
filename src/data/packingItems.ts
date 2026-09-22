@@ -236,8 +236,8 @@ export const packingItems: PackingItem[] = [
   },
   {
     id: 'CLOTHESPINS',
-    chineseName: '洗衣夾與別針',
-    englishName: 'Clothespins & Safety Pins',
+    chineseName: '洗衣夾/別針',
+    englishName: 'Clothespins / Safety Pins',
     spanishName: 'Pinzas de tender ropa e imperdibles',
     category: 'HYGIENE',
     priority: 'RECOMMENDED',
