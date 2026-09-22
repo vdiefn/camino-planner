@@ -170,11 +170,8 @@ const dailyAverageKm = computed(() => {
     <!-- 頂部標題區 -->
     <div class="mb-4 sm:mb-6">
       <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2">
-        徒步行程規劃與現場調整
+        徒步行程規劃
       </h2>
-      <p class="text-xs sm:text-sm text-slate-500 mt-1">
-        自由設定起訖點、每日目標步程預估、優先推薦住宿城鎮與現場結束點連鎖重新均分。
-      </p>
     </div>
 
     <!-- 三欄響應式佈局 -->

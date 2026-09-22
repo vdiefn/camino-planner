@@ -114,44 +114,45 @@ const localAlbergues = computed(() => {
                   class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2.5"
                 >
                   <div class="flex items-start justify-between gap-2">
-                    <div>
-                      <div class="text-slate-900 flex items-center gap-2 flex-wrap">
-                        <span class="font-bold">{{ albergue.name }}</span>
-                        <span
-                          class="px-2 py-0.5 rounded text-[11px] font-medium shrink-0"
-                          :class="[
-                            albergue.type === 'MUNICIPAL'
-                              ? 'bg-emerald-100 text-emerald-800'
-                              : albergue.type === 'PAROCHIAL'
-                              ? 'bg-purple-100 text-purple-800'
-                              : albergue.type === 'HOTEL'
-                              ? 'bg-indigo-100 text-indigo-800'
-                              : albergue.type === 'HOSTEL'
-                              ? 'bg-sky-100 text-sky-800'
-                              : 'bg-amber-100 text-amber-800'
-                          ]"
-                        >
-                          {{
-                            albergue.type === 'MUNICIPAL'
-                              ? '公立'
-                              : albergue.type === 'PAROCHIAL'
-                              ? '教會'
-                              : albergue.type === 'HOTEL'
-                              ? '飯店'
-                              : albergue.type === 'HOSTEL'
-                              ? '青旅'
-                              : '私立'
-                          }}
-                        </span>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-slate-900 font-bold">
+                        {{ albergue.name }}
                       </div>
                       <div v-if="albergue.chineseName" class="text-xs text-slate-500">
                         {{ albergue.chineseName }}
                       </div>
                       <div class="text-xs text-slate-500 mt-1.5 flex items-center gap-3">
                         <span v-if="albergue.bedCount">床位數：{{ albergue.bedCount }} 床</span>
-                        <span v-if="albergue.priceEur" class=" text-slate-700">約 €{{ albergue.priceEur }}</span>
+                        <span v-if="albergue.priceEur" class="text-slate-700">約 €{{ albergue.priceEur }}</span>
                       </div>
                     </div>
+
+                    <span
+                      class="px-2 py-0.5 rounded text-[11px] font-medium shrink-0"
+                      :class="[
+                        albergue.type === 'MUNICIPAL'
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : albergue.type === 'PAROCHIAL'
+                          ? 'bg-purple-100 text-purple-800'
+                          : albergue.type === 'HOTEL'
+                          ? 'bg-indigo-100 text-indigo-800'
+                          : albergue.type === 'HOSTEL'
+                          ? 'bg-sky-100 text-sky-800'
+                          : 'bg-amber-100 text-amber-800'
+                      ]"
+                    >
+                      {{
+                        albergue.type === 'MUNICIPAL'
+                          ? '公立'
+                          : albergue.type === 'PAROCHIAL'
+                          ? '教會'
+                          : albergue.type === 'HOTEL'
+                          ? '飯店'
+                          : albergue.type === 'HOSTEL'
+                          ? '青旅'
+                          : '私立'
+                      }}
+                    </span>
                   </div>
 
                   <div v-if="albergue.notes" class="text-xs text-slate-600 leading-relaxed">
