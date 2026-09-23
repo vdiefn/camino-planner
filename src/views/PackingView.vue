@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   AlertOctagon,
   ShieldCheck,
@@ -7,8 +7,8 @@ import {
   RotateCcw,
   Sparkles,
   X,
-  Plus,
   ChevronDown,
+  Trash2,
 } from 'lucide-vue-next'
 import { usePackingStore } from '@/stores/packing'
 import type { PackingCategory, PackingItem } from '@/types/camino'
@@ -20,34 +20,99 @@ import GoogleAd from '@/components/common/GoogleAd.vue'
 
 const packingStore = usePackingStore()
 
-// 9 大分類定義與圖示/中文對照
-const allCategories: { id: PackingCategory; label: string; icon: string }[] = [
+// 官方 9 大分類定義與圖示/中文對照
+const defaultCategories: { id: PackingCategory; label: string; icon: string }[] = [
   { id: 'PACK', label: '背包系統', icon: '🎒' },
   { id: 'CLOTHING', label: '服飾穿搭', icon: '👕' },
   { id: 'FOOTWEAR', label: '鞋襪足部', icon: '👟' },
   { id: 'SLEEP', label: '睡眠防護', icon: '🛏️' },
-  { id: 'MEDICAL', label: '醫藥防蟲', icon: '💊' },
-  { id: 'HYGIENE', label: '衛浴清潔', icon: '🧼' },
-  { id: 'ELECTRONICS', label: '電子電力', icon: '🔌' },
+  { id: 'MEDICAL', label: '個人藥物', icon: '💊' },
+  { id: 'HYGIENE', label: '衛生用品', icon: '🧼' },
+  { id: 'ELECTRONICS', label: '電子設備', icon: '🔌' },
   { id: 'DOCS', label: '證件工具', icon: '📄' },
-  { id: 'OTHER', label: '其他輔助', icon: '📦' },
+  { id: 'OTHER', label: '其他', icon: '📦' },
 ]
 
-// 預設顯示最核心的 5 大分類（使用者可點選上方標籤動態增減）
-const activeCategories = ref<Set<PackingCategory>>(
-  new Set(['PACK', 'CLOTHING', 'FOOTWEAR', 'SLEEP', 'MEDICAL']),
-)
+const officialCategoryIds = new Set(defaultCategories.map((c) => c.id))
+
+// 動態聚合官方分類與使用者自訂之新分類（防重複集合）
+const allCategories = computed(() => {
+  const list = [...defaultCategories]
+  const knownIds = new Set(list.map((c) => c.id))
+
+  for (const item of packingStore.packingItems) {
+    if (!knownIds.has(item.category)) {
+      knownIds.add(item.category)
+      list.push({
+        id: item.category,
+        label: item.category,
+        icon: '📦',
+      })
+    }
+  }
+  return list
+})
+
+// 提取目前已自訂過的獨立分類清單（供新增彈窗快速選取）
+const existingCustomCategories = computed(() => {
+  const officialIds = officialCategoryIds
+  const customSet = new Set<string>()
+  for (const item of packingStore.customItems) {
+    if (!officialIds.has(item.category)) {
+      customSet.add(item.category)
+    }
+  }
+  return Array.from(customSet)
+})
+
+// 刪除自訂分類二次確認控制
+const isDeleteCategoryModalOpen = ref(false)
+const categoryToDelete = ref('')
+
+const categoryToDeleteItemCount = computed(() => {
+  if (!categoryToDelete.value) return 0
+  return packingStore.getItemsByCategory(categoryToDelete.value).length
+})
+
+function promptDeleteCategory(catId: string) {
+  categoryToDelete.value = catId
+  isDeleteCategoryModalOpen.value = true
+}
+
+function handleConfirmDeleteCategory() {
+  if (categoryToDelete.value) {
+    packingStore.removeCustomCategory(categoryToDelete.value)
+  }
+  isDeleteCategoryModalOpen.value = false
+  categoryToDelete.value = ''
+}
+
+// 排除分類二次確認控制
+const isRemoveCategoryModalOpen = ref(false)
+const categoryToRemove = ref<{ id: PackingCategory; label: string } | null>(null)
+
+function promptRemoveCategory(cat: { id: PackingCategory; label: string }) {
+  categoryToRemove.value = cat
+  isRemoveCategoryModalOpen.value = true
+}
+
+function handleConfirmRemoveCategory() {
+  if (categoryToRemove.value) {
+    packingStore.removeActiveCategory(categoryToRemove.value.id)
+  }
+  isRemoveCategoryModalOpen.value = false
+  categoryToRemove.value = null
+}
+
+// 畫面目前啟用顯示的分類集合（直接連動 store 以確保負重計算與畫面完全同步）
+const activeCategorySet = computed(() => new Set(packingStore.activeCategories))
 
 function toggleCategory(catId: PackingCategory) {
-  if (activeCategories.value.has(catId)) {
-    activeCategories.value.delete(catId)
-  } else {
-    activeCategories.value.add(catId)
-  }
+  packingStore.toggleCategory(catId)
 }
 
 function showAllCategories() {
-  allCategories.forEach((cat) => activeCategories.value.add(cat.id))
+  packingStore.setAllCategories(allCategories.value.map((cat) => cat.id))
 }
 
 // 手機版折疊狀態（預設收合以釋放手機垂直空間，與行程規劃一致）
@@ -61,6 +126,10 @@ const currentTipsItem = ref<PackingItem | null>(null)
 function handleShowTips(item: PackingItem) {
   currentTipsItem.value = item
   isTipsModalOpen.value = true
+}
+
+function handleAddCustomItem(item: Parameters<typeof packingStore.addCustomItem>[0]) {
+  packingStore.addCustomItem(item)
 }
 
 // 計算單一分類的已勾選總重 (克) 與項目數
@@ -304,14 +373,24 @@ function handleConfirmReset() {
               type="button"
               :class="[
                 'inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-normal transition-all cursor-pointer',
-                activeCategories.has(cat.id)
+                activeCategorySet.has(cat.id)
                   ? 'border border-amber-300 bg-amber-50 font-medium text-slate-800 shadow-xs'
                   : 'border border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100',
               ]"
               @click="toggleCategory(cat.id)"
             >
               <span>{{ cat.label }}</span>
-              <Plus v-if="!activeCategories.has(cat.id)" class="h-3 w-3 text-slate-400" />
+              <!-- 自訂分類專屬：直接在頂部標籤刪除 -->
+              <span
+                v-if="!officialCategoryIds.has(cat.id)"
+                role="button"
+                tabindex="0"
+                class="ml-0.5 -mr-1 p-0.5 rounded text-slate-400 hover:bg-rose-100 hover:text-rose-600 transition-colors"
+                title="刪除此自訂分類"
+                @click.stop="promptDeleteCategory(cat.id)"
+              >
+                <Trash2 class="h-3 w-3" />
+              </span>
             </button>
           </div>
         </div>
@@ -319,7 +398,7 @@ function handleConfirmReset() {
         <!-- 瀑布流多欄排版區 (1~2 欄自適應) -->
         <div class="columns-1 md:columns-2 gap-4 space-y-4">
           <div
-            v-for="cat in allCategories.filter((c) => activeCategories.has(c.id))"
+            v-for="cat in allCategories.filter((c) => activeCategorySet.has(c.id))"
             :key="cat.id"
             class="break-inside-avoid rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-3"
           >
@@ -334,8 +413,8 @@ function handleConfirmReset() {
                 <button
                   type="button"
                   class="rounded-md p-1 text-slate-300 hover:bg-slate-100 hover:text-slate-600 cursor-pointer"
-                  title="從看板收合此分類"
-                  @click="toggleCategory(cat.id)"
+                  :title="officialCategoryIds.has(cat.id) ? '從本次清單排除此分類' : '刪除此自訂分類與所屬裝備'"
+                  @click="officialCategoryIds.has(cat.id) ? promptRemoveCategory(cat) : promptDeleteCategory(cat.id)"
                 >
                   <X class="h-4 w-4" />
                 </button>
@@ -364,8 +443,9 @@ function handleConfirmReset() {
     <!-- 彈窗群 -->
     <AddCustomItemModal
       :is-open="isCustomModalOpen"
+      :custom-categories="existingCustomCategories"
       @close="isCustomModalOpen = false"
-      @add="packingStore.addCustomItem"
+      @add="handleAddCustomItem"
     />
 
     <ProTipsModal
@@ -373,6 +453,36 @@ function handleConfirmReset() {
       :item="currentTipsItem"
       @close="isTipsModalOpen = false"
     />
+
+    <!-- 二次確認排除分類對話框 -->
+    <ConfirmModal
+      :is-open="isRemoveCategoryModalOpen"
+      :title="`排除「${categoryToRemove?.label}」分類`"
+      confirm-text="確認排除"
+      cancel-text="取消"
+      @confirm="handleConfirmRemoveCategory"
+      @close="isRemoveCategoryModalOpen = false"
+    >
+      <p>確定要將「{{ categoryToRemove?.label }}」從本次清單中排除嗎？</p>
+      <p class="mt-1 text-slate-500">
+        排除後該分類將在看板隱藏，其裝備亦不計入背包負重。（您隨時可由上方標籤點擊恢復）
+      </p>
+    </ConfirmModal>
+
+    <!-- 二次確認刪除自訂分類對話框 -->
+    <ConfirmModal
+      :is-open="isDeleteCategoryModalOpen"
+      :title="`刪除自訂分類「${categoryToDelete}」`"
+      confirm-text="確認刪除"
+      cancel-text="取消"
+      @confirm="handleConfirmDeleteCategory"
+      @close="isDeleteCategoryModalOpen = false"
+    >
+      <p>確定要刪除「{{ categoryToDelete }}」分類嗎？</p>
+      <p class="mt-1 text-slate-500">
+        該分類底下的所有自訂裝備（共 {{ categoryToDeleteItemCount }} 項）將一併移除且無法復原。
+      </p>
+    </ConfirmModal>
 
     <!-- 二次確認重設對話框 -->
     <ConfirmModal

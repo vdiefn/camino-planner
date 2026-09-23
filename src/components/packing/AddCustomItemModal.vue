@@ -6,9 +6,12 @@ import type { PackingCategory, PackingPriority } from '@/types/camino'
 
 interface Props {
   isOpen: boolean
+  customCategories?: string[]
 }
 
-defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  customCategories: () => [],
+})
 const emit = defineEmits<{
   (e: 'close'): void
   (
@@ -31,19 +34,20 @@ const emit = defineEmits<{
 const formName = ref('')
 const formEnglishName = ref('')
 const formSpanishName = ref('')
-const formCategory = ref<PackingCategory>('OTHER')
+const selectedCategoryOption = ref<string>('OTHER')
+const customCategoryInput = ref('')
 const formWeightGrams = ref<number>(100)
 const formQuantity = ref<number>(1)
 const formIsWornOnBody = ref(false)
 
-const categoryOptions: { label: string; value: PackingCategory }[] = [
+const officialCategoryOptions: { label: string; value: PackingCategory }[] = [
   { label: '背包系統', value: 'PACK' },
   { label: '服飾穿搭', value: 'CLOTHING' },
   { label: '鞋襪足部', value: 'FOOTWEAR' },
   { label: '睡眠防護', value: 'SLEEP' },
-  { label: '衛浴清潔', value: 'HYGIENE' },
+  { label: '衛生用品', value: 'HYGIENE' },
   { label: '醫藥防蟲', value: 'MEDICAL' },
-  { label: '電子用品', value: 'ELECTRONICS' },
+  { label: '電子設備', value: 'ELECTRONICS' },
   { label: '證件', value: 'DOCS' },
   { label: '其他', value: 'OTHER' },
 ]
@@ -51,11 +55,26 @@ const categoryOptions: { label: string; value: PackingCategory }[] = [
 function handleSubmit() {
   if (!formName.value.trim()) return
 
+  let resolvedCategory: PackingCategory = selectedCategoryOption.value as PackingCategory
+
+  if (selectedCategoryOption.value === '__NEW_CATEGORY__') {
+    const trimmed = customCategoryInput.value.trim()
+    if (!trimmed) {
+      resolvedCategory = 'OTHER'
+    } else {
+      // 智慧正規化：若使用者手動輸入官方分類標籤或代碼，自動對齊為官方代碼
+      const matched = officialCategoryOptions.find(
+        (opt) => opt.label === trimmed || opt.value.toUpperCase() === trimmed.toUpperCase(),
+      )
+      resolvedCategory = matched ? matched.value : trimmed
+    }
+  }
+
   emit('add', {
     chineseName: formName.value.trim(),
     englishName: formEnglishName.value.trim() || formName.value.trim(),
     spanishName: formSpanishName.value.trim() || undefined,
-    category: formCategory.value,
+    category: resolvedCategory,
     priority: 'OPTIONAL',
     referenceRangeText: `${formWeightGrams.value}g`,
     isChecked: true,
@@ -68,7 +87,8 @@ function handleSubmit() {
   formName.value = ''
   formEnglishName.value = ''
   formSpanishName.value = ''
-  formCategory.value = 'OTHER'
+  selectedCategoryOption.value = 'OTHER'
+  customCategoryInput.value = ''
   formWeightGrams.value = 100
   formQuantity.value = 1
   formIsWornOnBody.value = false
@@ -130,13 +150,30 @@ function handleSubmit() {
           <div>
             <label class="block text-slate-700">所屬裝備分類</label>
             <select
-              v-model="formCategory"
+              v-model="selectedCategoryOption"
               class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-amber-500 focus:outline-hidden"
             >
-              <option v-for="cat in categoryOptions" :key="cat.value" :value="cat.value">
-                {{ cat.label }}
-              </option>
+              <optgroup label="官方分類">
+                <option v-for="cat in officialCategoryOptions" :key="cat.value" :value="cat.value">
+                  {{ cat.label }}
+                </option>
+              </optgroup>
+              <optgroup v-if="props.customCategories.length > 0" label="已建立的自訂分類">
+                <option v-for="cat in props.customCategories" :key="cat" :value="cat">
+                  {{ cat }}
+                </option>
+              </optgroup>
+              <option value="__NEW_CATEGORY__">+ 新增自訂分類...</option>
             </select>
+
+            <input
+              v-if="selectedCategoryOption === '__NEW_CATEGORY__'"
+              v-model="customCategoryInput"
+              type="text"
+              placeholder="請輸入自訂分類名稱 (例如：攝影器材、炊事用品)"
+              required
+              class="mt-2 w-full rounded-xl border border-amber-300 bg-amber-50/50 px-3 py-2 text-sm text-slate-900 focus:border-amber-500 focus:outline-hidden"
+            />
           </div>
 
           <div class="grid grid-cols-2 gap-3">

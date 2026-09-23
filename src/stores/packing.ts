@@ -70,11 +70,29 @@ export function sanitizePackingState(raw: any) {
     }
   }
 
+  // 4. 目前已顯示/已選取之分類清單校驗
+  const defaultActiveCategories: PackingCategory[] = [
+    'PACK',
+    'CLOTHING',
+    'FOOTWEAR',
+    'SLEEP',
+    'MEDICAL',
+  ]
+  const activeCategories: PackingCategory[] = []
+  if (Array.isArray(raw?.activeCategories)) {
+    for (const c of raw.activeCategories) {
+      if (typeof c === 'string' && c.trim()) {
+        activeCategories.push(c as PackingCategory)
+      }
+    }
+  }
+
   return {
     version: typeof raw?.version === 'number' ? raw.version : 1,
     bodyWeightKg,
     userItemStates,
     customItems,
+    activeCategories: activeCategories.length > 0 ? activeCategories : defaultActiveCategories,
   }
 }
 
@@ -93,7 +111,33 @@ export const usePackingStore = defineStore(
     // 3. 使用者自訂裝備（非官方預設，需完整保存）
     const customItems = ref<PackingItem[]>([])
 
-    // 4. 動態組合完整裝備清單：永遠以代碼中最新官方資料為基底 + 套用使用者差集 + 串接自訂項目
+    // 4. 目前畫面上啟用顯示的分類清單（預設 5 大核心分類）
+    const defaultActiveCategories: PackingCategory[] = [
+      'PACK',
+      'CLOTHING',
+      'FOOTWEAR',
+      'SLEEP',
+      'MEDICAL',
+    ]
+    const activeCategories = ref<PackingCategory[]>([...defaultActiveCategories])
+
+    function toggleCategory(catId: PackingCategory) {
+      if (activeCategories.value.includes(catId)) {
+        activeCategories.value = activeCategories.value.filter((id) => id !== catId)
+      } else {
+        activeCategories.value = [...activeCategories.value, catId]
+      }
+    }
+
+    function removeActiveCategory(catId: PackingCategory) {
+      activeCategories.value = activeCategories.value.filter((id) => id !== catId)
+    }
+
+    function setAllCategories(catIds: PackingCategory[]) {
+      activeCategories.value = [...new Set(catIds)]
+    }
+
+    // 5. 動態組合完整裝備清單：永遠以代碼中最新官方資料為基底 + 套用使用者差集 + 串接自訂項目
     const packingItems = computed<PackingItem[]>(() => {
       const officialItems = defaultPackingItems.map((defaultItem) => {
         const override = userItemStates.value[defaultItem.id]
@@ -176,16 +220,25 @@ export const usePackingStore = defineStore(
         id,
         isCustom: true,
       })
+      if (!activeCategories.value.includes(customItem.category)) {
+        activeCategories.value.push(customItem.category)
+      }
     }
 
     function removeCustomItem(id: string) {
       customItems.value = customItems.value.filter((i) => i.id !== id)
     }
 
+    function removeCustomCategory(category: string) {
+      customItems.value = customItems.value.filter((i) => i.category !== category)
+      activeCategories.value = activeCategories.value.filter((c) => c !== category)
+    }
+
     function resetToDefaults() {
       bodyWeightKg.value = 60
       userItemStates.value = {}
       customItems.value = []
+      activeCategories.value = [...defaultActiveCategories]
     }
 
     // 相容保留（供 App.vue 或外部呼叫），差集架構下無需再執行手動覆寫
@@ -193,10 +246,14 @@ export const usePackingStore = defineStore(
       // 差集模式下，官方文字已由 computed 即時讀取最新代碼，無需額外遍歷
     }
 
-    // 6. Computed 試算統計數據
+    // 6. Computed 試算統計數據（僅累計目前畫面上啟用顯示之分類裝備）
+    const activeCategorySet = computed(() => new Set(activeCategories.value))
+
     const backpackWeightGrams = computed(() => {
       return packingItems.value
-        .filter((i) => i.isChecked && !i.isWornOnBody)
+        .filter(
+          (i) => activeCategorySet.value.has(i.category) && i.isChecked && !i.isWornOnBody,
+        )
         .reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
     })
 
@@ -206,7 +263,9 @@ export const usePackingStore = defineStore(
 
     const wornWeightGrams = computed(() => {
       return packingItems.value
-        .filter((i) => i.isChecked && i.isWornOnBody)
+        .filter(
+          (i) => activeCategorySet.value.has(i.category) && i.isChecked && i.isWornOnBody,
+        )
         .reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
     })
 
@@ -236,14 +295,19 @@ export const usePackingStore = defineStore(
       bodyWeightKg,
       userItemStates,
       customItems,
+      activeCategories,
       packingItems,
       syncWithLatestDefaults,
+      toggleCategory,
+      removeActiveCategory,
+      setAllCategories,
       toggleItemCheck,
       toggleWornOnBody,
       updateItemWeight,
       updateItemQuantity,
       addCustomItem,
       removeCustomItem,
+      removeCustomCategory,
       resetToDefaults,
       backpackWeightGrams,
       backpackWeightKg,
@@ -257,7 +321,7 @@ export const usePackingStore = defineStore(
   },
   {
     persist: {
-      pick: ['version', 'bodyWeightKg', 'userItemStates', 'customItems'],
+      pick: ['version', 'bodyWeightKg', 'userItemStates', 'customItems', 'activeCategories'],
       serializer: {
         serialize: JSON.stringify,
         deserialize: (rawString: string) => {

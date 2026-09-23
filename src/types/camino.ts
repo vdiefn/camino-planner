@@ -72,6 +72,7 @@ export type PackingCategory =
   | 'ELECTRONICS'
   | 'DOCS'
   | 'OTHER'
+  | (string & {})
 
 export type PackingPriority = 'ESSENTIAL' | 'RECOMMENDED' | 'OPTIONAL'
 

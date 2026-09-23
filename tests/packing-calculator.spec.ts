@@ -22,8 +22,10 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
 
   it('勾選穿在身上 (isWornOnBody: true) 的裝備絕對不計入背包淨負重', () => {
     const store = usePackingStore()
+    // 啟用全部分類以測試全線裝備之穿戴互斥邏輯
+    store.setAllCategories([...new Set(store.packingItems.map((i) => i.category))])
 
-    // 找到穿在身上的項目（登山鞋 850g、遮陽帽 70g、登山杖 440g、護照 90g）
+    // 找到穿在身上的項目（登山鞋 850g、遮陽帽 70g、登山杖 440g、護照正本 50g、朝聖者護照 40g）
     const wornItems = store.packingItems.filter((i) => i.isWornOnBody)
     expect(wornItems.length).toBeGreaterThan(0)
 
@@ -34,6 +36,31 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
     const backpackItems = store.packingItems.filter((i) => i.isChecked && !i.isWornOnBody)
     const expectedBackpackGrams = backpackItems.reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
     expect(store.backpackWeightGrams).toBe(expectedBackpackGrams)
+  })
+
+  it('未顯示之分類絕對不計入負重累計，切換顯示後即時動態納入計算', () => {
+    const store = usePackingStore()
+
+    // 預設核心 5 大分類不含 HYGIENE（衛生用品）
+    expect(store.activeCategories.includes('HYGIENE')).toBe(false)
+    const initialWeight = store.backpackWeightGrams
+
+    // 計算官方 HYGIENE 分類已勾選之背包重量
+    const hygieneGrams = store
+      .getItemsByCategory('HYGIENE')
+      .filter((i) => i.isChecked && !i.isWornOnBody)
+      .reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
+    expect(hygieneGrams).toBeGreaterThan(0)
+
+    // 啟用顯示 HYGIENE 分類
+    store.toggleCategory('HYGIENE')
+    expect(store.activeCategories.includes('HYGIENE')).toBe(true)
+    expect(store.backpackWeightGrams).toBe(initialWeight + hygieneGrams)
+
+    // 再次收合 HYGIENE 分類
+    store.toggleCategory('HYGIENE')
+    expect(store.activeCategories.includes('HYGIENE')).toBe(false)
+    expect(store.backpackWeightGrams).toBe(initialWeight)
   })
 
   it('單項裝備數量變更時，該品項總重應正確乘以倍率 (如羊毛襪 70g × 3 = 210g)', () => {
@@ -67,6 +94,8 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
 
   it('新增自訂裝備後，背包淨負重與百分比應即時累加', () => {
     const store = usePackingStore()
+    // 啟用全部分類以測試單一裝備累加
+    store.setAllCategories([...new Set(store.packingItems.map((i) => i.category))])
     const initialGrams = store.backpackWeightGrams
 
     store.addCustomItem({
@@ -220,5 +249,147 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
     expect(item.unitWeightGrams).toBe(0)
     expect(item.isChecked).toBe(true)
     expect(item.isWornOnBody).toBe(false)
+  })
+
+  it('自訂全新分類裝備：應正確累計負重且能透過 getItemsByCategory 依自訂分類精準取得', () => {
+    const store = usePackingStore()
+    const initialGrams = store.backpackWeightGrams
+
+    // 新增屬於全新自訂分類「攝影器材」的裝備
+    store.addCustomItem({
+      chineseName: '單眼相機腳架',
+      englishName: 'Camera Tripod',
+      category: '攝影器材',
+      priority: 'OPTIONAL',
+      referenceRangeText: '850g',
+      isChecked: true,
+      unitWeightGrams: 850,
+      quantity: 1,
+      isWornOnBody: false,
+    })
+
+    // 驗證背包負重正確累加 850g
+    expect(store.backpackWeightGrams).toBe(initialGrams + 850)
+
+    // 驗證能透過該自訂分類取得該項目
+    const photoItems = store.getItemsByCategory('攝影器材')
+    expect(photoItems.length).toBe(1)
+    expect(photoItems[0].chineseName).toBe('單眼相機腳架')
+    expect(photoItems[0].category).toBe('攝影器材')
+  })
+
+  it('防重複分類防禦：相同或包含空白的自訂分類應自動歸併至同一分類，不產生分裂', () => {
+    const store = usePackingStore()
+
+    // 1. 連續新增兩個帶有相同分類「攝影器材」的裝備（其中一個帶有前後空白模擬輸入防呆修剪）
+    store.addCustomItem({
+      chineseName: '單眼腳架',
+      englishName: 'Tripod',
+      category: '攝影器材',
+      priority: 'OPTIONAL',
+      referenceRangeText: '850g',
+      isChecked: true,
+      unitWeightGrams: 850,
+      quantity: 1,
+      isWornOnBody: false,
+    })
+
+    store.addCustomItem({
+      chineseName: '長焦鏡頭',
+      englishName: 'Lens',
+      category: '  攝影器材  '.trim(),
+      priority: 'OPTIONAL',
+      referenceRangeText: '600g',
+      isChecked: true,
+      unitWeightGrams: 600,
+      quantity: 1,
+      isWornOnBody: false,
+    })
+
+    // 驗證兩件裝備均正確歸併於同一個「攝影器材」分類下
+    const photoItems = store.getItemsByCategory('攝影器材')
+    expect(photoItems.length).toBe(2)
+    expect(photoItems.map((i) => i.chineseName)).toEqual(['單眼腳架', '長焦鏡頭'])
+  })
+
+  it('自我修復防衛層：應完整保留使用者輸入的全新自訂分類字串，不被強制降級或覆蓋', () => {
+    const customItemWithNewCategory = {
+      id: 'CUSTOM_CAMPING_01',
+      chineseName: '鈦金屬高山爐頭',
+      category: '炊事露營',
+    }
+
+    const sanitized = sanitizePackingState({
+      customItems: [customItemWithNewCategory],
+    })
+
+    expect(sanitized.customItems.length).toBe(1)
+    expect(sanitized.customItems[0].category).toBe('炊事露營')
+  })
+
+  it('刪除自訂分類功能：應一併移除該分類下所有裝備，並自動自負重中扣除', () => {
+    const store = usePackingStore()
+
+    // 新增自訂分類「攝影器材」之裝備
+    store.addCustomItem({
+      chineseName: '廣角鏡頭',
+      englishName: 'Lens',
+      category: '攝影器材',
+      priority: 'OPTIONAL',
+      referenceRangeText: '500g',
+      isChecked: true,
+      unitWeightGrams: 500,
+      quantity: 1,
+      isWornOnBody: false,
+    })
+
+    const weightWithItem = store.backpackWeightGrams
+    expect(store.getItemsByCategory('攝影器材').length).toBeGreaterThan(0)
+
+    // 執行刪除自訂分類
+    store.removeCustomCategory('攝影器材')
+
+    // 驗證該分類裝備已全數清空，且負重正確即時扣除
+    expect(store.getItemsByCategory('攝影器材').length).toBe(0)
+    expect(store.backpackWeightGrams).toBe(weightWithItem - 500)
+  })
+
+  it('排除官方分類後負重應精準扣除，且重設清單後官方核心分類保證100%全數復原', () => {
+    const store = usePackingStore()
+
+    // 初始狀態包含 SLEEP（睡眠防護）與 MEDICAL（個人藥物）
+    expect(store.activeCategories.includes('SLEEP')).toBe(true)
+    expect(store.activeCategories.includes('MEDICAL')).toBe(true)
+    const initialGrams = store.backpackWeightGrams
+
+    // 計算這兩大分類在背包中的重量
+    const sleepGrams = store
+      .getItemsByCategory('SLEEP')
+      .filter((i) => i.isChecked && !i.isWornOnBody)
+      .reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
+    const medicalGrams = store
+      .getItemsByCategory('MEDICAL')
+      .filter((i) => i.isChecked && !i.isWornOnBody)
+      .reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
+
+    expect(sleepGrams).toBeGreaterThan(0)
+    expect(medicalGrams).toBeGreaterThan(0)
+
+    // 1. 排除「睡眠防護」與「個人藥物」
+    store.removeActiveCategory('SLEEP')
+    store.removeActiveCategory('MEDICAL')
+
+    expect(store.activeCategories.includes('SLEEP')).toBe(false)
+    expect(store.activeCategories.includes('MEDICAL')).toBe(false)
+    // 驗證重量確實精準扣除
+    expect(store.backpackWeightGrams).toBe(initialGrams - sleepGrams - medicalGrams)
+
+    // 2. 執行重設清單
+    store.resetToDefaults()
+
+    // 驗證兩大核心分類保證 100% 完整回歸且重量重新計入
+    expect(store.activeCategories.includes('SLEEP')).toBe(true)
+    expect(store.activeCategories.includes('MEDICAL')).toBe(true)
+    expect(store.backpackWeightGrams).toBe(initialGrams)
   })
 })
