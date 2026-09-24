@@ -164,12 +164,11 @@ export const usePackingStore = defineStore(
       if (!list.includes(toCatId)) list.push(toCatId)
 
       const fromIdx = list.indexOf(fromCatId)
-      if (fromIdx === -1) return
-      const [moved] = list.splice(fromIdx, 1)
-
       const toIdx = list.indexOf(toCatId)
-      if (toIdx !== -1) {
-        list.splice(toIdx, 0, moved)
+      if (fromIdx !== -1 && toIdx !== -1) {
+        const temp = list[fromIdx]
+        list[fromIdx] = list[toIdx]
+        list[toIdx] = temp
         categoryOrder.value = list
       }
     }
