@@ -264,14 +264,26 @@ function handleConfirmReset() {
         朝聖之路行李打包清單
       </h2>
 
-      <button
-        type="button"
-        @click="isResetModalOpen = true"
-        class="text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer inline-flex items-center gap-1.5 shrink-0"
-      >
-        <RotateCcw class="w-3.5 h-3.5 text-slate-400 hover:text-slate-800 hover:bg-slate-200" />
-        <span>重設清單</span>
-      </button>
+      <!-- 右側精巧功能按鈕群 -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button
+          type="button"
+          @click="isCustomModalOpen = true"
+          class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-500 px-3 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
+        >
+          <PlusCircle class="w-3.5 h-3.5" />
+          <span>新增自訂裝備</span>
+        </button>
+
+        <button
+          type="button"
+          @click="isResetModalOpen = true"
+          class="text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+        >
+          <RotateCcw class="w-3.5 h-3.5" />
+          <span>重設清單</span>
+        </button>
+      </div>
     </div>
 
     <!-- 二欄式響應式佈局 (左:負重儀表板與減重法則 / 右:裝備分類清單) -->
@@ -411,16 +423,6 @@ function handleConfirmReset() {
                 {{ packingStore.wornWeightKg }} kg
               </div>
             </div>
-
-            <!-- 新增自訂裝備按鈕 -->
-            <button
-              type="button"
-              class="w-full flex items-center justify-center gap-2 rounded-xl bg-orange-400 hover:bg-orange-50 text-white hover:text-gray-700 py-2.5 text-xs font-normal shadow-xs transition-all cursor-pointer"
-              @click="isCustomModalOpen = true"
-            >
-              <PlusCircle class="h-4 w-4" />
-              <span class="text-sm">新增自訂裝備</span>
-            </button>
           </div>
         </div>
 
@@ -462,7 +464,7 @@ function handleConfirmReset() {
             <span class="text-sm font-medium text-slate-800">裝備分類篩選</span>
             <button
               type="button"
-              class="text-[11px] font-normal text-slate-400 border p-1 rounded border-slate-300 hover:border-slate-500 hover:text-slate-700 cursor-pointer"
+              class="text-[11px] font-normal text-slate-400 border px-1.5 py-1 rounded border-slate-200 hover:border-slate-300 hover:text-slate-500 cursor-pointer"
               @click="showAllCategories"
             >
               選擇全部

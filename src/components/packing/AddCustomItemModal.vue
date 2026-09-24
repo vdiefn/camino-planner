@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, Switch } from '@headlessui/vue'
-import { PlusCircle, X } from 'lucide-vue-next'
+import { X } from 'lucide-vue-next'
 import type { PackingCategory, PackingPriority } from '@/types/camino'
 
 interface Props {
@@ -104,8 +104,7 @@ function handleSubmit() {
       <DialogPanel class="w-full max-w-md rounded-xl bg-white p-6 shadow-xl space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-amber-600">
-            <PlusCircle class="h-5 w-5" />
-            <DialogTitle class="text-base text-slate-900">
+            <DialogTitle class="text-lg text-slate-900">
               新增自訂裝備
             </DialogTitle>
           </div>
