@@ -270,63 +270,66 @@ function handleConfirmReset() {
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       <!-- 左欄：Sticky 負重儀表板、減重法則與廣告 (lg: 4 欄) -->
       <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
-        <!-- 負重儀表板卡片 -->
-        <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs">
-          <!-- 標題列：手機版支援點擊整列切換折疊 -->
-          <div
-            @click="isMobileSettingsOpen = !isMobileSettingsOpen"
-            class="flex items-center justify-between cursor-pointer lg:cursor-default select-none"
-          >
-            <h3 class="text-base font-bold text-slate-900 flex items-center gap-1.5">
-              體重與 10% 負重警戒線
-            </h3>
-
-            <div class="flex items-center gap-2">
-              <!-- 手機版折疊按鈕 -->
-              <button
-                type="button"
-                class="lg:hidden p-1 text-slate-500 hover:text-slate-700 transition"
-                :aria-expanded="isMobileSettingsOpen"
-                aria-label="切換負重設定展開收合"
+        <!-- 平板模式左右並排網格包裝 (md: 2 欄 / lg 與手機: 1 欄) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5 items-stretch">
+          <!-- 負重儀表板卡片 -->
+          <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <!-- 標題列：手機版支援點擊整列切換折疊（平板與桌機直接展開） -->
+              <div
+                @click="isMobileSettingsOpen = !isMobileSettingsOpen"
+                class="flex items-center justify-between cursor-pointer md:cursor-default select-none"
               >
-                <ChevronDown
-                  class="w-4 h-4 transition-transform duration-200"
-                  :class="{ 'rotate-180': isMobileSettingsOpen }"
-                />
-              </button>
-            </div>
-          </div>
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-1.5">
+                  體重與 10% 負重警戒線
+                </h3>
 
-          <!-- 手機版收合時呈現的精簡摘要列（桌機版隱藏） -->
-          <div
-            v-if="!isMobileSettingsOpen"
-            @click="isMobileSettingsOpen = true"
-            class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
-          >
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-400">體重</span>
-              <span class="font-bold text-slate-800 font-mono">{{ packingStore.bodyWeightKg }}kg</span>
-              <span class="text-slate-300">·</span>
-              <span class="text-slate-400">淨負重</span>
-              <span class="font-bold font-mono" :class="packingStore.isOverweight ? 'text-rose-600' : 'text-slate-800'">
-                {{ packingStore.backpackWeightKg }}kg
-              </span>
-            </div>
-            <div class="flex items-center gap-1.5 shrink-0">
-              <span
-                class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium"
-                :class="packingStore.isOverweight ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'"
+                <div class="flex items-center gap-2">
+                  <!-- 手機版折疊按鈕（平板與桌機隱藏） -->
+                  <button
+                    type="button"
+                    class="md:hidden p-1 text-slate-500 hover:text-slate-700 transition"
+                    :aria-expanded="isMobileSettingsOpen"
+                    aria-label="切換負重設定展開收合"
+                  >
+                    <ChevronDown
+                      class="w-4 h-4 transition-transform duration-200"
+                      :class="{ 'rotate-180': isMobileSettingsOpen }"
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <!-- 手機版收合時呈現的精簡摘要列（平板與桌機版隱藏） -->
+              <div
+                v-if="!isMobileSettingsOpen"
+                @click="isMobileSettingsOpen = true"
+                class="md:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
               >
-                {{ packingStore.isOverweight ? '超標' : '合格' }} ({{ packingStore.weightPercentage }}%)
-              </span>
-            </div>
-          </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-slate-400">體重</span>
+                  <span class="font-bold text-slate-800 font-mono">{{ packingStore.bodyWeightKg }}kg</span>
+                  <span class="text-slate-300">·</span>
+                  <span class="text-slate-400">淨負重</span>
+                  <span class="font-bold font-mono" :class="packingStore.isOverweight ? 'text-rose-600' : 'text-slate-800'">
+                    {{ packingStore.backpackWeightKg }}kg
+                  </span>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <span
+                    class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium"
+                    :class="packingStore.isOverweight ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'"
+                  >
+                    {{ packingStore.isOverweight ? '超標' : '合格' }} ({{ packingStore.weightPercentage }}%)
+                  </span>
+                </div>
+              </div>
 
-          <!-- 可折疊內容區塊：手機版依 isMobileSettingsOpen 顯示/隱藏，桌機版永遠顯示（lg:block） -->
-          <div
-            class="space-y-4 mt-4"
-            :class="isMobileSettingsOpen ? 'block' : 'hidden lg:block'"
-          >
+              <!-- 可折疊內容區塊：手機版依 isMobileSettingsOpen 顯示/隱藏，平板與桌機永遠顯示（md:block） -->
+              <div
+                class="space-y-4 mt-4"
+                :class="isMobileSettingsOpen ? 'block' : 'hidden md:block'"
+              >
             <!-- 體重輸入框 -->
             <div class="rounded-xl flex items-center justify-between">
               <label class="text-sm text-slate-500">你的體重 (kg)</label>
@@ -405,6 +408,7 @@ function handleConfirmReset() {
             </div>
           </div>
         </div>
+      </div>
 
         <!-- 實戰減重法則 -->
         <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
@@ -431,6 +435,7 @@ function handleConfirmReset() {
             </li>
           </ul>
         </div>
+      </div>
 
         <!-- 側邊商業廣告欄位 -->
         <GoogleAd slot-id="packing-sidebar-ad" format="rectangle" />
