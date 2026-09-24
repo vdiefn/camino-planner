@@ -87,12 +87,34 @@ export function sanitizePackingState(raw: any) {
     }
   }
 
+  // 5. 分類自訂排序校驗
+  const defaultCategoryOrder: string[] = [
+    'PACK',
+    'CLOTHING',
+    'FOOTWEAR',
+    'SLEEP',
+    'MEDICAL',
+    'HYGIENE',
+    'ELECTRONICS',
+    'DOCS',
+    'OTHER',
+  ]
+  const categoryOrder: string[] = []
+  if (Array.isArray(raw?.categoryOrder)) {
+    for (const c of raw.categoryOrder) {
+      if (typeof c === 'string' && c.trim()) {
+        categoryOrder.push(c)
+      }
+    }
+  }
+
   return {
     version: typeof raw?.version === 'number' ? raw.version : 1,
     bodyWeightKg,
     userItemStates,
     customItems,
     activeCategories: activeCategories.length > 0 ? activeCategories : defaultActiveCategories,
+    categoryOrder: categoryOrder.length > 0 ? categoryOrder : defaultCategoryOrder,
   }
 }
 
@@ -120,6 +142,35 @@ export const usePackingStore = defineStore(
       'MEDICAL',
     ]
     const activeCategories = ref<PackingCategory[]>([...defaultActiveCategories])
+
+    // 4.1 分類順序管理（預設 9 大官方分類順序）
+    const defaultCategoryOrder: string[] = [
+      'PACK',
+      'CLOTHING',
+      'FOOTWEAR',
+      'SLEEP',
+      'MEDICAL',
+      'HYGIENE',
+      'ELECTRONICS',
+      'DOCS',
+      'OTHER',
+    ]
+    const categoryOrder = ref<string[]>([...defaultCategoryOrder])
+
+    function reorderCategories(fromCatId: string, toCatId: string) {
+      if (!fromCatId || !toCatId || fromCatId === toCatId) return
+      const list = [...categoryOrder.value]
+      if (!list.includes(fromCatId)) list.push(fromCatId)
+      if (!list.includes(toCatId)) list.push(toCatId)
+
+      const fromIdx = list.indexOf(fromCatId)
+      const toIdx = list.indexOf(toCatId)
+      if (fromIdx !== -1 && toIdx !== -1) {
+        const [moved] = list.splice(fromIdx, 1)
+        list.splice(toIdx, 0, moved)
+        categoryOrder.value = list
+      }
+    }
 
     function toggleCategory(catId: PackingCategory) {
       if (activeCategories.value.includes(catId)) {
@@ -239,6 +290,7 @@ export const usePackingStore = defineStore(
       userItemStates.value = {}
       customItems.value = []
       activeCategories.value = [...defaultActiveCategories]
+      categoryOrder.value = [...defaultCategoryOrder]
     }
 
     // 相容保留（供 App.vue 或外部呼叫），差集架構下無需再執行手動覆寫
@@ -296,11 +348,13 @@ export const usePackingStore = defineStore(
       userItemStates,
       customItems,
       activeCategories,
+      categoryOrder,
       packingItems,
       syncWithLatestDefaults,
       toggleCategory,
       removeActiveCategory,
       setAllCategories,
+      reorderCategories,
       toggleItemCheck,
       toggleWornOnBody,
       updateItemWeight,
@@ -321,7 +375,14 @@ export const usePackingStore = defineStore(
   },
   {
     persist: {
-      pick: ['version', 'bodyWeightKg', 'userItemStates', 'customItems', 'activeCategories'],
+      pick: [
+        'version',
+        'bodyWeightKg',
+        'userItemStates',
+        'customItems',
+        'activeCategories',
+        'categoryOrder',
+      ],
       serializer: {
         serialize: JSON.stringify,
         deserialize: (rawString: string) => {

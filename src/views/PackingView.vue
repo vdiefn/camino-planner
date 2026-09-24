@@ -9,6 +9,7 @@ import {
   X,
   ChevronDown,
   Trash2,
+  GripVertical,
 } from 'lucide-vue-next'
 import { usePackingStore } from '@/stores/packing'
 import type { PackingCategory, PackingItem } from '@/types/camino'
@@ -113,6 +114,108 @@ function toggleCategory(catId: PackingCategory) {
 
 function showAllCategories() {
   packingStore.setAllCategories(allCategories.value.map((cat) => cat.id))
+}
+
+// 分類卡片收合狀態控制（預設全展開）
+const collapsedCategories = ref<Record<string, boolean>>({})
+
+function toggleCategoryCollapse(catId: string) {
+  collapsedCategories.value[catId] = !collapsedCategories.value[catId]
+}
+
+// 依據使用者自訂排序的已啟用分類列表
+const sortedActiveCategories = computed(() => {
+  const activeSet = activeCategorySet.value
+  const activeCats = allCategories.value.filter((c) => activeSet.has(c.id))
+  const orderList = packingStore.categoryOrder || []
+  const orderMap = new Map(orderList.map((id, idx) => [id, idx]))
+  return [...activeCats].sort((a, b) => {
+    const orderA = orderMap.has(a.id) ? orderMap.get(a.id)! : 999
+    const orderB = orderMap.has(b.id) ? orderMap.get(b.id)! : 999
+    return orderA - orderB
+  })
+})
+
+// 分類卡片拖曳排序狀態（同時支援桌面與手機觸控）
+const draggedCatId = ref<string | null>(null)
+const dropTargetCatId = ref<string | null>(null)
+
+// 拖曳即時重排節流時間戳
+let lastReorderTime = 0
+
+// 桌面 HTML5 Drag & Drop（拖曳過程中即時重排）
+function handleDragStart(catId: string, event: DragEvent) {
+  draggedCatId.value = catId
+  if (event.dataTransfer) {
+    event.dataTransfer.effectAllowed = 'move'
+    event.dataTransfer.setData('text/plain', catId)
+  }
+}
+
+function handleDragOver(catId: string, event: DragEvent) {
+  event.preventDefault()
+  if (!draggedCatId.value || draggedCatId.value === catId) return
+  if (event.dataTransfer) {
+    event.dataTransfer.dropEffect = 'move'
+  }
+
+  // 取得目標卡片 DOM 矩形，只有游標進入中段核心區域 (20%~80%) 時才換位，徹底防範邊界震盪
+  const target = event.currentTarget as HTMLElement | null
+  if (target) {
+    const rect = target.getBoundingClientRect()
+    const relativePos = (event.clientY - rect.top) / rect.height
+    if (relativePos < 0.2 || relativePos > 0.8) {
+      return
+    }
+  }
+
+  const now = Date.now()
+  if (now - lastReorderTime > 60) {
+    packingStore.reorderCategories(draggedCatId.value, catId)
+    lastReorderTime = now
+  }
+}
+
+function handleDrop() {
+  draggedCatId.value = null
+  dropTargetCatId.value = null
+}
+
+function handleDragEnd() {
+  draggedCatId.value = null
+  dropTargetCatId.value = null
+}
+
+// 行動裝置 Touch 觸控拖曳支援（滑動過程中即時重排）
+function handleTouchStart(catId: string, _event: TouchEvent) {
+  draggedCatId.value = catId
+}
+
+function handleTouchMove(event: TouchEvent) {
+  if (!draggedCatId.value) return
+  const touch = event.touches[0]
+  if (!touch) return
+  const element = document.elementFromPoint(touch.clientX, touch.clientY)
+  const cardElement = element?.closest('[data-category-id]') as HTMLElement | null
+  if (cardElement) {
+    const targetId = cardElement.dataset.categoryId
+    if (targetId && targetId !== draggedCatId.value) {
+      const rect = cardElement.getBoundingClientRect()
+      const relativePos = (touch.clientY - rect.top) / rect.height
+      if (relativePos >= 0.2 && relativePos <= 0.8) {
+        const now = Date.now()
+        if (now - lastReorderTime > 60) {
+          packingStore.reorderCategories(draggedCatId.value, targetId)
+          lastReorderTime = now
+        }
+      }
+    }
+  }
+}
+
+function handleTouchEnd() {
+  draggedCatId.value = null
+  dropTargetCatId.value = null
 }
 
 // 手機版折疊狀態（預設收合以釋放手機垂直空間，與行程規劃一致）
@@ -359,10 +462,10 @@ function handleConfirmReset() {
             <span class="text-sm font-medium text-slate-800">裝備分類篩選</span>
             <button
               type="button"
-              class="text-[11px] font-normal text-amber-900 cursor-pointer"
+              class="text-[11px] font-normal text-slate-400 border p-1 rounded border-slate-300 hover:border-slate-500 hover:text-slate-700 cursor-pointer"
               @click="showAllCategories"
             >
-              選擇全部分類
+              選擇全部
             </button>
           </div>
 
@@ -395,16 +498,52 @@ function handleConfirmReset() {
           </div>
         </div>
 
-        <!-- 瀑布流多欄排版區 (1~2 欄自適應) -->
+        <!-- 緊湊多欄瀑布流排版區 (零多餘空格) -->
         <div class="columns-1 md:columns-2 gap-4 space-y-4">
           <div
-            v-for="cat in allCategories.filter((c) => activeCategorySet.has(c.id))"
+            v-for="cat in sortedActiveCategories"
             :key="cat.id"
-            class="break-inside-avoid rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-3"
+            :data-category-id="cat.id"
+            :draggable="true"
+            @dragstart="handleDragStart(cat.id, $event)"
+            @dragover.prevent="handleDragOver(cat.id, $event)"
+            @drop="handleDrop"
+            @dragend="handleDragEnd"
+            class="break-inside-avoid rounded-xl border bg-white p-4 transition-all duration-300 ease-out will-change-transform"
+            :class="[
+              collapsedCategories[cat.id] ? 'shadow-xs' : 'space-y-3 shadow-xs',
+              draggedCatId === cat.id
+                ? 'opacity-40 scale-[0.97] shadow-lg ring-2 ring-amber-300/70 border-amber-300'
+                : 'opacity-100 scale-100 border-slate-200',
+              dropTargetCatId === cat.id && draggedCatId !== cat.id
+                ? 'border-amber-400 ring-2 ring-amber-200/80 shadow-md'
+                : ''
+            ]"
           >
-            <!-- 分類標頭 -->
-            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-              <h4 class="text-md text-slate-900">{{ cat.label }}</h4>
+            <!-- 分類標頭（點擊切換展開/收合） -->
+            <div
+              class="flex items-center justify-between cursor-pointer select-none"
+              :class="{ 'border-b border-slate-100 pb-2.5': !collapsedCategories[cat.id] }"
+              @click="toggleCategoryCollapse(cat.id)"
+            >
+              <div class="flex items-center gap-1.5">
+                <!-- 拖曳手柄（桌面與手機均可按住拖動） -->
+                <div
+                  class="cursor-grab active:cursor-grabbing text-slate-300 hover:text-slate-600 p-0.5 rounded touch-none"
+                  title="按住拖曳調整順序"
+                  @click.stop
+                  @touchstart.stop="handleTouchStart(cat.id, $event)"
+                  @touchmove.prevent="handleTouchMove($event)"
+                  @touchend.stop="handleTouchEnd"
+                >
+                  <GripVertical class="h-4 w-4" />
+                </div>
+                <h4 class="text-md font-medium text-slate-900">{{ cat.label }}</h4>
+                <ChevronDown
+                  class="h-4 w-4 text-slate-400 transition-transform duration-200"
+                  :class="{ '-rotate-90': collapsedCategories[cat.id] }"
+                />
+              </div>
 
               <div class="flex items-center gap-2">
                 <span class="text-[11px] text-slate-400 font-mono">
@@ -414,15 +553,15 @@ function handleConfirmReset() {
                   type="button"
                   class="rounded-md p-1 text-slate-300 hover:bg-slate-100 hover:text-slate-600 cursor-pointer"
                   :title="officialCategoryIds.has(cat.id) ? '從本次清單排除此分類' : '刪除此自訂分類與所屬裝備'"
-                  @click="officialCategoryIds.has(cat.id) ? promptRemoveCategory(cat) : promptDeleteCategory(cat.id)"
+                  @click.stop="officialCategoryIds.has(cat.id) ? promptRemoveCategory(cat) : promptDeleteCategory(cat.id)"
                 >
                   <X class="h-4 w-4" />
                 </button>
               </div>
             </div>
 
-            <!-- 該分類之裝備列表 -->
-            <div class="space-y-2.5">
+            <!-- 該分類之裝備列表（收合時隱藏） -->
+            <div v-show="!collapsedCategories[cat.id]" class="space-y-2.5">
               <PackingItemRow
                 v-for="item in packingStore.getItemsByCategory(cat.id)"
                 :key="item.id"

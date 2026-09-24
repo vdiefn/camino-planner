@@ -56,7 +56,7 @@ const emit = defineEmits<{
             <!-- 穿在身上行內膠囊按鈕（防冒泡避免觸發 Checkbox） -->
             <button
               type="button"
-              class="rounded px-1.5 py-0.5 text-[10px] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
+              class="rounded p-1 text-[10px] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
               :class="[
                 item.isWornOnBody
                   ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100'
@@ -67,10 +67,6 @@ const emit = defineEmits<{
             >
               <span>{{ item.isWornOnBody ? '✓ 穿在身上' : '+ 穿在身上' }}</span>
             </button>
-          </div>
-          <div v-if="isExpanded" class="mt-0.5 text-[11px] space-y-0.5">
-            <div class="text-slate-500">{{ item.englishName }}</div>
-            <div v-if="item.spanishName" class="text-slate-400">{{ item.spanishName }}</div>
           </div>
         </div>
       </div>
@@ -87,7 +83,7 @@ const emit = defineEmits<{
           title="目前總重量"
         >
           {{ item.unitWeightGrams * item.quantity }}g
-          <span v-if="item.quantity > 1" class="text-[10px] text-slate-400">({{ item.quantity }}件)</span>
+          <span v-if="item.quantity > 1" class="text-[10px] text-slate-400">x {{ item.quantity }}</span>
         </span>
 
         <button
