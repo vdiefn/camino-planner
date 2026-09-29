@@ -344,7 +344,7 @@ const dailyAverageKm = computed(() => {
               class="w-full py-2.5 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
               :class="[
                 isDirty
-                  ? 'bg-orange-400 hover:bg-orange-50 text-white hover:text-gray-700 shadow-xs'
+                  ? 'bg-orange-400 text-white hover:bg-orange-500 shadow-xs'
                   : 'bg-slate-100 text-slate-400 cursor-not-allowed'
               ]"
             >
@@ -358,11 +358,10 @@ const dailyAverageKm = computed(() => {
               </button>
             </div>
           </div>
-
           <!-- 冬季庇里牛斯山安全提醒 -->
           <div
             v-if="scheduleStore.isWinterLocked"
-            class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex items-start gap-2"
+            class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-slate-800 flex items-start gap-2"
           >
             <AlertTriangle class="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
             <div>

@@ -18,7 +18,7 @@ export const transportRoutes: TransportRoute[] = [
         to: '巴黎蒙帕納斯車站 (Paris Montparnasse)',
         durationMinutes: 50,
         estimatedCostEur: { min: 11, max: 14 },
-        warningTip: '請注意蒙帕納斯車站分為多個 Hall，搭乘高鐵建議至少提早 30 分鐘抵達月台。',
+        warningTip: '請注意蒙帕納斯車站設有多個站台，搭乘火車建議至少提早 30 分鐘抵達月台。',
       },
       {
         stepOrder: 2,
@@ -108,7 +108,7 @@ export const transportRoutes: TransportRoute[] = [
         durationMinutes: 105,
         estimatedCostEur: { min: 18, max: 22 },
         bookingUrl: 'https://www.alsa.es/',
-        warningTip: '若班次接不上，亦可在 Pamplona 巴士站找其他朝聖者共乘計程車（每車約 90~110 歐元，4 人均分極划算）。',
+        warningTip: '若班次接不上，亦可在 Pamplona 巴士站找其他朝聖者共乘計程車（每車約 90~110 歐元）。',
       },
     ],
   },
