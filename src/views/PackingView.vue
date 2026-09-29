@@ -10,6 +10,7 @@ import {
   ChevronDown,
   Trash2,
   GripVertical,
+  MessageCircleWarning,
 } from 'lucide-vue-next'
 import { usePackingStore } from '@/stores/packing'
 import type { PackingCategory, PackingItem } from '@/types/camino'
@@ -198,8 +199,10 @@ function handleTouchEnd() {
   lastTargetId = null
 }
 
-// 手機版折疊狀態（預設收合以釋放手機垂直空間，與行程規劃一致）
-const isMobileSettingsOpen = ref(false)
+// 手機與平板折疊狀態（預設收合以釋放垂直空間，桌機版始終展開）
+const isWeightSettingsOpen = ref(false)
+// 減重黃金法則 Tooltip 顯示狀態（支援滑鼠懸停與平板觸控點擊）
+const isRulesTooltipOpen = ref(false)
 
 // 彈窗狀態
 const isCustomModalOpen = ref(false)
@@ -239,7 +242,7 @@ function handleConfirmReset() {
 <template>
   <div class="container mx-auto px-4 py-6 max-w-7xl mt-2">
     <!-- 頂部標題區 -->
-    <div class="mb-4 sm:mb-6 flex items-center justify-between gap-3">
+    <div class="mb-2 sm:mb-6 flex items-center justify-between gap-3">
       <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2">
         朝聖之路行李打包清單
       </h2>
@@ -267,44 +270,91 @@ function handleConfirmReset() {
     </div>
 
     <!-- 二欄式響應式佈局 (左:負重儀表板與減重法則 / 右:裝備分類清單) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6 items-start">
       <!-- 左欄：Sticky 負重儀表板、減重法則與廣告 (lg: 4 欄) -->
       <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
-        <!-- 平板模式左右並排網格包裝 (md: 2 欄 / lg 與手機: 1 欄) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5 items-stretch">
-          <!-- 負重儀表板卡片 -->
-          <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
-            <div>
-              <!-- 標題列：手機版支援點擊整列切換折疊（平板與桌機直接展開） -->
-              <div
-                @click="isMobileSettingsOpen = !isMobileSettingsOpen"
-                class="flex items-center justify-between cursor-pointer md:cursor-default select-none"
-              >
-                <h3 class="text-base font-bold text-slate-900 flex items-center gap-1.5">
+        <!-- 負重儀表板卡片 (獨佔整行) -->
+        <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+          <div>
+            <!-- 標題列：手機與平板支援點擊整列切換折疊（桌機直接展開） -->
+            <div
+              @click="isWeightSettingsOpen = !isWeightSettingsOpen"
+              class="flex items-center justify-between cursor-pointer lg:cursor-default select-none"
+            >
+              <div class="flex items-center gap-1.5">
+                <h3 class="text-base font-bold text-slate-900">
                   體重與 10% 負重警戒線
                 </h3>
 
-                <div class="flex items-center gap-2">
-                  <!-- 手機版折疊按鈕（平板與桌機隱藏） -->
+                <!-- 減重黃金法則符號按鈕與 Tooltip (僅在平板與手機模式顯示) -->
+                <div
+                  class="relative inline-flex items-center lg:hidden"
+                  @mouseenter="isRulesTooltipOpen = true"
+                  @mouseleave="isRulesTooltipOpen = false"
+                >
                   <button
                     type="button"
-                    class="md:hidden p-1 text-slate-500 hover:text-slate-700 transition"
-                    :aria-expanded="isMobileSettingsOpen"
+                    @click.stop="isRulesTooltipOpen = !isRulesTooltipOpen"
+                    class="p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-help flex items-center"
+                    title="朝聖裝備減重黃金法則"
+                    aria-label="查看朝聖裝備減重黃金法則"
+                  >
+                    <MessageCircleWarning class="w-4 h-4" />
+                  </button>
+
+                  <!-- 浮動 Tooltip 內容框 -->
+                  <div
+                    v-show="isRulesTooltipOpen"
+                    class="absolute left-0 sm:left-auto top-full mt-2 w-72 sm:w-80 p-4 bg-white rounded-xl shadow-xl border border-slate-200 z-50 text-left text-xs"
+                    @click.stop
+                  >
+                    <div class="font-bold text-slate-900 flex items-center gap-1.5 mb-2 pb-1.5 border-b border-slate-100 text-sm">
+                      <Sparkles class="w-4 h-4 text-amber-500" />
+                      <span>朝聖裝備減重黃金法則</span>
+                    </div>
+                    <ul class="space-y-2 text-slate-600 leading-relaxed font-normal">
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-amber-500 font-bold">•</span>
+                        <span>嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背 7kg，超重是膝蓋與足底發炎的第一元兇。</span>
+                      </li>
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-amber-500 font-bold">•</span>
+                        <span>善用「穿在身上」開關：登山鞋 (850g)、登山杖 (440g) 手持穿戴不計入背包負重。</span>
+                      </li>
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-amber-500 font-bold">•</span>
+                        <span>水與食物不要背過多：朝聖路上村莊密集且有公共飲水泉（Fuente），帶 1L 水瓶隨走隨補即可。</span>
+                      </li>
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-amber-500 font-bold">•</span>
+                        <span>三套衣物輪替原則：一套穿身上、一套備用換洗、一套晾乾中，羊毛材質抗臭效果最佳。</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+                <div class="flex items-center gap-2">
+                  <!-- 手機與平板折疊按鈕（桌機隱藏） -->
+                  <button
+                    type="button"
+                    class="lg:hidden p-1 text-slate-500 hover:text-slate-700 transition"
+                    :aria-expanded="isWeightSettingsOpen"
                     aria-label="切換負重設定展開收合"
                   >
                     <ChevronDown
                       class="w-4 h-4 transition-transform duration-200"
-                      :class="{ 'rotate-180': isMobileSettingsOpen }"
+                      :class="{ 'rotate-180': isWeightSettingsOpen }"
                     />
                   </button>
                 </div>
               </div>
 
-              <!-- 手機版收合時呈現的精簡摘要列（平板與桌機版隱藏） -->
+              <!-- 手機與平板收合時呈現的精簡摘要列（桌機版隱藏） -->
               <div
-                v-if="!isMobileSettingsOpen"
-                @click="isMobileSettingsOpen = true"
-                class="md:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
+                v-if="!isWeightSettingsOpen"
+                @click="isWeightSettingsOpen = true"
+                class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
               >
                 <div class="flex items-center gap-1.5">
                   <span class="text-slate-400">體重</span>
@@ -325,10 +375,10 @@ function handleConfirmReset() {
                 </div>
               </div>
 
-              <!-- 可折疊內容區塊：手機版依 isMobileSettingsOpen 顯示/隱藏，平板與桌機永遠顯示（md:block） -->
+              <!-- 可折疊內容區塊：手機與平板依 isWeightSettingsOpen 顯示/隱藏，桌機永遠顯示（lg:block） -->
               <div
                 class="space-y-4 mt-4"
-                :class="isMobileSettingsOpen ? 'block' : 'hidden md:block'"
+                :class="isWeightSettingsOpen ? 'block' : 'hidden lg:block'"
               >
             <!-- 體重輸入框 -->
             <div class="rounded-xl flex items-center justify-between">
@@ -410,13 +460,13 @@ function handleConfirmReset() {
         </div>
       </div>
 
-        <!-- 實戰減重法則 -->
-        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
-          <h3 class="flex items-center gap-2 text-sm text-slate-900">
+        <!-- 電腦模式 (lg:) 下顯示之朝聖裝備減重黃金法則實體卡片 -->
+        <div class="hidden lg:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+          <h3 class="flex items-center gap-2 text-sm text-slate-900 font-bold">
             <Sparkles class="h-4 w-4 text-amber-500" />
             <span class="text-base">朝聖裝備減重黃金法則</span>
           </h3>
-          <ul class="mt-3 space-y-2.5 text-sm text-slate-600 leading-relaxed">
+          <ul class="mt-3 space-y-2.5 text-sm text-slate-600 leading-relaxed font-normal">
             <li class="flex items-start gap-2">
               <span class="text-amber-500 font-bold">•</span>
               <span>嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背 7kg，超重是膝蓋與足底發炎的第一元兇。</span>
@@ -435,7 +485,6 @@ function handleConfirmReset() {
             </li>
           </ul>
         </div>
-      </div>
 
         <!-- 側邊商業廣告欄位 -->
         <GoogleAd slot-id="packing-sidebar-ad" format="rectangle" />

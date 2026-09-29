@@ -191,7 +191,7 @@ const dailyAverageKm = computed(() => {
               </h2>
               <div class="relative group inline-flex items-center" @click.stop>
                 <div
-                  class="text-amber-500 hover:text-amber-600 p-1 rounded-lg hover:bg-amber-50 transition cursor-pointer flex items-center"
+                  class="text-amber-500 hover:text-amber-600 p-1 rounded-lg hover:bg-amber-50 transition cursor-help flex items-center"
                 >
                   <MessageCircleWarning class="w-4 h-4" />
                 </div>
