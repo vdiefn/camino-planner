@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 import {
   AlertOctagon,
   ShieldCheck,
@@ -11,231 +11,257 @@ import {
   Trash2,
   GripVertical,
   MessageCircleWarning,
-} from 'lucide-vue-next'
-import { usePackingStore } from '@/stores/packing'
-import type { PackingCategory, PackingItem } from '@/types/camino'
-import PackingItemRow from '@/components/packing/PackingItemRow.vue'
-import ProTipsModal from '@/components/packing/ProTipsModal.vue'
-import AddCustomItemModal from '@/components/packing/AddCustomItemModal.vue'
-import ConfirmModal from '@/components/common/ConfirmModal.vue'
-import GoogleAd from '@/components/common/GoogleAd.vue'
+} from "lucide-vue-next";
+import { usePackingStore } from "@/stores/packing";
+import type { PackingCategory, PackingItem } from "@/types/camino";
+import PackingItemRow from "@/components/packing/PackingItemRow.vue";
+import ProTipsModal from "@/components/packing/ProTipsModal.vue";
+import AddCustomItemModal from "@/components/packing/AddCustomItemModal.vue";
+import ConfirmModal from "@/components/common/ConfirmModal.vue";
+import TipsModal from "@/components/common/TipsModal.vue";
+import GoogleAd from "@/components/common/GoogleAd.vue";
 
-const packingStore = usePackingStore()
+const packingStore = usePackingStore();
 
 // 官方 9 大分類定義與圖示/中文對照
-const defaultCategories: { id: PackingCategory; label: string; icon: string }[] = [
-  { id: 'PACK', label: '背包系統', icon: '🎒' },
-  { id: 'CLOTHING', label: '服飾穿搭', icon: '👕' },
-  { id: 'FOOTWEAR', label: '鞋襪足部', icon: '👟' },
-  { id: 'SLEEP', label: '睡眠防護', icon: '🛏️' },
-  { id: 'MEDICAL', label: '個人藥物', icon: '💊' },
-  { id: 'HYGIENE', label: '衛生用品', icon: '🧼' },
-  { id: 'ELECTRONICS', label: '電子設備', icon: '🔌' },
-  { id: 'DOCS', label: '證件工具', icon: '📄' },
-  { id: 'OTHER', label: '其他', icon: '📦' },
-]
+const defaultCategories: {
+  id: PackingCategory;
+  label: string;
+  icon: string;
+}[] = [
+  { id: "PACK", label: "背包系統", icon: "🎒" },
+  { id: "CLOTHING", label: "服飾穿搭", icon: "👕" },
+  { id: "FOOTWEAR", label: "鞋襪足部", icon: "👟" },
+  { id: "SLEEP", label: "睡眠防護", icon: "🛏️" },
+  { id: "MEDICAL", label: "個人藥物", icon: "💊" },
+  { id: "HYGIENE", label: "衛生用品", icon: "🧼" },
+  { id: "ELECTRONICS", label: "電子設備", icon: "🔌" },
+  { id: "DOCS", label: "證件工具", icon: "📄" },
+  { id: "OTHER", label: "其他", icon: "📦" },
+];
 
-const officialCategoryIds = new Set(defaultCategories.map((c) => c.id))
+const officialCategoryIds = new Set(defaultCategories.map((c) => c.id));
 
 // 動態聚合官方分類與使用者自訂之新分類（防重複集合）
 const allCategories = computed(() => {
-  const list = [...defaultCategories]
-  const knownIds = new Set(list.map((c) => c.id))
+  const list = [...defaultCategories];
+  const knownIds = new Set(list.map((c) => c.id));
 
   for (const item of packingStore.packingItems) {
     if (!knownIds.has(item.category)) {
-      knownIds.add(item.category)
+      knownIds.add(item.category);
       list.push({
         id: item.category,
         label: item.category,
-        icon: '📦',
-      })
+        icon: "📦",
+      });
     }
   }
-  return list
-})
+  return list;
+});
 
 // 提取目前已自訂過的獨立分類清單（供新增彈窗快速選取）
 const existingCustomCategories = computed(() => {
-  const officialIds = officialCategoryIds
-  const customSet = new Set<string>()
+  const officialIds = officialCategoryIds;
+  const customSet = new Set<string>();
   for (const item of packingStore.customItems) {
     if (!officialIds.has(item.category)) {
-      customSet.add(item.category)
+      customSet.add(item.category);
     }
   }
-  return Array.from(customSet)
-})
+  return Array.from(customSet);
+});
 
 // 刪除自訂分類二次確認控制
-const isDeleteCategoryModalOpen = ref(false)
-const categoryToDelete = ref('')
+const isDeleteCategoryModalOpen = ref(false);
+const categoryToDelete = ref("");
 
 const categoryToDeleteItemCount = computed(() => {
-  if (!categoryToDelete.value) return 0
-  return packingStore.getItemsByCategory(categoryToDelete.value).length
-})
+  if (!categoryToDelete.value) return 0;
+  return packingStore.getItemsByCategory(categoryToDelete.value).length;
+});
 
 function promptDeleteCategory(catId: string) {
-  categoryToDelete.value = catId
-  isDeleteCategoryModalOpen.value = true
+  categoryToDelete.value = catId;
+  isDeleteCategoryModalOpen.value = true;
 }
 
 function handleConfirmDeleteCategory() {
   if (categoryToDelete.value) {
-    packingStore.removeCustomCategory(categoryToDelete.value)
+    packingStore.removeCustomCategory(categoryToDelete.value);
   }
-  isDeleteCategoryModalOpen.value = false
-  categoryToDelete.value = ''
+  isDeleteCategoryModalOpen.value = false;
+  categoryToDelete.value = "";
 }
 
 // 排除分類二次確認控制
-const isRemoveCategoryModalOpen = ref(false)
-const categoryToRemove = ref<{ id: PackingCategory; label: string } | null>(null)
+const isRemoveCategoryModalOpen = ref(false);
+const categoryToRemove = ref<{ id: PackingCategory; label: string } | null>(
+  null,
+);
 
 function promptRemoveCategory(cat: { id: PackingCategory; label: string }) {
-  categoryToRemove.value = cat
-  isRemoveCategoryModalOpen.value = true
+  categoryToRemove.value = cat;
+  isRemoveCategoryModalOpen.value = true;
 }
 
 function handleConfirmRemoveCategory() {
   if (categoryToRemove.value) {
-    packingStore.removeActiveCategory(categoryToRemove.value.id)
+    packingStore.removeActiveCategory(categoryToRemove.value.id);
   }
-  isRemoveCategoryModalOpen.value = false
-  categoryToRemove.value = null
+  isRemoveCategoryModalOpen.value = false;
+  categoryToRemove.value = null;
 }
 
 // 畫面目前啟用顯示的分類集合（直接連動 store 以確保負重計算與畫面完全同步）
-const activeCategorySet = computed(() => new Set(packingStore.activeCategories))
+const activeCategorySet = computed(
+  () => new Set(packingStore.activeCategories),
+);
 
 function toggleCategory(catId: PackingCategory) {
-  packingStore.toggleCategory(catId)
+  packingStore.toggleCategory(catId);
 }
 
 function showAllCategories() {
-  packingStore.setAllCategories(allCategories.value.map((cat) => cat.id))
+  packingStore.setAllCategories(allCategories.value.map((cat) => cat.id));
 }
 
 // 分類卡片收合狀態控制（預設全展開）
-const collapsedCategories = ref<Record<string, boolean>>({})
+const collapsedCategories = ref<Record<string, boolean>>({});
 
 function toggleCategoryCollapse(catId: string) {
-  collapsedCategories.value[catId] = !collapsedCategories.value[catId]
+  collapsedCategories.value[catId] = !collapsedCategories.value[catId];
 }
 
 // 依據使用者自訂排序的已啟用分類列表
 const sortedActiveCategories = computed(() => {
-  const activeSet = activeCategorySet.value
-  const activeCats = allCategories.value.filter((c) => activeSet.has(c.id))
-  const orderList = packingStore.categoryOrder || []
-  const orderMap = new Map(orderList.map((id, idx) => [id, idx]))
+  const activeSet = activeCategorySet.value;
+  const activeCats = allCategories.value.filter((c) => activeSet.has(c.id));
+  const orderList = packingStore.categoryOrder || [];
+  const orderMap = new Map(orderList.map((id, idx) => [id, idx]));
   return [...activeCats].sort((a, b) => {
-    const orderA = orderMap.has(a.id) ? orderMap.get(a.id)! : 999
-    const orderB = orderMap.has(b.id) ? orderMap.get(b.id)! : 999
-    return orderA - orderB
-  })
-})
+    const orderA = orderMap.has(a.id) ? orderMap.get(a.id)! : 999;
+    const orderB = orderMap.has(b.id) ? orderMap.get(b.id)! : 999;
+    return orderA - orderB;
+  });
+});
 
 // 分類卡片拖曳排序狀態（同時支援桌面與手機觸控）
-const draggedCatId = ref<string | null>(null)
-let lastTargetId: string | null = null
+const draggedCatId = ref<string | null>(null);
+let lastTargetId: string | null = null;
 
 // 桌面 HTML5 Drag & Drop（目標鎖定即時交換）
 function handleDragStart(catId: string, event: DragEvent) {
-  draggedCatId.value = catId
-  lastTargetId = null
+  draggedCatId.value = catId;
+  lastTargetId = null;
   if (event.dataTransfer) {
-    event.dataTransfer.effectAllowed = 'move'
-    event.dataTransfer.setData('text/plain', catId)
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", catId);
   }
 }
 
 function handleDragOver(catId: string, event: DragEvent) {
-  event.preventDefault()
-  if (!draggedCatId.value || draggedCatId.value === catId) return
-  if (lastTargetId === catId) return // 已經與該目標交換過，鎖定不再重複反覆跳動
+  event.preventDefault();
+  if (!draggedCatId.value || draggedCatId.value === catId) return;
+  if (lastTargetId === catId) return; // 已經與該目標交換過，鎖定不再重複反覆跳動
 
   if (event.dataTransfer) {
-    event.dataTransfer.dropEffect = 'move'
+    event.dataTransfer.dropEffect = "move";
   }
-  lastTargetId = catId
-  packingStore.reorderCategories(draggedCatId.value, catId)
+  lastTargetId = catId;
+  packingStore.reorderCategories(draggedCatId.value, catId);
 }
 
 function handleDrop() {
-  draggedCatId.value = null
-  lastTargetId = null
+  draggedCatId.value = null;
+  lastTargetId = null;
 }
 
 function handleDragEnd() {
-  draggedCatId.value = null
-  lastTargetId = null
+  draggedCatId.value = null;
+  lastTargetId = null;
 }
 
 // 行動裝置 Touch 觸控拖曳支援（滑動過程中即時交換）
 function handleTouchStart(catId: string, _event: TouchEvent) {
-  draggedCatId.value = catId
-  lastTargetId = null
+  draggedCatId.value = catId;
+  lastTargetId = null;
 }
 
 function handleTouchMove(event: TouchEvent) {
-  if (!draggedCatId.value) return
-  const touch = event.touches[0]
-  if (!touch) return
-  const element = document.elementFromPoint(touch.clientX, touch.clientY)
-  const cardElement = element?.closest('[data-category-id]') as HTMLElement | null
+  if (!draggedCatId.value) return;
+  const touch = event.touches[0];
+  if (!touch) return;
+  const element = document.elementFromPoint(touch.clientX, touch.clientY);
+  const cardElement = element?.closest(
+    "[data-category-id]",
+  ) as HTMLElement | null;
   if (cardElement) {
-    const targetId = cardElement.dataset.categoryId
-    if (targetId && targetId !== draggedCatId.value && targetId !== lastTargetId) {
-      lastTargetId = targetId
-      packingStore.reorderCategories(draggedCatId.value, targetId)
+    const targetId = cardElement.dataset.categoryId;
+    if (
+      targetId &&
+      targetId !== draggedCatId.value &&
+      targetId !== lastTargetId
+    ) {
+      lastTargetId = targetId;
+      packingStore.reorderCategories(draggedCatId.value, targetId);
     }
   }
 }
 
 function handleTouchEnd() {
-  draggedCatId.value = null
-  lastTargetId = null
+  draggedCatId.value = null;
+  lastTargetId = null;
 }
 
 // 手機與平板折疊狀態（預設收合以釋放垂直空間，桌機版始終展開）
-const isWeightSettingsOpen = ref(false)
-// 減重黃金法則 Tooltip 顯示狀態（支援滑鼠懸停與平板觸控點擊）
-const isRulesTooltipOpen = ref(false)
+const isWeightSettingsOpen = ref(false);
+// 減重黃金法則 Modal 顯示狀態（平板與手機模式點擊開啟）
+const isRulesModalOpen = ref(false);
+const weightRulesTips = [
+  "嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背 7kg，超重是膝蓋與足底發炎的第一元兇。",
+  "善用「穿在身上」開關：登山鞋 (850g)、登山杖 (440g) 手持穿戴不計入背包負重。",
+  "水與食物不要背過多：朝聖路上村莊密集且有公共飲水泉（Fuente），帶 1L 水瓶隨走隨補即可。",
+  "三套衣物輪替原則：一套穿身上、一套備用換洗、一套晾乾中，羊毛材質抗臭效果最佳。",
+];
 
 // 彈窗狀態
-const isCustomModalOpen = ref(false)
-const isTipsModalOpen = ref(false)
-const currentTipsItem = ref<PackingItem | null>(null)
+const isCustomModalOpen = ref(false);
+const isTipsModalOpen = ref(false);
+const currentTipsItem = ref<PackingItem | null>(null);
 
 function handleShowTips(item: PackingItem) {
-  currentTipsItem.value = item
-  isTipsModalOpen.value = true
+  currentTipsItem.value = item;
+  isTipsModalOpen.value = true;
 }
 
-function handleAddCustomItem(item: Parameters<typeof packingStore.addCustomItem>[0]) {
-  packingStore.addCustomItem(item)
+function handleAddCustomItem(
+  item: Parameters<typeof packingStore.addCustomItem>[0],
+) {
+  packingStore.addCustomItem(item);
 }
 
 // 計算單一分類的已勾選總重 (克) 與項目數
 function getCategoryStats(catId: PackingCategory) {
-  const items = packingStore.getItemsByCategory(catId)
-  const checkedItems = items.filter((i) => i.isChecked)
-  const totalGrams = checkedItems.reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
+  const items = packingStore.getItemsByCategory(catId);
+  const checkedItems = items.filter((i) => i.isChecked);
+  const totalGrams = checkedItems.reduce(
+    (sum, i) => sum + i.unitWeightGrams * i.quantity,
+    0,
+  );
   return {
     itemCount: items.length,
     checkedCount: checkedItems.length,
     totalGrams,
-  }
+  };
 }
 
 // 二次確認對話框狀態控制
-const isResetModalOpen = ref(false)
+const isResetModalOpen = ref(false);
 
 function handleConfirmReset() {
-  packingStore.resetToDefaults()
-  isResetModalOpen.value = false
+  packingStore.resetToDefaults();
+  isResetModalOpen.value = false;
 }
 </script>
 
@@ -243,7 +269,9 @@ function handleConfirmReset() {
   <div class="container mx-auto px-4 py-6 max-w-7xl mt-2">
     <!-- 頂部標題區 -->
     <div class="mb-2 sm:mb-6 flex items-center justify-between gap-3">
-      <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2">
+      <h2
+        class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2"
+      >
         朝聖之路行李打包清單
       </h2>
 
@@ -274,7 +302,9 @@ function handleConfirmReset() {
       <!-- 左欄：Sticky 負重儀表板、減重法則與廣告 (lg: 4 欄) -->
       <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
         <!-- 負重儀表板卡片 (獨佔整行) -->
-        <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div
+          class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between"
+        >
           <div>
             <!-- 標題列：手機與平板支援點擊整列切換折疊（桌機直接展開） -->
             <div
@@ -286,202 +316,230 @@ function handleConfirmReset() {
                   體重與 10% 負重警戒線
                 </h3>
 
-                <!-- 減重黃金法則符號按鈕與 Tooltip (僅在平板與手機模式顯示) -->
-                <div
-                  class="relative inline-flex items-center lg:hidden"
-                  @mouseenter="isRulesTooltipOpen = true"
-                  @mouseleave="isRulesTooltipOpen = false"
+                <!-- 減重黃金法則符號按鈕 (僅在平板與手機模式顯示，點擊開啟 Modal) -->
+                <button
+                  type="button"
+                  @click.stop="isRulesModalOpen = true"
+                  class="lg:hidden p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
+                  title="朝聖裝備減重黃金法則"
+                  aria-label="查看朝聖裝備減重黃金法則"
                 >
-                  <button
-                    type="button"
-                    @click.stop="isRulesTooltipOpen = !isRulesTooltipOpen"
-                    class="p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-help flex items-center"
-                    title="朝聖裝備減重黃金法則"
-                    aria-label="查看朝聖裝備減重黃金法則"
-                  >
-                    <MessageCircleWarning class="w-4 h-4" />
-                  </button>
+                  <MessageCircleWarning class="w-4 h-4" />
+                </button>
+              </div>
 
-                  <!-- 浮動 Tooltip 內容框 -->
-                  <div
-                    v-show="isRulesTooltipOpen"
-                    class="absolute left-0 sm:left-auto top-full mt-2 w-72 sm:w-80 p-4 bg-white rounded-xl shadow-xl border border-slate-200 z-50 text-left text-xs"
-                    @click.stop
+              <div class="flex items-center gap-2">
+                <!-- 手機與平板折疊按鈕（桌機隱藏） -->
+                <button
+                  type="button"
+                  class="lg:hidden p-1 text-slate-500 hover:text-slate-700 transition"
+                  :aria-expanded="isWeightSettingsOpen"
+                  aria-label="切換負重設定展開收合"
+                >
+                  <ChevronDown
+                    class="w-4 h-4 transition-transform duration-200"
+                    :class="{ 'rotate-180': isWeightSettingsOpen }"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <!-- 手機與平板收合時呈現的精簡摘要列（桌機版隱藏） -->
+            <div
+              v-if="!isWeightSettingsOpen"
+              @click="isWeightSettingsOpen = true"
+              class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
+            >
+              <div class="flex items-center gap-1.5">
+                <span class="text-slate-400">體重</span>
+                <span class="font-bold text-slate-800 font-mono"
+                  >{{ packingStore.bodyWeightKg }}kg</span
+                >
+                <span class="text-slate-300">·</span>
+                <span class="text-slate-400">淨負重</span>
+                <span
+                  class="font-bold font-mono"
+                  :class="
+                    packingStore.isOverweight
+                      ? 'text-rose-600'
+                      : 'text-slate-800'
+                  "
+                >
+                  {{ packingStore.backpackWeightKg }}kg
+                </span>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span
+                  class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium"
+                  :class="
+                    packingStore.isOverweight
+                      ? 'bg-rose-100 text-rose-700'
+                      : 'bg-emerald-100 text-emerald-700'
+                  "
+                >
+                  {{ packingStore.isOverweight ? "超標" : "合格" }} ({{
+                    packingStore.weightPercentage
+                  }}%)
+                </span>
+              </div>
+            </div>
+
+            <!-- 可折疊內容區塊：手機與平板依 isWeightSettingsOpen 顯示/隱藏，桌機永遠顯示（lg:block） -->
+            <div
+              class="space-y-4 mt-4"
+              :class="isWeightSettingsOpen ? 'block' : 'hidden lg:block'"
+            >
+              <!-- 體重輸入框 -->
+              <div class="rounded-xl flex items-center justify-between">
+                <label class="text-sm text-slate-500">你的體重 (kg)</label>
+                <div class="flex items-center gap-1.5">
+                  <input
+                    v-model.number="packingStore.bodyWeightKg"
+                    type="number"
+                    min="20"
+                    max="150"
+                    step="0.5"
+                    class="w-20 rounded-lg border border-slate-200 bg-white px-0 py-1 text-center font-mono text-base text-slate-900 focus:border-amber-500 focus:outline-hidden [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                  />
+                  <span class="text-xs text-slate-500">kg</span>
+                </div>
+              </div>
+
+              <!-- 負重進度條儀表 -->
+              <div class="space-y-2">
+                <div class="flex items-baseline justify-between text-xs">
+                  <span class="text-slate-500 text-sm"
+                    >背包淨負重 (不含身上穿戴):</span
                   >
-                    <div class="font-bold text-slate-900 flex items-center gap-1.5 mb-2 pb-1.5 border-b border-slate-100 text-sm">
-                      <Sparkles class="w-4 h-4 text-amber-500" />
-                      <span>朝聖裝備減重黃金法則</span>
-                    </div>
-                    <ul class="space-y-2 text-slate-600 leading-relaxed font-normal">
-                      <li class="flex items-start gap-1.5">
-                        <span class="text-amber-500 font-bold">•</span>
-                        <span>嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背 7kg，超重是膝蓋與足底發炎的第一元兇。</span>
-                      </li>
-                      <li class="flex items-start gap-1.5">
-                        <span class="text-amber-500 font-bold">•</span>
-                        <span>善用「穿在身上」開關：登山鞋 (850g)、登山杖 (440g) 手持穿戴不計入背包負重。</span>
-                      </li>
-                      <li class="flex items-start gap-1.5">
-                        <span class="text-amber-500 font-bold">•</span>
-                        <span>水與食物不要背過多：朝聖路上村莊密集且有公共飲水泉（Fuente），帶 1L 水瓶隨走隨補即可。</span>
-                      </li>
-                      <li class="flex items-start gap-1.5">
-                        <span class="text-amber-500 font-bold">•</span>
-                        <span>三套衣物輪替原則：一套穿身上、一套備用換洗、一套晾乾中，羊毛材質抗臭效果最佳。</span>
-                      </li>
-                    </ul>
+                  <span
+                    class="font-mono text-base"
+                    :class="
+                      packingStore.isOverweight
+                        ? 'text-rose-600'
+                        : 'text-slate-900'
+                    "
+                  >
+                    {{ packingStore.backpackWeightKg }}
+                    <span class="text-xs font-normal">kg</span>
+                  </span>
+                </div>
+
+                <!-- 進度條軌道 -->
+                <div
+                  class="h-3 w-full overflow-hidden rounded-full bg-slate-100 p-0.5"
+                >
+                  <div
+                    class="h-full rounded-full transition-all duration-300"
+                    :class="[
+                      packingStore.isOverweight
+                        ? 'bg-rose-300'
+                        : packingStore.weightPercentage >= 9.0
+                          ? 'bg-amber-300'
+                          : 'bg-emerald-500',
+                    ]"
+                    :style="{
+                      width: `${Math.min(100, (packingStore.weightPercentage / 10) * 100)}%`,
+                    }"
+                  />
+                </div>
+
+                <div class="flex justify-between text-[11px] text-slate-500">
+                  <span>目前佔體重 {{ packingStore.weightPercentage }}%</span>
+                  <span
+                    >10% 警戒上限:
+                    {{ packingStore.maxRecommendedWeightKg }} kg</span
+                  >
+                </div>
+              </div>
+
+              <!-- 狀態提示框 -->
+              <div
+                :class="[
+                  'flex items-start gap-2.5 rounded-xl p-3.5 text-xs',
+                  packingStore.isOverweight
+                    ? 'bg-rose-50 text-rose-900 border border-rose-200'
+                    : 'bg-emerald-50 text-emerald-900 border border-emerald-200',
+                ]"
+              >
+                <AlertOctagon
+                  v-if="packingStore.isOverweight"
+                  class="h-4 w-4 shrink-0 text-rose-600 mt-0.5"
+                />
+                <ShieldCheck
+                  v-else
+                  class="h-4 w-4 shrink-0 text-emerald-800 mt-0.5"
+                />
+                <div>
+                  <div class="font-medium text-sm">
+                    {{
+                      packingStore.isOverweight
+                        ? "⚠️ 負重已超標！"
+                        : "🟢 負重合格安全！"
+                    }}
+                  </div>
+                  <div
+                    class="mt-0.5 text-[11px] leading-relaxed opacity-90 font-normal"
+                    v-if="packingStore.isOverweight"
+                  >
+                    {{
+                      `已超過體重 10% (+${(packingStore.backpackWeightKg - packingStore.maxRecommendedWeightKg).toFixed(2)}kg)，強烈建議精簡非必備品！`
+                    }}
                   </div>
                 </div>
               </div>
 
-                <div class="flex items-center gap-2">
-                  <!-- 手機與平板折疊按鈕（桌機隱藏） -->
-                  <button
-                    type="button"
-                    class="lg:hidden p-1 text-slate-500 hover:text-slate-700 transition"
-                    :aria-expanded="isWeightSettingsOpen"
-                    aria-label="切換負重設定展開收合"
-                  >
-                    <ChevronDown
-                      class="w-4 h-4 transition-transform duration-200"
-                      :class="{ 'rotate-180': isWeightSettingsOpen }"
-                    />
-                  </button>
-                </div>
-              </div>
-
-              <!-- 手機與平板收合時呈現的精簡摘要列（桌機版隱藏） -->
+              <!-- 身上穿戴總重統計 -->
               <div
-                v-if="!isWeightSettingsOpen"
-                @click="isWeightSettingsOpen = true"
-                class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
+                class="rounded-xlb text-xs flex items-center justify-between"
               >
-                <div class="flex items-center gap-1.5">
-                  <span class="text-slate-400">體重</span>
-                  <span class="font-bold text-slate-800 font-mono">{{ packingStore.bodyWeightKg }}kg</span>
-                  <span class="text-slate-300">·</span>
-                  <span class="text-slate-400">淨負重</span>
-                  <span class="font-bold font-mono" :class="packingStore.isOverweight ? 'text-rose-600' : 'text-slate-800'">
-                    {{ packingStore.backpackWeightKg }}kg
-                  </span>
+                <div class="font-normal text-sm text-slate-500">
+                  當天穿在身上衣物重量
                 </div>
-                <div class="flex items-center gap-1.5 shrink-0">
-                  <span
-                    class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium"
-                    :class="packingStore.isOverweight ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'"
-                  >
-                    {{ packingStore.isOverweight ? '超標' : '合格' }} ({{ packingStore.weightPercentage }}%)
-                  </span>
+                <div class="font-mono font-medium text-slate-500 text-sm">
+                  {{ packingStore.wornWeightKg }} kg
                 </div>
-              </div>
-
-              <!-- 可折疊內容區塊：手機與平板依 isWeightSettingsOpen 顯示/隱藏，桌機永遠顯示（lg:block） -->
-              <div
-                class="space-y-4 mt-4"
-                :class="isWeightSettingsOpen ? 'block' : 'hidden lg:block'"
-              >
-            <!-- 體重輸入框 -->
-            <div class="rounded-xl flex items-center justify-between">
-              <label class="text-sm text-slate-500">你的體重 (kg)</label>
-              <div class="flex items-center gap-1.5">
-                <input
-                  v-model.number="packingStore.bodyWeightKg"
-                  type="number"
-                  min="20"
-                  max="150"
-                  step="0.5"
-                  class="w-20 rounded-lg border border-slate-200 bg-white px-0 py-1 text-center font-mono text-base text-slate-900 focus:border-amber-500 focus:outline-hidden [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                />
-                <span class="text-xs text-slate-500">kg</span>
-              </div>
-            </div>
-
-            <!-- 負重進度條儀表 -->
-            <div class="space-y-2">
-              <div class="flex items-baseline justify-between text-xs">
-                <span class="text-slate-500 text-sm">背包淨負重 (不含身上穿戴):</span>
-                <span class="font-mono text-base" :class="packingStore.isOverweight ? 'text-rose-600' : 'text-slate-900'">
-                  {{ packingStore.backpackWeightKg }} <span class="text-xs font-normal">kg</span>
-                </span>
-              </div>
-
-              <!-- 進度條軌道 -->
-              <div class="h-3 w-full overflow-hidden rounded-full bg-slate-100 p-0.5">
-                <div
-                  class="h-full rounded-full transition-all duration-300"
-                  :class="[
-                    packingStore.isOverweight
-                      ? 'bg-rose-300'
-                      : packingStore.weightPercentage >= 9.0
-                        ? 'bg-amber-300'
-                        : 'bg-emerald-500',
-                  ]"
-                  :style="{ width: `${Math.min(100, (packingStore.weightPercentage / 10) * 100)}%` }"
-                />
-              </div>
-
-              <div class="flex justify-between text-[11px] text-slate-500">
-                <span>目前佔體重 {{ packingStore.weightPercentage }}%</span>
-                <span>10% 警戒上限: {{ packingStore.maxRecommendedWeightKg }} kg</span>
-              </div>
-            </div>
-
-            <!-- 狀態提示框 -->
-            <div
-              :class="[
-                'flex items-start gap-2.5 rounded-xl p-3.5 text-xs',
-                packingStore.isOverweight
-                  ? 'bg-rose-50 text-rose-900 border border-rose-200'
-                  : 'bg-emerald-50 text-emerald-900 border border-emerald-200',
-              ]"
-            >
-              <AlertOctagon v-if="packingStore.isOverweight" class="h-4 w-4 shrink-0 text-rose-600 mt-0.5" />
-              <ShieldCheck v-else class="h-4 w-4 shrink-0 text-emerald-800 mt-0.5" />
-              <div>
-                <div class="font-medium text-sm">
-                  {{ packingStore.isOverweight ? '⚠️ 負重已超標！' : '🟢 負重合格安全！' }}
-                </div>
-                <div class="mt-0.5 text-[11px] leading-relaxed opacity-90 font-normal" v-if="packingStore.isOverweight">
-                  {{
-                     `已超過體重 10% (+${(packingStore.backpackWeightKg - packingStore.maxRecommendedWeightKg).toFixed(2)}kg)，強烈建議精簡非必備品！`
-                  }}
-                </div>
-              </div>
-            </div>
-
-            <!-- 身上穿戴總重統計 -->
-            <div class="rounded-xlb text-xs flex items-center justify-between">
-              <div class="font-normal text-sm text-slate-500">當天穿在身上衣物重量</div>
-              <div class="font-mono font-medium text-slate-500 text-sm">
-                {{ packingStore.wornWeightKg }} kg
               </div>
             </div>
           </div>
         </div>
-      </div>
 
         <!-- 電腦模式 (lg:) 下顯示之朝聖裝備減重黃金法則實體卡片 -->
-        <div class="hidden lg:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+        <div
+          class="hidden lg:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
+        >
           <h3 class="flex items-center gap-2 text-sm text-slate-900 font-bold">
             <Sparkles class="h-4 w-4 text-amber-500" />
             <span class="text-base">朝聖裝備減重黃金法則</span>
           </h3>
-          <ul class="mt-3 space-y-2.5 text-sm text-slate-600 leading-relaxed font-normal">
+          <ul
+            class="mt-3 space-y-2.5 text-sm text-slate-600 leading-relaxed font-normal"
+          >
             <li class="flex items-start gap-2">
               <span class="text-amber-500 font-bold">•</span>
-              <span>嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背 7kg，超重是膝蓋與足底發炎的第一元兇。</span>
+              <span
+                >嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背
+                7kg，超重是膝蓋與足底發炎的第一元兇。</span
+              >
             </li>
             <li class="flex items-start gap-2">
               <span class="text-amber-500 font-bold">•</span>
-              <span>善用「穿在身上」開關：登山鞋 (850g)、登山杖 (440g) 手持穿戴不計入背包負重。</span>
+              <span
+                >善用「穿在身上」開關：登山鞋 (850g)、登山杖 (440g)
+                手持穿戴不計入背包負重。</span
+              >
             </li>
             <li class="flex items-start gap-2">
               <span class="text-amber-500 font-bold">•</span>
-              <span>水與食物不要背過多：朝聖路上村莊密集且有公共飲水泉（Fuente），帶 1L 水瓶隨走隨補即可。</span>
+              <span
+                >水與食物不要背過多：朝聖路上村莊密集且有公共飲水泉（Fuente），帶
+                1L 水瓶隨走隨補即可。</span
+              >
             </li>
             <li class="flex items-start gap-2">
               <span class="text-amber-500 font-bold">•</span>
-              <span>三套衣物輪替原則：一套穿身上、一套備用換洗、一套晾乾中，羊毛材質抗臭效果最佳。</span>
+              <span
+                >三套衣物輪替原則：一套穿身上、一套備用換洗、一套晾乾中，羊毛材質抗臭效果最佳。</span
+              >
             </li>
           </ul>
         </div>
@@ -493,7 +551,9 @@ function handleConfirmReset() {
       <!-- 右欄：頂部分類標籤開關 + 瀑布流分類卡片 (lg: 8 欄) -->
       <div class="lg:col-span-8 space-y-4">
         <!-- 頂部分類 Chips 快速開關列 -->
-        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-2.5">
+        <div
+          class="rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-2.5"
+        >
           <div class="flex items-center justify-between">
             <span class="text-sm font-medium text-slate-800">裝備分類篩選</span>
             <button
@@ -554,13 +614,16 @@ function handleConfirmReset() {
               collapsedCategories[cat.id] ? 'shadow-xs' : 'space-y-3 shadow-xs',
               draggedCatId === cat.id
                 ? 'opacity-40 scale-[0.98] border-amber-300'
-                : 'opacity-100 scale-100 border-slate-200'
+                : 'opacity-100 scale-100 border-slate-200',
             ]"
           >
             <!-- 分類標頭（點擊切換展開/收合） -->
             <div
               class="flex items-center justify-between cursor-pointer select-none"
-              :class="{ 'border-b border-slate-100 pb-2.5': !collapsedCategories[cat.id] }"
+              :class="{
+                'border-b border-slate-100 pb-2.5':
+                  !collapsedCategories[cat.id],
+              }"
               @click="toggleCategoryCollapse(cat.id)"
             >
               <div class="flex items-center gap-1.5">
@@ -575,7 +638,9 @@ function handleConfirmReset() {
                 >
                   <GripVertical class="h-4 w-4" />
                 </div>
-                <h4 class="text-md font-medium text-slate-900">{{ cat.label }}</h4>
+                <h4 class="text-md font-medium text-slate-900">
+                  {{ cat.label }}
+                </h4>
                 <ChevronDown
                   class="h-4 w-4 text-slate-400 transition-transform duration-200"
                   :class="{ '-rotate-90': collapsedCategories[cat.id] }"
@@ -584,13 +649,24 @@ function handleConfirmReset() {
 
               <div class="flex items-center gap-2">
                 <span class="text-[11px] text-slate-400 font-mono">
-                  {{ getCategoryStats(cat.id).checkedCount }}/{{ getCategoryStats(cat.id).itemCount }} 項 · {{ getCategoryStats(cat.id).totalGrams }}g
+                  {{ getCategoryStats(cat.id).checkedCount }}/{{
+                    getCategoryStats(cat.id).itemCount
+                  }}
+                  項 · {{ getCategoryStats(cat.id).totalGrams }}g
                 </span>
                 <button
                   type="button"
                   class="rounded-md p-1 text-slate-300 hover:bg-slate-100 hover:text-slate-600 cursor-pointer"
-                  :title="officialCategoryIds.has(cat.id) ? '從本次清單排除此分類' : '刪除此自訂分類與所屬裝備'"
-                  @click.stop="officialCategoryIds.has(cat.id) ? promptRemoveCategory(cat) : promptDeleteCategory(cat.id)"
+                  :title="
+                    officialCategoryIds.has(cat.id)
+                      ? '從本次清單排除此分類'
+                      : '刪除此自訂分類與所屬裝備'
+                  "
+                  @click.stop="
+                    officialCategoryIds.has(cat.id)
+                      ? promptRemoveCategory(cat)
+                      : promptDeleteCategory(cat.id)
+                  "
                 >
                   <X class="h-4 w-4" />
                 </button>
@@ -656,7 +732,8 @@ function handleConfirmReset() {
     >
       <p>確定要刪除「{{ categoryToDelete }}」分類嗎？</p>
       <p class="mt-1 text-slate-500">
-        該分類底下的所有自訂裝備（共 {{ categoryToDeleteItemCount }} 項）將一併移除且無法復原。
+        該分類底下的所有自訂裝備（共
+        {{ categoryToDeleteItemCount }} 項）將一併移除且無法復原。
       </p>
     </ConfirmModal>
 
@@ -672,5 +749,13 @@ function handleConfirmReset() {
       <p>確定要將所有裝備勾選、實測重量與自訂項目還原為官方預設清單嗎？</p>
       <p class="mt-1 text-slate-500">此動作將清空所有自訂設定且無法復原。</p>
     </ConfirmModal>
+
+    <!-- 減重黃金法則對話框 (手機與平板) -->
+    <TipsModal
+      :is-open="isRulesModalOpen"
+      title="朝聖裝備減重黃金法則"
+      :tips="weightRulesTips"
+      @close="isRulesModalOpen = false"
+    />
   </div>
 </template>
