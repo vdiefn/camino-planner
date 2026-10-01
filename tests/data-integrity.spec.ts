@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { waypoints, packingItems, transportRoutes, accommodations } from '../src/data'
+import { buildGlobalWaypointMap } from '../src/data/routes'
 import type { PackingCategory } from '../src/types/camino'
 
 describe('Camino Francés 靜態資料完整性與防呆檢驗', () => {
@@ -155,10 +156,10 @@ describe('Camino Francés 靜態資料完整性與防呆檢驗', () => {
   // --- 5. 庇護所住宿檢驗 ---
   describe('庇護所住宿 (Accommodations)', () => {
     it('所有住宿點的 waypointId 必須能對應到現有的城鎮航點', () => {
-      const waypointIds = new Set(waypoints.map((w) => w.id))
+      const globalWaypointMap = buildGlobalWaypointMap()
       expect(accommodations.length).toBeGreaterThan(0)
       accommodations.forEach((acc) => {
-        expect(waypointIds.has(acc.waypointId)).toBe(true)
+        expect(globalWaypointMap.has(acc.waypointId)).toBe(true)
       })
     })
 

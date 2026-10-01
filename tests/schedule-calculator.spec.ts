@@ -8,7 +8,7 @@ import {
   removeRestDay,
   updateStageEndWaypoint,
 } from '../src/utils/scheduleCalculator'
-import { waypoints } from '../src/data/waypoints'
+import { francesWaypoints as waypoints } from '../src/data/routes/frances'
 import type { UserPlanConfig } from '../src/types/camino'
 
 describe('排程運算核心引擎單元測試 (Schedule Calculator Engine)', () => {
