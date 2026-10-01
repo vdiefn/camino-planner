@@ -3,7 +3,8 @@ import { ref, computed } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { X, MapPin } from 'lucide-vue-next'
 import type { UserStage, Waypoint } from '@/types/camino'
-import { waypoints } from '@/data/waypoints'
+import { useScheduleStore } from '@/stores/schedule'
+import { getFinisterreWaypoints } from '@/data/routes/finisterre'
 import { calculateSegmentStats } from '@/utils/scheduleCalculator'
 
 const props = defineProps<{
@@ -16,21 +17,32 @@ const emit = defineEmits<{
   (e: 'confirm', dayIndex: number, newWaypointId: string): void
 }>()
 
+const scheduleStore = useScheduleStore()
 const selectedWaypointId = ref<string>('')
+
+// 當前可選航點來源（延伸段與主線嚴格隔離）
+const activeWaypointsList = computed<Waypoint[]>(() => {
+  if (!props.stage) return []
+  if (props.stage.isExtensionStage) {
+    return getFinisterreWaypoints(scheduleStore.currentDraft.finisterreOption)
+  }
+  return scheduleStore.currentMainWaypoints
+})
 
 // 取得起始點之後的有效推薦城鎮清單（避免選取起點之前的城鎮）
 const candidateWaypoints = computed(() => {
   if (!props.stage) return []
-  const startIdx = waypoints.findIndex(w => w.id === props.stage!.startWaypointId)
+  const wps = activeWaypointsList.value
+  const startIdx = wps.findIndex((w) => w.id === props.stage!.startWaypointId)
   if (startIdx === -1) return []
 
   // 顯示起始點之後的城鎮（最多後續 8 個城鎮供現場調配）
-  return waypoints.slice(startIdx + 1, Math.min(startIdx + 9, waypoints.length))
+  return wps.slice(startIdx + 1, Math.min(startIdx + 9, wps.length))
 })
 
 const startWaypoint = computed<Waypoint | undefined>(() => {
   if (!props.stage) return undefined
-  return waypoints.find(w => w.id === props.stage!.startWaypointId)
+  return scheduleStore.getWaypoint(props.stage.startWaypointId)
 })
 
 // 計算從今日起點至該候選地點的當日行走公里數
@@ -40,7 +52,7 @@ const getStageDistance = (wp: Waypoint): string => {
     props.stage.startWaypointId,
     wp.id,
     props.stage.routeVariant,
-    waypoints
+    activeWaypointsList.value,
   )
   return stats.distanceKm.toFixed(1)
 }

@@ -10,7 +10,7 @@ import {
   AlertTriangle
 } from 'lucide-vue-next'
 import type { UserStage, Waypoint } from '@/types/camino'
-import { waypoints } from '@/data/waypoints'
+import { useScheduleStore } from '@/stores/schedule'
 
 const props = defineProps<{
   stage: UserStage
@@ -24,13 +24,15 @@ const emit = defineEmits<{
   (e: 'toggle-rest', dayIndex: number): void
 }>()
 
-// 航點查找
+const scheduleStore = useScheduleStore()
+
+// 航點查找（改吃 Store 全域查找字典，支援多路線與世界盡頭）
 const startWaypoint = computed<Waypoint | undefined>(() => {
-  return waypoints.find(w => w.id === props.stage.startWaypointId)
+  return scheduleStore.getWaypoint(props.stage.startWaypointId)
 })
 
 const endWaypoint = computed<Waypoint | undefined>(() => {
-  return waypoints.find(w => w.id === props.stage.endWaypointId)
+  return scheduleStore.getWaypoint(props.stage.endWaypointId)
 })
 
 // 日期格式化 (MM/DD 星期幾)
@@ -68,7 +70,9 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
     :class="[
       stage.isRestDay
         ? 'border-purple-300'
-        : 'border-slate-200 hover:border-slate-400'
+        : stage.isExtensionStage
+          ? 'border-sky-300 bg-sky-50/15'
+          : 'border-slate-200 hover:border-slate-400'
     ]"
   >
     <!-- 電腦版視圖 (md 及以上：直接完整展開) -->
@@ -81,7 +85,9 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             :class="[
               stage.isRestDay
                 ? 'border-2 border-purple-300'
-                : 'border-2 border-orange-300'
+                : stage.isExtensionStage
+                  ? 'border-2 border-sky-400 bg-sky-50/40'
+                  : 'border-2 border-orange-300'
             ]"
           >
             <span class="text-xs font-normal text-slate-700">DAY</span>
@@ -98,6 +104,18 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                 class="px-2 py-0.5 rounded-full text-xs font-normal bg-purple-100 text-purple-800"
               >
                 休息停留日
+              </span>
+              <span
+                v-if="stage.isExtensionStage && !stage.isRestDay"
+                class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-800"
+              >
+                🌊 世界盡頭延伸
+              </span>
+              <span
+                v-if="!stage.isRestDay && (stage.endWaypointId === 'SANTIAGO_DE_COMPOSTELA' || stage.endWaypointId.endsWith(':santiago'))"
+                class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800"
+              >
+                🎉 朝聖主線終點
               </span>
             </div>
 
@@ -211,7 +229,9 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
               :class="[
                 stage.isRestDay
                   ? 'border-2 border-purple-300'
-                  : 'border-2 border-orange-300'
+                  : stage.isExtensionStage
+                    ? 'border-2 border-sky-400 bg-sky-50'
+                    : 'border-2 border-orange-300'
               ]"
             >
               <span class="font-medium">D{{ stage.dayIndex }}</span>
@@ -220,6 +240,18 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="text-xs text-slate-700 font-normal">
                   {{ formattedDate }}
+                </span>
+                <span
+                  v-if="stage.isExtensionStage && !stage.isRestDay"
+                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-sky-100 text-sky-800"
+                >
+                  延伸
+                </span>
+                <span
+                  v-if="!stage.isRestDay && (stage.endWaypointId === 'SANTIAGO_DE_COMPOSTELA' || stage.endWaypointId.endsWith(':santiago'))"
+                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-800"
+                >
+                  主線終點
                 </span>
                 <span
                   v-if="endWaypoint?.isMajorCity"

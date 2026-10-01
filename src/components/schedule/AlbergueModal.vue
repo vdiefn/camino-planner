@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { X, BedDouble, ExternalLink, Phone, MessageSquare } from 'lucide-vue-next'
 import type { UserStage, Waypoint } from '@/types/camino'
-import { waypoints } from '@/data/waypoints'
+import { useScheduleStore } from '@/stores/schedule'
 import { accommodations } from '@/data/accommodations'
 
 const props = defineProps<{
@@ -15,10 +15,12 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-// 取得該分段結束城鎮
+const scheduleStore = useScheduleStore()
+
+// 取得該分段結束城鎮（向 Store 集中查找）
 const endWaypoint = computed<Waypoint | undefined>(() => {
   if (!props.stage) return undefined
-  return waypoints.find(w => w.id === props.stage!.endWaypointId)
+  return scheduleStore.getWaypoint(props.stage.endWaypointId)
 })
 
 // 取得該分段結束城鎮的所有庇護所
@@ -97,12 +99,21 @@ const localAlbergues = computed(() => {
                   </p>
                   <div class="flex items-center justify-center gap-2 flex-wrap text-xs">
                     <a
-                      :href="`https://www.google.com/maps/search/alojamiento+hotel+albergue+${endWaypoint?.spanishName || ''}`"
+                      :href="`https://www.gronze.com/buscar?search_api_views_fulltext=${encodeURIComponent(endWaypoint?.localName || endWaypoint?.spanishName || '')}`"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100 transition shadow-xs flex items-center gap-1.5"
+                    >
+                      <ExternalLink class="w-3.5 h-3.5 text-amber-600" />
+                      Gronze 權威住宿查驗
+                    </a>
+                    <a
+                      :href="`https://www.google.com/maps/search/alojamiento+hotel+albergue+${encodeURIComponent(endWaypoint?.spanishName || endWaypoint?.localName || '')}`"
                       target="_blank"
                       rel="noopener noreferrer"
                       class="px-3 py-1.5 rounded-lg bg-white text-slate-800 border border-slate-300 hover:bg-slate-100 transition shadow-xs flex items-center gap-1.5"
                     >
-                      <ExternalLink class="w-3.5 h-3.5 text-amber-600" />
+                      <ExternalLink class="w-3.5 h-3.5 text-slate-600" />
                       開啟 Google 地圖搜尋
                     </a>
                   </div>
