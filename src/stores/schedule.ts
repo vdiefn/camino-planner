@@ -1,84 +1,343 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { UserPlanConfig, UserStage } from '@/types/camino'
-import { waypoints } from '@/data/waypoints'
+import type { UserPlanConfig, UserStage, Waypoint } from '@/types/camino'
+import type { RouteId, RouteScheduleDraft, FinisterreOption } from '@/types/route'
+import {
+  AVAILABLE_ROUTES,
+  getRouteMetadata,
+  getRouteWaypoints,
+  getCombinedRouteWaypoints,
+  buildGlobalWaypointMap,
+  getEffectiveRouteMetadata,
+  getRouteTotalDistance,
+} from '@/data/routes'
 import {
   generateInitialStages,
+  generateFinisterreStages,
   insertRestDay as insertRestDayIntoStages,
   removeRestDay as removeRestDayFromStages,
   updateStageEndWaypoint as updateStageEndWaypointInStages,
   isWinterClosure,
 } from '@/utils/scheduleCalculator'
 
+/**
+ * 預設各路線之獨立初始草稿
+ */
+function createDefaultDrafts(todayStr: string): Record<RouteId, RouteScheduleDraft> {
+  return {
+    frances: {
+      routeId: 'frances',
+      branchId: 'napoleon',
+      startWaypointId: 'SJPP',
+      endWaypointId: 'SANTIAGO_DE_COMPOSTELA',
+      startDate: todayStr,
+      targetDays: 33,
+      dailyKmQuota: 23.5,
+      restDays: [],
+      finisterreOption: 'NONE',
+      santiagoLayoverDays: 0,
+      updatedAt: new Date().toISOString(),
+    },
+    portugues: {
+      routeId: 'portugues',
+      branchId: 'central',
+      startWaypointId: 'portugues:porto',
+      endWaypointId: 'portugues:santiago',
+      startDate: todayStr,
+      targetDays: 11,
+      dailyKmQuota: 21.8,
+      restDays: [],
+      finisterreOption: 'NONE',
+      santiagoLayoverDays: 0,
+      updatedAt: new Date().toISOString(),
+    },
+    norte: {
+      routeId: 'norte',
+      startWaypointId: 'norte:irun',
+      endWaypointId: 'norte:santiago',
+      startDate: todayStr,
+      targetDays: 35,
+      dailyKmQuota: 23.6,
+      restDays: [],
+      finisterreOption: 'NONE',
+      santiagoLayoverDays: 0,
+      updatedAt: new Date().toISOString(),
+    },
+  }
+}
+
+/**
+ * 純驗證與安全清洗函式：驗證草稿起訖點是否合法且依序，若不合法則修復為官方預設值
+ */
+function sanitizeDraft(draft: RouteScheduleDraft, routeId: RouteId): RouteScheduleDraft {
+  const meta = getRouteMetadata(routeId)
+  const defaultStart = meta?.defaultStartWaypointId || 'SJPP'
+  const defaultEnd = meta?.defaultEndWaypointId || 'SANTIAGO_DE_COMPOSTELA'
+  const wps = getRouteWaypoints(routeId, draft.branchId)
+
+  const startWp = wps.find((w) => w.id === draft.startWaypointId)
+  const endWp = wps.find((w) => w.id === draft.endWaypointId)
+
+  // 驗證起訖點是否存在，且起點里程必須嚴格小於終點里程
+  const isStartValid = Boolean(startWp)
+  const isEndValid = Boolean(endWp)
+  const isOrderValid = isStartValid && isEndValid && startWp!.cumulativeKm < endWp!.cumulativeKm
+
+  if (!isStartValid || !isEndValid || !isOrderValid) {
+    draft.startWaypointId = defaultStart
+    draft.endWaypointId = defaultEnd
+  }
+
+  return draft
+}
+
 export const useScheduleStore = defineStore(
   'schedule',
   () => {
-    // 1. 使用者排程配置
-    const config = ref<UserPlanConfig>({
-      startDate: new Date().toISOString().split('T')[0],
-      startWaypointId: 'SJPP',
-      endWaypointId: 'SANTIAGO_DE_COMPOSTELA',
-      targetDays: 33,
-      restDays: 0,
-      dailyTargetKm: 23.5,
-      bodyWeightKg: 60,
-      day1RouteVariant: 'NAPOLEON',
+    const todayStr = new Date().toISOString().split('T')[0]
+
+    // 1. 版本控制與當前啟用路線
+    const version = ref<number>(2)
+    const currentRouteId = ref<RouteId>('frances')
+
+    // 2. 多路線獨立草稿字典 (Multi-Drafts)
+    const drafts = ref<Record<RouteId, RouteScheduleDraft>>(createDefaultDrafts(todayStr))
+
+    // 3. 各路線目前計算出之主線分段快取
+    const mainStages = ref<Record<RouteId, UserStage[]>>({
+      frances: [],
+      portugues: [],
+      norte: [],
     })
 
-    // 2. 每日分段資料清單
-    const stages = ref<UserStage[]>([])
+    // 全域航點快取字典 (O(1) 效能)
+    const globalWaypointMap = buildGlobalWaypointMap()
+
+    function getWaypoint(id: string): Waypoint | undefined {
+      return globalWaypointMap.get(id)
+    }
+
+    // 當前路線草稿
+    const currentDraft = computed<RouteScheduleDraft>(() => {
+      const active = drafts.value[currentRouteId.value]
+      if (!active) {
+        drafts.value[currentRouteId.value] = createDefaultDrafts(todayStr)[currentRouteId.value]
+      }
+      return drafts.value[currentRouteId.value]
+    })
+
+    // 向下相容 config 代理物件（使既有 View 與測試無痛存取）
+    const config = computed<UserPlanConfig>({
+      get: () => ({
+        startDate: currentDraft.value.startDate,
+        startWaypointId: currentDraft.value.startWaypointId,
+        endWaypointId: currentDraft.value.endWaypointId,
+        targetDays: currentDraft.value.targetDays,
+        restDays: currentDraft.value.restDays?.length || 0,
+        dailyTargetKm: currentDraft.value.dailyKmQuota,
+        bodyWeightKg: 60,
+        day1RouteVariant: (currentDraft.value as any).day1RouteVariant || 'NAPOLEON',
+      }),
+      set: (val: UserPlanConfig) => {
+        currentDraft.value.startDate = val.startDate
+        currentDraft.value.startWaypointId = val.startWaypointId
+        currentDraft.value.endWaypointId = val.endWaypointId
+        currentDraft.value.targetDays = val.targetDays
+        currentDraft.value.dailyKmQuota = val.dailyTargetKm
+        if (val.day1RouteVariant) {
+          ;(currentDraft.value as any).day1RouteVariant = val.day1RouteVariant
+        }
+      },
+    })
+
+    // 當前主線航點陣列
+    const currentMainWaypoints = computed<Waypoint[]>(() => {
+      return getRouteWaypoints(currentRouteId.value, currentDraft.value.branchId)
+    })
+
+    // 當前有效完整航點集合（含世界盡頭）
+    const currentWaypoints = computed<Waypoint[]>(() => {
+      return getCombinedRouteWaypoints(
+        currentRouteId.value,
+        currentDraft.value.branchId,
+        currentDraft.value.finisterreOption,
+      )
+    })
+
+    // 當前有效路線中繼資料（動態由航點計算長度，並適配分支建議天數）
+    const currentRouteMetadata = computed(() => {
+      return getEffectiveRouteMetadata(currentRouteId.value, currentDraft.value.branchId)
+    })
+
+    // 依據各路線草稿之分支動態取得顯示長度
+    function getRouteDisplayDistance(routeId: RouteId): number {
+      const draft = drafts.value[routeId]
+      return getRouteTotalDistance(routeId, draft?.branchId)
+    }
+
+    // 重新計算當前路線之主線行程
+    function calculateCurrentMainStages() {
+      sanitizeDraft(currentDraft.value, currentRouteId.value)
+      const draft = currentDraft.value
+      const wps = currentMainWaypoints.value
+      const cfg: UserPlanConfig = {
+        startDate: draft.startDate,
+        startWaypointId: draft.startWaypointId,
+        endWaypointId: draft.endWaypointId,
+        targetDays: draft.targetDays,
+        dailyTargetKm: draft.dailyKmQuota || 23.5,
+        restDays: draft.restDays?.length || 0,
+        bodyWeightKg: 60,
+        day1RouteVariant:
+          (draft as any).day1RouteVariant ||
+          (draft.branchId === 'valcarlos' ? 'VALCARLOS' : 'NAPOLEON'),
+      }
+      mainStages.value[currentRouteId.value] = generateInitialStages(cfg, wps)
+    }
 
     // 初始化排程
     function initSchedule() {
-      stages.value = generateInitialStages(config.value, waypoints)
+      calculateCurrentMainStages()
     }
 
-    // 依照當前使用者設定重新計算排程（不重設天數）
+    // 整合完整天數分段（主線分段 ＋ 世界盡頭分段，具備空資料自癒機制）
+    const stages = computed<UserStage[]>({
+      get: () => {
+        let curMain = mainStages.value[currentRouteId.value]
+        if (!curMain || curMain.length === 0) {
+          calculateCurrentMainStages()
+          curMain = mainStages.value[currentRouteId.value] || []
+        }
+        const option = currentDraft.value.finisterreOption || 'NONE'
+        if (option === 'NONE' || curMain.length === 0) {
+          return curMain
+        }
+        const lastMain = curMain[curMain.length - 1]
+        const layoverDays = currentDraft.value.santiagoLayoverDays || 0
+        const finStages = generateFinisterreStages(lastMain, option, layoverDays)
+        return [...curMain, ...finStages]
+      },
+      set: (newStages: UserStage[]) => {
+        // 分離主線段與延伸段
+        mainStages.value[currentRouteId.value] = newStages.filter((s) => !s.isExtensionStage)
+      },
+    })
+
+    // 切換主路線
+    function switchRoute(newRouteId: RouteId) {
+      if (currentRouteId.value === newRouteId) return
+      currentRouteId.value = newRouteId
+
+      // 切換路線時明確清洗草稿資料並重新演算
+      sanitizeDraft(currentDraft.value, newRouteId)
+      calculateCurrentMainStages()
+    }
+
+    // 切換路線分支 (例如法國之路的拿破崙 vs 瓦卡洛斯；葡萄牙之路的中央線 vs 海岸線)
+    function switchBranch(newBranchId: string) {
+      currentDraft.value.branchId = newBranchId
+
+      if (currentRouteId.value === 'frances') {
+        const variant = newBranchId === 'valcarlos' ? 'VALCARLOS' : 'NAPOLEON'
+        ;(currentDraft.value as any).day1RouteVariant = variant
+      }
+
+      sanitizeDraft(currentDraft.value, currentRouteId.value)
+
+      // 智慧天數聯動：取得新分支之建議天數與航點推導長度
+      const newMeta = getEffectiveRouteMetadata(currentRouteId.value, newBranchId)
+      if (newMeta?.recommendedDays) {
+        currentDraft.value.targetDays = newMeta.recommendedDays
+        currentDraft.value.dailyKmQuota = Number(
+          (newMeta.totalDistanceKm / newMeta.recommendedDays).toFixed(1),
+        )
+      }
+
+      calculateCurrentMainStages()
+    }
+
+    // 切換世界盡頭延伸走向
+    function setFinisterreOption(option: FinisterreOption) {
+      currentDraft.value.finisterreOption = option
+    }
+
+    // 設定聖地牙哥停留天數
+    function setSantiagoLayoverDays(days: number) {
+      currentDraft.value.santiagoLayoverDays = Math.max(0, Math.min(days, 5))
+    }
+
+    // 重新計算排程
     function recalculateSchedule() {
-      initSchedule()
+      calculateCurrentMainStages()
     }
 
-    // 點擊「重設」時還原回官方標準 33 天全線排程
+    // 重設回當前路線之官方預設設定
     function resetToDefaults() {
-      config.value.startWaypointId = 'SJPP'
-      config.value.endWaypointId = 'SANTIAGO_DE_COMPOSTELA'
-      config.value.targetDays = 33
-      config.value.restDays = 0
-      config.value.bodyWeightKg = 60
-      config.value.day1RouteVariant = 'NAPOLEON'
-      initSchedule()
+      const defaultState = createDefaultDrafts(todayStr)[currentRouteId.value]
+      drafts.value[currentRouteId.value] = { ...defaultState }
+      calculateCurrentMainStages()
     }
 
-    // 相容別名
     function resetSchedule() {
       resetToDefaults()
     }
 
-    // 設為休息日
+    // 插入休息日
     function insertRestDay(dayIndex: number) {
-      stages.value = insertRestDayIntoStages(stages.value, dayIndex, waypoints)
+      const curMain = mainStages.value[currentRouteId.value]
+      if (!curMain || curMain.length === 0) return
+
+      // 若為世界盡頭分段，暫不支援動態均分
+      if (dayIndex > curMain.length) return
+
+      mainStages.value[currentRouteId.value] = insertRestDayIntoStages(
+        curMain,
+        dayIndex,
+        currentMainWaypoints.value,
+      )
     }
 
     // 移除休息日
     function removeRestDay(dayIndex: number) {
-      stages.value = removeRestDayFromStages(stages.value, dayIndex, waypoints)
+      const curMain = mainStages.value[currentRouteId.value]
+      if (!curMain || curMain.length === 0) return
+
+      if (dayIndex > curMain.length) return
+
+      mainStages.value[currentRouteId.value] = removeRestDayFromStages(
+        curMain,
+        dayIndex,
+        currentMainWaypoints.value,
+      )
     }
 
     // 現場修改某天結束城鎮
     function updateEndWaypoint(dayIndex: number, newEndWaypointId: string) {
-      stages.value = updateStageEndWaypointInStages(stages.value, dayIndex, newEndWaypointId, waypoints)
-    }
+      const curMain = mainStages.value[currentRouteId.value]
+      if (!curMain || curMain.length === 0) return
 
-    // 切換 Day 1 路線變更
-    function setDay1Variant(variant: 'NAPOLEON' | 'VALCARLOS') {
-      config.value.day1RouteVariant = variant
-      if (stages.value.length > 0 && stages.value[0].startWaypointId === 'SJPP') {
-        stages.value[0].routeVariant = variant
-        updateEndWaypoint(1, stages.value[0].endWaypointId)
+      if (dayIndex <= curMain.length) {
+        mainStages.value[currentRouteId.value] = updateStageEndWaypointInStages(
+          curMain,
+          dayIndex,
+          newEndWaypointId,
+          currentMainWaypoints.value,
+        )
       }
     }
 
-    // 3. Computed 統計數據
+    // 切換 Day 1 路線分支（法國之路專屬）
+    function setDay1Variant(variant: 'NAPOLEON' | 'VALCARLOS') {
+      ;(currentDraft.value as any).day1RouteVariant = variant
+      currentDraft.value.branchId = variant === 'VALCARLOS' ? 'valcarlos' : 'napoleon'
+      const curMain = mainStages.value[currentRouteId.value]
+      if (curMain && curMain.length > 0 && curMain[0].startWaypointId === 'SJPP') {
+        curMain[0].routeVariant = variant
+        updateEndWaypoint(1, curMain[0].endWaypointId)
+      }
+    }
+
+    // 統計數據
     const totalDistanceKm = computed(() => {
       return Number(stages.value.reduce((acc, s) => acc + s.distanceKm, 0).toFixed(1))
     })
@@ -96,18 +355,77 @@ export const useScheduleStore = defineStore(
     })
 
     const isWinterLocked = computed(() => {
-      return config.value.startWaypointId === 'SJPP' && isWinterClosure(config.value.startDate)
+      return (
+        currentRouteId.value === 'frances' &&
+        currentDraft.value.startWaypointId === 'SJPP' &&
+        isWinterClosure(currentDraft.value.startDate)
+      )
     })
 
-    // 若尚未初始化過，執行預設初始化
-    if (stages.value.length === 0) {
-      initSchedule()
+    // 舊版 LocalStorage 快取無損平滑遷移管線 (Schema Migration)
+    function migrateLegacyStorage(legacyData?: any) {
+      // 偵測若為舊版無 drafts 結構或版本低於 2
+      if (!drafts.value || !drafts.value.frances) {
+        drafts.value = createDefaultDrafts(todayStr)
+      }
+
+      // 檢查是否有舊版平鋪的 config 遺留資料
+      const legacyCfg = legacyData?.config || (legacyData as any)?.legacyConfig
+      if (legacyCfg && typeof legacyCfg === 'object') {
+        drafts.value.frances.startDate = legacyCfg.startDate || drafts.value.frances.startDate
+        drafts.value.frances.startWaypointId =
+          legacyCfg.startWaypointId || drafts.value.frances.startWaypointId
+        drafts.value.frances.endWaypointId =
+          legacyCfg.endWaypointId || drafts.value.frances.endWaypointId
+        drafts.value.frances.targetDays = legacyCfg.targetDays || drafts.value.frances.targetDays
+        drafts.value.frances.dailyKmQuota =
+          legacyCfg.dailyTargetKm || drafts.value.frances.dailyKmQuota
+        if (legacyCfg.day1RouteVariant) {
+          ;(drafts.value.frances as any).day1RouteVariant = legacyCfg.day1RouteVariant
+        }
+      }
+
+      // 檢查是否有舊版平鋪的 stages 遺留資料
+      const legacyStages = legacyData?.stages || (legacyData as any)?.legacyStages
+      if (Array.isArray(legacyStages) && legacyStages.length > 0) {
+        mainStages.value.frances = legacyStages
+      }
+
+      version.value = 2
+      if (!currentRouteId.value) {
+        currentRouteId.value = 'frances'
+      }
+
+      // 快取載入完成後，對所有路線草稿進行安全清洗防禦
+      for (const r of AVAILABLE_ROUTES) {
+        if (drafts.value[r.id]) {
+          sanitizeDraft(drafts.value[r.id], r.id)
+        }
+      }
+
+      calculateCurrentMainStages()
+    }
+
+    // 首次載入若無分段則初始化
+    if (!mainStages.value[currentRouteId.value] || mainStages.value[currentRouteId.value].length === 0) {
+      calculateCurrentMainStages()
     }
 
     return {
+      version,
+      currentRouteId,
+      drafts,
+      currentDraft,
       config,
       stages,
+      currentWaypoints,
+      currentMainWaypoints,
+      getWaypoint,
       initSchedule,
+      switchRoute,
+      switchBranch,
+      setFinisterreOption,
+      setSantiagoLayoverDays,
       recalculateSchedule,
       resetToDefaults,
       resetSchedule,
@@ -115,14 +433,25 @@ export const useScheduleStore = defineStore(
       removeRestDay,
       updateEndWaypoint,
       setDay1Variant,
+      availableRoutes: AVAILABLE_ROUTES,
+      getRouteMetadata,
+      currentRouteMetadata,
+      getRouteDisplayDistance,
       totalDistanceKm,
       totalElevationGainM,
       totalWalkingDays,
       totalRestDays,
       isWinterLocked,
+      migrateLegacyStorage,
     }
   },
   {
-    persist: true, // 透過 pinia-plugin-persistedstate 本機持久化
+    persist: {
+      key: 'schedule', // 嚴格保持與舊版相同 key，確保能攔截到舊版快取資料
+      pick: ['version', 'currentRouteId', 'drafts', 'mainStages'],
+      afterHydrate: (ctx: any) => {
+        ctx.store.migrateLegacyStorage(ctx.store)
+      },
+    },
   },
 )

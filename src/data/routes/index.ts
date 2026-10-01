@@ -1,6 +1,6 @@
 import type { RouteId, RouteMetadata, FinisterreOption } from '@/types/route'
 import type { Waypoint } from '@/types/camino'
-import { francesMetadata, francesWaypoints } from './frances'
+import { francesMetadata, francesWaypoints, francesBranches, getFrancesWaypoints } from './frances'
 import { portuguesMetadata, getPortuguesWaypoints } from './portugues'
 import { norteMetadata, norteWaypoints } from './norte'
 import { getFinisterreWaypoints, allFinisterreWaypoints } from './finisterre'
@@ -67,7 +67,7 @@ export function getEffectiveRouteMetadata(
 export function getRouteWaypoints(routeId: RouteId, branchId?: string): Waypoint[] {
   switch (routeId) {
     case 'frances':
-      return francesWaypoints
+      return getFrancesWaypoints(branchId)
     case 'portugues':
       return getPortuguesWaypoints((branchId as 'central' | 'costa') || 'central')
     case 'norte':
@@ -121,6 +121,8 @@ export function buildGlobalWaypointMap(): Map<string, Waypoint> {
 export {
   francesMetadata,
   francesWaypoints,
+  francesBranches,
+  getFrancesWaypoints,
   portuguesMetadata,
   getPortuguesWaypoints,
   norteMetadata,

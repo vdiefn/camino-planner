@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename)
 // 專案根目錄
 const projectRoot = path.resolve(__dirname, '../../../..')
 const accommodationsPath = path.join(projectRoot, 'src/data/accommodations.ts')
-const waypointsPath = path.join(projectRoot, 'src/data/waypoints.ts')
+const francesPath = path.join(projectRoot, 'src/data/routes/frances.ts')
 
 function parseTypeScriptArray(filePath, arrayName) {
   const content = fs.readFileSync(filePath, 'utf-8')
@@ -56,7 +56,7 @@ function runAudit() {
     process.exit(1)
   }
 
-  const waypoints = parseTypeScriptArray(waypointsPath, 'waypoints')
+  const waypoints = parseTypeScriptArray(francesPath, 'francesWaypoints')
   const accommodations = parseTypeScriptArray(accommodationsPath, 'accommodations')
 
   // 擴充讀取多路線架構下的所有航點 ID (葡萄牙之路、北方之路、世界盡頭等)
