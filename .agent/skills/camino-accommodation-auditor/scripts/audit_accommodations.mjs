@@ -59,9 +59,21 @@ function runAudit() {
   const waypoints = parseTypeScriptArray(waypointsPath, 'waypoints')
   const accommodations = parseTypeScriptArray(accommodationsPath, 'accommodations')
 
-  console.log(`ℹ️ 讀取完成：共收錄 ${waypoints.length} 個航點，${accommodations.length} 筆住宿資料。\n`)
-
+  // 擴充讀取多路線架構下的所有航點 ID (葡萄牙之路、北方之路、世界盡頭等)
   const waypointIdSet = new Set(waypoints.map(w => w.id))
+  const routesDir = path.join(projectRoot, 'src/data/routes')
+  if (fs.existsSync(routesDir)) {
+    const routeFiles = fs.readdirSync(routesDir).filter(f => f.endsWith('.ts'))
+    for (const f of routeFiles) {
+      const routeContent = fs.readFileSync(path.join(routesDir, f), 'utf-8')
+      const matches = [...routeContent.matchAll(/id:\s*['"]([a-zA-Z0-9_:-]+)['"]/g)]
+      for (const m of matches) {
+        waypointIdSet.add(m[1])
+      }
+    }
+  }
+
+  console.log(`ℹ️ 讀取完成：共收錄 ${waypointIdSet.size} 個全域航點，${accommodations.length} 筆住宿資料。\n`)
   const seenIds = new Map()
   const duplicateIds = []
   const invalidWaypoints = []
