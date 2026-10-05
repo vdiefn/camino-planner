@@ -51,6 +51,18 @@ const formatWaypointOption = (wp: any) => {
   return `${wp.localName || wp.spanishName}（${wp.chineseName}）`;
 };
 
+// 分支選單文字格式化（包含冬季封山與里程天數資訊，避免在 option 內使用 template 標籤）
+const formatBranchOption = (branch: any) => {
+  let note = "";
+  if (scheduleStore.isWinterLocked && branch.id === "napoleon") {
+    note = "（❄️ 11/1~3/31 封山禁行）";
+  } else if (scheduleStore.isWinterLocked && branch.id === "valcarlos") {
+    note = "（冬季官方建議通行）";
+  }
+  const distInfo = `（約${Math.round(branch.totalDistanceKm || 0)}km • ${branch.recommendedDays} 天）`;
+  return `${branch.chineseName}${note ? " " + note : ""} ${distInfo}`;
+};
+
 // 當 store 外部或切換路線有更新時，同步回 draftConfig
 watch(
   () => [
@@ -440,16 +452,7 @@ const dailyAverageKm = computed(() => {
                   :value="branch.id"
                   :disabled="scheduleStore.isWinterLocked && branch.id === 'napoleon'"
                 >
-                  {{ branch.chineseName }}
-                  <template v-if="scheduleStore.isWinterLocked && branch.id === 'napoleon'">
-                    （❄️ 11/1~3/31 封山禁行）
-                  </template>
-                  <template v-else-if="scheduleStore.isWinterLocked && branch.id === 'valcarlos'">
-                    （冬季官方建議通行）
-                  </template>
-                  <template>
-                    （約{{ Math.round(branch.totalDistanceKm || 0) }}km • {{ branch.recommendedDays }} 天）
-                  </template>
+                  {{ formatBranchOption(branch) }}
                 </option>
               </select>
             </div>
