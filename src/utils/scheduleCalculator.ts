@@ -1,4 +1,6 @@
 import type { UserPlanConfig, UserStage, Waypoint } from '@/types/camino'
+import type { FinisterreOption } from '@/types/route'
+import { getFinisterreWaypoints, finisterreOptionLabels } from '@/data/routes/finisterre'
 
 /**
  * 判定日期是否落在 11/1 至 3/31 冬季拿破崙之路強制封閉期
@@ -449,4 +451,189 @@ export function updateStageEndWaypoint(
 
   // 3. 連鎖重算後續天數
   return reallocateRemainingWalkingStages(newStages, stageIndex, allWaypoints)
+}
+
+/**
+ * 計算特定航點清單中，兩航點間的總距離 (km)
+ */
+export function calculateRouteDistance(
+  startId: string,
+  endId: string,
+  waypointsList: Waypoint[],
+): number {
+  if (startId === endId) return 0
+  const start = waypointsList.find((w) => w.id === startId)
+  const end = waypointsList.find((w) => w.id === endId)
+  if (!start || !end) return 0
+  return Number(Math.max(0, Math.abs(end.cumulativeKm - start.cumulativeKm)).toFixed(1))
+}
+
+
+/**
+ * 依據天數在航點陣列中尋找最佳停靠城鎮
+ */
+function pickOptimalWaypoints(waypoints: Waypoint[], days: number): string[] {
+  if (days <= 1) return [waypoints[waypoints.length - 1].id]
+  const stops: string[] = []
+  let currentWp = waypoints[0]
+  const finalWp = waypoints[waypoints.length - 1]
+
+  for (let day = 1; day <= days; day++) {
+    if (day === days) {
+      stops.push(finalWp.id)
+      break
+    }
+    const remainingDays = days - day + 1
+    const remainingKm = Math.max(0, finalWp.cumulativeKm - currentWp.cumulativeKm)
+    const targetKm = currentWp.cumulativeKm + remainingKm / remainingDays
+
+    let bestWp: Waypoint | null = null
+    let minDiff = Infinity
+    for (const wp of waypoints) {
+      if (wp.cumulativeKm > currentWp.cumulativeKm && wp.cumulativeKm < finalWp.cumulativeKm) {
+        const diff = Math.abs(wp.cumulativeKm - targetKm)
+        if (diff < minDiff) {
+          minDiff = diff
+          bestWp = wp
+        }
+      }
+    }
+    if (bestWp && !stops.includes(bestWp.id)) {
+      stops.push(bestWp.id)
+      currentWp = bestWp
+    } else {
+      stops.push(finalWp.id)
+      break
+    }
+  }
+  return stops
+}
+
+/**
+ * 依據延伸選項與天數，精確推導停靠城鎮序列
+ */
+export function calculateFinisterreStopIds(
+  option: FinisterreOption,
+  days: number,
+  finWaypoints: Waypoint[],
+): string[] {
+  if (option === 'FINISTERRE_ONLY') {
+    if (days === 3) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra']
+    if (days === 2) return ['finisterre:maronas', 'finisterre:fisterra']
+    if (days === 4) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:cee', 'finisterre:fisterra']
+    if (days === 5) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:cee', 'finisterre:fisterra']
+    return pickOptimalWaypoints(finWaypoints, days)
+  }
+
+  if (option === 'MUXIA_ONLY') {
+    if (days === 3) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia']
+    if (days === 2) return ['finisterre:maronas', 'finisterre:muxia']
+    if (days === 4) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:dumbria', 'finisterre:muxia']
+    if (days === 5) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:dumbria', 'finisterre:muxia']
+    return pickOptimalWaypoints(finWaypoints, days)
+  }
+
+  if (option === 'BOTH_FINISTERRE_FIRST') {
+    if (days === 4) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra', 'finisterre:muxia']
+    if (days === 3) return ['finisterre:maronas', 'finisterre:fisterra', 'finisterre:muxia']
+    if (days === 5) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
+    if (days === 6) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:cee', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
+    const part1Days = Math.max(2, days - 2)
+    const part2Days = Math.max(1, days - part1Days)
+    const part1Wps = finWaypoints.filter((w) => w.cumulativeKm <= 89.5)
+    const part2Wps = finWaypoints.filter((w) => w.cumulativeKm >= 89.5)
+    const part1Stops = pickOptimalWaypoints(part1Wps, part1Days)
+    const part2Stops = pickOptimalWaypoints(part2Wps, part2Days)
+    return [...part1Stops, ...part2Stops]
+  }
+
+  if (option === 'BOTH_MUXIA_FIRST') {
+    if (days === 4) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia', 'finisterre:fisterra']
+    if (days === 3) return ['finisterre:maronas', 'finisterre:muxia', 'finisterre:fisterra']
+    if (days === 5) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
+    if (days === 6) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:dumbria', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
+    const part1Days = Math.max(2, days - 2)
+    const part2Days = Math.max(1, days - part1Days)
+    const part1Wps = finWaypoints.filter((w) => w.cumulativeKm <= 86.3)
+    const part2Wps = finWaypoints.filter((w) => w.cumulativeKm >= 86.3)
+    const part1Stops = pickOptimalWaypoints(part1Wps, part1Days)
+    const part2Stops = pickOptimalWaypoints(part2Wps, part2Days)
+    return [...part1Stops, ...part2Stops]
+  }
+
+  return []
+}
+
+/**
+ * 依據主線最後一天分段，接續推算世界盡頭延伸分段 (Chained Extension Stages)
+ */
+export function generateFinisterreStages(
+  lastMainStage: UserStage | undefined,
+  option: FinisterreOption = 'NONE',
+  santiagoLayoverDays: number = 0,
+  customDays?: number,
+): UserStage[] {
+  if (!lastMainStage || option === 'NONE') return []
+
+  const extensionStages: UserStage[] = []
+  let curDate = lastMainStage.date
+  let curDayIndex = lastMainStage.dayIndex
+
+  // 1. 若有設定在聖地牙哥停留休整，先插入休整日
+  const safeLayoverDays = Math.max(0, Math.min(santiagoLayoverDays, 5))
+  for (let i = 1; i <= safeLayoverDays; i++) {
+    curDate = addDaysToDate(curDate, 1)
+    curDayIndex++
+    extensionStages.push({
+      dayIndex: curDayIndex,
+      date: curDate,
+      startWaypointId: lastMainStage.endWaypointId,
+      endWaypointId: lastMainStage.endWaypointId,
+      passedWaypointIds: [],
+      distanceKm: 0,
+      elevationGainM: 0,
+      elevationLossM: 0,
+      isRestDay: true,
+      isExtensionStage: true,
+      stageNotes: '聖地牙哥停留休整日 ⛪',
+    })
+  }
+
+  // 2. 獲取延伸段航點陣列
+  const finWaypoints = getFinisterreWaypoints(option)
+  if (finWaypoints.length < 2) return extensionStages
+
+  // 決定徒步天數（支援自訂天數，預設對齊官方經典天數）
+  const defaultDays = finisterreOptionLabels[option]?.days || 3
+  const walkingDays = customDays && customDays > 0 ? customDays : defaultDays
+
+  const stopIds = calculateFinisterreStopIds(option, walkingDays, finWaypoints)
+
+  let prevId = finWaypoints[0].id // finisterre:santiago
+  for (const nextId of stopIds) {
+    curDate = addDaysToDate(curDate, 1)
+    curDayIndex++
+    const segStats = calculateSegmentStats(prevId, nextId, undefined, finWaypoints)
+
+    extensionStages.push({
+      dayIndex: curDayIndex,
+      date: curDate,
+      startWaypointId: prevId,
+      endWaypointId: nextId,
+      passedWaypointIds: segStats.passedWaypointIds,
+      distanceKm: segStats.distanceKm,
+      elevationGainM: segStats.elevationGainM,
+      elevationLossM: segStats.elevationLossM,
+      isRestDay: false,
+      isExtensionStage: true,
+      stageNotes: nextId.includes('fisterra')
+        ? '大西洋地涯菲尼斯特雷 🌅'
+        : nextId.includes('muxia')
+          ? '穆希亞聖船聖母聖殿 ⛵'
+          : undefined,
+    })
+    prevId = nextId
+  }
+
+  return extensionStages
 }

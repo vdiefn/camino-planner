@@ -19,6 +19,7 @@ import {
   updateStageEndWaypoint as updateStageEndWaypointInStages,
   isWinterClosure,
 } from '@/utils/scheduleCalculator'
+import { finisterreOptionLabels } from '@/data/routes/finisterre'
 
 /**
  * 預設各路線之獨立初始草稿
@@ -35,6 +36,7 @@ function createDefaultDrafts(todayStr: string): Record<RouteId, RouteScheduleDra
       dailyKmQuota: 23.5,
       restDays: [],
       finisterreOption: 'NONE',
+      finisterreDays: 3,
       santiagoLayoverDays: 0,
       updatedAt: new Date().toISOString(),
     },
@@ -48,6 +50,7 @@ function createDefaultDrafts(todayStr: string): Record<RouteId, RouteScheduleDra
       dailyKmQuota: 21.8,
       restDays: [],
       finisterreOption: 'NONE',
+      finisterreDays: 3,
       santiagoLayoverDays: 0,
       updatedAt: new Date().toISOString(),
     },
@@ -60,6 +63,7 @@ function createDefaultDrafts(todayStr: string): Record<RouteId, RouteScheduleDra
       dailyKmQuota: 23.6,
       restDays: [],
       finisterreOption: 'NONE',
+      finisterreDays: 3,
       santiagoLayoverDays: 0,
       updatedAt: new Date().toISOString(),
     },
@@ -86,6 +90,12 @@ function sanitizeDraft(draft: RouteScheduleDraft, routeId: RouteId): RouteSchedu
   if (!isStartValid || !isEndValid || !isOrderValid) {
     draft.startWaypointId = defaultStart
     draft.endWaypointId = defaultEnd
+  }
+
+  // 冬季封山強制防禦：11/1 ~ 3/31 期間法國之路自 SJPP 出發，唯一合法走法為瓦卡洛斯 (Valcarlos)
+  if (routeId === 'frances' && draft.startWaypointId === 'SJPP' && isWinterClosure(draft.startDate)) {
+    draft.branchId = 'valcarlos'
+    ;(draft as any).day1RouteVariant = 'VALCARLOS'
   }
 
   return draft
@@ -214,7 +224,8 @@ export const useScheduleStore = defineStore(
         }
         const lastMain = curMain[curMain.length - 1]
         const layoverDays = currentDraft.value.santiagoLayoverDays || 0
-        const finStages = generateFinisterreStages(lastMain, option, layoverDays)
+        const finDays = currentDraft.value.finisterreDays || finisterreOptionLabels[option]?.days || 3
+        const finStages = generateFinisterreStages(lastMain, option, layoverDays, finDays)
         return [...curMain, ...finStages]
       },
       set: (newStages: UserStage[]) => {
@@ -235,6 +246,16 @@ export const useScheduleStore = defineStore(
 
     // 切換路線分支 (例如法國之路的拿破崙 vs 瓦卡洛斯；葡萄牙之路的中央線 vs 海岸線)
     function switchBranch(newBranchId: string) {
+      // 若為冬季封山期，嚴格禁止切換至拿破崙之路
+      if (
+        currentRouteId.value === 'frances' &&
+        currentDraft.value.startWaypointId === 'SJPP' &&
+        isWinterClosure(currentDraft.value.startDate) &&
+        newBranchId === 'napoleon'
+      ) {
+        return
+      }
+
       currentDraft.value.branchId = newBranchId
 
       if (currentRouteId.value === 'frances') {
@@ -259,6 +280,19 @@ export const useScheduleStore = defineStore(
     // 切換世界盡頭延伸走向
     function setFinisterreOption(option: FinisterreOption) {
       currentDraft.value.finisterreOption = option
+      if (option !== 'NONE') {
+        currentDraft.value.finisterreDays = finisterreOptionLabels[option]?.days || 3
+      }
+    }
+
+    // 設定延伸段徒步天數
+    function setFinisterreDays(days: number) {
+      const opt = currentDraft.value.finisterreOption
+      if (opt === 'NONE') return
+      const isBoth = opt === 'BOTH_FINISTERRE_FIRST' || opt === 'BOTH_MUXIA_FIRST'
+      const minDays = isBoth ? 3 : 2
+      const maxDays = isBoth ? 8 : 6
+      currentDraft.value.finisterreDays = Math.max(minDays, Math.min(maxDays, days))
     }
 
     // 設定聖地牙哥停留天數
@@ -268,6 +302,37 @@ export const useScheduleStore = defineStore(
 
     // 重新計算排程
     function recalculateSchedule() {
+      calculateCurrentMainStages()
+    }
+
+    // 明確套用並更新當前路線之排程設定（直接寫入底層草稿並重新演算）
+    function updateDraftConfig(
+      newConfig: Partial<UserPlanConfig> & {
+        finisterreOption?: FinisterreOption
+        finisterreDays?: number
+        santiagoLayoverDays?: number
+      },
+    ) {
+      if (newConfig.startDate !== undefined) currentDraft.value.startDate = newConfig.startDate
+      if (newConfig.startWaypointId !== undefined)
+        currentDraft.value.startWaypointId = newConfig.startWaypointId
+      if (newConfig.endWaypointId !== undefined)
+        currentDraft.value.endWaypointId = newConfig.endWaypointId
+      if (newConfig.targetDays !== undefined) currentDraft.value.targetDays = newConfig.targetDays
+      if (newConfig.dailyTargetKm !== undefined)
+        currentDraft.value.dailyKmQuota = newConfig.dailyTargetKm
+      if (newConfig.day1RouteVariant !== undefined) {
+        ;(currentDraft.value as any).day1RouteVariant = newConfig.day1RouteVariant
+      }
+      if (newConfig.finisterreOption !== undefined) {
+        currentDraft.value.finisterreOption = newConfig.finisterreOption
+      }
+      if (newConfig.finisterreDays !== undefined) {
+        currentDraft.value.finisterreDays = newConfig.finisterreDays
+      }
+      if (newConfig.santiagoLayoverDays !== undefined) {
+        currentDraft.value.santiagoLayoverDays = newConfig.santiagoLayoverDays
+      }
       calculateCurrentMainStages()
     }
 
@@ -328,6 +393,15 @@ export const useScheduleStore = defineStore(
 
     // 切換 Day 1 路線分支（法國之路專屬）
     function setDay1Variant(variant: 'NAPOLEON' | 'VALCARLOS') {
+      if (
+        currentRouteId.value === 'frances' &&
+        currentDraft.value.startWaypointId === 'SJPP' &&
+        isWinterClosure(currentDraft.value.startDate) &&
+        variant === 'NAPOLEON'
+      ) {
+        return
+      }
+
       ;(currentDraft.value as any).day1RouteVariant = variant
       currentDraft.value.branchId = variant === 'VALCARLOS' ? 'valcarlos' : 'napoleon'
       const curMain = mainStages.value[currentRouteId.value]
@@ -425,8 +499,10 @@ export const useScheduleStore = defineStore(
       switchRoute,
       switchBranch,
       setFinisterreOption,
+      setFinisterreDays,
       setSantiagoLayoverDays,
       recalculateSchedule,
+      updateDraftConfig,
       resetToDefaults,
       resetSchedule,
       insertRestDay,

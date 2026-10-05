@@ -153,6 +153,29 @@ describe('Schedule Calculator - 迴歸基準測試 (French Way Baseline)', () =>
       expect(stages[2].endWaypointId).toBe('finisterre:fisterra')
       expect(stages[3].endWaypointId).toBe('finisterre:muxia')
     })
+
+    it('FINISTERRE_ONLY 支援自訂為 4 天（輕鬆漫遊版），總里程保持為 89.5 km 且終抵 Fisterra', () => {
+      const stages = generateFinisterreStages(mockLastStage, 'FINISTERRE_ONLY', 0, 4)
+      expect(stages).toHaveLength(4)
+      expect(stages[stages.length - 1].endWaypointId).toBe('finisterre:fisterra')
+      const totalKm = Number(stages.reduce((acc, s) => acc + s.distanceKm, 0).toFixed(1))
+      expect(totalKm).toBe(89.5)
+      // 確保航點首尾相接
+      for (let i = 0; i < stages.length - 1; i++) {
+        expect(stages[i].endWaypointId).toBe(stages[i + 1].startWaypointId)
+      }
+    })
+
+    it('BOTH_FINISTERRE_FIRST 支援自訂為 5 天（包含中繼停靠 Lires），終抵 Muxía', () => {
+      const stages = generateFinisterreStages(mockLastStage, 'BOTH_FINISTERRE_FIRST', 0, 5)
+      expect(stages).toHaveLength(5)
+      expect(stages[stages.length - 1].endWaypointId).toBe('finisterre:muxia')
+      const totalKm = Number(stages.reduce((acc, s) => acc + s.distanceKm, 0).toFixed(1))
+      expect(totalKm).toBe(118.5)
+      for (let i = 0; i < stages.length - 1; i++) {
+        expect(stages[i].endWaypointId).toBe(stages[i + 1].startWaypointId)
+      }
+    })
   })
 })
 

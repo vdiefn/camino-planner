@@ -46,6 +46,7 @@ export interface RouteScheduleDraft {
   restDays: number[]
   customStages?: UserStage[]
   finisterreOption: FinisterreOption
+  finisterreDays?: number
   santiagoLayoverDays?: number
   updatedAt: string
 }
