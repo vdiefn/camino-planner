@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { waypoints, packingItems, transportRoutes, accommodations } from '../src/data'
+import { packingItems, transportRoutes, accommodations } from '../src/data'
+import { francesWaypoints as waypoints } from '../src/data/routes/frances'
 import { buildGlobalWaypointMap } from '../src/data/routes'
 import type { PackingCategory } from '../src/types/camino'
 

@@ -22,16 +22,29 @@ describe('Route Registry & Multi-Route Data Integrity - 多路線完整性測試
     const meta = getRouteMetadata('frances')
     const wps = getRouteWaypoints('frances')
 
-    it('中繼資料設定應正確', () => {
+    it('中繼資料設定應正確，且具備拿破崙高山越嶺與瓦卡洛斯替代道路雙分支', () => {
       expect(meta?.totalDistanceKm).toBe(774.5)
       expect(meta?.defaultStartWaypointId).toBe('SJPP')
       expect(meta?.defaultEndWaypointId).toBe('SANTIAGO_DE_COMPOSTELA')
+      expect(meta?.branches).toHaveLength(2)
+      expect(meta?.branches?.[0].id).toBe('napoleon')
+      expect(meta?.branches?.[1].id).toBe('valcarlos')
     })
 
     it('所有航點應具備中文與西文名稱，且累積里程遞增', () => {
       for (let i = 0; i < wps.length - 1; i++) {
         expect(wps[i].chineseName).toBeTruthy()
         expect(wps[i + 1].cumulativeKm).toBeGreaterThanOrEqual(wps[i].cumulativeKm)
+      }
+    })
+
+    it('瓦卡洛斯分支航點累積里程應嚴格單調遞增且包含 VALCARLOS 航點', () => {
+      const valcarlosWps = getRouteWaypoints('frances', 'valcarlos')
+      const valcarlosPoint = valcarlosWps.find((w) => w.id === 'VALCARLOS')
+      expect(valcarlosPoint).toBeDefined()
+      expect(valcarlosWps.find((w) => w.id === 'ORISSON')).toBeUndefined()
+      for (let i = 0; i < valcarlosWps.length - 1; i++) {
+        expect(valcarlosWps[i + 1].cumulativeKm).toBeGreaterThanOrEqual(valcarlosWps[i].cumulativeKm)
       }
     })
   })

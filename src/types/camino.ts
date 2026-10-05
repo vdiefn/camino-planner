@@ -55,6 +55,7 @@ export interface UserStage {
   elevationGainM: number
   elevationLossM: number
   isRestDay: boolean
+  isExtensionStage?: boolean // 是否為世界盡頭延伸段
   routeVariant?: 'NAPOLEON' | 'VALCARLOS'
   albergueName?: string
   isBooked?: boolean
