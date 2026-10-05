@@ -150,10 +150,10 @@ const sortedActiveCategories = computed(() => {
 const draggedCatId = ref<string | null>(null);
 let lastTargetId: string | null = null;
 
-// 桌面 HTML5 Drag & Drop（目標鎖定即時交換）
+// 桌面 HTML5 Drag & Drop（即時插入式平滑排序）
 function handleDragStart(catId: string, event: DragEvent) {
   draggedCatId.value = catId;
-  lastTargetId = null;
+  lastTargetId = catId;
   if (event.dataTransfer) {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", catId);
@@ -163,7 +163,7 @@ function handleDragStart(catId: string, event: DragEvent) {
 function handleDragOver(catId: string, event: DragEvent) {
   event.preventDefault();
   if (!draggedCatId.value || draggedCatId.value === catId) return;
-  if (lastTargetId === catId) return; // 已經與該目標交換過，鎖定不再重複反覆跳動
+  if (lastTargetId === catId) return; // 避免在同一個目標節點上重複觸發
 
   if (event.dataTransfer) {
     event.dataTransfer.dropEffect = "move";
@@ -182,10 +182,10 @@ function handleDragEnd() {
   lastTargetId = null;
 }
 
-// 行動裝置 Touch 觸控拖曳支援（滑動過程中即時交換）
+// 行動裝置 Touch 觸控拖曳支援（滑動過程中即時插入移動）
 function handleTouchStart(catId: string, _event: TouchEvent) {
   draggedCatId.value = catId;
-  lastTargetId = null;
+  lastTargetId = catId;
 }
 
 function handleTouchMove(event: TouchEvent) {

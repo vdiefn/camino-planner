@@ -154,11 +154,21 @@ function getTransportBadge(type: TransportType) {
   <div class="container mx-auto px-4 py-6 max-w-7xl mt-2">
     <!-- 頂部標題區 -->
     <div class="mb-4 sm:mb-6">
-      <h2
-        class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2"
-      >
-        前往朝聖起點交通指南
-      </h2>
+      <div class="flex flex-wrap items-center gap-2 mb-1.5">
+        <h2
+          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2"
+        >
+          前往朝聖起點交通指南
+        </h2>
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300"
+        >
+          法國之路：SJPP 起點
+        </span>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-500">
+        目前提供前往法國之路起點（Saint-Jean-Pied-de-Port）之交通換乘攻略；葡萄牙之路（波多 Porto）與北方之路（伊倫 Irún）之交通指南正積極建置中。
+      </p>
     </div>
 
     <!-- 二欄式響應式佈局 (左:城市決策與實戰避坑 / 右:轉乘時間軸步驟) -->
