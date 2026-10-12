@@ -15,7 +15,7 @@ import {
   Plus,
   Minus,
   RotateCcw,
-  MessageCircleWarning,
+  Sparkles,
   CheckCircle2,
   ChevronDown,
 } from "lucide-vue-next";
@@ -319,7 +319,7 @@ const dailyAverageKm = computed(() => {
           >
             <div class="flex items-center gap-1.5">
               <h2 class="text-base font-bold text-slate-900">行程規劃設定</h2>
-              <div class="relative group inline-flex items-center" @click.stop>
+              <div class="inline-flex items-center lg:hidden" @click.stop>
                 <button
                   type="button"
                   @click.stop="isScheduleTipsModalOpen = true"
@@ -329,20 +329,6 @@ const dailyAverageKm = computed(() => {
                 >
                   <MessageCircleWarning class="w-4 h-4" />
                 </button>
-
-                <!-- 滑鼠懸停即時浮現氣泡（僅在 lg 以上桌機 hover 時渲染，手機與平板點擊開啟 Modal） -->
-                <div
-                  class="hidden lg:group-hover:block pointer-events-none lg:group-hover:pointer-events-auto transition-all duration-200 absolute left-0 top-full z-30 mt-1.5 w-72 rounded-xl bg-white p-3.5 shadow-lg border border-slate-200 text-xs text-slate-700"
-                >
-                  <div
-                    class="flex items-center gap-1.5 font-medium text-slate-900 mb-1.5"
-                  >
-                    <span>彈性排程小提醒</span>
-                  </div>
-                  <p class="leading-relaxed">
-                    朝聖之路不需要完全照表操課。路上若遇體力不支或愛上某座小鎮，隨時點擊卡片上的「更換結束點」或「設為休息日」，系統會為您自動重新計算後續天數！
-                  </p>
-                </div>
               </div>
             </div>
 
@@ -687,6 +673,21 @@ const dailyAverageKm = computed(() => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- 彈性排程小提醒（電腦模式：常駐於行程規劃設定卡片下方） -->
+        <div
+          class="hidden lg:flex items-start gap-3 p-4 rounded-xl border border-slate-200 text-xs bg-white p-5 shadow-xs"
+        >
+          <div class="space-y-1">
+            <h3 class="flex items-center gap-2 text-sm text-slate-900 font-bold">
+              <Sparkles class="h-4 w-4 text-amber-500" />
+              <span class="text-base">彈性排程小提醒</span>
+            </h3>
+            <p class="leading-relaxed text-slate-600">
+              朝聖之路不需要完全照表操課。路上若遇體力不支或愛上某座小鎮，隨時點擊卡片上的「更換結束點」或「設為休息日」，系統會為您自動重新計算後續天數！
+            </p>
           </div>
         </div>
 
