@@ -10227,9 +10227,10 @@ export const accommodations: Accommodation[] = [
     bedCount: 60,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 687 52 96 27',
+      phone: '+34 640 36 16 40',
+      officialWebsiteUrl: 'https://irunsantiago.com/',
     },
-    notes: '西法邊境起點公立庇護所，由巴斯克朝聖協會義工營運，傳統隨喜接待（Donativo）。',
+    notes: '西法邊境起點公立庇護所，巴斯克朝聖協會義工營運，隨喜接待（Donativo），先到先得不可預約。開放期間 2/1~11/30。',
   },
   {
     id: 'ACC_NORTE_PASAJES_SANTA_ANA',
@@ -10239,11 +10240,11 @@ export const accommodations: Accommodation[] = [
     type: 'PAROCHIAL',
     priceEur: 0,
     bedCount: 14,
-    hasKitchen: true,
+    hasKitchen: false,
     bookingChannels: {
-      phone: '+34 699 37 40 45',
+      phone: '+34 676 51 93 09',
     },
-    notes: '峽灣港口海景庇護所，搭渡船橫渡海灣前之傳統隨喜接待。',
+    notes: '峽灣港口海景公立庇護所，搭渡船橫渡海灣前之隨喜接待（Donativo），無自炊廚房，先到先得不可預約。',
   },
   {
     id: 'ACC_NORTE_SAN_SEBASTIAN_ONDARRETA',
@@ -10256,8 +10257,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 943 31 02 68',
+      officialWebsiteUrl: 'https://www.donostia.eus/info/ciudadano/albergues.nsf',
     },
-    notes: '貝殼灣大城官方指定朝聖接待所，近翁達雷塔海灘。',
+    notes: '聖塞巴斯提安市公所公營青旅（La Sirena），近翁達雷塔海灘，可透過市府官網提早預約。',
   },
   {
     id: 'ACC_NORTE_ZARAUTZ_MUNICIPAL',
@@ -10271,7 +10273,22 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34 943 83 09 90',
     },
-    notes: '衝浪名城薩勞茨官方庇護所，夏季熱門。',
+    notes: '衝浪名城薩勞茨青年公立庇護所，僅 7、8 月夏季開放。非夏季請洽私立青旅。',
+  },
+  {
+    id: 'ACC_NORTE_ZARAUTZ_BLAI_BLAI',
+    waypointId: 'norte:zarautz',
+    name: 'Blai Blai Hostel',
+    chineseName: 'Blai Blai 朝聖者青年旅館',
+    type: 'HOSTEL',
+    priceEur: 24,
+    bedCount: 28,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34 943 00 20 89',
+      officialWebsiteUrl: 'https://blaiblaihostel.com/',
+    },
+    notes: '薩勞茨全年度營業優質私立青旅，床位附隱私簾與個人插座，朝聖者社群高評價，建議提早預約。',
   },
   {
     id: 'ACC_NORTE_DEBA_GELTOKI',
@@ -10285,7 +10302,7 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34 943 19 24 52',
     },
-    notes: '位於德瓦火車站大樓二樓，市政公立，先到先得不可預約。',
+    notes: '德瓦火車站2樓公立庇護所，無官網。先到先得不可預約，須先至 Ifar Kalea 4 旅遊諮詢處登記領取鑰匙。',
   },
   {
     id: 'ACC_NORTE_MARKINA_CARMEN',
@@ -10293,13 +10310,13 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue de peregrinos Convento del Carmen',
     chineseName: '馬爾基納加爾默羅修道院庇護所',
     type: 'PAROCHIAL',
-    priceEur: 15,
-    bedCount: 40,
+    priceEur: 0,
+    bedCount: 51,
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 946 16 70 01',
     },
-    notes: '歷史加爾默羅修道院附設朝聖接待所，環境古樸莊嚴。',
+    notes: '歷史加爾默羅修道院附設接待所，比斯開志工團體（Hosvobi）營運，隨喜接待（Donativo），開放期間約 3月中至10月中。',
   },
   {
     id: 'ACC_NORTE_ZENARRUZA_COLEGIATA',
@@ -10312,8 +10329,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 946 16 60 40',
+      officialWebsiteUrl: 'https://monasteriozenarruza.net/',
     },
-    notes: '十世紀熙篤會古修道院，山間傳奇接待所，義工隨喜（Donativo）共食晚餐與晚禱。',
+    notes: '十世紀熙篤會古修道院，傳奇傳統隨喜接待所（Donativo），僧侶提供共食晚餐與晚禱祝福，深具朝聖靈修精神。',
   },
   {
     id: 'ACC_NORTE_GERNIKA_MUNICIPAL',
@@ -10321,13 +10339,13 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue de peregrinos de Gernika',
     chineseName: '格爾尼卡市立公立庇護所',
     type: 'MUNICIPAL',
-    priceEur: 15,
-    bedCount: 32,
+    priceEur: 0,
+    bedCount: 35,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 946 25 58 77',
+      phone: '+34 609 03 15 26',
     },
-    notes: '歷史和平象徵古城，鄰近格爾尼卡之樹與議會大廈。',
+    notes: '格爾尼卡市立公立庇護所（學校體育館改建），比斯開志工團體營運，隨喜（Donativo），主要於 8 月開放，其餘月份建議改選周邊旅宿。',
   },
   {
     id: 'ACC_NORTE_LEZAMA_MUNICIPAL',
@@ -10350,12 +10368,27 @@ export const accommodations: Accommodation[] = [
     chineseName: '畢爾包薩瓦爾比德公立朝聖庇護所',
     type: 'MUNICIPAL',
     priceEur: 0,
-    bedCount: 30,
+    bedCount: 60,
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 687 52 96 27',
     },
-    notes: '巴斯克朝聖協會營運之傳統隨喜接待所，鄰近市區舊城區。',
+    notes: '巴斯克朝聖協會營運之公立隨喜接待所（Zabalbide），鄰近舊城區，開放期間 6/1~9/30，先到先得不可預約。',
+  },
+  {
+    id: 'ACC_NORTE_BILBAO_ALL_IRON',
+    waypointId: 'norte:bilbao',
+    name: 'All Iron Hostel',
+    chineseName: '全鐵朝聖者青年旅館',
+    type: 'HOSTEL',
+    priceEur: 22,
+    bedCount: 48,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34 944 03 65 34',
+      officialWebsiteUrl: 'https://allironhostel.com/',
+    },
+    notes: '緊鄰北方之路進城路線與貝戈尼亞聖母聖殿，具備獨立官網與全年度線上預約，朝聖友善。',
   },
   {
     id: 'ACC_NORTE_PORTUGALETE_MUNICIPAL',
@@ -10391,13 +10424,13 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue de peregrinos de Castro-Urdiales',
     chineseName: '卡斯特羅烏爾迪亞萊斯公立庇護所',
     type: 'MUNICIPAL',
-    priceEur: 10,
+    priceEur: 0,
     bedCount: 16,
-    hasKitchen: false,
+    hasKitchen: true,
     bookingChannels: {
-      phone: '+34 942 86 13 83',
+      phone: '+34 942 78 29 00',
     },
-    notes: '海上古堡要塞城鎮公立庇護所，出城口附近。',
+    notes: '海上古堡名城公立庇護所，純隨喜（Donativo），床位僅16床極易客滿，先到先得無官網。開放期間 3月底~10月底。',
   },
   {
     id: 'ACC_NORTE_ISLARES_MUNICIPAL',
@@ -10420,12 +10453,12 @@ export const accommodations: Accommodation[] = [
     chineseName: '拉雷多聖三修道院庇護所',
     type: 'PAROCHIAL',
     priceEur: 10,
-    bedCount: 32,
+    bedCount: 45,
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 942 60 45 42',
     },
-    notes: '拉雷多歷史修女會營運之朝聖接待所，老城核心位置。',
+    notes: '拉雷多三一修女會營運之朝聖接待所，老城核心位置，不可預約先到先得，全年開放。',
   },
   {
     id: 'ACC_NORTE_GUEMES_ABUELO_PEUTO',
@@ -10438,6 +10471,7 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 942 62 11 22',
+      officialWebsiteUrl: 'https://alberguedeguemes.es/',
     },
     notes: '全朝聖之路最負盛名的精神家園，由神父 Padre Ernesto 創立，每晚凝聚朝聖者圍坐分享、享用公共豐盛晚餐（純隨喜 Donativo）。',
   },
@@ -10448,12 +10482,13 @@ export const accommodations: Accommodation[] = [
     chineseName: '桑坦德聖徒殉道者公立庇護所',
     type: 'MUNICIPAL',
     priceEur: 15,
-    bedCount: 30,
+    bedCount: 40,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 942 21 08 25',
+      phone: '+34 942 21 97 47',
+      whatsapp: '+34689833167',
     },
-    notes: '坎塔布里亞首府官方庇護所，近渡輪碼頭與大教堂。',
+    notes: '桑坦德朝聖協會營運之公立庇護所，無官網，支援 WhatsApp 諮詢，近渡輪碼頭與大教堂。',
   },
   {
     id: 'ACC_NORTE_BOO_PIELAGOS_MUNICIPAL',
@@ -10476,12 +10511,13 @@ export const accommodations: Accommodation[] = [
     chineseName: '桑蒂利亞納修道院庇護所',
     type: 'PAROCHIAL',
     priceEur: 16,
-    bedCount: 30,
+    bedCount: 60,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 942 81 80 00',
+      phone: '+34 693 81 65 28',
+      officialWebsiteUrl: 'https://albergueelconvento.com/',
     },
-    notes: '三謊言中世紀古城，方濟各古修道院內部，石雕迴廊典雅。',
+    notes: '三謊言古城 Regina Coeli 古修道院內，支援官網線上預約，開放期間 3/27~10/15，石雕迴廊環境幽雅。',
   },
   {
     id: 'ACC_NORTE_COBRECES_CISTER',
@@ -10498,18 +10534,35 @@ export const accommodations: Accommodation[] = [
     notes: '以修士自製起司聞名之熙篤會古修道院旁，環境祥和安寧。',
   },
   {
-    id: 'ACC_NORTE_SAN_VICENTE_MUNICIPAL',
-    waypointId: 'norte:san-vicente-barquera',
-    name: 'Albergue de peregrinos de San Vicente de la Barquera',
-    chineseName: '聖森特德拉巴爾克拉公立庇護所',
-    type: 'MUNICIPAL',
-    priceEur: 12,
+    id: 'ACC_NORTE_COBRECES_VIEJO_LUCAS',
+    waypointId: 'norte:cobreces',
+    name: 'Albergue Viejo Lucas',
+    chineseName: '老盧卡斯朝聖青年旅館',
+    type: 'HOSTEL',
+    priceEur: 17,
     bedCount: 24,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 942 71 07 97',
+      phone: '+34 625 48 35 96',
+      whatsapp: '+34625483596',
+      officialWebsiteUrl: 'https://albergueviejolucas.com/',
     },
-    notes: '雪山與海灣倒影漁港名城，市鎮公所營運。',
+    notes: '科布雷塞斯主力優質青旅，朝聖者高評價，具備專屬官網與 WhatsApp，支援提早預約。',
+  },
+  {
+    id: 'ACC_NORTE_SAN_VICENTE_NOMADA',
+    waypointId: 'norte:san-vicente-barquera',
+    name: 'Nómada Hostel (原 El Galeón)',
+    chineseName: '遊牧者旅舍（原公立加利恩庇護所）',
+    type: 'HOSTEL',
+    priceEur: 25,
+    bedCount: 38,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34 623 29 55 26',
+      officialWebsiteUrl: 'https://nomadahostel.es/',
+    },
+    notes: '原公立庇護所轉由 Nómada Hostel 經營，緊鄰高處天使聖母教堂，含早餐，支援官網線上預約。',
   },
   {
     id: 'ACC_NORTE_SERDIO_MUNICIPAL',
@@ -10532,12 +10585,14 @@ export const accommodations: Accommodation[] = [
     chineseName: '科隆布雷斯朝聖者之家庇護所',
     type: 'PAROCHIAL',
     priceEur: 0,
-    bedCount: 18,
+    bedCount: 9,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 646 95 39 30',
+      phone: '+34 697 65 07 55',
+      whatsapp: '+34697650755',
+      officialWebsiteUrl: 'https://alberguecolombres.com/',
     },
-    notes: '進入阿斯圖里亞斯首站，傳統隨喜接待所（Donativo）。',
+    notes: '進入阿斯圖里亞斯首站，溫馨家庭式隨喜（Donativo），含素食晚餐與早餐，開放期間 3/29~10/30（週六休、8月休）。',
   },
   {
     id: 'ACC_NORTE_LLANES_CASONA',
@@ -10546,12 +10601,13 @@ export const accommodations: Accommodation[] = [
     chineseName: '亞內斯朝聖莊園庇護所',
     type: 'PRIVATE',
     priceEur: 18,
-    bedCount: 40,
-    hasKitchen: true,
+    bedCount: 45,
+    hasKitchen: false,
     bookingChannels: {
-      phone: '+34 985 40 18 56',
+      phone: '+34 985 40 24 94',
+      officialWebsiteUrl: 'https://www.alberguelacasonadelperegrino.es/',
     },
-    notes: '彩色防波堤名城，傳統阿斯圖里亞斯莊園改建，設備齊全。',
+    notes: '市中心十八世紀印第安莊園改建，僅微波爐/熱水無全套爐具，開放期間 3/1~10/31，支援官網預訂。',
   },
   {
     id: 'ACC_NORTE_SAN_PEDRO_LECES',
@@ -10560,12 +10616,12 @@ export const accommodations: Accommodation[] = [
     chineseName: '勒塞斯公立朝聖者青年庇護所',
     type: 'MUNICIPAL',
     priceEur: 15,
-    bedCount: 44,
+    bedCount: 60,
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 985 86 14 05',
     },
-    notes: '里瓦德塞利亞出城山丘公立庇護所，居高臨下俯瞰大西洋海景。',
+    notes: '里瓦德塞利亞出城海景山丘公立庇護所，含早餐，居高臨下俯瞰大西洋海景，先到先得。',
   },
   {
     id: 'ACC_NORTE_SEBRAYO_MUNICIPAL',
@@ -10579,21 +10635,36 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34 985 89 21 86',
     },
-    notes: '蘋果酒之都前夕之迷你石屋村莊，阿斯圖里亞斯最古樸公立點之一。',
+    notes: '蘋果酒之都前夕之迷你石屋村莊，阿斯圖里亞斯最古樸公立點之一，村內無商店。',
+  },
+  {
+    id: 'ACC_NORTE_VILLAVICIOSA_CONGRESO',
+    waypointId: 'norte:villaviciosa',
+    name: 'Albergue El Congreso',
+    chineseName: '國民大會朝聖者青年旅館',
+    type: 'HOSTEL',
+    priceEur: 18,
+    bedCount: 30,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34 985 89 27 01',
+      officialWebsiteUrl: 'https://albergueelcongreso.com/',
+    },
+    notes: '比利亞維西奧薩市政廣場核心，北方之路與原始之路分岔樞紐，支援官網線上預訂。',
   },
   {
     id: 'ACC_NORTE_GIJON_MUNICIPAL',
     waypointId: 'norte:gijon',
-    name: 'Albergue de peregrinos San Andrés de Vega',
-    chineseName: '希洪聖安德烈斯公立庇護所',
+    name: 'Albergue Juvenil Palacio de San Andrés de Cornellana',
+    chineseName: '希洪聖安德烈斯宮殿青年旅舍庇護所',
     type: 'MUNICIPAL',
     priceEur: 10,
     bedCount: 22,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 985 18 11 05',
+      phone: '+34 985 16 06 73',
     },
-    notes: '大西洋最大海港城市公立庇護所，近大學校區。',
+    notes: '十七世紀古宮殿改建之市立接待所，位於 Contrueces 區，全年開放。',
   },
   {
     id: 'ACC_NORTE_AVILES_PEDRO_SOLIS',
@@ -10602,26 +10673,27 @@ export const accommodations: Accommodation[] = [
     chineseName: '阿維萊斯佩德羅索利斯市立公立庇護所',
     type: 'MUNICIPAL',
     priceEur: 10,
-    bedCount: 30,
+    bedCount: 56,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 985 54 00 35',
+      phone: '+34 984 70 31 17',
     },
-    notes: '中世紀拱廊老街心臟地帶，由阿維萊斯市政府營運。',
+    notes: '中世紀拱廊老街心臟地帶，由阿斯圖-加利西亞朝聖協會營運，全年開放先到先得。',
   },
   {
     id: 'ACC_NORTE_SOTO_LUINA_MUNICIPAL',
     waypointId: 'norte:soto-de-luina',
     name: 'Albergue de peregrinos de Soto de Luiña',
-    chineseName: '索托德盧伊尼亞歷史醫院公立庇護所',
+    chineseName: '索托德盧伊尼亞舊校舍公立庇護所',
     type: 'MUNICIPAL',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 40,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 985 59 71 56',
+      phone: '+34 640 69 25 91',
+      officialWebsiteUrl: 'https://alberguesotodeluina.es/',
     },
-    notes: '十七世紀巴洛克朝聖醫院舊址，市鎮公所附設。',
+    notes: '村莊舊學校改建公立庇護所，先到先得不可預約，具備專屬官網，全年開放。',
   },
   {
     id: 'ACC_NORTE_CADAVEDO_MUNICIPAL',
@@ -10649,7 +10721,23 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34 985 64 00 83',
     },
-    notes: '白色階梯漁港盧阿爾卡南郊公立庇護所，先到先得。',
+    notes: '白色階梯漁港盧阿爾卡南郊公立庇護所，偏離主線古道 2.2 公里，先到先得。',
+  },
+  {
+    id: 'ACC_NORTE_LUARCA_VILLA_DE_LUARCA',
+    waypointId: 'norte:luarca',
+    name: 'Albergue Villa de Luarca',
+    chineseName: '盧阿爾卡莊園朝聖者青年旅館',
+    type: 'HOSTEL',
+    priceEur: 20,
+    bedCount: 22,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34 660 81 94 34',
+      whatsapp: '+34660819434',
+      officialWebsiteUrl: 'https://alberguevilladeluarca.com/',
+    },
+    notes: '位於白色漁港盧阿爾卡市中心核心，免除公立庇護所偏離路線 2.2 公里之苦，支援官網與 WhatsApp 預訂。',
   },
   {
     id: 'ACC_NORTE_CARIDAD_MUNICIPAL',
@@ -10661,9 +10749,9 @@ export const accommodations: Accommodation[] = [
     bedCount: 18,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 985 47 86 01',
+      phone: '+34 624 84 12 17',
     },
-    notes: '跨海大橋前最後一個主要市政公立落腳點。',
+    notes: '跨海大橋進入加利西亞前最後市政公立點，開放期間 4/1~11/30，先到先得。',
   },
   {
     id: 'ACC_NORTE_RIBADEO_XUNTA',
@@ -10672,12 +10760,12 @@ export const accommodations: Accommodation[] = [
     chineseName: '里瓦德奧加利西亞官方公立庇護所',
     type: 'MUNICIPAL',
     priceEur: 10,
-    bedCount: 42,
+    bedCount: 12,
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 982 12 86 89',
     },
-    notes: '橫跨桑托斯跨海大橋進入加利西亞第一站，Xunta 官方網絡，不可預約。',
+    notes: '橫跨桑托斯大橋跨入加利西亞首站。實體僅 12 床極易客滿（先到先得不可預約），客滿可轉往市區私立青旅。',
   },
   {
     id: 'ACC_NORTE_LOU洛_GOUDAN',
@@ -10689,9 +10777,9 @@ export const accommodations: Accommodation[] = [
     bedCount: 22,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 982 12 11 00',
+      phone: '+34 606 82 25 90',
     },
-    notes: '山間石屋寧靜聚落，Xunta 官方公立庇護所。',
+    notes: '山間石造寧靜聚落，Xunta 官方公立不可預約，附簡易廚房（微波爐、冰箱，無明火）。',
   },
   {
     id: 'ACC_NORTE_LOURENZA_XUNTA',
@@ -10703,9 +10791,9 @@ export const accommodations: Accommodation[] = [
     bedCount: 26,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 982 12 10 06',
+      phone: '+34 650 96 11 25',
     },
-    notes: '聖薩爾瓦多修道院蠶豆之鄉，Xunta 官方公立網絡。',
+    notes: '聖薩爾瓦多修道院蠶豆之鄉，Xunta 官方網絡，附廚房與投幣洗烘衣設備。',
   },
   {
     id: 'ACC_NORTE_MONDONEDO_XUNTA',
@@ -10719,7 +10807,7 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34 982 52 10 00',
     },
-    notes: '加利西亞歷史古都，主教座堂前老街，Xunta 官方網絡。',
+    notes: '加利西亞古都主教座堂老城區，昔日小學改建之 Xunta 公立庇護所，不可預約。',
   },
   {
     id: 'ACC_NORTE_GONTAN_XUNTA',
@@ -10731,9 +10819,9 @@ export const accommodations: Accommodation[] = [
     bedCount: 26,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 982 50 80 00',
+      phone: '+34 659 13 97 34',
     },
-    notes: '河畔花園優質現代庇護所，Xunta 官方網絡。',
+    notes: '河畔綠地旁現代石木建築，設施齊全乾淨，Xunta 官方公立。',
   },
   {
     id: 'ACC_NORTE_VILALBA_XUNTA',
@@ -10745,9 +10833,9 @@ export const accommodations: Accommodation[] = [
     bedCount: 58,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 982 51 03 00',
+      phone: '+34 606 82 25 89',
     },
-    notes: '安德拉德古堡大鎮，規模完備之現代化公立庇護所。',
+    notes: '安德拉德古堡大鎮，規模完備之現代化公立庇護所，設有無障礙空間。',
   },
   {
     id: 'ACC_NORTE_BAAMONDE_XUNTA',
@@ -10761,7 +10849,7 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34 982 39 81 27',
     },
-    notes: '千年空心栗樹名鎮，超大容量公立庇護所，近火車站。',
+    notes: '千年空心栗樹名鎮，加利西亞超大容量公立庇護所，近火車站與草坪中庭。',
   },
   {
     id: 'ACC_NORTE_MIRAZ_CSJ',
@@ -10774,8 +10862,25 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 982 18 41 87',
+      officialWebsiteUrl: 'https://www.csj.org.uk/albergue-san-martin',
     },
-    notes: '英國聖地牙哥朝聖之路協會（CSJ）營運之石造庇護所，傳統隨喜接待（Donativo）。',
+    notes: '英國聖地牙哥朝聖之路協會（CSJ）志工營運之石造庇護所，傳統隨喜（Donativo），約 4/1~10/31 開放。',
+  },
+  {
+    id: 'ACC_NORTE_MIRAZ_ABRIGO',
+    waypointId: 'norte:miraz',
+    name: 'Albergue O Abrigo',
+    chineseName: '阿布里戈溫馨鄉村庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 16,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34 982 37 32 04',
+      whatsapp: '+34 629 18 17 99',
+      officialWebsiteUrl: 'https://albergueoabrigo.com/',
+    },
+    notes: 'Miraz 聚落重要私立備援，當 CSJ 隨喜庇護所滿床或淡季休館時之首選，附熱水淋浴與朝聖晚餐。',
   },
   {
     id: 'ACC_NORTE_SOBRADO_MONASTERIO',
@@ -10788,8 +10893,10 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 981 78 75 09',
+      whatsapp: '+34 682 86 52 14',
+      officialWebsiteUrl: 'https://monasteriodesobrado.org/',
     },
-    notes: '世界遺產十世紀皇家熙篤會古修道院內部，可直接夜宿於古老迴廊修道室中，極具震撼靈性體驗。',
+    notes: '世界文化遺產熙篤會古修道院內部，直接夜宿於迴廊修道室中，極具震撼靈性體驗，可參與修士晚禱。',
   },
   {
     id: 'ACC_NORTE_BOIMORTO_XUNTA',
@@ -10801,9 +10908,9 @@ export const accommodations: Accommodation[] = [
     bedCount: 34,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 981 51 60 00',
+      phone: '+34 606 82 25 87',
     },
-    notes: '匯入法國之路前最後一個北方之路專屬公立庇護所，Xunta 官方網絡。',
+    notes: '匯入法國之路（Arzúa）前最後一個北方之路專屬公立庇護所，避開匯流後的大量人潮。',
   },
   {
     id: 'ACC_NORTE_SAN_SEBASTIAN_DOWNTOWN',
@@ -11096,9 +11203,11 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 683 31 43 97',
+      whatsapp: '+34 683 31 43 97',
+      officialWebsiteUrl: 'https://albergueelolivo.es/',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-el-olivo-ribadeo.html',
     },
-    notes: '老城區石造房屋，後院有橄欖樹休憩中庭，設施新穎乾淨。',
+    notes: '老城區石造房屋，後院有橄欖樹休憩中庭，設施新穎乾淨，公立滿床時首選。',
   },
   {
     id: 'ACC_NORTE_RIBADEO_VIRUXE',
@@ -11126,6 +11235,8 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 982 52 17 51',
+      whatsapp: '+34 608 97 00 12',
+      officialWebsiteUrl: 'https://hotelmontero.es/',
       bookingComUrl: 'https://www.booking.com/hotel/es/montero-mondonedo.html',
     },
     notes: '座落於歷史古城入口，加利西亞傳統石牆風格，附設地方特色餐廳。',
@@ -11156,6 +11267,7 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34 982 51 01 23',
+      whatsapp: '+34 639 88 56 31',
     },
     notes: '安德拉德城堡旁，步行至古城廣場與超市極近。',
   },
@@ -11533,9 +11645,11 @@ export const accommodations: Accommodation[] = [
     bedCount: 24,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 900 00 00 00',
+      phone: '+34 686 79 43 89',
+      whatsapp: '+34 686 79 43 89',
+      officialWebsiteUrl: 'https://albergueaponte.es/',
     },
-    notes: 'Ribadeo 沿途站點重要朝聖接待處，提供自炊與休整補給。',
+    notes: '桑托斯大橋旁知名私立庇護所，提供自炊與洗烘設備，可提前預約。',
   },
   {
     id: 'ACC_NORTE_RIBADEO_HOSTEL_NAMOR',
@@ -11645,9 +11759,11 @@ export const accommodations: Accommodation[] = [
     bedCount: 24,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+34 900 00 00 00',
+      phone: '+34 982 50 81 48',
+      whatsapp: '+34 636 94 48 42',
+      officialWebsiteUrl: 'https://alberguexabarin.com/',
     },
-    notes: 'Abadín 沿途站點重要朝聖接待處，提供自炊與休整補給。',
+    notes: '國道旁阿瓦丁優質私立庇護所，附設餐廳酒吧與花園露臺，支援 WhatsApp 預約。',
   },
   {
     id: 'ACC_NORTE_ABADIN_ALBERGUE_GOAS',
