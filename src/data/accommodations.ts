@@ -10943,7 +10943,7 @@ export const accommodations: Accommodation[] = [
     notes: '舊工廠改建之工業風精品青旅，床位附隱私遮簾、個人插座與大容量電子密碼櫃。',
   },
   {
-    id: 'ACC_NORTE_ZARAUTZ_BLAI_BLAI',
+    id: 'ACC_NORTE_ZARAUTZ_BLAI_BLAI_2',
     waypointId: 'norte:zarautz',
     name: 'Blai Blai Hostel',
     chineseName: '布萊布萊海岸背包青旅',
@@ -11076,7 +11076,7 @@ export const accommodations: Accommodation[] = [
     notes: '高第建築名城，典雅花園庭院，提供朝聖者自炊廚房與洗衣烘乾。',
   },
   {
-    id: 'ACC_NORTE_SAN_VICENTE_NOMADA',
+    id: 'ACC_NORTE_SAN_VICENTE_NOMADA_2',
     waypointId: 'norte:san-vicente-barquera',
     name: 'Nómada Hostel',
     chineseName: '遊牧者海灣景觀青旅',
@@ -16692,5 +16692,874 @@ export const accommodations: Accommodation[] = [
       phone: '+34 900 00 00 00',
     },
     notes: 'Sobrado dos Monxes - Arzúa 沿線城鎮重要接待旅宿，提供舒適過夜與休整休息。',
-  }
+  },
+  // =========================================================================
+  // 世界盡頭延伸旅程 (Camino de Fisterra y Muxía) 權威查驗精選住宿 (58 筆)
+  // =========================================================================
+  {
+    id: 'ACC_FIN_NEGREIRA_MUNICIPAL_NEGREIRA',
+    waypointId: 'finisterre:negreira',
+    name: 'Albergue de peregrinos de Negreira',
+    chineseName: '內格雷拉公立庇護所',
+    type: 'MUNICIPAL',
+    priceEur: 10,
+    bedCount: 19,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34660789189',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+    },
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_NEGREIRA_PENSION_SAN_JOSE',
+    waypointId: 'finisterre:negreira',
+    name: 'Albergue-Pensión San José',
+    chineseName: '聖荷西庇護民宿',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 48,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34881976934',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_NEGREIRA_EL_CARMEN',
+    waypointId: 'finisterre:negreira',
+    name: 'Albergue El Carmen',
+    chineseName: '卡門庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 30,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34636129691',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_NEGREIRA_ALECRIN',
+    waypointId: 'finisterre:negreira',
+    name: 'Albergue Alecrín',
+    chineseName: '迷迭香庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 40,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981818286',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_NEGREIRA_BERGANDO',
+    waypointId: 'finisterre:negreira',
+    name: 'Albergue Bergando',
+    chineseName: '貝爾甘多庇護所',
+    type: 'PRIVATE',
+    priceEur: 20,
+    bedCount: 28,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34659447204',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_NEGREIRA_COTON',
+    waypointId: 'finisterre:negreira',
+    name: 'Albergue Cotón',
+    chineseName: '科頓庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 40,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34881979654',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_NEGREIRA_HOSTAL_LA_MEZQUITA',
+    waypointId: 'finisterre:negreira',
+    name: 'Hostal La Mezquita **',
+    chineseName: '清真寺客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 7,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34636129691',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_VILASERIO_PENSION_O_RUEIRO',
+    waypointId: 'finisterre:vilaserio',
+    name: 'Albergue-Pensión O Rueiro',
+    chineseName: '歐魯埃羅庇護客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 30,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34659568139',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-orueiro-vilaserio.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_VILASERIO_CASA_VELLA',
+    waypointId: 'finisterre:vilaserio',
+    name: 'Albergue Casa Vella',
+    chineseName: '老宅庇護所',
+    type: 'PRIVATE',
+    priceEur: 16,
+    bedCount: 15,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34651883535',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-orueiro-vilaserio.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_SANTA_MARINA_SANTA_MARINA',
+    waypointId: 'finisterre:maronas',
+    name: 'Albergue Santa Mariña',
+    chineseName: '聖瑪麗娜庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 32,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981852897'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_SANTA_MARINA_CASA_PEPA',
+    waypointId: 'finisterre:maronas',
+    name: 'Albergue Casa Pepa',
+    chineseName: '佩帕之家朝聖庇護所',
+    type: 'PRIVATE',
+    priceEur: 17,
+    bedCount: 38,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981852881'
+    },
+    notes: '聖瑪麗娜老牌鄉村庇護所，附設朝聖者餐廳，鄉村手作晚餐評價高。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_OLVEIROA_MUNICIPAL_OLVEIROA',
+    waypointId: 'finisterre:olveiroa',
+    name: 'Albergue de peregrinos de Olveiroa',
+    chineseName: '奧爾韋羅阿公立庇護所',
+    type: 'MUNICIPAL',
+    priceEur: 10,
+    bedCount: 40,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34658045242',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+    },
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_OLVEIROA_HORREO',
+    waypointId: 'finisterre:olveiroa',
+    name: 'Albergue Hórreo',
+    chineseName: '穀倉朝聖庇護所',
+    type: 'PRIVATE',
+    priceEur: 17,
+    bedCount: 58,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981741673',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+    },
+    notes: '保留傳統加利西亞高架穀倉庭園，空間寬敞，適合多日徒步中繼站。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_OLVEIROA_PENSION_CASA_MANOLA',
+    waypointId: 'finisterre:olveiroa',
+    name: 'Albergue-Pensión Casa Manola',
+    chineseName: '馬諾拉之家庇護客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 18,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981741745',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_OLVEIROA_PENSION_CASA_LONCHO',
+    waypointId: 'finisterre:olveiroa',
+    name: 'Pensión Casa Loncho **',
+    chineseName: '隆喬之家鄉村客棧',
+    type: 'HOSTEL',
+    priceEur: 50,
+    bedCount: 14,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981741673',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_OLVEIROA_PENSION_AS_PIAS',
+    waypointId: 'finisterre:olveiroa',
+    name: 'Pensión As Pías ***',
+    chineseName: '阿斯皮亞斯精品民宿',
+    type: 'HOSTEL',
+    priceEur: 40,
+    bedCount: 4,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981741520',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LOGOSO_PENSION_O_LOGOSO',
+    waypointId: 'finisterre:logoso',
+    name: 'Albergue-Pensión O Logoso',
+    chineseName: '奧洛戈索庇護客棧',
+    type: 'HOSTEL',
+    priceEur: 17,
+    bedCount: 38,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34659505399',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-logoso.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LOGOSO_PENSION_A_PEDRA',
+    waypointId: 'finisterre:logoso',
+    name: 'Pensión A Pedra *',
+    chineseName: '磐石客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 4,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34671543648',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-a-pedra.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_HOSPITAL_O_CASTELINO',
+    waypointId: 'finisterre:hospital',
+    name: 'Albergue O Casteliño',
+    chineseName: '小城堡庇護所',
+    type: 'PRIVATE',
+    priceEur: 14,
+    bedCount: 18,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34615997169'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_DUMBRIA_O_CONCO',
+    waypointId: 'finisterre:dumbria',
+    name: 'Albergue de peregrinos O Conco (Dumbría)',
+    chineseName: '歐康科公立庇護所（敦布里亞）',
+    type: 'MUNICIPAL',
+    priceEur: 10,
+    bedCount: 26,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981744001',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-lela-dumbria.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_DUMBRIA_PENSION_O_ARXENTINO',
+    waypointId: 'finisterre:dumbria',
+    name: 'Pensión O Arxentino *',
+    chineseName: '阿根廷人客棧',
+    type: 'HOSTEL',
+    priceEur: 60,
+    bedCount: 7,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981744051',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-lela-dumbria.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_DUMBRIA_CASA_LELA',
+    waypointId: 'finisterre:dumbria',
+    name: 'Casa Rural Lela',
+    chineseName: '萊拉鄉村民宿',
+    type: 'PRIVATE',
+    priceEur: 60,
+    bedCount: 5,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34669094827',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-lela-dumbria.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_A_CASA_DA_FONTE',
+    waypointId: 'finisterre:cee',
+    name: 'Albergue A Casa da Fonte',
+    chineseName: '噴泉之家庇護所',
+    type: 'PRIVATE',
+    priceEur: 16,
+    bedCount: 40,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34699242711',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-borda3n.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_O_BORDON',
+    waypointId: 'finisterre:cee',
+    name: 'Albergue O Bordón',
+    chineseName: '朝聖者手杖庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 24,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34655903932',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-borda3n.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_MOREIRA',
+    waypointId: 'finisterre:cee',
+    name: 'Albergue Moreira',
+    chineseName: '莫雷拉庇護所',
+    type: 'PRIVATE',
+    priceEur: 17,
+    bedCount: 14,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34620891547',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-borda3n.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_PENSION_TEQUERON',
+    waypointId: 'finisterre:cee',
+    name: 'Albergue-Pensión Tequerón',
+    chineseName: '特克隆庇護客棧',
+    type: 'HOSTEL',
+    priceEur: 17,
+    bedCount: 14,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34666119594',
+      bookingComUrl: 'https://www.booking.com/hotel/es/tequeron.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_TALIEIRO',
+    waypointId: 'finisterre:cee',
+    name: 'Albergue Talieiro',
+    chineseName: '塔利埃羅庇護所',
+    type: 'PRIVATE',
+    priceEur: 18,
+    bedCount: 16,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34647801669',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-talieiro.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_PENSION_BEIRAMAR',
+    waypointId: 'finisterre:cee',
+    name: 'Pensión Beiramar',
+    chineseName: '海濱客棧',
+    type: 'HOSTEL',
+    priceEur: 40,
+    bedCount: 8,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981745040',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-beiramar.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_HOTEL_LA_MARINA',
+    waypointId: 'finisterre:cee',
+    name: 'Hotel La Marina **',
+    chineseName: '瑪麗娜飯店',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 32,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981747381',
+      bookingComUrl: 'https://www.booking.com/hotel/es/la-marina-cee.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CEE_HOTEL_LARRY',
+    waypointId: 'finisterre:cee',
+    name: 'Hotel Larry **',
+    chineseName: '拉里飯店',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 21,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981746441',
+      bookingComUrl: 'https://www.booking.com/hotel/es/larry.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CORCUBION_SAN_ROQUE',
+    waypointId: 'finisterre:corcubion',
+    name: 'Albergue de peregrinos San Roque',
+    chineseName: '聖羅克公立庇護所（科爾庫維翁）',
+    type: 'MUNICIPAL',
+    priceEur: 15,
+    bedCount: 14,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34679460942',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-marviva-corcubion123456789101112131415161718192021.html?label=hotel_list&aid=357048'
+    },
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CORCUBION_PENSION_MAR_VIVA',
+    waypointId: 'finisterre:corcubion',
+    name: 'Pensión Mar Viva',
+    chineseName: '活海客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 6,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34649746329',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-marviva-corcubion123456789101112131415161718192021.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CORCUBION_HOTEL_ALDA_CORCUBION',
+    waypointId: 'finisterre:corcubion',
+    name: 'Hotel Alda Corcubión',
+    chineseName: '阿爾達科爾庫維翁飯店',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 16,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34881043759',
+      bookingComUrl: 'https://www.booking.com/hotel/es/as-hortensias.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_CORCUBION_CASA_DA_BALEA',
+    waypointId: 'finisterre:corcubion',
+    name: 'Casa da Balea ***',
+    chineseName: '鯨魚之村民宿',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 6,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981746645',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-da-balea.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_MUNICIPAL_FISTERRA',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue de peregrinos de Fisterra',
+    chineseName: '菲尼斯特雷官方公立庇護所',
+    type: 'MUNICIPAL',
+    priceEur: 10,
+    bedCount: 26,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981740781',
+      bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_PENSION_FINISTELLAE',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue-Pensión Finistellae',
+    chineseName: '天涯之星庇護客棧',
+    type: 'HOSTEL',
+    priceEur: 14,
+    bedCount: 20,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34637821296',
+      bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_PENSION_O_ENCONTRO',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue-Pensión O Encontro',
+    chineseName: '邂逅庇護客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 14,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34634454936',
+      bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_PENSION_CABO_DA_VILA',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue-Pensión Cabo da Vila',
+    chineseName: '海角小鎮庇護客棧',
+    type: 'HOSTEL',
+    priceEur: 20,
+    bedCount: 32,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34607735474',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-pension-cabo-da-vila.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_POR_FIN',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue Por Fin',
+    chineseName: '終點（Por Fin）庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 11,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34632112264',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-por-fin.html?label=hotel_link&aid=357048'
+    },
+    notes: '菲尼斯特雷中心著名朝聖庇護所，寓意「終於抵達」，氣氛熱情溫馨。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_MAR_DE_ROSTRO',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue Mar de Rostro',
+    chineseName: '面海（Mar de Rostro）庇護所',
+    type: 'PRIVATE',
+    priceEur: 18,
+    bedCount: 23,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34637107765',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-mar-de-rostro.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_MAR_DE_FORA',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue Mar de Fora',
+    chineseName: '外海（Mar de Fora）庇護所',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 34,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34648263639',
+      bookingComUrl: 'https://www.booking.com/hotel/es/mar-de-fora.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_FISTERRA_ARASOLIS',
+    waypointId: 'finisterre:fisterra',
+    name: 'Albergue Arasolis',
+    chineseName: '太陽祭壇庇護所',
+    type: 'PRIVATE',
+    priceEur: 17,
+    bedCount: 16,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34638326869',
+      bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_AS_EIRAS',
+    waypointId: 'finisterre:lires',
+    name: 'Albergue As Eiras',
+    chineseName: '阿斯埃拉斯庇護所',
+    type: 'PRIVATE',
+    priceEur: 25,
+    bedCount: 30,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981748180',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-as-eiras.html?label=hotel_link&aid=357048'
+    },
+    notes: '橫跨菲尼斯特雷與穆希亞中繼必經海灣聚落，露台可遠眺利雷斯海口夕陽。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_PENSION_CASA_LUZ',
+    waypointId: 'finisterre:lires',
+    name: 'Pensión Casa Luz **',
+    chineseName: '光之屋客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 5,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981748924',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-as-eiras.html?label=hotel_list&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_PENSION_FRAGAS_DA_CANTEIRA',
+    waypointId: 'finisterre:lires',
+    name: 'Pensión Fragas da Canteira **',
+    chineseName: '採石場森林客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 9,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981748997',
+      bookingComUrl: 'https://www.booking.com/hotel/es/fragas-da-canteira.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_HOTEL_LIRESCA',
+    waypointId: 'finisterre:lires',
+    name: 'Hotel LiresCa',
+    chineseName: '利雷斯卡特色精品飯店',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 8,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981464395',
+      bookingComUrl: 'https://www.booking.com/hotel/es/liresca.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_HOTEL_AS_EIRAS',
+    waypointId: 'finisterre:lires',
+    name: 'Hotel As Eiras ***',
+    chineseName: '阿斯埃拉斯三星級飯店',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 12,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981748180',
+      bookingComUrl: 'https://www.booking.com/hotel/es/as-eiras.html?label=hotel_link&aid=357048'
+    },
+    notes: '橫跨菲尼斯特雷與穆希亞中繼必經海灣聚落，露台可遠眺利雷斯海口夕陽。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_CASA_RAUL',
+    waypointId: 'finisterre:lires',
+    name: 'Casa Rural Raúl',
+    chineseName: '勞爾鄉村民宿',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 4,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34981748156',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-raul.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_CASA_JESUS_TURISMO_RURAL',
+    waypointId: 'finisterre:lires',
+    name: 'Casa Jesús Turismo Rural',
+    chineseName: '赫蘇斯農莊鄉村民宿',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 6,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34696029810',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-jesus-turismo-rural-cee.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_LIRES_APARTHOTEL_RIA_DE_LIRES',
+    waypointId: 'finisterre:lires',
+    name: 'Aparthotel Ría de Lires',
+    chineseName: '利雷斯河口公寓飯店',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 7,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34625270080',
+      bookingComUrl: 'https://www.booking.com/hotel/es/aparthotel-ria-de-lires.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_MUNICIPAL_MUXIA',
+    waypointId: 'finisterre:muxia',
+    name: 'Albergue de peregrinos de Muxía',
+    chineseName: '穆希亞官方公立庇護所',
+    type: 'MUNICIPAL',
+    priceEur: 10,
+    bedCount: 32,
+    hasKitchen: true,
+    bookingChannels: {
+      bookingComUrl: 'https://www.booking.com/hotel/es/hostel-bela-muxia.html?label=hotel_list&aid=357048'
+    },
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_BELA_MUXIA',
+    waypointId: 'finisterre:muxia',
+    name: 'Albergue Bela Muxía',
+    chineseName: '美麗穆希亞庇護所（文化主題）',
+    type: 'PRIVATE',
+    priceEur: 17,
+    bedCount: 44,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34687798222',
+      bookingComUrl: 'https://www.booking.com/hotel/es/hostel-bela-muxia.html?label=hotel_link&aid=357048'
+    },
+    notes: '穆希亞知名文化主題庇護所，紀念加利西亞詩人與傳奇巨石，設施極佳。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_ARRIBADA',
+    waypointId: 'finisterre:muxia',
+    name: 'Albergue Arribada',
+    chineseName: '抵達（Arribada）庇護所',
+    type: 'PRIVATE',
+    priceEur: 20,
+    bedCount: 40,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34981742516',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-arribada.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_DA_COSTA',
+    waypointId: 'finisterre:muxia',
+    name: 'Albergue da Costa',
+    chineseName: '海岸庇護所',
+    type: 'PRIVATE',
+    priceEur: 16,
+    bedCount: 8,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34676363820',
+      bookingComUrl: 'https://www.booking.com/hotel/es/dabalar.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_MUXIA_MARE',
+    waypointId: 'finisterre:muxia',
+    name: 'Albergue Muxía Mare',
+    chineseName: '穆希亞海潮庇護所',
+    type: 'PRIVATE',
+    priceEur: 16,
+    bedCount: 16,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34664102205',
+      bookingComUrl: 'https://www.booking.com/hotel/es/muxia-mare.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_PENSION_BELA_MUXIA',
+    waypointId: 'finisterre:muxia',
+    name: 'Pensión Bela Muxía',
+    chineseName: '美麗穆希亞客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 16,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34687798222',
+      bookingComUrl: 'https://www.booking.com/hotel/es/bela-muxia.html?label=hotel_link&aid=357048'
+    },
+    notes: '穆希亞知名文化主題庇護所，紀念加利西亞詩人與傳奇巨石，設施極佳。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_PENSION_RUSTICA_ALEMANA',
+    waypointId: 'finisterre:muxia',
+    name: 'Pensión Rústica Alemana',
+    chineseName: '德式鄉村客棧',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 4,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34986064877',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-alemana.html?label=hotel_link&aid=357048'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_FIN_MUXIA_MUXIA',
+    waypointId: 'finisterre:muxia',
+    name: 'Albergue @Muxía',
+    chineseName: '穆希亞科技庇護所',
+    type: 'PRIVATE',
+    priceEur: 17,
+    bedCount: 36,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34 609 61 55 33',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-muxia.es.html'
+    },
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Rúa Enfesto, 21, 15125 Muxía, A Coruña',
+  },
 ]

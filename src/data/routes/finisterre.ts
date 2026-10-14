@@ -64,11 +64,24 @@ const negreira: Waypoint = {
   routeVariant: 'COMMON',
 }
 
+const vilaserio: Waypoint = {
+  id: 'finisterre:vilaserio',
+  localName: 'Vilaserío',
+  spanishName: 'Vilaserío',
+  chineseName: '維拉塞里奧',
+  coordinates: { lat: 42.9242, lng: -8.8415 },
+  cumulativeKm: 33.7,
+  elevationM: 350,
+  hasAlbergue: true,
+  isMajorCity: false,
+  routeVariant: 'COMMON',
+}
+
 const maronas: Waypoint = {
   id: 'finisterre:maronas',
-  localName: 'Santa Mariña',
-  spanishName: 'Maroñas',
-  chineseName: '馬羅尼亞斯',
+  localName: 'Santa Mariña (As Maroñas)',
+  spanishName: 'Santa Mariña (As Maroñas)',
+  chineseName: '聖瑪麗娜',
   coordinates: { lat: 42.9469, lng: -8.9242 },
   cumulativeKm: 42.0,
   elevationM: 380,
@@ -85,6 +98,19 @@ const olveiroa: Waypoint = {
   coordinates: { lat: 42.9786, lng: -9.0433 },
   cumulativeKm: 54.0,
   elevationM: 280,
+  hasAlbergue: true,
+  isMajorCity: false,
+  routeVariant: 'COMMON',
+}
+
+const logoso: Waypoint = {
+  id: 'finisterre:logoso',
+  localName: 'O Logoso',
+  spanishName: 'Logoso',
+  chineseName: '洛戈索',
+  coordinates: { lat: 42.9882, lng: -9.0685 },
+  cumulativeKm: 57.7,
+  elevationM: 320,
   hasAlbergue: true,
   isMajorCity: false,
   routeVariant: 'COMMON',
@@ -194,8 +220,10 @@ export function getFinisterreWaypoints(option: FinisterreOption): Waypoint[] {
     return [
       { ...santiagoStart, cumulativeKm: 0 },
       { ...negreira, cumulativeKm: 21.0 },
+      { ...vilaserio, cumulativeKm: 33.7 },
       { ...maronas, cumulativeKm: 42.0 },
       { ...olveiroa, cumulativeKm: 54.0 },
+      { ...logoso, cumulativeKm: 57.7 },
       { ...hospital, cumulativeKm: 60.0 },
       { ...cee, cumulativeKm: 75.0 },
       { ...corcubion, cumulativeKm: 76.8 },
@@ -207,8 +235,10 @@ export function getFinisterreWaypoints(option: FinisterreOption): Waypoint[] {
     return [
       { ...santiagoStart, cumulativeKm: 0 },
       { ...negreira, cumulativeKm: 21.0 },
+      { ...vilaserio, cumulativeKm: 33.7 },
       { ...maronas, cumulativeKm: 42.0 },
       { ...olveiroa, cumulativeKm: 54.0 },
+      { ...logoso, cumulativeKm: 57.7 },
       { ...hospital, cumulativeKm: 60.0 },
       { ...dumbria, cumulativeKm: 64.5 },
       { ...muxia, cumulativeKm: 86.3 },
@@ -216,12 +246,14 @@ export function getFinisterreWaypoints(option: FinisterreOption): Waypoint[] {
   }
 
   if (option === 'BOTH_FINISTERRE_FIRST') {
-    // Santiago ➔ Negreira (21) ➔ Olveiroa (54) ➔ Fisterra (89.5) ➔ Lires (103.5) ➔ Muxía (118.5)
+    // Santiago ➔ Negreira (21) ➔ Vilaserío (33.7) ➔ Santa Mariña (42) ➔ Olveiroa (54) ➔ Fisterra (89.5) ➔ Lires (103.5) ➔ Muxía (118.5)
     return [
       { ...santiagoStart, cumulativeKm: 0 },
       { ...negreira, cumulativeKm: 21.0 },
+      { ...vilaserio, cumulativeKm: 33.7 },
       { ...maronas, cumulativeKm: 42.0 },
       { ...olveiroa, cumulativeKm: 54.0 },
+      { ...logoso, cumulativeKm: 57.7 },
       { ...hospital, cumulativeKm: 60.0 },
       { ...cee, cumulativeKm: 75.0 },
       { ...corcubion, cumulativeKm: 76.8 },
@@ -232,12 +264,14 @@ export function getFinisterreWaypoints(option: FinisterreOption): Waypoint[] {
   }
 
   if (option === 'BOTH_MUXIA_FIRST') {
-    // Santiago ➔ Negreira (21) ➔ Olveiroa (54) ➔ Muxía (86.3) ➔ Lires (101.3) ➔ Fisterra (118.5)
+    // Santiago ➔ Negreira (21) ➔ Vilaserío (33.7) ➔ Santa Mariña (42) ➔ Olveiroa (54) ➔ Muxía (86.3) ➔ Lires (101.3) ➔ Fisterra (118.5)
     return [
       { ...santiagoStart, cumulativeKm: 0 },
       { ...negreira, cumulativeKm: 21.0 },
+      { ...vilaserio, cumulativeKm: 33.7 },
       { ...maronas, cumulativeKm: 42.0 },
       { ...olveiroa, cumulativeKm: 54.0 },
+      { ...logoso, cumulativeKm: 57.7 },
       { ...hospital, cumulativeKm: 60.0 },
       { ...dumbria, cumulativeKm: 64.5 },
       { ...muxia, cumulativeKm: 86.3 },
@@ -255,8 +289,10 @@ export function getFinisterreWaypoints(option: FinisterreOption): Waypoint[] {
 export const allFinisterreWaypoints: Waypoint[] = [
   santiagoStart,
   negreira,
+  vilaserio,
   maronas,
   olveiroa,
+  logoso,
   hospital,
   cee,
   corcubion,
