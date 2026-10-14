@@ -44,9 +44,6 @@ onUnmounted(() => {
             <h1 class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
               Camino Planner
             </h1>
-            <span class="rounded-full bg-amber-100 px-1.5 py-0.5 sm:px-2 text-[10px] font-bold text-amber-800 shrink-0">
-              🇪🇸 法國之路
-            </span>
           </div>
         </div>
       </div>
@@ -106,7 +103,6 @@ onUnmounted(() => {
         >
           <Wifi v-if="isOnline" class="h-3.5 w-3.5 text-emerald-600 animate-pulse" />
           <WifiOff v-else class="h-3.5 w-3.5 text-amber-600" />
-          <span class="hidden sm:inline font-mono">{{ isOnline ? '連線正常' : '離線模式' }}</span>
         </div>
       </div>
     </div>

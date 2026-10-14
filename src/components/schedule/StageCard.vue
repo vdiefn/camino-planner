@@ -107,25 +107,25 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
               </span>
               <span
                 v-if="stage.isExtensionStage && !stage.isRestDay"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-800"
+                class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-50 border border-sky-200 text-sky-900"
               >
-                🌊 世界盡頭延伸
+                世界盡頭延伸
               </span>
               <span
                 v-if="stage.routeVariant === 'NAPOLEON'"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-900 border border-amber-300"
+                class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200"
               >
-                ⛰️ 拿破崙之路（高山越嶺）
+                拿破崙之路
               </span>
               <span
                 v-else-if="stage.routeVariant === 'VALCARLOS'"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-900 border border-sky-300"
+                class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-50 text-sky-900 border border-sky-200"
               >
-                🌲 瓦卡洛斯之路（山谷替代）
+                瓦卡洛斯之路
               </span>
               <span
                 v-if="!stage.isRestDay && (stage.endWaypointId === 'SANTIAGO_DE_COMPOSTELA' || stage.endWaypointId.endsWith(':santiago'))"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800"
+                class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200"
               >
                 🎉 朝聖主線終點
               </span>
