@@ -84,7 +84,7 @@ const localAlbergues = computed(() => {
                     class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition flex items-center gap-1 font-normal"
                   >
                     <ExternalLink class="w-3 h-3" />
-                    Google 地圖搜尋該地區住宿
+                    Google 地圖搜尋住宿
                   </a>
                 </div>
               </div>
@@ -105,7 +105,7 @@ const localAlbergues = computed(() => {
                       class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100 transition shadow-xs flex items-center gap-1.5"
                     >
                       <ExternalLink class="w-3.5 h-3.5 text-amber-600" />
-                      Gronze 權威住宿查驗
+                      Gronze 查詢
                     </a>
                     <a
                       :href="`https://www.google.com/maps/search/alojamiento+hotel+albergue+${encodeURIComponent(endWaypoint?.spanishName || endWaypoint?.localName || '')}`"
