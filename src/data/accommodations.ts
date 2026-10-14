@@ -8181,7 +8181,7 @@ export const accommodations: Accommodation[] = [
   },
 
   // ==========================================
-  // Camino Portugués (葡萄牙之路雙線官方與經典庇護所 145 筆)
+  // Camino Portugués (葡萄牙之路雙線官方與經典庇護所已升級真實聯絡管道與解除瓶頸 184 筆)
   // ==========================================
   {
     id: 'ACC_PORT_PORTO_ALBERGUE_DE_PERE',
@@ -8193,7 +8193,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8207,7 +8207,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8221,7 +8221,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8235,7 +8235,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8246,10 +8246,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Mosteiró朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 25,
-    bedCount: 20,
+    bedCount: 9,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351911121122',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-dos-caminhos.html?label=hotel_link&aid=357048'
     },
     notes: 'Mosteiró 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8259,11 +8260,11 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue de peregrinos do Mosteiro de Vairão',
     chineseName: 'Vairão朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 10,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 50,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351966431916'
     },
     notes: 'Vairão 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8277,7 +8278,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Fajozes 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8288,10 +8289,10 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Vilarinho朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 17,
-    bedCount: 20,
+    bedCount: 13,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351917767307'
     },
     notes: 'Vilarinho 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8302,10 +8303,10 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Vilarinho朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 20,
-    bedCount: 20,
+    bedCount: 7,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351966766092'
     },
     notes: 'Vilarinho 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8315,11 +8316,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue de peregrinos de São Pedro de Rates',
     chineseName: 'São Pedro de Rates朝聖庇護所',
     type: 'PAROCHIAL',
-    priceEur: 0,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 52,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 252 957 156',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casaanabela.es.html?label=hotel_list&aid=357048'
     },
     notes: 'São Pedro de Rates 朝聖古道重要接待旅宿，提供舒適過夜與休息。（傳統隨喜 Donativo）',
   },
@@ -8330,10 +8332,10 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Pedra Furada朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 24,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351252954331'
     },
     notes: 'Pedra Furada 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8347,7 +8349,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Pereira (Barcelos) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8361,7 +8363,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Pereira (Barcelos) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8371,11 +8373,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Cidade de Barcelos',
     chineseName: 'Barcelos朝聖庇護所',
     type: 'PAROCHIAL',
-    priceEur: 0,
+    priceEur: 15,
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 253 824 167',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/in-barcelos.html?label=hotel_list&aid=357048'
     },
     notes: 'Barcelos 朝聖古道重要接待旅宿，提供舒適過夜與休息。（傳統隨喜 Donativo）',
   },
@@ -8389,7 +8392,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 253 824 167'
     },
     notes: 'Barcelos 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8403,7 +8406,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Portela de Tamel 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8414,10 +8417,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Vitorino dos Piães朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 35,
-    bedCount: 20,
+    bedCount: 10,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351914589521',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/esta-bulo-de-valinhas.html?label=hotel_list&aid=357048'
     },
     notes: 'Vitorino dos Piães 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8431,7 +8435,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Facha 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8442,10 +8446,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Ponte de Lima朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 5,
-    bedCount: 20,
+    bedCount: 60,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351925403164',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/pousada-de-juventude-de-ponte-de-lima.html?label=hotel_list&aid=357048'
     },
     notes: 'Ponte de Lima 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8455,11 +8460,12 @@ export const accommodations: Accommodation[] = [
     name: 'Pousada de Juventude de Ponte de Lima',
     chineseName: 'Ponte de Lima朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 52,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351258751321',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/pousada-de-juventude-de-ponte-de-lima.html?label=hotel_link&aid=357048'
     },
     notes: 'Ponte de Lima 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8470,10 +8476,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Codeçal朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 20,
-    bedCount: 20,
+    bedCount: 8,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351935883131',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_list&aid=357048'
     },
     notes: 'Codeçal 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8487,7 +8494,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Agualonga 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8498,10 +8505,10 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Rubiães朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 34,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351965053751'
     },
     notes: 'Rubiães 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8515,7 +8522,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Rubiães 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8526,10 +8533,10 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Rubiães朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 14,
-    bedCount: 20,
+    bedCount: 14,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351962830024'
     },
     notes: 'Rubiães 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8540,10 +8547,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Fontoura朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 20,
-    bedCount: 20,
+    bedCount: 14,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34677012859',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-quinta-do-cruzeiro.html?label=hotel_list&aid=357048'
     },
     notes: 'Fontoura 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8557,7 +8565,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Paços 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8571,7 +8579,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Arão 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8582,10 +8590,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Valença朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 8,
-    bedCount: 20,
+    bedCount: 49,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351961168501',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/hostel-bulwark.html?label=hotel_list&aid=357048'
     },
     notes: 'Valença 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8596,10 +8605,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Tui朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 36,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34649502704',
+      bookingComUrl: 'https://www.booking.com/hotel/es/convento-del-camino.es.html?label=hotel_list&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8609,25 +8619,27 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Convento del Camino',
     chineseName: 'Tui朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 16,
-    bedCount: 20,
+    priceEur: 17,
+    bedCount: 43,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34690328565',
+      bookingComUrl: 'https://www.booking.com/hotel/es/convento-del-camino.es.html?label=hotel_link&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_TUI_JACOB__039_S_HOS',
     waypointId: 'portugues:tui',
-    name: "Jacob's Hostel Tui",
+    name: 'Jacob\'s Hostel Tui',
     chineseName: 'Tui朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 16,
-    bedCount: 20,
+    priceEur: 18,
+    bedCount: 19,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34644557194',
+      bookingComUrl: 'https://www.booking.com/hotel/es/jacob-39-s-hostel-tui.html?label=hotel_link&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8637,11 +8649,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Villa San Clemente',
     chineseName: 'Tui朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 15,
-    bedCount: 20,
+    priceEur: 17,
+    bedCount: 22,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34686342075',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-villa-san-clemente.html?label=hotel_link&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8655,7 +8668,8 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986604052',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-buen-camino-tui.html?label=hotel_link&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8669,7 +8683,8 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34679774753',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-pallanes.html?label=hotel_link&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8679,25 +8694,27 @@ export const accommodations: Accommodation[] = [
     name: 'A Troita Hostel',
     chineseName: 'Tui朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 16,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 22,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34682757397',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-troita-hostel.es.html?label=hotel_link&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_TUI_ALBERGUE_IDEAS_P',
     waypointId: 'portugues:tui',
-    name: 'Albergue Ideas Peregrinas',
+    name: 'Albergue Ide',
     chineseName: 'Tui朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 12,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986076330',
+      bookingComUrl: 'https://www.booking.com/hotel/es/ideas-peregrinas.html?label=hotel_link&aid=357048'
     },
     notes: 'Tui 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8711,7 +8728,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Orbenlle 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8725,7 +8742,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Ameiro Longo 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8739,7 +8756,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Veigadaña 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8750,10 +8767,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Rúa (Mos)朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 37,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986348001',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-casa-dos-parladoiros.html?label=hotel_list&aid=357048'
     },
     notes: 'Rúa (Mos) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8767,7 +8785,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Capilla de Santiaguiño 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8778,10 +8796,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 36,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34618338045',
+      bookingComUrl: 'https://www.booking.com/hotel/es/santiago-apostol-de-redondela.html?label=hotel_list&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8792,10 +8811,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 15,
-    bedCount: 20,
+    bedCount: 32,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34627748802',
+      bookingComUrl: 'https://www.booking.com/hotel/es/santiago-apostol-de-redondela.html?label=hotel_link&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8805,11 +8825,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue A Casa da Herba',
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 21,
+    bedCount: 24,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34644404074',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-casa-da-herba.html?label=hotel_link&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8819,11 +8840,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue A Conserveira',
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 16,
-    bedCount: 20,
+    priceEur: 17,
+    bedCount: 40,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34676667293',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-conserveira.html?label=hotel_link&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8834,10 +8856,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 17,
-    bedCount: 20,
+    bedCount: 46,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34673414752',
+      bookingComUrl: 'https://www.booking.com/hotel/es/santiago-de-vilavella.html?label=hotel_link&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8848,10 +8871,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 20,
-    bedCount: 20,
+    bedCount: 9,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34657805988',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-rotonda.html?label=hotel_link&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8861,11 +8885,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Avoa Regina',
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 15,
-    bedCount: 20,
+    priceEur: 17,
+    bedCount: 32,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986125297',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-avoa-regina.html?label=hotel_link&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8875,11 +8900,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Alfonso XII',
     chineseName: 'Redondela朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 8,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34676167662',
+      bookingComUrl: 'https://www.booking.com/hotel/es/alfonso-xii.html?label=hotel_link&aid=357048'
     },
     notes: 'Redondela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8893,7 +8919,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Cesantes 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8907,7 +8933,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Cesantes 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8918,10 +8944,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Arcade朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 12,
-    bedCount: 20,
+    bedCount: 10,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34649494905',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-filla-do-mar.html?label=hotel_list&aid=357048'
     },
     notes: 'Arcade 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8932,10 +8959,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Arcade朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 16,
-    bedCount: 20,
+    bedCount: 28,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34616107820',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-filla-do-mar.html?label=hotel_list&aid=357048'
     },
     notes: 'Arcade 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8946,10 +8974,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Arcade朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 18,
-    bedCount: 20,
+    bedCount: 26,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986401754',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-filla-do-mar.html?label=hotel_list&aid=357048'
     },
     notes: 'Arcade 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8959,11 +8988,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue A Filla do Mar',
     chineseName: 'Arcade朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 35,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 26,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986841522',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-filla-do-mar.html?label=hotel_link&aid=357048'
     },
     notes: 'Arcade 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8977,7 +9007,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Pontesampaio 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -8988,10 +9018,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 86,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986844045',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-aloxa-hostel-pontevedra.html?label=hotel_list&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9001,11 +9032,12 @@ export const accommodations: Accommodation[] = [
     name: 'Aloxa Hostel',
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 19,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 60,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34663438770',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-aloxa-hostel-pontevedra.html?label=hotel_link&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9015,11 +9047,12 @@ export const accommodations: Accommodation[] = [
     name: 'Slow City Hostel',
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 6,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34631062896',
+      bookingComUrl: 'https://www.booking.com/hotel/es/slow-city-hostel-pontevedra.html?label=hotel_link&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9029,11 +9062,12 @@ export const accommodations: Accommodation[] = [
     name: 'Acolá Hostel',
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 16,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34678680758',
+      bookingComUrl: 'https://www.booking.com/hotel/es/acola-hostel-pontevedra.html?label=hotel_link&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9043,11 +9077,12 @@ export const accommodations: Accommodation[] = [
     name: 'Nacama Hostel',
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 22,
+    bedCount: 42,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986050888',
+      bookingComUrl: 'https://www.booking.com/hotel/es/nacama-hostel-pontevedra-pontevedra1234567891011.html?label=hotel_link&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9057,11 +9092,12 @@ export const accommodations: Accommodation[] = [
     name: 'dpaso Urban Hostel',
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 22,
+    priceEur: 15,
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34625145630',
+      bookingComUrl: 'https://www.booking.com/hotel/es/dpaso-urban-hostel.html?label=hotel_link&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9071,11 +9107,12 @@ export const accommodations: Accommodation[] = [
     name: 'GBC Hostel Pontevedra',
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 19,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 40,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34676188664',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-gbc-hostel.html?label=hotel_link&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9085,11 +9122,12 @@ export const accommodations: Accommodation[] = [
     name: 'Hostel Charino',
     chineseName: 'Ganderón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 25,
-    bedCount: 20,
+    priceEur: 35,
+    bedCount: 24,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34615641432',
+      bookingComUrl: 'https://www.booking.com/hotel/es/hostel-charino.html?label=hotel_link&aid=357048'
     },
     notes: 'Ganderón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9103,7 +9141,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'San Caetano (Pontevedra) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9117,7 +9155,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'A Seca (Barro) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9131,7 +9169,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Briallos 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9145,121 +9183,128 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Tivo 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_ALBERGUE_DE_CALD',
     waypointId: 'portugues:caldas-de-reis',
-    name: 'Albergue de Caldas de Reis Urraca',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    name: 'Albergue de Cald Reis Urraca',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 20,
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_ALBERGUE_A_QUEIM',
     waypointId: 'portugues:caldas-de-reis',
     name: 'Albergue A Queimada',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 72,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986189194',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-a-queimada.html?label=hotel_link&aid=357048'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_ALBERGUE_AS_POZA',
     waypointId: 'portugues:caldas-de-reis',
-    name: 'Albergue As Pozas Termais',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    name: 'Albergue As Poz',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 25,
-    bedCount: 20,
+    bedCount: 26,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34666941113',
+      bookingComUrl: 'https://www.booking.com/hotel/es/as-pozas-termais.html?label=hotel_link&aid=357048'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_ALBERGUE_ARGEMIR',
     waypointId: 'portugues:caldas-de-reis',
     name: 'Albergue Argemira',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 19,
-    bedCount: 20,
+    priceEur: 20,
+    bedCount: 28,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34613063551',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-argemira.html?label=hotel_link&aid=357048'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_ALBERGUE_ALBOR',
     waypointId: 'portugues:caldas-de-reis',
     name: 'Albergue Albor',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 22,
-    bedCount: 20,
+    bedCount: 35,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34600351157',
+      bookingComUrl: 'https://www.booking.com/hotel/es/la-torre-hostel.html?label=hotel_list&aid=357048'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_ALBERGUE_PENSION',
     waypointId: 'portugues:caldas-de-reis',
     name: 'Albergue-Pensión Timonel',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 13,
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986540840',
+      bookingComUrl: 'https://www.booking.com/hotel/es/la-torre-hostel.html?label=hotel_list&aid=357048'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_GBC_HOSTEL_CALDA',
     waypointId: 'portugues:caldas-de-reis',
     name: 'GBC Hostel Caldas',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 25,
+    bedCount: 100,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34604053729',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-celenis.html?label=hotel_link&aid=357048'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_CALDAS_DE_REIS_THERMA_PILGRIM_H',
     waypointId: 'portugues:caldas-de-reis',
     name: 'Therma Pilgrim Hostel',
-    chineseName: 'Caldas de Reis朝聖庇護所',
+    chineseName: 'Cald Reis朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 25,
+    bedCount: 16,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34659214804',
+      bookingComUrl: 'https://www.booking.com/hotel/es/therma-pilgrim-hostel.es.html?label=hotel_link&aid=357048'
     },
-    notes: 'Caldas de Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+    notes: 'Cald Reis 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_PONTEVEDRA_ALBERGUE_DE_PERE_4',
@@ -9271,7 +9316,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'O Pino (Valga) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9282,10 +9327,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'San Miguel de Valga朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 54,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34699832730',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-do-horreo.html?label=hotel_list&aid=357048'
     },
     notes: 'San Miguel de Valga 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9296,10 +9342,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 48,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34673656173',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-corredoiras.html?label=hotel_list&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9309,11 +9356,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Corredoiras',
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 24,
+    bedCount: 17,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34981817266',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-corredoiras.html?label=hotel_link&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9323,11 +9371,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Camiño do Sar',
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 22,
+    priceEur: 20,
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34618734373',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-camino-do-sar.es.html?label=hotel_link&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9337,11 +9386,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue O Pedrón',
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 44,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34881121266',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-pedron.html?label=hotel_link&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9351,25 +9401,27 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Murgadán',
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 20,
+    bedCount: 32,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34638298437',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-murgadan.html?label=hotel_link&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
   {
     id: 'ACC_PORT_PADRON_ALBERGUE_D__039_',
     waypointId: 'portugues:padron',
-    name: "Albergue d'Camiño",
+    name: 'Albergue d\'Camiño',
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 19,
-    bedCount: 20,
+    priceEur: 27,
+    bedCount: 15,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34615046723',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-d-39-camino.html?label=hotel_link&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9379,11 +9431,12 @@ export const accommodations: Accommodation[] = [
     name: 'O Albergue da Meiga',
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 50,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34639994048',
+      bookingComUrl: 'https://www.booking.com/hotel/es/o-albergue-da-meiga.html?label=hotel_link&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9394,10 +9447,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Padrón朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 20,
-    bedCount: 20,
+    bedCount: 22,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34981810455',
+      bookingComUrl: 'https://www.booking.com/hotel/es/pension-flavia.html?label=hotel_link&aid=357048'
     },
     notes: 'Padrón 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9411,7 +9465,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Iria Flavia 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9422,10 +9476,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'O Milladoiro朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 17,
-    bedCount: 20,
+    bedCount: 62,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34981938382',
+      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-milladoiro.html?label=hotel_link&aid=357048'
     },
     notes: 'O Milladoiro 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9439,7 +9494,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9453,7 +9508,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9467,7 +9522,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9481,7 +9536,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9495,7 +9550,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9509,7 +9564,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9523,7 +9578,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9537,7 +9592,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santiago de Compostela 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9551,7 +9606,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Praia de Labruge 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9565,7 +9620,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Praia de Labruge 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9579,7 +9634,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Praia de Labruge 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9593,7 +9648,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Vila do Conde 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9607,7 +9662,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Vila do Conde 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9618,10 +9673,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Póvoa de Varzim朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 36,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351252622314',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/sardines-and-friends.html?label=hotel_list&aid=357048'
     },
     notes: 'Póvoa de Varzim 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9635,7 +9691,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Apúlia 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9645,11 +9701,12 @@ export const accommodations: Accommodation[] = [
     name: 'HI Ofir - Pousada de Juventude',
     chineseName: 'Fão朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 16,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 88,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351253982045',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/the-spot-hostel-ofir.html?label=hotel_list&aid=357048'
     },
     notes: 'Fão 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9660,10 +9717,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Marinhas朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 14,
-    bedCount: 20,
+    bedCount: 30,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351967611204',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/marinhas-bed-amp-breakfast.html?label=hotel_list&aid=357048'
     },
     notes: 'Marinhas 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9677,7 +9735,8 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351962471251',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/minho-at-home.es.html?label=hotel_list&aid=357048'
     },
     notes: 'Castelo do Neiva 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9691,7 +9750,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Anha 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9702,10 +9761,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Viana do Castelo朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 15,
-    bedCount: 20,
+    bedCount: 55,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351258822264',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/albergue-de-peregrinos-hostel-viana-do-castelo.es.html?label=hotel_list&aid=357048'
     },
     notes: 'Viana do Castelo 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9715,11 +9775,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue de Santa Luzia',
     chineseName: 'Viana do Castelo朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 38,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351258823173',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/albergue-de-peregrinos-hostel-viana-do-castelo.es.html?label=hotel_link&aid=357048'
     },
     notes: 'Viana do Castelo 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9729,11 +9790,12 @@ export const accommodations: Accommodation[] = [
     name: 'Pousada de Juventude de Viana do Castelo',
     chineseName: 'Viana do Castelo朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 23,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 40,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351258838458',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/pousada-de-juventude-de-viana-do-castelo.html?label=hotel_link&aid=357048'
     },
     notes: 'Viana do Castelo 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9747,7 +9809,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Carreço 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9761,7 +9823,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Carreço 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9772,10 +9834,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Caminha朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 27,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351914290431',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/bom-caminha-private-albergue-amp-guest-house.html?label=hotel_list&aid=357048'
     },
     notes: 'Caminha 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9785,11 +9848,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Bom Caminha',
     chineseName: 'Caminha朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 16,
-    bedCount: 20,
+    priceEur: 17,
+    bedCount: 16,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351963528441',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/bom-caminha-private-albergue-amp-guest-house.html?label=hotel_link&aid=357048'
     },
     notes: 'Caminha 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9799,11 +9863,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue Santiago de Caminha',
     chineseName: 'Caminha朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 21,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 16,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351962974936',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/albergue-santiago-de-caminha.es.html?label=hotel_link&aid=357048'
     },
     notes: 'Caminha 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9813,11 +9878,12 @@ export const accommodations: Accommodation[] = [
     name: 'Olá Vida Hostel',
     chineseName: 'Caminha朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 24,
-    bedCount: 20,
+    priceEur: 15,
+    bedCount: 14,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351926677900',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/olavida-hostel-caminha.es.html?label=hotel_link&aid=357048'
     },
     notes: 'Caminha 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9828,10 +9894,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Camposancos朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 36,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34619258075',
+      bookingComUrl: 'https://www.booking.com/hotel/es/o-peirao.html?label=hotel_list&aid=357048'
     },
     notes: 'Camposancos 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9841,11 +9908,12 @@ export const accommodations: Accommodation[] = [
     name: 'Albergue O Peirao',
     chineseName: 'Camposancos朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 20,
-    bedCount: 20,
+    priceEur: 18,
+    bedCount: 16,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34682190102',
+      bookingComUrl: 'https://www.booking.com/hotel/es/o-peirao.html?label=hotel_link&aid=357048'
     },
     notes: 'Camposancos 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9859,7 +9927,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Viladesuso 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9873,7 +9941,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Viladesuso 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9887,7 +9955,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Porto Mougás 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9901,7 +9969,8 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34986133213',
+      bookingComUrl: 'https://www.booking.com/hotel/es/estela-do-mar.html?label=hotel_link&aid=357048'
     },
     notes: 'Baiona 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9911,11 +9980,12 @@ export const accommodations: Accommodation[] = [
     name: 'Hostel Baionamar',
     chineseName: 'Baiona朝聖庇護所',
     type: 'PRIVATE',
-    priceEur: 18,
-    bedCount: 20,
+    priceEur: 20,
+    bedCount: 18,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34698165575',
+      bookingComUrl: 'https://www.booking.com/hotel/es/hostel-baionamar.html?label=hotel_link&aid=357048'
     },
     notes: 'Baiona 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9929,7 +9999,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Sabarís (Santa Cristina da Ramallosa) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9940,10 +10010,10 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Priegue朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 14,
-    bedCount: 20,
+    bedCount: 10,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34689133973'
     },
     notes: 'Priegue 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9957,7 +10027,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'O Freixo (Valadares) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9968,10 +10038,11 @@ export const accommodations: Accommodation[] = [
     chineseName: 'Vigo朝聖庇護所',
     type: 'PRIVATE',
     priceEur: 10,
-    bedCount: 20,
+    bedCount: 93,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+34650812048',
+      bookingComUrl: 'https://www.booking.com/hotel/es/real4.html?label=hotel_list&aid=357048'
     },
     notes: 'Vigo 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9985,7 +10056,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -9999,7 +10070,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10013,7 +10084,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10027,7 +10098,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10041,7 +10112,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10055,7 +10126,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10069,7 +10140,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Moreira da Maia 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10083,7 +10154,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Moreira da Maia 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10097,7 +10168,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Moreira da Maia 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10111,7 +10182,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10125,7 +10196,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10139,7 +10210,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10153,7 +10224,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10167,7 +10238,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10181,7 +10252,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 925 572 630'
     },
     notes: 'Aeroporto do Porto 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10195,7 +10266,7 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Vilar (Vila do Conde) 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
   },
@@ -10209,9 +10280,593 @@ export const accommodations: Accommodation[] = [
     bedCount: 20,
     hasKitchen: true,
     bookingChannels: {
-      phone: '+351 900 000 000',
+      phone: '+351 213 463 624'
     },
     notes: 'Santagões 朝聖古道重要接待旅宿，提供舒適過夜與休息。',
+  },
+  {
+    id: 'ACC_PORT_RATES_CASA_ANABELA',
+    waypointId: 'portugues:rates',
+    name: 'Casa Anabela',
+    chineseName: 'Casa Anabela',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 4,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351919578642',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casaanabela.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_RATES_CASA_MATTOS',
+    waypointId: 'portugues:rates',
+    name: 'Casa Mattos',
+    chineseName: 'Casa Mattos',
+    type: 'PRIVATE',
+    priceEur: 40,
+    bedCount: 5,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351919822398',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casaanabela.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_RATES_CASA_DA_VILA_GUEST_HOUSE',
+    waypointId: 'portugues:rates',
+    name: 'Casa da Vila Guest House',
+    chineseName: 'Casa da Vila Guest House',
+    type: 'PRIVATE',
+    priceEur: 160,
+    bedCount: 2,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351913317842',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-da-vila-guest-house.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_PEDRA_FURADA_CASA_DA_MARIA',
+    waypointId: 'portugues:pedra-furada',
+    name: 'Casa Da Maria',
+    chineseName: 'Casa Da Maria',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 20,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351253852611'
+    },
+    notes: '位於 Pedra Furada，提供朝聖者舒適住宿與休整。 備有自炊廚房。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_VITORINO_DOS_PIAES_CASA_SAGRES',
+    waypointId: 'portugues:vitorino-dos-piaes',
+    name: 'Casa Sagres',
+    chineseName: 'Casa Sagres',
+    type: 'PRIVATE',
+    priceEur: 23,
+    bedCount: 5,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+351962916441',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/esta-bulo-de-valinhas.html?label=hotel_list&aid=357048'
+    },
+    notes: '位於 Vitorino dos Piães，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_VITORINO_DOS_PIAES_CASA_O_ESTABULO_DE_VALINHAS',
+    waypointId: 'portugues:vitorino-dos-piaes',
+    name: 'Casa Rural O Estábulo de Valinhas',
+    chineseName: 'Casa Rural O Estábulo de Valinhas',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 10,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+351961050955',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/esta-bulo-de-valinhas.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Vitorino dos Piães，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_LABRUJA_CASA_DA_VALADA',
+    waypointId: 'portugues:labruja',
+    name: 'Albergue Casa da Valada',
+    chineseName: 'Albergue Casa da Valada',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 13,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351967742694',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_LABRUJA_CASA_DO_CHAFARIZ',
+    waypointId: 'portugues:labruja',
+    name: 'Casa do Chafariz',
+    chineseName: 'Casa do Chafariz',
+    type: 'PRIVATE',
+    priceEur: 25,
+    bedCount: 20,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351967656435',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_LABRUJA_CASA_DO_OLIVAL',
+    waypointId: 'portugues:labruja',
+    name: 'Casa do Olival',
+    chineseName: 'Casa do Olival',
+    type: 'PRIVATE',
+    priceEur: 35,
+    bedCount: 3,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+351961251175',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_LABRUJA_CASA_DAS_POCAS_GUEST_HOUSE',
+    waypointId: 'portugues:labruja',
+    name: 'Casa das Poças Guest House',
+    chineseName: 'Casa das Poças Guest House',
+    type: 'PRIVATE',
+    priceEur: 40,
+    bedCount: 2,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351967361935',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_LABRUJA_QUINTA_LABRUJA',
+    waypointId: 'portugues:labruja',
+    name: 'Quinta Labruja',
+    chineseName: 'Quinta Labruja',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 2,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+351935268485',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/quinta-labruja-labruja.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_FONTOURA_CASA_DA_QUINTA_DO_CRUZEIRO',
+    waypointId: 'portugues:fontoura',
+    name: 'Casa da Quinta do Cruzeiro',
+    chineseName: 'Casa da Quinta do Cruzeiro',
+    type: 'PRIVATE',
+    priceEur: 40,
+    bedCount: 3,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351937625011',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-quinta-do-cruzeiro.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Fontoura，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_FONTOURA_QUINTA_DE_REAL',
+    waypointId: 'portugues:fontoura',
+    name: 'Quinta de Real',
+    chineseName: 'Quinta de Real',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 6,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351969844495',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/quinta-de-real.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Fontoura，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_VALENCA_HOSTEL_BULWARK',
+    waypointId: 'portugues:valenca',
+    name: 'Hostel Bulwark',
+    chineseName: 'Hostel Bulwark',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 2,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351928142906',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/hostel-bulwark.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_VALENCA_RESIDENCIAL_PORTAS_DO_SOL',
+    waypointId: 'portugues:valenca',
+    name: 'Residencial Portas do Sol',
+    chineseName: 'Residencial Portas do Sol',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 6,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351965851667',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/residencial-portas-do-sol.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_VALENCA_POUSADA_DE_VALENCA_SAO_TEOTONIO',
+    waypointId: 'portugues:valenca',
+    name: 'Pousada de Valença - São Teotónio',
+    chineseName: 'Pousada de Valença - São Teotónio',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 18,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351251821333',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/pousada-sao-teotonio.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_VALENCA_HOTEL_VAL_FLORES',
+    waypointId: 'portugues:valenca',
+    name: 'Hotel Val Flores *',
+    chineseName: 'Hotel Val Flores *',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 32,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351251824106',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/val-flores.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_VALENCA_HOTEL_MABI',
+    waypointId: 'portugues:valenca',
+    name: 'Hotel Mabi *',
+    chineseName: 'Hotel Mabi *',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 11,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351251036383',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/mabi.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_MOS_CASA_DOS_PARLADOIROS',
+    waypointId: 'portugues:mos',
+    name: 'Casa dos Parladoiros',
+    chineseName: 'Casa dos Parladoiros',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 20,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34669631454',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-casa-dos-parladoiros.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_MOS_CASA_DA_CACHADA',
+    waypointId: 'portugues:mos',
+    name: 'Casa da Cachada',
+    chineseName: 'Casa da Cachada',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 20,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34669631454',
+      bookingComUrl: 'https://www.booking.com/hotel/es/cachada-turhouse.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_MOS_CASA_OS_CABALEIROS',
+    waypointId: 'portugues:mos',
+    name: 'Casa Os Cabaleiros',
+    chineseName: 'Casa Os Cabaleiros',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 1,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34686567945',
+      bookingComUrl: 'https://www.booking.com/hotel/es/os-cabaleiros.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_PONTECESURES_HOSPEDAJE_CASA_DO_HORREO',
+    waypointId: 'portugues:pontecesures',
+    name: 'Hospedaje Casa do Hórreo',
+    chineseName: 'Hospedaje Casa do Hórreo',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 4,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34609155607',
+      bookingComUrl: 'https://www.booking.com/hotel/es/casa-do-horreo.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_PONTECESURES_HOTEL_RURAL_A_CASA_DO_RIO',
+    waypointId: 'portugues:pontecesures',
+    name: 'Hotel Rural A Casa do Río **',
+    chineseName: 'Hotel Rural A Casa do Río **',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 15,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34986557743',
+      bookingComUrl: 'https://www.booking.com/hotel/es/a-casa-do-rio.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_PONTECESURES_APARTAMENTOS_TURISTICOS_A_CASA_ANTIGA_DO_MONTE',
+    waypointId: 'portugues:pontecesures',
+    name: 'Apartamentos Turísticos A Casa Antiga do Monte',
+    chineseName: 'Apartamentos Turísticos A Casa Antiga do Monte',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 3,
+    hasKitchen: false,
+    bookingChannels: {
+      phone: '+34600064394',
+      bookingComUrl: 'https://www.booking.com/hotel/es/apartamentos-san-lois.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_O_MILLADOIRO_HOTEL_PAYRO',
+    waypointId: 'portugues:o-milladoiro',
+    name: 'Hotel Payro **',
+    chineseName: 'Hotel Payro **',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 18,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34881975176',
+      bookingComUrl: 'https://www.booking.com/hotel/es/payro.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 O Milladoiro，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_O_MILLADOIRO_HOTEL_B_B_SANTIAGO_MILLADOIRO',
+    waypointId: 'portugues:o-milladoiro',
+    name: 'Hotel B&B Santiago Milladoiro **',
+    chineseName: 'Hotel B&B Santiago Milladoiro **',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 82,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+34881555969',
+      bookingComUrl: 'https://www.booking.com/hotel/es/b-amp-b-santiago-milladoiro.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 O Milladoiro，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_POVOA_DE_VARZIM_SARDINES_FRIENDS_HOSTEL_04',
+    waypointId: 'portugues:povoa-de-varzim',
+    name: 'Sardines & Friends Hostel 04',
+    chineseName: 'Sardines & Friends Hostel 04',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 7,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351962083329',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/sardines-and-friends.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_POVOA_DE_VARZIM_SARDINES_FRIENDS_HOSTEL_06',
+    waypointId: 'portugues:povoa-de-varzim',
+    name: 'Sardines & Friends Hostel 06',
+    chineseName: 'Sardines & Friends Hostel 06',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 20,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351962083329',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/sardines-and-friends-suites.es.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_POVOA_DE_VARZIM_RESIDENCIA_REVE_D_OR',
+    waypointId: 'portugues:povoa-de-varzim',
+    name: 'Residência Rêve d\'Or',
+    chineseName: 'Residência Rêve d\'Or',
+    type: 'PRIVATE',
+    priceEur: 36.5,
+    bedCount: 7,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351919656970',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/residaancia-raave-d-or.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_APULIA_APULIA_PRAIA_HOTEL',
+    waypointId: 'portugues:apulia',
+    name: 'Apulia Praia Hotel ****',
+    chineseName: 'Apulia Praia Hotel ****',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 44,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351253989290',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/apulia-praia.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Apúlia，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_FAO_THE_SPOT_HOSTEL_OFIR',
+    waypointId: 'portugues:fao',
+    name: 'The Spot Hostel Ofir',
+    chineseName: 'The Spot Hostel Ofir',
+    type: 'HOSTEL',
+    priceEur: 27,
+    bedCount: 6,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351916467751',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/the-spot-hostel-ofir.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_FAO_HOSTEL_DO_ALTO',
+    waypointId: 'portugues:fao',
+    name: 'Hostel do Alto',
+    chineseName: 'Hostel do Alto',
+    type: 'HOSTEL',
+    priceEur: 15,
+    bedCount: 19,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351961754783',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/hostel-do-alto.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_FAO_HOTEL_AXIS_OFIR',
+    waypointId: 'portugues:fao',
+    name: 'Hotel Axis Ofir ****',
+    chineseName: 'Hotel Axis Ofir ****',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 192,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351253989800',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/ofir.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_FAO_HOTEL_PARQUE_DO_RIO',
+    waypointId: 'portugues:fao',
+    name: 'Hotel Parque do Rio ****',
+    chineseName: 'Hotel Parque do Rio ****',
+    type: 'HOTEL',
+    priceEur: 15,
+    bedCount: 33,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351253981521',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/estalagem-parque-do-rio.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_MARINHAS_HOSTEL_COSTA_SELVAGEM',
+    waypointId: 'portugues:marinhas',
+    name: 'Hostel Costa Selvagem',
+    chineseName: 'Hostel Costa Selvagem',
+    type: 'HOSTEL',
+    priceEur: 18,
+    bedCount: 4,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351913212250',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/marinhas-bed-amp-breakfast.html?label=hotel_list&aid=357048'
+    },
+    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_MARINHAS_CASA_DO_AVO_GRANDE',
+    waypointId: 'portugues:marinhas',
+    name: 'Casa do Avô Grande',
+    chineseName: 'Casa do Avô Grande',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 3,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351919752342',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-do-avo-grande.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_MARINHAS_CASA_BY_ANITA_GUESTHOUSE',
+    waypointId: 'portugues:marinhas',
+    name: 'Casa by Anita Guesthouse',
+    chineseName: 'Casa by Anita Guesthouse',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 3,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351912328417',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/casa-by-anita-guesthouse.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_CASTELO_DO_NEIVA_ALOJAMENTO_CASA_D_OLIVEIRA',
+    waypointId: 'portugues:castelo-do-neiva',
+    name: 'Alojamento Casa d\'Oliveira',
+    chineseName: 'Alojamento Casa d\'Oliveira',
+    type: 'PRIVATE',
+    priceEur: 70,
+    bedCount: 1,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351913487540',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/minho-at-home.es.html?label=hotel_list&aid=357048'
+    },
+    notes: '位於 Castelo do Neiva，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+  },
+  {
+    id: 'ACC_PORT_CASTELO_DO_NEIVA_QUINTA_DO_MONTEVERDE',
+    waypointId: 'portugues:castelo-do-neiva',
+    name: 'Quinta do Monteverde',
+    chineseName: 'Quinta do Monteverde',
+    type: 'PRIVATE',
+    priceEur: 15,
+    bedCount: 4,
+    hasKitchen: true,
+    bookingChannels: {
+      phone: '+351258871134',
+      bookingComUrl: 'https://www.booking.com/hotel/pt/quinta-do-monteverde.html?label=hotel_link&aid=357048'
+    },
+    notes: '位於 Castelo do Neiva，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
   },
 
   // ==========================================
