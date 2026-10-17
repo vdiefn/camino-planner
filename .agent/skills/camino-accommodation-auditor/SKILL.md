@@ -5,7 +5,7 @@ description: 西班牙朝聖之路全路線住宿資料雙向稽核與更新技�
 
 # 全路線朝聖住宿雙向稽核與補齊技能 (Camino Accommodation Auditor & Synchronizer)
 
-本技能專門用於排查、補齊與維護朝聖之路規劃專案中的住宿資料庫（[`src/data/accommodations.ts`](file:///d:/file/practice/camino-planner/src/data/accommodations.ts)），**全方位適用於本專案收錄之所有朝聖路線（涵蓋法國之路、葡萄牙之路中央線/海岸線、北方之路、原始之路、世界盡頭延伸線等所有主線與分支路線）**。
+本技能專門用於排查、補齊與維護朝聖之路規劃專案中的住宿資料庫（[`src/data/accommodations.ts`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/data/accommodations.ts)），**全方位適用於本專案收錄之所有朝聖路線（涵蓋法國之路、葡萄牙之路中央線/海岸線、北方之路、原始之路、世界盡頭延伸線等所有主線與分支路線）**。
 
 本技能採用**「雙向對齊機制（Two-Way Reconciliation）」**：
 1. **正向稽核（現有 $\rightarrow$ 來源）**：排查已歇業、拆牌、重複建檔或頂讓改名的「幽靈住宿點」，並修正過期價格與床位。
@@ -16,8 +16,10 @@ description: 西班牙朝聖之路全路線住宿資料雙向稽核與更新技�
 ## 核心準則與安全防線 (Core Principles)
 
 > [!IMPORTANT]
+> 0. **核心協定繼承與零信任防線 (Inherited Protocol)**：
+>    - 🚨 **強制前置依賴**：啟動本技能時，必須先透過 `view_file` 讀取並嚴格遵循全域 [base-skill](file:///C:/Users/user/.gemini/config/skills/base-skill/SKILL.md) 定義之「雙軌權限模型」、「唯讀操作零審批」、「工具調用鐵律（強制原生 `view_file`，嚴禁終端 `Get-Content`）」與「對話主戰場原則（嚴禁僅寫入 Artifact 假推進，變更報告必須直接輸出於對話中）」。
 > 1. **全路線一體適用**：本技能適用於所有已建置與未來擴充之朝聖路線，查證規格一致，嚴禁單一路線差別待遇。
-> 2. **嚴禁直接未授權改動程式碼**：在使用者審閱並明確同意變更報告之前，絕對不可直接修改 [`src/data/accommodations.ts`](file:///d:/file/practice/camino-planner/src/data/accommodations.ts)。
+> 2. **嚴禁直接未授權改動程式碼**：遵循 `base-skill` 代寫三步防線，在使用者於對話中審閱並明確同意變更報告之前，絕對不可直接修改 [`src/data/accommodations.ts`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/data/accommodations.ts)。
 > 3. **嚴格禁止使用 Python 進行驗證**：
 >    - 本專案為純 Node.js / TypeScript 生態系（本機未安裝 Python）。
 >    - 嚴禁呼叫 `python`、`python3` 或相關腳本。所有資料健康度稽核、測試與驗證均須透過 Node.js 工具鏈與 Vitest 執行。
@@ -70,7 +72,7 @@ flowchart TD
 
 ## 民宿（Casa）與特殊旅宿之型別對應指引 (Type Mapping Guide)
 
-專案定義之 [`AccommodationType`](file:///d:/file/practice/camino-planner/src/types/camino.ts#L9) 為：`'MUNICIPAL' | 'PAROCHIAL' | 'PRIVATE' | 'HOSTEL' | 'HOTEL'`。
+專案定義之 [`AccommodationType`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/types/camino.ts#L9) 為：`'MUNICIPAL' | 'PAROCHIAL' | 'PRIVATE' | 'HOSTEL' | 'HOTEL'`。
 
 新增缺漏旅宿時，應依照實體營運模式映射型別：
 1. **Casa Rural / Casa de Huéspedes / Gîte**：
