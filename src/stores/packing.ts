@@ -10,6 +10,19 @@ export interface UserItemOverride {
   quantity?: number;
 }
 
+// 官方 9 大分類全收錄預設清單（朝聖之路全部必備裝備預設全部顯示）
+export const defaultActiveCategories: PackingCategory[] = [
+  "PACK",
+  "CLOTHING",
+  "FOOTWEAR",
+  "SLEEP",
+  "MEDICAL",
+  "HYGIENE",
+  "ELECTRONICS",
+  "DOCS",
+  "OTHER",
+];
+
 // 自我修復防禦層：逐欄型別檢查與預設值補齊，徹底杜絕執行時期例外與白畫面
 export function sanitizePackingState(raw: any) {
   // 1. 體重校驗 (確保為正數，否則安全回退 60)
@@ -91,21 +104,28 @@ export function sanitizePackingState(raw: any) {
     }
   }
 
-  // 4. 目前已顯示/已選取之分類清單校驗
-  const defaultActiveCategories: PackingCategory[] = [
-    "PACK",
-    "CLOTHING",
-    "FOOTWEAR",
-    "SLEEP",
-    "MEDICAL",
-  ];
-  const activeCategories: PackingCategory[] = [];
+  // 4. 目前已顯示/已選取之分類清單校驗（預設 9 大官方分類全部顯示）
+  let activeCategories: PackingCategory[] = [];
   if (Array.isArray(raw?.activeCategories)) {
     for (const c of raw.activeCategories) {
       if (typeof c === "string" && c.trim()) {
         activeCategories.push(c as PackingCategory);
       }
     }
+  }
+
+  // 若使用者本地快取為舊版（version < 2），自動將缺漏之官方必備分類補齊
+  if (!raw?.version || raw.version < 2) {
+    const existingSet = new Set(activeCategories);
+    for (const cat of defaultActiveCategories) {
+      if (!existingSet.has(cat)) {
+        activeCategories.push(cat);
+      }
+    }
+  }
+
+  if (activeCategories.length === 0) {
+    activeCategories = [...defaultActiveCategories];
   }
 
   // 5. 分類自訂排序校驗
@@ -130,7 +150,7 @@ export function sanitizePackingState(raw: any) {
   }
 
   return {
-    version: typeof raw?.version === "number" ? raw.version : 1,
+    version: 2,
     bodyWeightKg,
     userItemStates,
     customItems,
@@ -144,8 +164,8 @@ export function sanitizePackingState(raw: any) {
 export const usePackingStore = defineStore(
   "packing",
   () => {
-    // 0. 資料綱要版本號（為未來架構防護預留）
-    const version = ref<number>(1);
+    // 0. 資料綱要版本號（升級為 2，支援 9 大必備分類預設全顯示）
+    const version = ref<number>(2);
 
     // 1. 使用者體重 (kg)
     const bodyWeightKg = ref<number>(60);
@@ -156,14 +176,7 @@ export const usePackingStore = defineStore(
     // 3. 使用者自訂裝備（非官方預設，需完整保存）
     const customItems = ref<PackingItem[]>([]);
 
-    // 4. 目前畫面上啟用顯示的分類清單（預設 5 大核心分類）
-    const defaultActiveCategories: PackingCategory[] = [
-      "PACK",
-      "CLOTHING",
-      "FOOTWEAR",
-      "SLEEP",
-      "MEDICAL",
-    ];
+    // 4. 目前畫面上啟用顯示的分類清單（預設 9 大必備分類全顯示）
     const activeCategories = ref<PackingCategory[]>([
       ...defaultActiveCategories,
     ]);

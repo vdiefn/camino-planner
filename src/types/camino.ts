@@ -108,10 +108,14 @@ export interface TransportStep {
   warningTip?: string
 }
 
-export type OriginCity = 'PARIS' | 'MADRID' | 'BARCELONA'
+export type TransportTargetRoute = 'frances' | 'portugues' | 'norte'
+
+export type OriginCity = string
 
 export interface TransportRoute {
   id: string
+  targetRoute?: TransportTargetRoute
+  destinationName?: string
   originCity: OriginCity
   title: string
   totalDurationHours: number

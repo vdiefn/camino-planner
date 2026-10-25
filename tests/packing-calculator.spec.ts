@@ -41,8 +41,8 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
   it('未顯示之分類絕對不計入負重累計，切換顯示後即時動態納入計算', () => {
     const store = usePackingStore()
 
-    // 預設核心 5 大分類不含 HYGIENE（衛生用品）
-    expect(store.activeCategories.includes('HYGIENE')).toBe(false)
+    // 預設 9 大官方分類全數啟用（包含 HYGIENE 等必備分類）
+    expect(store.activeCategories.includes('HYGIENE')).toBe(true)
     const initialWeight = store.backpackWeightGrams
 
     // 計算官方 HYGIENE 分類已勾選之背包重量
@@ -52,14 +52,14 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
       .reduce((sum, i) => sum + i.unitWeightGrams * i.quantity, 0)
     expect(hygieneGrams).toBeGreaterThan(0)
 
-    // 啟用顯示 HYGIENE 分類
-    store.toggleCategory('HYGIENE')
-    expect(store.activeCategories.includes('HYGIENE')).toBe(true)
-    expect(store.backpackWeightGrams).toBe(initialWeight + hygieneGrams)
-
-    // 再次收合 HYGIENE 分類
+    // 暫時收合/排除 HYGIENE 分類
     store.toggleCategory('HYGIENE')
     expect(store.activeCategories.includes('HYGIENE')).toBe(false)
+    expect(store.backpackWeightGrams).toBe(initialWeight - hygieneGrams)
+
+    // 再次啟用 HYGIENE 分類
+    store.toggleCategory('HYGIENE')
+    expect(store.activeCategories.includes('HYGIENE')).toBe(true)
     expect(store.backpackWeightGrams).toBe(initialWeight)
   })
 
