@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import AppHeader from '@/components/common/AppHeader.vue'
+import AppFooter from '@/components/common/AppFooter.vue'
 import BottomNav from '@/components/common/BottomNav.vue'
+import FeedbackModal from '@/components/common/FeedbackModal.vue'
+import BackToTop from '@/components/common/BackToTop.vue'
 import ScheduleView from '@/views/ScheduleView.vue'
 import PackingView from '@/views/PackingView.vue'
 import TransportView from '@/views/TransportView.vue'
@@ -23,7 +26,7 @@ onMounted(() => {
     <AppHeader v-model:current-tab="currentTab" />
 
     <!-- 主內容呈現區 -->
-    <main class="flex-1 pb-20 md:pb-12">
+    <main class="flex-1">
       <!-- 智慧動態排程 -->
       <ScheduleView v-if="currentTab === 'schedule'" />
       
@@ -33,6 +36,15 @@ onMounted(() => {
       <!-- 起點交通轉乘決策 -->
       <TransportView v-else-if="currentTab === 'transport'" />
     </main>
+
+    <!-- 全域通用頁尾 -->
+    <AppFooter />
+
+    <!-- 全域回饋與許願彈窗 -->
+    <FeedbackModal />
+
+    <!-- 全站回到頂部極簡懸浮圓鈕 -->
+    <BackToTop />
 
     <!-- 手機端底部固定導覽列 -->
     <BottomNav v-model:current-tab="currentTab" />

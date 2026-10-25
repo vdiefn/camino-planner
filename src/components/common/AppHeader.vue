@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Compass } from 'lucide-vue-next'
+import { Compass, MessageSquarePlus } from 'lucide-vue-next'
+import { useFeedbackModal } from '@/composables/useFeedbackModal'
 
 type TabType = 'schedule' | 'packing' | 'transport'
 
@@ -7,17 +8,28 @@ interface Props {
   currentTab: TabType
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'update:currentTab', tab: TabType): void
 }>()
+
+const { openFeedback } = useFeedbackModal()
+
+// 點擊分頁：若已在該分頁則平滑回到頂端，反之切換分頁
+function handleTabClick(tab: TabType) {
+  if (props.currentTab === tab) {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } else {
+    emit('update:currentTab', tab)
+  }
+}
 </script>
 
 <template>
-  <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-    <div class="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-3 sm:px-6">
-      <!-- 品牌標誌與標題 -->
-      <div class="flex items-center gap-2.5 sm:gap-3">
+  <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+    <div class="relative mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
+      <!-- 左側：品牌標誌與標題 -->
+      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
         <div class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-amber-500 text-white shadow-xs shrink-0">
           <Compass class="h-5 w-5 sm:h-6 sm:w-6" />
         </div>
@@ -30,8 +42,8 @@ const emit = defineEmits<{
         </div>
       </div>
 
-      <!-- 電腦版頂部 Tab 導覽列 -->
-      <nav class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1">
+      <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊） -->
+      <nav class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1 absolute left-1/2 -translate-x-1/2">
         <button
           type="button"
           :class="[
@@ -40,7 +52,7 @@ const emit = defineEmits<{
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
           ]"
-          @click="emit('update:currentTab', 'schedule')"
+          @click="handleTabClick('schedule')"
         >
           行程規劃
         </button>
@@ -53,7 +65,7 @@ const emit = defineEmits<{
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
           ]"
-          @click="emit('update:currentTab', 'packing')"
+          @click="handleTabClick('packing')"
         >
           裝備負重
         </button>
@@ -66,11 +78,24 @@ const emit = defineEmits<{
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
           ]"
-          @click="emit('update:currentTab', 'transport')"
+          @click="handleTabClick('transport')"
         >
           起點交通
         </button>
       </nav>
+
+      <!-- 右側：功能動作區（許願與回饋） -->
+      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <button
+          type="button"
+          @click="openFeedback({ category: 'feature_request' })"
+          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+          title="意見回饋與許願"
+          aria-label="意見回饋與許願"
+        >
+          <MessageSquarePlus class="h-5 w-5" />
+        </button>
+      </div>
     </div>
   </header>
 </template>

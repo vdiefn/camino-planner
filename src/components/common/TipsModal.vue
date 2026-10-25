@@ -11,7 +11,7 @@ interface Props {
 defineProps<Props>();
 const emit = defineEmits<{
   (e: "close"): void;
-}>();
+}>()
 </script>
 
 <template>
@@ -60,17 +60,6 @@ const emit = defineEmits<{
               </li>
             </ul>
           </slot>
-        </div>
-
-        <!-- 底部快速關閉按鈕（行動端單手舒適點擊） -->
-        <div class="pt-2 border-t border-slate-100 flex justify-end">
-          <button
-            type="button"
-            class="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
-            @click="emit('close')"
-          >
-            我知道了
-          </button>
         </div>
       </DialogPanel>
     </div>

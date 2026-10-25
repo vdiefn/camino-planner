@@ -19,7 +19,6 @@ import {
   CheckCircle2,
   ChevronDown,
   MessageCircleWarning,
-  ArrowUp,
   Coffee,
 } from "lucide-vue-next";
 
@@ -302,25 +301,6 @@ const dailyAverageKm = computed(() => {
   return Number((scheduleStore.totalDistanceKm / walkingDays).toFixed(1));
 });
 
-// 回到頂部（回到第一天）按鈕顯示狀態
-const showBackToTop = ref(false);
-
-const handleScroll = () => {
-  showBackToTop.value = window.scrollY > 300;
-};
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll, { passive: true });
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
-
 // 主線是否成功抵達聖地牙哥大教堂
 const isMainReachedSantiago = computed(() => {
   const stages = scheduleStore.stages;
@@ -442,23 +422,100 @@ const collapsedRouteFlow = computed(() => {
   }
   return stops;
 });
+
+// 頁面滾動監聽：判斷下方卡片資料是否已滾入吸頂列下方
+const isScrolled = ref(false);
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10;
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-6 max-w-[1440px] mt-2">
-    <!-- 頂部標題區 -->
-    <div class="mb-4 sm:mb-6">
-      <h2
-        class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2"
-      >
-        徒步行程規劃
-      </h2>
+  <div class="container mx-auto px-4 pt-0 pb-6 max-w-[1440px]">
+    <!-- 頂部吸頂列：左側大標題 ＋ 右側數據看板（Sticky 黏性吸頂，零位移、無底線、無陰影，滾動時純毛玻璃） -->
+    <div
+      :class="[
+        'sticky top-14 sm:top-16 z-30 -mx-4 px-4 sm:-mx-6 sm:px-6 py-2 sm:py-2.5 mb-1.5 sm:mb-3 transition-[background-color,backdrop-filter] duration-200',
+        isScrolled
+          ? 'bg-slate-50/75 backdrop-blur-md'
+          : 'bg-transparent',
+      ]"
+    >
+      <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-2 sm:gap-4">
+        <h2
+          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 shrink-0"
+        >
+          徒步行程規劃
+        </h2>
+
+        <!-- 右側：數據看板條（左右內距充裕、扁平單行設計） -->
+        <div
+          class="px-4 sm:px-6 py-2 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center justify-between sm:justify-around text-xs gap-2.5 sm:gap-6 shrink-0 w-full md:w-auto"
+        >
+          <!-- 總徒步里程 -->
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="text-slate-400 text-[11px] sm:text-xs">總里程</span>
+            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              scheduleStore.totalDistanceKm.toFixed(1)
+            }}</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km</span>
+          </div>
+
+          <div class="w-px h-3.5 bg-slate-200"></div>
+
+          <!-- 日均徒步 -->
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="text-slate-400 text-[11px] sm:text-xs">日均</span>
+            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              dailyAverageKm.toFixed(1)
+            }}</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km/日</span>
+          </div>
+
+          <div class="w-px h-3.5 bg-slate-200"></div>
+
+          <!-- 總天數 -->
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="text-slate-400 text-[11px] sm:text-xs">總天數</span>
+            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              totalTripDays
+            }}</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+            <span
+              v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
+              class="hidden sm:inline text-[10px] sm:text-[11px] text-slate-400 font-mono"
+            >
+              ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
+            </span>
+          </div>
+
+          <div class="w-px h-3.5 bg-slate-200"></div>
+
+          <!-- 休息停留 -->
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="text-slate-400 text-[11px] sm:text-xs">休息</span>
+            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              scheduleStore.totalRestDays
+            }}</span>
+            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 三欄響應式佈局 -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-4 lg:gap-6 items-start">
       <!-- 左欄：Sticky 排程設定控制台 (lg: 4 欄，具備獨立自適應高度與平滑滾動，防止超出或被導覽列遮擋) -->
-      <div class="lg:col-span-4 space-y-4 lg:sticky lg:top-18 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto lg:overscroll-contain pr-1">
+      <div class="lg:col-span-4 space-y-3 sm:space-y-4 lg:sticky lg:top-32 lg:max-h-[calc(100vh-8.5rem)] lg:overflow-y-auto lg:overscroll-contain pr-1">
         <!-- 控制台卡片 -->
         <div
           class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs"
@@ -818,62 +875,7 @@ const collapsedRouteFlow = computed(() => {
       </div>
 
       <!-- 中欄：每日分段時間軸清單 (lg: 8 欄) -->
-      <div class="lg:col-span-8 space-y-4">
-        <!-- 頂部數據總覽看板（Sticky 吸頂常駐於導覽列下方，扁平單行設計，左右寬度充裕伸展） -->
-        <div class="sticky top-16 sm:top-18 z-20">
-          <div
-            class="px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-xs flex items-center justify-between sm:justify-around text-xs"
-          >
-            <!-- 總徒步里程 -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
-              <span class="text-slate-400 text-[11px] sm:text-xs">總里程</span>
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-                scheduleStore.totalDistanceKm.toFixed(1)
-              }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km</span>
-            </div>
-
-            <div class="w-px h-3.5 bg-slate-200"></div>
-
-            <!-- 日均徒步 -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
-              <span class="text-slate-400 text-[11px] sm:text-xs">日均</span>
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-                dailyAverageKm.toFixed(1)
-              }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km/日</span>
-            </div>
-
-            <div class="w-px h-3.5 bg-slate-200"></div>
-
-            <!-- 總天數 -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
-              <span class="text-slate-400 text-[11px] sm:text-xs">總天數</span>
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-                totalTripDays
-              }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
-              <span
-                v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
-                class="hidden sm:inline text-[10px] sm:text-[11px] text-slate-400 font-mono"
-              >
-                ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
-              </span>
-            </div>
-
-            <div class="w-px h-3.5 bg-slate-200"></div>
-
-            <!-- 休息停留 -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
-              <span class="text-slate-400 text-[11px] sm:text-xs">休息</span>
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-                scheduleStore.totalRestDays
-              }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
-            </div>
-          </div>
-        </div>
-
+      <div class="lg:col-span-8 space-y-3 sm:space-y-4">
         <!-- 每日分段卡片清單與那一天之精準提醒 -->
         <template
           v-for="(stage, index) in scheduleStore.stages"
@@ -961,28 +963,6 @@ const collapsedRouteFlow = computed(() => {
         </template>
       </div>
     </div>
-
-    <!-- 回到頂部（回到第一天）懸浮按鈕 -->
-    <Transition
-      enter-active-class="transition-all duration-300 ease-out"
-      enter-from-class="opacity-0 translate-y-4 scale-90"
-      enter-to-class="opacity-100 translate-y-0 scale-100"
-      leave-active-class="transition-all duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0 scale-100"
-      leave-to-class="opacity-0 translate-y-4 scale-90"
-    >
-      <button
-        v-if="showBackToTop"
-        type="button"
-        @click="scrollToTop"
-        class="fixed bottom-6 right-6 z-30 p-2.5 sm:px-3.5 sm:py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-medium backdrop-blur-xs group"
-        title="回到頂部（回到第一天）"
-        aria-label="回到第一天"
-      >
-        <ArrowUp class="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
-        <span class="hidden sm:inline">回到 Day 1</span>
-      </button>
-    </Transition>
 
     <!-- 彈窗群 -->
     <ChangeWaypointModal

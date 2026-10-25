@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import {
   AlertOctagon,
   ShieldCheck,
@@ -120,10 +120,6 @@ const activeCategorySet = computed(
 
 function toggleCategory(catId: PackingCategory) {
   packingStore.toggleCategory(catId);
-}
-
-function showAllCategories() {
-  packingStore.setAllCategories(allCategories.value.map((cat) => cat.id));
 }
 
 // 分類卡片收合狀態控制（預設全展開）
@@ -263,44 +259,68 @@ function handleConfirmReset() {
   packingStore.resetToDefaults();
   isResetModalOpen.value = false;
 }
+
+// 頁面滾動監聽：判斷下方卡片資料是否已滾入吸頂列下方
+const isScrolled = ref(false);
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10;
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-6 max-w-7xl mt-2">
-    <!-- 頂部標題區 -->
-    <div class="mb-2 sm:mb-6 flex items-center justify-between gap-3">
-      <h2
-        class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2"
-      >
-        朝聖之路行李打包清單
-      </h2>
-
-      <!-- 右側精巧功能按鈕群 -->
-      <div class="flex items-center gap-2 shrink-0">
-        <button
-          type="button"
-          @click="isCustomModalOpen = true"
-          class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-500 px-3 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
+  <div class="container mx-auto px-4 pt-0 pb-6 max-w-7xl">
+    <!-- 頂部吸頂列：標題 ＋ 功能按鈕群（Sticky 零位移、無底線、無陰影，滾動純毛玻璃） -->
+    <div
+      :class="[
+        'sticky top-14 sm:top-16 z-30 -mx-4 px-4 sm:-mx-6 sm:px-6 py-2 sm:py-2.5 mb-1.5 sm:mb-3 transition-[background-color,backdrop-filter] duration-200',
+        isScrolled
+          ? 'bg-slate-50/75 backdrop-blur-md'
+          : 'bg-transparent',
+      ]"
+    >
+      <div class="flex items-center justify-between gap-3">
+        <h2
+          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2"
         >
-          <PlusCircle class="w-3.5 h-3.5" />
-          <span>新增自訂裝備</span>
-        </button>
+          朝聖之路行李打包清單
+        </h2>
 
-        <button
-          type="button"
-          @click="isResetModalOpen = true"
-          class="text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer inline-flex items-center gap-1.5"
-        >
-          <RotateCcw class="w-3.5 h-3.5" />
-          <span>重設清單</span>
-        </button>
+        <!-- 右側精巧功能按鈕群 -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            @click="isCustomModalOpen = true"
+            class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-500 px-3 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
+          >
+            <PlusCircle class="w-3.5 h-3.5" />
+            <span>新增自訂裝備</span>
+          </button>
+
+          <button
+            type="button"
+            @click="isResetModalOpen = true"
+            class="text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+          >
+            <RotateCcw class="w-3.5 h-3.5" />
+            <span>重設清單</span>
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- 二欄式響應式佈局 (左:負重儀表板與減重法則 / 右:裝備分類清單) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-4 lg:gap-6 items-start">
       <!-- 左欄：Sticky 負重儀表板、減重法則與廣告 (lg: 4 欄) -->
-      <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
+      <div class="lg:col-span-4 space-y-3 sm:space-y-4 lg:sticky lg:top-28">
         <!-- 負重儀表板卡片 (獨佔整行) -->
         <div
           class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between"
@@ -549,20 +569,13 @@ function handleConfirmReset() {
       </div>
 
       <!-- 右欄：頂部分類標籤開關 + 瀑布流分類卡片 (lg: 8 欄) -->
-      <div class="lg:col-span-8 space-y-4">
+      <div class="lg:col-span-8 space-y-3 sm:space-y-4">
         <!-- 頂部分類 Chips 快速開關列 -->
         <div
           class="rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-2.5"
         >
-          <div class="flex items-center justify-between">
+          <div>
             <span class="text-sm font-medium text-slate-800">裝備分類篩選</span>
-            <button
-              type="button"
-              class="text-[11px] font-normal text-slate-400 border px-1.5 py-1 rounded border-slate-200 hover:border-slate-300 hover:text-slate-500 cursor-pointer"
-              @click="showAllCategories"
-            >
-              選擇全部
-            </button>
           </div>
 
           <div class="flex flex-wrap gap-1.5">
