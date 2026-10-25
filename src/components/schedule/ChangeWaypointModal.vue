@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { X, MapPin } from 'lucide-vue-next'
 import type { UserStage, Waypoint } from '@/types/camino'
@@ -20,6 +20,15 @@ const emit = defineEmits<{
 const scheduleStore = useScheduleStore()
 const selectedWaypointId = ref<string>('')
 
+// 每次開啟彈窗或切換目標分段時，重置為當前分段的結束航點
+watch(
+  () => [props.isOpen, props.stage],
+  () => {
+    selectedWaypointId.value = props.stage?.endWaypointId || ''
+  },
+  { immediate: true },
+)
+
 // 當前可選航點來源（延伸段與主線嚴格隔離）
 const activeWaypointsList = computed<Waypoint[]>(() => {
   if (!props.stage) return []
@@ -33,7 +42,7 @@ const activeWaypointsList = computed<Waypoint[]>(() => {
 const candidateWaypoints = computed(() => {
   if (!props.stage) return []
   const wps = activeWaypointsList.value
-  const startIdx = wps.findIndex((w) => w.id === props.stage!.startWaypointId)
+  const startIdx = wps.findIndex((w) => w.id === props.stage!.startWaypointId || (props.stage!.isExtensionStage && props.stage!.startWaypointId.toLowerCase().includes('santiago') && w.id.includes('santiago')))
   if (startIdx === -1) return []
 
   // 顯示起始點之後的城鎮（最多後續 8 個城鎮供現場調配）

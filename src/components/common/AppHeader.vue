@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { Wifi, WifiOff, Compass } from 'lucide-vue-next'
+import { Compass } from 'lucide-vue-next'
 
 type TabType = 'schedule' | 'packing' | 'transport'
 
@@ -12,28 +11,11 @@ defineProps<Props>()
 const emit = defineEmits<{
   (e: 'update:currentTab', tab: TabType): void
 }>()
-
-// 離線 / 連線狀態偵測
-const isOnline = ref(typeof navigator !== 'undefined' ? navigator.onLine : true)
-
-function handleOnlineStatus() {
-  isOnline.value = navigator.onLine
-}
-
-onMounted(() => {
-  window.addEventListener('online', handleOnlineStatus)
-  window.addEventListener('offline', handleOnlineStatus)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('online', handleOnlineStatus)
-  window.removeEventListener('offline', handleOnlineStatus)
-})
 </script>
 
 <template>
   <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+    <div class="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-3 sm:px-6">
       <!-- 品牌標誌與標題 -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         <div class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-amber-500 text-white shadow-xs shrink-0">
@@ -89,22 +71,6 @@ onUnmounted(() => {
           起點交通
         </button>
       </nav>
-
-      <!-- 離線可用狀態指示器 -->
-      <div class="flex items-center gap-2">
-        <div
-          :class="[
-            'inline-flex items-center gap-1.5 rounded-full p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium transition-colors',
-            isOnline
-              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
-              : 'bg-amber-50 text-amber-700 border border-amber-200/60',
-          ]"
-          :title="isOnline ? '連線正常' : '離線模式'"
-        >
-          <Wifi v-if="isOnline" class="h-3.5 w-3.5 text-emerald-600 animate-pulse" />
-          <WifiOff v-else class="h-3.5 w-3.5 text-amber-600" />
-        </div>
-      </div>
     </div>
   </header>
 </template>

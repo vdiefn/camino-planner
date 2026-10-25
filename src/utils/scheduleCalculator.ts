@@ -289,25 +289,33 @@ function reallocateRemainingWalkingStages(
   startIndex: number,
   allWaypoints: Waypoint[],
 ): UserStage[] {
-  if (startIndex + 1 >= stages.length) return stages
+  const loopStartIndex = Math.max(0, startIndex + 1)
+  if (loopStartIndex >= stages.length) return stages
 
-  const finalEndWaypointId = stages[stages.length - 1].endWaypointId
-  const remainingStages = stages.slice(startIndex + 1)
+  const remainingStages = stages.slice(loopStartIndex)
   const remainingWalkingCount = remainingStages.filter((s) => !s.isRestDay).length
 
   if (remainingWalkingCount <= 0) return stages
 
   const commonWaypoints = allWaypoints.filter((w) => w.routeVariant === 'COMMON' || !w.routeVariant)
-  const previousStage = stages[startIndex]
-  const currentStartWp = allWaypoints.find((w) => w.id === previousStage.endWaypointId)
-  const finalEndWp = allWaypoints.find((w) => w.id === finalEndWaypointId)
+
+  let currentStartWp: Waypoint | undefined
+  if (startIndex < 0) {
+    currentStartWp = allWaypoints.find((w) => w.id === stages[0].startWaypointId) || allWaypoints[0]
+  } else {
+    const previousStage = stages[startIndex]
+    currentStartWp = allWaypoints.find((w) => w.id === previousStage.endWaypointId)
+  }
+
+  // 決定最終終點航點：重算均分時之全線目標終點永遠嚴格鎖定為該航點清單之最終點，杜絕縮水殘留
+  const finalEndWp = allWaypoints[allWaypoints.length - 1]
 
   if (!currentStartWp || !finalEndWp) return stages
 
   let currentWp = currentStartWp
   let walkingIndex = 0
 
-  for (let i = startIndex + 1; i < stages.length; i++) {
+  for (let i = loopStartIndex; i < stages.length; i++) {
     const stg = stages[i]
 
     if (stg.isRestDay) {
@@ -518,26 +526,37 @@ export function calculateFinisterreStopIds(
   finWaypoints: Waypoint[],
 ): string[] {
   if (option === 'FINISTERRE_ONLY') {
-    if (days === 3) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra']
     if (days === 2) return ['finisterre:maronas', 'finisterre:fisterra']
+    if (days === 3) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra']
     if (days === 4) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:cee', 'finisterre:fisterra']
     if (days === 5) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:cee', 'finisterre:fisterra']
+    if (days === 6) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:cee', 'finisterre:fisterra']
+    if (days === 7) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:hospital', 'finisterre:cee', 'finisterre:fisterra']
+    if (days >= 8) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:logoso', 'finisterre:hospital', 'finisterre:cee', 'finisterre:fisterra']
     return pickOptimalWaypoints(finWaypoints, days)
   }
 
   if (option === 'MUXIA_ONLY') {
-    if (days === 3) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia']
     if (days === 2) return ['finisterre:maronas', 'finisterre:muxia']
+    if (days === 3) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia']
     if (days === 4) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:dumbria', 'finisterre:muxia']
     if (days === 5) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:dumbria', 'finisterre:muxia']
+    if (days === 6) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:dumbria', 'finisterre:muxia']
+    if (days === 7) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:hospital', 'finisterre:dumbria', 'finisterre:muxia']
+    if (days >= 8) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:logoso', 'finisterre:hospital', 'finisterre:dumbria', 'finisterre:muxia']
     return pickOptimalWaypoints(finWaypoints, days)
   }
 
   if (option === 'BOTH_FINISTERRE_FIRST') {
-    if (days === 4) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra', 'finisterre:muxia']
     if (days === 3) return ['finisterre:maronas', 'finisterre:fisterra', 'finisterre:muxia']
+    if (days === 4) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra', 'finisterre:muxia']
     if (days === 5) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
     if (days === 6) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:cee', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
+    if (days === 7) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:olveiroa', 'finisterre:cee', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
+    if (days === 8) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:cee', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
+    if (days === 9) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:hospital', 'finisterre:cee', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
+    if (days === 10) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:logoso', 'finisterre:hospital', 'finisterre:cee', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
+    if (days >= 11) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:logoso', 'finisterre:hospital', 'finisterre:cee', 'finisterre:corcubion', 'finisterre:fisterra', 'finisterre:lires', 'finisterre:muxia']
     const part1Days = Math.max(2, days - 2)
     const part2Days = Math.max(1, days - part1Days)
     const part1Wps = finWaypoints.filter((w) => w.cumulativeKm <= 89.5)
@@ -548,10 +567,15 @@ export function calculateFinisterreStopIds(
   }
 
   if (option === 'BOTH_MUXIA_FIRST') {
-    if (days === 4) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia', 'finisterre:fisterra']
     if (days === 3) return ['finisterre:maronas', 'finisterre:muxia', 'finisterre:fisterra']
+    if (days === 4) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia', 'finisterre:fisterra']
     if (days === 5) return ['finisterre:negreira', 'finisterre:olveiroa', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
     if (days === 6) return ['finisterre:negreira', 'finisterre:maronas', 'finisterre:dumbria', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
+    if (days === 7) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:olveiroa', 'finisterre:dumbria', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
+    if (days === 8) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:dumbria', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
+    if (days === 9) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:hospital', 'finisterre:dumbria', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
+    if (days === 10) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:logoso', 'finisterre:hospital', 'finisterre:dumbria', 'finisterre:muxia', 'finisterre:lires', 'finisterre:fisterra']
+    if (days >= 11) return ['finisterre:negreira', 'finisterre:vilaserio', 'finisterre:maronas', 'finisterre:olveiroa', 'finisterre:logoso', 'finisterre:hospital', 'finisterre:dumbria', 'finisterre:muxia', 'finisterre:lires', 'finisterre:cee', 'finisterre:fisterra']
     const part1Days = Math.max(2, days - 2)
     const part2Days = Math.max(1, days - part1Days)
     const part1Wps = finWaypoints.filter((w) => w.cumulativeKm <= 86.3)
@@ -633,6 +657,31 @@ export function generateFinisterreStages(
           : undefined,
     })
     prevId = nextId
+  }
+
+  // 若使用者自訂天數大於徒步移動天數（如雙點 12~15 天），於終點安排海角連住放空休整日補齊天數
+  while (extensionStages.length < walkingDays) {
+    curDate = addDaysToDate(curDate, 1)
+    curDayIndex++
+    const lastStage = extensionStages[extensionStages.length - 1]
+    const stayWaypointId = lastStage ? lastStage.endWaypointId : finWaypoints[finWaypoints.length - 1].id
+    extensionStages.push({
+      dayIndex: curDayIndex,
+      date: curDate,
+      startWaypointId: stayWaypointId,
+      endWaypointId: stayWaypointId,
+      passedWaypointIds: [],
+      distanceKm: 0,
+      elevationGainM: 0,
+      elevationLossM: 0,
+      isRestDay: true,
+      isExtensionStage: true,
+      stageNotes: stayWaypointId.includes('fisterra')
+        ? '菲尼斯特雷海角放空休整日 🌊'
+        : stayWaypointId.includes('muxia')
+          ? '穆希亞海濱漫遊休整日 ⛵'
+          : '世界盡頭海角休整日 🛌',
+    })
   }
 
   return extensionStages

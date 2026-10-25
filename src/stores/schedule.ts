@@ -17,9 +17,11 @@ import {
   insertRestDay as insertRestDayIntoStages,
   removeRestDay as removeRestDayFromStages,
   updateStageEndWaypoint as updateStageEndWaypointInStages,
+  calculateSegmentStats,
   isWinterClosure,
+  addDaysToDate,
 } from '@/utils/scheduleCalculator'
-import { finisterreOptionLabels } from '@/data/routes/finisterre'
+import { finisterreOptionLabels, getFinisterreWaypoints } from '@/data/routes/finisterre'
 
 /**
  * 預設各路線之獨立初始草稿
@@ -95,7 +97,6 @@ function sanitizeDraft(draft: RouteScheduleDraft, routeId: RouteId): RouteSchedu
   // 冬季封山強制防禦：11/1 ~ 3/31 期間法國之路自 SJPP 出發，唯一合法走法為瓦卡洛斯 (Valcarlos)
   if (routeId === 'frances' && draft.startWaypointId === 'SJPP' && isWinterClosure(draft.startDate)) {
     draft.branchId = 'valcarlos'
-    ;(draft as any).day1RouteVariant = 'VALCARLOS'
   }
 
   return draft
@@ -120,6 +121,13 @@ export const useScheduleStore = defineStore(
       norte: [],
     })
 
+    // 4. 各路線目前計算出之世界盡頭延伸段快取
+    const extensionStages = ref<Record<RouteId, UserStage[]>>({
+      frances: [],
+      portugues: [],
+      norte: [],
+    })
+
     // 全域航點快取字典 (O(1) 效能)
     const globalWaypointMap = buildGlobalWaypointMap()
 
@@ -136,7 +144,7 @@ export const useScheduleStore = defineStore(
       return drafts.value[currentRouteId.value]
     })
 
-    // 向下相容 config 代理物件（使既有 View 與測試無痛存取）
+    // 向下相容 config 代理物件（使既有 View 與測試無痛存取，day1RouteVariant 由 branchId 單一真相來源推導）
     const config = computed<UserPlanConfig>({
       get: () => ({
         startDate: currentDraft.value.startDate,
@@ -146,7 +154,9 @@ export const useScheduleStore = defineStore(
         restDays: currentDraft.value.restDays?.length || 0,
         dailyTargetKm: currentDraft.value.dailyKmQuota,
         bodyWeightKg: 60,
-        day1RouteVariant: (currentDraft.value as any).day1RouteVariant || 'NAPOLEON',
+        day1RouteVariant: (currentDraft.value.branchId === 'valcarlos'
+          ? 'VALCARLOS'
+          : 'NAPOLEON') as 'NAPOLEON' | 'VALCARLOS',
       }),
       set: (val: UserPlanConfig) => {
         currentDraft.value.startDate = val.startDate
@@ -155,7 +165,8 @@ export const useScheduleStore = defineStore(
         currentDraft.value.targetDays = val.targetDays
         currentDraft.value.dailyKmQuota = val.dailyTargetKm
         if (val.day1RouteVariant) {
-          ;(currentDraft.value as any).day1RouteVariant = val.day1RouteVariant
+          currentDraft.value.branchId =
+            val.day1RouteVariant === 'VALCARLOS' ? 'valcarlos' : 'napoleon'
         }
       },
     })
@@ -185,6 +196,44 @@ export const useScheduleStore = defineStore(
       return getRouteTotalDistance(routeId, draft?.branchId)
     }
 
+    // 檢查指定路線是否已具備與當前草稿設定吻合之有效分段（保留休息日與自訂停靠點，嚴防跨路線髒資料）
+    function hasValidPersistedStages(routeId: RouteId): boolean {
+      const saved = mainStages.value[routeId]
+      const draft = drafts.value[routeId]
+      if (!Array.isArray(saved) || saved.length === 0 || !draft) return false
+
+      const expectedVariant = draft.branchId === 'valcarlos' ? 'VALCARLOS' : 'NAPOLEON'
+      const isVariantMatch =
+        routeId !== 'frances' ||
+        saved[0].startWaypointId !== 'SJPP' ||
+        saved[0].routeVariant === expectedVariant
+
+      // 嚴格檢驗：主線所有分段起訖點必須全數屬於該路線之合法航點清單，絕不能混雜外路線或世界盡頭航點
+      const routeWaypoints = getRouteWaypoints(routeId, draft.branchId)
+      const isWaypointsValid = saved.every(
+        (s) =>
+          routeWaypoints.some((w) => w.id === s.startWaypointId) &&
+          routeWaypoints.some((w) => w.id === s.endWaypointId),
+      )
+
+      return (
+        isWaypointsValid &&
+        saved.length === draft.targetDays &&
+        saved[0].date === draft.startDate &&
+        saved[0].startWaypointId === draft.startWaypointId &&
+        saved[saved.length - 1].endWaypointId === draft.endWaypointId &&
+        isVariantMatch
+      )
+    }
+
+    // 同步主線分段中之休息日索引回草稿狀態
+    function syncRestDaysFromMainStages(routeId: RouteId) {
+      const saved = mainStages.value[routeId]
+      const draft = drafts.value[routeId]
+      if (!Array.isArray(saved) || !draft) return
+      draft.restDays = saved.filter((s) => s.isRestDay).map((s) => s.dayIndex)
+    }
+
     // 重新計算當前路線之主線行程
     function calculateCurrentMainStages() {
       sanitizeDraft(currentDraft.value, currentRouteId.value)
@@ -198,11 +247,46 @@ export const useScheduleStore = defineStore(
         dailyTargetKm: draft.dailyKmQuota || 23.5,
         restDays: draft.restDays?.length || 0,
         bodyWeightKg: 60,
-        day1RouteVariant:
-          (draft as any).day1RouteVariant ||
-          (draft.branchId === 'valcarlos' ? 'VALCARLOS' : 'NAPOLEON'),
+        day1RouteVariant: draft.branchId === 'valcarlos' ? 'VALCARLOS' : 'NAPOLEON',
       }
       mainStages.value[currentRouteId.value] = generateInitialStages(cfg, wps)
+      syncRestDaysFromMainStages(currentRouteId.value)
+      calculateCurrentExtensionStages()
+    }
+
+    // 重新計算當前路線之世界盡頭延伸段行程
+    function calculateCurrentExtensionStages() {
+      const curMain = mainStages.value[currentRouteId.value]
+      const option = currentDraft.value.finisterreOption || 'NONE'
+      if (option === 'NONE' || !curMain || curMain.length === 0) {
+        extensionStages.value[currentRouteId.value] = []
+        return
+      }
+      const lastMain = curMain[curMain.length - 1]
+      const finDays = currentDraft.value.finisterreDays || finisterreOptionLabels[option]?.days || 3
+      extensionStages.value[currentRouteId.value] = generateFinisterreStages(
+        lastMain,
+        option,
+        0,
+        finDays,
+      )
+    }
+
+    // 當主線分段日期或天數變動時，同步推移世界盡頭延伸段之日期與天數
+    function syncExtensionDates() {
+      const curMain = mainStages.value[currentRouteId.value]
+      const curExt = extensionStages.value[currentRouteId.value]
+      if (!curMain || curMain.length === 0 || !curExt || curExt.length === 0) return
+
+      let curDate = curMain[curMain.length - 1].date
+      let curDayIndex = curMain[curMain.length - 1].dayIndex
+
+      for (const stg of curExt) {
+        curDate = addDaysToDate(curDate, 1)
+        curDayIndex++
+        stg.date = curDate
+        stg.dayIndex = curDayIndex
+      }
     }
 
     // 初始化排程
@@ -222,15 +306,17 @@ export const useScheduleStore = defineStore(
         if (option === 'NONE' || curMain.length === 0) {
           return curMain
         }
-        const lastMain = curMain[curMain.length - 1]
-        const layoverDays = currentDraft.value.santiagoLayoverDays || 0
-        const finDays = currentDraft.value.finisterreDays || finisterreOptionLabels[option]?.days || 3
-        const finStages = generateFinisterreStages(lastMain, option, layoverDays, finDays)
-        return [...curMain, ...finStages]
+        let curExt = extensionStages.value[currentRouteId.value]
+        if (!curExt || curExt.length === 0) {
+          calculateCurrentExtensionStages()
+          curExt = extensionStages.value[currentRouteId.value] || []
+        }
+        return [...curMain, ...curExt]
       },
       set: (newStages: UserStage[]) => {
         // 分離主線段與延伸段
         mainStages.value[currentRouteId.value] = newStages.filter((s) => !s.isExtensionStage)
+        extensionStages.value[currentRouteId.value] = newStages.filter((s) => s.isExtensionStage)
       },
     })
 
@@ -239,9 +325,14 @@ export const useScheduleStore = defineStore(
       if (currentRouteId.value === newRouteId) return
       currentRouteId.value = newRouteId
 
-      // 切換路線時明確清洗草稿資料並重新演算
+      // 切換路線時明確清洗草稿資料；若已有吻合之分段快取則保留使用者微調進度並對齊 restDays
       sanitizeDraft(currentDraft.value, newRouteId)
-      calculateCurrentMainStages()
+      if (!hasValidPersistedStages(newRouteId)) {
+        calculateCurrentMainStages()
+      } else {
+        syncRestDaysFromMainStages(newRouteId)
+        validateAndSyncExtensionStages()
+      }
     }
 
     // 切換路線分支 (例如法國之路的拿破崙 vs 瓦卡洛斯；葡萄牙之路的中央線 vs 海岸線)
@@ -257,12 +348,6 @@ export const useScheduleStore = defineStore(
       }
 
       currentDraft.value.branchId = newBranchId
-
-      if (currentRouteId.value === 'frances') {
-        const variant = newBranchId === 'valcarlos' ? 'VALCARLOS' : 'NAPOLEON'
-        ;(currentDraft.value as any).day1RouteVariant = variant
-      }
-
       sanitizeDraft(currentDraft.value, currentRouteId.value)
 
       // 智慧天數聯動：取得新分支之建議天數與航點推導長度
@@ -283,26 +368,29 @@ export const useScheduleStore = defineStore(
       if (option !== 'NONE') {
         currentDraft.value.finisterreDays = finisterreOptionLabels[option]?.days || 3
       }
+      calculateCurrentExtensionStages()
     }
 
-    // 設定延伸段徒步天數
+    // 設定延伸段徒步天數（依使用者需求：單點最高 8 天，雙點最高 15 天）
     function setFinisterreDays(days: number) {
       const opt = currentDraft.value.finisterreOption
       if (opt === 'NONE') return
       const isBoth = opt === 'BOTH_FINISTERRE_FIRST' || opt === 'BOTH_MUXIA_FIRST'
       const minDays = isBoth ? 3 : 2
-      const maxDays = isBoth ? 8 : 6
+      const maxDays = isBoth ? 15 : 8
       currentDraft.value.finisterreDays = Math.max(minDays, Math.min(maxDays, days))
+      calculateCurrentExtensionStages()
     }
 
-    // 設定聖地牙哥停留天數
-    function setSantiagoLayoverDays(days: number) {
-      currentDraft.value.santiagoLayoverDays = Math.max(0, Math.min(days, 5))
+    // 設定聖地牙哥停留天數（已棄用，保留介面相容）
+    function setSantiagoLayoverDays(_days: number) {
+      // 依使用者需求已移除自動修整日，改由 StageCard 自由設置休息日
     }
 
     // 重新計算排程
     function recalculateSchedule() {
       calculateCurrentMainStages()
+      calculateCurrentExtensionStages()
     }
 
     // 明確套用並更新當前路線之排程設定（直接寫入底層草稿並重新演算）
@@ -322,7 +410,8 @@ export const useScheduleStore = defineStore(
       if (newConfig.dailyTargetKm !== undefined)
         currentDraft.value.dailyKmQuota = newConfig.dailyTargetKm
       if (newConfig.day1RouteVariant !== undefined) {
-        ;(currentDraft.value as any).day1RouteVariant = newConfig.day1RouteVariant
+        currentDraft.value.branchId =
+          newConfig.day1RouteVariant === 'VALCARLOS' ? 'valcarlos' : 'napoleon'
       }
       if (newConfig.finisterreOption !== undefined) {
         currentDraft.value.finisterreOption = newConfig.finisterreOption
@@ -330,21 +419,41 @@ export const useScheduleStore = defineStore(
       if (newConfig.finisterreDays !== undefined) {
         currentDraft.value.finisterreDays = newConfig.finisterreDays
       }
-      if (newConfig.santiagoLayoverDays !== undefined) {
-        currentDraft.value.santiagoLayoverDays = newConfig.santiagoLayoverDays
+      if (newConfig.restDays === undefined) {
+        currentDraft.value.restDays = []
       }
       calculateCurrentMainStages()
+      calculateCurrentExtensionStages()
     }
 
     // 重設回當前路線之官方預設設定
     function resetToDefaults() {
       const defaultState = createDefaultDrafts(todayStr)[currentRouteId.value]
       drafts.value[currentRouteId.value] = { ...defaultState }
+      extensionStages.value[currentRouteId.value] = []
       calculateCurrentMainStages()
+      calculateCurrentExtensionStages()
     }
 
     function resetSchedule() {
       resetToDefaults()
+    }
+
+    // 當主線分段變更時，同步推移世界盡頭延伸段之日期與天數（延伸段永遠保留規劃，不因主線落腳點而消失）
+    function validateAndSyncExtensionStages() {
+      const curMain = mainStages.value[currentRouteId.value]
+      const option = currentDraft.value.finisterreOption || 'NONE'
+      if (option === 'NONE' || !curMain || curMain.length === 0) {
+        extensionStages.value[currentRouteId.value] = []
+        return
+      }
+
+      const curExt = extensionStages.value[currentRouteId.value]
+      if (!curExt || curExt.length === 0) {
+        calculateCurrentExtensionStages()
+      } else {
+        syncExtensionDates()
+      }
     }
 
     // 插入休息日
@@ -352,14 +461,24 @@ export const useScheduleStore = defineStore(
       const curMain = mainStages.value[currentRouteId.value]
       if (!curMain || curMain.length === 0) return
 
-      // 若為世界盡頭分段，暫不支援動態均分
-      if (dayIndex > curMain.length) return
-
-      mainStages.value[currentRouteId.value] = insertRestDayIntoStages(
-        curMain,
-        dayIndex,
-        currentMainWaypoints.value,
-      )
+      if (dayIndex <= curMain.length) {
+        mainStages.value[currentRouteId.value] = insertRestDayIntoStages(
+          curMain,
+          dayIndex,
+          currentMainWaypoints.value,
+        )
+        syncRestDaysFromMainStages(currentRouteId.value)
+        validateAndSyncExtensionStages()
+      } else {
+        const curExt = extensionStages.value[currentRouteId.value]
+        if (!curExt || curExt.length === 0) return
+        const finWaypoints = getFinisterreWaypoints(currentDraft.value.finisterreOption)
+        extensionStages.value[currentRouteId.value] = insertRestDayIntoStages(
+          curExt,
+          dayIndex,
+          finWaypoints,
+        )
+      }
     }
 
     // 移除休息日
@@ -367,13 +486,24 @@ export const useScheduleStore = defineStore(
       const curMain = mainStages.value[currentRouteId.value]
       if (!curMain || curMain.length === 0) return
 
-      if (dayIndex > curMain.length) return
-
-      mainStages.value[currentRouteId.value] = removeRestDayFromStages(
-        curMain,
-        dayIndex,
-        currentMainWaypoints.value,
-      )
+      if (dayIndex <= curMain.length) {
+        mainStages.value[currentRouteId.value] = removeRestDayFromStages(
+          curMain,
+          dayIndex,
+          currentMainWaypoints.value,
+        )
+        syncRestDaysFromMainStages(currentRouteId.value)
+        validateAndSyncExtensionStages()
+      } else {
+        const curExt = extensionStages.value[currentRouteId.value]
+        if (!curExt || curExt.length === 0) return
+        const finWaypoints = getFinisterreWaypoints(currentDraft.value.finisterreOption)
+        extensionStages.value[currentRouteId.value] = removeRestDayFromStages(
+          curExt,
+          dayIndex,
+          finWaypoints,
+        )
+      }
     }
 
     // 現場修改某天結束城鎮
@@ -387,6 +517,17 @@ export const useScheduleStore = defineStore(
           dayIndex,
           newEndWaypointId,
           currentMainWaypoints.value,
+        )
+        validateAndSyncExtensionStages()
+      } else {
+        const curExt = extensionStages.value[currentRouteId.value]
+        if (!curExt || curExt.length === 0) return
+        const finWaypoints = getFinisterreWaypoints(currentDraft.value.finisterreOption)
+        extensionStages.value[currentRouteId.value] = updateStageEndWaypointInStages(
+          curExt,
+          dayIndex,
+          newEndWaypointId,
+          finWaypoints,
         )
       }
     }
@@ -402,13 +543,106 @@ export const useScheduleStore = defineStore(
         return
       }
 
-      ;(currentDraft.value as any).day1RouteVariant = variant
       currentDraft.value.branchId = variant === 'VALCARLOS' ? 'valcarlos' : 'napoleon'
       const curMain = mainStages.value[currentRouteId.value]
       if (curMain && curMain.length > 0 && curMain[0].startWaypointId === 'SJPP') {
         curMain[0].routeVariant = variant
         updateEndWaypoint(1, curMain[0].endWaypointId)
       }
+    }
+
+    // 一鍵追加一天主線行程抵達聖地牙哥大教堂（完全保留使用者先前調整好的所有城鎮與休息日）
+    function appendMainDayToSantiago() {
+      const curMain = mainStages.value[currentRouteId.value]
+      if (!curMain || curMain.length === 0) return
+      const lastMain = curMain[curMain.length - 1]
+      const targetEndId = currentDraft.value.endWaypointId || 'SANTIAGO_DE_COMPOSTELA'
+
+      // 若最後一天已經抵達聖地牙哥大教堂且非休息日，則無需追加
+      if (
+        (lastMain.endWaypointId === targetEndId || lastMain.endWaypointId === 'SANTIAGO_DE_COMPOSTELA') &&
+        !lastMain.isRestDay
+      ) {
+        return
+      }
+
+      const nextDate = addDaysToDate(lastMain.date, 1)
+      const nextDayIndex = lastMain.dayIndex + 1
+      const segStats = calculateSegmentStats(
+        lastMain.endWaypointId,
+        targetEndId,
+        lastMain.routeVariant,
+        currentMainWaypoints.value,
+      )
+
+      const newStage: UserStage = {
+        dayIndex: nextDayIndex,
+        date: nextDate,
+        startWaypointId: lastMain.endWaypointId,
+        endWaypointId: targetEndId,
+        passedWaypointIds: segStats.passedWaypointIds,
+        distanceKm: segStats.distanceKm,
+        elevationGainM: segStats.elevationGainM,
+        elevationLossM: segStats.elevationLossM,
+        isRestDay: false,
+        isExtensionStage: false,
+      }
+
+      curMain.push(newStage)
+      currentDraft.value.targetDays = curMain.length
+      validateAndSyncExtensionStages()
+    }
+
+    // 一鍵追加一天世界盡頭天數抵達海角終點（Fisterra 或 Muxía）
+    function appendFinisterreDayToDestination() {
+      const opt = currentDraft.value.finisterreOption
+      if (opt === 'NONE') return
+      const curExt = extensionStages.value[currentRouteId.value]
+      if (!curExt || curExt.length === 0) return
+      const lastExt = curExt[curExt.length - 1]
+
+      let targetEndId = 'finisterre:fisterra'
+      if (opt === 'MUXIA_ONLY' || opt === 'BOTH_FINISTERRE_FIRST') {
+        targetEndId = 'finisterre:muxia'
+      }
+
+      // 如果最後一天已經抵達目標海角且不是休息日，則無需追加
+      if (lastExt.endWaypointId === targetEndId && !lastExt.isRestDay) {
+        return
+      }
+
+      const isBoth = opt === 'BOTH_FINISTERRE_FIRST' || opt === 'BOTH_MUXIA_FIRST'
+      const maxDays = isBoth ? 15 : 8
+      if (curExt.length >= maxDays) return
+
+      const finWaypoints = getFinisterreWaypoints(opt)
+      const nextDate = addDaysToDate(lastExt.date, 1)
+      const nextDayIndex = lastExt.dayIndex + 1
+      const segStats = calculateSegmentStats(
+        lastExt.endWaypointId,
+        targetEndId,
+        undefined,
+        finWaypoints,
+      )
+
+      const newStage: UserStage = {
+        dayIndex: nextDayIndex,
+        date: nextDate,
+        startWaypointId: lastExt.endWaypointId,
+        endWaypointId: targetEndId,
+        passedWaypointIds: segStats.passedWaypointIds,
+        distanceKm: segStats.distanceKm,
+        elevationGainM: segStats.elevationGainM,
+        elevationLossM: segStats.elevationLossM,
+        isRestDay: false,
+        isExtensionStage: true,
+        stageNotes: targetEndId.includes('fisterra')
+          ? '大西洋地涯菲尼斯特雷 🌅'
+          : '穆希亞聖船聖母聖殿 ⛵',
+      }
+
+      curExt.push(newStage)
+      currentDraft.value.finisterreDays = curExt.length
     }
 
     // 統計數據
@@ -443,8 +677,11 @@ export const useScheduleStore = defineStore(
         drafts.value = createDefaultDrafts(todayStr)
       }
 
-      // 檢查是否有舊版平鋪的 config 遺留資料
-      const legacyCfg = legacyData?.config || (legacyData as any)?.legacyConfig
+      // 檢查是否有舊版平鋪的 config 遺留資料（排除 store 自身之 computed config 代理）
+      const isRawLegacyPayload = Boolean(legacyData && !('currentDraft' in legacyData))
+      const legacyCfg = isRawLegacyPayload
+        ? legacyData?.config || (legacyData as any)?.legacyConfig
+        : (legacyData as any)?.legacyConfig
       if (legacyCfg && typeof legacyCfg === 'object') {
         drafts.value.frances.startDate = legacyCfg.startDate || drafts.value.frances.startDate
         drafts.value.frances.startWaypointId =
@@ -455,14 +692,21 @@ export const useScheduleStore = defineStore(
         drafts.value.frances.dailyKmQuota =
           legacyCfg.dailyTargetKm || drafts.value.frances.dailyKmQuota
         if (legacyCfg.day1RouteVariant) {
-          ;(drafts.value.frances as any).day1RouteVariant = legacyCfg.day1RouteVariant
+          drafts.value.frances.branchId =
+            legacyCfg.day1RouteVariant === 'VALCARLOS' ? 'valcarlos' : 'napoleon'
         }
       }
 
-      // 檢查是否有舊版平鋪的 stages 遺留資料
-      const legacyStages = legacyData?.stages || (legacyData as any)?.legacyStages
+      // 檢查是否有舊版平鋪的 stages 遺留資料（排除 store 自身之 computed stages）
+      const legacyStages = isRawLegacyPayload
+        ? legacyData?.stages || (legacyData as any)?.legacyStages
+        : (legacyData as any)?.legacyStages
       if (Array.isArray(legacyStages) && legacyStages.length > 0) {
         mainStages.value.frances = legacyStages
+      }
+
+      if (!extensionStages.value) {
+        extensionStages.value = { frances: [], portugues: [], norte: [] }
       }
 
       version.value = 2
@@ -477,7 +721,12 @@ export const useScheduleStore = defineStore(
         }
       }
 
-      calculateCurrentMainStages()
+      if (!hasValidPersistedStages(currentRouteId.value)) {
+        calculateCurrentMainStages()
+      } else {
+        syncRestDaysFromMainStages(currentRouteId.value)
+        validateAndSyncExtensionStages()
+      }
     }
 
     // 首次載入若無分段則初始化
@@ -508,6 +757,8 @@ export const useScheduleStore = defineStore(
       insertRestDay,
       removeRestDay,
       updateEndWaypoint,
+      appendMainDayToSantiago,
+      appendFinisterreDayToDestination,
       setDay1Variant,
       availableRoutes: AVAILABLE_ROUTES,
       getRouteMetadata,
@@ -524,7 +775,7 @@ export const useScheduleStore = defineStore(
   {
     persist: {
       key: 'schedule', // 嚴格保持與舊版相同 key，確保能攔截到舊版快取資料
-      pick: ['version', 'currentRouteId', 'drafts', 'mainStages'],
+      pick: ['version', 'currentRouteId', 'drafts', 'mainStages', 'extensionStages'],
       afterHydrate: (ctx: any) => {
         ctx.store.migrateLegacyStorage(ctx.store)
       },

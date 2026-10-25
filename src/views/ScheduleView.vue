@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import { useScheduleStore } from "@/stores/schedule";
 import StageCard from "@/components/schedule/StageCard.vue";
 import ChangeWaypointModal from "@/components/schedule/ChangeWaypointModal.vue";
@@ -18,6 +18,9 @@ import {
   Sparkles,
   CheckCircle2,
   ChevronDown,
+  MessageCircleWarning,
+  ArrowUp,
+  Coffee,
 } from "lucide-vue-next";
 
 const scheduleStore = useScheduleStore();
@@ -40,7 +43,6 @@ const draftConfig = ref({
   targetDays: scheduleStore.config.targetDays,
   finisterreOption: scheduleStore.currentDraft.finisterreOption || "NONE",
   finisterreDays: scheduleStore.currentDraft.finisterreDays || 3,
-  santiagoLayoverDays: scheduleStore.currentDraft.santiagoLayoverDays || 0,
 });
 
 // 航點選單文字格式化（起點明確標示 SJPP、終點英文標示 Santiago de Compostela）
@@ -73,7 +75,6 @@ watch(
     scheduleStore.config.targetDays,
     scheduleStore.currentDraft.finisterreOption,
     scheduleStore.currentDraft.finisterreDays,
-    scheduleStore.currentDraft.santiagoLayoverDays,
   ],
   () => {
     draftConfig.value.startWaypointId = scheduleStore.config.startWaypointId;
@@ -84,8 +85,6 @@ watch(
       scheduleStore.currentDraft.finisterreOption || "NONE";
     draftConfig.value.finisterreDays =
       scheduleStore.currentDraft.finisterreDays || 3;
-    draftConfig.value.santiagoLayoverDays =
-      scheduleStore.currentDraft.santiagoLayoverDays || 0;
   },
   { immediate: true },
 );
@@ -98,7 +97,7 @@ const draftDailyAvgKm = computed(() => {
   );
   const walkingDays = Math.max(
     1,
-    draftConfig.value.targetDays - scheduleStore.totalRestDays,
+    draftConfig.value.targetDays - (scheduleStore.config.restDays || 0),
   );
   if (dist > 0 && walkingDays > 0) {
     return (dist / walkingDays).toFixed(1);
@@ -128,9 +127,7 @@ const isDirty = computed(() => {
     draftConfig.value.finisterreOption !==
       (scheduleStore.currentDraft.finisterreOption || "NONE") ||
     draftConfig.value.finisterreDays !==
-      (scheduleStore.currentDraft.finisterreDays || 3) ||
-    draftConfig.value.santiagoLayoverDays !==
-      (scheduleStore.currentDraft.santiagoLayoverDays || 0)
+      (scheduleStore.currentDraft.finisterreDays || 3)
   );
 });
 
@@ -146,7 +143,7 @@ const isFinisterreBoth = computed(() => {
 });
 
 const minFinisterreDays = computed(() => (isFinisterreBoth.value ? 3 : 2));
-const maxFinisterreDays = computed(() => (isFinisterreBoth.value ? 8 : 6));
+const maxFinisterreDays = computed(() => (isFinisterreBoth.value ? 15 : 8));
 
 const finisterreDailyAvgKm = computed(() => {
   const km = currentFinisterreInfo.value.totalKm;
@@ -164,6 +161,15 @@ const handleSwitchRoute = (routeId: RouteId) => {
 
 // 處理起訖點變更時，若天數超出合理範圍進行保護
 const handleWaypointChange = () => {
+  const wps = scheduleStore.currentMainWaypoints;
+  const startWp = wps.find((w) => w.id === draftConfig.value.startWaypointId);
+  const endWp = wps.find((w) => w.id === draftConfig.value.endWaypointId);
+  if (wps.length >= 2 && startWp && endWp && startWp.cumulativeKm >= endWp.cumulativeKm) {
+    if (startWp.id === wps[wps.length - 1].id) {
+      draftConfig.value.startWaypointId = wps[0].id;
+    }
+    draftConfig.value.endWaypointId = wps[wps.length - 1].id;
+  }
   const dist = calculateSelectedDistance(
     draftConfig.value.startWaypointId,
     draftConfig.value.endWaypointId,
@@ -208,19 +214,6 @@ const handleDecreaseFinisterreDays = () => {
   }
 };
 
-// 調整聖地牙哥停留休整天數
-const handleIncreaseLayoverDays = () => {
-  if (draftConfig.value.santiagoLayoverDays < 3) {
-    draftConfig.value.santiagoLayoverDays += 1;
-  }
-};
-
-const handleDecreaseLayoverDays = () => {
-  if (draftConfig.value.santiagoLayoverDays > 0) {
-    draftConfig.value.santiagoLayoverDays -= 1;
-  }
-};
-
 // 套用變更並重新計算（依照使用者調整的日期、主線與延伸段全體設定）
 const handleApplyChanges = () => {
   scheduleStore.updateDraftConfig({
@@ -230,13 +223,20 @@ const handleApplyChanges = () => {
     targetDays: draftConfig.value.targetDays,
     finisterreOption: draftConfig.value.finisterreOption,
     finisterreDays: draftConfig.value.finisterreDays,
-    santiagoLayoverDays: draftConfig.value.santiagoLayoverDays,
   });
 };
 
 // 點擊重設按鈕：還原回當前路線之官方預設設定
 const handleResetToOfficial = () => {
   scheduleStore.resetToDefaults();
+  draftConfig.value.startWaypointId = scheduleStore.config.startWaypointId;
+  draftConfig.value.endWaypointId = scheduleStore.config.endWaypointId;
+  draftConfig.value.startDate = scheduleStore.config.startDate;
+  draftConfig.value.targetDays = scheduleStore.config.targetDays;
+  draftConfig.value.finisterreOption =
+    scheduleStore.currentDraft.finisterreOption || "NONE";
+  draftConfig.value.finisterreDays =
+    scheduleStore.currentDraft.finisterreDays || 3;
 };
 
 // 放棄變更，還原為當前排程設定
@@ -249,8 +249,6 @@ const handleDiscardDraft = () => {
     scheduleStore.currentDraft.finisterreOption || "NONE";
   draftConfig.value.finisterreDays =
     scheduleStore.currentDraft.finisterreDays || 3;
-  draftConfig.value.santiagoLayoverDays =
-    scheduleStore.currentDraft.santiagoLayoverDays || 0;
 };
 
 // 彈窗狀態
@@ -285,16 +283,169 @@ const handleToggleRest = (dayIndex: number) => {
   }
 };
 
+// 一鍵追加一天主線抵達聖地牙哥大教堂
+const handleAppendMainDay = () => {
+  scheduleStore.appendMainDayToSantiago();
+  draftConfig.value.targetDays = scheduleStore.config.targetDays;
+};
+
+// 一鍵追加一天世界盡頭抵達海角終點
+const handleAppendFinisterreDay = () => {
+  scheduleStore.appendFinisterreDayToDestination();
+  draftConfig.value.finisterreDays = scheduleStore.currentDraft.finisterreDays || 3;
+};
+
 // 計算日均公里
 const dailyAverageKm = computed(() => {
   const walkingDays = scheduleStore.totalWalkingDays;
   if (walkingDays === 0) return 0;
   return Number((scheduleStore.totalDistanceKm / walkingDays).toFixed(1));
 });
+
+// 回到頂部（回到第一天）按鈕顯示狀態
+const showBackToTop = ref(false);
+
+const handleScroll = () => {
+  showBackToTop.value = window.scrollY > 300;
+};
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll, { passive: true });
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+// 主線是否成功抵達聖地牙哥大教堂
+const isMainReachedSantiago = computed(() => {
+  const stages = scheduleStore.stages;
+  if (!stages || stages.length === 0) return true;
+  const mainStagesList = stages.filter((s) => !s.isExtensionStage);
+  if (mainStagesList.length === 0) return true;
+  const lastMain = mainStagesList[mainStagesList.length - 1];
+  return (
+    lastMain.endWaypointId === "SANTIAGO_DE_COMPOSTELA" ||
+    lastMain.endWaypointId.endsWith(":santiago")
+  );
+});
+
+// 主線最後落腳城鎮名稱
+const lastMainWaypointName = computed(() => {
+  const mainStagesList = scheduleStore.stages.filter((s) => !s.isExtensionStage);
+  if (mainStagesList.length === 0) return "";
+  const lastMain = mainStagesList[mainStagesList.length - 1];
+  const wp = scheduleStore.getWaypoint(lastMain.endWaypointId);
+  return wp ? wp.localName || wp.chineseName : lastMain.endWaypointId;
+});
+
+// 主線最後一天分段（用於精準定位「未達聖地牙哥提醒」在該天卡片之後）
+const lastMainStage = computed(() => {
+  const mainStagesList = scheduleStore.stages.filter((s) => !s.isExtensionStage);
+  if (mainStagesList.length === 0) return null;
+  return mainStagesList[mainStagesList.length - 1];
+});
+
+const isLastMainStage = (stage: UserStage) => {
+  return lastMainStage.value?.dayIndex === stage.dayIndex && !stage.isExtensionStage;
+};
+
+// 世界盡頭目標終點航點 ID
+const targetFinisterreEndWaypointId = computed(() => {
+  const opt = scheduleStore.currentDraft.finisterreOption;
+  if (opt === "FINISTERRE_ONLY" || opt === "BOTH_MUXIA_FIRST") {
+    return "finisterre:fisterra";
+  }
+  if (opt === "MUXIA_ONLY" || opt === "BOTH_FINISTERRE_FIRST") {
+    return "finisterre:muxia";
+  }
+  return null;
+});
+
+// 世界盡頭最後一天落腳城鎮名稱
+const lastExtensionWaypointName = computed(() => {
+  const extStages = scheduleStore.stages.filter((s) => s.isExtensionStage);
+  if (extStages.length === 0) return "";
+  const lastExt = extStages[extStages.length - 1];
+  const wp = scheduleStore.getWaypoint(lastExt.endWaypointId);
+  return wp ? wp.localName || wp.chineseName : lastExt.endWaypointId;
+});
+
+// 世界盡頭是否成功抵達目標海角
+const isExtensionReachedDestination = computed(() => {
+  const opt = scheduleStore.currentDraft.finisterreOption;
+  if (opt === "NONE") return true;
+  const targetId = targetFinisterreEndWaypointId.value;
+  if (!targetId) return true;
+  const extStages = scheduleStore.stages.filter((s) => s.isExtensionStage);
+  if (extStages.length === 0) return true;
+  const lastExt = extStages[extStages.length - 1];
+  return lastExt.endWaypointId === targetId;
+});
+
+// 目標海角中文名稱
+const targetDestinationName = computed(() => {
+  const opt = scheduleStore.currentDraft.finisterreOption;
+  if (opt === "FINISTERRE_ONLY" || opt === "BOTH_MUXIA_FIRST") {
+    return "菲尼斯特雷大西洋燈塔 (Finisterre)";
+  }
+  if (opt === "MUXIA_ONLY" || opt === "BOTH_FINISTERRE_FIRST") {
+    return "穆希亞聖船聖母聖殿 (Muxía)";
+  }
+  return "";
+});
+
+// 判斷某個 stage 是否為延伸段之最後一天
+const isLastExtensionStage = (stage: UserStage) => {
+  const extStages = scheduleStore.stages.filter((s) => s.isExtensionStage);
+  if (extStages.length === 0) return false;
+  return (
+    extStages[extStages.length - 1].dayIndex === stage.dayIndex &&
+    stage.isExtensionStage
+  );
+};
+
+// 手機/平板折疊摘要列計算：總天數（主線 + 世界盡頭）
+const mobileDisplayTotalDays = computed(() => {
+  const mainDays = draftConfig.value.targetDays;
+  if (draftConfig.value.finisterreOption === "NONE") {
+    return mainDays;
+  }
+  const extDays = draftConfig.value.finisterreDays || 3;
+  return mainDays + extDays;
+});
+
+// 行程全體總天數（包含主線與世界盡頭延伸段）
+const totalTripDays = computed(() => {
+  return scheduleStore.stages.length;
+});
+
+// 手機/平板折疊摘要列計算：完整起訖停靠站序列 (以箭頭一貫串聯：例如 SJPP → Santiago → Fisterra → Muxía)
+const collapsedRouteFlow = computed(() => {
+  const stops: string[] = [
+    currentStartName.value || "SJPP",
+    currentEndName.value || "Santiago",
+  ];
+  const opt = draftConfig.value.finisterreOption;
+  if (opt === "FINISTERRE_ONLY") {
+    stops.push("Fisterra");
+  } else if (opt === "MUXIA_ONLY") {
+    stops.push("Muxía");
+  } else if (opt === "BOTH_FINISTERRE_FIRST") {
+    stops.push("Fisterra", "Muxía");
+  } else if (opt === "BOTH_MUXIA_FIRST") {
+    stops.push("Muxía", "Fisterra");
+  }
+  return stops;
+});
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-6 max-w-7xl mt-2">
+  <div class="container mx-auto px-4 py-6 max-w-[1440px] mt-2">
     <!-- 頂部標題區 -->
     <div class="mb-4 sm:mb-6">
       <h2
@@ -306,8 +457,8 @@ const dailyAverageKm = computed(() => {
 
     <!-- 三欄響應式佈局 -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      <!-- 左欄：Sticky 排程設定控制台 (lg: 4 欄) -->
-      <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
+      <!-- 左欄：Sticky 排程設定控制台 (lg: 4 欄，具備獨立自適應高度與平滑滾動，防止超出或被導覽列遮擋) -->
+      <div class="lg:col-span-4 space-y-4 lg:sticky lg:top-18 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto lg:overscroll-contain pr-1">
         <!-- 控制台卡片 -->
         <div
           class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs"
@@ -357,31 +508,37 @@ const dailyAverageKm = computed(() => {
             </div>
           </div>
 
-          <!-- 手機版收合時呈現的精簡摘要列（桌機版隱藏） -->
+          <!-- 手機版收合時呈現的精簡摘要列（桌機版隱藏，完整呈現主線與世界盡頭資訊） -->
           <div
             v-if="!isMobileSettingsOpen"
             @click="isMobileSettingsOpen = true"
             class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
           >
             <div class="flex items-center gap-1.5 min-w-0 truncate">
-              <span class="font-medium text-slate-800 truncate">{{
-                currentStartName
-              }}</span>
-              <span class="text-slate-400 shrink-0">→</span>
-              <span class="font-medium text-slate-800 truncate">{{
-                currentEndName
-              }}</span>
+              <template v-for="(stop, idx) in collapsedRouteFlow" :key="idx">
+                <span class="font-medium text-slate-800 truncate">{{ stop }}</span>
+                <span
+                  v-if="idx < collapsedRouteFlow.length - 1"
+                  class="text-slate-400 shrink-0 text-[11px]"
+                  >→</span
+                >
+              </template>
             </div>
             <div class="flex items-center gap-2 shrink-0">
-              <span class="font-medium text-slate-700"
-                >{{ draftConfig.targetDays }} 天</span
-              >
+              <span class="font-medium text-slate-800 font-mono">
+                {{ mobileDisplayTotalDays }} 天
+                <span
+                  v-if="draftConfig.finisterreOption !== 'NONE'"
+                  class="text-[10px] text-slate-400 font-normal font-sans"
+                >
+                  ({{ draftConfig.targetDays }}+{{ draftConfig.finisterreDays }})
+                </span>
+              </span>
               <span
                 v-if="isDirty"
                 class="inline-flex items-center gap-1 text-[11px] text-amber-600 font-medium"
               >
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span
-                >待套用
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>待套用
               </span>
             </div>
           </div>
@@ -523,51 +680,53 @@ const dailyAverageKm = computed(() => {
               </div>
             </div>
 
-            <!-- 世界盡頭全域延伸段 (Finisterre & Muxía Extension) -->
-            <div class="pt-2 border-t border-slate-100 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <label class="text-xs text-slate-800 flex items-center gap-1.5">
-                  <span>世界盡頭延伸旅程</span>
-                </label>
-              </div>
-
-              <select
-                :value="draftConfig.finisterreOption"
-                @change="handleFinisterreOptionChange(($event.target as HTMLSelectElement).value as FinisterreOption)"
-                class="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
-              >
-                <option
-                  v-for="(info, key) in finisterreOptionLabels"
-                  :key="key"
-                  :value="key"
-                >
-                  {{ info.title }}
-                </option>
-              </select>
-
-              <!-- 延伸段設定（兩欄極簡灰階風格，統一視覺階層） -->
+            <!-- 世界盡頭全域延伸段 (Finisterre & Muxía Extension，選單與天數並排同一列) -->
+            <div class="pt-2 border-t border-slate-100">
               <div
-                v-if="draftConfig.finisterreOption !== 'NONE'"
-                class="grid grid-cols-2 gap-3 pt-0.5"
+                class="grid gap-2 items-end"
+                :class="draftConfig.finisterreOption !== 'NONE' ? 'grid-cols-1 sm:grid-cols-12' : 'grid-cols-1'"
               >
-                <!-- 延伸線徒步天數 -->
-                <div>
+                <!-- 延伸路線下拉選單 -->
+                <div :class="draftConfig.finisterreOption !== 'NONE' ? 'sm:col-span-7' : 'w-full'">
+                  <label class="text-xs text-slate-800 block mb-1">
+                    世界盡頭延伸旅程
+                  </label>
+                  <select
+                    :value="draftConfig.finisterreOption"
+                    @change="handleFinisterreOptionChange(($event.target as HTMLSelectElement).value as FinisterreOption)"
+                    class="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden truncate"
+                  >
+                    <option
+                      v-for="(info, key) in finisterreOptionLabels"
+                      :key="key"
+                      :value="key"
+                    >
+                      {{ info.title }}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- 延伸徒步天數 Stepper（並排於同一列右側） -->
+                <div
+                  v-if="draftConfig.finisterreOption !== 'NONE'"
+                  class="sm:col-span-5"
+                >
                   <div class="flex items-center justify-between mb-1">
                     <label class="block text-xs text-slate-600">
-                      延伸徒步天數
+                      延伸天數
                     </label>
-                    <span class="text-[11px] text-slate-500 font-mono">
-                      約 {{ finisterreDailyAvgKm }} km/日
+                    <span class="text-[10px] text-slate-400 font-mono">
+                      約 {{ finisterreDailyAvgKm }}km/日
                     </span>
                   </div>
                   <div
-                    class="flex items-center border border-slate-200 rounded-lg bg-slate-50 overflow-hidden h-9.5"
+                    class="flex items-center border border-slate-200 rounded-lg bg-slate-50 overflow-hidden h-9"
                   >
                     <button
                       type="button"
                       @click="handleDecreaseFinisterreDays"
                       :disabled="draftConfig.finisterreDays <= minFinisterreDays"
-                      class="px-2.5 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
+                      class="px-2 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <Minus class="w-3.5 h-3.5" />
                     </button>
@@ -580,44 +739,7 @@ const dailyAverageKm = computed(() => {
                       type="button"
                       @click="handleIncreaseFinisterreDays"
                       :disabled="draftConfig.finisterreDays >= maxFinisterreDays"
-                      class="px-2.5 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
-                    >
-                      <Plus class="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-
-                <!-- 聖地牙哥停留休整天數 -->
-                <div>
-                  <div class="flex items-center justify-between mb-1">
-                    <label class="block text-xs text-slate-600">
-                      聖地牙哥休整
-                    </label>
-                    <span class="text-[11px] text-slate-500 font-mono">
-                      停留天數
-                    </span>
-                  </div>
-                  <div
-                    class="flex items-center border border-slate-200 rounded-lg bg-slate-50 overflow-hidden h-9.5"
-                  >
-                    <button
-                      type="button"
-                      @click="handleDecreaseLayoverDays"
-                      :disabled="draftConfig.santiagoLayoverDays <= 0"
-                      class="px-2.5 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
-                    >
-                      <Minus class="w-3.5 h-3.5" />
-                    </button>
-                    <span
-                      class="flex-1 text-center text-xs font-bold text-slate-900 font-mono"
-                    >
-                      {{ draftConfig.santiagoLayoverDays }} 天
-                    </span>
-                    <button
-                      type="button"
-                      @click="handleIncreaseLayoverDays"
-                      :disabled="draftConfig.santiagoLayoverDays >= 3"
-                      class="px-2.5 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
+                      class="px-2 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <Plus class="w-3.5 h-3.5" />
                     </button>
@@ -697,93 +819,170 @@ const dailyAverageKm = computed(() => {
 
       <!-- 中欄：每日分段時間軸清單 (lg: 8 欄) -->
       <div class="lg:col-span-8 space-y-4">
-        <!-- 頂部數據總覽看板 (移至每日行程上方) -->
-        <!-- 手機版：單行水平極簡資訊條 (sm:hidden) -->
-        <div
-          class="sm:hidden px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-between text-xs"
-        >
-          <div class="flex items-center gap-1">
-            <span class="text-slate-400">總長</span>
-            <span class="font-bold text-slate-900 font-mono">{{
-              scheduleStore.totalDistanceKm.toFixed(1)
-            }}</span>
-            <span class="text-[10px] text-slate-500">km</span>
-          </div>
-          <div class="w-px h-3.5 bg-slate-200"></div>
-          <div class="flex items-center gap-1">
-            <span class="text-slate-400">日均</span>
-            <span class="font-bold text-slate-900 font-mono">{{
-              dailyAverageKm.toFixed(1)
-            }}</span>
-            <span class="text-[10px] text-slate-500">km</span>
-          </div>
-          <div class="w-px h-3.5 bg-slate-200"></div>
-          <div class="flex items-center gap-1 text-slate-700">
-            <span class="font-bold text-slate-900 font-mono">{{
-              scheduleStore.totalWalkingDays
-            }}</span>
-            <span class="text-[10px] text-slate-500">走</span>
-            <span class="text-slate-300">/</span>
-            <span class="font-bold text-slate-900 font-mono">{{
-              scheduleStore.totalRestDays
-            }}</span>
-            <span class="text-[10px] text-slate-500">休</span>
-          </div>
-        </div>
+        <!-- 頂部數據總覽看板（Sticky 吸頂常駐於導覽列下方，扁平單行設計，左右寬度充裕伸展） -->
+        <div class="sticky top-16 sm:top-18 z-20">
+          <div
+            class="px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-xs flex items-center justify-between sm:justify-around text-xs"
+          >
+            <!-- 總徒步里程 -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <span class="text-slate-400 text-[11px] sm:text-xs">總里程</span>
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                scheduleStore.totalDistanceKm.toFixed(1)
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km</span>
+            </div>
 
-        <!-- 桌機版：四欄數據看板 (hidden sm:grid) -->
-        <div
-          class="hidden sm:grid sm:grid-cols-4 gap-3 p-4 rounded-xl bg-white border border-slate-200 shadow-xs"
-        >
-          <div class="p-3 bg-slate-50 rounded-xl text-center">
-            <div class="text-xs text-slate-500">總徒步里程</div>
-            <div class="text-xl font-black text-slate-900 font-mono mt-0.5">
-              {{ scheduleStore.totalDistanceKm.toFixed(1) }}
-              <span class="text-xs font-normal">km</span>
+            <div class="w-px h-3.5 bg-slate-200"></div>
+
+            <!-- 日均徒步 -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <span class="text-slate-400 text-[11px] sm:text-xs">日均</span>
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                dailyAverageKm.toFixed(1)
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km/日</span>
             </div>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-xl text-center">
-            <div class="text-xs text-slate-500">日均徒步</div>
-            <div class="text-xl font-black text-slate-900 font-mono mt-0.5">
-              {{ dailyAverageKm.toFixed(1) }}
-              <span class="text-xs font-normal">km/日</span>
+
+            <div class="w-px h-3.5 bg-slate-200"></div>
+
+            <!-- 總天數 -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <span class="text-slate-400 text-[11px] sm:text-xs">總天數</span>
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                totalTripDays
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+              <span
+                v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
+                class="hidden sm:inline text-[10px] sm:text-[11px] text-slate-400 font-mono"
+              >
+                ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
+              </span>
             </div>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-xl text-center">
-            <div class="text-xs text-slate-500">徒步天數</div>
-            <div class="text-xl font-black text-slate-900 font-mono mt-0.5">
-              {{ scheduleStore.totalWalkingDays }}
-              <span class="text-xs font-normal">天</span>
-            </div>
-            <div
-              v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE'"
-              class="text-[10px] text-slate-500 mt-0.5"
-            >
-              主線 {{ scheduleStore.config.targetDays }} + 延伸 {{ scheduleStore.currentDraft.finisterreDays || 3 }}
-            </div>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-xl text-center">
-            <div class="text-xs text-slate-500">休息停留</div>
-            <div class="text-xl font-black text-slate-900 font-mono mt-0.5">
-              {{ scheduleStore.totalRestDays }}
-              <span class="text-xs font-normal">天</span>
+
+            <div class="w-px h-3.5 bg-slate-200"></div>
+
+            <!-- 休息停留 -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <span class="text-slate-400 text-[11px] sm:text-xs">休息</span>
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                scheduleStore.totalRestDays
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
             </div>
           </div>
         </div>
 
-        <!-- 每日分段卡片清單 -->
-        <StageCard
+        <!-- 每日分段卡片清單與那一天之精準提醒 -->
+        <template
           v-for="(stage, index) in scheduleStore.stages"
           :key="`${stage.dayIndex}-${stage.startWaypointId}-${stage.endWaypointId}`"
-          :stage="stage"
-          :is-first="index === 0"
-          :is-last="index === scheduleStore.stages.length - 1"
-          @open-albergue="handleOpenAlbergue"
-          @change-waypoint="handleChangeWaypoint"
-          @toggle-rest="handleToggleRest"
-        />
+        >
+          <StageCard
+            :stage="stage"
+            :is-first="index === 0"
+            :is-last="index === scheduleStore.stages.length - 1"
+            @open-albergue="handleOpenAlbergue"
+            @change-waypoint="handleChangeWaypoint"
+            @toggle-rest="handleToggleRest"
+          />
+
+          <!-- 主線未抵達聖地牙哥時之提醒橫條：精準置於「主線最後一天（那一天）」下方，一眼即可看見 -->
+          <div
+            v-if="isLastMainStage(stage) && !isMainReachedSantiago"
+            class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-2.5 shadow-xs"
+          >
+            <AlertTriangle class="w-4.5 h-4.5 text-amber-600 shrink-0 mt-0.5" />
+            <div class="flex-1">
+              <div class="font-bold text-sm text-amber-950">
+                朝聖主線尚未抵達聖地牙哥大教堂（Day {{ stage.dayIndex }} 落腳於「{{ lastMainWaypointName }}」）
+              </div>
+              <div class="mt-1 text-slate-700 leading-relaxed">
+                主線行程於今日停靠在 {{ lastMainWaypointName }}。下方世界盡頭旅程預設由聖地牙哥大教堂接續啟程，若欲無縫接軌，可直接點擊下方快捷鍵自動補齊：
+              </div>
+              <div class="mt-2.5 flex items-center gap-2 flex-wrap">
+                <button
+                  v-if="stage.isRestDay"
+                  type="button"
+                  @click="handleToggleRest(stage.dayIndex)"
+                  class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 transition cursor-pointer flex items-center gap-1 shadow-2xs"
+                >
+                  <Coffee class="w-3.5 h-3.5 text-amber-600" />
+                  取消此日休息（恢復直達聖地牙哥）
+                </button>
+                <button
+                  type="button"
+                  @click="handleAppendMainDay"
+                  class="px-2.5 py-1 rounded-lg text-xs font-medium bg-amber-600 hover:bg-amber-700 text-white transition cursor-pointer flex items-center gap-1 shadow-xs"
+                >
+                  <Plus class="w-3.5 h-3.5" />
+                  追加 1 天直達大教堂（保留前段規劃）
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 世界盡頭未抵達終點時之提醒橫條：精準置於「世界盡頭最後一天（那一天）」下方，一眼即可看見 -->
+          <div
+            v-if="isLastExtensionStage(stage) && !isExtensionReachedDestination"
+            class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-2.5 shadow-xs"
+          >
+            <AlertTriangle class="w-4.5 h-4.5 text-amber-600 shrink-0 mt-0.5" />
+            <div class="flex-1">
+              <div class="font-bold text-sm text-amber-950">
+                世界盡頭行程尚未抵達{{ targetDestinationName }}（Day {{ stage.dayIndex }} 落腳於「{{ lastExtensionWaypointName }}」）
+              </div>
+              <div class="mt-1 text-slate-700 leading-relaxed">
+                延伸行程因設定休息停留日或城鎮調整，於最後一天停靠在 {{ lastExtensionWaypointName }}，未能抵達預定之海角終點。您可直接點擊下方快捷鍵補齊：
+              </div>
+              <div class="mt-2.5 flex items-center gap-2 flex-wrap">
+                <button
+                  v-if="stage.isRestDay"
+                  type="button"
+                  @click="handleToggleRest(stage.dayIndex)"
+                  class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 transition cursor-pointer flex items-center gap-1 shadow-2xs"
+                >
+                  <Coffee class="w-3.5 h-3.5 text-amber-600" />
+                  取消此日休息（恢復直達海角）
+                </button>
+                <button
+                  v-if="(scheduleStore.currentDraft.finisterreDays || 3) < maxFinisterreDays"
+                  type="button"
+                  @click="handleAppendFinisterreDay"
+                  class="px-2.5 py-1 rounded-lg text-xs font-medium bg-amber-600 hover:bg-amber-700 text-white transition cursor-pointer flex items-center gap-1 shadow-xs"
+                >
+                  <Plus class="w-3.5 h-3.5" />
+                  追加 1 天直達海角（保留前段規劃）
+                </button>
+              </div>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
+
+    <!-- 回到頂部（回到第一天）懸浮按鈕 -->
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 translate-y-4 scale-90"
+      enter-to-class="opacity-100 translate-y-0 scale-100"
+      leave-active-class="transition-all duration-200 ease-in"
+      leave-from-class="opacity-100 translate-y-0 scale-100"
+      leave-to-class="opacity-0 translate-y-4 scale-90"
+    >
+      <button
+        v-if="showBackToTop"
+        type="button"
+        @click="scrollToTop"
+        class="fixed bottom-6 right-6 z-30 p-2.5 sm:px-3.5 sm:py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-medium backdrop-blur-xs group"
+        title="回到頂部（回到第一天）"
+        aria-label="回到第一天"
+      >
+        <ArrowUp class="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+        <span class="hidden sm:inline">回到 Day 1</span>
+      </button>
+    </Transition>
 
     <!-- 彈窗群 -->
     <ChangeWaypointModal
