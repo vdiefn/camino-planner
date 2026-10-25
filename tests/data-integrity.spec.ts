@@ -4,9 +4,9 @@ import { francesWaypoints as waypoints } from '../src/data/routes/frances'
 import { buildGlobalWaypointMap } from '../src/data/routes'
 import type { PackingCategory } from '../src/types/camino'
 
-describe('Camino Francés 靜態資料完整性與防呆檢驗', () => {
-  // --- 1. 城鎮航點檢驗 ---
-  describe('城鎮航點 (Waypoints)', () => {
+describe('跨領域靜態資料完整性與防呆檢驗 (Cross-Domain Static Data Integrity)', () => {
+  // --- 1. 城鎮航點唯一性與地理邊界檢驗（路線結構與分支已由 routes-data.test.ts 覆蓋） ---
+  describe('城鎮航點地理座標與唯一性 (Waypoints Geo & Uniqueness)', () => {
     it('航點 ID 必須全域唯一且不可為空', () => {
       const ids = waypoints.map((w) => w.id)
       const uniqueIds = new Set(ids)
@@ -14,43 +14,13 @@ describe('Camino Francés 靜態資料完整性與防呆檢驗', () => {
       ids.forEach((id) => expect(id.trim().length).toBeGreaterThan(0))
     })
 
-    it('起點必須為 SJPP (0km)，終點必須為 Santiago de Compostela (770~790km)', () => {
-      const startPoint = waypoints.find((w) => w.id === 'SJPP')
-      const endPoint = waypoints.find((w) => w.id === 'SANTIAGO_DE_COMPOSTELA')
-
-      expect(startPoint).toBeDefined()
-      expect(startPoint?.cumulativeKm).toBe(0)
-
-      expect(endPoint).toBeDefined()
-      expect(endPoint?.cumulativeKm).toBeGreaterThanOrEqual(770)
-      expect(endPoint?.cumulativeKm).toBeLessThanOrEqual(790)
-    })
-
-    it('主線航點的累積里程必須嚴格單調遞增', () => {
-      const commonWaypoints = waypoints.filter((w) => w.routeVariant === 'COMMON' || !w.routeVariant)
-      for (let i = 1; i < commonWaypoints.length; i++) {
-        expect(commonWaypoints[i].cumulativeKm).toBeGreaterThan(commonWaypoints[i - 1].cumulativeKm)
-      }
-    })
-
-    it('所有航點必須具備有效的 GPS 經緯度座標', () => {
+    it('所有航點必須具備有效的西班牙北部 GPS 經緯度座標邊界', () => {
       waypoints.forEach((w) => {
         expect(w.coordinates.lat).toBeGreaterThan(40.0)
         expect(w.coordinates.lat).toBeLessThan(44.0)
         expect(w.coordinates.lng).toBeGreaterThan(-9.5)
         expect(w.coordinates.lng).toBeLessThan(0.0)
       })
-    })
-
-    it('Day 1 雙路線必須具備正確的分歧標記與代表性航點', () => {
-      const napoleonPoint = waypoints.find((w) => w.id === 'ORISSON')
-      const valcarlosPoint = waypoints.find((w) => w.id === 'VALCARLOS')
-
-      expect(napoleonPoint?.routeVariant).toBe('NAPOLEON')
-      expect(napoleonPoint?.elevationM).toBeGreaterThanOrEqual(750) // Orisson 約 792m
-
-      expect(valcarlosPoint?.routeVariant).toBe('VALCARLOS')
-      expect(valcarlosPoint?.elevationM).toBeLessThan(500) // Valcarlos 谷地約 365m
     })
   })
 

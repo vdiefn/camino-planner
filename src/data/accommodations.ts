@@ -10297,7 +10297,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351919578642',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casaanabela.es.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_RATES_CASA_MATTOS',
@@ -10312,7 +10312,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351919822398',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casaanabela.es.html?label=hotel_list&aid=357048'
     },
-    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_RATES_CASA_DA_VILA_GUEST_HOUSE',
@@ -10327,7 +10327,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351913317842',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-da-vila-guest-house.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 São Pedro de Rates，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_PEDRA_FURADA_CASA_DA_MARIA',
@@ -10341,7 +10341,7 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+351253852611'
     },
-    notes: '位於 Pedra Furada，提供朝聖者舒適住宿與休整。 備有自炊廚房。 地址：Dirección:',
+    notes: '位於 Pedra Furada，提供朝聖者舒適住宿與休整。 備有自炊廚房。',
   },
   {
     id: 'ACC_PORT_VITORINO_DOS_PIAES_CASA_SAGRES',
@@ -10356,7 +10356,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351962916441',
       bookingComUrl: 'https://www.booking.com/hotel/pt/esta-bulo-de-valinhas.html?label=hotel_list&aid=357048'
     },
-    notes: '位於 Vitorino dos Piães，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Vitorino dos Piães，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_VITORINO_DOS_PIAES_CASA_O_ESTABULO_DE_VALINHAS',
@@ -10371,7 +10371,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351961050955',
       bookingComUrl: 'https://www.booking.com/hotel/pt/esta-bulo-de-valinhas.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Vitorino dos Piães，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Vitorino dos Piães，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_LABRUJA_CASA_DA_VALADA',
@@ -10386,7 +10386,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351967742694',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_list&aid=357048'
     },
-    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_LABRUJA_CASA_DO_CHAFARIZ',
@@ -10401,7 +10401,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351967656435',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_list&aid=357048'
     },
-    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_LABRUJA_CASA_DO_OLIVAL',
@@ -10416,7 +10416,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351961251175',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_list&aid=357048'
     },
-    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_LABRUJA_CASA_DAS_POCAS_GUEST_HOUSE',
@@ -10431,7 +10431,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351967361935',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-das-pocas-guest-house-al.es.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_LABRUJA_QUINTA_LABRUJA',
@@ -10446,7 +10446,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351935268485',
       bookingComUrl: 'https://www.booking.com/hotel/pt/quinta-labruja-labruja.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Labruja，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_FONTOURA_CASA_DA_QUINTA_DO_CRUZEIRO',
@@ -10461,7 +10461,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351937625011',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-quinta-do-cruzeiro.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Fontoura，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Fontoura，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_FONTOURA_QUINTA_DE_REAL',
@@ -10476,7 +10476,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351969844495',
       bookingComUrl: 'https://www.booking.com/hotel/pt/quinta-de-real.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Fontoura，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Fontoura，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_VALENCA_HOSTEL_BULWARK',
@@ -10491,7 +10491,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351928142906',
       bookingComUrl: 'https://www.booking.com/hotel/pt/hostel-bulwark.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_VALENCA_RESIDENCIAL_PORTAS_DO_SOL',
@@ -10506,7 +10506,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351965851667',
       bookingComUrl: 'https://www.booking.com/hotel/pt/residencial-portas-do-sol.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_VALENCA_POUSADA_DE_VALENCA_SAO_TEOTONIO',
@@ -10521,7 +10521,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351251821333',
       bookingComUrl: 'https://www.booking.com/hotel/pt/pousada-sao-teotonio.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_VALENCA_HOTEL_VAL_FLORES',
@@ -10536,7 +10536,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351251824106',
       bookingComUrl: 'https://www.booking.com/hotel/pt/val-flores.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_VALENCA_HOTEL_MABI',
@@ -10551,7 +10551,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351251036383',
       bookingComUrl: 'https://www.booking.com/hotel/pt/mabi.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Valença do Minho，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_MOS_CASA_DOS_PARLADOIROS',
@@ -10566,7 +10566,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34669631454',
       bookingComUrl: 'https://www.booking.com/hotel/es/a-casa-dos-parladoiros.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_MOS_CASA_DA_CACHADA',
@@ -10581,7 +10581,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34669631454',
       bookingComUrl: 'https://www.booking.com/hotel/es/cachada-turhouse.es.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_MOS_CASA_OS_CABALEIROS',
@@ -10596,7 +10596,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34686567945',
       bookingComUrl: 'https://www.booking.com/hotel/es/os-cabaleiros.es.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Mos，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_PONTECESURES_HOSPEDAJE_CASA_DO_HORREO',
@@ -10611,7 +10611,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34609155607',
       bookingComUrl: 'https://www.booking.com/hotel/es/casa-do-horreo.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_PONTECESURES_HOTEL_RURAL_A_CASA_DO_RIO',
@@ -10626,7 +10626,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34986557743',
       bookingComUrl: 'https://www.booking.com/hotel/es/a-casa-do-rio.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_PONTECESURES_APARTAMENTOS_TURISTICOS_A_CASA_ANTIGA_DO_MONTE',
@@ -10641,7 +10641,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34600064394',
       bookingComUrl: 'https://www.booking.com/hotel/es/apartamentos-san-lois.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Pontecesures，提供朝聖者舒適住宿與休整。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_O_MILLADOIRO_HOTEL_PAYRO',
@@ -10656,7 +10656,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34881975176',
       bookingComUrl: 'https://www.booking.com/hotel/es/payro.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 O Milladoiro，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 O Milladoiro，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_O_MILLADOIRO_HOTEL_B_B_SANTIAGO_MILLADOIRO',
@@ -10671,7 +10671,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34881555969',
       bookingComUrl: 'https://www.booking.com/hotel/es/b-amp-b-santiago-milladoiro.es.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 O Milladoiro，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 O Milladoiro，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_POVOA_DE_VARZIM_SARDINES_FRIENDS_HOSTEL_04',
@@ -10686,7 +10686,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351962083329',
       bookingComUrl: 'https://www.booking.com/hotel/pt/sardines-and-friends.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_POVOA_DE_VARZIM_SARDINES_FRIENDS_HOSTEL_06',
@@ -10701,7 +10701,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351962083329',
       bookingComUrl: 'https://www.booking.com/hotel/pt/sardines-and-friends-suites.es.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_POVOA_DE_VARZIM_RESIDENCIA_REVE_D_OR',
@@ -10716,7 +10716,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351919656970',
       bookingComUrl: 'https://www.booking.com/hotel/pt/residaancia-raave-d-or.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Póvoa de Varzim，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_APULIA_APULIA_PRAIA_HOTEL',
@@ -10731,7 +10731,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351253989290',
       bookingComUrl: 'https://www.booking.com/hotel/pt/apulia-praia.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Apúlia，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Apúlia，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_FAO_THE_SPOT_HOSTEL_OFIR',
@@ -10746,7 +10746,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351916467751',
       bookingComUrl: 'https://www.booking.com/hotel/pt/the-spot-hostel-ofir.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_FAO_HOSTEL_DO_ALTO',
@@ -10761,7 +10761,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351961754783',
       bookingComUrl: 'https://www.booking.com/hotel/pt/hostel-do-alto.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_FAO_HOTEL_AXIS_OFIR',
@@ -10776,7 +10776,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351253989800',
       bookingComUrl: 'https://www.booking.com/hotel/pt/ofir.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_FAO_HOTEL_PARQUE_DO_RIO',
@@ -10791,7 +10791,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351253981521',
       bookingComUrl: 'https://www.booking.com/hotel/pt/estalagem-parque-do-rio.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Fão，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_MARINHAS_HOSTEL_COSTA_SELVAGEM',
@@ -10806,7 +10806,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351913212250',
       bookingComUrl: 'https://www.booking.com/hotel/pt/marinhas-bed-amp-breakfast.html?label=hotel_list&aid=357048'
     },
-    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_MARINHAS_CASA_DO_AVO_GRANDE',
@@ -10821,7 +10821,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351919752342',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-do-avo-grande.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_MARINHAS_CASA_BY_ANITA_GUESTHOUSE',
@@ -10836,7 +10836,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351912328417',
       bookingComUrl: 'https://www.booking.com/hotel/pt/casa-by-anita-guesthouse.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Marinhas，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_CASTELO_DO_NEIVA_ALOJAMENTO_CASA_D_OLIVEIRA',
@@ -10851,7 +10851,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351913487540',
       bookingComUrl: 'https://www.booking.com/hotel/pt/minho-at-home.es.html?label=hotel_list&aid=357048'
     },
-    notes: '位於 Castelo do Neiva，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Castelo do Neiva，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
   {
     id: 'ACC_PORT_CASTELO_DO_NEIVA_QUINTA_DO_MONTEVERDE',
@@ -10866,7 +10866,7 @@ export const accommodations: Accommodation[] = [
       phone: '+351258871134',
       bookingComUrl: 'https://www.booking.com/hotel/pt/quinta-do-monteverde.html?label=hotel_link&aid=357048'
     },
-    notes: '位於 Castelo do Neiva，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。 地址：Dirección:',
+    notes: '位於 Castelo do Neiva，提供朝聖者舒適住宿與休整。 備有自炊廚房。 支援 Booking.com 線上即時預訂。',
   },
 
   // ==========================================
@@ -16081,9 +16081,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34660789189',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+
     },
-    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。',
   },
   {
     id: 'ACC_FIN_NEGREIRA_PENSION_SAN_JOSE',
@@ -16096,9 +16096,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34881976934',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_NEGREIRA_EL_CARMEN',
@@ -16111,9 +16111,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34636129691',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_NEGREIRA_ALECRIN',
@@ -16126,9 +16126,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34981818286',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_NEGREIRA_BERGANDO',
@@ -16143,7 +16143,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34659447204',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_NEGREIRA_COTON',
@@ -16156,9 +16156,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34881979654',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_NEGREIRA_HOSTAL_LA_MEZQUITA',
@@ -16171,9 +16171,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34636129691',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-bergando.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_VILASERIO_PENSION_O_RUEIRO',
@@ -16188,7 +16188,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34659568139',
       bookingComUrl: 'https://www.booking.com/hotel/es/pension-orueiro-vilaserio.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_VILASERIO_CASA_VELLA',
@@ -16201,9 +16201,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: false,
     bookingChannels: {
       phone: '+34651883535',
-      bookingComUrl: 'https://www.booking.com/hotel/es/pension-orueiro-vilaserio.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_SANTA_MARINA_SANTA_MARINA',
@@ -16217,7 +16217,7 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34981852897'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_SANTA_MARINA_CASA_PEPA',
@@ -16231,7 +16231,7 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34981852881'
     },
-    notes: '聖瑪麗娜老牌鄉村庇護所，附設朝聖者餐廳，鄉村手作晚餐評價高。 地址：Dirección:',
+    notes: '聖瑪麗娜老牌鄉村庇護所，附設朝聖者餐廳，鄉村手作晚餐評價高。',
   },
   {
     id: 'ACC_FIN_OLVEIROA_MUNICIPAL_OLVEIROA',
@@ -16244,9 +16244,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34658045242',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+
     },
-    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。',
   },
   {
     id: 'ACC_FIN_OLVEIROA_HORREO',
@@ -16259,9 +16259,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34981741673',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+
     },
-    notes: '保留傳統加利西亞高架穀倉庭園，空間寬敞，適合多日徒步中繼站。 地址：Dirección:',
+    notes: '保留傳統加利西亞高架穀倉庭園，空間寬敞，適合多日徒步中繼站。',
   },
   {
     id: 'ACC_FIN_OLVEIROA_PENSION_CASA_MANOLA',
@@ -16276,7 +16276,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981741745',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_OLVEIROA_PENSION_CASA_LONCHO',
@@ -16289,9 +16289,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34981741673',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_OLVEIROA_PENSION_AS_PIAS',
@@ -16304,9 +16304,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34981741520',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-casa-manola.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LOGOSO_PENSION_O_LOGOSO',
@@ -16321,7 +16321,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34659505399',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-logoso.es.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LOGOSO_PENSION_A_PEDRA',
@@ -16336,7 +16336,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34671543648',
       bookingComUrl: 'https://www.booking.com/hotel/es/pension-a-pedra.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_HOSPITAL_O_CASTELINO',
@@ -16350,7 +16350,7 @@ export const accommodations: Accommodation[] = [
     bookingChannels: {
       phone: '+34615997169'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_DUMBRIA_O_CONCO',
@@ -16363,9 +16363,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34981744001',
-      bookingComUrl: 'https://www.booking.com/hotel/es/casa-lela-dumbria.es.html?label=hotel_list&aid=357048'
+
     },
-    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。',
   },
   {
     id: 'ACC_FIN_DUMBRIA_PENSION_O_ARXENTINO',
@@ -16378,9 +16378,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34981744051',
-      bookingComUrl: 'https://www.booking.com/hotel/es/casa-lela-dumbria.es.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_DUMBRIA_CASA_LELA',
@@ -16395,7 +16395,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34669094827',
       bookingComUrl: 'https://www.booking.com/hotel/es/casa-lela-dumbria.es.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_A_CASA_DA_FONTE',
@@ -16408,9 +16408,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34699242711',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-borda3n.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_O_BORDON',
@@ -16425,7 +16425,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34655903932',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-borda3n.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_MOREIRA',
@@ -16438,9 +16438,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34620891547',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-o-borda3n.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_PENSION_TEQUERON',
@@ -16455,7 +16455,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34666119594',
       bookingComUrl: 'https://www.booking.com/hotel/es/tequeron.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_TALIEIRO',
@@ -16470,7 +16470,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34647801669',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-talieiro.es.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_PENSION_BEIRAMAR',
@@ -16485,7 +16485,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981745040',
       bookingComUrl: 'https://www.booking.com/hotel/es/pension-beiramar.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_HOTEL_LA_MARINA',
@@ -16500,7 +16500,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981747381',
       bookingComUrl: 'https://www.booking.com/hotel/es/la-marina-cee.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CEE_HOTEL_LARRY',
@@ -16515,7 +16515,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981746441',
       bookingComUrl: 'https://www.booking.com/hotel/es/larry.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CORCUBION_SAN_ROQUE',
@@ -16528,9 +16528,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: false,
     bookingChannels: {
       phone: '+34679460942',
-      bookingComUrl: 'https://www.booking.com/hotel/es/pension-marviva-corcubion123456789101112131415161718192021.html?label=hotel_list&aid=357048'
+
     },
-    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。',
   },
   {
     id: 'ACC_FIN_CORCUBION_PENSION_MAR_VIVA',
@@ -16545,7 +16545,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34649746329',
       bookingComUrl: 'https://www.booking.com/hotel/es/pension-marviva-corcubion123456789101112131415161718192021.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CORCUBION_HOTEL_ALDA_CORCUBION',
@@ -16560,7 +16560,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34881043759',
       bookingComUrl: 'https://www.booking.com/hotel/es/as-hortensias.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_CORCUBION_CASA_DA_BALEA',
@@ -16575,7 +16575,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981746645',
       bookingComUrl: 'https://www.booking.com/hotel/es/casa-da-balea.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_FISTERRA_MUNICIPAL_FISTERRA',
@@ -16588,9 +16588,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34981740781',
-      bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_list&aid=357048'
+
     },
-    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。',
   },
   {
     id: 'ACC_FIN_FISTERRA_PENSION_FINISTELLAE',
@@ -16603,9 +16603,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34637821296',
-      bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_FISTERRA_PENSION_O_ENCONTRO',
@@ -16620,7 +16620,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34634454936',
       bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_FISTERRA_PENSION_CABO_DA_VILA',
@@ -16635,7 +16635,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34607735474',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-pension-cabo-da-vila.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_FISTERRA_POR_FIN',
@@ -16650,7 +16650,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34632112264',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-por-fin.html?label=hotel_link&aid=357048'
     },
-    notes: '菲尼斯特雷中心著名朝聖庇護所，寓意「終於抵達」，氣氛熱情溫馨。 地址：Dirección:',
+    notes: '菲尼斯特雷中心著名朝聖庇護所，寓意「終於抵達」，氣氛熱情溫馨。',
   },
   {
     id: 'ACC_FIN_FISTERRA_MAR_DE_ROSTRO',
@@ -16665,7 +16665,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34637107765',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-mar-de-rostro.es.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_FISTERRA_MAR_DE_FORA',
@@ -16680,7 +16680,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34648263639',
       bookingComUrl: 'https://www.booking.com/hotel/es/mar-de-fora.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_FISTERRA_ARASOLIS',
@@ -16693,9 +16693,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: true,
     bookingChannels: {
       phone: '+34638326869',
-      bookingComUrl: 'https://www.booking.com/hotel/es/o-encontro-fisterra.es.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LIRES_AS_EIRAS',
@@ -16710,7 +16710,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981748180',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-as-eiras.html?label=hotel_link&aid=357048'
     },
-    notes: '橫跨菲尼斯特雷與穆希亞中繼必經海灣聚落，露台可遠眺利雷斯海口夕陽。 地址：Dirección:',
+    notes: '橫跨菲尼斯特雷與穆希亞中繼必經海灣聚落，露台可遠眺利雷斯海口夕陽。',
   },
   {
     id: 'ACC_FIN_LIRES_PENSION_CASA_LUZ',
@@ -16723,9 +16723,9 @@ export const accommodations: Accommodation[] = [
     hasKitchen: false,
     bookingChannels: {
       phone: '+34981748924',
-      bookingComUrl: 'https://www.booking.com/hotel/es/albergue-as-eiras.html?label=hotel_list&aid=357048'
+
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LIRES_PENSION_FRAGAS_DA_CANTEIRA',
@@ -16740,7 +16740,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981748997',
       bookingComUrl: 'https://www.booking.com/hotel/es/fragas-da-canteira.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LIRES_HOTEL_LIRESCA',
@@ -16755,7 +16755,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981464395',
       bookingComUrl: 'https://www.booking.com/hotel/es/liresca.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LIRES_HOTEL_AS_EIRAS',
@@ -16770,7 +16770,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981748180',
       bookingComUrl: 'https://www.booking.com/hotel/es/as-eiras.html?label=hotel_link&aid=357048'
     },
-    notes: '橫跨菲尼斯特雷與穆希亞中繼必經海灣聚落，露台可遠眺利雷斯海口夕陽。 地址：Dirección:',
+    notes: '橫跨菲尼斯特雷與穆希亞中繼必經海灣聚落，露台可遠眺利雷斯海口夕陽。',
   },
   {
     id: 'ACC_FIN_LIRES_CASA_RAUL',
@@ -16785,7 +16785,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981748156',
       bookingComUrl: 'https://www.booking.com/hotel/es/casa-raul.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LIRES_CASA_JESUS_TURISMO_RURAL',
@@ -16800,7 +16800,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34696029810',
       bookingComUrl: 'https://www.booking.com/hotel/es/casa-jesus-turismo-rural-cee.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_LIRES_APARTHOTEL_RIA_DE_LIRES',
@@ -16815,7 +16815,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34625270080',
       bookingComUrl: 'https://www.booking.com/hotel/es/aparthotel-ria-de-lires.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。支援提前預約。',
   },
   {
     id: 'ACC_FIN_MUXIA_MUNICIPAL_MUXIA',
@@ -16827,9 +16827,9 @@ export const accommodations: Accommodation[] = [
     bedCount: 32,
     hasKitchen: true,
     bookingChannels: {
-      bookingComUrl: 'https://www.booking.com/hotel/es/hostel-bela-muxia.html?label=hotel_list&aid=357048'
+      phone: '+34 981 74 20 18',
     },
-    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。 地址：Dirección:',
+    notes: '加利西亞官方 Xunta 公立庇護所，公定價 €10，不可預約先到先得，須備朝聖者護照。',
   },
   {
     id: 'ACC_FIN_MUXIA_BELA_MUXIA',
@@ -16844,7 +16844,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34687798222',
       bookingComUrl: 'https://www.booking.com/hotel/es/hostel-bela-muxia.html?label=hotel_link&aid=357048'
     },
-    notes: '穆希亞知名文化主題庇護所，紀念加利西亞詩人與傳奇巨石，設施極佳。 地址：Dirección:',
+    notes: '穆希亞知名文化主題庇護所，紀念加利西亞詩人與傳奇巨石，設施極佳。',
   },
   {
     id: 'ACC_FIN_MUXIA_ARRIBADA',
@@ -16859,7 +16859,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34981742516',
       bookingComUrl: 'https://www.booking.com/hotel/es/albergue-arribada.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_MUXIA_DA_COSTA',
@@ -16874,7 +16874,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34676363820',
       bookingComUrl: 'https://www.booking.com/hotel/es/dabalar.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_MUXIA_MUXIA_MARE',
@@ -16889,7 +16889,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34664102205',
       bookingComUrl: 'https://www.booking.com/hotel/es/muxia-mare.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_MUXIA_PENSION_BELA_MUXIA',
@@ -16904,7 +16904,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34687798222',
       bookingComUrl: 'https://www.booking.com/hotel/es/bela-muxia.html?label=hotel_link&aid=357048'
     },
-    notes: '穆希亞知名文化主題庇護所，紀念加利西亞詩人與傳奇巨石，設施極佳。 地址：Dirección:',
+    notes: '穆希亞知名文化主題庇護所，紀念加利西亞詩人與傳奇巨石，設施極佳。',
   },
   {
     id: 'ACC_FIN_MUXIA_PENSION_RUSTICA_ALEMANA',
@@ -16919,7 +16919,7 @@ export const accommodations: Accommodation[] = [
       phone: '+34986064877',
       bookingComUrl: 'https://www.booking.com/hotel/es/pension-alemana.html?label=hotel_link&aid=357048'
     },
-    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。 地址：Dirección:',
+    notes: '提供朝聖者舒適住宿與休整。備有自由使用廚房。支援提前預約。',
   },
   {
     id: 'ACC_FIN_MUXIA_MUXIA',
