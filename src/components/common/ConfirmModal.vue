@@ -36,7 +36,7 @@ const emit = defineEmits<{
             <AlertTriangle class="w-5 h-5" />
           </div>
           <div class="space-y-1.5 flex-1 min-w-0">
-            <DialogTitle class="text-base font-boldtext-slate-900">
+            <DialogTitle class="text-base font-bold text-slate-900">
               {{ title }}
             </DialogTitle>
             <div class="text-sm text-slate-600 leading-relaxed">

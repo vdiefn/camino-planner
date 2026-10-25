@@ -124,6 +124,22 @@ const emit = defineEmits<{
       v-if="isExpanded"
       class="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2.5 text-xs"
     >
+      <!-- 英西雙語對照與參考重量區間 -->
+      <div
+        v-if="item.englishName || item.spanishName || item.referenceRangeText"
+        class="w-full flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 pb-1"
+      >
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span v-if="item.englishName">EN: {{ item.englishName }}</span>
+          <span v-if="item.spanishName" class="text-slate-600">
+            {{ item.englishName ? '· ' : '' }}ES: {{ item.spanishName }}
+          </span>
+        </div>
+        <span v-if="item.referenceRangeText" class="font-mono text-slate-400">
+          參考: {{ item.referenceRangeText }}
+        </span>
+      </div>
+
       <!-- 參考重量與實測輸入框 -->
       <div class="flex items-center gap-2">
         <div class="flex items-center gap-1">

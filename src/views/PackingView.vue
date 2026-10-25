@@ -490,7 +490,7 @@ function handleConfirmReset() {
 
               <!-- 身上穿戴總重統計 -->
               <div
-                class="rounded-xlb text-xs flex items-center justify-between"
+                class="rounded-xl text-xs flex items-center justify-between"
               >
                 <div class="font-normal text-sm text-slate-500">
                   當天穿在身上衣物重量
