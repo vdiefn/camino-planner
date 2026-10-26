@@ -444,7 +444,7 @@ onUnmounted(() => {
     <!-- 頂部吸頂列：左側大標題 ＋ 右側數據看板（Sticky 黏性吸頂，零位移、無底線、無陰影，滾動時純毛玻璃） -->
     <div
       :class="[
-        'sticky top-14 sm:top-16 z-30 -mx-4 px-4 sm:-mx-6 sm:px-6 py-2 sm:py-2.5 mb-1.5 sm:mb-3 transition-[background-color,backdrop-filter] duration-200',
+        'sticky top-14 sm:top-16 z-30 -mx-4 px-4 py-2 sm:py-2.5 mb-1.5 sm:mb-3 transition-[background-color,backdrop-filter] duration-200',
         isScrolled
           ? 'bg-slate-50/75 backdrop-blur-md'
           : 'bg-transparent',
