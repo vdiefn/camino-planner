@@ -12,7 +12,7 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
           class="flex items-center gap-2 text-slate-800 transition-colors"
         >
           <img src="/favicon.svg" alt="Logo" class="w-6 h-6" />
-          <span class="font-bold text-sm sm:text-base">Camino Planner</span>
+          <span class="font-bold text-sm sm:text-base">Camino Plan</span>
         </router-link>
         <router-link
           to="/"
@@ -40,7 +40,7 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
         <div class="mt-6 space-y-6 text-sm text-slate-600 leading-relaxed">
           <section>
             <p>
-              歡迎使用 <strong>Camino Planner 朝聖者智慧規劃工具</strong>（以下簡稱「本網站」）。本網站極度重視您的隱私，特此制定本政策，說明我們在資料隱私、本地儲存與第三方廣告方面的運作方式。
+              歡迎使用 <strong>Camino Plan 朝聖者智慧規劃工具</strong>（以下簡稱「本網站」）。本網站極度重視您的隱私，特此制定本政策，說明我們在資料隱私、本地儲存與第三方廣告方面的運作方式。
             </p>
           </section>
 
@@ -119,7 +119,7 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
 
     <!-- 底部精簡版權資訊 -->
     <footer class="border-t border-slate-200/60 bg-white/50 py-4 text-center text-xs text-slate-400">
-      <p>© {{ new Date().getFullYear() }} Camino Planner. All rights reserved.</p>
+      <p>© {{ new Date().getFullYear() }} Camino Plan. All rights reserved.</p>
     </footer>
   </div>
 </template>

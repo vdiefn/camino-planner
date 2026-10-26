@@ -38,7 +38,7 @@ function handleTabClick(tab: TabType) {
         <div>
           <div class="flex items-center gap-1.5 sm:gap-2">
             <h1 class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
-              Camino Planner
+              Camino Plan
             </h1>
           </div>
         </div>

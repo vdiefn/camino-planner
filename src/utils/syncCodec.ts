@@ -707,7 +707,7 @@ export function parseBackupJson(rawJson: string): DecodeResult {
       parsed.app !== 'camino-planner' ||
       (!parsed.schedule && !parsed.packing)
     ) {
-      return { ok: false, error: '此檔案並非 Camino Planner 產出的有效備份檔' }
+      return { ok: false, error: '此檔案並非 Camino Plan 產出的有效備份檔' }
     }
 
     const result: NormalizedImportPayload = {
