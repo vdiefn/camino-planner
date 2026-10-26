@@ -150,21 +150,25 @@ async function handleSubmit() {
               </div>
 
               <!-- 成功狀態畫面 -->
-              <div v-if="isSuccess" class="py-8 text-center space-y-3">
-                <div class="flex items-center justify-center gap-2">
-                  <CheckCircle2 class="w-6 h-6 text-emerald-600 shrink-0" />
-                  <h4 class="text-base font-bold text-slate-900">
-                    非常感謝您的回饋！
-                  </h4>
+              <div v-if="isSuccess" class="py-4 space-y-4">
+                <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                  <div class="flex items-center gap-2.5">
+                    <CheckCircle2 class="w-5 h-5 text-emerald-600 shrink-0" />
+                    <h4 class="text-sm sm:text-base font-bold text-slate-900">
+                      非常感謝您的回饋！
+                    </h4>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-7.5">
+                    您的寶貴建議與情報已成功送達。這能讓所有朝聖者的規劃旅程更加踏實順利，祝您一路順風！¡Buen Camino!
+                  </p>
                 </div>
-                <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">
-                  您的寶貴建議與情報已送達，這能讓所有朝聖者的規劃旅程更加踏實順利。¡Buen Camino!
-                </p>
-                <div class="pt-3">
+
+                <!-- 底部操作列：與表單送出按鈕位置一致，視覺更和諧 -->
+                <div class="pt-2 flex items-center justify-end border-t border-slate-100">
                   <button
                     type="button"
                     @click="closeFeedback"
-                    class="px-5 py-2 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition cursor-pointer"
+                    class="px-5 py-2 text-xs sm:text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-xl shadow-xs transition cursor-pointer"
                   >
                     完成
                   </button>
