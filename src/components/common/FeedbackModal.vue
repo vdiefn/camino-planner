@@ -24,7 +24,6 @@ const { isOpen, initialCategory, initialTarget, closeFeedback } = useFeedbackMod
 const category = ref<FeedbackCategory>('feature_request')
 const target = ref('')
 const content = ref('')
-const contact = ref('')
 const botField = ref('') // 蜜罐欄位 (隱形)
 
 const isSubmitting = ref(false)
@@ -37,7 +36,6 @@ watch(isOpen, (newVal) => {
     category.value = initialCategory.value
     target.value = initialTarget.value
     content.value = ''
-    contact.value = ''
     botField.value = ''
     isSubmitting.value = false
     isSuccess.value = false
@@ -89,7 +87,6 @@ async function handleSubmit() {
         category: category.value,
         target: target.value.trim(),
         content: content.value.trim(),
-        contact: contact.value.trim(),
         botField: botField.value
       })
     })
@@ -237,18 +234,10 @@ async function handleSubmit() {
                   />
                 </div>
 
-                <!-- 稱呼或聯絡方式 -->
-                <div>
-                  <label class="block text-xs font-medium text-slate-700 mb-1">
-                    您的稱呼或聯絡方式 <span class="text-slate-400 font-normal">（選填，若希望收到回覆可留下 Email）</span>
-                  </label>
-                  <input
-                    v-model="contact"
-                    type="text"
-                    placeholder="匿名 / 旅人小明 / email@example.com"
-                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
-                  />
-                </div>
+                <!-- 感謝回饋提示 -->
+                <p class="text-sm text-slate-700 leading-relaxed">
+                  感謝您的寶貴回饋與建議！
+                </p>
 
                 <!-- 錯誤訊息提示 -->
                 <div v-if="errorMessage" class="flex items-center gap-1.5 text-xs text-rose-600 bg-rose-50 p-2.5 rounded-xl border border-rose-200">
