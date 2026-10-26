@@ -151,12 +151,12 @@ async function handleSubmit() {
 
               <!-- 成功狀態畫面 -->
               <div v-if="isSuccess" class="py-8 text-center space-y-3">
-                <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                  <CheckCircle2 class="w-7 h-7" />
+                <div class="flex items-center justify-center gap-2">
+                  <CheckCircle2 class="w-6 h-6 text-emerald-600 shrink-0" />
+                  <h4 class="text-base font-bold text-slate-900">
+                    非常感謝您的回饋！
+                  </h4>
                 </div>
-                <h4 class="text-base font-bold text-slate-900">
-                  非常感謝您的回饋！
-                </h4>
                 <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">
                   您的寶貴建議與情報已送達，這能讓所有朝聖者的規劃旅程更加踏實順利。¡Buen Camino!
                 </p>
