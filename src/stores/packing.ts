@@ -210,6 +210,20 @@ export const usePackingStore = defineStore(
       }
     }
 
+    // 輔助函式：取得或初始化官方項目的差集物件
+    function ensureOverride(id: string): UserItemOverride {
+      if (!userItemStates.value[id]) {
+        const defaultItem = defaultPackingItems.find((i) => i.id === id);
+        userItemStates.value[id] = {
+          isChecked: defaultItem?.isChecked ?? true,
+          isWornOnBody: defaultItem?.isWornOnBody ?? false,
+          unitWeightGrams: defaultItem?.unitWeightGrams ?? 0,
+          quantity: defaultItem?.quantity ?? 1,
+        };
+      }
+      return userItemStates.value[id];
+    }
+
     function toggleCategory(catId: PackingCategory) {
       if (activeCategories.value.includes(catId)) {
         activeCategories.value = activeCategories.value.filter(
@@ -249,20 +263,6 @@ export const usePackingStore = defineStore(
 
       return [...officialItems, ...customItems.value];
     });
-
-    // 輔助函式：取得或初始化官方項目的差集物件
-    function ensureOverride(id: string): UserItemOverride {
-      if (!userItemStates.value[id]) {
-        const defaultItem = defaultPackingItems.find((i) => i.id === id);
-        userItemStates.value[id] = {
-          isChecked: defaultItem?.isChecked ?? true,
-          isWornOnBody: defaultItem?.isWornOnBody ?? false,
-          unitWeightGrams: defaultItem?.unitWeightGrams ?? 0,
-          quantity: defaultItem?.quantity ?? 1,
-        };
-      }
-      return userItemStates.value[id];
-    }
 
     // 5. 動作 Actions
     function toggleItemCheck(id: string) {
@@ -338,6 +338,17 @@ export const usePackingStore = defineStore(
       customItems.value = [];
       activeCategories.value = [...defaultActiveCategories];
       categoryOrder.value = [...defaultCategoryOrder];
+    }
+
+    // 套用匯入之裝備設定（策略 1：經防禦清洗後完整取代裝備區段）
+    function applyImportedPacking(rawImported: unknown) {
+      const sanitized = sanitizePackingState(rawImported);
+      version.value = sanitized.version;
+      bodyWeightKg.value = sanitized.bodyWeightKg;
+      userItemStates.value = sanitized.userItemStates;
+      customItems.value = sanitized.customItems;
+      activeCategories.value = sanitized.activeCategories;
+      categoryOrder.value = sanitized.categoryOrder;
     }
 
     // 相容保留（供 App.vue 或外部呼叫），差集架構下無需再執行手動覆寫
@@ -418,6 +429,7 @@ export const usePackingStore = defineStore(
       removeCustomItem,
       removeCustomCategory,
       resetToDefaults,
+      applyImportedPacking,
       backpackWeightGrams,
       backpackWeightKg,
       wornWeightGrams,

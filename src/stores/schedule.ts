@@ -729,6 +729,42 @@ export const useScheduleStore = defineStore(
       }
     }
 
+    // 依路線 ID 局部套用匯入之行程設定（保護未包含在匯入資料中之其他路線草稿）
+    function applyImportedSchedule(imported: {
+      currentRouteId: RouteId
+      drafts: Partial<Record<RouteId, RouteScheduleDraft>>
+      mainStages: Partial<Record<RouteId, UserStage[]>>
+      extensionStages: Partial<Record<RouteId, UserStage[]>>
+    }) {
+      for (const r of AVAILABLE_ROUTES) {
+        const routeId = r.id
+        const incomingDraft = imported.drafts[routeId]
+        if (incomingDraft) {
+          drafts.value[routeId] = sanitizeDraft({ ...incomingDraft }, routeId)
+          const incomingMain = imported.mainStages[routeId]
+          const incomingExt = imported.extensionStages[routeId]
+          if (Array.isArray(incomingMain) && incomingMain.length > 0) {
+            mainStages.value[routeId] = incomingMain.map((s) => ({ ...s }))
+          }
+          extensionStages.value[routeId] = Array.isArray(incomingExt)
+            ? incomingExt.map((s) => ({ ...s }))
+            : []
+          syncRestDaysFromMainStages(routeId)
+        }
+      }
+
+      if (imported.currentRouteId && drafts.value[imported.currentRouteId]) {
+        currentRouteId.value = imported.currentRouteId
+      }
+
+      if (!hasValidPersistedStages(currentRouteId.value)) {
+        calculateCurrentMainStages()
+      } else {
+        syncRestDaysFromMainStages(currentRouteId.value)
+        validateAndSyncExtensionStages()
+      }
+    }
+
     // 首次載入若無分段則初始化
     if (!mainStages.value[currentRouteId.value] || mainStages.value[currentRouteId.value].length === 0) {
       calculateCurrentMainStages()
@@ -738,6 +774,8 @@ export const useScheduleStore = defineStore(
       version,
       currentRouteId,
       drafts,
+      mainStages,
+      extensionStages,
       currentDraft,
       config,
       stages,
@@ -770,6 +808,7 @@ export const useScheduleStore = defineStore(
       totalRestDays,
       isWinterLocked,
       migrateLegacyStorage,
+      applyImportedSchedule,
     }
   },
   {

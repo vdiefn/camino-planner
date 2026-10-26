@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Compass, MessageSquarePlus } from 'lucide-vue-next'
+import { Compass, MessageSquarePlus, Share2 } from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
+import { useSyncBackup } from '@/composables/useSyncBackup'
 
 type TabType = 'schedule' | 'packing' | 'transport'
 
@@ -14,6 +15,7 @@ const emit = defineEmits<{
 }>()
 
 const { openFeedback } = useFeedbackModal()
+const { openSyncModal } = useSyncBackup()
 
 // 點擊分頁：若已在該分頁則平滑回到頂端，反之切換分頁
 function handleTabClick(tab: TabType) {
@@ -84,8 +86,18 @@ function handleTabClick(tab: TabType) {
         </button>
       </nav>
 
-      <!-- 右側：功能動作區（許願與回饋） -->
-      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+      <!-- 右側：功能動作區（跨裝置同步備份 ＆ 許願與回饋） -->
+      <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <button
+          type="button"
+          @click="openSyncModal"
+          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+          title="跨裝置同步與備份"
+          aria-label="跨裝置同步與備份"
+        >
+          <Share2 class="h-5 w-5" />
+        </button>
+
         <button
           type="button"
           @click="openFeedback({ category: 'feature_request' })"

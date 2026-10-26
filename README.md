@@ -26,9 +26,10 @@
 - 內建各城鎮公立/私立庇護所資訊（床位、費用、廚房設施）。
 - 整合一鍵電話預約、官方網站、Booking.com 連結，並提供超市與藥局的 Google 地圖精準導航。
 
-### 5. 離線優先架構 (Offline-First PWA)
-- 採用純前端 Jamstack 運算與 Pinia 本機持久化（`localStorage`）。
-- 整合 Service Worker 靜態資源快取，即使在庇里牛斯山區或梅塞塔荒原完全斷網，依然能 100% 順暢查閱與操作。
+### 5. 離線優先與跨裝置無狀態同步架構 (Offline-First PWA & Stateless Sync)
+- **本機秒開持久化**：採用純前端 Jamstack 運算與 Pinia 本機差集持久化（`localStorage`），搭配 Service Worker 靜態資源快取，即使在庇里牛斯山區或梅塞塔荒原斷網也能 100% 順暢操作。
+- **跨裝置 QR Code / URL 壓縮分享**：透過 `fflate` 與 `uqr` 將行程最小重建種子與裝備差集濃縮為短網址與離線向量 QR Code，免註冊帳號即可將電腦排好的規劃一鍵傳送至手機或分享給旅伴。
+- **完整 JSON 備份匯出與安全還原**：支援跨路線完整快照 `.json` 匯出與匯入，並具備覆寫前預覽攔截與雙向勾選保護機制。
 
 ---
 
@@ -41,9 +42,10 @@
 | **樣式系統** | Tailwind CSS v4 (響應式手機/平板/電腦三端配適) |
 | **無障礙元件** | @headlessui/vue (Dialog、Disclosure) |
 | **狀態管理** | Pinia + pinia-plugin-persistedstate (本機持久化) |
+| **跨端同步與壓縮** | fflate (Deflate 二進位壓縮) + uqr (離線向量 QR Code 渲染) |
 | **離線機制** | vite-plugin-pwa (Service Worker 快取) |
 | **圖示庫** | lucide-vue-next |
-| **單元測試** | Vitest (覆蓋排程運算、負重邏輯與資料完整性驗證) |
+| **單元測試** | Vitest (覆蓋排程運算、負重邏輯、跨裝置編解碼與資料完整性驗證) |
 
 ---
 
