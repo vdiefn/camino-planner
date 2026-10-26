@@ -182,7 +182,7 @@ function handleSubmit() {
                 v-model.number="formWeightGrams"
                 type="number"
                 min="0"
-                step="5"
+                step="1"
                 required
                 class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 font-mono text-sm text-slate-900 focus:border-amber-500 focus:outline-hidden"
               />

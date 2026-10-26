@@ -583,43 +583,41 @@ onUnmounted(() => {
                 class="flex flex-col sm:flex-row sm:items-center gap-2 text-sm"
               >
                 <div class="flex items-center gap-1.5 font-medium text-slate-900">
-                  <span class="text-emerald-700">起:</span>
+                  <span class="text-slate-700">起:</span>
                   <span>{{ step.from }}</span>
                 </div>
                 <div class="hidden sm:block text-slate-300">
                   <ArrowRight class="h-4 w-4" />
                 </div>
                 <div class="flex items-center gap-1.5 font-medium text-slate-900">
-                  <span class="text-amber-700">迄:</span>
+                  <span class="text-slate-700">迄:</span>
                   <span>{{ step.to }}</span>
                 </div>
               </div>
 
-              <!-- 耗時與預估費用 -->
-              <div
-                class="flex flex-wrap items-center gap-4 text-xs text-slate-500 pt-1 border-t border-slate-100"
-              >
-                <div class="flex items-center gap-1">
-                  <Clock class="h-3.5 w-3.5 text-slate-400" />
+              <!-- 步驟詳細資訊（預估車程、票價、避坑提示統一以點條列） -->
+              <div class="space-y-1.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                <div class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5"></span>
                   <span>預估車程：{{ step.durationMinutes }} 分鐘</span>
                 </div>
-                <div class="flex items-center gap-1">
-                  <Euro class="h-3.5 w-3.5 text-slate-400" />
+                <div class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5"></span>
                   <span>
                     票價：€{{ step.estimatedCostEur.min }} ~ €{{
                       step.estimatedCostEur.max
                     }}
                   </span>
                 </div>
-              </div>
-
-              <!-- 避坑提醒標籤 -->
-              <div
-                v-if="step.warningTip"
-                class="rounded-lg bg-amber-50 p-2.5 text-xs text-amber-900 leading-relaxed border border-amber-200/80"
-              >
-                <span class="font-bold">避坑提示：</span>
-                {{ step.warningTip }}
+                <div
+                  v-if="step.warningTip"
+                  class="flex items-start gap-2 leading-relaxed"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5"></span>
+                  <span>
+                    避坑提示：{{ step.warningTip }}
+                  </span>
+                </div>
               </div>
 
               <!-- 官方訂票按鈕 -->

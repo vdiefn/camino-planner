@@ -147,7 +147,7 @@ const emit = defineEmits<{
           <input
             type="number"
             min="0"
-            step="5"
+            step="1"
             :value="item.unitWeightGrams"
             class="w-16 rounded-md border border-slate-200 px-1.5 py-0.5 text-right font-mono text-slate-900 focus:border-amber-400 focus:outline-hidden"
             @input="emit('updateWeight', item.id, Number(($event.target as HTMLInputElement).value))"

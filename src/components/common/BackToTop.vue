@@ -35,7 +35,7 @@ onUnmounted(() => {
       v-if="isVisible"
       type="button"
       @click="scrollToTop"
-      class="hidden sm:flex fixed bottom-8 right-8 z-30 h-11 w-11 items-center justify-center rounded-full border border-slate-200/90 bg-white/95 text-slate-600 shadow-md backdrop-blur-xs transition-all duration-200 hover:border-amber-400 hover:text-amber-600 hover:shadow-lg active:scale-95 cursor-pointer group"
+      class="hidden md:flex fixed bottom-8 right-8 z-30 h-11 w-11 items-center justify-center rounded-full border border-slate-200/90 bg-white/95 text-slate-600 shadow-md backdrop-blur-xs transition-all duration-200 hover:border-amber-400 hover:text-amber-600 hover:shadow-lg active:scale-95 cursor-pointer group"
       title="回到頂部"
       aria-label="回到頂部"
     >
