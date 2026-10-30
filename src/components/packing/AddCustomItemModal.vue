@@ -32,8 +32,6 @@ const emit = defineEmits<{
 }>()
 
 const formName = ref('')
-const formEnglishName = ref('')
-const formSpanishName = ref('')
 const selectedCategoryOption = ref<string>('OTHER')
 const customCategoryInput = ref('')
 const formWeightGrams = ref<number>(100)
@@ -72,11 +70,11 @@ function handleSubmit() {
 
   emit('add', {
     chineseName: formName.value.trim(),
-    englishName: formEnglishName.value.trim() || formName.value.trim(),
-    spanishName: formSpanishName.value.trim() || undefined,
+    englishName: '',
+    spanishName: undefined,
     category: resolvedCategory,
     priority: 'OPTIONAL',
-    referenceRangeText: `${formWeightGrams.value}g`,
+    referenceRangeText: '',
     isChecked: true,
     unitWeightGrams: Math.max(0, formWeightGrams.value),
     quantity: Math.max(1, formQuantity.value),
@@ -85,8 +83,6 @@ function handleSubmit() {
 
   // 重設表單
   formName.value = ''
-  formEnglishName.value = ''
-  formSpanishName.value = ''
   selectedCategoryOption.value = 'OTHER'
   customCategoryInput.value = ''
   formWeightGrams.value = 100
@@ -119,30 +115,12 @@ function handleSubmit() {
 
         <form class="space-y-3.5 text-xs" @submit.prevent="handleSubmit">
           <div>
-            <label class="block text-slate-700">裝備名稱 (中文必填)</label>
+            <label class="block text-slate-700">裝備名稱</label>
             <input
               v-model="formName"
               type="text"
               placeholder="例如：相機腳架、超輕折疊傘"
               required
-              class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-900 focus:border-amber-500 focus:outline-hidden"
-            />
-          </div>
-          <div>
-            <label class="block text-slate-700">英文品名 (選填)</label>
-            <input
-              v-model="formEnglishName"
-              type="text"
-              placeholder="例如：Camera Tripod"
-              class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-900 focus:border-amber-500 focus:outline-hidden"
-            />
-          </div>
-          <div>
-            <label class="block text-slate-700">西班牙文品名 (選填)</label>
-            <input
-              v-model="formSpanishName"
-              type="text"
-              placeholder="例如：Trípode"
               class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-900 focus:border-amber-500 focus:outline-hidden"
             />
           </div>

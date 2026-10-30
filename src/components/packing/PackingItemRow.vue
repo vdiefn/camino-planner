@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Lightbulb, Trash2, Plus, Minus, ChevronDown } from 'lucide-vue-next'
+import { Lightbulb, Trash2, Plus, Minus } from 'lucide-vue-next'
 import type { PackingItem } from '@/types/camino'
-
-const isExpanded = ref(false)
 
 interface Props {
   item: PackingItem
@@ -53,14 +50,14 @@ const emit = defineEmits<{
               必備
             </span>
 
-            <!-- 穿在身上行內膠囊按鈕（防冒泡避免觸發 Checkbox） -->
+            <!-- 穿在身上行內膠囊按鈕（防冒泡避免觸發 Checkbox，未勾選時無外框） -->
             <button
               type="button"
-              class="rounded p-1 text-[10px] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
+              class="rounded px-1.5 py-0.5 text-[10px] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
               :class="[
                 item.isWornOnBody
                   ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100'
-                  : 'border border-slate-300 text-slate-400 hover:border-slate-400 hover:text-slate-600 bg-white'
+                  : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600'
               ]"
               :title="item.isWornOnBody ? '點擊改為放入背包（計入背包負重）' : '點擊標記為穿在身上（不計入背包負重）'"
               @click.stop.prevent="emit('toggleWorn', item.id)"
@@ -71,21 +68,8 @@ const emit = defineEmits<{
         </div>
       </div>
 
-      <!-- 避坑 Tips 按鈕、自訂刪除按鈕與展開收合 -->
+      <!-- 右側：避坑 Tips 與自訂刪除按鈕 -->
       <div class="flex items-center gap-1.5 shrink-0">
-        <!-- 收合時顯示的總重量小摘要 -->
-        <span
-          v-if="!isExpanded"
-          :class="[
-            'text-[11px] font-mono font-medium transition-colors',
-            item.isChecked ? 'text-slate-500' : 'text-slate-400 line-through opacity-60'
-          ]"
-          title="目前總重量"
-        >
-          {{ item.unitWeightGrams * item.quantity }}g
-          <span v-if="item.quantity > 1" class="text-[10px] text-slate-400">x {{ item.quantity }}</span>
-        </span>
-
         <button
           v-if="item.proTips"
           type="button"
@@ -103,77 +87,53 @@ const emit = defineEmits<{
         >
           <Trash2 class="h-3.5 w-3.5" />
         </button>
-
-        <!-- 展開/收合按鈕 -->
-        <button
-          type="button"
-          class="p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
-          :title="isExpanded ? '收合詳細資訊' : '展開外文與數值編輯'"
-          @click.stop="isExpanded = !isExpanded"
-        >
-          <ChevronDown
-            class="h-4 w-4 transition-transform duration-200"
-            :class="{ 'rotate-180': isExpanded }"
-          />
-        </button>
       </div>
     </div>
 
-    <!-- 下方：展開時才顯示重量與數量微調 -->
-    <div
-      v-if="isExpanded"
-      class="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2.5 text-xs"
-    >
-      <!-- 英西雙語對照與參考重量區間 -->
-      <div
-        v-if="item.englishName || item.spanishName || item.referenceRangeText"
-        class="w-full flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 pb-1"
-      >
-        <div class="flex flex-wrap items-center gap-1.5">
-          <span v-if="item.englishName">EN: {{ item.englishName }}</span>
-          <span v-if="item.spanishName" class="text-slate-600">
-            {{ item.englishName ? '· ' : '' }}ES: {{ item.spanishName }}
-          </span>
-        </div>
-        <span v-if="item.referenceRangeText" class="font-mono text-slate-400">
-          參考: {{ item.referenceRangeText }}
-        </span>
+    <!-- 下方：常駐緊湊重量與數量控制列（無分隔線） -->
+    <div class="mt-2 flex items-center justify-between gap-2 text-xs">
+      <!-- 實際重量 -->
+      <div class="flex items-center gap-1.5">
+        <span class="text-slate-500">實際重量:</span>
+        <input
+          type="number"
+          min="0"
+          step="1"
+          :value="item.unitWeightGrams"
+          class="w-16 rounded-md border border-slate-200 px-1.5 py-0.5 text-right font-mono text-slate-900 focus:border-amber-400 focus:outline-hidden"
+          @input="emit('updateWeight', item.id, Number(($event.target as HTMLInputElement).value))"
+        />
+        <span class="text-slate-400">g</span>
       </div>
 
-      <!-- 參考重量與實測輸入框 -->
+      <!-- 數量步進器與多件小計 -->
       <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1">
-          <span class="text-slate-500">實際重量:</span>
-          <input
-            type="number"
-            min="0"
-            step="1"
-            :value="item.unitWeightGrams"
-            class="w-16 rounded-md border border-slate-200 px-1.5 py-0.5 text-right font-mono text-slate-900 focus:border-amber-400 focus:outline-hidden"
-            @input="emit('updateWeight', item.id, Number(($event.target as HTMLInputElement).value))"
-          />
-          <span class="text-slate-400">g</span>
-        </div>
-      </div>
+        <span
+          v-if="item.quantity > 1"
+          class="text-[11px] font-mono text-slate-400"
+          title="總重量"
+        >
+          計 {{ item.unitWeightGrams * item.quantity }}g
+        </span>
 
-      <!-- 數量步進器 -->
-      <div class="flex items-center rounded-md border border-slate-200 bg-slate-50">
-        <button
-          type="button"
-          class="px-1.5 py-0.5 text-slate-500 hover:bg-slate-200 rounded-l-md cursor-pointer"
-          :disabled="item.quantity <= 1"
-          @click="emit('updateQuantity', item.id, item.quantity - 1)"
-        >
-          <Minus class="h-3 w-3" />
-        </button>
-        <span class="w-6 text-center font-mono text-slate-800">{{ item.quantity }}</span>
-        <button
-          type="button"
-          class="px-1.5 py-0.5 text-slate-500 hover:bg-slate-200 rounded-r-md cursor-pointer"
-          @click="emit('updateQuantity', item.id, item.quantity + 1)"
-        >
-          <Plus class="h-3 w-3" />
-        </button>
+        <div class="flex items-center rounded-md border border-slate-200 bg-slate-50">
+          <button
+            type="button"
+            class="px-1.5 py-0.5 text-slate-500 hover:bg-slate-200 rounded-l-md cursor-pointer"
+            :disabled="item.quantity <= 1"
+            @click="emit('updateQuantity', item.id, item.quantity - 1)"
+          >
+            <Minus class="h-3 w-3" />
+          </button>
+          <span class="w-6 text-center font-mono text-slate-800">{{ item.quantity }}</span>
+          <button
+            type="button"
+            class="px-1.5 py-0.5 text-slate-500 hover:bg-slate-200 rounded-r-md cursor-pointer"
+            @click="emit('updateQuantity', item.id, item.quantity + 1)"
+          >
+            <Plus class="h-3 w-3" />
+          </button>
+        </div>
       </div>
     </div>
   </div>
