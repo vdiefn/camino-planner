@@ -260,9 +260,9 @@ export function encodeCompactUrlPayload(options: {
           isChecked ? 1 : 0,
           item.isWornOnBody ? 1 : 0,
         ]
-        const hasDiffEng = item.englishName && item.englishName !== item.chineseName
-        if (hasDiffEng || item.spanishName) {
-          tuple.push(hasDiffEng ? item.englishName : '')
+        const hasEng = Boolean(item.englishName && item.englishName.trim())
+        if (hasEng || item.spanishName) {
+          tuple.push(hasEng ? item.englishName : '')
         }
         if (item.spanishName) {
           tuple.push(item.spanishName)
@@ -569,7 +569,7 @@ export function decodeCompactUrlPayload(token: string): DecodeResult {
             rawCustomItems.push({
               id: `CUSTOM_SYNC_${Date.now()}_${idx}`,
               chineseName,
-              englishName: tuple[6] ? String(tuple[6]) : chineseName,
+              englishName: tuple[6] ? String(tuple[6]) : '',
               spanishName: tuple[7] ? String(tuple[7]) : '',
               category: String(tuple[1] || 'OTHER') as PackingCategory,
               priority: 'OPTIONAL',

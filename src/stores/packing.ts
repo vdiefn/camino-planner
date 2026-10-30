@@ -65,13 +65,16 @@ export function sanitizePackingState(raw: any) {
   if (Array.isArray(raw?.customItems)) {
     for (const item of raw.customItems) {
       if (item && typeof item === "object" && item.id && item.chineseName) {
+        const chineseName = String(item.chineseName);
+        const rawEng = typeof item.englishName === "string" ? item.englishName : "";
+        const englishName = rawEng === chineseName ? "" : rawEng;
+        const rawSpa = typeof item.spanishName === "string" ? item.spanishName : "";
+        const spanishName = rawSpa === chineseName ? "" : rawSpa;
         customItems.push({
           id: String(item.id),
-          chineseName: String(item.chineseName),
-          englishName:
-            typeof item.englishName === "string" ? item.englishName : "",
-          spanishName:
-            typeof item.spanishName === "string" ? item.spanishName : "",
+          chineseName,
+          englishName,
+          spanishName,
           category:
             typeof item.category === "string"
               ? (item.category as PackingCategory)

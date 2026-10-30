@@ -392,4 +392,50 @@ describe('裝備負重試算核心測試 (Packing Calculator Engine)', () => {
     expect(store.activeCategories.includes('MEDICAL')).toBe(true)
     expect(store.backpackWeightGrams).toBe(initialGrams)
   })
+
+  it('自訂裝備英文或西文留空時，不應自動回退填入中文品名；歷史被污染資料應自動清理', () => {
+    const store = usePackingStore()
+
+    // 1. 新增僅有中文品名的自訂裝備
+    store.addCustomItem({
+      chineseName: '台灣特色平安符',
+      englishName: '',
+      spanishName: '',
+      category: 'OTHER',
+      priority: 'OPTIONAL',
+      referenceRangeText: '10g',
+      isChecked: true,
+      unitWeightGrams: 10,
+      quantity: 1,
+      isWornOnBody: false,
+    })
+
+    const addedItem = store.customItems.find((i) => i.chineseName === '台灣特色平安符')
+    expect(addedItem).toBeDefined()
+    expect(addedItem?.englishName).toBe('')
+    expect(addedItem?.spanishName).toBe('')
+
+    // 2. 測試歷史被污染的 localStorage 資料防禦修復 (englishName === chineseName 時自動清空)
+    const pollutedState = {
+      bodyWeightKg: 60,
+      customItems: [
+        {
+          id: 'CUSTOM_OLD_1',
+          chineseName: '高山烏龍茶包',
+          englishName: '高山烏龍茶包',
+          spanishName: '高山烏龍茶包',
+          category: 'OTHER',
+          unitWeightGrams: 50,
+          quantity: 1,
+          isChecked: true,
+          isWornOnBody: false,
+        },
+      ],
+    }
+
+    const sanitized = sanitizePackingState(pollutedState)
+    expect(sanitized.customItems[0].chineseName).toBe('高山烏龍茶包')
+    expect(sanitized.customItems[0].englishName).toBe('')
+    expect(sanitized.customItems[0].spanishName).toBe('')
+  })
 })
