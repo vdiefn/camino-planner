@@ -666,6 +666,44 @@ onUnmounted(() => {
               </div>
             </div>
           </div>
+
+          <!-- 葡萄牙海岸線 (Camino de la Costa) 專屬起點接駁與跨境渡輪避坑專區 -->
+          <div
+            v-if="selectedTargetRoute === 'portugues'"
+            class="rounded-xl border border-sky-200 bg-sky-50/60 p-4 sm:p-5 shadow-xs space-y-3"
+          >
+            <div class="flex items-center gap-2 text-sm font-bold text-sky-950">
+              <span class="text-base">🌊</span>
+              <span>葡萄牙海岸線 (Camino de la Costa) 專屬交通錦囊</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs leading-relaxed text-slate-700">
+              <!-- 錦囊 1：波多出城地鐵接駁 -->
+              <div class="bg-white/90 p-3.5 rounded-lg border border-sky-100 space-y-1.5">
+                <div class="font-bold text-sky-900 flex items-center gap-1.5">
+                  <Train class="w-3.5 h-3.5 text-sky-600" />
+                  <span>波多市區 ➔ Matosinhos 濱海起步接駁</span>
+                </div>
+                <p class="text-slate-600">
+                  波多主教座堂出城前 10km 為多車流工業與硬石板路。建議自市區 <strong class="text-slate-800">Trindade 站</strong> 搭乘輕軌 <strong class="text-sky-700">Metro A 線（藍線）</strong> 至 <strong class="text-slate-800">Matosinhos Sul</strong> 站（約 25 分鐘，單程 €2.15），出站即達大西洋沙灘與木棧道起步。
+                </p>
+              </div>
+
+              <!-- 錦囊 2：Caminha 跨國渡輪與計程快艇 -->
+              <div class="bg-white/90 p-3.5 rounded-lg border border-sky-100 space-y-1.5">
+                <div class="font-bold text-sky-900 flex items-center gap-1.5">
+                  <Compass class="w-3.5 h-3.5 text-sky-600" />
+                  <span>Caminha 跨米尼奧河至西班牙 A Guarda 渡輪</span>
+                </div>
+                <p class="text-slate-600">
+                  西葡邊境由米尼奧河阻隔：官方渡輪（Ferry Xacobeo，約 €1.50）<strong class="text-amber-800">極受潮汐影響，退潮常停駛</strong>。若遇停航可於碼頭搭乘 <strong class="text-sky-700">朝聖者計程快艇（Taxi-Boat）</strong>（約 €5~€6/人，航程 5 分鐘直達碼頭）。
+                </p>
+                <p class="text-[11px] text-amber-700 font-medium">
+                  ⏰ 提醒：過河入境西班牙手錶需調快 1 小時（葡萄牙 UTC+0 ➔ 西班牙 UTC+1）。
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

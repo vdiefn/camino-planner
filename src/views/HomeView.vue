@@ -32,18 +32,23 @@ const getTabFromRoute = (path: string): 'schedule' | 'packing' | 'transport' => 
 // 當前啟用的分頁標籤：'schedule' | 'packing' | 'transport'
 const currentTab = ref<'schedule' | 'packing' | 'transport'>(getTabFromRoute(route.path))
 
-// 同步 URL 中的 :routeId 至 Pinia Store（支援瀏覽器上一頁/下一頁與直接造訪特定路線）
+// 同步 URL 中的 :routeId 與 :branchId 至 Pinia Store（支援瀏覽器上一頁/下一頁與直接造訪特定路線）
 const syncRouteIdFromUrl = () => {
   const routeIdParam = route.params.routeId as RouteId
+  const branchIdParam = route.params.branchId as string | undefined
+
   if (routeIdParam && AVAILABLE_ROUTES.some((r) => r.id === routeIdParam)) {
     if (scheduleStore.currentRouteId !== routeIdParam) {
       scheduleStore.switchRoute(routeIdParam)
+    }
+    if (branchIdParam && scheduleStore.currentDraft?.branchId !== branchIdParam) {
+      scheduleStore.switchBranch(branchIdParam)
     }
   }
 }
 
 watch(
-  () => route.params.routeId,
+  () => [route.params.routeId, route.params.branchId],
   () => {
     syncRouteIdFromUrl()
   },
@@ -58,11 +63,17 @@ watch(
   }
 )
 
-// 當使用者點擊分頁頁籤時，同步更新網址路徑（自動攜帶當前選定之路線 ID）
+// 當使用者點擊分頁頁籤時，同步更新網址路徑（自動攜帶當前選定之路線與分支 ID）
 watch(currentTab, (newTab) => {
   let targetPath = `/${newTab}`
   if (newTab === 'schedule' || newTab === 'transport') {
-    targetPath = `/${newTab}/${scheduleStore.currentRouteId || 'frances'}`
+    const routeId = scheduleStore.currentRouteId || 'frances'
+    const branchId = scheduleStore.currentDraft?.branchId
+    if (routeId === 'portugues' && branchId === 'costa') {
+      targetPath = `/${newTab}/${routeId}/${branchId}`
+    } else {
+      targetPath = `/${newTab}/${routeId}`
+    }
   }
   if (route.path !== targetPath) {
     router.push(targetPath)

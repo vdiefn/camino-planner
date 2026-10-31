@@ -20,7 +20,7 @@ const router = createRouter({
       redirect: '/schedule/frances',
     },
     {
-      path: '/schedule/:routeId',
+      path: '/schedule/:routeId/:branchId?',
       name: 'schedule',
       component: HomeView,
     },
@@ -39,7 +39,7 @@ const router = createRouter({
       redirect: '/transport/frances',
     },
     {
-      path: '/transport/:routeId',
+      path: '/transport/:routeId/:branchId?',
       name: 'transport',
       component: HomeView,
     },
@@ -62,13 +62,20 @@ const router = createRouter({
   },
 })
 
-// 路由防禦：確保 /schedule/:routeId 與 /transport/:routeId 為合法收錄之路線，否則自動 fallback 至 frances
+// 路由防禦：確保 /schedule/:routeId/:branchId? 與 /transport/:routeId/:branchId? 為合法收錄之路線與分支，否則自動 fallback
 router.beforeEach((to, _from, next) => {
   if (to.name === 'schedule' || to.name === 'transport') {
     const routeId = to.params.routeId as string
-    const isValid = AVAILABLE_ROUTES.some((r) => r.id === routeId)
-    if (!isValid) {
+    const branchId = to.params.branchId as string | undefined
+    const routeMeta = AVAILABLE_ROUTES.find((r) => r.id === routeId)
+    if (!routeMeta) {
       return next(`/${String(to.name)}/frances`)
+    }
+    if (branchId && routeMeta.branches) {
+      const isValidBranch = routeMeta.branches.some((b) => b.id === branchId)
+      if (!isValidBranch) {
+        return next(`/${String(to.name)}/${routeId}`)
+      }
     }
   }
   next()
@@ -91,9 +98,17 @@ function upsertMeta(selector: string, attr: 'name' | 'property', key: string, co
  */
 function resolveRouteSeoMeta(to: RouteLocationNormalized) {
   const routeId = to.params.routeId as RouteId
+  const branchId = to.params.branchId as string | undefined
   const routeMeta = getRouteMetadata(routeId)
 
   if (to.name === 'schedule' && routeMeta) {
+    if (routeId === 'portugues' && branchId === 'costa') {
+      const costaBranch = routeMeta.branches?.find((b) => b.id === 'costa')
+      return {
+        title: `【2026 朝聖之路】葡萄牙之路海岸線 (Camino de la Costa) 行程規劃與每日里程試算 | Camino Plan`,
+        description: `專為葡萄牙海岸線徒步者打造的免費規劃工具。自波多沿大西洋海岸北上，全長約 ${costaBranch?.totalDistanceKm || 270.9}km、建議 ${costaBranch?.recommendedDays || 13} 天，支援每日海風步道與木棧道里程試算、爬升、庇護所清單與 Caminha 跨國渡輪節點。`,
+      }
+    }
     return {
       title: `【2026 朝聖之路】${routeMeta.chineseName} (${routeMeta.name}) 行程規劃與每日里程計算 | Camino Plan`,
       description: `專為${routeMeta.chineseName}徒步者打造的免費規劃工具。全長約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天，支援每日分段公里試算、爬升下降、庇護所清單與世界盡頭延伸段。`,
@@ -101,6 +116,12 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized) {
   }
 
   if (to.name === 'transport' && routeMeta) {
+    if (routeId === 'portugues' && branchId === 'costa') {
+      return {
+        title: `【2026 朝聖之路】葡萄牙之路海岸線起點交通與 Caminha 跨國渡輪避坑指南 | Camino Plan`,
+        description: `提供前往葡萄牙海岸線起點（波多主教座堂 / Matosinhos 海邊起點）地鐵接駁、Caminha 跨米尼奧河至西班牙 A Guarda 的 Xacobeo 渡輪與計程快艇全攻略。`,
+      }
+    }
     return {
       title: `【2026 朝聖之路】${routeMeta.chineseName} (${routeMeta.name}) 起點交通攻略與轉乘指南 | Camino Plan`,
       description: `提供抵達${routeMeta.chineseName}起點的最佳大眾運輸交通指南、高鐵與巴士班次規劃、跨國轉乘避坑提醒與官方訂票連結。`,

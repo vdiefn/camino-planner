@@ -19,7 +19,14 @@ const emit = defineEmits<{
 const { openFeedback } = useFeedbackModal()
 const { openSyncModal } = useSyncBackup()
 const scheduleStore = useScheduleStore()
-const currentRouteId = computed(() => scheduleStore.currentRouteId || 'frances')
+const currentRouteSlug = computed(() => {
+  const routeId = scheduleStore.currentRouteId || 'frances'
+  const branchId = scheduleStore.currentDraft?.branchId
+  if (routeId === 'portugues' && branchId === 'costa') {
+    return `${routeId}/${branchId}`
+  }
+  return routeId
+})
 
 // 點擊分頁：若已在該分頁則平滑回到頂端，反之切換分頁
 function handleTabClick(tab: TabType) {
@@ -51,7 +58,7 @@ function handleTabClick(tab: TabType) {
       <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊，使用動態長尾 <a href> 錨點供搜尋引擎檢索） -->
       <nav aria-label="主要功能導覽" class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1 absolute left-1/2 -translate-x-1/2">
         <a
-          :href="`/schedule/${currentRouteId}`"
+          :href="`/schedule/${currentRouteSlug}`"
           :class="[
             'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
             currentTab === 'schedule'
@@ -77,7 +84,7 @@ function handleTabClick(tab: TabType) {
         </a>
 
         <a
-          :href="`/transport/${currentRouteId}`"
+          :href="`/transport/${currentRouteSlug}`"
           :class="[
             'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
             currentTab === 'transport'

@@ -15,7 +15,14 @@ const emit = defineEmits<{
 }>()
 
 const scheduleStore = useScheduleStore()
-const currentRouteId = computed(() => scheduleStore.currentRouteId || 'frances')
+const currentRouteSlug = computed(() => {
+  const routeId = scheduleStore.currentRouteId || 'frances'
+  const branchId = scheduleStore.currentDraft?.branchId
+  if (routeId === 'portugues' && branchId === 'costa') {
+    return `${routeId}/${branchId}`
+  }
+  return routeId
+})
 
 // 點擊分頁：若已在該分頁則自動平滑回到頂端，反之切換分頁
 function handleTabClick(tab: TabType) {
@@ -31,7 +38,7 @@ function handleTabClick(tab: TabType) {
   <nav aria-label="行動端功能導覽" class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md md:hidden">
     <div class="grid h-16 grid-cols-3 items-center">
       <a
-        :href="`/schedule/${currentRouteId}`"
+        :href="`/schedule/${currentRouteSlug}`"
         :class="[
           'flex h-full flex-col items-center justify-center gap-1 transition-colors cursor-pointer',
           currentTab === 'schedule' ? 'text-amber-600 font-medium' : 'text-slate-500 hover:text-slate-800',
@@ -55,7 +62,7 @@ function handleTabClick(tab: TabType) {
       </a>
 
       <a
-        :href="`/transport/${currentRouteId}`"
+        :href="`/transport/${currentRouteSlug}`"
         :class="[
           'flex h-full flex-col items-center justify-center gap-1 transition-colors cursor-pointer',
           currentTab === 'transport' ? 'text-amber-600 font-medium' : 'text-slate-500 hover:text-slate-800',

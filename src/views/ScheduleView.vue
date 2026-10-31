@@ -158,7 +158,24 @@ const finisterreDailyAvgKm = computed(() => {
 // 處理路線切換（同步更新 URL 路由，確保長尾網址與瀏覽器歷程一致）
 const handleSwitchRoute = (routeId: RouteId) => {
   scheduleStore.switchRoute(routeId);
-  router.push(`/schedule/${routeId}`);
+  const branchId = scheduleStore.currentDraft?.branchId;
+  if (routeId === "portugues" && branchId === "costa") {
+    router.push(`/schedule/portugues/costa`);
+  } else {
+    router.push(`/schedule/${routeId}`);
+  }
+};
+
+// 處理分支切換（葡萄牙中央線 vs 海岸線等長尾路徑連動）
+const handleSwitchBranch = (branchId: string) => {
+  scheduleStore.switchBranch(branchId);
+  if (scheduleStore.currentRouteId === "portugues") {
+    if (branchId === "costa") {
+      router.push(`/schedule/portugues/costa`);
+    } else {
+      router.push(`/schedule/portugues/central`);
+    }
+  }
 };
 
 // 處理起訖點變更時，若天數超出合理範圍進行保護
@@ -657,7 +674,7 @@ onUnmounted(() => {
               </div>
               <select
                 :value="scheduleStore.currentDraft.branchId"
-                @change="scheduleStore.switchBranch(($event.target as HTMLSelectElement).value)"
+                @change="handleSwitchBranch(($event.target as HTMLSelectElement).value)"
                 class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
               >
                 <option
