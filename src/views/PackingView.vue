@@ -287,31 +287,34 @@ onUnmounted(() => {
           : 'bg-transparent',
       ]"
     >
-      <div class="flex items-center justify-between gap-3">
+      <div class="flex items-center justify-between gap-2 sm:gap-3">
         <h2
-          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2"
+          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 truncate"
         >
-          朝聖之路行李打包清單
+          <span class="sm:hidden">行李打包清單</span>
+          <span class="hidden sm:inline">朝聖之路行李打包清單</span>
         </h2>
 
-        <!-- 右側精巧功能按鈕群 -->
-        <div class="flex items-center gap-2 shrink-0">
+        <!-- 右側精巧功能按鈕群（手機端精簡文字防折行） -->
+        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <button
             type="button"
             @click="isCustomModalOpen = true"
-            class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-500 px-3 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
+            class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-500 px-2 sm:px-3 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1 sm:gap-1.5"
           >
             <PlusCircle class="w-3.5 h-3.5" />
-            <span>新增自訂裝備</span>
+            <span class="sm:hidden">新增</span>
+            <span class="hidden sm:inline">新增自訂裝備</span>
           </button>
 
           <button
             type="button"
             @click="isResetModalOpen = true"
-            class="text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+            class="text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 px-2 sm:px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer inline-flex items-center gap-1 sm:gap-1.5"
           >
             <RotateCcw class="w-3.5 h-3.5" />
-            <span>重設清單</span>
+            <span class="sm:hidden">重設</span>
+            <span class="hidden sm:inline">重設清單</span>
           </button>
         </div>
       </div>
@@ -332,7 +335,7 @@ onUnmounted(() => {
               class="flex items-center justify-between cursor-pointer lg:cursor-default select-none"
             >
               <div class="flex items-center gap-1.5">
-                <h3 class="text-base font-bold text-slate-900">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
                   體重與 10% 負重警戒線
                 </h3>
 
@@ -364,11 +367,11 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <!-- 手機與平板收合時呈現的精簡摘要列（桌機版隱藏） -->
+            <!-- 手機與平板收合時呈現的精簡摘要列（桌機版隱藏，無多餘橫線更通透） -->
             <div
               v-if="!isWeightSettingsOpen"
               @click="isWeightSettingsOpen = true"
-              class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
+              class="lg:hidden mt-2 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
             >
               <div class="flex items-center gap-1.5">
                 <span class="text-slate-400">體重</span>
