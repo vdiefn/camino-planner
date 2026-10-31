@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import AppHeader from '@/components/common/AppHeader.vue'
 import AppFooter from '@/components/common/AppFooter.vue'
 import BottomNav from '@/components/common/BottomNav.vue'
@@ -12,8 +13,34 @@ import TransportView from '@/views/TransportView.vue'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { usePackingStore } from '@/stores/packing'
 
+const route = useRoute()
+const router = useRouter()
+
+// 依據當前 URL Path 初始化分頁狀態
+const getTabFromRoute = (path: string): 'schedule' | 'packing' | 'transport' => {
+  if (path.startsWith('/packing')) return 'packing'
+  if (path.startsWith('/transport')) return 'transport'
+  return 'schedule'
+}
+
 // 當前啟用的分頁標籤：'schedule' | 'packing' | 'transport'
-const currentTab = ref<'schedule' | 'packing' | 'transport'>('schedule')
+const currentTab = ref<'schedule' | 'packing' | 'transport'>(getTabFromRoute(route.path))
+
+// 監聽路由變化同步更新 currentTab（例如上一頁/下一頁）
+watch(
+  () => route.path,
+  (newPath) => {
+    currentTab.value = getTabFromRoute(newPath)
+  }
+)
+
+// 當使用者點擊分頁頁籤時，同步更新網址路徑（搶佔長尾網址權重）
+watch(currentTab, (newTab) => {
+  const targetPath = `/${newTab}`
+  if (route.path !== targetPath) {
+    router.push(targetPath)
+  }
+})
 
 // 初始化裝備資料與檢查網址是否帶有 #sync=... 外部同步資料
 const packingStore = usePackingStore()
