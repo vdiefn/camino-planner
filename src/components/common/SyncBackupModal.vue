@@ -116,14 +116,15 @@ const shareUrl = computed(() => {
   return `${baseUrl}#sync=${compactToken.value}`
 })
 
-// 純同步產生向量 QR Code SVG
-const qrCodeSvg = computed(() => {
+// 純同步產生向量 QR Code SVG Data URL（透過 <img> 沙箱渲染，杜絕 v-html）
+const qrCodeDataUrl = computed(() => {
   if (!shareUrl.value) return ''
   try {
-    return renderSVG(shareUrl.value, {
+    const svg = renderSVG(shareUrl.value, {
       ecc: 'L',
       border: 1,
     })
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`
   } catch {
     return ''
   }
@@ -428,13 +429,18 @@ function handleConfirmImport() {
                   </div>
 
                   <div
-                    v-if="hasExportSelection && qrCodeSvg"
+                    v-if="hasExportSelection && qrCodeDataUrl"
                     class="flex flex-col sm:flex-row items-center gap-4"
                   >
                     <div
-                      class="w-36 h-36 bg-white p-2 rounded-xl border border-slate-200 shadow-xs shrink-0 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full"
-                      v-html="qrCodeSvg"
-                    />
+                      class="w-36 h-36 bg-white p-2 rounded-xl border border-slate-200 shadow-xs shrink-0 flex items-center justify-center"
+                    >
+                      <img
+                        :src="qrCodeDataUrl"
+                        alt="跨裝置同步 QR Code"
+                        class="w-full h-full object-contain"
+                      />
+                    </div>
                     <div class="flex-1 w-full space-y-2 text-xs text-slate-600">
                       <p class="leading-relaxed">
                         拿出手機相機掃描左側 QR Code，即可免登入將目前規劃直接傳送到手機瀏覽器。

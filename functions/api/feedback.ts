@@ -22,10 +22,41 @@ const CATEGORY_LABELS: Record<string, string> = {
   general: '💬 其他回饋 / 朝聖心得'
 }
 
+const ALLOWED_ORIGIN_REGEX = /^https:\/\/([a-z0-9-]+\.)?camino-plan\.com$|^http:\/\/(localhost|127\.0\.0\.1):\d+$/
+const MAX_BODY_CHARS = 8192
+const MAX_CONTENT_LENGTH = 2000
+const MAX_FIELD_LENGTH = 120
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     const { request, env } = context
-    const body: FeedbackPayload = await request.json()
+
+    // 0. 來源標頭 (Origin) 白名單校驗與 Payload 長度限制（防範跨站濫用與超大請求 DoS）
+    const origin = request.headers.get('Origin')
+    if (origin && !ALLOWED_ORIGIN_REGEX.test(origin)) {
+      return new Response(JSON.stringify({ success: false, error: '非法請求來源' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
+
+    const rawText = await request.text()
+    if (rawText.length > MAX_BODY_CHARS) {
+      return new Response(JSON.stringify({ success: false, error: '回饋內容超過長度上限' }), {
+        status: 413,
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
+
+    let body: FeedbackPayload
+    try {
+      body = JSON.parse(rawText) as FeedbackPayload
+    } catch {
+      return new Response(JSON.stringify({ success: false, error: '無效的 JSON 格式' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
 
     // 1. 防機器人蜜罐檢查 (若機器人填寫了隱藏欄位直接靜默忽略，避免垃圾信)
     if (body.botField) {
@@ -35,8 +66,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       })
     }
 
-    // 2. 基本內容校驗
-    if (!body.content || body.content.trim().length === 0) {
+    // 2. 嚴格型別與長度清洗
+    const formattedContent =
+      typeof body.content === 'string' ? body.content.trim().slice(0, MAX_CONTENT_LENGTH) : ''
+    const safeTarget =
+      typeof body.target === 'string' ? body.target.trim().slice(0, MAX_FIELD_LENGTH) : ''
+    const safeContact =
+      typeof body.contact === 'string' ? body.contact.trim().slice(0, MAX_FIELD_LENGTH) : ''
+
+    if (!formattedContent) {
       return new Response(JSON.stringify({ success: false, error: '請輸入回饋內容' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
@@ -44,11 +82,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     }
 
     const categoryText = CATEGORY_LABELS[body.category] || '💬 意見回饋'
-    const targetText = body.target?.trim() ? `\n📌 相關對象：${body.target.trim()}` : ''
-    const contactText = body.contact?.trim() ? `\n👤 聯絡方式：${body.contact.trim()}` : '\n👤 聯絡方式：未填寫（匿名）'
-    const formattedContent = body.content.trim()
+    const targetText = safeTarget ? `\n📌 相關對象：${safeTarget}` : ''
+    const contactText = safeContact ? `\n👤 聯絡方式：${safeContact}` : '\n👤 聯絡方式：未填寫（匿名）'
 
-    const emailSubject = `[Camino Plan 回饋] ${categoryText}${body.target?.trim() ? ' - ' + body.target.trim() : ''}`
+    const emailSubject = `[Camino Plan 回饋] ${categoryText}${safeTarget ? ' - ' + safeTarget : ''}`
 
     // 追蹤各通道的發送結果
     let isAnyChannelSuccess = false
@@ -70,8 +107,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             subject: emailSubject,
             from_name: 'Camino Plan 網站回饋通知',
             回饋類別: categoryText,
-            關聯目標: body.target?.trim() || '全站 / 無特定',
-            聯絡資訊: body.contact?.trim() || '匿名',
+            關聯目標: safeTarget || '全站 / 無特定',
+            聯絡資訊: safeContact || '匿名',
             回饋內容: formattedContent
           })
         })
@@ -102,15 +139,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            content: fullMessage,
+            content: fullMessage.slice(0, 1950),
+            allowed_mentions: { parse: [] },
             embeds: [
               {
                 title: categoryText,
                 color: body.category === 'feature_request' ? 0xf59e0b : body.category === 'data_correction' ? 0x10b981 : body.category === 'bug_report' ? 0xef4444 : 0x6366f1,
                 fields: [
-                  ...(body.target?.trim() ? [{ name: '相關對象', value: body.target.trim(), inline: true }] : []),
-                  { name: '聯絡方式', value: body.contact?.trim() || '匿名', inline: true },
-                  { name: '詳細內容', value: formattedContent }
+                  ...(safeTarget ? [{ name: '相關對象', value: safeTarget, inline: true }] : []),
+                  { name: '聯絡方式', value: safeContact || '匿名', inline: true },
+                  { name: '詳細內容', value: formattedContent.slice(0, 1024) }
                 ],
                 timestamp: new Date().toISOString()
               }
@@ -139,8 +177,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             chat_id: env.TELEGRAM_CHAT_ID,
-            text: fullMessage,
-            parse_mode: 'Markdown'
+            text: fullMessage
           })
         })
         if (tgRes.ok) {

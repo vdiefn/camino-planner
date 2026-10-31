@@ -33,14 +33,16 @@ export function sanitizePackingState(raw: any) {
       ? raw.bodyWeightKg
       : 60;
 
-  // 2. 官方裝備狀態字典校驗 (逐欄容錯修復)
+  // 2. 官方裝備狀態字典校驗 (逐欄容錯修復，並阻斷原型鏈污染鍵名)
+  const DANGEROUS_KEYS = new Set(["__proto__", "constructor", "prototype"]);
   const userItemStates: Record<string, UserItemOverride> = {};
   if (
     raw?.userItemStates &&
     typeof raw.userItemStates === "object" &&
     !Array.isArray(raw.userItemStates)
   ) {
-    for (const [id, state] of Object.entries(raw.userItemStates)) {
+    for (const [id, state] of Object.entries(raw.userItemStates).slice(0, 300)) {
+      if (DANGEROUS_KEYS.has(id) || id.length > 64) continue;
       if (state && typeof state === "object") {
         const s = state as Record<string, unknown>;
         userItemStates[id] = {
@@ -60,24 +62,24 @@ export function sanitizePackingState(raw: any) {
     }
   }
 
-  // 3. 自訂裝備校驗與欄位自動補齊 (Defensive Auto-fill)
+  // 3. 自訂裝備校驗與欄位自動補齊 (Defensive Auto-fill，限制數量與字串長度)
   const customItems: PackingItem[] = [];
   if (Array.isArray(raw?.customItems)) {
-    for (const item of raw.customItems) {
+    for (const item of raw.customItems.slice(0, 200)) {
       if (item && typeof item === "object" && item.id && item.chineseName) {
-        const chineseName = String(item.chineseName);
-        const rawEng = typeof item.englishName === "string" ? item.englishName : "";
+        const chineseName = String(item.chineseName).slice(0, 80);
+        const rawEng = typeof item.englishName === "string" ? item.englishName.slice(0, 80) : "";
         const englishName = rawEng === chineseName ? "" : rawEng;
-        const rawSpa = typeof item.spanishName === "string" ? item.spanishName : "";
+        const rawSpa = typeof item.spanishName === "string" ? item.spanishName.slice(0, 80) : "";
         const spanishName = rawSpa === chineseName ? "" : rawSpa;
         customItems.push({
-          id: String(item.id),
+          id: String(item.id).slice(0, 64),
           chineseName,
           englishName,
           spanishName,
           category:
-            typeof item.category === "string"
-              ? (item.category as PackingCategory)
+            typeof item.category === "string" && !DANGEROUS_KEYS.has(item.category)
+              ? (item.category.slice(0, 40) as PackingCategory)
               : "OTHER",
           priority:
             typeof item.priority === "string"
@@ -85,9 +87,9 @@ export function sanitizePackingState(raw: any) {
               : "OPTIONAL",
           referenceRangeText:
             typeof item.referenceRangeText === "string"
-              ? item.referenceRangeText
+              ? item.referenceRangeText.slice(0, 60)
               : "",
-          proTips: typeof item.proTips === "string" ? item.proTips : undefined,
+          proTips: typeof item.proTips === "string" ? item.proTips.slice(0, 300) : undefined,
           isChecked:
             typeof item.isChecked === "boolean" ? item.isChecked : true,
           unitWeightGrams:
@@ -110,9 +112,9 @@ export function sanitizePackingState(raw: any) {
   // 4. 目前已顯示/已選取之分類清單校驗（預設 9 大官方分類全部顯示）
   let activeCategories: PackingCategory[] = [];
   if (Array.isArray(raw?.activeCategories)) {
-    for (const c of raw.activeCategories) {
-      if (typeof c === "string" && c.trim()) {
-        activeCategories.push(c as PackingCategory);
+    for (const c of raw.activeCategories.slice(0, 50)) {
+      if (typeof c === "string" && c.trim() && !DANGEROUS_KEYS.has(c.trim())) {
+        activeCategories.push(c.trim().slice(0, 40) as PackingCategory);
       }
     }
   }
@@ -145,9 +147,9 @@ export function sanitizePackingState(raw: any) {
   ];
   const categoryOrder: string[] = [];
   if (Array.isArray(raw?.categoryOrder)) {
-    for (const c of raw.categoryOrder) {
-      if (typeof c === "string" && c.trim()) {
-        categoryOrder.push(c);
+    for (const c of raw.categoryOrder.slice(0, 50)) {
+      if (typeof c === "string" && c.trim() && !DANGEROUS_KEYS.has(c.trim())) {
+        categoryOrder.push(c.trim().slice(0, 40));
       }
     }
   }
