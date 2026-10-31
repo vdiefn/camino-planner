@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import { useScheduleStore } from "@/stores/schedule";
 import StageCard from "@/components/schedule/StageCard.vue";
 import ChangeWaypointModal from "@/components/schedule/ChangeWaypointModal.vue";
+import WaypointSelect from "@/components/schedule/WaypointSelect.vue";
 import AlbergueModal from "@/components/schedule/AlbergueModal.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 import GoogleAd from "@/components/common/GoogleAd.vue";
@@ -45,14 +46,6 @@ const draftConfig = ref({
   finisterreOption: scheduleStore.currentDraft.finisterreOption || "NONE",
   finisterreDays: scheduleStore.currentDraft.finisterreDays || 3,
 });
-
-// 航點選單文字格式化（起點明確標示 SJPP、終點英文標示 Santiago de Compostela）
-const formatWaypointOption = (wp: any) => {
-  if (wp.id === "SJPP") {
-    return "SJPP - Saint-Jean-Pied-de-Port（聖讓皮耶德波爾）";
-  }
-  return `${wp.localName || wp.spanishName}（${wp.chineseName}）`;
-};
 
 // 分支選單文字格式化（包含冬季封山與里程天數資訊，避免在 option 內使用 template 標籤）
 const formatBranchOption = (branch: any) => {
@@ -636,12 +629,31 @@ onUnmounted(() => {
             class="space-y-4 mt-4"
             :class="isMobileSettingsOpen ? 'block' : 'hidden lg:block'"
           >
-            <!-- 主路線切換標籤頁 (支援未來多路線動態擴充之自適應網格) -->
+            <!-- 主路線切換：手機版下拉選單 (sm:hidden) / 電腦平板網格按鈕 (hidden sm:grid) -->
             <div>
               <label class="text-xs text-slate-700 mb-1.5 flex items-center gap-1.5">
                 <span>選擇朝聖主路線</span>
               </label>
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl">
+
+              <!-- 手機版：單行精簡下拉選單（省空間且支援多路線無縫擴充） -->
+              <div class="sm:hidden">
+                <select
+                  :value="scheduleStore.currentRouteId"
+                  @change="handleSwitchRoute(($event.target as HTMLSelectElement).value as RouteId)"
+                  class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium"
+                >
+                  <option
+                    v-for="route in scheduleStore.availableRoutes"
+                    :key="route.id"
+                    :value="route.id"
+                  >
+                    {{ route.chineseName }}（約 {{ scheduleStore.getRouteDisplayDistance(route.id) }}km）
+                  </option>
+                </select>
+              </div>
+
+              <!-- 平板與桌機版：保留一鍵點選的網格按鈕 -->
+              <div class="hidden sm:grid sm:grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl">
                 <button
                   v-for="route in scheduleStore.availableRoutes"
                   :key="route.id"
@@ -688,33 +700,21 @@ onUnmounted(() => {
               </select>
             </div>
 
-            <!-- 起點（獨立佔一行） -->
-            <div>
-              <label class="block text-xs text-slate-600 mb-1"> 起點 </label>
-              <select
-                v-model="draftConfig.startWaypointId"
-                @change="handleWaypointChange"
-                class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
-              >
-                <option v-for="wp in scheduleStore.currentMainWaypoints" :key="wp.id" :value="wp.id">
-                  {{ formatWaypointOption(wp) }}
-                </option>
-              </select>
-            </div>
+            <!-- 起點（獨立佔一行，支援搜尋與自訂防反彈下拉） -->
+            <WaypointSelect
+              v-model="draftConfig.startWaypointId"
+              label="起點"
+              :waypoints="scheduleStore.currentMainWaypoints"
+              @change="handleWaypointChange"
+            />
 
-            <!-- 終點（獨立佔一行） -->
-            <div>
-              <label class="block text-xs text-slate-600 mb-1"> 終點 </label>
-              <select
-                v-model="draftConfig.endWaypointId"
-                @change="handleWaypointChange"
-                class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
-              >
-                <option v-for="wp in scheduleStore.currentMainWaypoints" :key="wp.id" :value="wp.id">
-                  {{ formatWaypointOption(wp) }}
-                </option>
-              </select>
-            </div>
+            <!-- 終點（獨立佔一行，支援搜尋與自訂防反彈下拉） -->
+            <WaypointSelect
+              v-model="draftConfig.endWaypointId"
+              label="終點"
+              :waypoints="scheduleStore.currentMainWaypoints"
+              @change="handleWaypointChange"
+            />
 
             <!-- 出發日期與預計總天數（各佔一半） -->
             <div class="grid grid-cols-2 gap-3">
