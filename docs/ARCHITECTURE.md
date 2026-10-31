@@ -371,6 +371,11 @@ export interface MultiRouteScheduleState {
   - **世界盡頭排程鏈驗證**：延伸段 5 種走向接續天數、日期連續性、聖地牙哥停留休整日推導，以及雙向環線之爬升/下降高度動態反轉運算。
 - `tests/unit/schedule-migration.test.ts`：
   - 模擬舊版 localStorage schema 還原，驗證自動遷移邏輯與草稿隔離性。
+- `tests/unit/packing-export.test.ts`：
+  - 驗證已勾選項目過濾、未勾選與無項目分類之動態排除。
+  - 驗證穿在身上標記、多件數量乘號計算與樣式 B（中置點連接、☐ 方框、統計摘要）之純文字排版抗破版能力。
+- `tests/unit/useAsyncLock.test.ts`：
+  - 驗證動作互斥鎖（Concurrency Lock）正常透傳、高頻連點忽略、例外必定釋放（finally）與 cooldownMs 冷卻保護機制。
 
 ## 5. 商業化與廣告整合架構 (Google AdSense)
 - **環境變數控制**：透過 `VITE_GOOGLE_ADSENSE_CLIENT_ID` 決定是否啟用；未配置時元件自體隱藏，零版面空間佔用。
@@ -403,11 +408,14 @@ export interface MultiRouteScheduleState {
 
 ### 6.3 裝備打包實戰工具箱架構 (Packing Advanced Capabilities)
 - **自訂裝備更新契約**：Store 擴充 `updateCustomItem(id, item: Partial<PackingItem>)`，支援品名、重量與分類之就地編輯。
-- **零依賴紙本列印架構 (`@media print`)**：
-  - 注入專用列印 CSS 類別 `print:hidden`（隱藏頂部導覽列、操作按鈕、步進器與頁尾廣告）與 `print:block`。
-  - 自動切換為高對比純白底黑字、A4 雙欄網格與實體打勾方框（`print:border-slate-800`）。
-- **搭機法規防呆規則引擎 (Flight Rules Engine)**：
-  - 依品項屬性宣告 `flightRestriction?: 'CHECK_IN_ONLY' | 'CARRY_ON_ONLY'`，自動在特定品項（登山杖、刀剪工具、行動電源）渲染直觀法規警示。
+- **A4 所見即所得沙盒列印架構 (WYSIWYG Sandbox Iframe Print)**：
+  - 透過動態隱藏 Iframe 隔離主應用程式 DOM 與外圍滾動容器，徹底杜絕多餘頁數溢出與全域導覽列穿透，實現單頁 A4 完美收納。
+  - 採用智慧貪婪高度平衡演算法（Greedy Height Balancing），消除 CSS Grid 列高拉伸造成的垂直空白，確保雙欄瀑布流間距緊湊一致。
+- **極簡抗破版純文字匯出（樣式 B）**：
+  - 針對手機備忘錄、LINE 與 Word 等比例字型環境，移除易折行破版的長橫線符號，以垂直中置點（`·`）緊湊連接品項與重量，杜絕右側參差漂移。
+- **非同步動作互斥防連點（`useAsyncLock`）與剪貼簿可觀測性**：
+  - 封裝 `useAsyncLock` Composable，以 `try...finally` 保證解鎖並提供 `cooldownMs` 冷卻時間，杜絕按鈕快速連按導致的 Iframe 堆疊與標題還原失敗。
+  - 剪貼簿具備三態即時 UI 反饋（預設／成功綠／失敗紅），徹底消除未獲授權時的靜默吞錯。
 
 ### 6.4 住宿庇護所檢索與快速聯絡管線 (Accommodation Pipeline & Quick Actions)
 - **Gronze 權威資料庫對齊**：波多雙分支與北方之路城鎮住宿依循既有階層核對 SOP 建置。
