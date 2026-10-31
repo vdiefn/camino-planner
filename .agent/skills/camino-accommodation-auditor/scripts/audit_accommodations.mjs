@@ -48,6 +48,7 @@ function parseTypeScriptArray(filePath, arrayName) {
 
 function runAudit() {
   console.log('====================================================')
+
   console.log('🔍 開始執行 Camino 住宿資料健康度與幽靈點初步排查...')
   console.log('====================================================\n')
 
@@ -170,6 +171,13 @@ function runAudit() {
   }
 
   console.log('====================================================')
+
+  // 若帶有 --strict 旗標且發現結構錯誤，拋出非 0 狀態碼阻斷流程 (Fail-Fast)
+  const isStrict = process.argv.includes('--strict')
+  if (isStrict && (duplicateIds.length > 0 || invalidWaypoints.length > 0 || anomalies.length > 0)) {
+    console.error(`\n❌ [Strict Mode] 稽核未通過：發現 ${duplicateIds.length} 個重複 ID、${invalidWaypoints.length} 個無效航點、${anomalies.length} 個資料異常。`)
+    process.exit(1)
+  }
 }
 
 runAudit()

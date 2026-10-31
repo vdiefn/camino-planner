@@ -170,3 +170,37 @@ node .agent/skills/camino-accommodation-auditor/scripts/audit_accommodations.mjs
 # ❌ 呼叫第 3 次 run_command（未整併）
 npm run test
 ```
+
+---
+
+# Rule 5 - [MUST] 跨平台 CRLF 換行防禦與大檔案單行錨點寫入鐵律 (CRLF Defense & Single-Line Anchor)
+
+- **跨平台換行陷阱防禦**：Windows 環境下 Git 工作目錄之程式碼檔案預設轉換為 CRLF（`\r\n`）。呼叫原生 `edit_file` 時，若 `Target` 參數包含多行字串，將因 JSON 傳遞之 `\n` 與磁碟實體之 `\r\n` 不相符而百分之百拋出 `target content not found in the file` 錯誤。
+- **單行唯一錨點原則（Single-Line Unique Anchor）**：修改 [`src/data/accommodations.ts`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/data/accommodations.ts)（超過 1.7 萬行之超大檔案）時，`Target` 必須嚴格鎖定為**不包含任何換行符之單行唯一識別錨點**（例如前一筆物件的專屬 ID `    id: 'ACC_XXX',`）。
+- **事前航點 ID 存在性檢核**：新增任何住宿物件前，必須先在對應路線航點檔案（`src/data/routes/*.ts`）檢索確認該城鎮之 `waypointId` 字面值完全相符（例如安科拉之真實 ID 為 `portugues:vila-praia-de-ancora`，嚴禁憑直覺臆測縮寫），杜絕無效航點污染。
+
+## Good Example
+
+- 在新增住宿點時，`Target` 僅選用不包含任何換行符號的單行唯一字串 `    id: 'ACC_FIN_MUXIA_MUXIA',`，並在此錨點下方精準注入新物件，完全免疫 CRLF 跨平台換行匹配失敗問題。
+
+```typescript
+// 呼叫 edit_file 時
+{
+  Path: ".../src/data/accommodations.ts",
+  Target: "    id: 'ACC_FIN_MUXIA_MUXIA',",
+  Replacement: "    id: 'ACC_FIN_MUXIA_MUXIA',\n  },\n  {\n    id: 'ACC_PORTUGUES_MATOSINHOS_CASA_SANTIAGO',\n    waypointId: 'portugues:matosinhos',..."
+}
+```
+
+## Bad Example
+
+- 同一新增住宿情境下，`Target` 複製了包含大括號、換行與註解的多行區塊，在 Windows CRLF 環境下直接觸發 `target content not found in the file` 報錯中斷。
+
+```typescript
+// ❌ 錯誤使用跨行字串作為 Target，在 Windows 環境必敗
+{
+  Path: ".../src/data/accommodations.ts",
+  Target: "    notes: '提供朝聖者舒適住宿與休整。',\n  },\n]",
+  Replacement: "..."
+}
+```
