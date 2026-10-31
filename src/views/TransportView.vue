@@ -11,7 +11,6 @@ import {
   Euro,
   Calendar,
   Compass,
-  ArrowRight,
   MessageCircleWarning,
   Sparkles,
   ChevronDown,
@@ -530,9 +529,9 @@ onUnmounted(() => {
             <!-- 步驟標頭（手機模式支援點擊切換折疊） -->
             <div
               @click="toggleStep(step.stepOrder)"
-              class="flex items-center justify-between cursor-pointer md:cursor-default select-none"
+              class="flex items-center justify-between cursor-pointer md:cursor-default select-none gap-2"
             >
-              <div class="flex items-center gap-2.5 min-w-0">
+              <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <span
                   class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-amber-400 font-mono text-xs font-bold text-slate-700 shrink-0"
                 >
@@ -551,7 +550,7 @@ onUnmounted(() => {
                     />
                     {{ getTransportBadge(step.type)?.label }}
                   </span>
-                  <span class="text-xs text-slate-600 truncate font-medium">
+                  <span class="text-xs text-slate-700 truncate font-medium">
                     {{ step.carrierName }}
                   </span>
                 </div>
@@ -578,20 +577,28 @@ onUnmounted(() => {
                 isStepExpanded(step.stepOrder) ? 'block' : 'hidden md:block',
               ]"
             >
-              <!-- 起訖點標示 -->
-              <div
-                class="flex flex-col sm:flex-row sm:items-center gap-2 text-sm"
-              >
-                <div class="flex items-center gap-1.5 font-medium text-slate-900">
-                  <span class="text-slate-700">起:</span>
-                  <span>{{ step.from }}</span>
+              <!-- 起訖點標示（垂直置中對齊，車站名稱採精緻小字級 text-xs sm:text-sm） -->
+              <div class="space-y-2 text-xs sm:text-sm">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="px-1.5 py-0.5 rounded text-[11px] font-normal bg-slate-100 text-slate-600 border border-slate-200 shrink-0"
+                  >
+                    起
+                  </span>
+                  <span class="font-normal text-slate-800 leading-snug flex-1">
+                    {{ step.from }}
+                  </span>
                 </div>
-                <div class="hidden sm:block text-slate-300">
-                  <ArrowRight class="h-4 w-4" />
-                </div>
-                <div class="flex items-center gap-1.5 font-medium text-slate-900">
-                  <span class="text-slate-700">迄:</span>
-                  <span>{{ step.to }}</span>
+
+                <div class="flex items-center gap-2">
+                  <span
+                    class="px-1.5 py-0.5 rounded text-[11px] font-normal bg-slate-100 text-slate-600 border border-slate-200 shrink-0"
+                  >
+                    迄
+                  </span>
+                  <span class="font-normal text-slate-800 leading-snug flex-1">
+                    {{ step.to }}
+                  </span>
                 </div>
               </div>
 
