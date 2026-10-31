@@ -15,7 +15,8 @@
 - **Template-First**：所有版面結構與視覺樣式 100% 在 `<template>` 內以 Tailwind CSS 類別宣告。
 - **極致輕量化**：不引入肥大全域樣式庫，表格與卡片採用原生 HTML5 標籤實作，確保 PWA 離線秒級載入。
 - **無障礙與狀態管理**：彈窗（Dialog）、開關（Switch）、手風琴折疊（Disclosure）統一採用 `@headlessui/vue`。
-- **漸進式揭露 (Progressive Disclosure)**：清單項目預設折疊外語對照與微調控制項，僅凸顯主要品名與總重小計；行內操作（如「穿在身上」膠囊按鈕）阻斷事件冒泡以避免誤觸品名切換。
+- **直覺極簡常駐控制 (Zero-Friction In-Place Controls)**：裝備清單卡片採用常駐單行控制項，徹底移除多餘摺疊箭頭與內部橫線；直接並排「實測克數」與「數量微調」，多件時自動計算小計總重；全面移除主畫面上無實質助益之外文與參考重量，未穿在身上時採無外框輕量文字按鈕呈現，杜絕視覺雜訊。
+- **純粹情境式彈窗 (Contextual Distraction-Free Modals)**：避坑指南彈窗（`ProTipsModal`）移除非必要之外文標籤與重複之建議重量，移除多餘框線、底色與內部中線，以通透留白排版 100% 聚焦於前輩實務避坑攻略。
 - **低疲勞視覺語義**：分類標籤與過濾按鈕採用柔和的琥珀暖色（Soft Amber），取代刺眼的高飽和色，兼顧戶外強光下的閱讀對比與視覺舒適度。
 
 ## 3. 核心資料模型 (TypeScript Models)
@@ -379,3 +380,40 @@ export interface MultiRouteScheduleState {
   1. `ScheduleView.vue` 頁尾（33天分段清單底部）
   2. `PackingView.vue` 頁尾（裝備打包清單底部）
   3. `TransportView.vue` 頁尾（起點交通決策步驟卡片底部）
+
+
+## 6. 未來演進架構與擴充設計規格 (Architecture Evolution & Scalability: Phase 2+)
+
+為確保後續分階段迭代具備清晰之系統藍圖與資料契約，以下針對 5 大核心演進面向制定技術規格：
+
+### 6.1 多語系國際化架構 (i18n Architecture)
+- **架構原則**：採用輕量化零外掛型別安全方案，預設為繁體中文（`zh-TW`），第一波全面提供英文（`en-US`），並保留西班牙文（`es-ES`）擴充槽位。
+- **靜態型別防護 (Type-Safe Dictionary)**：以 `src/locales/zh-TW.ts` 為唯一真實來源（SSOT），推導 `type I18nSchema = typeof zhTW`，強制其他語言定義檔在編譯時期必須 100% 實現所有 Key，徹底杜絕漏翻與破版。
+- **領域模型國際化契約**：
+  - `Waypoint` 航點模型：保留 `localName`（原名）、`spanishName`、`chineseName`，並擴充 `englishName?: string`。
+  - `PackingItem` 裝備模型：保持核心 `chineseName` 與 `englishName`。
+
+### 6.2 外掛式新經典路線擴充規格 (Route Plugin Architecture)
+- **擴充路由與草稿相容性**：
+  - 更新 `RouteId` 聯集型別：`export type RouteId = 'frances' | 'portugues' | 'norte' | 'ingles' | 'primitivo'`。
+  - 既有 `MultiRouteScheduleState` 與 `drafts` 架構具備天然可擴充性，新路線僅需在 `src/data/routes/` 建立對應資料檔（如 `ingles.ts`、`primitivo.ts`），即可無縫掛載進排程推導核心。
+- **航點命名空間隔離**：
+  - **英國之路 (Camino Inglés)**：航點 ID 強制前綴 `ingles:*`（起點 Ferrol 至 Santiago，約 113km）。
+  - **原始之路 (Camino Primitivo)**：航點 ID 強制前綴 `primitivo:*`（起點 Oviedo，於 Melide 匯入法國之路，約 321km）。
+
+### 6.3 裝備打包實戰工具箱架構 (Packing Advanced Capabilities)
+- **自訂裝備更新契約**：Store 擴充 `updateCustomItem(id, item: Partial<PackingItem>)`，支援品名、重量與分類之就地編輯。
+- **零依賴紙本列印架構 (`@media print`)**：
+  - 注入專用列印 CSS 類別 `print:hidden`（隱藏頂部導覽列、操作按鈕、步進器與頁尾廣告）與 `print:block`。
+  - 自動切換為高對比純白底黑字、A4 雙欄網格與實體打勾方框（`print:border-slate-800`）。
+- **搭機法規防呆規則引擎 (Flight Rules Engine)**：
+  - 依品項屬性宣告 `flightRestriction?: 'CHECK_IN_ONLY' | 'CARRY_ON_ONLY'`，自動在特定品項（登山杖、刀剪工具、行動電源）渲染直觀法規警示。
+
+### 6.4 住宿庇護所檢索與快速聯絡管線 (Accommodation Pipeline & Quick Actions)
+- **Gronze 權威資料庫對齊**：波多雙分支與北方之路城鎮住宿依循既有階層核對 SOP 建置。
+- **多維度 Filter 複合管線**：在記憶體中建立即時過濾函式，支援 `hasKitchen`、`type`、可否預約之複合過濾。
+- **通訊協議動作列**：UI 封裝快速撥號 `tel:${phone}` 與 WhatsApp 聊天直通 `https://wa.me/${intlPhone}?text=${encodedMsg}`（預載標準西文預約模板）。
+
+### 6.5 跨裝置快速同步架構 (QR Code Fast-Sync)
+- **純前端向量 QR Code 生成**：使用極輕量 SVG/Canvas 渲染，將 `syncCodec.ts` 生成之 Base64Url 壓縮字串直接轉為 QR Code。
+- **離線相機直掃解密**：朝聖路上隊友互助時，直接以手機原生相機讀取，免連外網即刻完成行程複製。
