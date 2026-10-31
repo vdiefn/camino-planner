@@ -457,56 +457,58 @@ onUnmounted(() => {
           徒步行程規劃
         </h2>
 
-        <!-- 右側：數據看板條（左右內距充裕、扁平單行設計） -->
+        <!-- 右側：數據看板條（說明在上、數字在下，手機版採四等分均勻網格，杜絕貼邊過度往外） -->
         <div
-          class="px-4 sm:px-6 py-2 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center justify-between sm:justify-around text-xs gap-2.5 sm:gap-6 shrink-0 w-full md:w-auto"
+          class="px-4 sm:px-6 py-2 rounded-xl bg-white border border-slate-200 shadow-2xs grid grid-cols-4 sm:flex sm:items-center sm:justify-around text-xs gap-1 sm:gap-6 shrink-0 w-full md:w-auto"
         >
           <!-- 總徒步里程 -->
-          <div class="flex items-center gap-1.5 sm:gap-2">
-            <span class="text-slate-400 text-[11px] sm:text-xs">總里程</span>
-            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-              scheduleStore.totalDistanceKm.toFixed(1)
-            }}</span>
-            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km</span>
+          <div class="flex flex-col items-center justify-center">
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總里程</span>
+            <div class="flex items-baseline gap-0.5 whitespace-nowrap">
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                scheduleStore.totalDistanceKm.toFixed(1)
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km</span>
+            </div>
           </div>
-
-          <div class="w-px h-3.5 bg-slate-200"></div>
 
           <!-- 日均徒步 -->
-          <div class="flex items-center gap-1.5 sm:gap-2">
-            <span class="text-slate-400 text-[11px] sm:text-xs">日均</span>
-            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-              dailyAverageKm.toFixed(1)
-            }}</span>
-            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km/日</span>
+          <div class="flex flex-col items-center justify-center">
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">日均</span>
+            <div class="flex items-baseline gap-0.5 whitespace-nowrap">
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                dailyAverageKm.toFixed(1)
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km/日</span>
+            </div>
           </div>
-
-          <div class="w-px h-3.5 bg-slate-200"></div>
 
           <!-- 總天數 -->
-          <div class="flex items-center gap-1.5 sm:gap-2">
-            <span class="text-slate-400 text-[11px] sm:text-xs">總天數</span>
-            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-              totalTripDays
-            }}</span>
-            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
-            <span
-              v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
-              class="hidden sm:inline text-[10px] sm:text-[11px] text-slate-400 font-mono"
-            >
-              ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
-            </span>
+          <div class="flex flex-col items-center justify-center">
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總天數</span>
+            <div class="flex items-baseline gap-0.5 whitespace-nowrap">
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                totalTripDays
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+              <span
+                v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
+                class="hidden sm:inline text-[10px] text-slate-400 font-mono ml-0.5"
+              >
+                ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
+              </span>
+            </div>
           </div>
 
-          <div class="w-px h-3.5 bg-slate-200"></div>
-
           <!-- 休息停留 -->
-          <div class="flex items-center gap-1.5 sm:gap-2">
-            <span class="text-slate-400 text-[11px] sm:text-xs">休息</span>
-            <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-              scheduleStore.totalRestDays
-            }}</span>
-            <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+          <div class="flex flex-col items-center justify-center">
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">休息</span>
+            <div class="flex items-baseline gap-0.5 whitespace-nowrap">
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                scheduleStore.totalRestDays
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+            </div>
           </div>
         </div>
       </div>
@@ -569,9 +571,10 @@ onUnmounted(() => {
           <div
             v-if="!isMobileSettingsOpen"
             @click="isMobileSettingsOpen = true"
-            class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
+            class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex flex-col gap-1.5 cursor-pointer"
           >
-            <div class="flex items-center gap-1.5 min-w-0 truncate">
+            <!-- 第一行：起訖走向（獨佔一整行，地名獲得完整伸展空間，杜絕因空間擠壓導致過度截斷） -->
+            <div class="flex items-center gap-1.5 min-w-0 text-xs text-slate-700">
               <template v-for="(stop, idx) in collapsedRouteFlow" :key="idx">
                 <span class="font-medium text-slate-800 truncate">{{ stop }}</span>
                 <span
@@ -581,19 +584,27 @@ onUnmounted(() => {
                 >
               </template>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="font-medium text-slate-800 font-mono">
-                {{ mobileDisplayTotalDays }} 天
-                <span
-                  v-if="draftConfig.finisterreOption !== 'NONE'"
-                  class="text-[10px] text-slate-400 font-normal font-sans"
-                >
-                  ({{ draftConfig.targetDays }}+{{ draftConfig.finisterreDays }})
+
+            <!-- 第二行：路線中文名稱、天數明細與狀態標籤 -->
+            <div class="flex items-center justify-between text-xs text-slate-500">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="text-[11px] font-medium text-slate-600 truncate">
+                  {{ scheduleStore.currentRouteMetadata?.chineseName }}
                 </span>
-              </span>
+                <span class="text-slate-300">·</span>
+                <span class="font-bold text-slate-800 font-mono text-xs">
+                  {{ mobileDisplayTotalDays }} 天
+                  <span
+                    v-if="draftConfig.finisterreOption !== 'NONE'"
+                    class="text-[10px] text-slate-400 font-normal font-sans ml-0.5"
+                  >
+                    ({{ draftConfig.targetDays }}+{{ draftConfig.finisterreDays }})
+                  </span>
+                </span>
+              </div>
               <span
                 v-if="isDirty"
-                class="inline-flex items-center gap-1 text-[11px] text-amber-600 font-medium"
+                class="inline-flex items-center gap-1 text-[11px] text-amber-600 font-medium shrink-0"
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>待套用
               </span>

@@ -42,9 +42,9 @@ const formattedDate = computed(() => {
   return `${d.getMonth() + 1}/${d.getDate()} (週${weekdays[d.getDay()]})`
 })
 
-// 移除括號備註的精簡中文名稱
+// 移除全形與半形括號備註的精簡中文名稱（防止手機版因括號內冗長說明導致文字截斷破版）
 const cleanChineseName = (name?: string) => {
-  return name ? name.replace(/\s*\([^)]*\)/g, '').trim() : ''
+  return name ? name.replace(/\s*[（(][^）)]*[）)]/g, '').trim() : ''
 }
 
 // Google 地圖外連搜尋
@@ -234,22 +234,23 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
     <!-- 手機版視圖 (md 以下：手風琴折疊模式) -->
     <div class="md:hidden">
       <Disclosure v-slot="{ open }">
-        <DisclosureButton class="w-full p-4 flex items-center justify-between text-left cursor-pointer">
-          <div class="flex items-center gap-3 min-w-0 flex-1">
-            <div
-              class="w-10 h-10 rounded-lg flex flex-col items-center justify-center shrink-0 text-xs bg-white text-slate-900"
-              :class="[
-                stage.isRestDay
-                  ? 'border-2 border-purple-300'
-                  : stage.isExtensionStage
-                    ? 'border-2 border-sky-400 bg-sky-50'
-                    : 'border-2 border-orange-300'
-              ]"
-            >
-              <span class="font-medium">D{{ stage.dayIndex }}</span>
-            </div>
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-1.5 flex-wrap">
+        <DisclosureButton class="w-full p-4 flex items-start gap-3 text-left cursor-pointer">
+          <div
+            class="w-10 h-10 rounded-lg flex flex-col items-center justify-center shrink-0 text-xs bg-white text-slate-900 mt-0.5"
+            :class="[
+              stage.isRestDay
+                ? 'border-2 border-purple-300'
+                : stage.isExtensionStage
+                  ? 'border-2 border-sky-400 bg-sky-50'
+                  : 'border-2 border-orange-300'
+            ]"
+          >
+            <span class="font-medium">D{{ stage.dayIndex }}</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <!-- 頂行：日期與機能標籤（靠左）＋ 公里數與展開箭頭（靠右） -->
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 flex-wrap min-w-0">
                 <span class="text-xs text-slate-700 font-normal">
                   {{ formattedDate }}
                 </span>
@@ -290,33 +291,36 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                   休息停留
                 </span>
               </div>
-              <div class="font-medium text-slate-900 text-sm flex items-center gap-x-1.5 gap-y-0.5 flex-wrap leading-tight mt-0.5">
-                <span>{{ startWaypoint?.localName || startWaypoint?.spanishName || stage.startWaypointId }}</span>
-                <span class="text-slate-600 text-xs font-normal">→</span>
-                <button
-                  type="button"
-                  @click.stop="emit('change-waypoint', stage)"
-                  class="text-slate-900 hover:text-slate-400 active:text-slate-500 cursor-pointer text-left font-medium transition-colors"
-                >
-                  {{ endWaypoint?.localName || endWaypoint?.spanishName || stage.endWaypointId }}
-                </button>
-              </div>
-              <div class="text-[11px] text-slate-500 font-normal mt-0.5 truncate">
-                {{ cleanChineseName(startWaypoint?.chineseName) }} → {{ cleanChineseName(endWaypoint?.chineseName) }}
-              </div>
-            </div>
-          </div>
 
-          <div class="flex items-center gap-2 shrink-0">
-            <div class="text-right">
-              <div class="font-medium text-slate-900 font-mono text-sm whitespace-nowrap">
-                {{ stage.distanceKm.toFixed(1) }} km
+              <!-- 右側：公里數與折疊箭頭 -->
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="font-medium text-slate-900 font-mono text-sm whitespace-nowrap">
+                  {{ stage.distanceKm.toFixed(1) }} km
+                </span>
+                <ChevronDown
+                  class="w-4 h-4 text-slate-600 transition-transform duration-200"
+                  :class="{ 'rotate-180': open }"
+                />
               </div>
             </div>
-            <ChevronDown
-              class="w-4 h-4 text-slate-600 transition-transform duration-200"
-              :class="{ 'rotate-180': open }"
-            />
+
+            <!-- 外文起訖走向（享有獨立滿寬，徹底解決地名與公里數擠壓黏著問題） -->
+            <div class="font-medium text-slate-900 text-sm flex items-center gap-x-1.5 gap-y-0.5 flex-wrap leading-tight mt-1">
+              <span>{{ startWaypoint?.localName || startWaypoint?.spanishName || stage.startWaypointId }}</span>
+              <span class="text-slate-400 text-xs font-normal">→</span>
+              <button
+                type="button"
+                @click.stop="emit('change-waypoint', stage)"
+                class="text-slate-900 hover:text-slate-400 active:text-slate-500 cursor-pointer text-left font-medium transition-colors"
+              >
+                {{ endWaypoint?.localName || endWaypoint?.spanishName || stage.endWaypointId }}
+              </button>
+            </div>
+
+            <!-- 中文起訖走向（已過濾全形與半形括號特色冗長說明，不再被截斷） -->
+            <div class="text-[11px] text-slate-500 font-normal mt-0.5 truncate">
+              {{ cleanChineseName(startWaypoint?.chineseName) }} → {{ cleanChineseName(endWaypoint?.chineseName) }}
+            </div>
           </div>
         </DisclosureButton>
 
