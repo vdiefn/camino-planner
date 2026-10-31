@@ -39,7 +39,7 @@ function handleTabClick(tab: TabType) {
 </script>
 
 <template>
-  <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+  <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md print:hidden">
     <div class="relative mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
       <!-- 左側：品牌標誌與標題 -->
       <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">

@@ -11,12 +11,14 @@ import {
   Trash2,
   GripVertical,
   MessageCircleWarning,
+  Printer,
 } from "lucide-vue-next";
 import { usePackingStore } from "@/stores/packing";
 import type { PackingCategory, PackingItem } from "@/types/camino";
 import PackingItemRow from "@/components/packing/PackingItemRow.vue";
 import ProTipsModal from "@/components/packing/ProTipsModal.vue";
 import AddCustomItemModal from "@/components/packing/AddCustomItemModal.vue";
+import PrintChecklistModal from "@/components/packing/PrintChecklistModal.vue";
 import ConfirmModal from "@/components/common/ConfirmModal.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 import GoogleAd from "@/components/common/GoogleAd.vue";
@@ -254,6 +256,8 @@ function getCategoryStats(catId: PackingCategory) {
 
 // 二次確認對話框狀態控制
 const isResetModalOpen = ref(false);
+// 紙本清單預覽與列印對話框狀態控制
+const isPrintModalOpen = ref(false);
 
 function handleConfirmReset() {
   packingStore.resetToDefaults();
@@ -297,6 +301,17 @@ onUnmounted(() => {
 
         <!-- 右側精巧功能按鈕群（手機端精簡文字防折行） -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <button
+            type="button"
+            @click="isPrintModalOpen = true"
+            class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-600 px-2 sm:px-2.5 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1 sm:gap-1.5"
+            title="開啟 A4 紙本預覽並列印"
+          >
+            <Printer class="w-3.5 h-3.5 text-slate-500" />
+            <span class="sm:hidden">列印</span>
+            <span class="hidden sm:inline">列印清單</span>
+          </button>
+
           <button
             type="button"
             @click="isCustomModalOpen = true"
@@ -772,6 +787,13 @@ onUnmounted(() => {
       title="朝聖裝備減重黃金法則"
       :tips="weightRulesTips"
       @close="isRulesModalOpen = false"
+    />
+
+    <!-- A4 紙本清單預覽與列印對話框 -->
+    <PrintChecklistModal
+      :is-open="isPrintModalOpen"
+      :categories="sortedActiveCategories"
+      @close="isPrintModalOpen = false"
     />
   </div>
 </template>
