@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import {
   Train,
   Bus,
@@ -21,6 +22,8 @@ import { useScheduleStore } from "@/stores/schedule";
 import GoogleAd from "@/components/common/GoogleAd.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 
+const route = useRoute();
+const router = useRouter();
 const scheduleStore = useScheduleStore();
 
 // 支援的三大朝聖起點路線定義
@@ -35,8 +38,12 @@ const targetRouteOptions: {
   { id: "norte", name: "北方之路", startTown: "伊倫 (Irún 邊界)", flag: "🌊" },
 ];
 
-// 依據使用者在行程規劃中正在檢視的路線，自動預選對應起點
+// 依據 URL 參數或 store 預選對應起點
 const getInitialTargetRoute = (): TransportTargetRoute => {
+  const param = route.params.routeId as string;
+  if (param && targetRouteOptions.some((r) => r.id === param)) {
+    return param as TransportTargetRoute;
+  }
   const current = scheduleStore.currentRouteId || "";
   if (current.startsWith("portugues")) return "portugues";
   if (current === "norte") return "norte";
@@ -44,6 +51,24 @@ const getInitialTargetRoute = (): TransportTargetRoute => {
 };
 
 const selectedTargetRoute = ref<TransportTargetRoute>(getInitialTargetRoute());
+
+// 監聽 URL 參數改變（支援上一頁/下一頁與外部長尾連結進入）
+watch(
+  () => route.params.routeId,
+  (newParam) => {
+    if (newParam && targetRouteOptions.some((r) => r.id === newParam)) {
+      selectedTargetRoute.value = newParam as TransportTargetRoute;
+    }
+  }
+);
+
+// 處理起點路線切換（同步更新 URL 保持長尾網址獨立）
+const handleSelectTargetRoute = (routeId: TransportTargetRoute) => {
+  selectedTargetRoute.value = routeId;
+  if (route.params.routeId !== routeId) {
+    router.push(`/transport/${routeId}`);
+  }
+};
 
 // 各路線專屬的出發城市定義字典
 const routeCityMap: Record<
@@ -299,7 +324,7 @@ onUnmounted(() => {
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-500 hover:text-slate-800',
               ]"
-              @click="selectedTargetRoute = route.id"
+              @click="handleSelectTargetRoute(route.id)"
             >
               <span>{{ route.name }}</span>
               <span class="text-[11px] opacity-75 hidden sm:inline">（{{ route.startTown.split(' ')[0] }}）</span>

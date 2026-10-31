@@ -1,8 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import { AVAILABLE_ROUTES, getRouteMetadata } from '@/data/routes'
+import type { RouteId } from '@/types/route'
 
 const SITE_ORIGIN = 'https://camino-plan.com'
-const DEFAULT_TITLE = '朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)'
+const DEFAULT_TITLE = '【2026 朝聖之路】行程規劃與裝備試算工具 | Camino Plan'
 const DEFAULT_DESCRIPTION =
   '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。'
 
@@ -11,37 +13,35 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/schedule',
+      redirect: '/schedule/frances',
     },
     {
       path: '/schedule',
+      redirect: '/schedule/frances',
+    },
+    {
+      path: '/schedule/:routeId',
       name: 'schedule',
       component: HomeView,
-      meta: {
-        title: '朝聖之路行程與分段規劃 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
-        description:
-          '支援法國之路、葡萄牙之路與北方之路的每日分段公里、爬升下降與世界盡頭延伸段規劃計算。',
-      },
     },
     {
       path: '/packing',
       name: 'packing',
       component: HomeView,
       meta: {
-        title: '朝聖之路行李打包清單與 10% 負重試算 | Camino Plan',
+        title: '【2026 朝聖之路裝備清單】10% 體重負重計算機與必備打包檢查表 | Camino Plan',
         description:
           '科學化朝聖者背包負重計算機，嚴格把關 10% 體重負重警戒線，內建九大必備裝備分類與減重避坑指南。',
       },
     },
     {
       path: '/transport',
+      redirect: '/transport/frances',
+    },
+    {
+      path: '/transport/:routeId',
       name: 'transport',
       component: HomeView,
-      meta: {
-        title: '朝聖之路起點交通轉乘與避坑指南 | Camino Plan',
-        description:
-          '提供巴黎、馬德里、波多直達各朝聖之路起點（SJPP、Porto、Irún）的最佳交通決策與避坑提醒。',
-      },
     },
     {
       path: '/privacy',
@@ -54,12 +54,24 @@ const router = createRouter({
     },
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/schedule',
+      redirect: '/schedule/frances',
     },
   ],
   scrollBehavior() {
     return { top: 0 }
   },
+})
+
+// 路由防禦：確保 /schedule/:routeId 與 /transport/:routeId 為合法收錄之路線，否則自動 fallback 至 frances
+router.beforeEach((to, _from, next) => {
+  if (to.name === 'schedule' || to.name === 'transport') {
+    const routeId = to.params.routeId as string
+    const isValid = AVAILABLE_ROUTES.some((r) => r.id === routeId)
+    if (!isValid) {
+      return next(`/${String(to.name)}/frances`)
+    }
+  }
+  next()
 })
 
 function upsertMeta(selector: string, attr: 'name' | 'property', key: string, content: string) {
@@ -73,20 +85,46 @@ function upsertMeta(selector: string, attr: 'name' | 'property', key: string, co
   el.setAttribute('content', content)
 }
 
+/**
+ * 資料驅動自動化 SEO Meta Resolver
+ * 從 AVAILABLE_ROUTES 動態推導路線名稱、總里程與建議天數，未來擴充新路線零配置自動生效
+ */
+function resolveRouteSeoMeta(to: RouteLocationNormalized) {
+  const routeId = to.params.routeId as RouteId
+  const routeMeta = getRouteMetadata(routeId)
+
+  if (to.name === 'schedule' && routeMeta) {
+    return {
+      title: `【2026 朝聖之路】${routeMeta.chineseName} (${routeMeta.name}) 行程規劃與每日里程計算 | Camino Plan`,
+      description: `專為${routeMeta.chineseName}徒步者打造的免費規劃工具。全長約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天，支援每日分段公里試算、爬升下降、庇護所清單與世界盡頭延伸段。`,
+    }
+  }
+
+  if (to.name === 'transport' && routeMeta) {
+    return {
+      title: `【2026 朝聖之路】${routeMeta.chineseName} (${routeMeta.name}) 起點交通攻略與轉乘指南 | Camino Plan`,
+      description: `提供抵達${routeMeta.chineseName}起點的最佳大眾運輸交通指南、高鐵與巴士班次規劃、跨國轉乘避坑提醒與官方訂票連結。`,
+    }
+  }
+
+  return {
+    title: (to.meta.title as string) || DEFAULT_TITLE,
+    description: (to.meta.description as string) || DEFAULT_DESCRIPTION,
+  }
+}
+
 router.afterEach((to) => {
   if (typeof document === 'undefined') return
-  const title = (to.meta.title as string) || DEFAULT_TITLE
-  const description = (to.meta.description as string) || DEFAULT_DESCRIPTION
-  const normalizedPath = to.path === '/' ? '/schedule' : to.path
-  const canonicalUrl = `${SITE_ORIGIN}${normalizedPath}`
+  const seo = resolveRouteSeoMeta(to)
+  const canonicalUrl = `${SITE_ORIGIN}${to.path}`
 
-  document.title = title
-  upsertMeta('meta[name="description"]', 'name', 'description', description)
-  upsertMeta('meta[property="og:title"]', 'property', 'og:title', title)
-  upsertMeta('meta[property="og:description"]', 'property', 'og:description', description)
+  document.title = seo.title
+  upsertMeta('meta[name="description"]', 'name', 'description', seo.description)
+  upsertMeta('meta[property="og:title"]', 'property', 'og:title', seo.title)
+  upsertMeta('meta[property="og:description"]', 'property', 'og:description', seo.description)
   upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
-  upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title)
-  upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description)
+  upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', seo.title)
+  upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', seo.description)
 
   let canonicalEl = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
   if (!canonicalEl) {

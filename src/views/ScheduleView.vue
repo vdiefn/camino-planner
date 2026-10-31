@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
 import { useScheduleStore } from "@/stores/schedule";
 import StageCard from "@/components/schedule/StageCard.vue";
 import ChangeWaypointModal from "@/components/schedule/ChangeWaypointModal.vue";
@@ -23,6 +24,7 @@ import {
 } from "lucide-vue-next";
 
 const scheduleStore = useScheduleStore();
+const router = useRouter();
 
 // 手機版折疊狀態（預設收合以釋放手機垂直空間）
 const isMobileSettingsOpen = ref(false);
@@ -153,9 +155,10 @@ const finisterreDailyAvgKm = computed(() => {
   return "0.0";
 });
 
-// 處理路線切換
+// 處理路線切換（同步更新 URL 路由，確保長尾網址與瀏覽器歷程一致）
 const handleSwitchRoute = (routeId: RouteId) => {
   scheduleStore.switchRoute(routeId);
+  router.push(`/schedule/${routeId}`);
 };
 
 // 處理起訖點變更時，若天數超出合理範圍進行保護
@@ -616,12 +619,12 @@ onUnmounted(() => {
             class="space-y-4 mt-4"
             :class="isMobileSettingsOpen ? 'block' : 'hidden lg:block'"
           >
-            <!-- 主路線切換標籤頁 (法國之路 / 葡萄牙之路 / 北方之路) -->
+            <!-- 主路線切換標籤頁 (支援未來多路線動態擴充之自適應網格) -->
             <div>
               <label class="text-xs text-slate-700 mb-1.5 flex items-center gap-1.5">
                 <span>選擇朝聖主路線</span>
               </label>
-              <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl">
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl">
                 <button
                   v-for="route in scheduleStore.availableRoutes"
                   :key="route.id"

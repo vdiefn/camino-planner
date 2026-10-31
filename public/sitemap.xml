@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 行程規劃三大路線專屬著陸頁 -->
   <url>
-    <loc>https://camino-plan.com/schedule</loc>
+    <loc>https://camino-plan.com/schedule/frances</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
+  <url>
+    <loc>https://camino-plan.com/schedule/portugues</loc>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/schedule/norte</loc>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <!-- 起點交通三大路線專屬著陸頁 -->
+  <url>
+    <loc>https://camino-plan.com/transport/frances</loc>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/transport/portugues</loc>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/transport/norte</loc>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <!-- 裝備負重與隱私權政策 -->
   <url>
     <loc>https://camino-plan.com/packing</loc>
-    <lastmod>2026-10-31</lastmod>
-  </url>
-  <url>
-    <loc>https://camino-plan.com/transport</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>

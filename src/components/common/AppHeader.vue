@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Compass, MessageSquarePlus, Share2 } from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
+import { useScheduleStore } from '@/stores/schedule'
 
 type TabType = 'schedule' | 'packing' | 'transport'
 
@@ -16,6 +18,8 @@ const emit = defineEmits<{
 
 const { openFeedback } = useFeedbackModal()
 const { openSyncModal } = useSyncBackup()
+const scheduleStore = useScheduleStore()
+const currentRouteId = computed(() => scheduleStore.currentRouteId || 'frances')
 
 // 點擊分頁：若已在該分頁則平滑回到頂端，反之切換分頁
 function handleTabClick(tab: TabType) {
@@ -44,10 +48,10 @@ function handleTabClick(tab: TabType) {
         </div>
       </div>
 
-      <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊，使用真實 <a href> 錨點供搜尋引擎檢索） -->
+      <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊，使用動態長尾 <a href> 錨點供搜尋引擎檢索） -->
       <nav aria-label="主要功能導覽" class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1 absolute left-1/2 -translate-x-1/2">
         <a
-          href="/schedule"
+          :href="`/schedule/${currentRouteId}`"
           :class="[
             'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
             currentTab === 'schedule'
@@ -73,7 +77,7 @@ function handleTabClick(tab: TabType) {
         </a>
 
         <a
-          href="/transport"
+          :href="`/transport/${currentRouteId}`"
           :class="[
             'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
             currentTab === 'transport'

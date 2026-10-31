@@ -8,6 +8,9 @@ import BackToTop from '@/components/common/BackToTop.vue'
 import ScheduleView from '@/views/ScheduleView.vue'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { usePackingStore } from '@/stores/packing'
+import { useScheduleStore } from '@/stores/schedule'
+import { AVAILABLE_ROUTES } from '@/data/routes'
+import type { RouteId } from '@/types/route'
 
 // 非首屏分頁與全域彈窗採用非同步載入（Code Splitting），降低首屏主執行緒負擔
 const PackingView = defineAsyncComponent(() => import('@/views/PackingView.vue'))
@@ -17,6 +20,7 @@ const SyncBackupModal = defineAsyncComponent(() => import('@/components/common/S
 
 const route = useRoute()
 const router = useRouter()
+const scheduleStore = useScheduleStore()
 
 // 依據當前 URL Path 初始化分頁狀態
 const getTabFromRoute = (path: string): 'schedule' | 'packing' | 'transport' => {
@@ -28,6 +32,24 @@ const getTabFromRoute = (path: string): 'schedule' | 'packing' | 'transport' => 
 // 當前啟用的分頁標籤：'schedule' | 'packing' | 'transport'
 const currentTab = ref<'schedule' | 'packing' | 'transport'>(getTabFromRoute(route.path))
 
+// 同步 URL 中的 :routeId 至 Pinia Store（支援瀏覽器上一頁/下一頁與直接造訪特定路線）
+const syncRouteIdFromUrl = () => {
+  const routeIdParam = route.params.routeId as RouteId
+  if (routeIdParam && AVAILABLE_ROUTES.some((r) => r.id === routeIdParam)) {
+    if (scheduleStore.currentRouteId !== routeIdParam) {
+      scheduleStore.switchRoute(routeIdParam)
+    }
+  }
+}
+
+watch(
+  () => route.params.routeId,
+  () => {
+    syncRouteIdFromUrl()
+  },
+  { immediate: true }
+)
+
 // 監聽路由變化同步更新 currentTab（例如上一頁/下一頁）
 watch(
   () => route.path,
@@ -36,9 +58,12 @@ watch(
   }
 )
 
-// 當使用者點擊分頁頁籤時，同步更新網址路徑（搶佔長尾網址權重）
+// 當使用者點擊分頁頁籤時，同步更新網址路徑（自動攜帶當前選定之路線 ID）
 watch(currentTab, (newTab) => {
-  const targetPath = `/${newTab}`
+  let targetPath = `/${newTab}`
+  if (newTab === 'schedule' || newTab === 'transport') {
+    targetPath = `/${newTab}/${scheduleStore.currentRouteId || 'frances'}`
+  }
   if (route.path !== targetPath) {
     router.push(targetPath)
   }
