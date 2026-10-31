@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppHeader from '@/components/common/AppHeader.vue'
 import AppFooter from '@/components/common/AppFooter.vue'
 import BottomNav from '@/components/common/BottomNav.vue'
-import FeedbackModal from '@/components/common/FeedbackModal.vue'
-import SyncBackupModal from '@/components/common/SyncBackupModal.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import ScheduleView from '@/views/ScheduleView.vue'
-import PackingView from '@/views/PackingView.vue'
-import TransportView from '@/views/TransportView.vue'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { usePackingStore } from '@/stores/packing'
+
+// 非首屏分頁與全域彈窗採用非同步載入（Code Splitting），降低首屏主執行緒負擔
+const PackingView = defineAsyncComponent(() => import('@/views/PackingView.vue'))
+const TransportView = defineAsyncComponent(() => import('@/views/TransportView.vue'))
+const FeedbackModal = defineAsyncComponent(() => import('@/components/common/FeedbackModal.vue'))
+const SyncBackupModal = defineAsyncComponent(() => import('@/components/common/SyncBackupModal.vue'))
 
 const route = useRoute()
 const router = useRouter()

@@ -23,43 +23,43 @@ function handleTabClick(tab: TabType) {
 </script>
 
 <template>
-  <nav class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md md:hidden">
+  <nav aria-label="行動端功能導覽" class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md md:hidden">
     <div class="grid h-16 grid-cols-3 items-center">
-      <button
-        type="button"
+      <a
+        href="/schedule"
         :class="[
           'flex h-full flex-col items-center justify-center gap-1 transition-colors cursor-pointer',
           currentTab === 'schedule' ? 'text-amber-600 font-medium' : 'text-slate-500 hover:text-slate-800',
         ]"
-        @click="handleTabClick('schedule')"
+        @click.prevent="handleTabClick('schedule')"
       >
         <CalendarDays class="h-5 w-5" />
         <span class="text-[11px]">行程規劃</span>
-      </button>
+      </a>
 
-      <button
-        type="button"
+      <a
+        href="/packing"
         :class="[
           'flex h-full flex-col items-center justify-center gap-1 transition-colors cursor-pointer',
           currentTab === 'packing' ? 'text-amber-600 font-medium' : 'text-slate-500 hover:text-slate-800',
         ]"
-        @click="handleTabClick('packing')"
+        @click.prevent="handleTabClick('packing')"
       >
         <Backpack class="h-5 w-5" />
         <span class="text-[11px]">裝備負重</span>
-      </button>
+      </a>
 
-      <button
-        type="button"
+      <a
+        href="/transport"
         :class="[
           'flex h-full flex-col items-center justify-center gap-1 transition-colors cursor-pointer',
           currentTab === 'transport' ? 'text-amber-600 font-medium' : 'text-slate-500 hover:text-slate-800',
         ]"
-        @click="handleTabClick('transport')"
+        @click.prevent="handleTabClick('transport')"
       >
         <TrainFront class="h-5 w-5" />
         <span class="text-[11px]">起點交通</span>
-      </button>
+      </a>
     </div>
   </nav>
 </template>

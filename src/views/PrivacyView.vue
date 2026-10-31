@@ -11,7 +11,7 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
           to="/"
           class="flex items-center gap-2 text-slate-800 transition-colors"
         >
-          <img src="/favicon.svg" alt="Logo" class="w-6 h-6" />
+          <img src="/favicon.svg" alt="Camino Plan 標誌" width="24" height="24" class="w-6 h-6" />
           <span class="font-bold text-sm sm:text-base">Camino Plan</span>
         </router-link>
         <router-link

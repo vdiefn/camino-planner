@@ -44,46 +44,46 @@ function handleTabClick(tab: TabType) {
         </div>
       </div>
 
-      <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊） -->
-      <nav class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1 absolute left-1/2 -translate-x-1/2">
-        <button
-          type="button"
+      <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊，使用真實 <a href> 錨點供搜尋引擎檢索） -->
+      <nav aria-label="主要功能導覽" class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1 absolute left-1/2 -translate-x-1/2">
+        <a
+          href="/schedule"
           :class="[
             'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
             currentTab === 'schedule'
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
           ]"
-          @click="handleTabClick('schedule')"
+          @click.prevent="handleTabClick('schedule')"
         >
           行程規劃
-        </button>
+        </a>
 
-        <button
-          type="button"
+        <a
+          href="/packing"
           :class="[
             'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
             currentTab === 'packing'
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
           ]"
-          @click="handleTabClick('packing')"
+          @click.prevent="handleTabClick('packing')"
         >
           裝備負重
-        </button>
+        </a>
 
-        <button
-          type="button"
+        <a
+          href="/transport"
           :class="[
             'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
             currentTab === 'transport'
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
           ]"
-          @click="handleTabClick('transport')"
+          @click.prevent="handleTabClick('transport')"
         >
           起點交通
-        </button>
+        </a>
       </nav>
 
       <!-- 右側：功能動作區（跨裝置同步備份 ＆ 許願與回饋） -->
