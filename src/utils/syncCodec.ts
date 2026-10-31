@@ -131,8 +131,8 @@ export const OFFICIAL_CATEGORY_LABELS: Record<string, string> = {
   OTHER: '其他',
 }
 
-const MAX_URL_TOKEN_LENGTH = 8192
-const MAX_DECOMPRESSED_BYTES = 512 * 1024
+export const MAX_URL_TOKEN_LENGTH = 8192
+export const MAX_DECOMPRESSED_BYTES = 64 * 1024
 
 /**
  * 將二進位陣列轉為無 '=' 尾綴之 URL 安全 Base64 字串
@@ -522,6 +522,9 @@ function reconstructSingleRouteSchedule(
  */
 export function decodeCompactUrlPayload(token: string): DecodeResult {
   try {
+    if (!token || typeof token !== 'string' || token.length > MAX_URL_TOKEN_LENGTH) {
+      return { ok: false, error: '同步連結長度無效或超過安全上限' }
+    }
     const compressed = base64UrlToUint8(token)
     const decompressed = unzlibSync(compressed)
     if (decompressed.byteLength > MAX_DECOMPRESSED_BYTES) {

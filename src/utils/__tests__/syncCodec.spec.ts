@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
+import { strToU8, zlibSync } from 'fflate'
 import { defaultActiveCategories, usePackingStore } from '@/stores/packing'
 import { useScheduleStore } from '@/stores/schedule'
 import {
@@ -7,6 +8,7 @@ import {
   decodeCompactUrlPayload,
   encodeCompactUrlPayload,
   parseBackupJson,
+  uint8ToBase64Url,
 } from '@/utils/syncCodec'
 
 describe('syncCodec 跨裝置同步與備份編解碼測試', () => {
@@ -347,6 +349,42 @@ describe('syncCodec 跨裝置同步與備份編解碼測試', () => {
       receiverStore.applyImportedPacking(res.data.packing)
       expect(receiverStore.activeCategories.includes('SLEEP')).toBe(false)
       expect(receiverStore.activeCategories.length).toBe(8)
+    }
+  })
+
+  it('TC-06: 資安邊界防衛測試 — 異常超長 URL Token 與 Zip Bomb 惡意資料應被安全攔截拒絕', () => {
+    // 1. 測試超過 MAX_URL_TOKEN_LENGTH (8192) 之惡意超長 Token
+    const oversizedToken = 'A'.repeat(8193)
+    const resultOverToken = decodeCompactUrlPayload(oversizedToken)
+    expect(resultOverToken.ok).toBe(false)
+    if (!resultOverToken.ok) {
+      expect(resultOverToken.error).toContain('超過安全上限')
+    }
+
+    // 2. 測試空字串或型別不合法防禦
+    const resultEmpty = decodeCompactUrlPayload('')
+    expect(resultEmpty.ok).toBe(false)
+
+    // 3. 測試 Zip Bomb 防禦：構造解壓後超過 64KB (MAX_DECOMPRESSED_BYTES) 之壓縮數據
+    const hugeRawPayload = JSON.stringify({
+      v: 1,
+      s: {
+        r: 'frances',
+        d: '2026-05-10',
+        sw: 'sjpp',
+        ew: 'santiago',
+        fo: 'NONE',
+        ms: new Array(4000).fill('SANTIAGO_DE_COMPOSTELA'),
+      },
+    })
+    // 壓縮並轉為 token
+    const compressedBytes = zlibSync(strToU8(hugeRawPayload))
+    const bombToken = uint8ToBase64Url(compressedBytes)
+
+    const bombResult = decodeCompactUrlPayload(bombToken)
+    expect(bombResult.ok).toBe(false)
+    if (!bombResult.ok) {
+      expect(bombResult.error).toContain('超過安全容量上限')
     }
   })
 })
