@@ -1,10 +1,17 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useScheduleStore } from '@/stores/schedule'
 
 describe('Schedule Migration & Multi-Drafts - 快取遷移與草稿隔離測試', () => {
   beforeEach(() => {
+    // 鎖定系統時間為非冬季 (5/1)，確保單元測試不受真實世界冬季封山邊界（11/1 ~ 3/31）波動影響
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-05-01T12:00:00Z'))
     setActivePinia(createPinia())
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
   })
 
   it('1. 初始狀態下預設為法國之路，且 drafts 具備 3 條主路線', () => {
