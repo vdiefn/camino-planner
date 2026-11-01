@@ -6,6 +6,7 @@ import StageCard from "@/components/schedule/StageCard.vue";
 import ChangeWaypointModal from "@/components/schedule/ChangeWaypointModal.vue";
 import WaypointSelect from "@/components/schedule/WaypointSelect.vue";
 import AlbergueModal from "@/components/schedule/AlbergueModal.vue";
+import PrintScheduleModal from "@/components/schedule/PrintScheduleModal.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 import GoogleAd from "@/components/common/GoogleAd.vue";
 import type { UserStage } from "@/types/camino";
@@ -22,6 +23,7 @@ import {
   ChevronDown,
   MessageCircleWarning,
   Coffee,
+  Printer,
 } from "lucide-vue-next";
 
 const scheduleStore = useScheduleStore();
@@ -31,6 +33,16 @@ const router = useRouter();
 const isMobileSettingsOpen = ref(false);
 // 彈性排程小提醒 Modal 狀態（手機與平板點擊開啟）
 const isScheduleTipsModalOpen = ref(false);
+// 紙本行程路書預覽與列印 Modal 狀態
+const isPrintScheduleModalOpen = ref(false);
+
+// 當前分支中文名稱（供路書頁首顯示，如「拿破崙越嶺線」或「海岸線」）
+const currentBranchName = computed(() => {
+  const branchId = scheduleStore.currentDraft?.branchId;
+  return scheduleStore.currentRouteMetadata?.branches?.find(
+    (b) => b.id === branchId,
+  )?.chineseName;
+});
 
 // 計算兩航點間的總距離（依據當前路線航點列表）
 const calculateSelectedDistance = (startId: string, endId: string) => {
@@ -83,18 +95,20 @@ watch(
   { immediate: true },
 );
 
-// 依據目前暫存起訖點、天數與目前休息天數，動態計算參考日均公里數
+// 依據目前暫存起訖點、天數與目前休息天數，動態計算參考日均公里數（具備 Number.isFinite 邊界守護防禦 NaN）
 const draftDailyAvgKm = computed(() => {
-  const dist = calculateSelectedDistance(
+  const selectedRouteDistanceKm = calculateSelectedDistance(
     draftConfig.value.startWaypointId,
     draftConfig.value.endWaypointId,
   );
-  const walkingDays = Math.max(
-    1,
-    draftConfig.value.targetDays - (scheduleStore.config.restDays || 0),
-  );
-  if (dist > 0 && walkingDays > 0) {
-    return (dist / walkingDays).toFixed(1);
+  const rawTargetDays = Number(draftConfig.value.targetDays);
+  const validTargetDays =
+    Number.isFinite(rawTargetDays) && rawTargetDays > 0 ? rawTargetDays : 1;
+  const restDays = scheduleStore.config.restDays || 0;
+  const walkingDays = Math.max(1, validTargetDays - restDays);
+
+  if (selectedRouteDistanceKm > 0 && walkingDays > 0) {
+    return (selectedRouteDistanceKm / walkingDays).toFixed(1);
   }
   return "0.0";
 });
@@ -442,35 +456,79 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 10;
 };
 
+// 頂部吸頂列與桌面版動態頂部偏移量
+const stickyHeaderRef = ref<HTMLElement | null>(null);
+const sidebarTopOffset = ref<number>(154);
+let resizeObserver: ResizeObserver | null = null;
+
+const updateSidebarLayout = () => {
+  if (stickyHeaderRef.value) {
+    // sm/lg 以上 AppHeader 高度為 64px (h-16)，吸頂列下外距為 16px (mb-4)
+    const headerHeight = stickyHeaderRef.value.offsetHeight;
+    sidebarTopOffset.value = 64 + headerHeight + 16;
+  }
+};
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
+
+  updateSidebarLayout();
+
+  // 優先使用 ResizeObserver 響應式觀察（杜絕 window.resize 重複觸發 Layout Thrashing）
+  if (stickyHeaderRef.value && typeof ResizeObserver !== "undefined") {
+    resizeObserver = new ResizeObserver(() => {
+      updateSidebarLayout();
+    });
+    resizeObserver.observe(stickyHeaderRef.value);
+  } else {
+    // 舊型環境降級備援
+    window.addEventListener("resize", updateSidebarLayout);
+  }
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("resize", updateSidebarLayout);
+  resizeObserver?.disconnect();
+  resizeObserver = null;
 });
 </script>
 
 <template>
   <div class="container mx-auto px-4 pt-0 pb-6 max-w-[1440px]">
-    <!-- 頂部吸頂列：左側大標題 ＋ 右側數據看板（Sticky 黏性吸頂，零位移、無底線、無陰影，滾動時純毛玻璃） -->
+    <!-- 頂部吸頂列：左側大標題 ＋ 右側數據看板與列印行程按鈕（Sticky 黏性吸頂，回歸原本經典佈局） -->
     <div
+      ref="stickyHeaderRef"
       :class="[
-        'sticky top-14 sm:top-16 z-30 -mx-4 px-4 py-2 sm:py-2.5 mb-1.5 sm:mb-3 transition-[background-color,backdrop-filter] duration-200',
+        'sticky top-14 sm:top-16 z-30 -mx-4 px-4 py-2 sm:py-2.5 mb-3 sm:mb-4 transition-[background-color,backdrop-filter] duration-200',
         isScrolled
           ? 'bg-slate-50/75 backdrop-blur-md'
           : 'bg-transparent',
       ]"
     >
       <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-2 sm:gap-4">
-        <h2
-          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 shrink-0"
-        >
-          徒步行程規劃
-        </h2>
+        <!-- 左側：大標題 ＋ 列印行程操作按鈕 -->
+        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <h2
+            class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 shrink-0"
+          >
+            徒步行程規劃
+          </h2>
 
-        <!-- 右側：數據看板條（說明在上、數字在下，手機版採四等分均勻網格，杜絕貼邊過度往外） -->
+          <!-- 列印行程按鈕（緊鄰標題，操作邏輯明確） -->
+          <button
+            type="button"
+            @click="isPrintScheduleModalOpen = true"
+            class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-600 px-2.5 sm:px-3 py-1.5 rounded-lg shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1.5 shrink-0"
+            title="開啟 A4 橫向紙本行程預覽與列印"
+          >
+            <Printer class="w-3.5 h-3.5 text-slate-500" />
+            <span class="whitespace-nowrap">列印行程</span>
+          </button>
+        </div>
+
+        <!-- 右側：獨立純粹的數據看板條（左右對稱、完美平衡） -->
         <div
           class="px-4 sm:px-6 py-2 rounded-xl bg-white border border-slate-200 shadow-2xs grid grid-cols-4 sm:flex sm:items-center sm:justify-around text-xs gap-1 sm:gap-6 shrink-0 w-full md:w-auto"
         >
@@ -497,19 +555,21 @@ onUnmounted(() => {
           </div>
 
           <!-- 總天數 -->
-          <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總天數</span>
-            <div class="flex items-baseline gap-0.5 whitespace-nowrap">
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-                totalTripDays
-              }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
-              <span
-                v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
-                class="hidden sm:inline text-[10px] text-slate-400 font-mono ml-0.5"
-              >
-                ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
-              </span>
+          <div class="flex items-baseline gap-0.5 whitespace-nowrap">
+            <div class="flex flex-col items-center justify-center">
+              <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總天數</span>
+              <div class="flex items-baseline gap-0.5 whitespace-nowrap">
+                <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                  totalTripDays
+                }}</span>
+                <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+                <span
+                  v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
+                  class="hidden sm:inline text-[10px] text-slate-400 font-mono ml-0.5"
+                >
+                  ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
+                </span>
+              </div>
             </div>
           </div>
 
@@ -527,13 +587,18 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- 三欄響應式佈局 -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-4 lg:gap-6 items-start">
-      <!-- 左欄：Sticky 排程設定控制台 (lg: 4 欄，具備獨立自適應高度與平滑滾動，防止超出或被導覽列遮擋) -->
-      <div class="lg:col-span-4 space-y-3 sm:space-y-4 lg:sticky lg:top-32 lg:max-h-[calc(100vh-8.5rem)] lg:overflow-y-auto lg:overscroll-contain pr-1">
-        <!-- 控制台卡片 -->
+    <!-- 三欄響應式佈局（設定最小高度為視窗可視高度，空間充足時下邊界永不提早懸空） -->
+    <div
+      class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-4 lg:gap-6 items-start lg:min-h-[calc(100vh-10rem)]"
+    >
+      <!-- 左欄：排程設定控制台（Sticky 吸頂，隨螢幕高度自適應伸縮，拉到底絕不上跑） -->
+      <div
+        class="lg:col-span-4 space-y-2.5 sm:space-y-3 lg:sticky"
+        :style="{ top: `${sidebarTopOffset}px` }"
+      >
+        <!-- 控制台卡片（自適應內距與彈性間距，隨螢幕高低自然伸縮） -->
         <div
-          class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs"
+          class="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200 shadow-xs"
         >
           <!-- 標題列：手機版支援點擊整列切換折疊 -->
           <div
@@ -542,7 +607,7 @@ onUnmounted(() => {
           >
             <div class="flex items-center gap-1.5">
               <h2 class="text-base font-bold text-slate-900">行程規劃設定</h2>
-              <div class="inline-flex items-center lg:hidden" @click.stop>
+              <div class="inline-flex items-center" @click.stop>
                 <button
                   type="button"
                   @click.stop="isScheduleTipsModalOpen = true"
@@ -626,12 +691,12 @@ onUnmounted(() => {
 
           <!-- 可折疊內容區塊：手機版依 isMobileSettingsOpen 顯示/隱藏，桌機版永遠顯示（lg:block） -->
           <div
-            class="space-y-4 mt-4"
+            class="space-y-2.5 sm:space-y-3 mt-3"
             :class="isMobileSettingsOpen ? 'block' : 'hidden lg:block'"
           >
             <!-- 主路線切換：手機版下拉選單 (sm:hidden) / 電腦平板網格按鈕 (hidden sm:grid) -->
             <div>
-              <label class="text-xs text-slate-700 mb-1.5 flex items-center gap-1.5">
+              <label class="text-xs text-slate-700 mb-1 flex items-center gap-1.5">
                 <span>選擇朝聖主路線</span>
               </label>
 
@@ -640,7 +705,7 @@ onUnmounted(() => {
                 <select
                   :value="scheduleStore.currentRouteId"
                   @change="handleSwitchRoute(($event.target as HTMLSelectElement).value as RouteId)"
-                  class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium"
+                  class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium"
                 >
                   <option
                     v-for="route in scheduleStore.availableRoutes"
@@ -659,7 +724,7 @@ onUnmounted(() => {
                   :key="route.id"
                   type="button"
                   @click="handleSwitchRoute(route.id)"
-                  class="py-2 px-1 text-center rounded-lg text-xs transition cursor-pointer"
+                  class="py-1.5 px-1 text-center rounded-lg text-xs transition cursor-pointer"
                   :class="[
                     scheduleStore.currentRouteId === route.id
                       ? 'bg-white text-slate-900 shadow-xs'
@@ -667,7 +732,7 @@ onUnmounted(() => {
                   ]"
                 >
                   <div class="truncate text-slate-900 font-semibold">{{ route.chineseName }}</div>
-                  <div class="text-xs text-slate-400 mt-0.5 truncate">
+                  <div class="text-[11px] text-slate-400 mt-0.5 truncate">
                     {{ scheduleStore.getRouteDisplayDistance(route.id) }}km
                   </div>
                 </button>
@@ -687,7 +752,7 @@ onUnmounted(() => {
               <select
                 :value="scheduleStore.currentDraft.branchId"
                 @change="handleSwitchBranch(($event.target as HTMLSelectElement).value)"
-                class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
+                class="w-full px-3 py-1.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
               >
                 <option
                   v-for="branch in scheduleStore.currentRouteMetadata.branches"
@@ -725,7 +790,7 @@ onUnmounted(() => {
                 <input
                   type="date"
                   v-model="draftConfig.startDate"
-                  class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
+                  class="w-full px-2.5 py-1.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden"
                 />
               </div>
 
@@ -743,12 +808,12 @@ onUnmounted(() => {
                   </span>
                 </div>
                 <div
-                  class="flex items-center border border-slate-200 rounded-lg bg-slate-50 overflow-hidden h-9.5"
+                  class="flex items-center border border-slate-200 rounded-lg bg-slate-50 overflow-hidden h-8.5"
                 >
                   <button
                     type="button"
                     @click="handleDecreaseDays"
-                    class="px-2.5 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center"
+                    class="px-2 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center"
                   >
                     <Minus class="w-3.5 h-3.5" />
                   </button>
@@ -760,7 +825,7 @@ onUnmounted(() => {
                   <button
                     type="button"
                     @click="handleIncreaseDays"
-                    class="px-2.5 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center"
+                    class="px-2 h-full text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center justify-center"
                   >
                     <Plus class="w-3.5 h-3.5" />
                   </button>
@@ -769,20 +834,20 @@ onUnmounted(() => {
             </div>
 
             <!-- 世界盡頭全域延伸段 (Finisterre & Muxía Extension，選單與天數並排同一列) -->
-            <div class="pt-2 border-t border-slate-100">
+            <div class="pt-1.5 border-t border-slate-100">
               <div
                 class="grid gap-2 items-end"
                 :class="draftConfig.finisterreOption !== 'NONE' ? 'grid-cols-1 sm:grid-cols-12' : 'grid-cols-1'"
               >
                 <!-- 延伸路線下拉選單 -->
                 <div :class="draftConfig.finisterreOption !== 'NONE' ? 'sm:col-span-7' : 'w-full'">
-                  <label class="text-xs text-slate-800 block mb-1">
+                  <label class="text-xs text-slate-800 block mb-0.5">
                     世界盡頭延伸旅程
                   </label>
                   <select
                     :value="draftConfig.finisterreOption"
                     @change="handleFinisterreOptionChange(($event.target as HTMLSelectElement).value as FinisterreOption)"
-                    class="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden truncate"
+                    class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden truncate"
                   >
                     <option
                       v-for="(info, key) in finisterreOptionLabels"
@@ -808,7 +873,7 @@ onUnmounted(() => {
                     </span>
                   </div>
                   <div
-                    class="flex items-center border border-slate-200 rounded-lg bg-slate-50 overflow-hidden h-9"
+                    class="flex items-center border border-slate-200 rounded-lg bg-slate-50 overflow-hidden h-8.5"
                   >
                     <button
                       type="button"
@@ -837,12 +902,12 @@ onUnmounted(() => {
             </div>
 
             <!-- 確認按照變更重新規劃按鈕 -->
-            <div class="pt-1">
+            <div class="pt-0.5">
               <button
                 type="button"
                 @click="handleApplyChanges"
                 :disabled="!isDirty"
-                class="w-full py-2.5 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                class="w-full py-2 px-3 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer font-medium"
                 :class="[
                   isDirty
                     ? 'bg-orange-400 text-white hover:bg-orange-500 shadow-xs'
@@ -886,16 +951,16 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <!-- 彈性排程小提醒（電腦模式：常駐於行程規劃設定卡片下方） -->
+        <!-- 彈性排程小提醒（電腦模式：自適應緊湊設計，隨螢幕高度伸縮） -->
         <div
-          class="hidden lg:flex items-start gap-3 p-4 rounded-xl border border-slate-200 text-xs bg-white p-5 shadow-xs"
+          class="hidden lg:flex items-start gap-2.5 p-3 sm:p-3.5 rounded-xl border border-slate-200 text-xs bg-white shadow-xs"
         >
           <div class="space-y-1">
-            <h3 class="flex items-center gap-2 text-sm text-slate-900 font-bold">
-              <Sparkles class="h-4 w-4 text-amber-500" />
-              <span class="text-base">彈性排程小提醒</span>
+            <h3 class="flex items-center gap-1.5 text-xs sm:text-sm text-slate-900 font-bold">
+              <Sparkles class="h-4 w-4 text-amber-500 shrink-0" />
+              <span>彈性排程小提醒</span>
             </h3>
-            <p class="leading-relaxed text-slate-600">
+            <p class="leading-relaxed text-slate-600 text-[11px] sm:text-xs">
               朝聖之路不需要完全照表操課。路上若遇體力不支或愛上某座小鎮，隨時點擊卡片上的「更換結束點」或「設為休息日」，系統會為您自動重新計算後續天數！
             </p>
           </div>
@@ -905,7 +970,7 @@ onUnmounted(() => {
         <GoogleAd slot-id="schedule-sidebar-ad" format="rectangle" />
       </div>
 
-      <!-- 中欄：每日分段時間軸清單 (lg: 8 欄) -->
+      <!-- 中欄：每日分段時間軸清單 (lg: 8 欄，全域原生平滑滾動) -->
       <div class="lg:col-span-8 space-y-3 sm:space-y-4">
         <!-- 每日分段卡片清單與那一天之精準提醒 -->
         <template
@@ -1019,5 +1084,15 @@ onUnmounted(() => {
         朝聖之路不需要完全照表操課。路上若遇體力不支或愛上某座小鎮，隨時點擊卡片上的「更換結束點」或「設為休息日」，系統會為您自動重新計算後續天數！
       </p>
     </TipsModal>
+
+    <!-- A4 橫向紙本行程路書預覽與列印對話框 -->
+    <PrintScheduleModal
+      :is-open="isPrintScheduleModalOpen"
+      :stages="scheduleStore.stages"
+      :route-meta="scheduleStore.currentRouteMetadata"
+      :branch-name="currentBranchName"
+      :start-date="scheduleStore.config.startDate"
+      @close="isPrintScheduleModalOpen = false"
+    />
   </div>
 </template>
