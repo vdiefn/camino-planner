@@ -371,6 +371,10 @@ export interface MultiRouteScheduleState {
   - **世界盡頭排程鏈驗證**：延伸段 5 種走向接續天數、日期連續性、聖地牙哥停留休整日推導，以及雙向環線之爬升/下降高度動態反轉運算。
 - `tests/unit/schedule-migration.test.ts`：
   - 模擬舊版 localStorage schema 還原，驗證自動遷移邏輯與草稿隔離性。
+  - 透過 `vi.useFakeTimers()` 鎖定非冬季時間，隔離真實世界冬季封山邊界（11/1 ~ 3/31）波動對測試穩定度之影響。
+- `tests/unit/schedule-export.test.ts`：
+  - 驗證每日行程純文字路書生成函式 `generateScheduleTextChecklist`。
+  - 驗證當地地名括號清理（去無用備註）、單日步程/爬升計算、休息日標記與延伸段標籤排版。
 - `tests/unit/packing-export.test.ts`：
   - 驗證已勾選項目過濾、未勾選與無項目分類之動態排除。
   - 驗證穿在身上標記、多件數量乘號計算與樣式 B（中置點連接、☐ 方框、統計摘要）之純文字排版抗破版能力。
@@ -425,3 +429,13 @@ export interface MultiRouteScheduleState {
 ### 6.5 跨裝置快速同步架構 (QR Code Fast-Sync)
 - **純前端向量 QR Code 生成**：使用極輕量 SVG/Canvas 渲染，將 `syncCodec.ts` 生成之 Base64Url 壓縮字串直接轉為 QR Code。
 - **離線相機直掃解密**：朝聖路上隊友互助時，直接以手機原生相機讀取，免連外網即刻完成行程複製。
+
+### 6.6 紙本行程路書列印與極簡導出架構 (Schedule Advanced Print & Export)
+- **A4 橫向所見即所得沙盒列印 (WYSIWYG Sandbox Iframe Print)**：
+  - 封裝於 `PrintScheduleModal.vue`，動態注入沙盒 `iframe` 實體，徹底隔絕主應用程式 DOM 與全域滾動條穿透。
+  - 透過 `onafterprint` 事件精準監聽列印預覽結束時序，並於元件 `onUnmounted` 生命週期強制清理殘留節點與計時器，杜絕記憶體洩漏。
+- **純文字行程產生器解耦 (`scheduleExport.ts`)**：
+  - 以純函式架構實現，去除航點括號雜訊，以當地地名標準化格式輸出，極致適配 LINE / 備忘錄通訊軟體分享。
+- **響應式吸頂與邊界防護加固 (`ScheduleView.vue`)**：
+  - 以 `ResizeObserver` 單一來源動態計算側邊欄吸頂偏移量，消除視窗縮放時的 Layout Thrashing（重排顛簸）。
+  - 於 `formatDateWithWeekday` 與 `draftDailyAvgKm` 導入 `isNaN` 與 `Number.isFinite` 嚴格邊界守護，徹底杜絕無效日期與數值產生 `NaN` 破圖。
