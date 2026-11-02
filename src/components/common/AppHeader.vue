@@ -5,7 +5,7 @@ import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { useScheduleStore } from '@/stores/schedule'
 
-type TabType = 'schedule' | 'packing' | 'transport'
+type TabType = 'schedule' | 'packing' | 'transport' | 'budget'
 
 interface Props {
   currentTab: TabType
@@ -94,6 +94,19 @@ function handleTabClick(tab: TabType) {
           @click.prevent="handleTabClick('transport')"
         >
           起點交通
+        </a>
+
+        <a
+          href="/budget"
+          :class="[
+            'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
+            currentTab === 'budget'
+              ? 'bg-white text-slate-800 font-medium shadow-sm'
+              : 'text-slate-400 hover:text-slate-500',
+          ]"
+          @click.prevent="handleTabClick('budget')"
+        >
+          花費預算
         </a>
       </nav>
 

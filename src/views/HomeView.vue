@@ -15,6 +15,7 @@ import type { RouteId } from '@/types/route'
 // 非首屏分頁與全域彈窗採用非同步載入（Code Splitting），降低首屏主執行緒負擔
 const PackingView = defineAsyncComponent(() => import('@/views/PackingView.vue'))
 const TransportView = defineAsyncComponent(() => import('@/views/TransportView.vue'))
+const BudgetView = defineAsyncComponent(() => import('@/views/BudgetView.vue'))
 const FeedbackModal = defineAsyncComponent(() => import('@/components/common/FeedbackModal.vue'))
 const SyncBackupModal = defineAsyncComponent(() => import('@/components/common/SyncBackupModal.vue'))
 
@@ -23,14 +24,15 @@ const router = useRouter()
 const scheduleStore = useScheduleStore()
 
 // 依據當前 URL Path 初始化分頁狀態
-const getTabFromRoute = (path: string): 'schedule' | 'packing' | 'transport' => {
+const getTabFromRoute = (path: string): 'schedule' | 'packing' | 'transport' | 'budget' => {
   if (path.startsWith('/packing')) return 'packing'
   if (path.startsWith('/transport')) return 'transport'
+  if (path.startsWith('/budget')) return 'budget'
   return 'schedule'
 }
 
-// 當前啟用的分頁標籤：'schedule' | 'packing' | 'transport'
-const currentTab = ref<'schedule' | 'packing' | 'transport'>(getTabFromRoute(route.path))
+// 當前啟用的分頁標籤：'schedule' | 'packing' | 'transport' | 'budget'
+const currentTab = ref<'schedule' | 'packing' | 'transport' | 'budget'>(getTabFromRoute(route.path))
 
 // 同步 URL 中的 :routeId 與 :branchId 至 Pinia Store（支援瀏覽器上一頁/下一頁與直接造訪特定路線）
 const syncRouteIdFromUrl = () => {
@@ -104,6 +106,9 @@ onMounted(() => {
 
       <!-- 起點交通轉乘決策 -->
       <TransportView v-else-if="currentTab === 'transport'" />
+
+      <!-- 朝聖花費預算試算 -->
+      <BudgetView v-else-if="currentTab === 'budget'" />
     </main>
 
     <!-- 全域通用頁尾 -->
