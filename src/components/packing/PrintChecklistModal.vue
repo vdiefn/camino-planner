@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -31,6 +31,18 @@ const packingStore = usePackingStore()
 const isCopied = ref(false)
 const isCopyFailed = ref(false)
 let copyResetTimer: ReturnType<typeof setTimeout> | null = null
+let pendingPrintCleanup: (() => void) | null = null
+
+onUnmounted(() => {
+  if (copyResetTimer) {
+    clearTimeout(copyResetTimer)
+    copyResetTimer = null
+  }
+  if (pendingPrintCleanup) {
+    pendingPrintCleanup()
+    pendingPrintCleanup = null
+  }
+})
 
 // 僅保留「已啟用顯示之分類」且「有勾選要攜帶」的裝備項目
 const activeCategorySet = computed(() => new Set(props.categories.map((c) => c.id)))
@@ -128,129 +140,41 @@ async function handleCopyText() {
 }
 
 /**
- * 真正「所見即所得（WYSIWYG）」的乾淨列印實作：
- * 透過隱藏的沙盒 Iframe 進行獨立渲染列印，徹底杜絕主頁面 (#app)、底部導覽列與外圍捲軸穿透，
- * 並透過 useAsyncLock 互斥鎖杜絕連點競態與 Iframe 堆疊。
+ * 原生標準列印實作：
+ * 採用 CSS @media print 樣式隔離，零動態 HTML 注入、零 Iframe，符合最嚴格 CSP 安全標準。
  */
 const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
   async () => {
-    const printArea = document.getElementById('print-checklist-area')
-    if (!printArea) {
-      window.print()
-      emit('close')
-      return
-    }
-
-    // 取得當前日期並設定自訂檔名：2026 朝聖之路裝備清單 YYYY-MM-DD
     const todayStr = new Date().toISOString().split('T')[0]
     const printFileName = `2026 朝聖之路裝備清單 ${todayStr}`
 
-    // 同步暫時切換全域 document.title（供部分直接取用主視窗標題之瀏覽器作為另存 PDF 預設檔名）
     const originalTitle = document.title
     document.title = printFileName
 
-    // 1. 建立隱藏式列印 iframe
-    const iframe = document.createElement('iframe')
-    iframe.setAttribute(
-      'style',
-      'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden;'
-    )
-    document.body.appendChild(iframe)
-
-    const iframeDoc = iframe.contentWindow?.document
-    if (!iframeDoc) {
-      window.print()
+    const finalizePrint = () => {
+      document.title = originalTitle
+      window.removeEventListener('afterprint', finalizePrint)
+      pendingPrintCleanup = null
       emit('close')
-      return
     }
 
-    // 2. 萃取全站已編譯之 Tailwind 樣式與所有 link/style 標籤
-    const styleNodes = Array.from(
-      document.querySelectorAll('style, link[rel="stylesheet"]')
-    )
-    const stylesHtml = styleNodes.map((node) => node.outerHTML).join('\n')
+    pendingPrintCleanup = () => {
+      document.title = originalTitle
+      window.removeEventListener('afterprint', finalizePrint)
+    }
 
-    // 3. 組裝獨立純淨的 HTML 文件
-    iframeDoc.open()
-    iframeDoc.write(`
-    <!DOCTYPE html>
-    <html lang="zh-TW">
-      <head>
-        <meta charset="UTF-8">
-        <title>${printFileName}</title>
-        ${stylesHtml}
-        <style>
-          @page {
-            size: A4 portrait;
-            margin: 10mm 12mm 10mm 12mm;
-          }
-          *, *::before, *::after {
-            box-sizing: border-box !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-          html, body {
-            background: white !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: visible !important;
-            height: auto !important;
-          }
-          #print-checklist-area {
-            width: 100% !important;
-            max-width: none !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            min-height: calc(297mm - 20mm) !important;
-            display: flex !important;
-            flex-direction: column !important;
-          }
-          .print-grid {
-            display: grid !important;
-            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            gap: 14px !important;
-            align-items: start !important;
-            flex-grow: 1 !important;
-          }
-          .checklist-category {
-            break-inside: avoid !important;
-            page-break-inside: avoid !important;
-            border: 1px solid #e2e8f0 !important;
-            border-radius: 8px !important;
-            padding: 10px 12px !important;
-            background: white !important;
-          }
-          .print-footer {
-            margin-top: auto !important;
-            padding-top: 12px !important;
-            border-top: 1px solid #e2e8f0 !important;
-          }
-        </style>
-      </head>
-      <body>
-        ${printArea.outerHTML}
-      </body>
-    </html>
-  `)
-    iframeDoc.close()
+    window.addEventListener('afterprint', finalizePrint, { once: true })
 
-    // 4. 等候渲染就緒後喚起列印，自動關閉 Dialog，並清除 DOM 與還原標題
-    iframe.contentWindow?.focus()
-    await new Promise<void>((resolve) => {
-      setTimeout(() => {
-        iframe.contentWindow?.print()
-        emit('close') // 喚起列印後立即自動關閉 Dialog
-        setTimeout(() => {
-          document.title = originalTitle
-          if (document.body.contains(iframe)) {
-            document.body.removeChild(iframe)
-          }
-          resolve()
-        }, 1500)
-      }, 300)
-    })
+    // 給予瀏覽器微小時間窗更新標題（供另存 PDF 自動帶入檔名）
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    window.print()
+
+    // 逾時安全兜底：若瀏覽器未觸發 afterprint 則復原標題
+    setTimeout(() => {
+      if (document.title === printFileName) {
+        document.title = originalTitle
+      }
+    }, 5000)
   },
   { cooldownMs: 1000 }
 )
@@ -532,3 +456,71 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
     </Dialog>
   </TransitionRoot>
 </template>
+
+<style>
+@media print {
+  /* 1. 隱藏主視窗與其他非列印目標節點 */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 2. 破除 Headless UI Portal 與滾動容器之視窗裁剪 */
+  [data-headlessui-portal],
+  [data-headlessui-portal] * {
+    transform: none !important;
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  /* 3. 僅讓列印目標區域完全可見並強制滿版置頂 */
+  #print-checklist-area,
+  #print-checklist-area * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  #print-checklist-area {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 10mm 12mm !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+    z-index: 999999 !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  #print-checklist-area .print-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    align-items: start !important;
+  }
+
+  #print-checklist-area .checklist-category {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+    background: white !important;
+  }
+
+  #print-checklist-area .print-footer {
+    margin-top: auto !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #e2e8f0 !important;
+  }
+}
+</style>
