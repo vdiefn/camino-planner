@@ -11,23 +11,23 @@ export type BudgetPersona = 'BUDGET' | 'STANDARD' | 'COMFORT' | 'CUSTOM'
  * 四大象限詳細花費結構
  */
 export interface BudgetDetails {
-  // 一、行前固定支出 (TWD 計價)
-  flightTwd: number // 台灣來回機票 (預設: 35,000)
-  gearTwd: number // 裝備增補採購 (預設: 4,000)
-  insuranceAndSimTwd: number // 申根保險與網卡 (預設: 2,500)
+  // 一、行前固定支出 (TWD 計價，null 代表自訂模式下尚未填寫之空白狀態)
+  flightTwd: number | null
+  gearTwd: number | null
+  insuranceAndSimTwd: number | null
 
   // 二、徒步路上每日浮動開銷 (EUR/天 計價，支援小數點後兩位)
-  lodgingEurPerDay: number // 庇護所 / 住宿 (平均)
-  foodEurPerDay: number // 三餐飲食與沿途吧台補給
-  laundryEurPerDay: number // 洗衣雜支
-  luggageTransferEurPerDay: number // 行李托運 (選填)
+  lodgingEurPerDay: number | null
+  foodEurPerDay: number | null
+  laundryEurPerDay: number | null
+  luggageTransferEurPerDay: number | null
 
   // 三、前後跨國接駁交通 (EUR 計價)
-  transitToStartEur: number // 機場至起點交通
-  transitFromEndEur: number // 終點返回機場交通
+  transitToStartEur: number | null
+  transitFromEndEur: number | null
 
   // 四、突發應急金 (EUR 計價)
-  emergencyFundEur: number // 醫療、改票或緊急備用金
+  emergencyFundEur: number | null
 }
 
 /**

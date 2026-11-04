@@ -14,6 +14,7 @@ import {
   MAX_BUDGET_DAYS,
   MIN_BUDGET_DAYS,
   PERSONA_PRESETS,
+  roundToTwoDecimals,
   sanitizeBudgetNumber,
 } from '@/utils/budgetCalculator'
 
@@ -71,6 +72,17 @@ export const useBudgetStore = defineStore(
       )
     })
 
+    // 個人自訂型專屬之路上每日平均開銷 (僅依據自訂快照計算，切換至其他預設風格時不被覆蓋)
+    const customDailyAvgEur = computed(() => {
+      const d = customDetails.value
+      const daily =
+        sanitizeBudgetNumber(d.lodgingEurPerDay) +
+        sanitizeBudgetNumber(d.foodEurPerDay) +
+        sanitizeBudgetNumber(d.laundryEurPerDay) +
+        sanitizeBudgetNumber(d.luggageTransferEurPerDay)
+      return roundToTwoDecimals(daily)
+    })
+
     // 判斷當前明細是否與所屬風格預設值相符
     const isMatchingCurrentPreset = computed(() => {
       if (persona.value === 'CUSTOM') {
@@ -86,7 +98,7 @@ export const useBudgetStore = defineStore(
       persona.value = newPersona
       if (newPersona === 'CUSTOM') {
         if (!hasCustomized.value) {
-          // 若從未自訂過或已按過還原鈕，確保右側試算內容全面歸零
+          // 若從未自訂過或已按過還原鈕，確保右側試算內容全面歸零且格子維持全空 (null)
           customDetails.value = { ...EMPTY_BUDGET_DETAILS }
           details.value = { ...EMPTY_BUDGET_DETAILS }
         } else {
@@ -118,23 +130,30 @@ export const useBudgetStore = defineStore(
       eurToTwdRate.value = sanitizeBudgetNumber(rate, DEFAULT_EUR_TWD_RATE, 10, 100)
     }
 
-    // 動作：更新特定開銷細項
-    function updateDetail<K extends keyof BudgetDetails>(key: K, val: number) {
-      const cleanVal = sanitizeBudgetNumber(val, 0)
-      details.value[key] = cleanVal
-      // 標記已使用個人化自訂，並同步持久記錄至自訂數值快照
-      hasCustomized.value = true
-      customDetails.value[key] = cleanVal
+    // 動作：更新特定開銷細項 (支援輸入 0，刪空時儲存 null 維持乾淨空白)
+    function updateDetail<K extends keyof BudgetDetails>(
+      key: K,
+      val: number | string | null | undefined
+    ) {
+      const isBlank =
+        val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
+      const finalVal: number | null = isBlank ? null : sanitizeBudgetNumber(val, 0)
 
-      // 若修改後已與現有風格預設不同，標註為 CUSTOM
+      // 若從預設風格微調，以該風格現有完整細項為基底初始化自訂快照
       if (persona.value !== 'CUSTOM') {
+        customDetails.value = { ...details.value }
         persona.value = 'CUSTOM'
       }
+
+      // 物件替換指派，確保 Vue 3 響應式系統 100% 精準捕捉變更
+      details.value = { ...details.value, [key]: finalVal }
+      customDetails.value = { ...customDetails.value, [key]: finalVal }
+      hasCustomized.value = true
     }
 
-    // 動作：還原回當前風格預設值 (若為 CUSTOM 則重設為空狀態)
+    // 動作：還原回當前風格預設值 (若為 CUSTOM 則重設為全空狀態 null)
     function resetToDefaults() {
-      // 點選還原鈕時，個人化自訂快照一律同步徹底重設為乾淨空狀態
+      // 點選還原鈕時，個人化自訂快照一律同步徹底重設為乾淨空狀態 (null)
       hasCustomized.value = false
       customDetails.value = { ...EMPTY_BUDGET_DETAILS }
 
@@ -161,6 +180,7 @@ export const useBudgetStore = defineStore(
       isScheduleDaysDifferent,
       currentRouteName,
       summary,
+      customDailyAvgEur,
       isMatchingCurrentPreset,
       setPersona,
       setCustomDays,

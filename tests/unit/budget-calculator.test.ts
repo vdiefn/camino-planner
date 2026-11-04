@@ -110,7 +110,7 @@ describe('budgetCalculator 預算試算與精度防禦測試', () => {
 
     const text = generateBudgetTextChecklist(mockMeta)
 
-    expect(text).toContain('【🇪🇸 聖雅各朝聖之路 · 行程花費預算表】')
+    expect(text).toContain('【聖雅各朝聖之路 · 行程花費預算表】')
     expect(text).toContain('路線：法國之路 ｜ 規劃天數：33 天')
     expect(text).toContain('預算風格：經典平衡型')
     expect(text).toContain('約 NT$ 41,500')
@@ -119,16 +119,16 @@ describe('budgetCalculator 預算試算與精度防禦測試', () => {
     expect(text).toContain('Buen Camino!')
   })
 
-  it('7. 個人自訂預算 (CUSTOM) 預設內容為空，EMPTY_BUDGET_DETAILS 各欄位皆為 0', () => {
+  it('7. 個人自訂預算 (CUSTOM) 預設內容為空，EMPTY_BUDGET_DETAILS 各欄位皆為 null (未填寫維持空白)', () => {
     const customPreset = PERSONA_PRESETS.CUSTOM
-    expect(customPreset.flightTwd).toBe(0)
-    expect(customPreset.gearTwd).toBe(0)
-    expect(customPreset.insuranceAndSimTwd).toBe(0)
-    expect(customPreset.lodgingEurPerDay).toBe(0)
-    expect(customPreset.foodEurPerDay).toBe(0)
-    expect(customPreset.transitToStartEur).toBe(0)
-    expect(customPreset.transitFromEndEur).toBe(0)
-    expect(customPreset.emergencyFundEur).toBe(0)
+    expect(customPreset.flightTwd).toBeNull()
+    expect(customPreset.gearTwd).toBeNull()
+    expect(customPreset.insuranceAndSimTwd).toBeNull()
+    expect(customPreset.lodgingEurPerDay).toBeNull()
+    expect(customPreset.foodEurPerDay).toBeNull()
+    expect(customPreset.transitToStartEur).toBeNull()
+    expect(customPreset.transitFromEndEur).toBeNull()
+    expect(customPreset.emergencyFundEur).toBeNull()
   })
 
   it('8. EMPTY_BUDGET_DETAILS 在 33 天、35.5 匯率下推導計算總額全面歸零 (0)', () => {

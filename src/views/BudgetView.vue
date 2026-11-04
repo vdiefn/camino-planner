@@ -40,28 +40,32 @@ const sliderPercentage = computed(() => {
   return ((val - min) / (max - min)) * 100
 })
 
-// 輸入框內容對應：若處於自訂型且尚未輸入自訂內容，格子維持為空
+// 取得輸入框當前數值：null 呈現乾淨空白，數字（包含 0）如實呈現數字，兼顧自訂全空與 0 輸入保留
 function getDetailInputValue(key: keyof BudgetDetails): number | string {
-  if (budgetStore.persona === 'CUSTOM' && !budgetStore.hasCustomized) {
-    return ''
-  }
   const val = budgetStore.details[key]
-  return val === 0 ? '' : val
+  return val === null || val === undefined ? '' : val
+}
+
+// 統一輸入事件處理：刪空時儲存 null 保持該格空白，輸入 0 則儲存 0，不污染其他欄位
+function handleInputChange(key: keyof BudgetDetails, event: Event) {
+  const target = event.target as HTMLInputElement
+  if (!target) return
+  const raw = target.value.trim()
+  if (raw === '') {
+    budgetStore.updateDetail(key, null)
+  } else {
+    budgetStore.updateDetail(key, Number(raw))
+  }
 }
 
 /**
- * 數字輸入框聚焦極致優化：
- * 1. 若內容為 '0' 則自動清空，使用者直接鍵入金額，無須手動按 Backspace 刪除 0。
- * 2. 若已有數值，自動全選（select），鍵入新數字時直接覆蓋原內容。
+ * 數字輸入框聚焦優化：
+ * 自動全選（select），使用者直接鍵入新金額即可覆蓋原內容（包含 0），無須手動按 Backspace 刪除。
  */
 function handleInputFocus(event: FocusEvent) {
   const target = event.target as HTMLInputElement
   if (!target) return
-  if (target.value === '0') {
-    target.value = ''
-  } else {
-    target.select()
-  }
+  target.select()
 }
 </script>
 
@@ -241,8 +245,8 @@ function handleInputFocus(event: FocusEvent) {
                 </span>
                 <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
                   {{
-                    budgetStore.hasCustomized && budgetStore.summary.dailyAvgEur > 0
-                      ? `日均約 €${budgetStore.summary.dailyAvgEur.toFixed(0)}`
+                    budgetStore.hasCustomized && budgetStore.customDailyAvgEur > 0
+                      ? `日均約 €${budgetStore.customDailyAvgEur.toFixed(0)}`
                       : PERSONA_LABELS.CUSTOM.tag
                   }}
                 </span>
@@ -350,7 +354,7 @@ function handleInputFocus(event: FocusEvent) {
               :value="budgetStore.eurToTwdRate"
               @focus="handleInputFocus"
               @change="budgetStore.setRate(Number(($event.target as HTMLInputElement).value))"
-              class="w-16 px-2 py-1 text-xs font-mono font-bold text-slate-900 border border-slate-200 rounded-lg bg-slate-50 text-right focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+              class="w-16 px-2 py-1 text-xs font-mono text-slate-900 border border-slate-200 rounded-lg bg-slate-50 text-right focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
             />
             <span class="text-xs text-slate-600">TWD</span>
           </div>
@@ -380,8 +384,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('flightTwd')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('flightTwd', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-3 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('flightTwd', $event)"
+                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
 
@@ -393,8 +397,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('gearTwd')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('gearTwd', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-3 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('gearTwd', $event)"
+                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
 
@@ -406,8 +410,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('insuranceAndSimTwd')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('insuranceAndSimTwd', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-3 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('insuranceAndSimTwd', $event)"
+                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
           </div>
@@ -439,8 +443,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('lodgingEurPerDay')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('lodgingEurPerDay', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('lodgingEurPerDay', $event)"
+                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
               <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.lodgingTotalEur.toFixed(2) }}</span>
             </div>
@@ -453,8 +457,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('foodEurPerDay')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('foodEurPerDay', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('foodEurPerDay', $event)"
+                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
               <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.foodTotalEur.toFixed(2) }}</span>
             </div>
@@ -467,8 +471,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('laundryEurPerDay')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('laundryEurPerDay', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('laundryEurPerDay', $event)"
+                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
               <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.laundryTotalEur.toFixed(2) }}</span>
             </div>
@@ -481,8 +485,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('luggageTransferEurPerDay')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('luggageTransferEurPerDay', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('luggageTransferEurPerDay', $event)"
+                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
               <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.luggageTotalEur.toFixed(2) }}</span>
             </div>
@@ -515,8 +519,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('transitToStartEur')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('transitToStartEur', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-3 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('transitToStartEur', $event)"
+                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
 
@@ -528,8 +532,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('transitFromEndEur')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('transitFromEndEur', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-3 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                @input="handleInputChange('transitFromEndEur', $event)"
+                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
           </div>
@@ -563,8 +567,8 @@ function handleInputFocus(event: FocusEvent) {
                 min="0"
                 :value="getDetailInputValue('emergencyFundEur')"
                 @focus="handleInputFocus"
-                @input="budgetStore.updateDetail('emergencyFundEur', Number(($event.target as HTMLInputElement).value) || 0)"
-                class="w-full px-3 py-1.5 text-xs font-mono font-bold rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden text-right"
+                @input="handleInputChange('emergencyFundEur', $event)"
+                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden text-right"
               />
             </div>
           </div>

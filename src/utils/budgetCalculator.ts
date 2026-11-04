@@ -25,16 +25,16 @@ export const MAX_BUDGET_DAYS = 90
  * 空預算明細（用於個人自訂型預設或還原時之乾淨狀態）
  */
 export const EMPTY_BUDGET_DETAILS: BudgetDetails = {
-  flightTwd: 0,
-  gearTwd: 0,
-  insuranceAndSimTwd: 0,
-  lodgingEurPerDay: 0,
-  foodEurPerDay: 0,
-  laundryEurPerDay: 0,
-  luggageTransferEurPerDay: 0,
-  transitToStartEur: 0,
-  transitFromEndEur: 0,
-  emergencyFundEur: 0,
+  flightTwd: null,
+  gearTwd: null,
+  insuranceAndSimTwd: null,
+  lodgingEurPerDay: null,
+  foodEurPerDay: null,
+  laundryEurPerDay: null,
+  luggageTransferEurPerDay: null,
+  transitToStartEur: null,
+  transitFromEndEur: null,
+  emergencyFundEur: null,
 }
 
 /**
@@ -157,7 +157,7 @@ export function isDetailsMatchingPreset(
   preset: BudgetDetails
 ): boolean {
   const keys = Object.keys(preset) as (keyof BudgetDetails)[]
-  return keys.every((k) => Math.abs(current[k] - preset[k]) < 0.001)
+  return keys.every((k) => Math.abs((current[k] ?? 0) - (preset[k] ?? 0)) < 0.001)
 }
 
 /**

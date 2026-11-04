@@ -7,7 +7,7 @@ import type { BudgetExportMeta } from '@/types/budget'
 export function generateBudgetTextChecklist(meta: BudgetExportMeta): string {
   const lines: string[] = []
 
-  lines.push('【🇪🇸 聖雅各朝聖之路 · 行程花費預算表】')
+  lines.push('【聖雅各朝聖之路 · 行程花費預算表】')
   lines.push(`路線：${meta.routeName} ｜ 規劃天數：${meta.totalDays} 天`)
   lines.push(`預算風格：${meta.personaName} ｜ 參考匯率：1 EUR ≈ ${meta.eurToTwdRate.toFixed(1)} TWD`)
   lines.push('')
@@ -44,10 +44,10 @@ export function generateBudgetTextChecklist(meta: BudgetExportMeta): string {
   lines.push('')
 
   // 總計
-  lines.push('💰【預估總花費（雙幣對照）】')
+  lines.push('【預估總花費（雙幣對照）】')
   lines.push(`  · 歐洲當地開銷：約 €${meta.totalEur.toFixed(2)} (換算約 NT$ ${meta.totalEurToTwd.toLocaleString()})`)
   lines.push(`  · 台灣行前固定：約 NT$ ${meta.totalFixedTwd.toLocaleString()}`)
-  lines.push(`  👉 全程預估總額：約 NT$ ${meta.grandTotalTwd.toLocaleString()}`)
+  lines.push(`  · 全程預估總額：約 NT$ ${meta.grandTotalTwd.toLocaleString()}`)
   lines.push('')
   lines.push('Buen Camino! 祝朝聖之路行前準備順利平安')
 
