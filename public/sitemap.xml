@@ -3,44 +3,48 @@
   <!-- 行程規劃三大路線專屬著陸頁 -->
   <url>
     <loc>https://camino-plan.com/schedule/frances</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/schedule/portugues</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/schedule/portugues/costa</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/schedule/norte</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <!-- 起點交通三大路線專屬著陸頁 -->
   <url>
     <loc>https://camino-plan.com/transport/frances</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/transport/portugues</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/transport/portugues/costa</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/transport/norte</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
-  <!-- 裝備負重與隱私權政策 -->
+  <!-- 裝備負重、花費預算與隱私權政策 -->
   <url>
     <loc>https://camino-plan.com/packing</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/budget</loc>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/privacy</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
 </urlset>

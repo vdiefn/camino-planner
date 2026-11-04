@@ -44,6 +44,16 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/budget',
+      name: 'budget',
+      component: HomeView,
+      meta: {
+        title: '【2026 朝聖之路花費預算】行前機票與徒步路上開銷計算機 | Camino Plan',
+        description:
+          '專為聖雅各朝聖之路設計的免費預算計算機，全雙幣 EUR/TWD 動態試算，涵蓋機票裝備、公私立庇護所住宿、朝聖者套餐伙食與突發應急金。',
+      },
+    },
+    {
       path: '/privacy',
       name: 'privacy',
       component: () => import('@/views/PrivacyView.vue'),

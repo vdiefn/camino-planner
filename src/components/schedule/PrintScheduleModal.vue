@@ -129,48 +129,25 @@ async function handleCopyText() {
   }
 }
 
-// 追蹤當前作用中的沙盒 iframe 與定時器，確保生命週期安全
-let activePrintIframe: HTMLIFrameElement | null = null
-let printFallbackTimer: ReturnType<typeof setTimeout> | null = null
-
-function cleanupIframe(originalTitle?: string) {
-  if (originalTitle) {
-    document.title = originalTitle
-  }
-  if (printFallbackTimer) {
-    clearTimeout(printFallbackTimer)
-    printFallbackTimer = null
-  }
-  if (activePrintIframe) {
-    if (document.body.contains(activePrintIframe)) {
-      document.body.removeChild(activePrintIframe)
-    }
-    activePrintIframe = null
-  }
-}
+let pendingPrintCleanup: (() => void) | null = null
 
 onUnmounted(() => {
   if (copyResetTimer) {
     clearTimeout(copyResetTimer)
     copyResetTimer = null
   }
-  cleanupIframe()
+  if (pendingPrintCleanup) {
+    pendingPrintCleanup()
+    pendingPrintCleanup = null
+  }
 })
 
 /**
- * 真正「所見即所得（WYSIWYG）」的 A4 橫向沙盒列印：
- * 透過隱藏的沙盒 Iframe 進行獨立渲染列印，徹底杜絕主頁面 DOM、導覽列與捲軸穿透，
- * 並透過 useAsyncLock 互斥鎖杜絕連點競態與 Iframe 堆疊。
+ * 原生標準列印實作：
+ * 採用 CSS @media print 樣式隔離，零動態 HTML 注入、零 Iframe，符合最嚴格 CSP 安全標準。
  */
 const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
   async () => {
-    const printArea = document.getElementById('print-schedule-area')
-    if (!printArea) {
-      window.print()
-      emit('close')
-      return
-    }
-
     const todayYear = new Date().getFullYear()
     const todayStr = new Date().toISOString().split('T')[0]
     const printFileName = `${todayYear} 朝聖之路每日行程表 ${todayStr}`
@@ -178,119 +155,30 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
     const originalTitle = document.title
     document.title = printFileName
 
-    // 若先前有未銷毀之沙盒 iframe 先行徹底清理
-    cleanupIframe()
-
-    // 1. 建立隱藏式列印 iframe
-    const iframe = document.createElement('iframe')
-    iframe.setAttribute(
-      'style',
-      'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden;'
-    )
-    document.body.appendChild(iframe)
-    activePrintIframe = iframe
-
-    const iframeDoc = iframe.contentWindow?.document
-    if (!iframeDoc) {
-      cleanupIframe(originalTitle)
-      window.print()
+    const finalizePrint = () => {
+      document.title = originalTitle
+      window.removeEventListener('afterprint', finalizePrint)
+      pendingPrintCleanup = null
       emit('close')
-      return
     }
 
-    // 2. 萃取樣式
-    const styleNodes = Array.from(
-      document.querySelectorAll('style, link[rel="stylesheet"]')
-    )
-    const stylesHtml = styleNodes.map((node) => node.outerHTML).join('\n')
+    pendingPrintCleanup = () => {
+      document.title = originalTitle
+      window.removeEventListener('afterprint', finalizePrint)
+    }
 
-    // 3. 組裝純淨的 A4 橫向 HTML 文件
-    iframeDoc.open()
-    iframeDoc.write(`
-    <!DOCTYPE html>
-    <html lang="zh-TW">
-      <head>
-        <meta charset="UTF-8">
-        <title>${printFileName}</title>
-        ${stylesHtml}
-        <style>
-          @page {
-            size: A4 landscape;
-            margin: 8mm 10mm 8mm 10mm;
-          }
-          *, *::before, *::after {
-            box-sizing: border-box !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-          html, body {
-            background: white !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: visible !important;
-            height: auto !important;
-          }
-          #print-schedule-area {
-            width: 100% !important;
-            max-width: none !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            min-height: calc(210mm - 16mm) !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
-          }
-          table {
-            width: 100% !important;
-            border-collapse: collapse !important;
-          }
-          tr {
-            break-inside: avoid !important;
-            page-break-inside: avoid !important;
-          }
-          th, td {
-            border-bottom: 1px solid #e2e8f0 !important;
-          }
-          .print-footer {
-            margin-top: auto !important;
-            padding-top: 12px !important;
-          }
-        </style>
-      </head>
-      <body>
-        ${printArea.outerHTML}
-      </body>
-    </html>
-  `)
-    iframeDoc.close()
+    window.addEventListener('afterprint', finalizePrint, { once: true })
 
-    // 4. 等候渲染就緒後喚起列印，精確監聽 onafterprint 事件或逾時安全兜底
-    iframe.contentWindow?.focus()
-    await new Promise<void>((resolve) => {
-      setTimeout(() => {
-        const printWindow = iframe.contentWindow
-        let hasResolved = false
+    // 給予瀏覽器微小時間窗更新標題（供另存 PDF 自動帶入檔名）
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    window.print()
 
-        const finalizePrint = () => {
-          if (hasResolved) return
-          hasResolved = true
-          cleanupIframe(originalTitle)
-          resolve()
-        }
-
-        if (printWindow) {
-          printWindow.onafterprint = finalizePrint
-        }
-
-        printWindow?.print()
-        emit('close')
-
-        // 逾時安全兜底（若瀏覽器不觸發 afterprint 或使用者未關閉）
-        printFallbackTimer = setTimeout(finalizePrint, 8000)
-      }, 300)
-    })
+    // 逾時安全兜底：若瀏覽器未觸發 afterprint 則復原標題
+    setTimeout(() => {
+      if (document.title === printFileName) {
+        document.title = originalTitle
+      }
+    }, 5000)
   },
   { cooldownMs: 1000 }
 )
@@ -560,3 +448,70 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
     </Dialog>
   </TransitionRoot>
 </template>
+
+<style>
+@media print {
+  /* 1. 隱藏主視窗與其他非列印目標節點 */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 2. 破除 Headless UI Portal 與滾動容器之視窗裁剪 */
+  [data-headlessui-portal],
+  [data-headlessui-portal] * {
+    transform: none !important;
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  /* 3. 僅讓列印目標區域完全可見並強制滿版置頂 */
+  #print-schedule-area,
+  #print-schedule-area * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  #print-schedule-area {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 8mm 10mm !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+    z-index: 999999 !important;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  #print-schedule-area table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  #print-schedule-area tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  #print-schedule-area th,
+  #print-schedule-area td {
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  #print-schedule-area .print-footer {
+    margin-top: auto !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #e2e8f0 !important;
+  }
+}
+</style>

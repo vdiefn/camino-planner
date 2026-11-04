@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { CalendarDays, Backpack, TrainFront } from 'lucide-vue-next'
+import { CalendarDays, Backpack, TrainFront, Coins } from 'lucide-vue-next'
 import { useScheduleStore } from '@/stores/schedule'
 
-type TabType = 'schedule' | 'packing' | 'transport'
+type TabType = 'schedule' | 'packing' | 'transport' | 'budget'
 
 interface Props {
   currentTab: TabType
@@ -36,7 +36,7 @@ function handleTabClick(tab: TabType) {
 
 <template>
   <nav aria-label="行動端功能導覽" class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md md:hidden print:hidden">
-    <div class="grid h-16 grid-cols-3 items-center">
+    <div class="grid h-16 grid-cols-4 items-center">
       <a
         :href="`/schedule/${currentRouteSlug}`"
         :class="[
@@ -71,6 +71,18 @@ function handleTabClick(tab: TabType) {
       >
         <TrainFront class="h-5 w-5" />
         <span class="text-[11px]">起點交通</span>
+      </a>
+
+      <a
+        href="/budget"
+        :class="[
+          'flex h-full flex-col items-center justify-center gap-1 transition-colors cursor-pointer',
+          currentTab === 'budget' ? 'text-amber-600 font-medium' : 'text-slate-500 hover:text-slate-800',
+        ]"
+        @click.prevent="handleTabClick('budget')"
+      >
+        <Coins class="h-5 w-5" />
+        <span class="text-[11px]">花費預算</span>
       </a>
     </div>
   </nav>
