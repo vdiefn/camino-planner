@@ -4,18 +4,28 @@ import {
   HelpCircle,
   ArrowLeft,
   BookOpen,
-  Footprints,
-  Backpack,
-  Train,
-  Coins,
-  ShieldAlert,
   Sparkles,
   Milestone,
 } from 'lucide-vue-next'
 import type { RouteId } from '@/types/route'
+import { FAQ_CATEGORIES, getAllFaqs, type FaqCategoryId } from '@/data/faqs'
 
 // 主頁籤：'faq' (常見問題) | 'routes' (歷史與路線攻略)
 const activeFaqTab = ref<'faq' | 'routes'>('faq')
+
+// 常見問題之分類篩選狀態（預設為全部 'all'）
+const selectedCategoryId = ref<FaqCategoryId>('all')
+
+// 總題目數量
+const totalFaqCount = computed(() => getAllFaqs().length)
+
+// 依選定之分類計算欲展示之常見問題分組
+const displayedCategories = computed(() => {
+  if (selectedCategoryId.value === 'all') {
+    return FAQ_CATEGORIES
+  }
+  return FAQ_CATEGORIES.filter((category) => category.id === selectedCategoryId.value)
+})
 
 // 路線分頁標籤（法國之路、葡萄牙之路、北方之路）
 const activeRouteTab = ref<RouteId>('frances')
@@ -119,125 +129,19 @@ const routeGuide = computed(() => {
   }
 })
 
-// 常見問題清單（解答內容分段）
-const faqCategories = [
-  {
-    category: '行程規劃與證書規則',
-    icon: Footprints,
-    faqs: [
-      {
-        q: '領取官方「朝聖者證書（La Compostela）」的最低徒步公里數與蓋章規定是什麼？',
-        paragraphs: [
-          '依據聖地牙哥大教堂朝聖者辦公室規定：徒步者必須完成「至少最後連續 100 公里」（例如法國之路 Sarria、葡萄牙中央線 Tui、葡萄牙海岸線 Vigo / Baiona、北方之路 Vilalba）。',
-          '在最後 100 公里區間內，每天必須在朝聖者護照上蓋滿「至少 2 個印章」（起訖點以外的區間每日至少 1 個章，全程蓋 2 個章最保險）。',
-          '沿途的庇護所、教堂、市政廳、咖啡館與餐廳均可蓋章。',
-        ],
-      },
-      {
-        q: '朝聖之路需要事先把 30 多天的住宿全部預訂好嗎？',
-        paragraphs: [
-          '強烈建議「不要一口氣把一個月的住宿全部訂死」。',
-          '徒步途中天候變化、雙腳起水泡或體能起伏隨時可能發生，彈性調整停留點是朝聖的重要樂趣。',
-          '推薦僅預訂出發前 2 至 3 晚（如 SJPP、Roncesvalles）的床位；上路後每日下午再視體能狀況透過網路預訂明後天的私立庇護所，或早起入住先到先得的公立庇護所。',
-        ],
-      },
-      {
-        q: '幾月走朝聖之路最舒適？',
-        paragraphs: [
-          '春末（5～6 月）與初秋（9～10 月）為最理想的黃金季節，氣溫宜人（約 12°C～24°C）、野花盛開或葡萄園豐收，氣候最為舒適。',
-          '盛夏（7～8 月）內陸高原酷熱，常飆破 35°C，建議清晨出發避暑，或改走較涼爽的海岸路線。',
-          '冬季（11～3 月）部分私立庇護所冬休，適合喜愛清靜但耐寒防風裝備充足的資深徒步者。',
-        ],
-      },
-    ],
-  },
-  {
-    category: '裝備打包與負重守則',
-    icon: Backpack,
-    faqs: [
-      {
-        q: '為什麼背包負重建議嚴格控制在「體重的 10%」以內？',
-        paragraphs: [
-          '連續數十天每天行走 20 至 25 公里，背包每多一公斤，足底筋膜、阿基里斯腱與膝關節承受的累積衝擊都會顯著倍增。',
-          '將不含當日飲水與糧食的基礎負重控制在體重 10% 左右（約 6～7.5 公斤），能大幅降低足底發炎、關節積水與嚴重水泡發生的風險。',
-          '「帶得越少，走得越遠」是所有朝聖前輩一致推崇的黃金法則。',
-        ],
-      },
-      {
-        q: '庇護所（Albergue）都有提供被子嗎？需要自己帶睡袋嗎？',
-        paragraphs: [
-          '公立庇護所通常僅提供床墊與拋棄式不織布床單，多數不提供厚被。',
-          '春秋季建議自備極輕量羽絨睡袋（舒適溫度約 5°C～10°C，重量 500g～700g）。',
-          '盛夏則可攜帶絲質或純棉睡袋內套（Liner）搭配隨身保暖薄外套，同時兼具防範床蝨叮咬的效果。',
-        ],
-      },
-      {
-        q: '如果中途背包過重走不動，有行李托運服務嗎？',
-        paragraphs: [
-          '有的。法國之路與葡萄牙之路全線均有極為成熟的行李托運服務（如西班牙郵政 Correos 的 Paq Mochila、Jacotrans 等）。',
-          '每段費用約 €5～€8，只要早上 8:00 前將掛好名牌的背包放在住宿大廳並註明目的地，工作人員就會在下午前安全送達下一座城鎮的落腳處。',
-        ],
-      },
-    ],
-  },
-  {
-    category: '起點交通與返程安排',
-    icon: Train,
-    faqs: [
-      {
-        q: '走法國之路，機票買巴黎還是馬德里進比較方便？',
-        paragraphs: [
-          '若起點設定在 SJPP，「巴黎進、馬德里出」是不走回頭路的熱門開口票（Open-Jaw）走法。',
-          '從巴黎蒙帕納斯車站可搭 TGV 高鐵至 Bayonne，再轉乘 TER 景觀區間車直達 SJPP。',
-          '抵達終點聖地牙哥後，搭乘西班牙國鐵 Renfe 高鐵約 3.5 小時即可直達馬德里市區，轉乘十分流暢。',
-        ],
-      },
-      {
-        q: '在哪裡領取「朝聖者護照（Credencial）」？',
-        paragraphs: [
-          '出發前可向台灣朝聖之路協會提前申辦，或抵達起點時現場直接購買領取（每本工本費約 €2～€3）。',
-          '例如 SJPP 的朝聖者辦公室（Accueil des Pèlerins）每日皆有志工協助登記並發放最新路況；波多則可於主教座堂服務處直接領取。',
-        ],
-      },
-    ],
-  },
-  {
-    category: '開銷預算與消費方式',
-    icon: Coins,
-    faqs: [
-      {
-        q: '走一趟 33 天的朝聖之路，大約需要準備多少預算？',
-        paragraphs: [
-          '以法國之路為例：台灣來回機票約 NT$ 30,000～42,000、行前裝備與申根保險約 NT$ 12,000～20,000。',
-          '徒步期間，庇護所床位（€10～€18/晚）搭配朝聖者套餐與超市自煮，每日生活花費約 €35～€45（約合台幣 NT$ 1,250～1,600/天）。',
-          '整趟 35 天總開銷通常約落在 NT$ 90,000 至 NT$ 125,000 之間，豐儉由人。',
-        ],
-      },
-      {
-        q: '路上可以刷卡嗎？需要帶多少歐元現金？',
-        paragraphs: [
-          '城鎮超市、連鎖餐廳與多數私立庇護所皆支援感應刷卡。',
-          '但公立庇護所、鄉村小店、投幣洗衣機與行李托運通常僅收歐元現金。',
-          '建議身上常備 €200～€350 的小面額紙鈔（€10、€20）與硬幣，並備妥開通跨國提款功能的金融卡應急。',
-        ],
-      },
-    ],
-  },
-]
-
 // 動態注入 FAQPage Schema.org 結構化資料
 onMounted(() => {
   if (typeof document === 'undefined') return
   const existingScript = document.head.querySelector('#faq-schema-jsonld')
   if (existingScript) existingScript.remove()
 
-  const allFaqs = faqCategories.flatMap((c) => c.faqs)
+  const allFaqs = getAllFaqs()
   const schemaData = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: allFaqs.map((faq) => ({
       '@type': 'Question',
-      name: faq.q,
+      name: faq.question,
       acceptedAnswer: {
         '@type': 'Answer',
         text: faq.paragraphs.join(' '),
@@ -261,19 +165,32 @@ onUnmounted(() => {
 
 <template>
   <div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
-    <!-- 頂部精簡導覽列 -->
-    <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-      <div class="mx-auto flex h-14 max-w-4xl items-center justify-between px-4 sm:px-6">
-        <router-link to="/" class="flex items-center gap-2 text-slate-800 transition-colors">
-          <img src="/favicon.svg" alt="Camino Plan 標誌" width="24" height="24" class="w-6 h-6" />
-          <span class="font-bold text-sm sm:text-base">Camino Plan</span>
+    <!-- 頂部獨立標準導覽列（對齊主站統一規格） -->
+    <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+      <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
+        <!-- 品牌標誌 -->
+        <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
+          <img
+            src="/favicon.svg"
+            alt="Camino Plan 標誌"
+            width="36"
+            height="36"
+            class="h-8 w-8 sm:h-9 sm:w-9 shrink-0 drop-shadow-2xs"
+          />
+          <div>
+            <span class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
+              Camino Plan
+            </span>
+          </div>
         </router-link>
+
+        <!-- 右側返回規劃工具按鈕 -->
         <router-link
           to="/"
-          class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 transition-colors"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200/90 text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
         >
           <ArrowLeft class="w-4 h-4" />
-          返回規劃工具
+          <span>返回規劃工具</span>
         </router-link>
       </div>
     </header>
@@ -321,43 +238,95 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <!-- 區塊 A：常見問題 FAQ（單一清爽面板呈現，不刻意包多層大卡片） -->
-        <div v-if="activeFaqTab === 'faq'" class="rounded-2xl bg-white border border-slate-200/80 p-5 sm:p-8 shadow-xs space-y-8">
-          <section
-            v-for="(cat, cIdx) in faqCategories"
-            :key="cat.category"
-            :class="[cIdx > 0 ? 'pt-6 border-t border-slate-100' : '']"
-            class="space-y-3.5"
-          >
-            <!-- 簡潔分類小標題 -->
-            <div class="flex items-center gap-2 text-slate-900">
-              <component :is="cat.icon" class="w-4.5 h-4.5 text-emerald-600 shrink-0" />
-              <h2 class="text-base sm:text-lg font-bold">{{ cat.category }}</h2>
-            </div>
-
-            <!-- 問題列表手風琴 -->
-            <div class="space-y-2.5">
-              <details
-                v-for="(faq, fIdx) in cat.faqs"
-                :key="fIdx"
-                class="group rounded-xl border border-slate-200/70 bg-slate-50/50 p-4 transition-colors hover:border-slate-300 hover:bg-slate-50/80"
+        <!-- 區塊 A：常見問題 FAQ（單一清爽面板呈現，支援分類快速篩選） -->
+        <div v-if="activeFaqTab === 'faq'" class="rounded-2xl bg-white border border-slate-200/80 p-5 sm:p-8 shadow-xs space-y-6">
+          <!-- 分類篩選膠囊標籤列（消滅灰色捲軸、電腦版自動折行、字數精簡） -->
+          <div class="flex items-center gap-1.5 overflow-x-auto sm:flex-wrap pb-1.5 -mx-1 px-1 sm:mx-0 sm:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden border-b border-slate-100">
+            <button
+              type="button"
+              @click="selectedCategoryId = 'all'"
+              class="inline-flex shrink-0 items-center gap-1 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs transition-all cursor-pointer border"
+              :class="[
+                selectedCategoryId === 'all'
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs font-medium'
+                  : 'bg-slate-100/90 text-slate-600 border-slate-200/80 hover:bg-slate-200/80 hover:text-slate-900',
+              ]"
+            >
+              <span>全部</span>
+              <span
+                class="px-1.5 py-0.2 rounded-full text-[10px]"
+                :class="selectedCategoryId === 'all' ? 'bg-emerald-700/90 text-white' : 'bg-slate-200 text-slate-600'"
               >
-                <summary class="flex cursor-pointer list-none items-start justify-between gap-3 text-xs sm:text-sm font-bold text-slate-800 select-none">
-                  <span class="leading-snug">{{ faq.q }}</span>
-                  <span class="mt-0.5 shrink-0 rounded-md bg-white border border-slate-200/80 px-2 py-0.5 text-[10px] font-medium text-slate-500 group-open:bg-emerald-50 group-open:text-emerald-700 group-open:border-emerald-200">
-                    展開
-                  </span>
-                </summary>
+                {{ totalFaqCount }}
+              </span>
+            </button>
 
-                <!-- 解答內容依照重點獨立分段 -->
-                <div class="mt-3 pt-3 border-t border-slate-200/60 text-xs sm:text-sm text-slate-600 leading-relaxed space-y-2">
-                  <p v-for="(para, pIdx) in faq.paragraphs" :key="pIdx">
-                    {{ para }}
-                  </p>
-                </div>
-              </details>
-            </div>
-          </section>
+            <button
+              v-for="cat in FAQ_CATEGORIES"
+              :key="cat.id"
+              type="button"
+              @click="selectedCategoryId = cat.id"
+              class="inline-flex shrink-0 items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs transition-all cursor-pointer border"
+              :class="[
+                selectedCategoryId === cat.id
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs font-medium'
+                  : 'bg-slate-100/90 text-slate-600 border-slate-200/80 hover:bg-slate-200/80 hover:text-slate-900',
+              ]"
+            >
+              <span>{{ cat.name }}</span>
+              <span
+                class="px-1.5 py-0.2 rounded-full text-[10px]"
+                :class="selectedCategoryId === cat.id ? 'bg-emerald-700/90 text-white' : 'bg-slate-200 text-slate-600'"
+              >
+                {{ cat.faqs.length }}
+              </span>
+            </button>
+          </div>
+
+          <!-- 分類問題列表 -->
+          <div class="space-y-8 pt-2">
+            <section
+              v-for="(cat, cIdx) in displayedCategories"
+              :key="cat.id"
+              :class="[cIdx > 0 ? 'pt-6 border-t border-slate-100' : '']"
+              class="space-y-3.5"
+            >
+              <!-- 簡潔分類小標題 -->
+              <div class="flex items-center gap-2 text-slate-900">
+                <component :is="cat.icon" class="w-4.5 h-4.5 text-emerald-600 shrink-0" />
+                <h2 class="text-base sm:text-lg font-bold">{{ cat.name }}</h2>
+                <span
+                  v-if="cat.badge"
+                  class="ml-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800"
+                >
+                  {{ cat.badge }}
+                </span>
+              </div>
+
+              <!-- 問題列表手風琴 -->
+              <div class="space-y-2.5">
+                <details
+                  v-for="faq in cat.faqs"
+                  :key="faq.id"
+                  class="group rounded-xl border border-slate-200/70 bg-slate-50/50 p-4 transition-colors hover:border-slate-300 hover:bg-slate-50/80"
+                >
+                  <summary class="flex cursor-pointer list-none items-start justify-between gap-3 text-xs sm:text-sm font-bold text-slate-800 select-none">
+                    <span class="leading-snug">{{ faq.question }}</span>
+                    <span class="mt-0.5 shrink-0 rounded-md bg-white border border-slate-200/80 px-2 py-0.5 text-[10px] font-medium text-slate-500 group-open:bg-emerald-50 group-open:text-emerald-700 group-open:border-emerald-200">
+                      展開
+                    </span>
+                  </summary>
+
+                  <!-- 解答內容依照重點獨立分段 -->
+                  <div class="mt-3 pt-3 border-t border-slate-200/60 text-xs sm:text-sm text-slate-600 leading-relaxed space-y-2">
+                    <p v-for="(para, pIdx) in faq.paragraphs" :key="pIdx">
+                      {{ para }}
+                    </p>
+                  </div>
+                </details>
+              </div>
+            </section>
+          </div>
         </div>
 
         <!-- 區塊 B：朝聖之路歷史淵源與三大路線深度攻略 -->
