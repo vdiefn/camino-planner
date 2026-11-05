@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Compass, MessageSquarePlus, Share2 } from 'lucide-vue-next'
+import { Compass, MessageSquarePlus, Share2, HelpCircle } from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { useScheduleStore } from '@/stores/schedule'
@@ -41,8 +41,11 @@ function handleTabClick(tab: TabType) {
 <template>
   <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md print:hidden">
     <div class="relative mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
-      <!-- 左側：品牌標誌與標題 -->
-      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+      <!-- 左側：品牌標誌與標題（點選返回首頁） -->
+      <router-link
+        to="/"
+        class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity cursor-pointer"
+      >
         <div class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-amber-500 text-white shadow-xs shrink-0">
           <Compass class="h-5 w-5 sm:h-6 sm:w-6" />
         </div>
@@ -53,7 +56,7 @@ function handleTabClick(tab: TabType) {
             </h1>
           </div>
         </div>
-      </div>
+      </router-link>
 
       <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊，使用動態長尾 <a href> 錨點供搜尋引擎檢索） -->
       <nav aria-label="主要功能導覽" class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1 absolute left-1/2 -translate-x-1/2">
@@ -110,8 +113,17 @@ function handleTabClick(tab: TabType) {
         </a>
       </nav>
 
-      <!-- 右側：功能動作區（跨裝置同步備份 ＆ 許願與回饋） -->
+      <!-- 右側：功能動作區（常見問題 ＆ 跨裝置同步備份 ＆ 許願與回饋） -->
       <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <router-link
+          to="/faq"
+          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+          title="常見問題與實戰攻略"
+          aria-label="常見問題與實戰攻略"
+        >
+          <HelpCircle class="h-5 w-5" />
+        </router-link>
+
         <button
           type="button"
           @click="openSyncModal"

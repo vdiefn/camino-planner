@@ -32,15 +32,25 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
             <ShieldCheck class="w-6 h-6" />
           </div>
           <div>
-            <h1 class="text-xl sm:text-2xl font-bold text-slate-800">隱私權政策</h1>
-            <p class="text-xs text-slate-400 mt-0.5">最後更新日期：2026 年 10 月 26 日</p>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-800">關於本站與隱私權政策</h1>
+            <p class="text-xs text-slate-400 mt-0.5">最後更新日期：2026 年 11 月 5 日</p>
           </div>
         </div>
 
         <div class="mt-6 space-y-6 text-sm text-slate-600 leading-relaxed">
+          <section class="space-y-2 rounded-xl bg-slate-50 p-4 sm:p-5 border border-slate-200/70">
+            <h2 class="text-base font-bold text-slate-800">關於 Camino Plan（開發初衷與服務說明）</h2>
+            <p>
+              <strong>Camino Plan 朝聖者規劃工具</strong> 是專為華語圈「聖雅各朝聖之路（Camino de Santiago）」徒步者打造的原創免費規劃平台。有鑑於繁體中文朝聖資訊分散於各部落格，且徒步途中經常面臨「庇里牛斯山冬令封山改道、體力透支需臨時調整停留城鎮、背包超重導致運動傷害、跨國轉乘資訊複雜」等實務痛點，我們整合了官方地理里程、海拔爬升、公立與私立庇護所清單及跨國鐵路巴士攻略，打造出這套可動態重算的互動規劃系統。
+            </p>
+            <p>
+              本網站收錄法國之路（Camino Francés）、葡萄牙之路（中央線／海岸線／靈性變體）、北方之路（Camino del Norte）與世界盡頭延伸段（Finisterre &amp; Muxía），所有功能完全免費開放且免註冊即可使用。
+            </p>
+          </section>
+
           <section>
             <p>
-              歡迎使用 <strong>Camino Plan 朝聖者智慧規劃工具</strong>（以下簡稱「本網站」）。本網站極度重視您的隱私，特此制定本政策，說明我們在資料隱私、本地儲存與第三方廣告方面的運作方式。
+              同時，本網站極度重視您的個人資料與隱私安全，特此制定以下隱私權政策，說明我們在資料保護、本機儲存與第三方廣告服務方面的運作方式。
             </p>
           </section>
 

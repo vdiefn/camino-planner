@@ -151,7 +151,7 @@ export function generateInitialStages(
   }
 
   const subRouteWaypoints = commonWaypoints.slice(startIndex, endIndex + 1)
-  
+
   // 計算總天數與徒步天數
   const totalDays = Math.max(1, targetDays)
   const safeRestDays = Math.min(Math.max(0, restDays), totalDays - 1)
@@ -425,7 +425,7 @@ export function removeRestDay(
 }
 
 /**
- * 變更某天的結束城鎮：連鎖智慧重算當天與後續所有天數的起訖城鎮與每日里程
+ * 變更某天的結束城鎮：連鎖重算當天與後續所有天數的起訖城鎮與每日里程
  */
 export function updateStageEndWaypoint(
   stages: UserStage[],

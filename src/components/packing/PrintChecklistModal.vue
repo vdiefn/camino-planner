@@ -70,7 +70,7 @@ const groupedCategories = computed(() => {
     .filter((group) => group.items.length > 0)
 })
 
-// 智慧貪婪平衡雙欄分流：確保左右兩欄高度平衡，且各欄內部卡片上下間距永遠固定，消除不自然大空格
+// 貪婪平衡雙欄分流：確保左右兩欄高度平衡，且各欄內部卡片上下間距永遠固定，消除不自然大空格
 const columnGroups = computed(() => {
   const left: typeof groupedCategories.value = []
   const right: typeof groupedCategories.value = []
