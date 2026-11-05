@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Compass, MessageSquarePlus, Share2, HelpCircle } from 'lucide-vue-next'
+import { MessageSquarePlus, Share2, HelpCircle } from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { useScheduleStore } from '@/stores/schedule'
@@ -46,9 +46,13 @@ function handleTabClick(tab: TabType) {
         to="/"
         class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity cursor-pointer"
       >
-        <div class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-amber-500 text-white shadow-xs shrink-0">
-          <Compass class="h-5 w-5 sm:h-6 sm:w-6" />
-        </div>
+        <img
+          src="/favicon.svg"
+          alt="Camino Plan 標誌"
+          width="36"
+          height="36"
+          class="h-8 w-8 sm:h-9 sm:w-9 shrink-0 drop-shadow-2xs"
+        />
         <div>
           <div class="flex items-center gap-1.5 sm:gap-2">
             <h1 class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">

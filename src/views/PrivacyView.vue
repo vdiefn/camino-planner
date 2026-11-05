@@ -4,22 +4,35 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
 
 <template>
   <div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
-    <!-- 頂部精簡導覽列 -->
-    <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-      <div class="mx-auto flex h-14 max-w-4xl items-center justify-between px-4 sm:px-6">
+    <!-- 頂部獨立標準導覽列（對齊主站統一規格） -->
+    <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+      <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
+        <!-- 品牌標誌 -->
         <router-link
           to="/"
-          class="flex items-center gap-2 text-slate-800 transition-colors"
+          class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity"
         >
-          <img src="/favicon.svg" alt="Camino Plan 標誌" width="24" height="24" class="w-6 h-6" />
-          <span class="font-bold text-sm sm:text-base">Camino Plan</span>
+          <img
+            src="/favicon.svg"
+            alt="Camino Plan 標誌"
+            width="36"
+            height="36"
+            class="h-8 w-8 sm:h-9 sm:w-9 shrink-0 drop-shadow-2xs"
+          />
+          <div>
+            <span class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
+              Camino Plan
+            </span>
+          </div>
         </router-link>
+
+        <!-- 右側返回規劃工具按鈕 -->
         <router-link
           to="/"
-          class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 transition-colors"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200/90 text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
         >
           <ArrowLeft class="w-4 h-4" />
-          返回規劃工具
+          <span>返回規劃工具</span>
         </router-link>
       </div>
     </header>

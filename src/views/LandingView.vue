@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import {
-  Compass,
   ArrowRight,
   Footprints,
   Backpack,
@@ -112,10 +111,14 @@ function navigateToRoute(routeId: RouteId) {
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
         <!-- 品牌標誌 -->
-        <router-link to="/" class="flex items-center gap-2.5 shrink-0">
-          <div class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-amber-500 text-white shadow-2xs shrink-0">
-            <Compass class="h-5 w-5 sm:h-6 sm:w-6" />
-          </div>
+        <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
+          <img
+            src="/favicon.svg"
+            alt="Camino Plan 標誌"
+            width="36"
+            height="36"
+            class="h-8 w-8 sm:h-9 sm:w-9 shrink-0 drop-shadow-2xs"
+          />
           <div>
             <span class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
               Camino Plan
@@ -156,21 +159,21 @@ function navigateToRoute(routeId: RouteId) {
             專為華語徒步者打造的免費極簡規劃工具。涵蓋每日里程分段試算、10% 體重負重裝備清單、起點交通決策與雙幣花費預算。免登入即可離線使用與跨裝置同步。
           </p>
 
-          <!-- 動作按鈕群 -->
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <!-- 動作按鈕群（小螢幕與電腦版均維持左右並排） -->
+          <div class="flex flex-row items-center justify-center gap-2 sm:gap-3.5 pt-2 max-w-lg mx-auto">
             <router-link
               :to="`/schedule/${currentRouteId}`"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm sm:text-base font-bold shadow-xs transition-all cursor-pointer"
+              class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-base font-bold shadow-xs transition-all cursor-pointer whitespace-nowrap"
             >
               <span>立即開始規劃行程</span>
-              <ArrowRight class="w-4 h-4" />
+              <ArrowRight class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </router-link>
 
             <router-link
               to="/faq"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-sm sm:text-base font-semibold border border-slate-200 shadow-2xs transition-all cursor-pointer"
+              class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-base font-semibold border border-slate-200 shadow-2xs transition-all cursor-pointer whitespace-nowrap"
             >
-              <HelpCircle class="w-4 h-4 text-emerald-600" />
+              <HelpCircle class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
               <span>朝聖歷史與新手攻略</span>
             </router-link>
           </div>
@@ -239,10 +242,10 @@ function navigateToRoute(routeId: RouteId) {
                 </p>
               </div>
 
-              <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700">
+              <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-700">
                 <span class="text-slate-600 font-mono">{{ route.distanceKm }}</span>
                 <span class="inline-flex items-center gap-1 text-slate-500 group-hover:text-slate-800 transition-colors">
-                  開始排程 <ArrowRight class="w-3.5 h-3.5" />
+                  踏出第一步 <ArrowRight class="w-3.5 h-3.5" />
                 </span>
               </div>
             </div>
@@ -271,9 +274,8 @@ function navigateToRoute(routeId: RouteId) {
                 <component :is="tool.icon" class="w-6 h-6" />
               </div>
               <div class="space-y-1">
-                <div class="text-base font-bold text-slate-900 group-hover:text-amber-600 transition-colors flex items-center gap-1">
+                <div class="text-base font-bold text-slate-900 transition-colors flex items-center gap-1">
                   <span>{{ tool.title }}</span>
-                  <ArrowRight class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
                 <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
                   {{ tool.desc }}
