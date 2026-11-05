@@ -13,7 +13,13 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/schedule/frances',
+      name: 'landing',
+      component: () => import('@/views/LandingView.vue'),
+      meta: {
+        title: '【2026 朝聖之路】行程規劃與裝備試算工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
+        description:
+          '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。',
+      },
     },
     {
       path: '/schedule',
