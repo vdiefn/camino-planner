@@ -286,7 +286,7 @@ function navigateToRoute(routeId: RouteId) {
         </section>
 
         <!-- 4. 底部知識庫導航橫幅 -->
-        <section class="rounded-2xl border border-slate-200 bg-gradient-to-r from-amber-50/70 via-white to-emerald-50/60 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+        <section class="rounded-2xl border border-slate-200 bg-linear-to-r from-amber-50/70 via-white to-emerald-50/60 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
           <div class="space-y-1 text-center sm:text-left">
             <h3 class="text-base sm:text-lg font-bold text-slate-900">
               第一次走朝聖之路？先看看行前避坑指南
