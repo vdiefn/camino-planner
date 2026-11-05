@@ -13,12 +13,19 @@ const props = withDefaults(defineProps<Props>(), {
   isSidebar: false,
 })
 
-// 讀取環境變數中的 Google AdSense Client ID
+// 讀取環境變數中的 Google AdSense Client ID 與啟用開關
 const adClientId = import.meta.env.VITE_GOOGLE_ADSENSE_CLIENT_ID || ''
 const defaultSlotId = import.meta.env.VITE_GOOGLE_ADSENSE_SLOT_ID || props.slotId
+const isAdEnabled = import.meta.env.VITE_GOOGLE_ADSENSE_ENABLED === 'true'
 
-// 若未配置 Client ID 則完全隱形，不佔據任何版面空間
-const isVisible = ref(Boolean(adClientId))
+// 驗證 Slot ID 是否為純數字，防止空白佔位
+const isValidSlot = /^\d+$/.test(defaultSlotId)
+if (import.meta.env.DEV && isAdEnabled && !isValidSlot) {
+  console.warn(`[GoogleAd] 略過渲染：Slot ID "${defaultSlotId}" 非純數字，請填入 AdSense 正式單元 ID。`)
+}
+
+// 審查期間預設隱藏手動佔位框，待 AdSense 核准且具備有效數字 Slot ID 後再啟用，杜絕空白廣告框扣分
+const isVisible = ref(Boolean(isAdEnabled && adClientId && isValidSlot))
 
 onMounted(() => {
   if (!isVisible.value) return

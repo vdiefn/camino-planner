@@ -14,11 +14,19 @@ import { ShieldCheck } from 'lucide-vue-next'
       </div>
       <span class="text-slate-300 hidden sm:inline">|</span>
       <router-link
-        to="/privacy"
-        target="_blank"
+        to="/faq"
         class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
       >
-        隱私權政策
+        常見問題與攻略
+      </router-link>
+      <span class="text-slate-300 hidden sm:inline">|</span>
+      <router-link
+        to="/privacy"
+        target="_blank"
+        rel="noopener"
+        class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
+      >
+        關於本站與隱私權政策
       </router-link>
     </div>
   </footer>

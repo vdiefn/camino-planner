@@ -60,7 +60,7 @@ function handleSubmit() {
     if (!trimmed) {
       resolvedCategory = 'OTHER'
     } else {
-      // 智慧正規化：若使用者手動輸入官方分類標籤或代碼，自動對齊為官方代碼
+      // 正規化：若使用者手動輸入官方分類標籤或代碼，自動對齊為官方代碼
       const matched = officialCategoryOptions.find(
         (opt) => opt.label === trimmed || opt.value.toUpperCase() === trimmed.toUpperCase(),
       )

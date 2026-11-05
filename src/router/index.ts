@@ -54,12 +54,22 @@ const router = createRouter({
       },
     },
     {
+      path: '/faq',
+      name: 'faq',
+      component: () => import('@/views/FaqView.vue'),
+      meta: {
+        title: '【2026 朝聖之路常見問題】路線選擇、預算住宿與裝備避坑全攻略 | Camino Plan',
+        description:
+          '專為聖雅各朝聖之路徒步者整理的問答百科，收錄證書規定、庇護所入住技巧、行李減重與交通銜接全指南。',
+      },
+    },
+    {
       path: '/privacy',
       name: 'privacy',
       component: () => import('@/views/PrivacyView.vue'),
       meta: {
         title: '隱私權政策 | Camino Plan',
-        description: 'Camino Plan 朝聖者智慧規劃工具之本機資料儲存、隱私保護與 Cookie 政策說明。',
+        description: 'Camino Plan 朝聖規劃工具之本機資料儲存、隱私保護與 Cookie 政策說明。',
       },
     },
     {
