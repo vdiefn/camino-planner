@@ -11,6 +11,8 @@ import {
   Clock,
   ShieldCheck,
   CheckCircle2,
+  Sparkles,
+  Compass,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
 import { useScheduleStore } from '@/stores/schedule'
@@ -127,17 +129,31 @@ function navigateToRoute(routeId: RouteId) {
         </router-link>
 
         <!-- 右側快速傳送門 -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 sm:gap-2">
+          <router-link
+            to="/history"
+            class="hidden sm:inline-flex text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors items-center gap-1"
+          >
+            <Sparkles class="w-4 h-4 text-amber-500" />
+            <span>歷史淵源</span>
+          </router-link>
+          <router-link
+            to="/routes"
+            class="hidden sm:inline-flex text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors items-center gap-1"
+          >
+            <Compass class="w-4 h-4 text-amber-500" />
+            <span>路線攻略</span>
+          </router-link>
           <router-link
             to="/faq"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <HelpCircle class="w-4 h-4 text-emerald-600" />
             <span>常見問題</span>
           </router-link>
           <router-link
             :to="`/schedule/${currentRouteId}`"
-            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3.5 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
+            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
           >
             <span>開始規劃</span>
             <ArrowRight class="w-3.5 h-3.5" />
@@ -197,13 +213,22 @@ function navigateToRoute(routeId: RouteId) {
 
         <!-- 2. 三大熱門路線探索專區 -->
         <section class="space-y-6">
-          <div class="text-center sm:text-left space-y-1">
-            <h3 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
-              <span>探索熱門朝聖主路線</span>
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-500">
-              點擊任一路線，即可直接帶入專屬每日里程試算與官方建議分段
-            </p>
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 text-center sm:text-left">
+            <div class="space-y-1">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
+                <span>探索熱門朝聖主路線</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-500">
+                點擊任一路線，即可直接帶入專屬每日里程試算與官方建議分段
+              </p>
+            </div>
+            <router-link
+              to="/routes"
+              class="text-xs font-semibold text-amber-600 hover:text-amber-700 inline-flex items-center justify-center gap-1 transition-colors self-center sm:self-end"
+            >
+              <span>查看路線深度對比攻略</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </router-link>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">

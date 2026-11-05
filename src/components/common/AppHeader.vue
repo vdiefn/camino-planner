@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { MessageSquarePlus, Share2, HelpCircle } from 'lucide-vue-next'
+import { MessageSquarePlus, Share2, HelpCircle, Compass } from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { useScheduleStore } from '@/stores/schedule'
@@ -117,13 +117,22 @@ function handleTabClick(tab: TabType) {
         </a>
       </nav>
 
-      <!-- 右側：功能動作區（常見問題 ＆ 跨裝置同步備份 ＆ 許願與回饋） -->
+      <!-- 右側：功能動作區（路線攻略 ＆ 常見問題 ＆ 跨裝置同步備份 ＆ 許願與回饋） -->
       <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <router-link
+          to="/routes"
+          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+          title="路線攻略與深度評估"
+          aria-label="路線攻略與深度評估"
+        >
+          <Compass class="h-5 w-5" />
+        </router-link>
+
         <router-link
           to="/faq"
           class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
-          title="常見問題與實戰攻略"
-          aria-label="常見問題與實戰攻略"
+          title="常見問題百科"
+          aria-label="常見問題百科"
         >
           <HelpCircle class="h-5 w-5" />
         </router-link>

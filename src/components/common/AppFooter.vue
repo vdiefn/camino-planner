@@ -14,10 +14,24 @@ import { ShieldCheck } from 'lucide-vue-next'
       </div>
       <span class="text-slate-300 hidden sm:inline">|</span>
       <router-link
+        to="/history"
+        class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
+      >
+        歷史淵源
+      </router-link>
+      <span class="text-slate-300 hidden sm:inline">|</span>
+      <router-link
+        to="/routes"
+        class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
+      >
+        路線攻略
+      </router-link>
+      <span class="text-slate-300 hidden sm:inline">|</span>
+      <router-link
         to="/faq"
         class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
       >
-        常見問題與攻略
+        常見問題
       </router-link>
       <span class="text-slate-300 hidden sm:inline">|</span>
       <router-link

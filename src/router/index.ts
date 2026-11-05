@@ -60,11 +60,31 @@ const router = createRouter({
       },
     },
     {
+      path: '/history',
+      name: 'history',
+      component: () => import('@/views/HistoryView.vue'),
+      meta: {
+        title: '聖雅各朝聖之路歷史淵源與文化象徵 | Camino Plan',
+        description:
+          '深度解析聖雅各朝聖之路（Camino de Santiago）千年歷史：繁星原野聖骨發現、第一位朝聖者阿方索二世、中世紀朝聖風潮、扇貝殼與黃色箭頭文化象徵典故。',
+      },
+    },
+    {
+      path: '/routes',
+      name: 'routes',
+      component: () => import('@/views/RoutesGuideView.vue'),
+      meta: {
+        title: '聖雅各三大經典朝聖路線攻略與難度評估 | Camino Plan',
+        description:
+          '法國之路、葡萄牙之路與北方之路深度攻略剖析。提供總里程、徒步天數、地形難度、路面鋪裝材質比例、最佳行走月份與避坑防禦提醒。',
+      },
+    },
+    {
       path: '/faq',
       name: 'faq',
       component: () => import('@/views/FaqView.vue'),
       meta: {
-        title: '常見問題與實戰攻略 (FAQ) | Camino Plan',
+        title: '常見問題百科 (FAQ) | Camino Plan',
         description:
           '專為聖雅各朝聖之路徒步者整理的問答百科，收錄證書規定、庇護所入住技巧、行李減重與交通銜接全指南。',
       },
