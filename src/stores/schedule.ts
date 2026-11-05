@@ -350,7 +350,7 @@ export const useScheduleStore = defineStore(
       currentDraft.value.branchId = newBranchId
       sanitizeDraft(currentDraft.value, currentRouteId.value)
 
-      // 智慧天數聯動：取得新分支之建議天數與航點推導長度
+      //天數聯動：取得新分支之建議天數與航點推導長度
       const newMeta = getEffectiveRouteMetadata(currentRouteId.value, newBranchId)
       if (newMeta?.recommendedDays) {
         currentDraft.value.targetDays = newMeta.recommendedDays

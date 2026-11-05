@@ -98,7 +98,7 @@ onMounted(() => {
 
     <!-- 主內容呈現區 -->
     <main class="flex-1">
-      <!-- 智慧動態排程 -->
+      <!-- 動態排程 -->
       <ScheduleView v-if="currentTab === 'schedule'" />
 
       <!-- 科學化裝備負重試算 -->

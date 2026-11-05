@@ -414,7 +414,7 @@ export interface MultiRouteScheduleState {
 - **自訂裝備更新契約**：Store 擴充 `updateCustomItem(id, item: Partial<PackingItem>)`，支援品名、重量與分類之就地編輯。
 - **A4 所見即所得沙盒列印架構 (WYSIWYG Sandbox Iframe Print)**：
   - 透過動態隱藏 Iframe 隔離主應用程式 DOM 與外圍滾動容器，徹底杜絕多餘頁數溢出與全域導覽列穿透，實現單頁 A4 完美收納。
-  - 採用智慧貪婪高度平衡演算法（Greedy Height Balancing），消除 CSS Grid 列高拉伸造成的垂直空白，確保雙欄瀑布流間距緊湊一致。
+  - 採用貪婪高度平衡演算法（Greedy Height Balancing），消除 CSS Grid 列高拉伸造成的垂直空白，確保雙欄瀑布流間距緊湊一致。
 - **極簡抗破版純文字匯出（樣式 B）**：
   - 針對手機備忘錄、LINE 與 Word 等比例字型環境，移除易折行破版的長橫線符號，以垂直中置點（`·`）緊湊連接品項與重量，杜絕右側參差漂移。
 - **非同步動作互斥防連點（`useAsyncLock`）與剪貼簿可觀測性**：
