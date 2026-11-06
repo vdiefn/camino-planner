@@ -8,8 +8,11 @@ import {
   Bookmark,
   List,
   X,
+  HelpCircle,
+  Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
+import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import {
   HISTORY_CHAPTERS,
   CULTURAL_SYMBOLS,
@@ -41,6 +44,8 @@ const selectedChapterId = ref<string>(NAV_CHAPTERS[0].id)
 const showBackToTop = ref<boolean>(false)
 // 手機端底部目錄抽屜（Drawer / Bottom Sheet）開關狀態
 const isDrawerOpen = ref<boolean>(false)
+// 手機端頂部漢堡選單抽屜開關狀態
+const isMenuDrawerOpen = ref<boolean>(false)
 // 手動平滑跳轉鎖定旗標（避免平滑滾動過程中 Observer 頻繁觸發）
 const isManualScrolling = ref<boolean>(false)
 let fallbackTimer: number | null = null
@@ -220,24 +225,53 @@ onUnmounted(() => {
           </div>
         </router-link>
 
-        <!-- 右側快速傳送門 -->
-        <div class="flex items-center gap-2">
+        <!-- 右側快速傳送門（電腦版完整展示） -->
+        <div class="hidden md:flex items-center gap-1.5 sm:gap-2">
           <router-link
             to="/routes"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Compass class="w-4 h-4 text-amber-500" />
             <span>路線攻略</span>
           </router-link>
           <router-link
+            to="/faq"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <HelpCircle class="w-4 h-4 text-emerald-600" />
+            <span>常見問題</span>
+          </router-link>
+          <router-link
             to="/schedule/frances"
-            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3.5 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
+            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
           >
             <span>開始規劃</span>
             <ChevronRight class="w-3.5 h-3.5" />
           </router-link>
         </div>
+
+        <!-- 右側快速傳送門（手機版：開始規劃按鈕 ＋ 漢堡選單） -->
+        <div class="flex md:hidden items-center gap-1.5">
+          <router-link
+            to="/schedule/frances"
+            class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1"
+          >
+            <span>開始規劃</span>
+            <ChevronRight class="w-3 h-3" />
+          </router-link>
+          <button
+            type="button"
+            @click="isMenuDrawerOpen = true"
+            class="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
+            aria-label="開啟全站選單"
+          >
+            <Menu class="w-5 h-5" />
+          </button>
+        </div>
       </div>
+
+      <!-- 全站手機版漢堡選單抽屜 -->
+      <MobileMenuDrawer v-model:is-open="isMenuDrawerOpen" />
     </header>
 
     <!-- 主體內容區塊（手機端已徹底移除頂部吸頂橫向膠囊條，滿版舒適閱讀） -->
@@ -260,7 +294,7 @@ onUnmounted(() => {
             <div class="p-3 space-y-3">
               <div class="flex items-center gap-2 pb-2 text-slate-400">
                 <Bookmark class="w-4 h-4 text-slate-400" />
-                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                <h2 class="text-md uppercase tracking-wider text-slate-500">
                   章節目錄
                 </h2>
               </div>
@@ -274,16 +308,16 @@ onUnmounted(() => {
                   class="w-full text-left py-1.5 px-1 text-sm transition-colors flex items-start gap-2.5 cursor-pointer bg-transparent border-0"
                   :class="[
                     selectedChapterId === chap.id
-                      ? 'text-slate-900 font-bold'
-                      : 'text-slate-400 hover:text-slate-600 font-normal',
+                      ? 'text-slate-800'
+                      : 'text-slate-400 hover:text-slate-600',
                   ]"
                 >
                   <span
                     class="font-mono text-[11px] shrink-0 transition-colors"
                     :class="[
                       selectedChapterId === chap.id
-                        ? 'text-slate-900 font-bold'
-                        : 'text-slate-400 font-normal',
+                        ? 'text-slate-800'
+                        : 'text-slate-400',
                     ]"
                   >
                     {{ chap.number }}
@@ -292,8 +326,8 @@ onUnmounted(() => {
                     class="line-clamp-2 leading-snug"
                     :class="[
                       selectedChapterId === chap.id
-                        ? 'text-slate-900 font-bold'
-                        : 'text-slate-400 font-normal',
+                        ? 'text-slate-900'
+                        : 'text-slate-400',
                     ]"
                   >
                     {{ chap.title }}

@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import {
-  HelpCircle,
   ArrowLeft,
   Sparkles,
   Compass,
   ShieldAlert,
+  Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
+import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import { FAQ_CATEGORIES, getAllFaqs, type FaqCategoryId } from '@/data/faqs'
+
+// 全站手機版漢堡選單抽屜開關狀態
+const isMenuDrawerOpen = ref(false)
 
 // 常見問題之分類篩選狀態（預設為全部 'all'）
 const selectedCategoryId = ref<FaqCategoryId>('all')
@@ -80,21 +84,21 @@ onUnmounted(() => {
           </div>
         </router-link>
 
-        <!-- 右側快速傳送門 -->
-        <div class="flex items-center gap-2">
+        <!-- 右側快速傳送門（電腦版完整展示） -->
+        <div class="hidden md:flex items-center gap-2">
           <router-link
             to="/history"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
-            <span class="hidden sm:inline">歷史淵源</span>
+            <span>歷史淵源</span>
           </router-link>
           <router-link
             to="/routes"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Compass class="w-4 h-4 text-emerald-600" />
-            <span class="hidden sm:inline">路線攻略</span>
+            <span>路線攻略</span>
           </router-link>
           <router-link
             to="/"
@@ -104,7 +108,29 @@ onUnmounted(() => {
             <span>返回規劃工具</span>
           </router-link>
         </div>
+
+        <!-- 右側快速傳送門（手機版：返回按鈕 ＋ 漢堡選單） -->
+        <div class="flex md:hidden items-center gap-1.5">
+          <router-link
+            to="/"
+            class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200/90 text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
+          >
+            <ArrowLeft class="w-3.5 h-3.5" />
+            <span>返回</span>
+          </router-link>
+          <button
+            type="button"
+            @click="isMenuDrawerOpen = true"
+            class="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
+            aria-label="開啟全站選單"
+          >
+            <Menu class="w-5 h-5" />
+          </button>
+        </div>
       </div>
+
+      <!-- 全站手機版漢堡選單抽屜 -->
+      <MobileMenuDrawer v-model:is-open="isMenuDrawerOpen" />
     </header>
 
     <!-- 主體內容 -->
@@ -112,10 +138,6 @@ onUnmounted(() => {
       <div class="mx-auto max-w-4xl space-y-8">
         <!-- 頁面標題區 -->
         <div class="text-center space-y-3">
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
-            <HelpCircle class="w-3.5 h-3.5" />
-            <span>朝聖行前百科</span>
-          </div>
           <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
             朝聖之路常見問題百科 (FAQ)
           </h1>
@@ -126,8 +148,8 @@ onUnmounted(() => {
 
         <!-- 常見問題 FAQ 面板 -->
         <div class="rounded-2xl bg-white border border-slate-200/80 p-5 sm:p-8 shadow-xs space-y-6">
-          <!-- 分類篩選膠囊標籤列 -->
-          <div class="flex items-center gap-1.5 overflow-x-auto sm:flex-wrap pb-1.5 -mx-1 px-1 sm:mx-0 sm:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden border-b border-slate-100">
+          <!-- 分類篩選膠囊標籤列（手機端自然雙排折行，一覽無遺） -->
+          <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 pb-3 border-b border-slate-100">
             <button
               type="button"
               @click="selectedCategoryId = 'all'"
@@ -213,15 +235,15 @@ onUnmounted(() => {
               </div>
             </section>
           </div>
-        </div>
 
-        <!-- 底部查核提醒 -->
-        <div class="rounded-xl bg-stone-50 border border-stone-200/80 px-4 py-3 flex items-start gap-2.5 text-xs text-slate-600">
-          <ShieldAlert class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-          <p class="leading-relaxed">
-            <strong>資訊查核提示：</strong>
-            本站所整理之問答與法規均定期對齊聖地牙哥朝聖者辦公室及加利西亞官方公告。路上遇天候或營運異動請以現場最新規定為準。祝您一路順風（¡Buen Camino!）。
-          </p>
+          <!-- 底部查核提醒（收納於白色主卡片底部） -->
+          <div class="pt-6 border-t border-slate-100 flex items-start gap-2.5 text-xs text-slate-500 leading-relaxed">
+            <ShieldAlert class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+            <p>
+              <strong class="font-semibold text-slate-700">資訊查核提示：</strong>
+              本站所整理之問答與法規均定期對齊聖地牙哥朝聖者辦公室及加利西亞官方公告。路上遇天候或營運異動請以現場最新規定為準。祝您一路順風（¡Buen Camino!）。
+            </p>
+          </div>
         </div>
       </div>
     </main>

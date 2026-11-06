@@ -2,18 +2,19 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import {
-  Compass,
   ArrowRight,
   Footprints,
   Train,
   AlertTriangle,
   Sparkles,
   ChevronRight,
-  ShieldAlert,
   MapPin,
   CheckCircle2,
+  HelpCircle,
+  Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
+import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import {
   ROUTES_GUIDE_LIST,
   FINISTERRE_GUIDE,
@@ -27,6 +28,8 @@ const scheduleStore = useScheduleStore()
 
 // 當前選取之路線（預設為法國之路 'frances'）
 const activeRouteId = ref<RouteId>('frances')
+// 手機版全站漢堡選單抽屜開關狀態
+const isMenuDrawerOpen = ref(false)
 
 const currentRoute = computed<RouteGuideItem>(() => {
   return (
@@ -56,7 +59,7 @@ function goToTransport(routeId: RouteId) {
   <div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
     <!-- 頂部獨立標準導覽列 -->
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-      <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
+      <div class="mx-auto flex h-full max-w-360 items-center justify-between px-4 sm:px-6">
         <!-- 品牌標誌 -->
         <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
           <img
@@ -73,25 +76,55 @@ function goToTransport(routeId: RouteId) {
           </div>
         </router-link>
 
-        <!-- 右側傳送門 -->
-        <div class="flex items-center gap-2">
+        <!-- 右側傳送門（電腦版完整展示） -->
+        <div class="hidden md:flex items-center gap-1.5 sm:gap-2">
           <router-link
             to="/history"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
             <span>歷史淵源</span>
           </router-link>
+          <router-link
+            to="/faq"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <HelpCircle class="w-4 h-4 text-emerald-600" />
+            <span>常見問題</span>
+          </router-link>
           <button
             type="button"
             @click="startSchedule(activeRouteId)"
-            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3.5 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
             <span>開始規劃</span>
             <ChevronRight class="w-3.5 h-3.5" />
           </button>
         </div>
+
+        <!-- 右側傳送門（手機版：開始規劃 ＋ 漢堡選單） -->
+        <div class="flex md:hidden items-center gap-1.5">
+          <button
+            type="button"
+            @click="startSchedule(activeRouteId)"
+            class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1 cursor-pointer"
+          >
+            <span>開始規劃</span>
+            <ChevronRight class="w-3 h-3" />
+          </button>
+          <button
+            type="button"
+            @click="isMenuDrawerOpen = true"
+            class="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
+            aria-label="開啟全站選單"
+          >
+            <Menu class="w-5 h-5" />
+          </button>
+        </div>
       </div>
+
+      <!-- 全站手機版漢堡選單抽屜 -->
+      <MobileMenuDrawer v-model:is-open="isMenuDrawerOpen" />
     </header>
 
     <!-- 主體內容 -->
@@ -99,10 +132,6 @@ function goToTransport(routeId: RouteId) {
       <div class="mx-auto max-w-4xl space-y-10">
         <!-- 頁面標題區 -->
         <div class="text-center space-y-3">
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
-            <Compass class="w-3.5 h-3.5" />
-            <span>路線評估與實戰對比指南</span>
-          </div>
           <h1 class="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
             聖雅各朝聖之路：三大經典路線深度攻略
           </h1>
@@ -127,21 +156,14 @@ function goToTransport(routeId: RouteId) {
               ]"
             >
               <span>{{ route.name }}</span>
-              <span
-                v-if="route.badge"
-                class="hidden md:inline-block px-2 py-0.5 rounded-full text-[10px] font-medium"
-                :class="activeRouteId === route.id ? 'bg-amber-100 text-amber-800' : 'bg-slate-300 text-slate-700'"
-              >
-                {{ route.badge.split('・')[0] }}
-              </span>
             </button>
           </div>
         </div>
 
-        <!-- 當前選定路線之核心詳情卡片 -->
-        <div class="space-y-6">
+        <!-- 當前選定路線之核心詳情全攻略（整合成單一白色大卡片） -->
+        <article class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs space-y-8">
           <!-- 1. 路線概況總覽與指標面板 -->
-          <article class="rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-8 shadow-xs space-y-6">
+          <div class="space-y-6">
             <!-- 標題與西班牙文名 -->
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-slate-100">
               <div class="space-y-1">
@@ -149,7 +171,10 @@ function goToTransport(routeId: RouteId) {
                   <h2 class="text-xl sm:text-2xl font-bold text-slate-900">
                     {{ currentRoute.name }}
                   </h2>
-                  <span class="text-xs text-amber-700 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full font-medium">
+                  <span
+                    v-if="currentRoute.badge"
+                    class="text-xs text-amber-700 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full font-medium"
+                  >
                     {{ currentRoute.badge }}
                   </span>
                 </div>
@@ -159,54 +184,63 @@ function goToTransport(routeId: RouteId) {
               </div>
 
               <!-- 起點標籤 -->
-              <div class="flex items-center gap-1.5 text-xs text-slate-600 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl self-start sm:self-center">
-                <MapPin class="w-3.5 h-3.5 text-rose-500 shrink-0" />
+              <div class="flex items-center gap-1.5 text-xs text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl self-start sm:self-center">
+                <MapPin class="w-3.5 h-3.5 text-amber-500 shrink-0" />
                 <span>起點：<strong>{{ currentRoute.startTown }}</strong> ({{ currentRoute.startTownCountry }})</span>
               </div>
             </div>
 
-            <!-- 四大關鍵指標方塊 -->
+            <!-- 四大關鍵指標方塊（統一兩行結構） -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              <div class="p-4 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-1">
-                <span class="text-[11px] text-slate-400 font-medium">官方總里程</span>
-                <p class="text-lg sm:text-xl font-bold text-slate-900">
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
+                <span class="text-[12px] text-slate-400">總里程</span>
+                <p class="text-base sm:text-lg font-bold text-slate-900">
                   {{ currentRoute.totalDistanceKm }} <span class="text-xs font-normal text-slate-500">km</span>
                 </p>
-                <span class="text-[10px] text-slate-400 block">{{ currentRoute.dailyDistanceAvgKm }}</span>
               </div>
 
-              <div class="p-4 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-1">
-                <span class="text-[11px] text-slate-400 font-medium">建議徒步天數</span>
-                <p class="text-lg sm:text-xl font-bold text-slate-900">
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
+                <span class="text-[12px] text-slate-400">建議天數</span>
+                <p class="text-base sm:text-lg font-bold text-slate-900">
                   {{ currentRoute.recommendedDays }}
                 </p>
-                <span class="text-[10px] text-slate-400 block">含建議 1~2 天休息日</span>
               </div>
 
-              <div class="p-4 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-1">
-                <span class="text-[11px] text-slate-400 font-medium">體能與地形難度</span>
-                <p class="text-lg sm:text-xl font-bold text-slate-900">
-                  {{ currentRoute.difficulty }}
-                </p>
-                <span class="text-xs text-amber-500 block">
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
+                <span class="text-[12px] text-slate-400">地形難度</span>
+                <p class="text-sm sm:text-base font-bold text-amber-500 tracking-wider">
                   {{ '★'.repeat(currentRoute.difficultyStars) }}{{ '☆'.repeat(5 - currentRoute.difficultyStars) }}
-                </span>
+                </p>
               </div>
 
-              <div class="p-4 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-1">
-                <span class="text-[11px] text-slate-400 font-medium">最佳行走月份</span>
-                <p class="text-xs sm:text-sm font-bold text-slate-800 leading-snug">
-                  {{ currentRoute.bestMonths.split('（')[0] }}
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
+                <span class="text-[12px] text-slate-400">最佳月份</span>
+                <p class="text-base sm:text-lg font-bold text-slate-900 whitespace-nowrap">
+                  {{ currentRoute.bestMonths }}
                 </p>
-                <span class="text-[10px] text-slate-400 block">氣候舒適穩定</span>
               </div>
             </div>
 
             <!-- 路面鋪裝材質長條比例圖 -->
             <div class="space-y-2 pt-2">
-              <div class="flex items-center justify-between text-xs text-slate-500 font-medium">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-sm text-slate-500">
                 <span>路面鋪裝材質分佈比例：</span>
-                <span class="text-[11px] text-slate-400">泥土碎石 {{ currentRoute.pavementRatio.trail }}% / 木棧石板 {{ currentRoute.pavementRatio.boardwalkOrCobble }}% / 柏油硬路 {{ currentRoute.pavementRatio.asphalt }}%</span>
+                <div class="flex items-center gap-2 text-[11px]">
+                  <span class="inline-flex items-center gap-1 font-semibold text-emerald-700">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                    <span>泥土碎石 {{ currentRoute.pavementRatio.trail }}%</span>
+                  </span>
+                  <span class="text-slate-300">/</span>
+                  <span class="inline-flex items-center gap-1 font-semibold text-amber-700">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+                    <span>木棧石板 {{ currentRoute.pavementRatio.boardwalkOrCobble }}%</span>
+                  </span>
+                  <span class="text-slate-300">/</span>
+                  <span class="inline-flex items-center gap-1 font-semibold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-slate-400 shrink-0"></span>
+                    <span>柏油硬路 {{ currentRoute.pavementRatio.asphalt }}%</span>
+                  </span>
+                </div>
               </div>
               <div class="h-3.5 w-full rounded-full bg-slate-100 flex overflow-hidden p-0.5">
                 <div
@@ -225,6 +259,9 @@ function goToTransport(routeId: RouteId) {
                   title="柏油硬路"
                 ></div>
               </div>
+              <p class="text-[12px] text-slate-500 leading-normal">
+                * 數據依據 OpenStreetMap (OSM) 官方路網標籤與 GIS 地形演算法測量統計，僅供參考
+              </p>
             </div>
 
             <!-- 路線摘要與適合對象 -->
@@ -237,41 +274,44 @@ function goToTransport(routeId: RouteId) {
               </div>
             </div>
 
-            <!-- 兩大快捷動作按鈕 -->
-            <div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
+            <!-- 兩大快捷動作按鈕（品牌琥珀黃自適應按鈕） -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
               <button
                 type="button"
                 @click="startSchedule(currentRoute.id)"
-                class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-xs transition-colors cursor-pointer"
+                class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-medium text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
               >
                 <Footprints class="w-4 h-4" />
-                <span>立即開始 {{ currentRoute.name }} 排程計算</span>
-                <ArrowRight class="w-4 h-4" />
+                <span>開始排程規劃</span>
+                <ArrowRight class="w-3.5 h-3.5" />
               </button>
 
               <button
                 type="button"
                 @click="goToTransport(currentRoute.id)"
-                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-sm transition-colors cursor-pointer"
+                class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
               >
-                <Train class="w-4 h-4 text-sky-600" />
+                <Train class="w-4 h-4 text-sky-700" />
                 <span>起點交通轉乘指南</span>
               </button>
             </div>
-          </article>
+          </div>
 
-          <!-- 2. 三大核心特色與實戰亮點 -->
-          <section class="rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-8 shadow-xs space-y-4">
+          <!-- 分隔線 1 -->
+          <hr class="border-t border-slate-200/80" />
+
+          <!-- 2. 三大核心特色與實戰亮點（自然欄位排版，無獨立小卡片） -->
+          <div class="space-y-4">
             <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
               <Sparkles class="w-4.5 h-4.5 text-amber-500" />
               <span>{{ currentRoute.name }} 核心特色與亮點剖析</span>
             </h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-1">
               <div
                 v-for="(feature, fIdx) in currentRoute.keyFeatures"
                 :key="fIdx"
-                class="rounded-xl bg-slate-50/80 border border-slate-200/70 p-4 space-y-2"
+                class="space-y-1.5"
               >
                 <h4 class="font-bold text-sm text-slate-900">
                   {{ feature.title }}
@@ -281,29 +321,35 @@ function goToTransport(routeId: RouteId) {
                 </p>
               </div>
             </div>
-          </section>
+          </div>
 
-          <!-- 3. 實戰避坑注意事項防禦指南 -->
-          <section class="rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-8 shadow-xs space-y-4">
+          <!-- 分隔線 2 -->
+          <hr class="border-t border-slate-200/80" />
+
+          <!-- 3. 行前注意事項（自然條列清單，無任何小卡片框） -->
+          <div class="space-y-3">
             <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-              <ShieldAlert class="w-4.5 h-4.5 text-rose-500" />
-              <span>行走此路線不可不知的避坑防禦提醒</span>
+              <AlertTriangle class="w-4.5 h-4.5 text-amber-500" />
+              <span>行前注意事項</span>
             </h3>
 
-            <div class="space-y-2.5">
-              <div
+            <ul class="space-y-2.5 pt-1">
+              <li
                 v-for="(warning, wIdx) in currentRoute.pitfallWarnings"
                 :key="wIdx"
-                class="flex items-start gap-3 rounded-xl bg-rose-50/60 border border-rose-200/80 p-3.5 text-xs sm:text-sm text-rose-900 leading-relaxed"
+                class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed"
               >
-                <AlertTriangle class="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-2"></span>
                 <span>{{ warning }}</span>
-              </div>
-            </div>
-          </section>
+              </li>
+            </ul>
+          </div>
 
-          <!-- 4. 起點交通銜接指南摘要 -->
-          <section class="rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-8 shadow-xs space-y-3">
+          <!-- 分隔線 3：行前注意事項與交通銜接指南之間的 Separator -->
+          <hr class="border-t border-slate-200/80" />
+
+          <!-- 4. 起點交通銜接指南（乾淨文字，無獨立內層框） -->
+          <div class="space-y-3">
             <div class="flex items-center justify-between">
               <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
                 <Train class="w-4.5 h-4.5 text-sky-600" />
@@ -312,54 +358,57 @@ function goToTransport(routeId: RouteId) {
               <button
                 type="button"
                 @click="goToTransport(currentRoute.id)"
-                class="text-xs font-semibold text-sky-600 hover:text-sky-700 underline underline-offset-2 cursor-pointer"
+                class="text-sm text-slate-600 hover:text-slate-900 underline-offset-2 cursor-pointer"
               >
-                查看完整交通避坑攻略 ➔
+                查看完整交通攻略 ➔
               </button>
             </div>
 
-            <div class="rounded-xl bg-sky-50/70 border border-sky-200/70 p-4 space-y-1.5 text-xs sm:text-sm text-sky-950">
+            <div class="space-y-1 text-xs sm:text-sm text-slate-700 pt-1 leading-relaxed">
               <p>
-                <strong>主要入境中轉城市：</strong>{{ currentRoute.recommendedStartGuide.hubCity }}
+                <strong class="font-semibold text-slate-900">主要入境中轉城市：</strong>{{ currentRoute.recommendedStartGuide.hubCity }}
               </p>
-              <p class="leading-relaxed">
-                <strong>轉乘建議：</strong>{{ currentRoute.recommendedStartGuide.transferTips }}
+              <p>
+                <strong class="font-semibold text-slate-900">轉乘建議：</strong>{{ currentRoute.recommendedStartGuide.transferTips }}
               </p>
             </div>
-          </section>
-        </div>
+          </div>
 
-        <!-- 獨立附屬專案：世界盡頭與穆希亞延伸線 -->
-        <section class="rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-8 shadow-xs space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 pb-3 border-b border-slate-100">
-            <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-amber-600">
-                終點之後的朝聖之路
+          <!-- 分隔線 4 -->
+          <hr class="border-t border-slate-200/80" />
+
+          <!-- 5. 終點之後的朝聖之路：世界盡頭與穆希亞延伸線（統一納入大卡片底部） -->
+          <div class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 pb-2">
+              <div>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-amber-600">
+                  終點之後的朝聖之路
+                </span>
+                <h3 class="text-lg font-bold text-slate-900">
+                  {{ FINISTERRE_GUIDE.name }}
+                </h3>
+              </div>
+              <span class="text-xs text-slate-500 font-medium">
+                {{ FINISTERRE_GUIDE.totalDistanceKm }} ・ {{ FINISTERRE_GUIDE.recommendedDays }}
               </span>
-              <h3 class="text-lg sm:text-xl font-bold text-slate-900">
-                {{ FINISTERRE_GUIDE.name }}
-              </h3>
             </div>
-            <span class="text-xs text-slate-500 font-medium">
-              {{ FINISTERRE_GUIDE.totalDistanceKm }} ・ {{ FINISTERRE_GUIDE.recommendedDays }}
-            </span>
-          </div>
 
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            {{ FINISTERRE_GUIDE.summary }}
-          </p>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {{ FINISTERRE_GUIDE.summary }}
+            </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
-            <div
-              v-for="(hl, hIdx) in FINISTERRE_GUIDE.highlights"
-              :key="hIdx"
-              class="rounded-xl bg-slate-50 border border-slate-200/70 p-3.5 text-xs text-slate-700 leading-relaxed flex items-start gap-2"
-            >
-              <CheckCircle2 class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-              <span>{{ hl }}</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+              <div
+                v-for="(hl, hIdx) in FINISTERRE_GUIDE.highlights"
+                :key="hIdx"
+                class="text-xs sm:text-sm text-slate-700 leading-relaxed flex items-start gap-2"
+              >
+                <CheckCircle2 class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>{{ hl }}</span>
+              </div>
             </div>
           </div>
-        </section>
+        </article>
       </div>
     </main>
 

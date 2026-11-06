@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { MessageSquarePlus, Share2, HelpCircle, Compass } from 'lucide-vue-next'
+import { ref, computed } from 'vue'
+import { MessageSquarePlus, Share2, HelpCircle, Compass, Sparkles, Menu } from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { useScheduleStore } from '@/stores/schedule'
+import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 
 type TabType = 'schedule' | 'packing' | 'transport' | 'budget'
 
@@ -15,6 +16,8 @@ const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'update:currentTab', tab: TabType): void
 }>()
+
+const isMobileMenuOpen = ref(false)
 
 const { openFeedback } = useFeedbackModal()
 const { openSyncModal } = useSyncBackup()
@@ -117,8 +120,17 @@ function handleTabClick(tab: TabType) {
         </a>
       </nav>
 
-      <!-- 右側：功能動作區（路線攻略 ＆ 常見問題 ＆ 跨裝置同步備份 ＆ 許願與回饋） -->
-      <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+      <!-- 右側：電腦版完整功能圖示群組（歷史 ＆ 路線 ＆ FAQ ＆ 同步 ＆ 回饋） -->
+      <div class="hidden md:flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <router-link
+          to="/history"
+          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+          title="歷史淵源與文化"
+          aria-label="歷史淵源與文化"
+        >
+          <Sparkles class="h-5 w-5" />
+        </router-link>
+
         <router-link
           to="/routes"
           class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
@@ -157,6 +169,22 @@ function handleTabClick(tab: TabType) {
           <MessageSquarePlus class="h-5 w-5" />
         </button>
       </div>
+
+      <!-- 右側：手機版漢堡選單觸發按鈕（極致乾淨俐落） -->
+      <div class="flex md:hidden items-center shrink-0">
+        <button
+          type="button"
+          @click="isMobileMenuOpen = true"
+          class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
+          title="開啟選單"
+          aria-label="開啟選單"
+        >
+          <Menu class="h-5.5 w-5.5" />
+        </button>
+      </div>
     </div>
+
+    <!-- 手機版右側滑出抽屜導覽選單 -->
+    <MobileMenuDrawer v-model:is-open="isMobileMenuOpen" />
   </header>
 </template>
