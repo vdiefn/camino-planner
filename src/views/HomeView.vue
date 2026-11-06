@@ -16,7 +16,6 @@ import type { RouteId } from '@/types/route'
 const PackingView = defineAsyncComponent(() => import('@/views/PackingView.vue'))
 const TransportView = defineAsyncComponent(() => import('@/views/TransportView.vue'))
 const BudgetView = defineAsyncComponent(() => import('@/views/BudgetView.vue'))
-const FeedbackModal = defineAsyncComponent(() => import('@/components/common/FeedbackModal.vue'))
 const SyncBackupModal = defineAsyncComponent(() => import('@/components/common/SyncBackupModal.vue'))
 
 const route = useRoute()
@@ -113,9 +112,6 @@ onMounted(() => {
 
     <!-- 全域通用頁尾 -->
     <AppFooter />
-
-    <!-- 全域回饋與許願彈窗 -->
-    <FeedbackModal />
 
     <!-- 全域跨裝置同步與備份彈窗 -->
     <SyncBackupModal />

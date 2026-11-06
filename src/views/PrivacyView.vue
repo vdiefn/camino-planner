@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
+import { ShieldCheck, ArrowLeft, ExternalLink, MessageSquare } from 'lucide-vue-next'
+import { useFeedbackModal } from '@/composables/useFeedbackModal'
+
+const { openFeedback } = useFeedbackModal()
 </script>
 
 <template>
@@ -51,10 +54,10 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
         </div>
 
         <div class="mt-6 space-y-6 text-sm text-slate-600 leading-relaxed">
-          <section class="space-y-2 rounded-xl bg-slate-50 p-4 sm:p-5 border border-slate-200/70">
-            <h2 class="text-base font-bold text-slate-800">關於 Camino Plan（開發初衷與服務說明）</h2>
+          <section class="space-y-2 rounded-xl bg-slate-50 ">
+            <h2 class="text-base font-bold text-slate-800">關於 Camino Plan</h2>
             <p>
-              <strong>Camino Plan 朝聖者規劃工具</strong> 是專為華語圈「聖雅各朝聖之路（Camino de Santiago）」徒步者打造的原創免費規劃平台。有鑑於繁體中文朝聖資訊分散於各部落格，且徒步途中經常面臨「庇里牛斯山冬令封山改道、體力透支需臨時調整停留城鎮、背包超重導致運動傷害、跨國轉乘資訊複雜」等實務痛點，我們整合了官方地理里程、海拔爬升、公立與私立庇護所清單及跨國鐵路巴士攻略，打造出這套可動態重算的互動規劃系統。
+              Camino Plan 朝聖者規劃工具是專為「聖雅各朝聖之路（Camino de Santiago）」徒步者打造的免費規劃平台。有鑑於繁體中文朝聖資訊分散於各部落格，且徒步途中經常面臨「庇里牛斯山冬令封山改道、體力透支需臨時調整停留城鎮、背包超重、跨國轉乘資訊複雜」等問題，我們整合了官方地理里程、公立與私立庇護所清單及跨國鐵路巴士攻略，打造出這套可動態規劃的互動系統。
             </p>
             <p>
               本網站收錄法國之路（Camino Francés）、葡萄牙之路（中央線／海岸線／靈性變體）、北方之路（Camino del Norte）與世界盡頭延伸段（Finisterre &amp; Muxía），所有功能完全免費開放且免註冊即可使用。
@@ -130,11 +133,21 @@ import { ShieldCheck, ArrowLeft, ExternalLink } from 'lucide-vue-next'
             </p>
           </section>
 
-          <section class="space-y-2">
+          <section class="space-y-2.5">
             <h2 class="text-base font-bold text-slate-800">5. 聯絡與意見回饋</h2>
             <p>
-              若您對本隱私權政策有任何疑問，或欲回報任何隱私相關問題，歡迎透過本工具頁首之「意見回饋」系統與開發團隊聯繫。
+              本站極度重視您的寶貴意見。若您對本隱私權政策有任何疑問、發現資訊有誤，或欲提出任何功能建議，歡迎直接透過線上聯絡系統與維護團隊聯繫：
             </p>
+            <div class="pt-1 flex justify-end">
+              <button
+                type="button"
+                @click="openFeedback({ category: 'general' })"
+                class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-700 hover:bg-slate-100 border border-slate-200/80 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
+              >
+                <MessageSquare class="w-4 h-4" />
+                <span>聯絡與回饋</span>
+              </button>
+            </div>
           </section>
         </div>
       </article>
