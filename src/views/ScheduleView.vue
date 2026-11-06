@@ -509,14 +509,14 @@ onUnmounted(() => {
     >
       <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-2 sm:gap-4">
         <!-- 左側：大標題 ＋ 列印行程操作按鈕 -->
-        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
-          <h2
+        <div class="flex items-center justify-between md:justify-start gap-2.5 sm:gap-3 w-full md:w-auto shrink-0">
+          <h1
             class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 shrink-0"
           >
             徒步行程規劃
-          </h2>
+          </h1>
 
-          <!-- 列印行程按鈕（緊鄰標題，操作邏輯明確） -->
+          <!-- 列印行程按鈕（手機端靠最右側對齊，與全站一致） -->
           <button
             type="button"
             @click="isPrintScheduleModalOpen = true"
@@ -524,7 +524,8 @@ onUnmounted(() => {
             title="開啟 A4 橫向紙本行程預覽與列印"
           >
             <Printer class="w-3.5 h-3.5 text-slate-500" />
-            <span class="whitespace-nowrap">列印行程</span>
+            <span class="sm:hidden">列印</span>
+            <span class="hidden sm:inline">列印行程</span>
           </button>
         </div>
 
@@ -555,21 +556,19 @@ onUnmounted(() => {
           </div>
 
           <!-- 總天數 -->
-          <div class="flex items-baseline gap-0.5 whitespace-nowrap">
-            <div class="flex flex-col items-center justify-center">
-              <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總天數</span>
-              <div class="flex items-baseline gap-0.5 whitespace-nowrap">
-                <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
-                  totalTripDays
-                }}</span>
-                <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
-                <span
-                  v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
-                  class="hidden sm:inline text-[10px] text-slate-400 font-mono ml-0.5"
-                >
-                  ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
-                </span>
-              </div>
+          <div class="flex flex-col items-center justify-center">
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總天數</span>
+            <div class="flex items-baseline gap-0.5 whitespace-nowrap">
+              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+                totalTripDays
+              }}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+              <span
+                v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
+                class="hidden sm:inline text-[10px] text-slate-400 font-mono ml-0.5"
+              >
+                ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
+              </span>
             </div>
           </div>
 

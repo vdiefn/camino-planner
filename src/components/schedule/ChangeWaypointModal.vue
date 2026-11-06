@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionRoot, TransitionChild } from '@headlessui/vue'
-import { X, MapPin } from 'lucide-vue-next'
+import { X, MapPin, House } from 'lucide-vue-next'
 import type { UserStage, Waypoint } from '@/types/camino'
 import { useScheduleStore } from '@/stores/schedule'
 import { getFinisterreWaypoints } from '@/data/routes/finisterre'
@@ -19,6 +19,12 @@ const emit = defineEmits<{
 
 const scheduleStore = useScheduleStore()
 const selectedWaypointId = ref<string>('')
+
+// 去除中文地名中夾帶的括號歷史備註（如聖多明哥出生地等），只保留純粹中文地名
+const cleanTownName = (name?: string): string => {
+  if (!name) return ''
+  return name.replace(/\s*[\(（][^\)）]*[\)）]\s*/g, '').trim()
+}
 
 // 每次開啟彈窗或切換目標分段時，重置為當前分段的結束航點
 watch(
@@ -116,9 +122,14 @@ const handleConfirm = () => {
 
               <div class="mt-4 space-y-4">
                 <div class="space-y-2">
-                  <label class="block text-xs font-semibold text-slate-700">
-                    選擇新結束城鎮（出發地：{{ startWaypoint?.localName || startWaypoint?.spanishName }} / {{ startWaypoint?.chineseName }}）
-                  </label>
+                  <div class="space-y-0.5">
+                    <label class="block text-xs font-semibold text-slate-800">
+                      選擇新結束城鎮
+                    </label>
+                    <div class="text-xs text-slate-500">
+                      出發地：{{ startWaypoint?.localName || startWaypoint?.spanishName }} / {{ cleanTownName(startWaypoint?.chineseName) }}
+                    </div>
+                  </div>
                   <div class="max-h-60 overflow-y-auto space-y-1.5 pr-1">
                     <button
                       v-for="wp in candidateWaypoints"
@@ -132,23 +143,29 @@ const handleConfirm = () => {
                           : 'border-slate-200 hover:bg-slate-50 text-slate-700'
                       ]"
                     >
-                      <div class="flex items-center gap-2">
+                      <div class="flex items-center gap-2.5 min-w-0 flex-1 pr-2">
                         <MapPin class="w-4 h-4 text-amber-500 shrink-0" />
-                        <div>
-                          <div class="flex items-center gap-1.5">
-                            <span class="font-medium text-slate-900">{{ wp.localName || wp.spanishName }}</span>
-                            <span
-                              v-if="wp.hasAlbergue"
-                              class="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-700 rounded font-normal"
-                            >
-                              有庇護所
-                            </span>
+                        <div class="min-w-0 flex-1">
+                          <div class="font-medium text-slate-900 text-sm leading-snug">
+                            {{ wp.localName || wp.spanishName }}
                           </div>
-                          <div class="text-xs font-normal text-slate-500">{{ wp.chineseName }}</div>
+                          <div class="text-xs font-normal text-slate-500 truncate mt-0.5">
+                            {{ cleanTownName(wp.chineseName) }}
+                          </div>
                         </div>
                       </div>
-                      <div class="text-xs font-mono text-slate-600">
-                        {{ getStageDistance(wp) }} km
+                      <div class="flex items-center gap-2 shrink-0">
+                        <span
+                          v-if="wp.hasAlbergue"
+                          class="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded font-normal shrink-0"
+                          title="設有朝聖者庇護所"
+                        >
+                          <House class="w-3 h-3 shrink-0" />
+                          <span class="hidden sm:inline">有庇護所</span>
+                        </span>
+                        <span class="text-xs font-mono font-medium text-slate-600 whitespace-nowrap">
+                          {{ getStageDistance(wp) }} km
+                        </span>
                       </div>
                     </button>
                   </div>

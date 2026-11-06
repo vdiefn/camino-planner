@@ -365,12 +365,12 @@ function handleInputFocus(event: FocusEvent) {
       <div class="lg:col-span-7 space-y-4">
         <!-- 一、行前固定支出 (TWD) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
-              <Plane class="w-4 h-4 text-sky-600" />
-              <span>一、行前固定支出 (台灣出發前)</span>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
+            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <Plane class="w-4 h-4 text-sky-600 shrink-0" />
+              <span>一、行前固定支出</span>
             </h3>
-            <span class="text-xs font-bold font-mono text-slate-900">
+            <span class="text-xs font-bold font-mono text-slate-900 shrink-0 whitespace-nowrap">
               小計：NT$ {{ budgetStore.summary.totalFixedTwd.toLocaleString() }}
             </span>
           </div>
@@ -419,16 +419,16 @@ function handleInputFocus(event: FocusEvent) {
 
         <!-- 二、徒步路上每日開銷 (EUR/天) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
-              <Footprints class="w-4 h-4 text-amber-500" />
-              <span>二、徒步路上每日開銷 (連動 {{ budgetStore.effectiveDays }} 天)</span>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
+            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <Footprints class="w-4 h-4 text-amber-500 shrink-0" />
+              <span>二、徒步每日開銷 ( {{ budgetStore.effectiveDays }} 天)</span>
             </h3>
-            <div class="text-right">
+            <div class="text-right shrink-0">
               <span class="text-xs font-bold font-mono text-slate-900 block">
                 €{{ budgetStore.summary.totalDailyWalkingEur.toFixed(2) }}
               </span>
-              <span class="text-[12px] text-slate-400 font-mono">
+              <span class="text-[11px] text-slate-400 font-mono block whitespace-nowrap">
                 約 NT$ {{ budgetStore.summary.totalDailyWalkingTwd.toLocaleString() }}
               </span>
             </div>
@@ -495,16 +495,16 @@ function handleInputFocus(event: FocusEvent) {
 
         <!-- 三、前後跨國接駁交通 (EUR) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
-              <Train class="w-4 h-4 text-indigo-600" />
-              <span>三、前後跨國接駁交通 (歐洲境內鐵公路)</span>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
+            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <Train class="w-4 h-4 text-indigo-600 shrink-0" />
+              <span>三、前後跨國接駁交通</span>
             </h3>
-            <div class="text-right">
+            <div class="text-right shrink-0">
               <span class="text-xs font-bold font-mono text-slate-900 block">
                 €{{ budgetStore.summary.transitTotalEur.toFixed(2) }}
               </span>
-              <span class="text-[12px] text-slate-400 font-mono">
+              <span class="text-[11px] text-slate-400 font-mono block whitespace-nowrap">
                 約 NT$ {{ budgetStore.summary.transitTotalTwd.toLocaleString() }}
               </span>
             </div>
@@ -541,16 +541,16 @@ function handleInputFocus(event: FocusEvent) {
 
         <!-- 四、突發應急金 (EUR) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <h3 class="text-md font-bold text-slate-900 flex items-center gap-2">
-              <ShieldAlert class="w-4 h-4 text-amber-600" />
-              <span>四、突發應急預備金 (非必要不花費)</span>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
+            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <ShieldAlert class="w-4 h-4 text-amber-600 shrink-0" />
+              <span>四、突發應急預備金</span>
             </h3>
-            <div class="text-right">
+            <div class="text-right shrink-0">
               <span class="text-xs font-bold font-mono text-slate-900 block">
                 €{{ budgetStore.summary.emergencyFundEur.toFixed(2) }}
               </span>
-              <span class="text-[12px] text-slate-400 font-mono">
+              <span class="text-[11px] text-slate-400 font-mono block whitespace-nowrap">
                 約 NT$ {{ budgetStore.summary.emergencyFundTwd.toLocaleString() }}
               </span>
             </div>

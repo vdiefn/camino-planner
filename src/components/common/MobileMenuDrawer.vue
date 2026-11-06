@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -13,9 +14,13 @@ import {
   Share2,
   MessageSquarePlus,
   ShieldCheck,
-  ChevronRight,
+  CalendarDays,
+  Backpack,
+  TrainFront,
+  Coins,
 } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
+import { useScheduleStore } from '@/stores/schedule'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 
@@ -29,8 +34,18 @@ const emit = defineEmits<{
 }>()
 
 const router = useRouter()
+const scheduleStore = useScheduleStore()
 const { openFeedback } = useFeedbackModal()
 const { openSyncModal } = useSyncBackup()
+
+const currentRouteSlug = computed(() => {
+  const routeId = scheduleStore.currentRouteId || 'frances'
+  const branchId = scheduleStore.currentDraft?.branchId
+  if (routeId === 'portugues' && branchId === 'costa') {
+    return `${routeId}/${branchId}`
+  }
+  return routeId
+})
 
 function close() {
   emit('update:isOpen', false)
@@ -79,11 +94,12 @@ function handleOpenFeedback() {
           leave-from="translate-x-0"
           leave-to="translate-x-full"
         >
-          <DialogPanel class="relative flex w-full max-w-xs flex-col bg-white pb-6 pt-5 shadow-2xl">
+          <DialogPanel class="relative flex w-full max-w-xs flex-col bg-white pb-4 pt-3 shadow-2xl">
             <!-- 抽屜頂部：品牌與關閉按鈕 -->
-            <div class="flex items-center justify-between px-5 pb-4 border-b border-slate-100">
+            <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
               <div class="flex items-center gap-2.5">
-                <span class="text-base font-bold tracking-tight text-slate-900">Camino Plan 導覽</span>
+                <span class="text-lg font-bold tracking-tight text-slate-800">
+                  Camino Plan 導覽</span>
               </div>
               <button
                 type="button"
@@ -96,90 +112,153 @@ function handleOpenFeedback() {
             </div>
 
             <!-- 選單內容區域 -->
-            <div class="flex-1 overflow-y-auto px-4 py-5 space-y-6">
+            <div class="flex-1 overflow-y-auto px-3 py-4 space-y-4">
+              <!-- 核心規劃工具分組 -->
+              <div class="space-y-1">
+                <span class="p-2 text-sm tracking-wider text-slate-500 uppercase">
+                  核心規劃工具
+                </span>
+                <nav class="py-1">
+                  <!-- 行程規劃 -->
+                  <button
+                    type="button"
+                    @click="navigateTo(`/schedule/${currentRouteSlug}`)"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-amber-50/70 text-slate-700 hover:text-amber-700 transition-colors text-left group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-amber-600 shrink-0">
+                        <CalendarDays class="w-4.5 h-4.5" />
+                      </div>
+                      <div class="text-sm text-slate-800 group-hover:text-amber-700">
+                        行程規劃
+                      </div>
+                    </div>
+                  </button>
+
+                  <!-- 裝備負重 -->
+                  <button
+                    type="button"
+                    @click="navigateTo('/packing')"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-emerald-50/70 text-slate-700 hover:text-emerald-700 transition-colors text-left group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-emerald-600 shrink-0">
+                        <Backpack class="w-4.5 h-4.5" />
+                      </div>
+                      <div class="text-sm text-slate-800 group-hover:text-emerald-700">
+                        裝備清單與負重
+                      </div>
+                    </div>
+                  </button>
+
+                  <!-- 起點交通 -->
+                  <button
+                    type="button"
+                    @click="navigateTo(`/transport/${currentRouteSlug}`)"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-sky-50/70 text-slate-700 hover:text-sky-700 transition-colors text-left group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-sky-600 shrink-0">
+                        <TrainFront class="w-4.5 h-4.5" />
+                      </div>
+                      <div class="text-sm text-slate-800 group-hover:text-sky-700">
+                        起點交通指南
+                      </div>
+                    </div>
+                  </button>
+
+                  <!-- 花費預算 -->
+                  <button
+                    type="button"
+                    @click="navigateTo('/budget')"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-rose-50/70 text-slate-700 hover:text-rose-700 transition-colors text-left group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-rose-600 shrink-0">
+                        <Coins class="w-4.5 h-4.5" />
+                      </div>
+                      <div class="text-sm text-slate-800 group-hover:text-rose-700">
+                        花費預算計算機
+                      </div>
+                    </div>
+                  </button>
+                </nav>
+              </div>
+
               <!-- 第一分組：朝聖深度攻略與百科 -->
-              <div class="space-y-2">
-                <span class="px-2 text-sm tracking-wider text-slate-500 uppercase">
+              <div class="space-y-1 pt-2 border-t border-slate-100">
+                <span class="p-2 text-sm tracking-wider text-slate-500 uppercase">
                   朝聖百科與攻略
                 </span>
-                <nav class="space-y-1">
+                <nav class="py-1">
                   <!-- 歷史淵源 -->
                   <button
                     type="button"
                     @click="navigateTo('/history')"
-                    class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-amber-50/70 text-slate-700 hover:text-amber-700 transition-colors text-left group cursor-pointer"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-amber-50/70 text-slate-700 hover:text-amber-700 transition-colors text-left group cursor-pointer"
                   >
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg text-amber-600 shrink-0">
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-amber-600 shrink-0">
                         <Sparkles class="w-4.5 h-4.5" />
                       </div>
-                      <div>
-                        <div class="text-sm text-slate-800 group-hover:text-amber-700">
-                          歷史淵源與文化
-                        </div>
-                        <div class="text-[12px] text-slate-500">千年傳奇、象徵與證書規範</div>
+                      <div class="text-sm text-slate-800 group-hover:text-amber-700">
+                        歷史淵源與文化
                       </div>
                     </div>
-                    <ChevronRight class="w-4 h-4 text-slate-300 group-hover:text-amber-500 transition-colors" />
                   </button>
 
                   <!-- 路線攻略 -->
                   <button
                     type="button"
                     @click="navigateTo('/routes')"
-                    class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-emerald-50/70 text-slate-700 hover:text-emerald-700 transition-colors text-left group cursor-pointer"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-emerald-50/70 text-slate-700 hover:text-emerald-700 transition-colors text-left group cursor-pointer"
                   >
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg  text-emerald-600 shrink-0">
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-emerald-600 shrink-0">
                         <Compass class="w-4.5 h-4.5" />
                       </div>
-                      <div>
-                        <div class="text-sm text-slate-800 group-hover:text-emerald-700">三大經典路線攻略</div>
-                        <div class="text-[12px] text-slate-500">客觀指標、地形與鋪裝比例</div>
+                      <div class="text-sm text-slate-800 group-hover:text-emerald-700">
+                        三大經典路線攻略
                       </div>
                     </div>
-                    <ChevronRight class="w-4 h-4 text-slate-300 group-hover:text-emerald-500 transition-colors" />
                   </button>
 
                   <!-- 常見問題 -->
                   <button
                     type="button"
                     @click="navigateTo('/faq')"
-                    class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-sky-50/70 text-slate-700 hover:text-sky-700 transition-colors text-left group cursor-pointer"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-sky-50/70 text-slate-700 hover:text-sky-700 transition-colors text-left group cursor-pointer"
                   >
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg  text-sky-600 shrink-0">
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-sky-600 shrink-0">
                         <HelpCircle class="w-4.5 h-4.5" />
                       </div>
-                      <div>
-                        <div class="text-sm text-slate-800 group-hover:text-sky-700">常見問題百科 (FAQ)</div>
-                        <div class="text-[12px] text-slate-500">庇護所、證書印章與行前須知</div>
+                      <div class="text-sm text-slate-800 group-hover:text-sky-700">
+                        常見問題 FAQ
                       </div>
                     </div>
-                    <ChevronRight class="w-4 h-4 text-slate-300 group-hover:text-sky-500 transition-colors" />
                   </button>
                 </nav>
               </div>
 
               <!-- 第二分組：規劃實用工具與支援 -->
-              <div class="space-y-2 pt-2 border-t border-slate-100">
-                <span class="px-2 text-sm tracking-wider text-slate-500 uppercase">
+              <div class="space-y-1 pt-2 border-t border-slate-100">
+                <span class="p-2 text-sm tracking-wider text-slate-500 uppercase">
                   實用工具與支援
                 </span>
-                <nav class="space-y-1">
+                <nav class="py-1">
                   <!-- 跨裝置同步 -->
                   <button
                     type="button"
                     @click="handleOpenSync"
-                    class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-700 transition-colors text-left group cursor-pointer"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-slate-50 text-slate-700 transition-colors text-left group cursor-pointer"
                   >
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg  text-slate-600 shrink-0">
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-slate-600 shrink-0">
                         <Share2 class="w-4.5 h-4.5" />
                       </div>
-                      <div>
-                        <div class="text-sm text-slate-800">跨裝置同步與備份</div>
-                        <div class="text-[12px] text-slate-500">以網址編碼分享或復原排程</div>
+                      <div class="text-sm text-slate-800">
+                        跨裝置同步與備份
                       </div>
                     </div>
                   </button>
@@ -188,15 +267,14 @@ function handleOpenFeedback() {
                   <button
                     type="button"
                     @click="handleOpenFeedback"
-                    class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-700 transition-colors text-left group cursor-pointer"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-slate-50 text-slate-700 transition-colors text-left group cursor-pointer"
                   >
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg  text-slate-600 shrink-0">
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-slate-600 shrink-0">
                         <MessageSquarePlus class="w-4.5 h-4.5" />
                       </div>
-                      <div>
-                        <div class="text-sm text-slate-800">問題回報與功能許願</div>
-                        <div class="text-[12px] text-slate-500">勘誤回報或向開發者提議</div>
+                      <div class="text-sm text-slate-800">
+                        問題回報與功能許願
                       </div>
                     </div>
                   </button>

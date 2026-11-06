@@ -12,11 +12,10 @@ import { useScheduleStore } from '@/stores/schedule'
 import { AVAILABLE_ROUTES } from '@/data/routes'
 import type { RouteId } from '@/types/route'
 
-// 非首屏分頁與全域彈窗採用非同步載入（Code Splitting），降低首屏主執行緒負擔
+// 非首屏分頁採用非同步載入（Code Splitting），降低首屏主執行緒負擔
 const PackingView = defineAsyncComponent(() => import('@/views/PackingView.vue'))
 const TransportView = defineAsyncComponent(() => import('@/views/TransportView.vue'))
 const BudgetView = defineAsyncComponent(() => import('@/views/BudgetView.vue'))
-const SyncBackupModal = defineAsyncComponent(() => import('@/components/common/SyncBackupModal.vue'))
 
 const route = useRoute()
 const router = useRouter()
@@ -110,11 +109,8 @@ onMounted(() => {
       <BudgetView v-else-if="currentTab === 'budget'" />
     </main>
 
-    <!-- 全域通用頁尾 -->
-    <AppFooter />
-
-    <!-- 全域跨裝置同步與備份彈窗 -->
-    <SyncBackupModal />
+    <!-- 全域通用頁尾（手機版預留底部導覽列高度避讓） -->
+    <AppFooter class="pb-20 md:pb-2.5" />
 
     <!-- 全站回到頂部極簡懸浮圓鈕 -->
     <BackToTop />
