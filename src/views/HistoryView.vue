@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import {
   Compass,
   Scroll,
   ChevronRight,
-  ArrowUp,
   Bookmark,
-  List,
-  X,
   HelpCircle,
   Menu,
 } from 'lucide-vue-next'
@@ -40,40 +37,12 @@ const NAV_CHAPTERS = [
 
 // 目前選取詳讀的歷史章節（預設為第一篇）
 const selectedChapterId = ref<string>(NAV_CHAPTERS[0].id)
-// 回到頂端按鈕之顯示狀態
-const showBackToTop = ref<boolean>(false)
-// 手機端底部目錄抽屜（Drawer / Bottom Sheet）開關狀態
-const isDrawerOpen = ref<boolean>(false)
 // 手機端頂部漢堡選單抽屜開關狀態
 const isMenuDrawerOpen = ref<boolean>(false)
 // 手動平滑跳轉鎖定旗標（避免平滑滾動過程中 Observer 頻繁觸發）
 const isManualScrolling = ref<boolean>(false)
 let fallbackTimer: number | null = null
 let activeScrollEndHandler: (() => void) | null = null
-
-// 監聽手機抽屜開關，防止底層背景滾動穿透
-watch(isDrawerOpen, (isOpen) => {
-  if (typeof document === 'undefined') return
-  document.body.style.overflow = isOpen ? 'hidden' : ''
-})
-
-function toggleDrawer() {
-  isDrawerOpen.value = !isDrawerOpen.value
-}
-
-function closeDrawer() {
-  isDrawerOpen.value = false
-}
-
-function handleMobileSelect(id: string) {
-  closeDrawer()
-  selectChapter(id)
-}
-
-// 滾動監聽：控制 Back to Top 按鈕
-function handleWindowScroll() {
-  showBackToTop.value = window.scrollY > 300
-}
 
 // 點擊書籤平滑滾動至目標章節（透過 scrollend 精準解鎖）
 function selectChapter(id: string) {
@@ -123,11 +92,6 @@ function selectChapter(id: string) {
   }
 }
 
-// 一鍵回到頂端
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
 // 建立 IntersectionObserver 實現 Scroll Spy 滾動監聽
 let observer: IntersectionObserver | null = null
 
@@ -158,8 +122,6 @@ onMounted(() => {
   script.text = JSON.stringify(articleSchema).replaceAll('<', '\\u003c')
   document.head.appendChild(script)
 
-  window.addEventListener('scroll', handleWindowScroll, { passive: true })
-
   // 監聽各章節是否進入視窗上半部中央
   observer = new IntersectionObserver(
     (entries) => {
@@ -185,7 +147,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.getElementById('history-article-schema')?.remove()
-  window.removeEventListener('scroll', handleWindowScroll)
   if (activeScrollEndHandler) {
     window.removeEventListener('scrollend', activeScrollEndHandler)
     activeScrollEndHandler = null
@@ -340,12 +301,12 @@ onUnmounted(() => {
           <!-- 右側主文內容列表 -->
           <div class="space-y-8 min-w-0">
             <!-- 歷史六大里程碑（統一整合於單一完整大卡片中） -->
-            <article class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs divide-y divide-slate-100">
+            <article class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs divide-y divide-slate-200">
               <section
                 v-for="(chapter, idx) in HISTORY_CHAPTERS"
                 :id="`chapter-${chapter.id}`"
                 :key="chapter.id"
-                class="first:pt-0 pt-8 first:mt-0 mt-8 space-y-4 scroll-mt-24"
+                class="py-8 first:pt-0 last:pb-0 space-y-4 scroll-mt-24"
               >
                 <!-- 章節標題與年代 -->
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-slate-100/80 pb-3">
@@ -374,10 +335,10 @@ onUnmounted(() => {
                   </p>
                 </div>
 
-                <!-- 經典引言小卡 -->
+                <!-- 經典引言小卡（已移除上方橫線，保留自然間距） -->
                 <div
                   v-if="chapter.quote"
-                  class="mt-3 pt-3 border-t border-slate-100/80 flex items-start gap-2.5 text-xs text-slate-500 italic"
+                  class="mt-3.5 flex items-start gap-2.5 text-xs text-slate-500 italic"
                 >
                   <Scroll class="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                   <div>
@@ -388,101 +349,104 @@ onUnmounted(() => {
               </section>
             </article>
 
-            <!-- 章節 07：朝聖文化的四大核心象徵（維持好看的四個框框網格） -->
-            <article
-              id="chapter-cultural-symbols"
-              class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs space-y-6 scroll-mt-24"
-            >
-              <!-- 章節標頭 -->
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-slate-100/80 pb-3">
-                <div class="space-y-0.5">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-amber-600">
-                    章節 07 ・ 符號與精神傳承
-                  </span>
-                  <h2 class="text-lg sm:text-xl font-bold text-slate-900">
-                    朝聖文化的四大核心象徵
-                  </h2>
-                </div>
-                <span class="text-xs text-slate-400 font-medium self-start sm:self-center">
-                  庇護・指引・印記・極簡
-                </span>
-              </div>
-
-              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                每一件佩掛在背包上的物品、沿途偶遇的每個印記，背後都蘊含著數百年的文化默契與庇護意涵。
-              </p>
-
-              <!-- 四大象徵：四個造型框框排版 -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div
-                  v-for="sym in CULTURAL_SYMBOLS"
-                  :key="sym.id"
-                  class="rounded-xl bg-slate-50/70 border border-slate-200/80 p-5 flex flex-col justify-between space-y-3"
-                >
-                  <div class="space-y-2">
-                    <div class="flex flex-wrap items-baseline justify-between gap-1.5">
-                      <h3 class="text-base font-bold text-slate-900">
-                        {{ sym.name }}
-                      </h3>
-                      <span class="text-xs text-amber-600 italic font-serif">
-                        {{ sym.spanishName }}
-                      </span>
-                    </div>
-                    <div class="text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md inline-block">
-                      象徵意義：{{ sym.meaning }}
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {{ sym.origin }}
-                    </p>
+            <!-- 章節 07 與 08：文化象徵與認證規範（合併於單一卡片） -->
+            <article class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs divide-y divide-slate-200">
+              <!-- 章節 07：朝聖文化的四大核心象徵（維持好看的四個框框網格） -->
+              <section
+                id="chapter-cultural-symbols"
+                class="pb-8 space-y-6 scroll-mt-24"
+              >
+                <!-- 章節標頭 -->
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-slate-100/80 pb-3">
+                  <div class="space-y-0.5">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-amber-600">
+                      章節 07 ・ 符號與精神傳承
+                    </span>
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900">
+                      朝聖文化的四大核心象徵
+                    </h2>
                   </div>
-
-                  <div class="py-2 border-t border-b border-slate-200/60 text-[11px] sm:text-xs text-slate-500 flex items-start gap-1.5">
-                    <span><strong class="text-slate-700 font-semibold">Tips：</strong>{{ sym.practicalTip }}</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- 章節 08：朝聖護照與完步證書規範 -->
-            <article
-              id="chapter-credencial-rules"
-              class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs space-y-5 scroll-mt-24"
-            >
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-slate-100/80 pb-3">
-                <div class="space-y-0.5">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-amber-600">
-                    章節 08 ・ 認證與官方規定
+                  <span class="text-xs text-slate-400 font-medium self-start sm:self-center">
+                    庇護・指引・印記・極簡
                   </span>
-                  <h2 class="text-lg sm:text-xl font-bold text-slate-900">
-                    {{ CREDENCIAL_INFO.title }}
-                  </h2>
                 </div>
-                <span class="text-xs text-slate-400 font-medium self-start sm:self-center">
-                  Credencial & Compostela
-                </span>
-              </div>
 
-              <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                <p v-for="(p, pIdx) in CREDENCIAL_INFO.paragraphs" :key="pIdx">
-                  {{ p }}
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  每一件佩掛在背包上的物品、沿途偶遇的每個印記，背後都蘊含著數百年的文化默契與庇護意涵。
                 </p>
-              </div>
 
-              <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-4 sm:p-5 space-y-2.5">
-                <h3 class="text-xs sm:text-sm font-bold text-slate-800">
-                  官方證書核發必備條件：
-                </h3>
-                <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
-                  <li
-                    v-for="(rule, rIdx) in CREDENCIAL_INFO.rules"
-                    :key="rIdx"
-                    class="flex items-start gap-2"
+                <!-- 四大象徵：四個造型框框排版 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div
+                    v-for="sym in CULTURAL_SYMBOLS"
+                    :key="sym.id"
+                    class="rounded-xl bg-slate-50/70 border border-slate-200/80 p-5 flex flex-col justify-between space-y-3"
                   >
-                    <div class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5"></div>
-                    <span>{{ rule }}</span>
-                  </li>
-                </ul>
-              </div>
+                    <div class="space-y-2">
+                      <div class="flex flex-wrap items-baseline justify-between gap-1.5">
+                        <h3 class="text-base font-bold text-slate-900">
+                          {{ sym.name }}
+                        </h3>
+                        <span class="text-xs text-amber-600 italic font-serif">
+                          {{ sym.spanishName }}
+                        </span>
+                      </div>
+                      <div class="text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md inline-block">
+                        象徵意義：{{ sym.meaning }}
+                      </div>
+                      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        {{ sym.origin }}
+                      </p>
+                    </div>
+
+                    <div class="py-2 border-t border-b border-slate-200/60 text-[11px] sm:text-xs text-slate-500 flex items-start gap-1.5">
+                      <span><strong class="text-slate-700 font-semibold">Tips：</strong>{{ sym.practicalTip }}</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 章節 08：朝聖護照與完步證書規範 -->
+              <section
+                id="chapter-credencial-rules"
+                class="pt-8 space-y-5 scroll-mt-24"
+              >
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-slate-100/80 pb-3">
+                  <div class="space-y-0.5">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-amber-600">
+                      章節 08 ・ 認證與官方規定
+                    </span>
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900">
+                      {{ CREDENCIAL_INFO.title }}
+                    </h2>
+                  </div>
+                  <span class="text-xs text-slate-400 font-medium self-start sm:self-center">
+                    Credencial & Compostela
+                  </span>
+                </div>
+
+                <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p v-for="(p, pIdx) in CREDENCIAL_INFO.paragraphs" :key="pIdx">
+                    {{ p }}
+                  </p>
+                </div>
+
+                <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-4 sm:p-5 space-y-2.5">
+                  <h3 class="text-xs sm:text-sm font-bold text-slate-800">
+                    官方證書核發必備條件：
+                  </h3>
+                  <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+                    <li
+                      v-for="(rule, rIdx) in CREDENCIAL_INFO.rules"
+                      :key="rIdx"
+                      class="flex items-start gap-2"
+                    >
+                      <div class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5"></div>
+                      <span>{{ rule }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </section>
             </article>
 
             <!-- 底部行動召喚卡片 -->
@@ -514,115 +478,6 @@ onUnmounted(() => {
         </div>
       </div>
     </main>
-
-    <!-- 右下角浮動操作按鈕區（回到頂端 + 手機專屬目錄抽屜按鈕） -->
-    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
-      <!-- 回到頂端懸浮圓鈕 -->
-      <Transition
-        enter-active-class="transition-all duration-300 ease-out"
-        enter-from-class="opacity-0 translate-y-3 scale-90"
-        enter-to-class="opacity-100 translate-y-0 scale-100"
-        leave-active-class="transition-all duration-200 ease-in"
-        leave-from-class="opacity-100 translate-y-0 scale-100"
-        leave-to-class="opacity-0 translate-y-3 scale-90"
-      >
-        <button
-          v-if="showBackToTop"
-          type="button"
-          @click="scrollToTop"
-          class="h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center rounded-full border border-slate-200/90 bg-white/95 text-slate-600 shadow-md backdrop-blur-xs transition-all duration-200 hover:border-amber-400 hover:text-amber-600 hover:shadow-lg active:scale-95 cursor-pointer"
-          title="回到頂端"
-          aria-label="回到頂端"
-        >
-          <ArrowUp class="h-4 w-4 sm:h-5 sm:w-5" />
-        </button>
-      </Transition>
-
-      <!-- 手機專屬目錄浮動鈕（只在手機 < 768px 顯示） -->
-      <button
-        type="button"
-        @click="toggleDrawer"
-        class="md:hidden flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-slate-200/90 bg-white/95 text-slate-700 shadow-md backdrop-blur-xs transition-all hover:border-amber-400 hover:text-amber-600 active:scale-95 cursor-pointer text-xs font-semibold"
-        aria-label="開啟章節目錄"
-      >
-        <List class="w-4 h-4 text-amber-500" />
-        <span>目錄</span>
-      </button>
-    </div>
-
-    <!-- 手機端專屬底部目錄抽屜 (Bottom Sheet) -->
-    <Teleport to="body">
-      <!-- 暗色半透明遮罩 -->
-      <Transition
-        enter-active-class="transition-opacity duration-300 ease-out"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="transition-opacity duration-200 ease-in"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
-      >
-        <div
-          v-if="isDrawerOpen"
-          class="md:hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-2xs"
-          @click="closeDrawer"
-        />
-      </Transition>
-
-      <!-- 底部平滑向上滑出面板 -->
-      <Transition
-        enter-active-class="transition-transform duration-300 ease-out"
-        enter-from-class="translate-y-full"
-        enter-to-class="translate-y-0"
-        leave-active-class="transition-transform duration-200 ease-in"
-        leave-from-class="translate-y-0"
-        leave-to-class="translate-y-full"
-      >
-        <div
-          v-if="isDrawerOpen"
-          class="md:hidden fixed bottom-0 left-0 right-0 z-50 max-h-[75vh] flex flex-col rounded-t-3xl bg-white shadow-2xl border-t border-slate-200"
-        >
-          <!-- 頂部標題列與關閉鈕 -->
-          <div class="px-5 pt-3.5 pb-2.5 flex items-center justify-between border-b border-slate-100">
-            <div class="flex items-center gap-2">
-              <Bookmark class="w-4 h-4 text-amber-500" />
-              <h3 class="text-sm font-bold text-slate-900">章節目錄</h3>
-            </div>
-            <button
-              type="button"
-              @click="closeDrawer"
-              class="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
-              aria-label="關閉目錄"
-            >
-              <X class="w-4 h-4" />
-            </button>
-          </div>
-
-          <!-- 01 至 08 直立條列清單 -->
-          <div class="overflow-y-auto p-4 space-y-1">
-            <button
-              v-for="chap in NAV_CHAPTERS"
-              :key="chap.id"
-              type="button"
-              @click="handleMobileSelect(chap.id)"
-              class="w-full text-left py-2.5 px-3 rounded-xl text-xs transition-colors flex items-start gap-3 cursor-pointer"
-              :class="[
-                selectedChapterId === chap.id
-                  ? 'bg-slate-100 text-slate-900 font-bold'
-                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800 font-normal',
-              ]"
-            >
-              <span
-                class="font-mono text-xs shrink-0"
-                :class="selectedChapterId === chap.id ? 'font-bold text-slate-900' : 'text-slate-400 font-normal'"
-              >
-                {{ chap.number }}
-              </span>
-              <span class="leading-relaxed">{{ chap.title }}</span>
-            </button>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
 
     <!-- 全站頁尾 -->
     <AppFooter />

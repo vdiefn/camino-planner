@@ -8,7 +8,7 @@ import {
   ComboboxOption,
   TransitionRoot,
 } from '@headlessui/vue'
-import { ChevronsUpDown, Check, MapPin, X } from 'lucide-vue-next'
+import { ChevronsUpDown, Check, MapPin, X, House } from 'lucide-vue-next'
 import type { Waypoint } from '@/types/camino'
 
 interface Props {
@@ -189,9 +189,11 @@ function handleClearInput() {
                     </span>
                     <span
                       v-if="wp.hasAlbergue"
-                      class="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-700 rounded font-normal shrink-0"
+                      class="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded font-normal shrink-0"
+                      title="設有朝聖者庇護所"
                     >
-                      庇護所
+                      <House class="w-3 h-3 shrink-0" />
+                      <span class="hidden sm:inline">庇護所</span>
                     </span>
                   </div>
                   <div class="text-xs text-slate-500 truncate">
