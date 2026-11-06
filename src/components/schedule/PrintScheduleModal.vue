@@ -14,7 +14,7 @@ import {
   generateScheduleTextChecklist,
   type ScheduleExportMeta,
 } from '@/utils/scheduleExport'
-import { useAsyncLock } from '@/composables/useAsyncLock'
+import { usePrint } from '@/composables/usePrint'
 
 interface Props {
   isOpen: boolean
@@ -60,8 +60,8 @@ const exportMeta = computed<ScheduleExportMeta>(() => {
   const totalElev = props.stages.reduce((sum, s) => sum + s.elevationGainM, 0)
   const lastStage = props.stages[props.stages.length - 1]
 
-  const branchPart = props.branchName ? `（${props.branchName}）` : ''
   const baseName = props.routeMeta?.chineseName || '朝聖之路'
+  const branchPart = props.branchName ? ` · ${props.branchName}` : ''
 
   return {
     routeName: `${baseName}${branchPart}`,
@@ -129,59 +129,27 @@ async function handleCopyText() {
   }
 }
 
-let pendingPrintCleanup: (() => void) | null = null
-
 onUnmounted(() => {
   if (copyResetTimer) {
     clearTimeout(copyResetTimer)
     copyResetTimer = null
   }
-  if (pendingPrintCleanup) {
-    pendingPrintCleanup()
-    pendingPrintCleanup = null
-  }
 })
 
 /**
  * 原生標準列印實作：
- * 採用 CSS @media print 樣式隔離，零動態 HTML 注入、零 Iframe，符合最嚴格 CSP 安全標準。
+ * 採用 usePrint 動態注入橫向 @page 樣式，零動態 HTML 注入、零 Iframe，符合最嚴格 CSP 安全標準。
  */
-const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
-  async () => {
+const { isPrinting, handlePrint } = usePrint({
+  getFileName: () => {
     const todayYear = new Date().getFullYear()
     const todayStr = new Date().toISOString().split('T')[0]
-    const printFileName = `${todayYear} 朝聖之路每日行程表 ${todayStr}`
-
-    const originalTitle = document.title
-    document.title = printFileName
-
-    const finalizePrint = () => {
-      document.title = originalTitle
-      window.removeEventListener('afterprint', finalizePrint)
-      pendingPrintCleanup = null
-      emit('close')
-    }
-
-    pendingPrintCleanup = () => {
-      document.title = originalTitle
-      window.removeEventListener('afterprint', finalizePrint)
-    }
-
-    window.addEventListener('afterprint', finalizePrint, { once: true })
-
-    // 給予瀏覽器微小時間窗更新標題（供另存 PDF 自動帶入檔名）
-    await new Promise((resolve) => setTimeout(resolve, 50))
-    window.print()
-
-    // 逾時安全兜底：若瀏覽器未觸發 afterprint 則復原標題
-    setTimeout(() => {
-      if (document.title === printFileName) {
-        document.title = originalTitle
-      }
-    }, 5000)
+    return `${todayYear} 朝聖之路每日行程表 ${todayStr}`
   },
-  { cooldownMs: 1000 }
-)
+  orientation: 'landscape',
+  pageMargin: '8mm 10mm 12mm 10mm',
+  onAfterPrint: () => emit('close'),
+})
 </script>
 
 <template>
@@ -196,7 +164,7 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs" />
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs print:hidden" />
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
@@ -215,25 +183,25 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
             >
               <!-- 頂部操作列 -->
               <div
-                class="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-200 bg-slate-50 shrink-0"
+                class="flex items-center justify-between px-3 sm:px-6 py-3 border-b border-slate-200 bg-slate-50 shrink-0 gap-2 print:hidden"
               >
-                <div class="flex items-center gap-2.5">
-                  <Printer class="w-5 h-5 text-slate-700" />
+                <div class="flex items-center gap-2">
+                  <Printer class="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 shrink-0" />
                   <div>
-                    <h3 class="text-sm sm:text-base font-bold text-slate-900">
-                      紙本行程預覽與列印
+                    <h3 class="text-xs sm:text-base font-bold text-slate-900 whitespace-nowrap">
+                      行程預覽與列印
                     </h3>
                   </div>
                 </div>
 
                 <!-- 右側動作按鈕群 -->
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1.5 sm:gap-2">
                   <!-- 一鍵複製純文字（三態反饋） -->
                   <button
                     type="button"
                     @click="handleCopyText"
                     :disabled="isCopied || isCopyFailed"
-                    class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium border shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                    class="px-2 sm:px-3 py-1.5 rounded-lg text-xs font-medium border shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1 whitespace-nowrap"
                     :class="[
                       isCopyFailed
                         ? 'border-rose-300 bg-rose-50 text-rose-700'
@@ -249,10 +217,10 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
                     <span>
                       {{
                         isCopyFailed
-                          ? '複製失敗（權限受阻）'
+                          ? '複製失敗'
                           : isCopied
-                            ? '已複製到剪貼簿！'
-                            : '複製純文字'
+                            ? '已複製！'
+                            : '複製文字'
                       }}
                     </span>
                   </button>
@@ -262,22 +230,17 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
                     type="button"
                     :disabled="isPrinting"
                     @click="handlePrint"
-                    class="px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
-                    :class="[
-                      isPrinting
-                        ? 'bg-emerald-400 cursor-not-allowed text-white/90'
-                        : 'bg-emerald-600 hover:bg-emerald-700 text-white',
-                    ]"
+                    class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1 whitespace-nowrap bg-amber-500 hover:bg-amber-600 text-white disabled:opacity-50"
                   >
                     <Printer class="w-3.5 h-3.5" />
-                    <span>{{ isPrinting ? '準備列印中...' : '列印 / 另存 PDF' }}</span>
+                    <span>{{ isPrinting ? '準備中...' : '列印' }}</span>
                   </button>
 
                   <!-- 關閉按鈕 -->
                   <button
                     type="button"
                     @click="emit('close')"
-                    class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer ml-1"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer ml-0.5 sm:ml-1"
                     aria-label="關閉預覽"
                   >
                     <X class="w-5 h-5" />
@@ -286,16 +249,20 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
               </div>
 
               <!-- A4 橫向模擬畫布滾動容器 -->
-              <div class="overflow-y-auto p-4 sm:p-6 bg-slate-100/70">
+              <div class="overflow-y-auto overflow-x-auto p-2 sm:p-6 bg-slate-100/70">
+                <!-- 手機端橫向滑動貼心提示 -->
+                <div class="sm:hidden text-center text-[11px] text-slate-400 mb-1.5 print:hidden">
+                  ⇄ 橫向 A4 紙本，可左右滑動完整檢視
+                </div>
                 <!-- 真正的 A4 橫向紙本內容區塊（所見即所得的核心畫布，最大寬度約 280mm） -->
                 <div
                   id="print-schedule-area"
-                  class="bg-white rounded-xl shadow-xs border border-slate-200 p-6 sm:p-8 max-w-[285mm] mx-auto text-slate-900 flex flex-col min-h-[190mm]"
+                  class="bg-white rounded-xl shadow-xs border border-slate-200 p-5 sm:p-8 min-w-[720px] max-w-[285mm] mx-auto text-slate-900 flex flex-col min-h-[calc(100vh-140px)] sm:min-h-[190mm] print:block print:min-h-0 print:p-0"
                 >
                   <!-- 1. 文件頁首 -->
                   <div class="pb-3 mb-3 shrink-0">
-                    <div class="flex items-start justify-between">
-                      <div>
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0 flex-1">
                         <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
                           聖雅各朝聖之路 · 每日徒步行程
                         </h1>
@@ -451,51 +418,79 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
 
 <style>
 @media print {
-  /* 1. 隱藏主視窗與其他非列印目標節點 */
-  body * {
-    visibility: hidden;
+  /* 1. 隱藏主應用畫面，避免佔據版面空間 */
+  #app {
+    display: none !important;
   }
 
-  /* 2. 破除 Headless UI Portal 與滾動容器之視窗裁剪 */
-  [data-headlessui-portal],
-  [data-headlessui-portal] * {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* 2. 強制隱藏所有操作列、按鈕與非列印元素 */
+  .print\:hidden,
+  [data-headlessui-portal] .print\:hidden,
+  [id^="headlessui-dialog"] .print\:hidden {
+    display: none !important;
+  }
+
+  /* 3. 徹底解開 Headless UI Portal 與 Dialog 容器的所有視窗限制，回歸自然文檔流（排除隱藏元素） */
+  [data-headlessui-portal]:not(.print\:hidden),
+  [id^="headlessui-dialog"]:not(.print\:hidden),
+  [id^="headlessui-dialog"] > div:not(.print\:hidden),
+  [id^="headlessui-dialog"] [role="dialog"]:not(.print\:hidden),
+  div:has(> #print-schedule-area) {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
     transform: none !important;
     overflow: visible !important;
     max-height: none !important;
-  }
-
-  /* 3. 僅讓列印目標區域完全可見並強制滿版置頂 */
-  #print-schedule-area,
-  #print-schedule-area * {
-    visibility: visible !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
   }
 
   #print-schedule-area {
-    position: fixed !important;
-    left: 0 !important;
-    top: 0 !important;
+    position: static !important;
+    display: block !important;
     width: 100% !important;
     max-width: none !important;
     min-height: auto !important;
     margin: 0 !important;
-    padding: 8mm 10mm !important;
+    padding: 0 !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     background: white !important;
-    z-index: 999999 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  @page {
-    size: A4 landscape;
-    margin: 0;
+  /* 5. 文件頂部資訊卡防拆散 */
+  #print-schedule-area > div:first-child {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
+  /* 6. 表格跨頁自動重複表頭與防橫列腰斬 */
   #print-schedule-area table {
     width: 100% !important;
     border-collapse: collapse !important;
+  }
+
+  #print-schedule-area thead {
+    display: table-header-group !important;
   }
 
   #print-schedule-area tr {
@@ -508,10 +503,17 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
     border-bottom: 1px solid #e2e8f0 !important;
   }
 
-  #print-schedule-area .print-footer {
-    margin-top: auto !important;
-    padding-top: 12px !important;
+  /* 7. 頁尾祝福語固定壓在每頁最底端 */
+  #print-schedule-area footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    padding-top: 8px !important;
     border-top: 1px solid #e2e8f0 !important;
+    margin-top: 0 !important;
   }
 }
 </style>

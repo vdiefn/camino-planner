@@ -9,7 +9,7 @@ import {
 import { Printer, Copy, Check, X, AlertCircle } from 'lucide-vue-next'
 import type { BudgetExportMeta } from '@/types/budget'
 import { generateBudgetTextChecklist } from '@/utils/budgetExport'
-import { useAsyncLock } from '@/composables/useAsyncLock'
+import { usePrint } from '@/composables/usePrint'
 
 interface Props {
   isOpen: boolean
@@ -25,16 +25,11 @@ const emit = defineEmits<{
 const isCopied = ref(false)
 const isCopyFailed = ref(false)
 let copyResetTimer: ReturnType<typeof setTimeout> | null = null
-let pendingPrintCleanup: (() => void) | null = null
 
 onUnmounted(() => {
   if (copyResetTimer) {
     clearTimeout(copyResetTimer)
     copyResetTimer = null
-  }
-  if (pendingPrintCleanup) {
-    pendingPrintCleanup()
-    pendingPrintCleanup = null
   }
 })
 
@@ -71,44 +66,18 @@ async function handleCopyText() {
 
 /**
  * 原生標準列印實作：
- * 採用 CSS @media print 樣式隔離，零動態 HTML 注入、零 Iframe，符合最嚴格 CSP 安全標準。
+ * 採用 usePrint 動態注入直向 @page 樣式，零動態 HTML 注入、零 Iframe，符合最嚴格 CSP 安全標準。
  */
-const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
-  async () => {
+const { isPrinting, handlePrint } = usePrint({
+  getFileName: () => {
     const todayYear = new Date().getFullYear()
     const todayStr = new Date().toISOString().split('T')[0]
-    const printFileName = `${todayYear} 朝聖之路預算開銷規劃表 ${todayStr}`
-
-    const originalTitle = document.title
-    document.title = printFileName
-
-    const finalizePrint = () => {
-      document.title = originalTitle
-      window.removeEventListener('afterprint', finalizePrint)
-      pendingPrintCleanup = null
-      emit('close')
-    }
-
-    pendingPrintCleanup = () => {
-      document.title = originalTitle
-      window.removeEventListener('afterprint', finalizePrint)
-    }
-
-    window.addEventListener('afterprint', finalizePrint, { once: true })
-
-    // 給予瀏覽器微小時間窗更新標題（供另存 PDF 自動帶入檔名）
-    await new Promise((resolve) => setTimeout(resolve, 50))
-    window.print()
-
-    // 逾時安全兜底：若瀏覽器未觸發 afterprint 則復原標題
-    setTimeout(() => {
-      if (document.title === printFileName) {
-        document.title = originalTitle
-      }
-    }, 5000)
+    return `${todayYear} 朝聖之路預算開銷規劃表 ${todayStr}`
   },
-  { cooldownMs: 1000 }
-)
+  orientation: 'portrait',
+  pageMargin: '8mm 10mm 12mm 10mm',
+  onAfterPrint: () => emit('close'),
+})
 </script>
 
 <template>
@@ -142,21 +111,22 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
             >
               <!-- 頂部操作工具列 -->
               <div
-                class="px-4 py-3 sm:px-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between shrink-0"
+                class="px-3 sm:px-6 py-2.5 sm:py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between shrink-0 gap-1.5 print:hidden"
               >
-                <div>
-                  <h3 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
-                    <Printer class="w-4 h-4 text-amber-500" />
-                    <span>花費預算表預覽</span>
+                <div class="flex items-center gap-1.5 min-w-0">
+                  <Printer class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 shrink-0" />
+                  <h3 class="text-xs sm:text-base font-bold text-slate-900 truncate">
+                    <span class="sm:hidden">預算表預覽</span>
+                    <span class="hidden sm:inline">花費預算表預覽</span>
                   </h3>
                 </div>
 
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                   <!-- 一鍵複製純文字按鈕 -->
                   <button
                     type="button"
                     @click="handleCopyText"
-                    class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border font-medium transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                    class="text-xs px-2 sm:px-3 py-1.5 rounded-lg border font-medium transition cursor-pointer flex items-center gap-1 shadow-2xs whitespace-nowrap shrink-0"
                     :class="[
                       isCopied
                         ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
@@ -165,10 +135,10 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
                           : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
                     ]"
                   >
-                    <Check v-if="isCopied" class="w-3.5 h-3.5 text-emerald-600" />
-                    <AlertCircle v-else-if="isCopyFailed" class="w-3.5 h-3.5 text-rose-600" />
-                    <Copy v-else class="w-3.5 h-3.5 text-slate-500" />
-                    <span>{{ isCopied ? '已複製到剪貼簿' : isCopyFailed ? '複製失敗' : '複製純文字' }}</span>
+                    <Check v-if="isCopied" class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <AlertCircle v-else-if="isCopyFailed" class="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                    <Copy v-else class="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                    <span>{{ isCopied ? '已複製' : isCopyFailed ? '失敗' : '複製' }}</span>
                   </button>
 
                   <!-- 喚起列印按鈕 -->
@@ -176,73 +146,68 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
                     type="button"
                     @click="handlePrint"
                     :disabled="isPrinting"
-                    class="text-xs px-3 sm:px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition cursor-pointer flex items-center gap-1.5 shadow-xs disabled:opacity-50"
+                    class="text-xs px-2.5 sm:px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition cursor-pointer flex items-center gap-1 shadow-xs disabled:opacity-50 whitespace-nowrap shrink-0"
                   >
-                    <Printer class="w-3.5 h-3.5" />
-                    <span>{{ isPrinting ? '準備列印中...' : '列印預算表' }}</span>
+                    <Printer class="w-3.5 h-3.5 shrink-0" />
+                    <span>{{ isPrinting ? '準備中...' : '列印' }}</span>
                   </button>
 
                   <!-- 關閉按鈕 -->
                   <button
                     type="button"
                     @click="emit('close')"
-                    class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer ml-1"
+                    class="p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer"
                     aria-label="關閉預覽"
                   >
-                    <X class="w-5 h-5" />
+                    <X class="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
                 </div>
               </div>
 
-              <!-- A4 模擬畫布滾動容器 -->
-              <div class="overflow-y-auto p-4 sm:p-6 bg-slate-100/70">
+              <!-- A4 模擬畫布滾動容器（手機版精簡內距） -->
+              <div class="overflow-y-auto p-1.5 sm:p-6 bg-slate-100/70">
                 <div
                   id="print-budget-area"
-                  class="bg-white rounded-xl shadow-xs border border-slate-200 p-6 sm:p-8 max-w-[210mm] mx-auto text-slate-900 flex flex-col min-h-[280mm]"
+                  class="bg-white rounded-xl shadow-xs border border-slate-200 p-3.5 sm:p-8 max-w-[210mm] mx-auto text-slate-900 flex flex-col min-h-[calc(100vh-140px)] sm:min-h-[280mm] print:block print:min-h-0 print:p-0"
                 >
                   <!-- 1. 文件頁首 -->
-                  <div class="pb-3 mb-4 shrink-0 border-b border-slate-200">
-                    <div class="flex items-start justify-between">
-                      <div>
-                        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+                  <div class="pb-2.5 sm:pb-3 mb-3 sm:mb-4 shrink-0 border-b border-slate-200">
+                    <div class="flex items-start justify-between gap-2">
+                      <div class="min-w-0 flex-1">
+                        <h1 class="text-base sm:text-2xl font-bold tracking-tight text-slate-900">
                           聖雅各朝聖之路 · 行程花費預算表
                         </h1>
-                        <p class="text-xs text-slate-500 mt-1 font-medium">
-                          路線：{{ props.meta.routeName }} ｜ 規劃天數：{{ props.meta.totalDays }} 天 ｜ 預算風格：{{ props.meta.personaName }}
+                        <p class="text-[11px] sm:text-xs text-slate-500 mt-1 font-medium leading-relaxed">
+                          路線：{{ props.meta.routeName }} ｜ 天數：{{ props.meta.totalDays }} 天 ｜ 風格：{{ props.meta.personaName }}
                         </p>
-                      </div>
-
-                      <div class="text-right shrink-0">
-                        <div class="text-xs font-mono text-slate-600">
-                          參考匯率：1 EUR ≈ {{ props.meta.eurToTwdRate.toFixed(1) }} TWD
+                        <div class="flex items-center justify-between mt-1 text-[10px] sm:text-xs text-slate-400 font-mono">
+                          <span>參考匯率：1 EUR ≈ {{ props.meta.eurToTwdRate.toFixed(1) }} TWD</span>
+                          <span>製表：{{ props.meta.createdAt }}</span>
                         </div>
-                        <p class="text-[10px] text-slate-400 mt-1">
-                          製表日期：{{ props.meta.createdAt }}
-                        </p>
                       </div>
                     </div>
 
-                    <!-- 2. 三大核心指標看板 -->
-                    <div class="mt-4 grid grid-cols-3 gap-3">
-                      <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
-                        <span class="block text-[11px] text-slate-500 mb-0.5">預估總預算 (含機票)</span>
-                        <div class="text-base text-slate-900 font-mono">
+                    <!-- 2. 三大核心指標看板（防折字排版） -->
+                    <div class="mt-2.5 sm:mt-4 grid grid-cols-3 gap-1.5 sm:gap-3">
+                      <div class="p-1.5 sm:p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
+                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">預估總預算</span>
+                        <div class="text-xs sm:text-base text-slate-900 font-mono font-bold whitespace-nowrap">
                           NT$ {{ props.meta.grandTotalTwd.toLocaleString() }}
                         </div>
                       </div>
 
-                      <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
-                        <span class="block text-[11px] text-slate-500 mb-0.5">歐洲當地總開銷</span>
-                        <div class="text-base text-slate-900 font-mono">
+                      <div class="p-1.5 sm:p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
+                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">歐洲總開銷</span>
+                        <div class="text-xs sm:text-base text-slate-900 font-mono font-bold whitespace-nowrap">
                           €{{ props.meta.totalEur.toFixed(2) }}
                         </div>
                       </div>
 
-                      <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
-                        <span class="block text-[11px] text-slate-500 mb-0.5">路上日均開銷 (步行日)</span>
-                        <div class="text-base text-slate-900 font-mono">
+                      <div class="p-1.5 sm:p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
+                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">日均開銷</span>
+                        <div class="text-xs sm:text-base text-slate-900 font-mono font-bold whitespace-nowrap">
                           €{{ props.meta.dailyAvgEur.toFixed(2) }}
-                          <span class="text-xs font-normal text-slate-500">/天</span>
+                          <span class="text-[10px] sm:text-xs font-normal text-slate-500">/天</span>
                         </div>
                       </div>
                     </div>
@@ -370,7 +335,7 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
 
                   <!-- 4. 頁尾祝福語 -->
                   <footer
-                    class="mt-auto pt-3 border-t border-slate-200 text-[10px] text-slate-400 flex items-center justify-between shrink-0"
+                    class="print-footer mt-auto pt-3 border-t border-slate-200 text-[10px] text-slate-400 flex items-center justify-between shrink-0"
                   >
                     <span>聖雅各朝聖之路 · 行前花費規劃</span>
                     <span>Buen Camino! 祝朝聖之路平安順心</span>
@@ -387,46 +352,69 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
 
 <style>
 @media print {
-  /* 1. 隱藏主應用與其他非列印目標節點 */
-  body * {
-    visibility: hidden;
+  /* 1. 隱藏主應用畫面，避免佔據版面空間 */
+  #app {
+    display: none !important;
   }
 
-  /* 2. 破除 Headless UI Portal 與滾動容器之視窗裁剪 */
-  [data-headlessui-portal],
-  [data-headlessui-portal] * {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* 2. 強制隱藏所有操作列、按鈕與非列印元素 */
+  .print\:hidden,
+  [data-headlessui-portal] .print\:hidden,
+  [id^="headlessui-dialog"] .print\:hidden {
+    display: none !important;
+  }
+
+  /* 3. 徹底解開 Headless UI Portal 與 Dialog 容器的所有視窗限制，回歸自然文檔流（排除隱藏元素） */
+  [data-headlessui-portal]:not(.print\:hidden),
+  [id^="headlessui-dialog"]:not(.print\:hidden),
+  [id^="headlessui-dialog"] > div:not(.print\:hidden),
+  [id^="headlessui-dialog"] [role="dialog"]:not(.print\:hidden),
+  div:has(> #print-budget-area) {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
     transform: none !important;
     overflow: visible !important;
     max-height: none !important;
-  }
-
-  /* 3. 僅讓列印目標區域完全可見並強制滿版置頂 */
-  #print-budget-area,
-  #print-budget-area * {
-    visibility: visible !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
   }
 
   #print-budget-area {
-    position: fixed !important;
-    left: 0 !important;
-    top: 0 !important;
+    position: static !important;
+    display: block !important;
     width: 100% !important;
     max-width: none !important;
     min-height: auto !important;
     margin: 0 !important;
-    padding: 10mm 12mm !important;
+    padding: 0 !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     background: white !important;
-    z-index: 999999 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  @page {
-    size: A4 portrait;
-    margin: 0;
+  /* 5. 文件頂部資訊卡防拆散 */
+  #print-budget-area > div:first-child {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   #print-budget-area table {
@@ -442,6 +430,19 @@ const { isBusy: isPrinting, execute: handlePrint } = useAsyncLock(
   #print-budget-area th,
   #print-budget-area td {
     border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  /* 6. 頁尾祝福語固定壓在每頁最底端 */
+  #print-budget-area .print-footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    padding-top: 8px !important;
+    border-top: 1px solid #e2e8f0 !important;
+    margin-top: 0 !important;
   }
 }
 </style>
