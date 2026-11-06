@@ -100,7 +100,13 @@ const router = createRouter({
     },
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/schedule/frances',
+      name: 'not-found',
+      component: () => import('@/views/NotFoundView.vue'),
+      meta: {
+        title: '找不到頁面 (404) | Camino Plan',
+        description: '您所尋找的頁面不存在、已被移動或網址輸入有誤。',
+        robots: 'noindex, nofollow',
+      },
     },
   ],
   scrollBehavior() {
@@ -192,6 +198,14 @@ router.afterEach((to) => {
   upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
   upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', seo.title)
   upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', seo.description)
+
+  // 處理 robots 標籤：若路由宣告 noindex 則動態注入，否則安全移除防範全站誤傷
+  const robotsMetaEl = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')
+  if (to.meta.robots) {
+    upsertMeta('meta[name="robots"]', 'name', 'robots', to.meta.robots as string)
+  } else if (robotsMetaEl) {
+    robotsMetaEl.remove()
+  }
 
   let canonicalEl = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
   if (!canonicalEl) {
