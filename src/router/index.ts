@@ -4,7 +4,7 @@ import { AVAILABLE_ROUTES, getRouteMetadata } from '@/data/routes'
 import type { RouteId } from '@/types/route'
 
 const SITE_ORIGIN = 'https://camino-plan.com'
-const DEFAULT_TITLE = '【2026 朝聖之路】行程規劃與裝備試算工具 | Camino Plan'
+const DEFAULT_TITLE = '朝聖之路行程與裝備規劃工具 | Camino Plan'
 const DEFAULT_DESCRIPTION =
   '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。'
 
@@ -16,7 +16,7 @@ const router = createRouter({
       name: 'landing',
       component: () => import('@/views/LandingView.vue'),
       meta: {
-        title: '【2026 朝聖之路】行程規劃與裝備試算工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
+        title: '朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
         description:
           '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。',
       },
@@ -35,7 +35,7 @@ const router = createRouter({
       name: 'packing',
       component: HomeView,
       meta: {
-        title: '【2026 朝聖之路裝備清單】10% 體重負重計算機與必備打包檢查表 | Camino Plan',
+        title: '裝備清單與負重計算機 (10% 體重法則) | Camino Plan',
         description:
           '科學化朝聖者背包負重計算機，嚴格把關 10% 體重負重警戒線，內建九大必備裝備分類與減重避坑指南。',
       },
@@ -54,9 +54,29 @@ const router = createRouter({
       name: 'budget',
       component: HomeView,
       meta: {
-        title: '【2026 朝聖之路花費預算】行前機票與徒步路上開銷計算機 | Camino Plan',
+        title: '朝聖花費與預算計算機 (全雙幣試算) | Camino Plan',
         description:
           '專為聖雅各朝聖之路設計的免費預算計算機，全雙幣 EUR/TWD 動態試算，涵蓋機票裝備、公私立庇護所住宿、朝聖者套餐伙食與突發應急金。',
+      },
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('@/views/HistoryView.vue'),
+      meta: {
+        title: '聖雅各朝聖之路歷史淵源與文化象徵 | Camino Plan',
+        description:
+          '深度解析聖雅各朝聖之路（Camino de Santiago）千年歷史：繁星原野聖骨發現、第一位朝聖者阿方索二世、中世紀朝聖風潮、扇貝殼與黃色箭頭文化象徵典故。',
+      },
+    },
+    {
+      path: '/routes',
+      name: 'routes',
+      component: () => import('@/views/RoutesGuideView.vue'),
+      meta: {
+        title: '聖雅各三大經典朝聖路線攻略與難度評估 | Camino Plan',
+        description:
+          '法國之路、葡萄牙之路與北方之路深度攻略剖析。提供總里程、徒步天數、地形難度、路面鋪裝材質比例、最佳行走月份與避坑防禦提醒。',
       },
     },
     {
@@ -64,7 +84,7 @@ const router = createRouter({
       name: 'faq',
       component: () => import('@/views/FaqView.vue'),
       meta: {
-        title: '【2026 朝聖之路常見問題】路線選擇、預算住宿與裝備避坑全攻略 | Camino Plan',
+        title: '常見問題百科 (FAQ) | Camino Plan',
         description:
           '專為聖雅各朝聖之路徒步者整理的問答百科，收錄證書規定、庇護所入住技巧、行李減重與交通銜接全指南。',
       },
@@ -131,12 +151,12 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized) {
     if (routeId === 'portugues' && branchId === 'costa') {
       const costaBranch = routeMeta.branches?.find((b) => b.id === 'costa')
       return {
-        title: `【2026 朝聖之路】葡萄牙之路海岸線 (Camino de la Costa) 行程規劃與每日里程試算 | Camino Plan`,
+        title: `葡萄牙之路海岸線行程規劃 (Camino de la Costa) | Camino Plan`,
         description: `專為葡萄牙海岸線徒步者打造的免費規劃工具。自波多沿大西洋海岸北上，全長約 ${costaBranch?.totalDistanceKm || 270.9}km、建議 ${costaBranch?.recommendedDays || 13} 天，支援每日海風步道與木棧道里程試算、爬升、庇護所清單與 Caminha 跨國渡輪節點。`,
       }
     }
     return {
-      title: `【2026 朝聖之路】${routeMeta.chineseName} (${routeMeta.name}) 行程規劃與每日里程計算 | Camino Plan`,
+      title: `${routeMeta.chineseName}行程規劃 (${routeMeta.name}) | Camino Plan`,
       description: `專為${routeMeta.chineseName}徒步者打造的免費規劃工具。全長約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天，支援每日分段公里試算、爬升下降、庇護所清單與世界盡頭延伸段。`,
     }
   }
@@ -144,12 +164,12 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized) {
   if (to.name === 'transport' && routeMeta) {
     if (routeId === 'portugues' && branchId === 'costa') {
       return {
-        title: `【2026 朝聖之路】葡萄牙之路海岸線起點交通與 Caminha 跨國渡輪避坑指南 | Camino Plan`,
+        title: `葡萄牙之路海岸線起點交通與渡輪指南 | Camino Plan`,
         description: `提供前往葡萄牙海岸線起點（波多主教座堂 / Matosinhos 海邊起點）地鐵接駁、Caminha 跨米尼奧河至西班牙 A Guarda 的 Xacobeo 渡輪與計程快艇全攻略。`,
       }
     }
     return {
-      title: `【2026 朝聖之路】${routeMeta.chineseName} (${routeMeta.name}) 起點交通攻略與轉乘指南 | Camino Plan`,
+      title: `${routeMeta.chineseName}起點交通攻略與轉乘指南 (${routeMeta.name}) | Camino Plan`,
       description: `提供抵達${routeMeta.chineseName}起點的最佳大眾運輸交通指南、高鐵與巴士班次規劃、跨國轉乘避坑提醒與官方訂票連結。`,
     }
   }

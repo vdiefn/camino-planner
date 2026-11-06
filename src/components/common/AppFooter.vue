@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ShieldCheck } from 'lucide-vue-next'
+import { useFeedbackModal } from '@/composables/useFeedbackModal'
+
+const { openFeedback } = useFeedbackModal()
 </script>
 
 <template>
@@ -14,13 +17,6 @@ import { ShieldCheck } from 'lucide-vue-next'
       </div>
       <span class="text-slate-300 hidden sm:inline">|</span>
       <router-link
-        to="/faq"
-        class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
-      >
-        常見問題與攻略
-      </router-link>
-      <span class="text-slate-300 hidden sm:inline">|</span>
-      <router-link
         to="/privacy"
         target="_blank"
         rel="noopener"
@@ -28,6 +24,14 @@ import { ShieldCheck } from 'lucide-vue-next'
       >
         關於本站與隱私權政策
       </router-link>
+      <span class="text-slate-300 hidden sm:inline">|</span>
+      <button
+        type="button"
+        @click="openFeedback()"
+        class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
+      >
+        意見回饋
+      </button>
     </div>
   </footer>
 </template>
