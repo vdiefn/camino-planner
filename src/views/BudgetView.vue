@@ -70,17 +70,17 @@ function handleInputFocus(event: FocusEvent) {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 pt-0 pb-8 max-w-[1280px]">
+  <div class="container mx-auto px-4 pt-0 pb-8 max-w-7xl">
     <!-- 頂部吸頂標題列 ＋ 核心看板 -->
     <div
       class="sticky top-14 sm:top-16 z-30 -mx-4 px-4 py-2.5 sm:py-3 mb-4 sm:mb-6 bg-slate-50/85 backdrop-blur-md border-b border-slate-200/60"
     >
-      <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <!-- 左側：大標題 ＋ 操作按鈕 -->
         <div class="flex items-center justify-between md:justify-start gap-2.5 sm:gap-3">
           <div class="flex items-center gap-2">
             <div>
-              <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900 leading-tight">
+              <h2 class="text-base sm:text-lg md:text-xl text-slate-800 leading-tight">
                 朝聖花費預算試算
               </h2>
             </div>
@@ -140,7 +140,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 1. 三大風格選擇卡片 -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900">
+            <h3 class="text-sm sm:text-base text-slate-800">
               預算風格類型
             </h3>
             <button
@@ -261,7 +261,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 2. 天數連動與自訂控制器 -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3.5">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900">
+            <h3 class="text-sm sm:text-base text-slate-800">
               徒步總天數設定
             </h3>
             <span class="text-sm font-mono text-slate-700 px-2 py-0.5">
@@ -339,8 +339,8 @@ function handleInputFocus(event: FocusEvent) {
           <div class="flex items-center gap-2">
             <Info class="w-4 h-4 text-slate-400 shrink-0" />
             <div>
-              <span class="text-xs font-bold text-slate-800 block">試算參考匯率</span>
-              <span class="text-[10px] text-slate-400">可依個人實際換匯成本微調</span>
+              <span class="text-sm text-slate-800 block">試算參考匯率</span>
+              <span class="text-[12px] text-slate-400">可依個人實際換匯成本微調</span>
             </div>
           </div>
 
@@ -366,7 +366,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 一、行前固定支出 (TWD) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Plane class="w-4 h-4 text-sky-600 shrink-0" />
               <span>一、行前固定支出</span>
             </h3>
@@ -420,7 +420,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 二、徒步路上每日開銷 (EUR/天) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Footprints class="w-4 h-4 text-amber-500 shrink-0" />
               <span>二、徒步每日開銷 ( {{ budgetStore.effectiveDays }} 天)</span>
             </h3>
@@ -496,7 +496,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 三、前後跨國接駁交通 (EUR) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Train class="w-4 h-4 text-indigo-600 shrink-0" />
               <span>三、前後跨國接駁交通</span>
             </h3>
@@ -542,7 +542,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 四、突發應急金 (EUR) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <ShieldAlert class="w-4 h-4 text-amber-600 shrink-0" />
               <span>四、突發應急預備金</span>
             </h3>

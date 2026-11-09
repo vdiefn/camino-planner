@@ -496,7 +496,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 pt-0 pb-6 max-w-[1440px]">
+  <div class="container mx-auto px-4 pt-0 pb-6 max-w-360">
     <!-- 頂部吸頂列：左側大標題 ＋ 右側數據看板與列印行程按鈕（Sticky 黏性吸頂，回歸原本經典佈局） -->
     <div
       ref="stickyHeaderRef"
@@ -507,7 +507,7 @@ onUnmounted(() => {
           : 'bg-transparent',
       ]"
     >
-      <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-2 sm:gap-4">
+      <div class="max-w-360 mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-2 sm:gap-4">
         <!-- 左側：大標題 ＋ 列印行程操作按鈕 -->
         <div class="flex items-center justify-between md:justify-start gap-2.5 sm:gap-3 w-full md:w-auto shrink-0">
           <h1
@@ -605,7 +605,7 @@ onUnmounted(() => {
             class="flex items-center justify-between cursor-pointer lg:cursor-default select-none"
           >
             <div class="flex items-center gap-1.5">
-              <h2 class="text-base font-bold text-slate-900">行程規劃設定</h2>
+              <h2 class="text-base text-slate-900">行程規劃設定</h2>
               <div class="inline-flex items-center" @click.stop>
                 <button
                   type="button"
@@ -665,7 +665,7 @@ onUnmounted(() => {
             <!-- 第二行：路線中文名稱、天數明細與狀態標籤 -->
             <div class="flex items-center justify-between text-xs text-slate-500">
               <div class="flex items-center gap-2 min-w-0">
-                <span class="text-[11px] font-medium text-slate-600 truncate">
+                <span class="text-[11px] text-slate-600 truncate">
                   {{ scheduleStore.currentRouteMetadata?.chineseName }}
                 </span>
                 <span class="text-slate-300">·</span>
@@ -704,7 +704,7 @@ onUnmounted(() => {
                 <select
                   :value="scheduleStore.currentRouteId"
                   @change="handleSwitchRoute(($event.target as HTMLSelectElement).value as RouteId)"
-                  class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium"
+                  class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                 >
                   <option
                     v-for="route in scheduleStore.availableRoutes"
@@ -727,10 +727,10 @@ onUnmounted(() => {
                   :class="[
                     scheduleStore.currentRouteId === route.id
                       ? 'bg-white text-slate-900 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                      : 'text-slate-600 hover:text-slate-800'
                   ]"
                 >
-                  <div class="truncate text-slate-900 font-semibold">{{ route.chineseName }}</div>
+                  <div class="text-sm truncate text-slate-900">{{ route.chineseName }}</div>
                   <div class="text-[11px] text-slate-400 mt-0.5 truncate">
                     {{ scheduleStore.getRouteDisplayDistance(route.id) }}km
                   </div>
@@ -744,7 +744,7 @@ onUnmounted(() => {
                 <label class="block text-xs text-slate-600">
                   {{ scheduleStore.currentRouteMetadata.chineseName }}走法／分支
                 </label>
-                <span class="text-[10px] text-slate-400">
+                <span class="text-[12px] text-slate-400">
                   {{ scheduleStore.currentRouteId === 'frances' ? '於 Roncesvalles 匯合' : '於 Redondela 匯合' }}
                 </span>
               </div>
@@ -935,11 +935,11 @@ onUnmounted(() => {
             <!-- 冬季庇里牛斯山安全提醒 -->
             <div
               v-if="scheduleStore.isWinterLocked"
-              class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-slate-800 flex items-start gap-2"
+              class="p-3  rounded-xl text-xs text-slate-800 flex items-start gap-2"
             >
               <AlertTriangle class="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
               <div>
-                <strong>冬季庇里牛斯山安全提醒（強制封山）</strong>
+                <p>冬季庇里牛斯山安全提醒</p>
                 <p class="mt-0.5 opacity-90">
                   11/1 ~ 3/31
                   法國官方強制封閉高空拿破崙之路（違者面臨罰款且需自負搜救費用），系統已自動為您鎖定安全之谷道路線（經
@@ -955,7 +955,7 @@ onUnmounted(() => {
           class="hidden lg:flex items-start gap-2.5 p-3 sm:p-3.5 rounded-xl border border-slate-200 text-xs bg-white shadow-xs"
         >
           <div class="space-y-1">
-            <h3 class="flex items-center gap-1.5 text-xs sm:text-sm text-slate-900 font-bold">
+            <h3 class="flex items-center gap-1.5 text-xs sm:text-sm text-slate-800">
               <Sparkles class="h-4 w-4 text-amber-500 shrink-0" />
               <span>彈性排程小提醒</span>
             </h3>

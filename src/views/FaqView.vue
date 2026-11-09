@@ -241,7 +241,8 @@ onUnmounted(() => {
             <ShieldAlert class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <p>
               <strong class="font-semibold text-slate-700">資訊查核提示：</strong>
-              本站所整理之問答與法規均定期對齊聖地牙哥朝聖者辦公室及加利西亞官方公告。路上遇天候或營運異動請以現場最新規定為準。祝您一路順風（¡Buen Camino!）。
+              本站整理之問答與相關資訊，將持續參考聖地牙哥朝聖者辦公室及各地官方機構公告進行更新。由於沿途住宿、交通、路線及相關規定可能因季節、天候或營運狀況而有所變動，實際資訊請以官方最新公告及現場規定為準。
+              祝您旅途平安順利，一路順風！ ¡Buen Camino!
             </p>
           </div>
         </div>

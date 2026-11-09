@@ -71,7 +71,7 @@ function handleReport(albergueName?: string) {
             <DialogPanel class="w-full max-w-lg transform overflow-hidden rounded-xl bg-white p-6 shadow-2xl transition-all border border-slate-200">
               <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div>
-                  <DialogTitle as="h3" class="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <DialogTitle as="h3" class="text-base text-slate-900 flex items-center gap-2">
                     <BedDouble class="w-5 h-5 text-slate-900" />
                     {{ endWaypoint?.localName || endWaypoint?.spanishName || stage?.endWaypointId }}
                   </DialogTitle>

@@ -92,7 +92,7 @@ const tools = [
     color: 'text-sky-500 bg-sky-50 border-sky-200',
   },
   {
-    title: '全雙幣花費預算計算機',
+    title: '雙幣別預算計算機',
     desc: '機票裝備、住宿飲食與緊急備用金全涵蓋，EUR / TWD 即時動態換算，輕鬆掌控朝聖預算。',
     path: '/budget',
     icon: Coins,
@@ -247,7 +247,7 @@ function navigateToRoute(routeId: RouteId) {
               to="/routes"
               class="text-xs font-semibold text-amber-600 hover:text-amber-700 inline-flex items-center justify-center gap-1 transition-colors self-center sm:self-end"
             >
-              <span>查看路線深度對比攻略</span>
+              <span>查看路線攻略</span>
               <ArrowRight class="w-3.5 h-3.5" />
             </router-link>
           </div>

@@ -136,7 +136,7 @@ async function handleSubmit() {
             <DialogPanel class="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 shadow-2xl transition-all border border-slate-200">
               <!-- 頂部標題與關閉按鈕 -->
               <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <DialogTitle as="h3" class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <DialogTitle as="h3" class="text-base text-slate-800 flex items-center gap-2">
                   <MessageCircle class="w-5 h-5 text-amber-500" />
                   意見回饋與許願池
                 </DialogTitle>
@@ -189,7 +189,7 @@ async function handleSubmit() {
 
                 <!-- 分類切換標籤 -->
                 <div>
-                  <label class="block text-xs font-medium text-slate-700 mb-1.5">
+                  <label class="block text-sm text-slate-700 mb-1.5">
                     回饋類別
                   </label>
                   <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
@@ -213,7 +213,7 @@ async function handleSubmit() {
 
                 <!-- 相關城鎮/庇護所/對象 -->
                 <div>
-                  <label class="block text-xs font-medium text-slate-700 mb-1">
+                  <label class="block text-sm text-slate-700 mb-1">
                     主旨
                   </label>
                   <input
@@ -226,7 +226,7 @@ async function handleSubmit() {
 
                 <!-- 詳細內容 -->
                 <div>
-                  <label class="block text-xs font-medium text-slate-700 mb-1">
+                  <label class="block text-sm text-slate-700 mb-1">
                     內容說明 <span class="text-rose-500">*</span>
                   </label>
                   <textarea

@@ -324,7 +324,7 @@ onUnmounted(() => {
                 </div>
 
                 <!-- 章節摘要引言 -->
-                <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed bg-amber-50/60 border-l-4 border-amber-400 px-3.5 py-2.5 rounded-r-xl">
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed bg-amber-50/60 border-l-4 border-amber-400 px-3.5 py-2.5 rounded-r-xl">
                   {{ chapter.summary }}
                 </p>
 
@@ -347,14 +347,11 @@ onUnmounted(() => {
                   </div>
                 </div>
               </section>
-            </article>
 
-            <!-- 章節 07 與 08：文化象徵與認證規範（合併於單一卡片） -->
-            <article class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs divide-y divide-slate-200">
               <!-- 章節 07：朝聖文化的四大核心象徵（維持好看的四個框框網格） -->
               <section
                 id="chapter-cultural-symbols"
-                class="pb-8 space-y-6 scroll-mt-24"
+                class="py-8 space-y-6 scroll-mt-24"
               >
                 <!-- 章節標頭 -->
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-slate-100/80 pb-3">

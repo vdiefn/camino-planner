@@ -72,7 +72,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
         ? 'border-purple-300'
         : stage.isExtensionStage
           ? 'border-sky-300 bg-sky-50/15'
-          : 'border-slate-200 hover:border-slate-400'
+          : 'border-slate-200 hover:border-orange-200'
     ]"
   >
     <!-- 電腦版視圖 (md 及以上：直接完整展開) -->
