@@ -257,7 +257,7 @@ function handleConfirmImport() {
               <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <DialogTitle
                   as="h3"
-                  class="text-base font-bold text-slate-900 flex items-center gap-2"
+                  class="text-base text-slate-900 flex items-center gap-2"
                 >
                   <Share2 class="w-5 h-5 text-amber-500" />
                   <span>{{ pendingImport ? '確認匯入外部行程與裝備' : '跨裝置同步與備份' }}</span>
@@ -379,7 +379,7 @@ function handleConfirmImport() {
               <div v-else class="mt-4 space-y-4">
                 <!-- 1. 勾選要打包的範圍 -->
                 <div>
-                  <div class="text-xs font-semibold text-slate-700 mb-2">
+                  <div class="text-sm text-slate-700 mb-2">
                     1. 選擇要打包同步的內容（QR Code 與備份檔共用）
                   </div>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-1">
@@ -390,8 +390,8 @@ function handleConfirmImport() {
                         class="mt-0.5 h-4 w-4 rounded border-slate-300 text-amber-500 focus:ring-amber-500"
                       />
                       <div>
-                        <div class="font-bold text-slate-900">行程規劃</div>
-                        <div class="text-[11px] text-slate-500 mt-0.5">
+                        <div class="text-sm text-slate-700">行程規劃</div>
+                        <div class="text-[12px] text-slate-500 mt-0.5">
                           {{ scheduleStore.currentRouteMetadata?.chineseName }} ·
                           {{ scheduleStore.stages.length }} 天
                         </div>
@@ -405,8 +405,8 @@ function handleConfirmImport() {
                         class="mt-0.5 h-4 w-4 rounded border-slate-300 text-amber-500 focus:ring-amber-500"
                       />
                       <div>
-                        <div class="font-bold text-slate-900">裝備負重清單</div>
-                        <div class="text-[11px] text-slate-500 mt-0.5">
+                        <div class=" text-sm text-slate-700">裝備負重清單</div>
+                        <div class="text-[12px] text-slate-500 mt-0.5">
                           含體重 {{ packingStore.bodyWeightKg }}kg 與自訂裝備（分享他人可取消勾選）
                         </div>
                       </div>
@@ -424,7 +424,7 @@ function handleConfirmImport() {
 
                 <!-- 2. QR Code 傳手機 & 複製分享連結 -->
                 <div class="space-y-2">
-                  <div class="text-xs font-semibold text-slate-700 mb-2">
+                  <div class="text-sm text-slate-700 mb-2">
                     2. 手機掃碼同步 / 分享給旅伴（當前路線）
                   </div>
 
@@ -450,17 +450,17 @@ function handleConfirmImport() {
                           :value="shareUrl"
                           type="text"
                           readonly
-                          class="w-full px-2.5 py-1.5 text-[11px] font-mono bg-slate-50 rounded-lg border border-slate-200 text-slate-500 focus:outline-none"
+                          class="w-full px-2.5 py-1.5 text-[12px] font-mono bg-slate-50 rounded-lg border border-slate-200 text-slate-500 focus:outline-none"
                           @focus="($event.target as HTMLInputElement)?.select()"
                         />
                         <button
                           type="button"
-                          class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-slate-900 hover:bg-slate-800 transition flex items-center gap-1 cursor-pointer"
+                          class="shrink-0 px-3 py-1.5 rounded-lg text-xs text-slate-600 border border-slate-200 bg-slate-20/100 hover:bg-slate-100 transition flex items-center gap-1 cursor-pointer"
                           @click="handleCopyShareUrl"
                         >
                           <Check v-if="isCopied" class="w-3.5 h-3.5 text-emerald-400" />
                           <Copy v-else class="w-3.5 h-3.5" />
-                          <span>{{ isCopied ? '已複製' : '複製連結' }}</span>
+                          <span>{{ isCopied ? '已複製' : '複製' }}</span>
                         </button>
                       </div>
                     </div>
@@ -469,10 +469,10 @@ function handleConfirmImport() {
 
                 <!-- 3. JSON 完整檔案備份與還原 -->
                 <div class="space-y-2">
-                  <div class="text-xs font-semibold text-slate-700 mb-2">
+                  <div class="text-sm text-slate-700 mb-2">
                     3. 完整備份檔匯出 / 匯入（含所有路線草稿）
                   </div>
-                  <p class="text-[11px] text-slate-500 leading-relaxed">
+                  <p class="text-[12px] text-slate-500 leading-relaxed">
                     可將所有路線草稿與自訂裝備存成
                     <code class="px-1 py-0.5 bg-slate-100 rounded text-slate-700">.json</code>
                     備份檔永久保存，防止清理瀏覽器快取後遺失。
@@ -481,7 +481,7 @@ function handleConfirmImport() {
                     <button
                       type="button"
                       :disabled="!hasExportSelection"
-                      class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-white bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition cursor-pointer"
+                      class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs text-white bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition cursor-pointer"
                       @click="handleDownloadBackupJson"
                     >
                       <Download class="w-3.5 h-3.5" />
@@ -490,7 +490,7 @@ function handleConfirmImport() {
 
                     <button
                       type="button"
-                      class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition cursor-pointer"
+                      class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition cursor-pointer"
                       @click="triggerFileSelect"
                     >
                       <Upload class="w-3.5 h-3.5" />

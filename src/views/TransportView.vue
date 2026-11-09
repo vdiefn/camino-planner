@@ -155,24 +155,26 @@ watch(selectedTargetRoute, (newRoute) => {
 
 // 各路線專屬貼心小提醒避坑攻略
 const routeTipsMap: Record<TransportTargetRoute, string[]> = {
-  frances: [
-    "提早搶高鐵早鳥票：巴黎至 Bayonne 的 TGV 建議提早預訂。自 2026 年 3 月起，SNCF TGV INOUI 一般可提前 6 個月購票，熱門日期及時段容易漲價，建議開放訂票後盡早查詢。",
-    "西班牙週日巴士減班：馬德里至 Pamplona 的巴士班次會依星期及季節調整，週日出發前務必確認最新時刻表，避免錯過轉乘班次。",
-    "Pamplona 共乘計程車：若搭不上前往 SJPP（Saint-Jean-Pied-de-Port）的直達巴士，可考慮預約計程車或與其他朝聖者共乘。車資依業者及出發時間而異，建議事先確認總價及分攤方式。",
-    "抵達 SJPP 第一件事：前往朝聖者辦公室（39 Rue de la Citadelle）領取 Credencial 朝聖者護照、取得出發章，並詢問最新路線資訊及庇護所開放狀況。"
-  ],
-  portugues: [
-    "波多地鐵直達起點：從 OPO 機場搭乘地鐵 E 線（紫線 Violeta）可直達市中心 Trindade 站，車程約 30 分鐘，單程 Z4 票價為 €2.30（2026 年票價，另需購買 Andante 卡）。上車前務必在車站黃色驗票機完成驗票。",
-    "大教堂領憑證：抵達波多後可前往主教座堂（Sé do Porto）或朝聖者服務辦公室領取 Credencial 朝聖者護照，並取得出發地的起點章。出發前請確認領取地點及開放時間。",
-    "出城避坑技巧：波多市區至郊區前段部分路面為堅硬石板路，市區外圍亦有車流較多的路段。海岸線朝聖者可考慮搭乘地鐵至 Matosinhos，從大西洋濱海步道開始步行；中央線亦可視行程選擇搭乘地鐵，縮短市區步行路段。",
-    "時區提醒：葡萄牙本土採用西歐時間（冬季 UTC+0、夏季 UTC+1），西班牙本土採用中歐時間（冬季 UTC+1、夏季 UTC+2），兩國全年相差 1 小時，跨國搭車請特別注意車票上的當地時間。"
-  ],
-  norte: [
-    "巴黎 TGV 直達法西邊界：巴黎蒙帕納斯有直達 TGV 前往法國邊境 Hendaye，車程最快約 4 小時 40 分鐘。抵達後可步行前往 Euskotren 的 Hendaia 車站，搭乘 E2 線進入西班牙巴斯克地區，前往 Irún 可再依實際目的地選擇步行或轉乘交通工具。",
-    "Euskotren 跨境電車（Topo）：Hendaia 與西班牙巴斯克地區之間可搭乘 Euskotren E2 線，平日通常約每 30 分鐘一班，可前往 San Sebastián（Donostia），全程約 35～40 分鐘。票價依搭乘區間及票種而異，出發前請確認最新時刻表與票價。",
-    "Irún 庇護所開門時間：Irún 公立朝聖者庇護所 Jakobi（Albergue de Peregrinos）通常於每年 2 月 1 日至 11 月 30 日營運，每日下午 16:00 開放至 22:00，不接受提前預約，建議提早抵達。出發前請確認當季營運日期及床位狀況。",
-    "Day 1 體力防範：北方之路 Irún 至 San Sebastián 首日約 25～27 公里，依路線版本不同，累積爬升約 550～600 公尺，途中有多處上下坡及 Jaizkibel 山區路段。出發前請備足飲水（建議至少 1.5L）及行動乾糧，並依天氣與個人體能調整補給量。"
-  ],
+frances: [
+  "TGV 早鳥票：SNCF TGV INOUI 最多可提前 6 個月購票，巴黎至 Bayonne／Hendaye 建議提早查詢，熱門時段票價容易上漲。",
+  "Pamplona 至 SJPP 巴士：ALSA 季節性巴士通常於 3～10 月營運，約每日 12:00 發車；冬季停駛，出發前務必確認最新班次。",
+  "計程車共乘：若錯過 Pamplona 至 SJPP 巴士，可預約計程車或與其他朝聖者共乘，建議事先確認車資及行李空間。",
+  "SJPP 起點資訊：抵達後可前往 Rue de la Citadelle 的朝聖者辦公室領取 Credencial、蓋出發章並確認路線；冬季拿破崙路線封閉時，應改走 Valcarlos 路線。"
+],
+
+portugues: [
+  "波多機場地鐵交通：從 OPO 機場搭乘地鐵 E 線（紫線 Violeta）至 Trindade 站，車程約 27 分鐘。2026 年 Z4 單程票價為 €2.30，使用 Andante 卡須在進站前驗票；亦可於指定驗票機使用 Visa／Mastercard 感應支付。",
+  "Credencial 領取地點：波多可前往 Sé 附近的 Posto de Turismo da Sé（主教座堂旅遊服務處），詢問聖地牙哥朝聖者護照 Credencial 的領取及蓋章服務。服務時間有限，建議出發前確認開放日期與時間。",
+  "中央線與海岸線交通：葡萄牙中央線（Caminho Português Central）與海岸線（Caminho Português da Costa）出城方向不同。若走海岸線，可搭乘地鐵轉往 Matosinhos 一帶接續海岸步道；出發前請先確認路線及下車地點，避免走錯方向。",
+  "葡萄牙與西班牙時差：葡萄牙本土全年比西班牙本土慢 1 小時。若途中跨境搭乘火車或巴士，請留意車票標示的當地時間，避免因時差錯過班次。"
+],
+
+norte: [
+  "巴黎 TGV 前往 Irún：從巴黎蒙帕納斯（Paris Montparnasse）搭乘 TGV 前往 Hendaye，車程最快約 4 小時 40 分鐘。抵達後步行至附近的 Euskotren Hendaia 車站，轉乘 E2 線前往西班牙 Irún。",
+  "Irún 領取 Credencial：北方之路起點 Irún 有多個朝聖者護照領取地點，最方便的是 Jakobi 朝聖者庇護所（Calle Lesaka, 1），每年 2 月至 11 月每日 16:00～20:00 可領取及蓋章；其他時間也可詢問當地教堂或市政府。",
+  "Euskotren 跨境交通：Hendaia 至 Irún 搭乘 E2 線僅需數分鐘，無須另外搭乘長途交通工具。TGV 與 Euskotren 為不同系統，須分別購票；Irún 可依目的地選擇 Ficoba 或 Irún Colon 車站下車。",
+  "跨境轉乘注意事項：Hendaye（法文）與 Hendaia（巴斯克語）是同一地點，查詢車站及班次時可能看到不同名稱。Euskotren 班距及營運時間依日期而異，建議事先確認時刻表並預留轉乘時間。"
+],
 };
 
 const currentTravelTips = computed(() => {
@@ -306,7 +308,7 @@ onUnmounted(() => {
     >
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <h2
-          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 shrink-0"
+          class="text-base sm:text-lg md:text-xl text-slate-800 flex items-center gap-2 shrink-0"
         >
           前往朝聖起點交通指南
         </h2>
@@ -348,7 +350,7 @@ onUnmounted(() => {
             class="flex items-center justify-between md:justify-start md:gap-1.5 mb-3"
           >
             <h3
-              class="text-sm sm:text-md font-bold md:font-normal text-slate-900"
+              class="text-sm sm:text-sm md:font-normal text-slate-800"
             >
               選擇你的歐洲抵達城市
             </h3>
@@ -429,7 +431,7 @@ onUnmounted(() => {
           class="hidden md:block rounded-xl border border-slate-200 bg-white p-4 shadow-xs"
         >
           <h3
-            class="text-xs font-bold text-slate-900 mb-2.5 flex items-center gap-1.5"
+            class="text-sm text-slate-800 mb-2.5 flex items-center gap-1.5"
           >
             <span>官方購票平台快速傳送門</span>
           </h3>
@@ -452,7 +454,7 @@ onUnmounted(() => {
         <div
           class="hidden md:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
         >
-          <h3 class="flex items-center gap-2 text-sm font-bold text-slate-900">
+          <h3 class="flex items-center gap-2 text-sm text-slate-800">
             <Sparkles class="w-4 h-4 text-amber-500" />
             <span>{{ targetRouteOptions.find(r => r.id === selectedTargetRoute)?.name }}起點避坑提醒</span>
           </h3>

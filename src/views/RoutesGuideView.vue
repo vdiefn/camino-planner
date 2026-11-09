@@ -186,7 +186,7 @@ function goToTransport(routeId: RouteId) {
               <!-- 起點標籤 -->
               <div class="flex items-center gap-1.5 text-xs text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl self-start sm:self-center">
                 <MapPin class="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                <span>起點：<strong>{{ currentRoute.startTown }}</strong> ({{ currentRoute.startTownCountry }})</span>
+                <span>起點：{{ currentRoute.startTown }} · {{ currentRoute.startTownCountry }}</span>
               </div>
             </div>
 
@@ -260,7 +260,7 @@ function goToTransport(routeId: RouteId) {
                 ></div>
               </div>
               <p class="text-[12px] text-slate-500 leading-normal">
-                * 數據依據 OpenStreetMap (OSM) 官方路網標籤與 GIS 地形演算法測量統計，僅供參考
+                * 數據依據 OpenStreetMap（OSM）開放地理資料及路網標籤，結合 GIS 空間分析與地形演算法計算得出，僅供參考。實際路況、地形及步行距離可能因路線變體、天候與道路狀況而有所差異。
               </p>
             </div>
 

@@ -293,7 +293,7 @@ onUnmounted(() => {
     >
       <div class="flex items-center justify-between gap-2 sm:gap-3">
         <h2
-          class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 truncate"
+          class="text-base sm:text-lg md:text-xl text-slate-800 flex items-center gap-2 truncate"
         >
           <span class="sm:hidden">行李打包清單</span>
           <span class="hidden sm:inline">朝聖之路行李打包清單</span>
@@ -350,7 +350,7 @@ onUnmounted(() => {
               class="flex items-center justify-between cursor-pointer lg:cursor-default select-none"
             >
               <div class="flex items-center gap-1.5">
-                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                <h3 class="text-sm sm:text-base text-slate-800">
                   體重與 10% 負重警戒線
                 </h3>
 
@@ -545,7 +545,7 @@ onUnmounted(() => {
         <div
           class="hidden lg:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
         >
-          <h3 class="flex items-center gap-2 text-sm text-slate-900 font-bold">
+          <h3 class="flex items-center gap-2 text-sm text-slate-800">
             <Sparkles class="h-4 w-4 text-amber-500" />
             <span class="text-base">朝聖裝備減重黃金法則</span>
           </h3>
