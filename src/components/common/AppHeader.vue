@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { MessageSquarePlus, Share2, HelpCircle, Compass, Sparkles, Menu } from 'lucide-vue-next'
+import { Menu as HeadlessMenu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import {
+  MessageSquarePlus,
+  Share2,
+  HelpCircle,
+  Compass,
+  Sparkles,
+  BookOpen,
+  ChevronDown,
+  Menu,
+} from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { useScheduleStore } from '@/stores/schedule'
@@ -65,12 +75,12 @@ function handleTabClick(tab: TabType) {
         </div>
       </router-link>
 
-      <!-- 中間：電腦版頂部 Tab 導覽列（居中對齊，使用動態長尾 <a href> 錨點供搜尋引擎檢索） -->
-      <nav aria-label="主要功能導覽" class="hidden md:flex items-center gap-1 rounded-xl bg-slate-100 p-1 absolute left-1/2 -translate-x-1/2">
+      <!-- 中間：電腦與平板頂部 Tab 導覽列（平板緊湊自適應，居中對齊） -->
+      <nav aria-label="主要功能導覽" class="hidden md:flex items-center gap-0.5 lg:gap-1 rounded-xl bg-slate-100 p-0.5 lg:p-1 absolute left-1/2 -translate-x-1/2">
         <a
           :href="`/schedule/${currentRouteSlug}`"
           :class="[
-            'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
+            'rounded-lg px-2.5 py-1.5 text-xs lg:px-4 lg:py-2 lg:text-sm font-normal transition-all cursor-pointer',
             currentTab === 'schedule'
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
@@ -83,7 +93,7 @@ function handleTabClick(tab: TabType) {
         <a
           href="/packing"
           :class="[
-            'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
+            'rounded-lg px-2.5 py-1.5 text-xs lg:px-4 lg:py-2 lg:text-sm font-normal transition-all cursor-pointer',
             currentTab === 'packing'
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
@@ -96,7 +106,7 @@ function handleTabClick(tab: TabType) {
         <a
           :href="`/transport/${currentRouteSlug}`"
           :class="[
-            'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
+            'rounded-lg px-2.5 py-1.5 text-xs lg:px-4 lg:py-2 lg:text-sm font-normal transition-all cursor-pointer',
             currentTab === 'transport'
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
@@ -109,7 +119,7 @@ function handleTabClick(tab: TabType) {
         <a
           href="/budget"
           :class="[
-            'rounded-lg px-4 py-2 text-sm font-normal transition-all cursor-pointer',
+            'rounded-lg px-2.5 py-1.5 text-xs lg:px-4 lg:py-2 lg:text-sm font-normal transition-all cursor-pointer',
             currentTab === 'budget'
               ? 'bg-white text-slate-800 font-medium shadow-sm'
               : 'text-slate-400 hover:text-slate-500',
@@ -120,35 +130,100 @@ function handleTabClick(tab: TabType) {
         </a>
       </nav>
 
-      <!-- 右側：電腦版完整功能圖示群組（歷史 ＆ 路線 ＆ FAQ ＆ 同步 ＆ 回饋） -->
-      <div class="hidden md:flex items-center gap-1 sm:gap-1.5 shrink-0">
-        <router-link
-          to="/history"
-          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
-          title="歷史淵源與文化"
-          aria-label="歷史淵源與文化"
-        >
-          <Sparkles class="h-5 w-5" />
-        </router-link>
+      <!-- 右側：電腦與平板完整功能導覽群組 -->
+      <div class="hidden md:flex items-center gap-1 lg:gap-1.5 shrink-0">
+        <!-- 平板專用（768px ~ 1199px）：智慧收合為「朝聖指南 ▾」下拉選單 -->
+        <HeadlessMenu as="div" class="relative inline-block text-left xl:hidden">
+          <MenuButton
+            class="text-xs text-slate-700 hover:text-amber-600 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            <BookOpen class="w-4 h-4 text-amber-500" />
+            <span>朝聖指南</span>
+            <ChevronDown class="w-3.5 h-3.5 text-slate-400" />
+          </MenuButton>
 
-        <router-link
-          to="/routes"
-          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
-          title="路線攻略與深度評估"
-          aria-label="路線攻略與深度評估"
-        >
-          <Compass class="h-5 w-5" />
-        </router-link>
+          <transition
+            enter-active-class="transition duration-100 ease-out"
+            enter-from-class="transform scale-95 opacity-0"
+            enter-to-class="transform scale-100 opacity-100"
+            leave-active-class="transition duration-75 ease-in"
+            leave-from-class="transform scale-100 opacity-100"
+            leave-to-class="transform scale-95 opacity-0"
+          >
+            <MenuItems
+              class="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-slate-100 rounded-xl bg-white p-1.5 shadow-lg border border-slate-200/90 focus:outline-hidden z-50"
+            >
+              <MenuItem v-slot="{ active }">
+                <router-link
+                  to="/history"
+                  :class="[
+                    active ? 'bg-amber-50 text-amber-700' : 'text-slate-700',
+                    'flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg transition-colors cursor-pointer',
+                  ]"
+                >
+                  <Sparkles class="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>歷史淵源與文化</span>
+                </router-link>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <router-link
+                  to="/routes"
+                  :class="[
+                    active ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700',
+                    'flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg transition-colors cursor-pointer',
+                  ]"
+                >
+                  <Compass class="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>路線攻略與評估</span>
+                </router-link>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <router-link
+                  to="/faq"
+                  :class="[
+                    active ? 'bg-sky-50 text-sky-700' : 'text-slate-700',
+                    'flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg transition-colors cursor-pointer',
+                  ]"
+                >
+                  <HelpCircle class="w-4 h-4 text-sky-600 shrink-0" />
+                  <span>常見問題百科</span>
+                </router-link>
+              </MenuItem>
+            </MenuItems>
+          </transition>
+        </HeadlessMenu>
 
-        <router-link
-          to="/faq"
-          class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
-          title="常見問題百科"
-          aria-label="常見問題百科"
-        >
-          <HelpCircle class="h-5 w-5" />
-        </router-link>
+        <!-- 寬螢幕桌面（>= 1280px / xl）：完整展開圖示與文字 -->
+        <div class="hidden xl:flex items-center gap-1 lg:gap-1.5">
+          <router-link
+            to="/history"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            <Sparkles class="w-4 h-4 text-amber-500" />
+            <span>歷史淵源</span>
+          </router-link>
 
+          <router-link
+            to="/routes"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            <Compass class="w-4 h-4 text-emerald-600" />
+            <span>路線攻略</span>
+          </router-link>
+
+          <router-link
+            to="/faq"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            <HelpCircle class="w-4 h-4 text-sky-600" />
+            <span>常見問題</span>
+          </router-link>
+        </div>
+
+        <!-- 垂直細分隔線 -->
+        <div class="h-4 w-px bg-slate-200 mx-1"></div>
+
+        <!-- 工具動作（同步 ＆ 回饋） -->
         <button
           type="button"
           @click="openSyncModal"
@@ -156,7 +231,7 @@ function handleTabClick(tab: TabType) {
           title="跨裝置同步與備份"
           aria-label="跨裝置同步與備份"
         >
-          <Share2 class="h-5 w-5" />
+          <Share2 class="h-4 w-4" />
         </button>
 
         <button
@@ -166,7 +241,7 @@ function handleTabClick(tab: TabType) {
           title="意見回饋與許願"
           aria-label="意見回饋與許願"
         >
-          <MessageSquarePlus class="h-5 w-5" />
+          <MessageSquarePlus class="h-4 w-4" />
         </button>
       </div>
 
