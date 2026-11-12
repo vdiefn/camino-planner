@@ -36,6 +36,70 @@ export default {
   },
   landing: {
     startPlanning: "Start Planning",
+    hero: {
+      title: "Every Step, A Journey of Your Own",
+      desc: "A minimalist planning tool for Camino de Santiago pilgrims. Calculate daily walking stages, manage 10% backpack weight limits, navigate trailhead transit, and estimate multi-currency budgets. Offline-ready with seamless cross-device sync.",
+      startBtn: "Start Planning Now",
+      faqBtn: "Camino History & FAQ",
+      featureFree: "100% Free · No Sign-in",
+      featureOffline: "Offline-Ready · Privacy Protected",
+      featureSync: "Cross-Device QR Code Sync",
+    },
+    featuredRoutes: {
+      title: "Explore Popular Camino Routes",
+      subtitle: "Select any route to automatically load daily stages, elevation profiles, and suggested stops",
+      guideLink: "View Routes Guide",
+      takeFirstStep: "Start Journey",
+      frances: {
+        name: "Camino Francés",
+        spanishName: "French Way",
+        startTown: "SJPP (Saint-Jean-Pied-de-Port)",
+        distanceKm: "~779 km",
+        recommendedDays: "33 - 35 days",
+        desc: "Cross the Pyrenees and the Meseta wheat plateau along the millennium-old classic route. Highest albergue density and vibrant pilgrim community, the premier choice for first-time pilgrims.",
+      },
+      portugues: {
+        name: "Camino Portugués",
+        spanishName: "Portuguese Way",
+        startTown: "Porto",
+        distanceKm: "~242 - 271 km",
+        recommendedDays: "11 - 14 days",
+        desc: "Depart from World Heritage Porto. Choose between Atlantic coastal boardwalks (Coastal Route) or Roman bridges and woodland trails (Central Route), with gentle, comfortable terrain.",
+      },
+      norte: {
+        name: "Camino del Norte",
+        spanishName: "Northern Way",
+        startTown: "Irún",
+        distanceKm: "~820 km",
+        recommendedDays: "35 - 38 days",
+        desc: "Walk westward along the dramatic cliffs of the Bay of Biscay in northern Spain. Panoramic ocean views, fresh seafood, and river crossings with challenging elevation and stunning scenery.",
+      },
+    },
+    tools: {
+      title: "Comprehensive Pilgrim Planning Toolkit",
+      subtitle: "Integrate itinerary, packing, transport, and budget to eliminate pre-trip uncertainty",
+      schedule: {
+        title: "Smart Stage Itinerary",
+        desc: "Supports 3 classic routes plus Finisterre. Automatically estimates daily distances and elevation; customize stops and rest days freely.",
+      },
+      packing: {
+        title: "10% Body Weight Packing List",
+        desc: "Guides the 10% body weight rule with 9 core gear categories and trail tips. Printable in A4 format.",
+      },
+      transport: {
+        title: "Trailhead Transit Guide",
+        desc: "Comprehensive public transit guides from Paris, Madrid, and Porto to all major trailheads with high-speed rail and official booking links.",
+      },
+      budget: {
+        title: "Dual-Currency Budget Planner",
+        desc: "Covers flights, gear, lodging, daily meals, and emergency contingency funds with real-time EUR / TWD currency conversion.",
+      },
+    },
+    bottomCta: {
+      title: "First Time on the Camino? Check the Essential Guide",
+      desc: "Explore 9th-century origins, official Compostela certificate rules, albergue etiquette, and ultralight packing principles.",
+      btn: "Read Camino FAQ",
+    },
   },
   schedule: {
     title: "Walking Itinerary",

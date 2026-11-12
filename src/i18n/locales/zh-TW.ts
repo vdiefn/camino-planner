@@ -36,6 +36,70 @@ export default {
   },
   landing: {
     startPlanning: '開始規劃',
+    hero: {
+      title: '每一步，都是屬於你的朝聖之旅',
+      desc: '專為聖雅各朝聖徒步者打造的免費極簡規劃工具。涵蓋每日里程分段試算、10% 體重負重裝備清單、起點交通決策與雙幣花費預算。免登入即可離線使用與跨裝置同步。',
+      startBtn: '立即開始規劃行程',
+      faqBtn: '朝聖歷史與新手攻略',
+      featureFree: '完全免費・免註冊登入',
+      featureOffline: '支援離線使用與本機隱私保護',
+      featureSync: '跨裝置免帳號 QR Code 同步',
+    },
+    featuredRoutes: {
+      title: '探索熱門朝聖主路線',
+      subtitle: '點擊任一路線，即可直接帶入專屬每日里程試算與官方建議分段',
+      guideLink: '查看路線攻略',
+      takeFirstStep: '踏出第一步',
+      frances: {
+        name: '法國之路',
+        spanishName: 'Camino Francés',
+        startTown: 'SJPP (聖讓皮耶德波爾)',
+        distanceKm: '約 779 km',
+        recommendedDays: '33 - 35 天',
+        desc: '翻越庇里牛斯山、橫越梅塞塔麥田高原，穿越千年的黃金朝聖路線。庇護所密度最高、社交氛圍最豐富，首走朝聖者最佳首選。',
+      },
+      portugues: {
+        name: '葡萄牙之路',
+        spanishName: 'Camino Portugués',
+        startTown: '波多 (Porto)',
+        distanceKm: '約 242 - 271 km',
+        recommendedDays: '11 - 14 天',
+        desc: '自世界遺產波多啟程，可自由選擇大西洋海景木棧道（海岸線）或古羅馬石橋森林小徑（中央線），地勢平緩舒適。',
+      },
+      norte: {
+        name: '北方之路',
+        spanishName: 'Camino del Norte',
+        startTown: '伊倫 (Irún)',
+        distanceKm: '約 820 km',
+        recommendedDays: '35 - 38 天',
+        desc: '沿著西班牙北部比斯開灣懸崖海岸一路向西，海天一色、海鮮美食與古老渡船接駁，體能挑戰度高但風景絕美難忘。',
+      },
+    },
+    tools: {
+      title: '全方位的徒步規劃工具箱',
+      subtitle: '整合行程、裝備、交通與預算，消除行前的所有未知焦慮',
+      schedule: {
+        title: '智慧動態分段排程',
+        desc: '支援三大經典路線與世界盡頭延伸段，每日公里與爬升自動推算，自由調整落腳城鎮與休息日。',
+      },
+      packing: {
+        title: '10% 體重負重打包清單',
+        desc: '嚴格守護 10% 體重負重黃金法則，內建九大分類必備裝備與避坑提示，支援 A4 紙本列印。',
+      },
+      transport: {
+        title: '起點交通決策指南',
+        desc: '收錄巴黎、馬德里、波多直達各朝聖起點的最佳大眾運輸攻略、高鐵轉乘與官方訂票連結。',
+      },
+      budget: {
+        title: '雙幣別預算計算機',
+        desc: '機票裝備、住宿飲食與緊急備用金全涵蓋，EUR / TWD 即時動態換算，輕鬆掌控朝聖預算。',
+      },
+    },
+    bottomCta: {
+      title: '第一次走朝聖之路？先看看行前避坑指南',
+      desc: '收錄西元 9 世紀朝聖起源歷史、官方證書申請規則、公私立庇護所入住技巧與背包減重法則。',
+      btn: '閱讀常見問題 FAQ',
+    },
   },
   schedule: {
     title: '徒步行程規劃',
