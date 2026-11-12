@@ -361,11 +361,154 @@ export default {
       footerWish: "Buen Camino! Wishing you a peaceful journey.",
     },
   },
+  transport: {
+    title: "Camino Trailhead Transit Guide",
+    selectOriginCity: "Select Your Arrival City in Europe",
+    mobileTipsTitle: "Trailhead Transit Tips",
+    mobileTipsAria: "View trailhead transit tips",
+    bookingPlatformsTitle: "Official Booking Portals",
+    tipsSectionTitle: "{route} Trailhead Tips & Advice",
+    durationLabel: "Duration:",
+    durationValue: "~{hours} hrs",
+    costLabel: "Fare:",
+    costRange: "€{min} ~ €{max}",
+    stepsCount: "Step-by-Step Directions ({count} steps)",
+    expandAll: "Expand All",
+    collapseAll: "Collapse All",
+    stepDuration: "Estimated Travel Time: {minutes} mins",
+    stepCost: "Fare: €{min} ~ €{max}",
+    stepWarning: "Pro Tip: {tip}",
+    bookOfficial: "Book on Official Site",
+    badgeFrom: "From",
+    badgeTo: "To",
+    toggleStepAria: "Toggle expand/collapse for this step",
+    badges: {
+      TRAIN: "Train",
+      BUS: "Bus",
+      FLIGHT: "Flight",
+      TAXI: "Taxi",
+      WALK: "Walk",
+    },
+    routes: {
+      frances: {
+        name: "Camino Francés",
+        startTown: "SJPP (Saint-Jean-Pied-de-Port)",
+        shortTown: "SJPP",
+      },
+      portugues: {
+        name: "Camino Portugués",
+        startTown: "Porto (Sé Cathedral)",
+        shortTown: "Porto",
+      },
+      norte: {
+        name: "Camino del Norte",
+        startTown: "Irún (Border)",
+        shortTown: "Irún",
+      },
+    },
+    cities: {
+      frances: {
+        PARIS: {
+          name: "Paris (CDG Airport / Downtown)",
+          summary: "TGV High-speed + TER Scenic Regional Train (~6.5h)",
+        },
+        MADRID: {
+          name: "Madrid (MAD Airport)",
+          summary: "Renfe Train to Pamplona + Seasonal Bus (~6.0h)",
+        },
+        BARCELONA: {
+          name: "Barcelona (BCN Airport)",
+          summary: "Train to Pamplona + Bus / Carpool (~7.0h)",
+        },
+      },
+      portugues: {
+        PORTO_AIRPORT: {
+          name: "Porto Airport (OPO Direct)",
+          summary: "Metro Line E direct to Cathedral in 28 mins (~0.5h)",
+        },
+        LISBON: {
+          name: "Lisbon (Lisboa Oriente)",
+          summary: "CP Alfa Pendular High-speed Train to Porto (~3.5h)",
+        },
+        MADRID: {
+          name: "Madrid (MAD Airport)",
+          summary: "Direct Flight 75m / ALSA Long-distance Coach (~2.0h~8.5h)",
+        },
+      },
+      norte: {
+        PARIS: {
+          name: "Paris (Paris Montparnasse)",
+          summary: "TGV direct to Hendaye + 4-min Metro (~5.0h)",
+        },
+        MADRID: {
+          name: "Madrid (Madrid Chamartín)",
+          summary: "Renfe Alvia Express / Coach direct to Irún (~5.5h)",
+        },
+        SAN_SEBASTIAN_AIRPORT: {
+          name: "San Sebastián / Bilbao (EAS/BIO)",
+          summary: "Airport Suburban Bus 15m direct to Albergue (~0.5h)",
+        },
+      },
+    },
+    platforms: {
+      sncf: "SNCF (France)",
+      renfe: "Renfe (Spain)",
+      cp: "CP (Portugal)",
+      alsa: "ALSA Bus",
+      euskotren: "Euskotren",
+      omio: "Omio Compare",
+    },
+    tips: {
+      frances: [
+        "TGV Early Bird Tickets: SNCF TGV INOUI tickets open up to 6 months in advance. Booking Paris to Bayonne/Hendaye early is recommended as peak fares rise quickly.",
+        "Pamplona to SJPP Bus: ALSA seasonal bus typically operates from March to October with a daily departure around 12:00 PM. No service in winter; verify schedules beforehand.",
+        "Taxi Carpooling: If you miss the Pamplona-SJPP bus, consider booking a taxi or carpooling with fellow pilgrims. Confirm fares and luggage capacity in advance.",
+        "SJPP Arrival Information: Visit the Pilgrim's Office on Rue de la Citadelle to pick up your Credencial, get your first stamp, and check weather conditions. If the Napoleon route is closed in winter, take the Valcarlos route instead.",
+      ],
+      portugues: [
+        "Porto Airport Metro: Take Metro Line E (Violet line) from OPO Airport to Trindade station (approx. 27 mins). A single Z4 fare is €2.30 with an Andante card. Contactless Visa/Mastercard payments are also accepted at designated gates.",
+        "Credencial Pickup in Porto: Pick up your Pilgrim's Credencial and first stamp at Posto de Turismo da Sé near Porto Cathedral. Check opening hours in advance.",
+        "Central vs. Coastal Route: The Central and Coastal routes depart Porto in different directions. For the Coastal route, take the metro toward Matosinhos to start directly along the beach boardwalks.",
+        "Time Zone Difference: Mainland Portugal is 1 hour behind mainland Spain (UTC+0 vs UTC+1). When taking cross-border trains or buses, pay close attention to local departure times.",
+      ],
+      norte: [
+        "Paris TGV to Irún: Take the TGV from Paris Montparnasse to Hendaye (fastest travel time approx. 4h 40m). Walk to the nearby Euskotren Hendaia station and take Line E2 across the border to Irún.",
+        "Credencial Pickup in Irún: The most convenient location is the Jakobi Pilgrim Albergue (Calle Lesaka, 1), open daily 16:00–20:00 from February to November. Local churches and the town hall can also assist.",
+        "Euskotren Cross-border Transit: Hendaia to Irún on Line E2 takes only a few minutes. TGV and Euskotren are separate ticketing systems. Choose Ficoba or Irún Colón station based on your destination.",
+        "Cross-border Station Names: Hendaye (French) and Hendaia (Basque) refer to the same station. Verify schedules and allow ample time for transfers.",
+      ],
+    },
+    coastalTips: {
+      title: "Camino de la Costa · Dedicated Transit Guide",
+      tip1Title: "Porto Downtown ➔ Matosinhos Coastal Trailhead Transit",
+      tip1Desc:
+        "The first 10km walking out of Porto Cathedral passes through busy roads and hard stone pavements. We recommend taking Metro Line A (Blue line) from Trindade station to Matosinhos Sul station (~25 mins, single ticket €2.15), stepping right onto Atlantic beaches and wooden boardwalks.",
+      tip2Title: "Caminha Cross-border Ferry / Taxi-Boat to A Guarda (Spain)",
+      tip2Desc:
+        "The Miño River divides Portugal and Spain. The official ferry (Ferry Xacobeo, ~€1.50) is heavily tide-dependent and frequently suspended at low tide. If suspended, take a Pilgrim Taxi-Boat at the pier (~€5~€6/person, 5-minute crossing directly to the opposite dock).",
+      tip2TimeNotice: "⏰ Reminder: Set your watch forward 1 hour upon crossing into Spain (Portugal UTC+0 ➔ Spain UTC+1).",
+    },
+  },
   common: {
     backToTop: "Back to Top",
     version: "Version",
     loading: "Loading...",
     confirm: "Confirm",
     cancel: "Cancel",
+  },
+  faq: {
+    pageTitle: "Camino de Santiago FAQ",
+    pageDescription:
+      "Comprehensive pre-trip answers for pilgrims: albergue rules, Compostela certification and credential stamps, lightweight packing rules, and cross-border transport.",
+    allCategories: "All",
+    expand: "Expand",
+    collapse: "Collapse",
+    backToPlanner: "Back to Planner",
+    back: "Back",
+    historyLink: "History",
+    routesLink: "Routes Guide",
+    disclaimerTitle: "Information Disclaimer:",
+    disclaimerText:
+      "Information on this page is periodically updated based on official announcements from the Pilgrim's Office in Santiago and regional authorities. As accommodations, timetables, routes, and regulations may change due to seasonality or maintenance, please verify with official on-site rules. ¡Buen Camino!",
   },
 };

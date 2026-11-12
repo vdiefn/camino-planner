@@ -357,11 +357,154 @@ export default {
       footerWish: 'Buen Camino! 祝朝聖之路平安順心',
     },
   },
+  transport: {
+    title: '前往朝聖起點交通指南',
+    selectOriginCity: '選擇你的歐洲抵達城市',
+    mobileTipsTitle: '起點交通貼心小提醒',
+    mobileTipsAria: '查看起點交通貼心小提醒',
+    bookingPlatformsTitle: '官方購票平台快速傳送門',
+    tipsSectionTitle: '{route}起點避坑提醒',
+    durationLabel: '耗時:',
+    durationValue: '約 {hours} 小時',
+    costLabel: '票價:',
+    costRange: '€{min} ~ €{max}',
+    stepsCount: '轉乘步驟詳情 (共 {count} 步)',
+    expandAll: '全部展開',
+    collapseAll: '全部收合',
+    stepDuration: '預估車程：{minutes} 分鐘',
+    stepCost: '票價：€{min} ~ €{max}',
+    stepWarning: '避坑提示：{tip}',
+    bookOfficial: '前往官方預訂',
+    badgeFrom: '起',
+    badgeTo: '迄',
+    toggleStepAria: '切換此步驟展開收合',
+    badges: {
+      TRAIN: '鐵路',
+      BUS: '巴士',
+      FLIGHT: '飛機',
+      TAXI: '計程車',
+      WALK: '步行',
+    },
+    routes: {
+      frances: {
+        name: '法國之路',
+        startTown: 'SJPP (聖讓皮耶德波爾)',
+        shortTown: 'SJPP',
+      },
+      portugues: {
+        name: '葡萄牙之路',
+        startTown: '波多 (Porto 大教堂)',
+        shortTown: '波多',
+      },
+      norte: {
+        name: '北方之路',
+        startTown: '伊倫 (Irún 邊界)',
+        shortTown: '伊倫',
+      },
+    },
+    cities: {
+      frances: {
+        PARIS: {
+          name: '巴黎 (Paris CDG / 市區)',
+          summary: 'TGV 高鐵 + TER 景觀區間車 (約 6.5h)',
+        },
+        MADRID: {
+          name: '馬德里 (Madrid MAD)',
+          summary: '國鐵至 Pamplona + 直達季節巴士 (約 6.0h)',
+        },
+        BARCELONA: {
+          name: '巴塞隆納 (Barcelona BCN)',
+          summary: '鐵路至 Pamplona + 巴士/共乘 (約 7.0h)',
+        },
+      },
+      portugues: {
+        PORTO_AIRPORT: {
+          name: '波多機場直達 (Porto OPO)',
+          summary: '市區輕軌 E 線 28 分鐘直達主教座堂 (約 0.5h)',
+        },
+        LISBON: {
+          name: '里斯本 (Lisboa Oriente)',
+          summary: 'CP 國鐵 Alfa Pendular 高鐵直達波多 (約 3.5h)',
+        },
+        MADRID: {
+          name: '馬德里 (Madrid MAD)',
+          summary: '跨國直飛 75 分鐘 / ALSA 長途客運 (約 2.0h~8.5h)',
+        },
+      },
+      norte: {
+        PARIS: {
+          name: '巴黎 (Paris Montparnasse)',
+          summary: 'TGV 直達邊境 Hendaye + 4分鐘輕軌 (約 5.0h)',
+        },
+        MADRID: {
+          name: '馬德里 (Madrid Chamartín)',
+          summary: 'Renfe Alvia 特快列車 / 客運直達 Irún (約 5.5h)',
+        },
+        SAN_SEBASTIAN_AIRPORT: {
+          name: '聖塞巴斯提安 / 畢爾包 (EAS/BIO)',
+          summary: '機場市郊巴士 15 分鐘直達庇護所 (約 0.5h)',
+        },
+      },
+    },
+    platforms: {
+      sncf: '法鐵 SNCF',
+      renfe: '西鐵 Renfe',
+      cp: '葡鐵 CP',
+      alsa: 'ALSA 巴士',
+      euskotren: 'Euskotren 輕軌',
+      omio: 'Omio 比價',
+    },
+    tips: {
+      frances: [
+        'TGV 早鳥票：SNCF TGV INOUI 最多可提前 6 個月購票，巴黎至 Bayonne／Hendaye 建議提早查詢，熱門時段票價容易上漲。',
+        'Pamplona 至 SJPP 巴士：ALSA 季節性巴士通常於 3～10 月營運，約每日 12:00 發車；冬季停駛，出發前務必確認最新班次。',
+        '計程車共乘：若錯過 Pamplona 至 SJPP 巴士，可預約計程車或與其他朝聖者共乘，建議事先確認車資及行李空間。',
+        'SJPP 起點資訊：抵達後可前往 Rue de la Citadelle 的朝聖者辦公室領取 Credencial、蓋出發章並確認路線；冬季拿破崙路線封閉時，應改走 Valcarlos 路線。',
+      ],
+      portugues: [
+        '波多機場地鐵交通：從 OPO 機場搭乘地鐵 E 線（紫線 Violeta）至 Trindade 站，車程約 27 分鐘。2026 年 Z4 單程票價為 €2.30，使用 Andante 卡須在進站前驗票；亦可於指定驗票機使用 Visa／Mastercard 感應支付。',
+        'Credencial 領取地點：波多可前往 Sé 附近的 Posto de Turismo da Sé（主教座堂旅遊服務處），詢問聖地牙哥朝聖者護照 Credencial 的領取及蓋章服務。服務時間有限，建議出發前確認開放日期與時間。',
+        '中央線與海岸線交通：葡萄牙中央線（Caminho Português Central）與海岸線（Caminho Português da Costa）出城方向不同。若走海岸線，可搭乘地鐵轉往 Matosinhos 一帶接續海岸步道；出發前請先確認路線及下車地點，避免走錯方向。',
+        '葡萄牙與西班牙時差：葡萄牙本土全年比西班牙本土慢 1 小時。若途中跨境搭乘火車或巴士，請留意車票標示的當地時間，避免因時差錯過班次。',
+      ],
+      norte: [
+        '巴黎 TGV 前往 Irún：從巴黎蒙帕納斯（Paris Montparnasse）搭乘 TGV 前往 Hendaye，車程最快約 4 小時 40 分鐘。抵達後步行至附近的 Euskotren Hendaia 車站，轉乘 E2 線前往西班牙 Irún。',
+        'Irún 領取 Credencial：北方之路起點 Irún 有多個朝聖者護照領取地點，最方便的是 Jakobi 朝聖者庇護所（Calle Lesaka, 1），每年 2 月至 11 月每日 16:00～20:00 可領取及蓋章；其他時間也可詢問當地教堂或市政府。',
+        'Euskotren 跨境交通：Hendaia 至 Irún 搭乘 E2 線僅需數分鐘，無須另外搭乘長途交通工具。TGV 與 Euskotren 為不同系統，須分別購票；Irún 可依目的地選擇 Ficoba 或 Irún Colon 車站下車。',
+        '跨境轉乘注意事項：Hendaye（法文）與 Hendaia（巴斯克語）是同一地點，查詢車站及班次時可能看到不同名稱。Euskotren 班距及營運時間依日期而異，建議事先確認時刻表並預留轉乘時間。',
+      ],
+    },
+    coastalTips: {
+      title: '葡萄牙海岸線 (Camino de la Costa) 專屬交通錦囊',
+      tip1Title: '波多市區 ➔ Matosinhos 濱海起步接駁',
+      tip1Desc:
+        '波多主教座堂出城前 10km 為多車流工業與硬石板路。建議自市區 Trindade 站 搭乘輕軌 Metro A 線（藍線） 至 Matosinhos Sul 站（約 25 分鐘，單程 €2.15），出站即達大西洋沙灘與木棧道起步。',
+      tip2Title: 'Caminha 跨米尼奧河至西班牙 A Guarda 渡輪',
+      tip2Desc:
+        '西葡邊境由米尼奧河阻隔：官方渡輪（Ferry Xacobeo，約 €1.50）極受潮汐影響，退潮常停駛。若遇停航可於碼頭搭乘 朝聖者計程快艇（Taxi-Boat）（約 €5~€6/人，航程 5 分鐘直達碼頭）。',
+      tip2TimeNotice: '⏰ 提醒：過河入境西班牙手錶需調快 1 小時（葡萄牙 UTC+0 ➔ 西班牙 UTC+1）。',
+    },
+  },
   common: {
     backToTop: '回到頂端',
     version: '版本',
     loading: '載入中...',
     confirm: '確認',
     cancel: '取消',
+  },
+  faq: {
+    pageTitle: '朝聖之路常見問題百科 (FAQ)',
+    pageDescription:
+      '專為聖雅各朝聖徒步者整理的行前問答，涵蓋公私立庇護所入住技巧、朝聖證書與印章規範、背包負重減法法則以及跨國交通轉乘。',
+    allCategories: '全部',
+    expand: '展開',
+    collapse: '收合',
+    backToPlanner: '返回規劃工具',
+    back: '返回',
+    historyLink: '歷史淵源',
+    routesLink: '路線攻略',
+    disclaimerTitle: '資訊查核提示：',
+    disclaimerText:
+      '本站整理之問答與相關資訊，將持續參考聖地牙哥朝聖者辦公室及各地官方機構公告進行更新。由於沿途住宿、交通、路線及相關規定可能因季節、天候或營運狀況而有所變動，實際資訊請以官方最新公告及現場規定為準。祝您旅途平安順利，一路順風！ ¡Buen Camino!',
   },
 }
