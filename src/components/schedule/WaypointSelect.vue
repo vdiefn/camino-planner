@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   Combobox,
   ComboboxInput,
@@ -24,6 +25,9 @@ const emit = defineEmits<{
   (e: 'change', value: string): void
 }>()
 
+const { locale } = useI18n()
+const isEnglish = computed(() => locale.value === 'en')
+
 const query = ref('')
 const inputRef = ref<any>(null)
 
@@ -35,6 +39,12 @@ const selectedWaypoint = computed(() => {
 // 格式化顯示名稱
 const formatWaypoint = (wp: Waypoint | null) => {
   if (!wp) return ''
+  if (isEnglish.value) {
+    if (wp.id === 'SJPP') {
+      return 'SJPP - Saint-Jean-Pied-de-Port'
+    }
+    return wp.localName || wp.spanishName || wp.id
+  }
   if (wp.id === 'SJPP') {
     return 'SJPP - Saint-Jean-Pied-de-Port（聖讓皮耶德波爾）'
   }
@@ -156,7 +166,7 @@ function handleClearInput() {
             v-if="filteredWaypoints.length === 0 && query !== ''"
             class="relative cursor-default select-none px-4 py-3 text-center text-xs text-slate-500"
           >
-            查無符合「{{ query }}」的航點或城鎮
+            {{ isEnglish ? `No destinations found for "${query}"` : `查無符合「${query}」的航點或城鎮` }}
           </div>
 
           <!-- 航點項目列表 -->
@@ -185,18 +195,18 @@ function handleClearInput() {
                 <div class="truncate">
                   <div class="flex items-center gap-1.5 truncate">
                     <span class="font-medium text-slate-900 truncate">
-                      {{ wp.id === 'SJPP' ? 'SJPP (聖讓皮耶德波爾)' : (wp.localName || wp.spanishName) }}
+                      {{ wp.id === 'SJPP' ? (isEnglish ? 'SJPP (Saint-Jean-Pied-de-Port)' : 'SJPP (聖讓皮耶德波爾)') : (wp.localName || wp.spanishName) }}
                     </span>
                     <span
                       v-if="wp.hasAlbergue"
                       class="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded font-normal shrink-0"
-                      title="設有朝聖者庇護所"
+                      :title="$t('schedule.facilities.albergue')"
                     >
                       <House class="w-3 h-3 shrink-0" />
-                      <span class="hidden sm:inline">庇護所</span>
+                      <span class="hidden sm:inline">{{ $t('schedule.facilities.albergue') }}</span>
                     </span>
                   </div>
-                  <div class="text-xs text-slate-500 truncate">
+                  <div v-if="!isEnglish" class="text-xs text-slate-500 truncate">
                     {{ wp.chineseName }}
                   </div>
                 </div>

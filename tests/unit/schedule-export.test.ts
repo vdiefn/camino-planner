@@ -207,4 +207,22 @@ describe('scheduleExport 純文字行程路書匯出測試', () => {
     expect(text).not.toContain('Village')
     expect(text).not.toContain('Start')
   })
+
+  it('TC-06: 支援英文語系 (locale = en) 輸出純英文路書', () => {
+    const enMeta: ScheduleExportMeta = {
+      routeName: 'Camino Francés · Napoleon Route',
+      startDate: '2026-05-01',
+      totalDays: 2,
+      totalDistanceKm: 46.6,
+      totalElevationGainM: 1480,
+    }
+    const text = generateScheduleTextChecklist(mockStages, mockWaypointMap, enMeta, 'en')
+    expect(text).toContain('Camino de Santiago Daily Walking Itinerary · Starting 2026-05-01')
+    expect(text).toContain('Route: Camino Francés · Napoleon Route | 2 days')
+    expect(text).toContain('[Itinerary]')
+    expect(text).toContain('D01 05-01 Saint-Jean-Pied-de-Port ➔ Roncesvalles · 25.1 km')
+    expect(text).toContain('Buen Camino! Wishing you a peaceful journey.')
+    expect(text).not.toContain('聖雅各朝聖之路')
+    expect(text).not.toContain('【行程表】')
+  })
 })

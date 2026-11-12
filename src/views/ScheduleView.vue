@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { useScheduleStore } from "@/stores/schedule";
 import StageCard from "@/components/schedule/StageCard.vue";
 import ChangeWaypointModal from "@/components/schedule/ChangeWaypointModal.vue";
@@ -28,6 +29,31 @@ import {
 
 const scheduleStore = useScheduleStore();
 const router = useRouter();
+const { t, locale } = useI18n();
+
+const isEnglish = computed(() => locale.value === 'en');
+
+const getRouteName = (route: any) => {
+  if (!route) return '';
+  return isEnglish.value ? (route.name || route.chineseName) : route.chineseName;
+};
+
+const getFinisterreTitle = (key: FinisterreOption) => {
+  switch (key) {
+    case 'NONE':
+      return t('schedule.finisterre.none');
+    case 'FINISTERRE_ONLY':
+      return t('schedule.finisterre.finisterreOnly');
+    case 'MUXIA_ONLY':
+      return t('schedule.finisterre.muxiaOnly');
+    case 'BOTH_FINISTERRE_FIRST':
+      return t('schedule.finisterre.bothFinisterreFirst');
+    case 'BOTH_MUXIA_FIRST':
+      return t('schedule.finisterre.bothMuxiaFirst');
+    default:
+      return '';
+  }
+};
 
 // 手機版折疊狀態（預設收合以釋放手機垂直空間）
 const isMobileSettingsOpen = ref(false);
@@ -36,12 +62,14 @@ const isScheduleTipsModalOpen = ref(false);
 // 紙本行程路書預覽與列印 Modal 狀態
 const isPrintScheduleModalOpen = ref(false);
 
-// 當前分支中文名稱（供路書頁首顯示，如「拿破崙越嶺線」或「海岸線」）
+// 當前分支名稱（供路書頁首顯示，支援中英雙語）
 const currentBranchName = computed(() => {
   const branchId = scheduleStore.currentDraft?.branchId;
-  return scheduleStore.currentRouteMetadata?.branches?.find(
+  const branch = scheduleStore.currentRouteMetadata?.branches?.find(
     (b) => b.id === branchId,
-  )?.chineseName;
+  );
+  if (!branch) return '';
+  return isEnglish.value ? (branch.name || branch.chineseName) : branch.chineseName;
 });
 
 // 計算兩航點間的總距離（依據當前路線航點列表）
@@ -63,12 +91,16 @@ const draftConfig = ref({
 const formatBranchOption = (branch: any) => {
   let note = "";
   if (scheduleStore.isWinterLocked && branch.id === "napoleon") {
-    note = "（❄️ 11/1~3/31 封山禁行）";
+    note = t('schedule.settings.winterClosed');
   } else if (scheduleStore.isWinterLocked && branch.id === "valcarlos") {
-    note = "（冬季官方建議通行）";
+    note = t('schedule.settings.winterRecommended');
   }
-  const distInfo = `（約${Math.round(branch.totalDistanceKm || 0)}km • ${branch.recommendedDays} 天）`;
-  return `${branch.chineseName}${note ? " " + note : ""} ${distInfo}`;
+  const distInfo = t('schedule.settings.approxDays', {
+    km: Math.round(branch.totalDistanceKm || 0),
+    days: branch.recommendedDays,
+  });
+  const name = isEnglish.value ? (branch.name || branch.chineseName) : branch.chineseName;
+  return `${name}${note ? note : ""}${distInfo}`;
 };
 
 // 當 store 外部或切換路線有更新時，同步回 draftConfig
@@ -513,7 +545,7 @@ onUnmounted(() => {
           <h1
             class="text-base sm:text-lg md:text-xl font-bold text-slate-900 flex items-center gap-2 shrink-0"
           >
-            徒步行程規劃
+            {{ $t('schedule.title') }}
           </h1>
 
           <!-- 列印行程按鈕（手機端靠最右側對齊，與全站一致） -->
@@ -521,11 +553,11 @@ onUnmounted(() => {
             type="button"
             @click="isPrintScheduleModalOpen = true"
             class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-600 px-2.5 sm:px-3 py-1.5 rounded-lg shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1.5 shrink-0"
-            title="開啟 A4 橫向紙本行程預覽與列印"
+            :title="$t('schedule.printTooltip')"
           >
             <Printer class="w-3.5 h-3.5 text-slate-500" />
-            <span class="sm:hidden">列印</span>
-            <span class="hidden sm:inline">列印行程</span>
+            <span class="sm:hidden">{{ $t('schedule.print') }}</span>
+            <span class="hidden sm:inline">{{ $t('schedule.printSchedule') }}</span>
           </button>
         </div>
 
@@ -535,7 +567,7 @@ onUnmounted(() => {
         >
           <!-- 總徒步里程 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總里程</span>
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.totalDistance') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
               <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
                 scheduleStore.totalDistanceKm.toFixed(1)
@@ -546,23 +578,23 @@ onUnmounted(() => {
 
           <!-- 日均徒步 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">日均</span>
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.dailyAverage') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
               <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
                 dailyAverageKm.toFixed(1)
               }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km/日</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">{{ $t('schedule.stats.dailyAverageUnit') }}</span>
             </div>
           </div>
 
           <!-- 總天數 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">總天數</span>
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.totalDays') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
               <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
                 totalTripDays
               }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">{{ $t('schedule.stats.dayUnit') }}</span>
               <span
                 v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
                 class="hidden sm:inline text-[10px] text-slate-400 font-mono ml-0.5"
@@ -574,12 +606,12 @@ onUnmounted(() => {
 
           <!-- 休息停留 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">休息</span>
+            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.restDays') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
               <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
                 scheduleStore.totalRestDays
               }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">天</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">{{ $t('schedule.stats.dayUnit') }}</span>
             </div>
           </div>
         </div>
@@ -605,14 +637,14 @@ onUnmounted(() => {
             class="flex items-center justify-between cursor-pointer lg:cursor-default select-none"
           >
             <div class="flex items-center gap-1.5">
-              <h2 class="text-base text-slate-900">行程規劃設定</h2>
+              <h2 class="text-base text-slate-900">{{ $t('schedule.settings.title') }}</h2>
               <div class="inline-flex items-center" @click.stop>
                 <button
                   type="button"
                   @click.stop="isScheduleTipsModalOpen = true"
                   class="text-amber-500 hover:text-amber-600 p-1 rounded-lg hover:bg-amber-50 transition cursor-pointer flex items-center"
-                  title="彈性排程小提醒"
-                  aria-label="查看彈性排程小提醒"
+                  :title="$t('schedule.settings.tipsTitle')"
+                  :aria-label="$t('schedule.settings.tipsTitle')"
                 >
                   <MessageCircleWarning class="w-4 h-4" />
                 </button>
@@ -626,7 +658,7 @@ onUnmounted(() => {
                 class="text-xs text-slate-400 hover:text-rose-500 items-center gap-1 transition cursor-pointer"
                 :class="isMobileSettingsOpen ? 'flex' : 'hidden lg:flex'"
               >
-                <RotateCcw class="w-3.5 h-3.5" /> 重設
+                <RotateCcw class="w-3.5 h-3.5" /> {{ $t('schedule.settings.reset') }}
               </button>
 
               <!-- 手機版折疊按鈕 -->
@@ -670,7 +702,7 @@ onUnmounted(() => {
                 </span>
                 <span class="text-slate-300">·</span>
                 <span class="font-bold text-slate-800 font-mono text-xs">
-                  {{ mobileDisplayTotalDays }} 天
+                  {{ mobileDisplayTotalDays }} {{ $t('schedule.stats.dayUnit') }}
                   <span
                     v-if="draftConfig.finisterreOption !== 'NONE'"
                     class="text-[10px] text-slate-400 font-normal font-sans ml-0.5"
@@ -683,7 +715,7 @@ onUnmounted(() => {
                 v-if="isDirty"
                 class="inline-flex items-center gap-1 text-[11px] text-amber-600 font-medium shrink-0"
               >
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>待套用
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>{{ $t('schedule.settings.pendingApply') }}
               </span>
             </div>
           </div>
@@ -696,7 +728,7 @@ onUnmounted(() => {
             <!-- 主路線切換：手機版下拉選單 (sm:hidden) / 電腦平板網格按鈕 (hidden sm:grid) -->
             <div>
               <label class="text-xs text-slate-700 mb-1 flex items-center gap-1.5">
-                <span>選擇朝聖主路線</span>
+                <span>{{ $t('schedule.settings.selectRoute') }}</span>
               </label>
 
               <!-- 手機版：單行精簡下拉選單（省空間且支援多路線無縫擴充） -->
@@ -711,7 +743,7 @@ onUnmounted(() => {
                     :key="route.id"
                     :value="route.id"
                   >
-                    {{ route.chineseName }}（約 {{ scheduleStore.getRouteDisplayDistance(route.id) }}km）
+                    {{ getRouteName(route) }} ({{ scheduleStore.getRouteDisplayDistance(route.id) }}km)
                   </option>
                 </select>
               </div>
@@ -730,7 +762,7 @@ onUnmounted(() => {
                       : 'text-slate-600 hover:text-slate-800'
                   ]"
                 >
-                  <div class="text-sm truncate text-slate-900">{{ route.chineseName }}</div>
+                  <div class="text-sm truncate text-slate-900">{{ getRouteName(route) }}</div>
                   <div class="text-[11px] text-slate-400 mt-0.5 truncate">
                     {{ scheduleStore.getRouteDisplayDistance(route.id) }}km
                   </div>
@@ -742,10 +774,10 @@ onUnmounted(() => {
             <div v-if="scheduleStore.currentRouteMetadata?.branches?.length">
               <div class="flex items-center justify-between mb-1">
                 <label class="block text-xs text-slate-600">
-                  {{ scheduleStore.currentRouteMetadata.chineseName }}走法／分支
+                  {{ isEnglish ? scheduleStore.currentRouteMetadata?.name : scheduleStore.currentRouteMetadata?.chineseName }} {{ $t('schedule.settings.branchVariant') }}
                 </label>
                 <span class="text-[12px] text-slate-400">
-                  {{ scheduleStore.currentRouteId === 'frances' ? '於 Roncesvalles 匯合' : '於 Redondela 匯合' }}
+                  {{ scheduleStore.currentRouteId === 'frances' ? $t('schedule.settings.mergesAtRoncesvalles') : $t('schedule.settings.mergesAtRedondela') }}
                 </span>
               </div>
               <select
@@ -767,7 +799,7 @@ onUnmounted(() => {
             <!-- 起點（獨立佔一行，支援搜尋與自訂防反彈下拉） -->
             <WaypointSelect
               v-model="draftConfig.startWaypointId"
-              label="起點"
+              :label="$t('schedule.settings.startTownLabel')"
               :waypoints="scheduleStore.currentMainWaypoints"
               @change="handleWaypointChange"
             />
@@ -775,7 +807,7 @@ onUnmounted(() => {
             <!-- 終點（獨立佔一行，支援搜尋與自訂防反彈下拉） -->
             <WaypointSelect
               v-model="draftConfig.endWaypointId"
-              label="終點"
+              :label="$t('schedule.settings.endTownLabel')"
               :waypoints="scheduleStore.currentMainWaypoints"
               @change="handleWaypointChange"
             />
@@ -784,7 +816,7 @@ onUnmounted(() => {
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs text-slate-600 mb-1">
-                  出發日期
+                  {{ $t('schedule.settings.startDate') }}
                 </label>
                 <input
                   type="date"
@@ -798,12 +830,12 @@ onUnmounted(() => {
                   <label class="block text-xs text-slate-600">
                     {{
                       draftConfig.finisterreOption !== 'NONE'
-                        ? '主線天數'
-                        : '預計天數'
+                        ? $t('schedule.settings.mainDays')
+                        : $t('schedule.settings.targetDaysLabel')
                     }}
                   </label>
                   <span class="text-[11px] text-slate-500 font-mono">
-                    約 {{ draftDailyAvgKm }} km/日
+                    ~ {{ draftDailyAvgKm }} {{ $t('schedule.stats.dailyAverageUnit') }}
                   </span>
                 </div>
                 <div
@@ -819,7 +851,7 @@ onUnmounted(() => {
                   <span
                     class="flex-1 text-center text-xs font-bold text-slate-900 font-mono"
                   >
-                    {{ draftConfig.targetDays }} 天
+                    {{ draftConfig.targetDays }} {{ $t('schedule.stats.dayUnit') }}
                   </span>
                   <button
                     type="button"
@@ -841,7 +873,7 @@ onUnmounted(() => {
                 <!-- 延伸路線下拉選單 -->
                 <div :class="draftConfig.finisterreOption !== 'NONE' ? 'sm:col-span-7' : 'w-full'">
                   <label class="text-xs text-slate-800 block mb-0.5">
-                    世界盡頭延伸旅程
+                    {{ $t('schedule.settings.finisterreTitle') }}
                   </label>
                   <select
                     :value="draftConfig.finisterreOption"
@@ -849,11 +881,11 @@ onUnmounted(() => {
                     class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:ring-slate-300 outline-hidden truncate"
                   >
                     <option
-                      v-for="(info, key) in finisterreOptionLabels"
+                      v-for="(_, key) in finisterreOptionLabels"
                       :key="key"
                       :value="key"
                     >
-                      {{ info.title }}
+                      {{ getFinisterreTitle(key) }}
                     </option>
                   </select>
                 </div>
@@ -865,10 +897,10 @@ onUnmounted(() => {
                 >
                   <div class="flex items-center justify-between mb-1">
                     <label class="block text-xs text-slate-600">
-                      延伸天數
+                      {{ $t('schedule.settings.finisterreDays') }}
                     </label>
                     <span class="text-[10px] text-slate-400 font-mono">
-                      約 {{ finisterreDailyAvgKm }}km/日
+                      ~{{ finisterreDailyAvgKm }} {{ $t('schedule.stats.dailyAverageUnit') }}
                     </span>
                   </div>
                   <div
@@ -885,7 +917,7 @@ onUnmounted(() => {
                     <span
                       class="flex-1 text-center text-xs font-bold text-slate-900 font-mono"
                     >
-                      {{ draftConfig.finisterreDays }} 天
+                      {{ draftConfig.finisterreDays }} {{ $t('schedule.stats.dayUnit') }}
                     </span>
                     <button
                       type="button"
@@ -914,36 +946,34 @@ onUnmounted(() => {
                 ]"
               >
                 <CheckCircle2 class="w-4 h-4" />
-                確認按照變更重新規劃
+                {{ $t('schedule.settings.applyChanges') }}
               </button>
               <div
                 v-if="isDirty"
                 class="mt-2 flex items-center justify-between text-xs text-slate-700 px-2.5 py-1.5 rounded-lg bg-stone-100 border border-stone-200"
               >
-                <span class="flex items-center gap-1"
-                  >設定已變更，請點擊確認</span
-                >
+                <span class="flex items-center gap-1">
+                  {{ $t('schedule.settings.changedHint') }}
+                </span>
                 <button
                   type="button"
                   @click="handleDiscardDraft"
                   class="text-slate-500 hover:text-slate-800 underline cursor-pointer"
                 >
-                  放棄修改
+                  {{ $t('schedule.settings.discard') }}
                 </button>
               </div>
             </div>
             <!-- 冬季庇里牛斯山安全提醒 -->
             <div
               v-if="scheduleStore.isWinterLocked"
-              class="p-3  rounded-xl text-xs text-slate-800 flex items-start gap-2"
+              class="p-3 rounded-xl text-xs text-slate-800 flex items-start gap-2"
             >
               <AlertTriangle class="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
               <div>
-                <p>冬季庇里牛斯山安全提醒</p>
+                <p>{{ $t('schedule.settings.winterAlertTitle') }}</p>
                 <p class="mt-0.5 opacity-90">
-                  11/1 ~ 3/31
-                  法國官方強制封閉高空拿破崙之路（違者面臨罰款且需自負搜救費用），系統已自動為您鎖定安全之谷道路線（經
-                  Valcarlos）。
+                  {{ $t('schedule.settings.winterAlertDesc') }}
                 </p>
               </div>
             </div>
@@ -957,10 +987,10 @@ onUnmounted(() => {
           <div class="space-y-1">
             <h3 class="flex items-center gap-1.5 text-xs sm:text-sm text-slate-800">
               <Sparkles class="h-4 w-4 text-amber-500 shrink-0" />
-              <span>彈性排程小提醒</span>
+              <span>{{ $t('schedule.settings.flexibleTipsTitle') }}</span>
             </h3>
             <p class="leading-relaxed text-slate-600 text-[11px] sm:text-xs">
-              朝聖之路不需要完全照表操課。路上若遇體力不支或愛上某座小鎮，隨時點擊卡片上的「更換結束點」或「設為休息日」，系統會為您自動重新計算後續天數！
+              {{ $t('schedule.settings.flexibleTipsDesc') }}
             </p>
           </div>
         </div>
@@ -1076,11 +1106,11 @@ onUnmounted(() => {
     <!-- 彈性排程小提醒對話框 (手機與平板) -->
     <TipsModal
       :is-open="isScheduleTipsModalOpen"
-      title="彈性排程小提醒"
+      :title="$t('schedule.settings.flexibleTipsTitle')"
       @close="isScheduleTipsModalOpen = false"
     >
       <p class="leading-relaxed">
-        朝聖之路不需要完全照表操課。路上若遇體力不支或愛上某座小鎮，隨時點擊卡片上的「更換結束點」或「設為休息日」，系統會為您自動重新計算後續天數！
+        {{ $t('schedule.settings.flexibleTipsDesc') }}
       </p>
     </TipsModal>
 

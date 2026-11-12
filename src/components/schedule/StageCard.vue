@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import {
   ChevronDown,
@@ -25,6 +26,8 @@ const emit = defineEmits<{
 }>()
 
 const scheduleStore = useScheduleStore()
+const { locale } = useI18n()
+const isEnglish = computed(() => locale.value === 'en')
 
 // 航點查找（改吃 Store 全域查找字典，支援多路線與世界盡頭）
 const startWaypoint = computed<Waypoint | undefined>(() => {
@@ -38,6 +41,10 @@ const endWaypoint = computed<Waypoint | undefined>(() => {
 // 日期格式化 (MM/DD 星期幾)
 const formattedDate = computed(() => {
   const d = new Date(props.stage.date)
+  if (isEnglish.value) {
+    const enWeekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    return `${d.getMonth() + 1}/${d.getDate()} (${enWeekdays[d.getDay()]})`
+  }
   const weekdays = ['日', '一', '二', '三', '四', '五', '六']
   return `${d.getMonth() + 1}/${d.getDate()} (週${weekdays[d.getDay()]})`
 })
@@ -103,31 +110,31 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                 v-if="stage.isRestDay"
                 class="px-2 py-0.5 rounded-full text-xs font-normal bg-purple-100 text-purple-800"
               >
-                休息停留日
+                {{ $t('schedule.badges.restDay') }}
               </span>
               <span
                 v-if="stage.isExtensionStage && !stage.isRestDay"
                 class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-50 border border-sky-200 text-sky-900"
               >
-                世界盡頭延伸
+                {{ $t('schedule.badges.extension') }}
               </span>
               <span
                 v-if="stage.routeVariant === 'NAPOLEON'"
                 class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200"
               >
-                拿破崙之路
+                {{ $t('schedule.badges.napoleon') }}
               </span>
               <span
                 v-else-if="stage.routeVariant === 'VALCARLOS'"
                 class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-50 text-sky-900 border border-sky-200"
               >
-                瓦卡洛斯之路
+                {{ $t('schedule.badges.valcarlos') }}
               </span>
               <span
                 v-if="!stage.isRestDay && (stage.endWaypointId === 'SANTIAGO_DE_COMPOSTELA' || stage.endWaypointId.endsWith(':santiago'))"
                 class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200"
               >
-                🎉 朝聖主線終點
+                {{ $t('schedule.badges.destination') }}
               </span>
             </div>
 
@@ -146,10 +153,10 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                 v-if="endWaypoint?.isMajorCity"
                 class="px-1.5 py-0.5 rounded text-[10px] font-normal bg-amber-100 text-amber-800"
               >
-                大城
+                {{ $t('schedule.badges.majorCity') }}
               </span>
             </div>
-            <div class="text-xs text-slate-600 font-normal">
+            <div v-if="!isEnglish" class="text-xs text-slate-600 font-normal">
               {{ startWaypoint?.chineseName }} → {{ endWaypoint?.chineseName }}
             </div>
           </div>
@@ -179,7 +186,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
         class="mt-3 p-2.5 bg-orange-50 border border-orange-200 rounded-xl text-xs text-orange-800 flex items-center gap-2 font-normal"
       >
         <AlertTriangle class="w-4 h-4 shrink-0 text-orange-600" />
-        <span>住宿提醒：該落腳點無常設朝聖者庇護所，建議提前確認私立旅館或考慮前後城鎮。</span>
+        <span>{{ $t('schedule.facilities.noAlbergueAlert') }}</span>
       </div>
 
       <!-- 中段：機能標籤與操作按鈕 -->
@@ -192,7 +199,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             @click.stop="emit('open-albergue', stage)"
             class="px-2 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded text-xs cursor-pointer hover:bg-emerald-100 transition"
           >
-            庇護所
+            {{ $t('schedule.facilities.albergue') }}
           </button>
           <button
             v-if="endWaypoint?.hasSupermarket"
@@ -200,7 +207,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             @click.stop="openGoogleMapSearch('supermarket')"
             class="px-2 py-0.5 bg-blue-50 text-blue-800 border border-blue-200 rounded text-xs cursor-pointer hover:bg-blue-100 transition"
           >
-            超市
+            {{ $t('schedule.facilities.supermarket') }}
           </button>
           <button
             v-if="endWaypoint?.hasPharmacy"
@@ -208,7 +215,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             @click.stop="openGoogleMapSearch('pharmacy')"
             class="px-2 py-0.5 bg-rose-50 text-rose-800 border border-rose-200 rounded text-xs cursor-pointer hover:bg-rose-100 transition"
           >
-            藥局
+            {{ $t('schedule.facilities.pharmacy') }}
           </button>
         </div>
 
@@ -225,7 +232,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             ]"
           >
             <Coffee class="w-3.5 h-3.5" />
-            <span>{{ stage.isRestDay ? '取消休息' : '設為休息日' }}</span>
+            <span>{{ stage.isRestDay ? $t('schedule.actions.removeRest') : $t('schedule.actions.setRest') }}</span>
           </button>
         </div>
       </div>
@@ -258,37 +265,37 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                   v-if="stage.isExtensionStage && !stage.isRestDay"
                   class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-sky-100 text-sky-800"
                 >
-                  延伸
+                  {{ $t('schedule.badges.extension') }}
                 </span>
                 <span
                   v-if="stage.routeVariant === 'NAPOLEON'"
                   class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-900 border border-amber-300"
                 >
-                  ⛰️ 拿破崙之路
+                  ⛰️ {{ $t('schedule.badges.napoleon') }}
                 </span>
                 <span
                   v-else-if="stage.routeVariant === 'VALCARLOS'"
                   class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-sky-100 text-sky-900 border border-sky-300"
                 >
-                  🌲 瓦卡洛斯替代
+                  🌲 {{ $t('schedule.badges.valcarlos') }}
                 </span>
                 <span
                   v-if="!stage.isRestDay && (stage.endWaypointId === 'SANTIAGO_DE_COMPOSTELA' || stage.endWaypointId.endsWith(':santiago'))"
                   class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-800"
                 >
-                  主線終點
+                  {{ $t('schedule.badges.destination') }}
                 </span>
                 <span
                   v-if="endWaypoint?.isMajorCity"
                   class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-800"
                 >
-                  大城
+                  {{ $t('schedule.badges.majorCity') }}
                 </span>
                 <span
                   v-if="stage.isRestDay"
                   class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-purple-100 text-purple-800"
                 >
-                  休息停留
+                  {{ $t('schedule.badges.restDay') }}
                 </span>
               </div>
 
@@ -318,7 +325,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             </div>
 
             <!-- 中文起訖走向（已過濾全形與半形括號特色冗長說明，不再被截斷） -->
-            <div class="text-[11px] text-slate-500 font-normal mt-0.5 truncate">
+            <div v-if="!isEnglish" class="text-[11px] text-slate-500 font-normal mt-0.5 truncate">
               {{ cleanChineseName(startWaypoint?.chineseName) }} → {{ cleanChineseName(endWaypoint?.chineseName) }}
             </div>
           </div>
@@ -331,7 +338,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
               class="p-2 bg-orange-50 border border-orange-200 rounded-lg text-xs text-orange-900 font-normal flex items-center gap-1.5"
             >
               <AlertTriangle class="w-3.5 h-3.5 shrink-0 text-orange-600" />
-              <span>該城鎮無常設庇護所，請提前規劃！</span>
+              <span>{{ $t('schedule.facilities.noAlbergueAlert') }}</span>
             </div>
 
             <div class="flex items-center justify-between text-xs text-slate-700 pt-1 font-normal font-mono">
@@ -349,7 +356,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                   @click.stop="emit('open-albergue', stage)"
                   class="px-2 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded text-xs cursor-pointer hover:bg-emerald-100 transition"
                 >
-                  庇護所
+                  {{ $t('schedule.facilities.albergue') }}
                 </button>
                 <button
                   v-if="endWaypoint?.hasSupermarket"
@@ -357,7 +364,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                   @click.stop="openGoogleMapSearch('supermarket')"
                   class="px-2 py-0.5 bg-blue-50 text-blue-800 border border-blue-200 rounded text-xs cursor-pointer hover:bg-blue-100 transition"
                 >
-                  超市
+                  {{ $t('schedule.facilities.supermarket') }}
                 </button>
                 <button
                   v-if="endWaypoint?.hasPharmacy"
@@ -365,7 +372,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                   @click.stop="openGoogleMapSearch('pharmacy')"
                   class="px-2 py-0.5 bg-rose-50 text-rose-800 border border-rose-200 rounded text-xs cursor-pointer hover:bg-rose-100 transition"
                 >
-                  藥局
+                  {{ $t('schedule.facilities.pharmacy') }}
                 </button>
               </div>
 
@@ -381,7 +388,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
                 ]"
               >
                 <Coffee class="w-3.5 h-3.5" />
-                <span>{{ stage.isRestDay ? '取消休息' : '設為休息日' }}</span>
+                <span>{{ stage.isRestDay ? $t('schedule.actions.removeRest') : $t('schedule.actions.setRest') }}</span>
               </button>
             </div>
           </div>
