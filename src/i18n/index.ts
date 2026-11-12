@@ -37,6 +37,12 @@ export function setAppLocale(locale: SupportedLocale) {
   if (typeof window !== 'undefined') {
     localStorage.setItem(STORAGE_KEY, locale)
     document.documentElement.lang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en'
+    // 即時動態連動更新瀏覽器分頁標題與 Meta 標籤
+    import('@/router')
+      .then(({ updateDocumentSeo }) => {
+        updateDocumentSeo()
+      })
+      .catch(() => {})
   }
 }
 
