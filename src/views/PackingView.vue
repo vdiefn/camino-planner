@@ -299,7 +299,7 @@ onUnmounted(() => {
           class="text-base sm:text-lg md:text-xl text-slate-800 flex items-center gap-2 truncate"
         >
           <span class="sm:hidden">{{ t('packing.title') }}</span>
-          <span class="hidden sm:inline">{{ t('packing.titleLong') }}</span>
+          <span class="hidden sm:inline font-bold">{{ t('packing.titleLong') }}</span>
         </h2>
 
         <!-- 右側精巧功能按鈕群（手機端精簡文字防折行） -->
