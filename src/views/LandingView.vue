@@ -17,6 +17,7 @@ import {
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 import { useScheduleStore } from '@/stores/schedule'
 import type { RouteId } from '@/types/route'
 
@@ -134,45 +135,51 @@ function navigateToRoute(routeId: RouteId) {
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
-            <span>歷史淵源</span>
+            <span>{{ $t('nav.history') }}</span>
           </router-link>
           <router-link
             to="/routes"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Compass class="w-4 h-4 text-amber-500" />
-            <span>路線攻略</span>
+            <span>{{ $t('nav.routes') }}</span>
           </router-link>
           <router-link
             to="/faq"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <HelpCircle class="w-4 h-4 text-emerald-600" />
-            <span>常見問題</span>
+            <span>{{ $t('nav.faq') }}</span>
           </router-link>
+
+          <LanguageSwitcher mode="dropdown" />
+
           <router-link
             :to="`/schedule/${currentRouteId}`"
-            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
+            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5 ml-1"
           >
-            <span>開始規劃</span>
+            <span>{{ $t('landing.startPlanning') }}</span>
             <ArrowRight class="w-3.5 h-3.5" />
           </router-link>
         </div>
 
-        <!-- 右側快速傳送門（手機版：開始規劃 ＋ 漢堡選單） -->
-        <div class="flex md:hidden items-center gap-1.5">
+        <!-- 右側快速傳送門（手機版：開始規劃 ＋ 語言切換 ＋ 漢堡選單） -->
+        <div class="flex md:hidden items-center gap-1">
+          <LanguageSwitcher mode="dropdown" />
+
           <router-link
             :to="`/schedule/${currentRouteId}`"
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1"
           >
-            <span>開始規劃</span>
+            <span>{{ $t('landing.startPlanning') }}</span>
             <ArrowRight class="w-3 h-3" />
           </router-link>
           <button
             type="button"
             @click="isMenuDrawerOpen = true"
             class="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
-            aria-label="開啟全站選單"
+            :title="$t('nav.openMenu')"
+            :aria-label="$t('nav.openMenu')"
           >
             <Menu class="w-5 h-5" />
           </button>
