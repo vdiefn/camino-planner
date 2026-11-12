@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useBudgetStore } from '@/stores/budget'
-import { PERSONA_LABELS } from '@/utils/budgetCalculator'
+import { useScheduleStore } from '@/stores/schedule'
 import PrintBudgetModal from '@/components/budget/PrintBudgetModal.vue'
 import GoogleAd from '@/components/common/GoogleAd.vue'
-import type { BudgetExportMeta, BudgetDetails } from '@/types/budget'
+import type { BudgetExportMeta, BudgetDetails, BudgetPersona } from '@/types/budget'
 import {
   Printer,
   RotateCcw,
@@ -15,19 +16,51 @@ import {
   Info,
 } from 'lucide-vue-next'
 
+const { t, locale } = useI18n()
 const budgetStore = useBudgetStore()
+const scheduleStore = useScheduleStore()
 
 // 列印彈窗狀態
 const isPrintModalOpen = ref(false)
 
+// 英文模式下的全程預估總歐元 (行前固定換算歐元 + 歐洲當地總開銷)
+const grandTotalEur = computed(() => {
+  const rate = budgetStore.eurToTwdRate || 35.5
+  const fixedEur = budgetStore.summary.totalFixedTwd / rate
+  return budgetStore.summary.totalEur + fixedEur
+})
+
+// 英文模式下的行前固定支出小計 (歐元整數)
+const fixedSubtotalEur = computed(() => {
+  const rate = budgetStore.eurToTwdRate || 35.5
+  return Math.round(budgetStore.summary.totalFixedTwd / rate)
+})
+
+// 依語系取得風格標籤與描述
+function getPersonaName(p: BudgetPersona) {
+  return t(`budget.styles.${p}.name`)
+}
+function getPersonaTag(p: BudgetPersona) {
+  if (p === 'CUSTOM' && budgetStore.hasCustomized && budgetStore.customDailyAvgEur > 0) {
+    return t('budget.styles.CUSTOM.customDailyTag', { eur: budgetStore.customDailyAvgEur.toFixed(0) })
+  }
+  return t(`budget.styles.${p}.tag`)
+}
+function getPersonaDesc(p: BudgetPersona) {
+  return t(`budget.styles.${p}.description`)
+}
+
 // 組合導出結構
 const exportMeta = computed<BudgetExportMeta>(() => {
-  const personaInfo = PERSONA_LABELS[budgetStore.persona]
   const todayStr = new Date().toISOString().split('T')[0]
+  const meta = scheduleStore.currentRouteMetadata
+  const routeName = locale.value === 'en'
+    ? (meta ? meta.name : 'Camino de Santiago')
+    : (meta ? meta.chineseName : '朝聖之路')
   return {
     ...budgetStore.summary,
-    routeName: budgetStore.currentRouteName,
-    personaName: personaInfo ? personaInfo.name : '個人自訂',
+    routeName,
+    personaName: getPersonaName(budgetStore.persona),
     createdAt: todayStr,
   }
 })
@@ -40,13 +73,18 @@ const sliderPercentage = computed(() => {
   return ((val - min) / (max - min)) * 100
 })
 
-// 取得輸入框當前數值：null 呈現乾淨空白，數字（包含 0）如實呈現數字，兼顧自訂全空與 0 輸入保留
+// 取得輸入框當前數值：null 呈現乾淨空白，數字（包含 0）如實呈現數字；英文模式下行前固定開銷以歐元換算呈現
 function getDetailInputValue(key: keyof BudgetDetails): number | string {
   const val = budgetStore.details[key]
-  return val === null || val === undefined ? '' : val
+  if (val === null || val === undefined) return ''
+  if (locale.value === 'en' && (key === 'flightTwd' || key === 'gearTwd' || key === 'insuranceAndSimTwd')) {
+    const rate = budgetStore.eurToTwdRate || 35.5
+    return Math.round(val / rate)
+  }
+  return val
 }
 
-// 統一輸入事件處理：刪空時儲存 null 保持該格空白，輸入 0 則儲存 0，不污染其他欄位
+// 統一輸入事件處理：刪空時儲存 null 保持該格空白，輸入 0 則儲存 0；英文模式下行前固定開銷以歐元換算存回台幣
 function handleInputChange(key: keyof BudgetDetails, event: Event) {
   const target = event.target as HTMLInputElement
   if (!target) return
@@ -54,7 +92,13 @@ function handleInputChange(key: keyof BudgetDetails, event: Event) {
   if (raw === '') {
     budgetStore.updateDetail(key, null)
   } else {
-    budgetStore.updateDetail(key, Number(raw))
+    const num = Number(raw)
+    if (locale.value === 'en' && (key === 'flightTwd' || key === 'gearTwd' || key === 'insuranceAndSimTwd')) {
+      const rate = budgetStore.eurToTwdRate || 35.5
+      budgetStore.updateDetail(key, Math.round(num * rate))
+    } else {
+      budgetStore.updateDetail(key, num)
+    }
   }
 }
 
@@ -80,8 +124,8 @@ function handleInputFocus(event: FocusEvent) {
         <div class="flex items-center justify-between md:justify-start gap-2.5 sm:gap-3">
           <div class="flex items-center gap-2">
             <div>
-              <h2 class="text-base sm:text-lg md:text-xl text-slate-800 leading-tight">
-                朝聖花費預算試算
+              <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-800 leading-tight">
+                {{ t('budget.title') }}
               </h2>
             </div>
           </div>
@@ -92,10 +136,10 @@ function handleInputFocus(event: FocusEvent) {
               type="button"
               @click="isPrintModalOpen = true"
               class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-600 px-2.5 sm:px-3 py-1.5 rounded-lg shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1.5 shrink-0"
-              title="開啟 A4 紙本預算單預覽與列印"
+              :title="t('budget.printModal.title')"
             >
               <Printer class="w-3.5 h-3.5 text-slate-500" />
-              <span>列印預算表</span>
+              <span>{{ t('budget.printBudget') }}</span>
             </button>
           </div>
         </div>
@@ -104,16 +148,22 @@ function handleInputFocus(event: FocusEvent) {
         <div class="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 shrink-0 bg-white sm:bg-transparent p-2 sm:p-0 rounded-xl border sm:border-0 border-slate-200">
           <!-- 全程預估總額 -->
           <div class="flex flex-col items-start sm:items-end">
-            <span class="text-[10px] sm:text-xs text-slate-500">全程預估總花費</span>
+            <span class="text-[10px] sm:text-xs text-slate-500">{{ t('budget.grandTotal') }}</span>
             <div class="flex items-baseline gap-1 text-slate-900 font-mono text-base sm:text-xl">
-              <span>NT$</span>
-              <span>{{ budgetStore.summary.grandTotalTwd.toLocaleString() }}</span>
+              <template v-if="locale === 'en'">
+                <span>€</span>
+                <span>{{ Math.round(grandTotalEur).toLocaleString() }}</span>
+              </template>
+              <template v-else>
+                <span>NT$</span>
+                <span>{{ budgetStore.summary.grandTotalTwd.toLocaleString() }}</span>
+              </template>
             </div>
           </div>
 
           <!-- 歐洲當地開銷 -->
           <div class="flex flex-col items-start sm:items-end">
-            <span class="text-[10px] sm:text-xs text-slate-500">歐洲當地總開銷</span>
+            <span class="text-[10px] sm:text-xs text-slate-500">{{ t('budget.localTotal') }}</span>
             <div class="flex items-baseline gap-1 text-slate-900 font-mono text-sm sm:text-base">
               <span>€</span>
               <span>{{ budgetStore.summary.totalEur.toFixed(2) }}</span>
@@ -122,11 +172,11 @@ function handleInputFocus(event: FocusEvent) {
 
           <!-- 路上日均 -->
           <div class="flex flex-col items-start sm:items-end">
-            <span class="text-[10px] sm:text-xs text-slate-500">路上步行日均</span>
+            <span class="text-[10px] sm:text-xs text-slate-500">{{ t('budget.dailyWalkingAvg') }}</span>
             <div class="flex items-baseline gap-1 text-slate-900 font-mono text-sm sm:text-base">
               <span>€</span>
               <span>{{ budgetStore.summary.dailyAvgEur.toFixed(2) }}</span>
-              <span class="text-[10px] text-slate-400">/天</span>
+              <span class="text-[10px] text-slate-400">{{ t('budget.perDay') }}</span>
             </div>
           </div>
         </div>
@@ -141,16 +191,16 @@ function handleInputFocus(event: FocusEvent) {
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between">
             <h3 class="text-sm sm:text-base text-slate-800">
-              預算風格類型
+              {{ t('budget.budgetStyle') }}
             </h3>
             <button
               type="button"
               @click="budgetStore.resetToDefaults()"
               class="text-[12px] text-slate-500 hover:text-slate-700 flex items-center gap-1 transition cursor-pointer"
-              title="重設回預設值"
+              :title="t('budget.resetTitle')"
             >
               <RotateCcw class="w-3.5 h-3.5" />
-              重設
+              {{ t('budget.reset') }}
             </button>
           </div>
 
@@ -162,20 +212,20 @@ function handleInputFocus(event: FocusEvent) {
               class="p-3 rounded-xl border text-left transition-all cursor-pointer relative"
               :class="[
                 budgetStore.persona === 'BUDGET'
-                  ? 'border-amber-300 bg-amber-50/50 ring-1 ring-amber-300'
+                  ? 'border-amber-400 ring-2 ring-amber-300 bg-white shadow-xs'
                   : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/50',
               ]"
             >
               <div class="flex items-center justify-between">
                 <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
-                  <span>{{ PERSONA_LABELS.BUDGET.name }}</span>
+                  <span>{{ getPersonaName('BUDGET') }}</span>
                 </span>
                 <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
-                  {{ PERSONA_LABELS.BUDGET.tag }}
+                  {{ getPersonaTag('BUDGET') }}
                 </span>
               </div>
               <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
-                {{ PERSONA_LABELS.BUDGET.description }}
+                {{ getPersonaDesc('BUDGET') }}
               </p>
             </button>
 
@@ -186,21 +236,23 @@ function handleInputFocus(event: FocusEvent) {
               class="p-3 rounded-xl border text-left transition-all cursor-pointer relative"
               :class="[
                 budgetStore.persona === 'STANDARD'
-                  ? 'border-amber-500 bg-amber-50/50 ring-1 ring-amber-500'
+                  ? 'border-amber-500 ring-2 ring-amber-400 bg-white shadow-xs'
                   : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/50',
               ]"
             >
               <div class="flex items-center justify-between">
                 <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
-                  <span>{{ PERSONA_LABELS.STANDARD.name }}</span>
-                  <span class="text-[9px] font-normal px-1.5 py-0.5 rounded text-emerald-800 bg-emerald-20 border border-emerald-600">官方推薦</span>
+                  <span>{{ getPersonaName('STANDARD') }}</span>
+                  <span class="text-[9px] font-normal px-1.5 py-0.5 rounded text-emerald-800 bg-emerald-20 border border-emerald-600">
+                    {{ t('budget.styles.STANDARD.recommended') }}
+                  </span>
                 </span>
                 <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
-                  {{ PERSONA_LABELS.STANDARD.tag }}
+                  {{ getPersonaTag('STANDARD') }}
                 </span>
               </div>
               <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
-                {{ PERSONA_LABELS.STANDARD.description }}
+                {{ getPersonaDesc('STANDARD') }}
               </p>
             </button>
 
@@ -211,20 +263,20 @@ function handleInputFocus(event: FocusEvent) {
               class="p-3 rounded-xl border text-left transition-all cursor-pointer relative"
               :class="[
                 budgetStore.persona === 'COMFORT'
-                  ? 'border-amber-500 bg-amber-50/50 ring-1 ring-amber-500'
+                  ? 'border-amber-500 ring-2 ring-amber-400 bg-white shadow-xs'
                   : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/50',
               ]"
             >
               <div class="flex items-center justify-between">
                 <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
-                  <span>{{ PERSONA_LABELS.COMFORT.name }}</span>
+                  <span>{{ getPersonaName('COMFORT') }}</span>
                 </span>
                 <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
-                  {{ PERSONA_LABELS.COMFORT.tag }}
+                  {{ getPersonaTag('COMFORT') }}
                 </span>
               </div>
               <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
-                {{ PERSONA_LABELS.COMFORT.description }}
+                {{ getPersonaDesc('COMFORT') }}
               </p>
             </button>
 
@@ -235,24 +287,20 @@ function handleInputFocus(event: FocusEvent) {
               class="p-3 rounded-xl border text-left transition-all cursor-pointer relative"
               :class="[
                 budgetStore.persona === 'CUSTOM'
-                  ? 'border-amber-500 bg-amber-50/50 ring-1 ring-amber-500'
+                  ? 'border-amber-500 ring-2 ring-amber-400 bg-white shadow-xs'
                   : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/50',
               ]"
             >
               <div class="flex items-center justify-between">
                 <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
-                  <span>{{ PERSONA_LABELS.CUSTOM.name }}</span>
+                  <span>{{ getPersonaName('CUSTOM') }}</span>
                 </span>
                 <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
-                  {{
-                    budgetStore.hasCustomized && budgetStore.customDailyAvgEur > 0
-                      ? `日均約 €${budgetStore.customDailyAvgEur.toFixed(0)}`
-                      : PERSONA_LABELS.CUSTOM.tag
-                  }}
+                  {{ getPersonaTag('CUSTOM') }}
                 </span>
               </div>
               <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
-                {{ PERSONA_LABELS.CUSTOM.description }}
+                {{ getPersonaDesc('CUSTOM') }}
               </p>
             </button>
           </div>
@@ -262,10 +310,10 @@ function handleInputFocus(event: FocusEvent) {
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3.5">
           <div class="flex items-center justify-between">
             <h3 class="text-sm sm:text-base text-slate-800">
-              徒步總天數設定
+              {{ t('budget.daysControl.title') }}
             </h3>
             <span class="text-sm font-mono text-slate-700 px-2 py-0.5">
-              {{ budgetStore.effectiveDays }} 天
+              {{ t('budget.daysControl.daysUnit', { days: budgetStore.effectiveDays }) }}
             </span>
           </div>
 
@@ -281,7 +329,7 @@ function handleInputFocus(event: FocusEvent) {
                   : 'text-slate-500 hover:text-slate-800',
               ]"
             >
-              <span>連動排程 ({{ budgetStore.scheduleTotalDays }}天)</span>
+              <span>{{ t('budget.daysControl.syncSchedule', { days: budgetStore.scheduleTotalDays }) }}</span>
             </button>
 
             <button
@@ -294,20 +342,19 @@ function handleInputFocus(event: FocusEvent) {
                   : 'text-slate-500 hover:text-slate-800',
               ]"
             >
-
-              <span>自訂天數</span>
+              <span>{{ t('budget.daysControl.customDays') }}</span>
             </button>
           </div>
 
           <!-- 模式狀態提示說明 -->
           <div class="text-[11px] leading-relaxed text-slate-500">
             <template v-if="budgetStore.isSyncWithSchedule">
-              即時連動目前排程天數（共 {{ budgetStore.scheduleTotalDays }} 天）。拖動滑桿可隨時切換為自訂天數推演。
+              {{ t('budget.daysControl.syncScheduleHint', { days: budgetStore.scheduleTotalDays }) }}
             </template>
             <template v-else>
-              目前為自訂模式（{{ budgetStore.effectiveDays }} 天）。
-              <span v-if="budgetStore.isScheduleDaysDifferent" class="text-amber-700 font-medium">
-                目前排程設定為 {{ budgetStore.scheduleTotalDays }} 天。
+              {{ t('budget.daysControl.customDaysHint', { days: budgetStore.effectiveDays }) }}
+              <span v-if="budgetStore.isScheduleDaysDifferent" class="text-amber-700 font-medium ml-1">
+                {{ t('budget.daysControl.diffScheduleHint', { days: budgetStore.scheduleTotalDays }) }}
               </span>
             </template>
           </div>
@@ -326,26 +373,29 @@ function handleInputFocus(event: FocusEvent) {
               }"
             />
             <div class="flex justify-between text-[10px] text-slate-400 font-mono">
-              <span>1 天</span>
-              <span>20 天</span>
-              <span>33 天 (經典)</span>
-              <span>60 天</span>
+              <span>{{ t('budget.daysControl.dayMarks.one') }}</span>
+              <span>{{ t('budget.daysControl.dayMarks.twenty') }}</span>
+              <span>{{ t('budget.daysControl.dayMarks.classic') }}</span>
+              <span>{{ t('budget.daysControl.dayMarks.sixty') }}</span>
             </div>
           </div>
         </div>
 
-        <!-- 3. 自訂參考匯率控制列 -->
-        <div class="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between gap-3">
+        <!-- 3. 自訂參考匯率控制列 (英文模式隱藏) -->
+        <div
+          v-if="locale !== 'en'"
+          class="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between gap-3"
+        >
           <div class="flex items-center gap-2">
             <Info class="w-4 h-4 text-slate-400 shrink-0" />
             <div>
-              <span class="text-sm text-slate-800 block">試算參考匯率</span>
-              <span class="text-[12px] text-slate-400">可依個人實際換匯成本微調</span>
+              <span class="text-sm text-slate-800 block">{{ t('budget.exchangeRate.title') }}</span>
+              <span class="text-[12px] text-slate-400">{{ t('budget.exchangeRate.hint') }}</span>
             </div>
           </div>
 
           <div class="flex items-center gap-1.5">
-            <span class="text-xs text-slate-600 font-mono">1 € ≈</span>
+            <span class="text-xs text-slate-600 font-mono">{{ t('budget.exchangeRate.unit') }}</span>
             <input
               type="number"
               step="0.1"
@@ -363,24 +413,29 @@ function handleInputFocus(event: FocusEvent) {
 
       <!-- 右欄：四大象限詳細開銷面板 (lg: 7 欄) -->
       <div class="lg:col-span-7 space-y-4">
-        <!-- 一、行前固定支出 (TWD) -->
+        <!-- 一、行前固定支出 -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
             <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Plane class="w-4 h-4 text-sky-600 shrink-0" />
-              <span>一、行前固定支出</span>
+              <span>{{ t('budget.categories.fixed') }}</span>
             </h3>
             <span class="text-xs font-bold font-mono text-slate-900 shrink-0 whitespace-nowrap">
-              小計：NT$ {{ budgetStore.summary.totalFixedTwd.toLocaleString() }}
+              <template v-if="locale === 'en'">
+                {{ t('budget.categories.fixedSubtotal', { eur: fixedSubtotalEur.toLocaleString() }) }}
+              </template>
+              <template v-else>
+                {{ t('budget.categories.fixedSubtotal', { twd: budgetStore.summary.totalFixedTwd.toLocaleString() }) }}
+              </template>
             </span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">台灣來回機票 (NT$)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.flight') }}</label>
               <input
                 type="number"
-                step="500"
+                :step="locale === 'en' ? 10 : 500"
                 min="0"
                 :value="getDetailInputValue('flightTwd')"
                 @focus="handleInputFocus"
@@ -390,10 +445,10 @@ function handleInputFocus(event: FocusEvent) {
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">裝備增補採購 (NT$)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.gear') }}</label>
               <input
                 type="number"
-                step="500"
+                :step="locale === 'en' ? 10 : 500"
                 min="0"
                 :value="getDetailInputValue('gearTwd')"
                 @focus="handleInputFocus"
@@ -403,10 +458,10 @@ function handleInputFocus(event: FocusEvent) {
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">申根保險與網卡 (NT$)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.insuranceAndSim') }}</label>
               <input
                 type="number"
-                step="200"
+                :step="locale === 'en' ? 5 : 200"
                 min="0"
                 :value="getDetailInputValue('insuranceAndSimTwd')"
                 @focus="handleInputFocus"
@@ -422,13 +477,16 @@ function handleInputFocus(event: FocusEvent) {
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
             <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Footprints class="w-4 h-4 text-amber-500 shrink-0" />
-              <span>二、徒步每日開銷 ( {{ budgetStore.effectiveDays }} 天)</span>
+              <span>{{ t('budget.categories.daily', { days: budgetStore.effectiveDays }) }}</span>
             </h3>
             <div class="text-right shrink-0">
               <span class="text-xs font-bold font-mono text-slate-900 block">
                 €{{ budgetStore.summary.totalDailyWalkingEur.toFixed(2) }}
               </span>
-              <span class="text-[11px] text-slate-400 font-mono block whitespace-nowrap">
+              <span
+                v-if="locale !== 'en'"
+                class="text-[11px] text-slate-400 font-mono block whitespace-nowrap"
+              >
                 約 NT$ {{ budgetStore.summary.totalDailyWalkingTwd.toLocaleString() }}
               </span>
             </div>
@@ -436,7 +494,7 @@ function handleInputFocus(event: FocusEvent) {
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">住宿床位 (€/晚)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.lodging') }}</label>
               <input
                 type="number"
                 step="1"
@@ -446,11 +504,13 @@ function handleInputFocus(event: FocusEvent) {
                 @input="handleInputChange('lodgingEurPerDay', $event)"
                 class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.lodgingTotalEur.toFixed(2) }}</span>
+              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+                {{ t('budget.categories.lodgingSubtotal', { eur: budgetStore.summary.lodgingTotalEur.toFixed(2) }) }}
+              </span>
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">三餐補給 (€/天)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.food') }}</label>
               <input
                 type="number"
                 step="1"
@@ -460,11 +520,13 @@ function handleInputFocus(event: FocusEvent) {
                 @input="handleInputChange('foodEurPerDay', $event)"
                 class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.foodTotalEur.toFixed(2) }}</span>
+              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+                {{ t('budget.categories.foodSubtotal', { eur: budgetStore.summary.foodTotalEur.toFixed(2) }) }}
+              </span>
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">洗衣雜支 (€/天)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.laundry') }}</label>
               <input
                 type="number"
                 step="1"
@@ -474,11 +536,13 @@ function handleInputFocus(event: FocusEvent) {
                 @input="handleInputChange('laundryEurPerDay', $event)"
                 class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.laundryTotalEur.toFixed(2) }}</span>
+              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+                {{ t('budget.categories.laundrySubtotal', { eur: budgetStore.summary.laundryTotalEur.toFixed(2) }) }}
+              </span>
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">行李托運 (€/天)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.luggage') }}</label>
               <input
                 type="number"
                 step="1"
@@ -488,7 +552,9 @@ function handleInputFocus(event: FocusEvent) {
                 @input="handleInputChange('luggageTransferEurPerDay', $event)"
                 class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">小計 €{{ budgetStore.summary.luggageTotalEur.toFixed(2) }}</span>
+              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+                {{ t('budget.categories.luggageSubtotal', { eur: budgetStore.summary.luggageTotalEur.toFixed(2) }) }}
+              </span>
             </div>
           </div>
         </div>
@@ -498,13 +564,16 @@ function handleInputFocus(event: FocusEvent) {
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
             <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Train class="w-4 h-4 text-indigo-600 shrink-0" />
-              <span>三、前後跨國接駁交通</span>
+              <span>{{ t('budget.categories.transit') }}</span>
             </h3>
             <div class="text-right shrink-0">
               <span class="text-xs font-bold font-mono text-slate-900 block">
                 €{{ budgetStore.summary.transitTotalEur.toFixed(2) }}
               </span>
-              <span class="text-[11px] text-slate-400 font-mono block whitespace-nowrap">
+              <span
+                v-if="locale !== 'en'"
+                class="text-[11px] text-slate-400 font-mono block whitespace-nowrap"
+              >
                 約 NT$ {{ budgetStore.summary.transitTotalTwd.toLocaleString() }}
               </span>
             </div>
@@ -512,7 +581,7 @@ function handleInputFocus(event: FocusEvent) {
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-[11px] text-slate-500 mb-1">入境機場前往徒步起點 (€)</label>
+              <label class="block text-[11px] text-slate-500 mb-1">{{ t('budget.categories.transitToStart') }}</label>
               <input
                 type="number"
                 step="5"
@@ -525,7 +594,7 @@ function handleInputFocus(event: FocusEvent) {
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">終點返回出境機場 (€)</label>
+              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.transitFromEnd') }}</label>
               <input
                 type="number"
                 step="5"
@@ -544,13 +613,16 @@ function handleInputFocus(event: FocusEvent) {
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
             <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <ShieldAlert class="w-4 h-4 text-amber-600 shrink-0" />
-              <span>四、突發應急預備金</span>
+              <span>{{ t('budget.categories.emergency') }}</span>
             </h3>
             <div class="text-right shrink-0">
               <span class="text-xs font-bold font-mono text-slate-900 block">
                 €{{ budgetStore.summary.emergencyFundEur.toFixed(2) }}
               </span>
-              <span class="text-[11px] text-slate-400 font-mono block whitespace-nowrap">
+              <span
+                v-if="locale !== 'en'"
+                class="text-[11px] text-slate-400 font-mono block whitespace-nowrap"
+              >
                 約 NT$ {{ budgetStore.summary.emergencyFundTwd.toLocaleString() }}
               </span>
             </div>
@@ -558,7 +630,7 @@ function handleInputFocus(event: FocusEvent) {
 
           <div class="flex items-center justify-between gap-4">
             <p class="text-xs text-slate-500 leading-relaxed">
-              建議準備之緊急醫療、看病買藥、臨時搭計程車或因罷工緊急改票之預備現金或信用卡額度。
+              {{ t('budget.categories.emergencyDesc') }}
             </p>
             <div class="w-32 shrink-0">
               <input
