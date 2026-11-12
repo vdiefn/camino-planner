@@ -614,4 +614,36 @@ export default {
       highlightsTitle: '世界盡頭專屬三大體驗',
     },
   },
+  history: {
+    pageTitle: '聖雅各朝聖之路：千年歷史與文化淵源',
+    pageDescription:
+      '從 9 世紀繁星原野的聖骨發現，到中世紀百萬信徒的跨國遠征，再到現代全球旅人的心靈淬鍊。完整解析朝聖歷史、文化象徵與證書規範。',
+    heroSubtitle:
+      '從 9 世紀繁星原野的聖骨發現，到中世紀百萬信徒的跨國遠征，再到現代全球旅人的心靈淬鍊。理解這條古道的故事，每一步都將踏在歷史的迴響中。',
+    tocTitle: '章節目錄',
+    routesLink: '路線攻略',
+    faqLink: '常見問題',
+    startPlanning: '開始規劃',
+    openMenu: '開啟全站選單',
+    chapterTag: '章節 0{num} ・ {period}',
+    chapter07: {
+      tag: '章節 07 ・ 符號與精神傳承',
+      title: '朝聖文化的四大核心象徵',
+      subtitle: '庇護・指引・印記・極簡',
+      lead: '每一件佩掛在背包上的物品、沿途偶遇的每個印記，背後都蘊含著數百年的文化默契與庇護意涵。',
+      symbolMeaning: '象徵意義：',
+      tipsLabel: 'Tips：',
+    },
+    chapter08: {
+      tag: '章節 08 ・ 認證與官方規定',
+      subtitle: 'Credencial & Compostela',
+      rulesTitle: '官方證書核發必備條件：',
+    },
+    cta: {
+      title: '準備好寫下屬於您自己的朝聖故事了嗎？',
+      desc: '前往路線攻略深入了解各路線難度，或直接開啟每日排程計算工具。',
+      browseRoutes: '瀏覽路線攻略',
+      startPlan: '開始行程規劃',
+    },
+  },
 }

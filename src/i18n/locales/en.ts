@@ -618,4 +618,36 @@ export default {
       highlightsTitle: "3 Unique End-of-the-World Highlights",
     },
   },
+  history: {
+    pageTitle: "Camino de Santiago: History & Cultural Heritage",
+    pageDescription:
+      "From the 9th-century star-guided discovery of the relics to medieval transnational journeys and modern personal quests. Explore Camino history, cultural symbols, and official certificate rules.",
+    heroSubtitle:
+      "From the 9th-century star-guided discovery of the relics to medieval transnational journeys and modern personal quests. Walking this ancient trail, every step echoes through centuries of history.",
+    tocTitle: "Table of Contents",
+    routesLink: "Route Guides",
+    faqLink: "FAQ",
+    startPlanning: "Start Planning",
+    openMenu: "Open navigation menu",
+    chapterTag: "Chapter 0{num} · {period}",
+    chapter07: {
+      tag: "Chapter 07 · Symbols & Heritage",
+      title: "The Four Core Symbols of Camino Culture",
+      subtitle: "Shelter · Guidance · Imprint · Simplicity",
+      lead: "Every item attached to your backpack and every sign on the road carries centuries of shared pilgrim heritage and protective meaning.",
+      symbolMeaning: "Meaning: ",
+      tipsLabel: "Tips: ",
+    },
+    chapter08: {
+      tag: "Chapter 08 · Official Rules & Certification",
+      subtitle: "Credencial & Compostela",
+      rulesTitle: "Official Certificate Eligibility Requirements:",
+    },
+    cta: {
+      title: "Ready to write your own Camino story?",
+      desc: "Explore comprehensive route guides for difficulty assessments, or begin calculating your daily schedule directly.",
+      browseRoutes: "Explore Routes",
+      startPlan: "Start Planning",
+    },
+  },
 };
