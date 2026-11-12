@@ -575,4 +575,47 @@ export default {
     disclaimerText:
       "Information on this page is periodically updated based on official announcements from the Pilgrim's Office in Santiago and regional authorities. As accommodations, timetables, routes, and regulations may change due to seasonality or maintenance, please verify with official on-site rules. ¡Buen Camino!",
   },
+  routesGuide: {
+    pageTitle: "Camino de Santiago Routes Guide",
+    pageDescription:
+      "Comprehensive guide to the French Way, Portuguese Way, and Northern Way: objective metrics, pavement surface breakdown, landscape features, and trail challenges.",
+    back: "Back",
+    backToPlanner: "Back to Planner",
+    historyLink: "History",
+    faqLink: "FAQ",
+    startPlanning: "Plan This Route",
+    viewTransport: "Transit Guide",
+    metrics: {
+      totalDistance: "Total Distance",
+      recommendedDays: "Suggested Days",
+      dailyDistanceAvg: "Daily Average",
+      difficulty: "Difficulty",
+      startTownCountry: "Trailhead:",
+      bestMonths: "Best Months",
+    },
+    pavement: {
+      title: "Pavement Surface Breakdown:",
+      trail: "Dirt & Gravel",
+      boardwalkOrCobble: "Boardwalk & Cobble",
+      asphalt: "Paved Asphalt",
+    },
+    sections: {
+      targetAudience: "Ideal For:",
+      keyFeatures: "Core Highlights & Landscapes",
+      pitfalls: "Crucial Pitfalls & Trail Challenges",
+      recommendedStart: "Trailhead Access & Gateway:",
+      hubCityLabel: "Gateway Hubs:",
+      transferTipsLabel: "Transfer Tips:",
+    },
+    finisterre: {
+      title: "Finisterre & Muxía Extension",
+      spanishName: "Camino de Finisterre y Muxía",
+      badge: "Atlantic Coast Extension",
+      startTownLabel: "Start Hub:",
+      endTownLabel: "Destination:",
+      distanceLabel: "Distance:",
+      daysLabel: "Duration:",
+      highlightsTitle: "3 Unique End-of-the-World Highlights",
+    },
+  },
 };

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import {
   ArrowRight,
   Footprints,
@@ -15,6 +16,7 @@ import {
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 import {
   ROUTES_GUIDE_LIST,
   FINISTERRE_GUIDE,
@@ -23,6 +25,7 @@ import {
 import type { RouteId } from '@/types/route'
 import { useScheduleStore } from '@/stores/schedule'
 
+const { t, locale } = useI18n()
 const router = useRouter()
 const scheduleStore = useScheduleStore()
 
@@ -83,40 +86,42 @@ function goToTransport(routeId: RouteId) {
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
-            <span>歷史淵源</span>
+            <span>{{ t('routesGuide.historyLink') }}</span>
           </router-link>
           <router-link
             to="/faq"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <HelpCircle class="w-4 h-4 text-emerald-600" />
-            <span>常見問題</span>
+            <span>{{ t('routesGuide.faqLink') }}</span>
           </router-link>
           <button
             type="button"
             @click="startSchedule(activeRouteId)"
             class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
-            <span>開始規劃</span>
+            <span>{{ t('routesGuide.startPlanning') }}</span>
             <ChevronRight class="w-3.5 h-3.5" />
           </button>
+          <LanguageSwitcher />
         </div>
 
-        <!-- 右側傳送門（手機版：開始規劃 ＋ 漢堡選單） -->
+        <!-- 右側傳送門（手機版：開始規劃 ＋ 語言切換 ＋ 漢堡選單） -->
         <div class="flex md:hidden items-center gap-1.5">
+          <LanguageSwitcher />
           <button
             type="button"
             @click="startSchedule(activeRouteId)"
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1 cursor-pointer"
           >
-            <span>開始規劃</span>
+            <span>{{ t('routesGuide.startPlanning') }}</span>
             <ChevronRight class="w-3 h-3" />
           </button>
           <button
             type="button"
             @click="isMenuDrawerOpen = true"
             class="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
-            aria-label="開啟全站選單"
+            :aria-label="t('nav.openMenu')"
           >
             <Menu class="w-5 h-5" />
           </button>
@@ -133,10 +138,10 @@ function goToTransport(routeId: RouteId) {
         <!-- 頁面標題區 -->
         <div class="text-center space-y-3">
           <h1 class="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-            聖雅各朝聖之路：三大經典路線深度攻略
+            {{ t('routesGuide.pageTitle') }}
           </h1>
           <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            每條朝聖路線的地貌、爬升、路面材質與所需天數截然不同。透過客觀數據與實戰指標，挑選出最適合您體能與休假節奏的命定路線。
+            {{ t('routesGuide.pageDescription') }}
           </p>
         </div>
 
@@ -155,7 +160,7 @@ function goToTransport(routeId: RouteId) {
                   : 'text-slate-600 hover:text-slate-900',
               ]"
             >
-              <span>{{ route.name }}</span>
+              <span>{{ locale === 'en' && route.nameEn ? route.nameEn : route.name }}</span>
             </button>
           </div>
         </div>
@@ -165,17 +170,17 @@ function goToTransport(routeId: RouteId) {
           <!-- 1. 路線概況總覽與指標面板 -->
           <div class="space-y-6">
             <!-- 標題與西班牙文名 -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-slate-100">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pb-4 border-b border-slate-100">
               <div class="space-y-1">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
                   <h2 class="text-xl sm:text-2xl font-bold text-slate-900">
-                    {{ currentRoute.name }}
+                    {{ locale === 'en' && currentRoute.nameEn ? currentRoute.nameEn : currentRoute.name }}
                   </h2>
                   <span
-                    v-if="currentRoute.badge"
-                    class="text-xs text-amber-700 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full font-medium"
+                    v-if="currentRoute.badge || (locale === 'en' && currentRoute.badgeEn)"
+                    class="text-xs text-amber-700 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full font-medium shrink-0 whitespace-nowrap"
                   >
-                    {{ currentRoute.badge }}
+                    {{ locale === 'en' && currentRoute.badgeEn ? currentRoute.badgeEn : currentRoute.badge }}
                   </span>
                 </div>
                 <p class="text-xs sm:text-sm text-slate-400 italic font-serif">
@@ -184,61 +189,61 @@ function goToTransport(routeId: RouteId) {
               </div>
 
               <!-- 起點標籤 -->
-              <div class="flex items-center gap-1.5 text-xs text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl self-start sm:self-center">
+              <div class="flex items-center gap-1.5 text-xs sm:text-sm text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl self-start md:self-center shrink-0">
                 <MapPin class="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                <span>起點：{{ currentRoute.startTown }} · {{ currentRoute.startTownCountry }}</span>
+                <span>{{ t('routesGuide.metrics.startTownCountry') }} {{ locale === 'en' && currentRoute.startTownEn ? currentRoute.startTownEn : currentRoute.startTown }} · {{ locale === 'en' && currentRoute.startTownCountryEn ? currentRoute.startTownCountryEn : currentRoute.startTownCountry }}</span>
               </div>
             </div>
 
             <!-- 四大關鍵指標方塊（統一兩行結構） -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
-                <span class="text-[12px] text-slate-400">總里程</span>
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5 min-w-0">
+                <span class="text-xs text-slate-400">{{ t('routesGuide.metrics.totalDistance') }}</span>
                 <p class="text-base sm:text-lg font-bold text-slate-900">
                   {{ currentRoute.totalDistanceKm }} <span class="text-xs font-normal text-slate-500">km</span>
                 </p>
               </div>
 
-              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
-                <span class="text-[12px] text-slate-400">建議天數</span>
-                <p class="text-base sm:text-lg font-bold text-slate-900">
-                  {{ currentRoute.recommendedDays }}
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5 min-w-0">
+                <span class="text-xs text-slate-400">{{ t('routesGuide.metrics.recommendedDays') }}</span>
+                <p class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                  {{ locale === 'en' && currentRoute.recommendedDaysEn ? currentRoute.recommendedDaysEn : currentRoute.recommendedDays }}
                 </p>
               </div>
 
-              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
-                <span class="text-[12px] text-slate-400">地形難度</span>
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5 min-w-0">
+                <span class="text-xs text-slate-400">{{ t('routesGuide.metrics.difficulty') }}</span>
                 <p class="text-sm sm:text-base font-bold text-amber-500 tracking-wider">
                   {{ '★'.repeat(currentRoute.difficultyStars) }}{{ '☆'.repeat(5 - currentRoute.difficultyStars) }}
                 </p>
               </div>
 
-              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5">
-                <span class="text-[12px] text-slate-400">最佳月份</span>
-                <p class="text-base sm:text-lg font-bold text-slate-900 whitespace-nowrap">
-                  {{ currentRoute.bestMonths }}
+              <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/70 space-y-0.5 min-w-0">
+                <span class="text-xs text-slate-400">{{ t('routesGuide.metrics.bestMonths') }}</span>
+                <p class="text-sm sm:text-base md:text-lg font-bold text-slate-900 leading-snug break-words">
+                  {{ locale === 'en' && currentRoute.bestMonthsEn ? currentRoute.bestMonthsEn : currentRoute.bestMonths }}
                 </p>
               </div>
             </div>
 
             <!-- 路面鋪裝材質長條比例圖 -->
             <div class="space-y-2 pt-2">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-sm text-slate-500">
-                <span>路面鋪裝材質分佈比例：</span>
-                <div class="flex items-center gap-2 text-[11px]">
-                  <span class="inline-flex items-center gap-1 font-semibold text-emerald-700">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-xs sm:text-sm text-slate-500">
+                <span class="font-medium text-slate-600">{{ t('routesGuide.pavement.title') }}</span>
+                <div class="flex items-center gap-2 text-xs flex-wrap">
+                  <span class="inline-flex items-center gap-1 font-semibold text-emerald-700 whitespace-nowrap">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                    <span>泥土碎石 {{ currentRoute.pavementRatio.trail }}%</span>
+                    <span>{{ t('routesGuide.pavement.trail') }} {{ currentRoute.pavementRatio.trail }}%</span>
                   </span>
                   <span class="text-slate-300">/</span>
-                  <span class="inline-flex items-center gap-1 font-semibold text-amber-700">
+                  <span class="inline-flex items-center gap-1 font-semibold text-amber-700 whitespace-nowrap">
                     <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
-                    <span>木棧石板 {{ currentRoute.pavementRatio.boardwalkOrCobble }}%</span>
+                    <span>{{ t('routesGuide.pavement.boardwalkOrCobble') }} {{ currentRoute.pavementRatio.boardwalkOrCobble }}%</span>
                   </span>
                   <span class="text-slate-300">/</span>
-                  <span class="inline-flex items-center gap-1 font-semibold text-slate-600">
+                  <span class="inline-flex items-center gap-1 font-semibold text-slate-600 whitespace-nowrap">
                     <span class="w-2 h-2 rounded-full bg-slate-400 shrink-0"></span>
-                    <span>柏油硬路 {{ currentRoute.pavementRatio.asphalt }}%</span>
+                    <span>{{ t('routesGuide.pavement.asphalt') }} {{ currentRoute.pavementRatio.asphalt }}%</span>
                   </span>
                 </div>
               </div>
@@ -246,31 +251,31 @@ function goToTransport(routeId: RouteId) {
                 <div
                   :style="{ width: `${currentRoute.pavementRatio.trail}%` }"
                   class="bg-emerald-500 rounded-l-full h-full"
-                  title="泥土山徑"
+                  :title="t('routesGuide.pavement.trail')"
                 ></div>
                 <div
                   :style="{ width: `${currentRoute.pavementRatio.boardwalkOrCobble}%` }"
                   class="bg-amber-400 h-full"
-                  title="木棧道/石板路"
+                  :title="t('routesGuide.pavement.boardwalkOrCobble')"
                 ></div>
                 <div
                   :style="{ width: `${currentRoute.pavementRatio.asphalt}%` }"
                   class="bg-slate-400 rounded-r-full h-full"
-                  title="柏油硬路"
+                  :title="t('routesGuide.pavement.asphalt')"
                 ></div>
               </div>
-              <p class="text-[12px] text-slate-500 leading-normal">
-                * 數據依據 OpenStreetMap（OSM）開放地理資料及路網標籤，結合 GIS 空間分析與地形演算法計算得出，僅供參考。實際路況、地形及步行距離可能因路線變體、天候與道路狀況而有所差異。
+              <p class="text-xs text-slate-500 leading-normal">
+                * {{ locale === 'en' ? 'Calculated via OpenStreetMap (OSM) geographic data, GIS spatial analysis, and trail network topology. Actual conditions, terrain, and distances may vary depending on weather, route variants, and path maintenance.' : '數據依據 OpenStreetMap（OSM）開放地理資料及路網標籤，結合 GIS 空間分析與地形演算法計算得出，僅供參考。實際路況、地形及步行距離可能因路線變體、天候與道路狀況而有所差異。' }}
               </p>
             </div>
 
             <!-- 路線摘要與適合對象 -->
             <div class="space-y-2.5 pt-2">
               <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                {{ currentRoute.summary }}
+                {{ locale === 'en' && currentRoute.summaryEn ? currentRoute.summaryEn : currentRoute.summary }}
               </p>
               <div class="rounded-xl bg-emerald-50/80 border border-emerald-200/70 p-3.5 text-xs sm:text-sm text-emerald-900">
-                <strong class="font-bold">適合族群：</strong>{{ currentRoute.targetAudience }}
+                <strong class="font-bold">{{ t('routesGuide.sections.targetAudience') }}</strong> {{ locale === 'en' && currentRoute.targetAudienceEn ? currentRoute.targetAudienceEn : currentRoute.targetAudience }}
               </div>
             </div>
 
@@ -282,7 +287,7 @@ function goToTransport(routeId: RouteId) {
                 class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-medium text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
               >
                 <Footprints class="w-4 h-4" />
-                <span>開始排程規劃</span>
+                <span>{{ t('routesGuide.startPlanning') }}</span>
                 <ArrowRight class="w-3.5 h-3.5" />
               </button>
 
@@ -292,7 +297,7 @@ function goToTransport(routeId: RouteId) {
                 class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
               >
                 <Train class="w-4 h-4 text-sky-700" />
-                <span>起點交通轉乘指南</span>
+                <span>{{ t('routesGuide.viewTransport') }}</span>
               </button>
             </div>
           </div>
@@ -304,7 +309,7 @@ function goToTransport(routeId: RouteId) {
           <div class="space-y-4">
             <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
               <Sparkles class="w-4.5 h-4.5 text-amber-500" />
-              <span>{{ currentRoute.name }} 核心特色與亮點剖析</span>
+              <span>{{ locale === 'en' && currentRoute.nameEn ? currentRoute.nameEn : currentRoute.name }} · {{ t('routesGuide.sections.keyFeatures') }}</span>
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-1">
@@ -313,11 +318,11 @@ function goToTransport(routeId: RouteId) {
                 :key="fIdx"
                 class="space-y-1.5"
               >
-                <h4 class="font-bold text-sm text-slate-900">
-                  {{ feature.title }}
+                <h4 class="font-bold text-xs sm:text-sm text-slate-900">
+                  {{ locale === 'en' && feature.titleEn ? feature.titleEn : feature.title }}
                 </h4>
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {{ feature.description }}
+                  {{ locale === 'en' && feature.descriptionEn ? feature.descriptionEn : feature.description }}
                 </p>
               </div>
             </div>
@@ -330,12 +335,12 @@ function goToTransport(routeId: RouteId) {
           <div class="space-y-3">
             <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
               <AlertTriangle class="w-4.5 h-4.5 text-amber-500" />
-              <span>行前注意事項</span>
+              <span>{{ t('routesGuide.sections.pitfalls') }}</span>
             </h3>
 
             <ul class="space-y-2.5 pt-1">
               <li
-                v-for="(warning, wIdx) in currentRoute.pitfallWarnings"
+                v-for="(warning, wIdx) in (locale === 'en' && currentRoute.pitfallWarningsEn?.length ? currentRoute.pitfallWarningsEn : currentRoute.pitfallWarnings)"
                 :key="wIdx"
                 class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed"
               >
@@ -353,23 +358,23 @@ function goToTransport(routeId: RouteId) {
             <div class="flex items-center justify-between">
               <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
                 <Train class="w-4.5 h-4.5 text-sky-600" />
-                <span>如何抵達起點：{{ currentRoute.startTown }}</span>
+                <span>{{ t('routesGuide.sections.recommendedStart') }} {{ locale === 'en' && currentRoute.startTownEn ? currentRoute.startTownEn : currentRoute.startTown }}</span>
               </h3>
               <button
                 type="button"
                 @click="goToTransport(currentRoute.id)"
-                class="text-sm text-slate-600 hover:text-slate-900 underline-offset-2 cursor-pointer"
+                class="text-xs sm:text-sm text-slate-600 hover:text-slate-900 underline-offset-2 cursor-pointer"
               >
-                查看完整交通攻略 ➔
+                {{ t('routesGuide.viewTransport') }} ➔
               </button>
             </div>
 
             <div class="space-y-1 text-xs sm:text-sm text-slate-700 pt-1 leading-relaxed">
               <p>
-                <strong class="font-semibold text-slate-900">主要入境中轉城市：</strong>{{ currentRoute.recommendedStartGuide.hubCity }}
+                <strong class="font-semibold text-slate-900">{{ t('routesGuide.sections.hubCityLabel') }}</strong>{{ locale === 'en' && currentRoute.recommendedStartGuide.hubCityEn ? currentRoute.recommendedStartGuide.hubCityEn : currentRoute.recommendedStartGuide.hubCity }}
               </p>
               <p>
-                <strong class="font-semibold text-slate-900">轉乘建議：</strong>{{ currentRoute.recommendedStartGuide.transferTips }}
+                {{ locale === 'en' && currentRoute.recommendedStartGuide.transferTipsEn ? currentRoute.recommendedStartGuide.transferTipsEn : currentRoute.recommendedStartGuide.transferTips }}
               </p>
             </div>
           </div>
@@ -381,25 +386,25 @@ function goToTransport(routeId: RouteId) {
           <div class="space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 pb-2">
               <div>
-                <span class="text-[11px] font-bold uppercase tracking-wider text-amber-600">
-                  終點之後的朝聖之路
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600">
+                  {{ t('routesGuide.finisterre.badge') }}
                 </span>
                 <h3 class="text-lg font-bold text-slate-900">
-                  {{ FINISTERRE_GUIDE.name }}
+                  {{ locale === 'en' ? FINISTERRE_GUIDE.nameEn : FINISTERRE_GUIDE.name }}
                 </h3>
               </div>
               <span class="text-xs text-slate-500 font-medium">
-                {{ FINISTERRE_GUIDE.totalDistanceKm }} ・ {{ FINISTERRE_GUIDE.recommendedDays }}
+                {{ locale === 'en' ? FINISTERRE_GUIDE.totalDistanceKmEn : FINISTERRE_GUIDE.totalDistanceKm }} ・ {{ locale === 'en' ? FINISTERRE_GUIDE.recommendedDaysEn : FINISTERRE_GUIDE.recommendedDays }}
               </span>
             </div>
 
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              {{ FINISTERRE_GUIDE.summary }}
+              {{ locale === 'en' ? FINISTERRE_GUIDE.summaryEn : FINISTERRE_GUIDE.summary }}
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
               <div
-                v-for="(hl, hIdx) in FINISTERRE_GUIDE.highlights"
+                v-for="(hl, hIdx) in (locale === 'en' && FINISTERRE_GUIDE.highlightsEn?.length ? FINISTERRE_GUIDE.highlightsEn : FINISTERRE_GUIDE.highlights)"
                 :key="hIdx"
                 class="text-xs sm:text-sm text-slate-700 leading-relaxed flex items-start gap-2"
               >

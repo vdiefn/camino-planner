@@ -571,4 +571,47 @@ export default {
     disclaimerText:
       '本站整理之問答與相關資訊，將持續參考聖地牙哥朝聖者辦公室及各地官方機構公告進行更新。由於沿途住宿、交通、路線及相關規定可能因季節、天候或營運狀況而有所變動，實際資訊請以官方最新公告及現場規定為準。祝您旅途平安順利，一路順風！ ¡Buen Camino!',
   },
+  routesGuide: {
+    pageTitle: '三大經典朝聖路線深度攻略',
+    pageDescription:
+      '嚴選法國之路、葡萄牙之路與北方之路，提供路況指標、路面鋪裝材質比例、景觀特色與新手避坑評估。',
+    back: '返回',
+    backToPlanner: '返回規劃工具',
+    historyLink: '歷史淵源',
+    faqLink: '常見問答',
+    startPlanning: '開始此路線規劃',
+    viewTransport: '前往起點交通指南',
+    metrics: {
+      totalDistance: '總里程',
+      recommendedDays: '建議天數',
+      dailyDistanceAvg: '日均里程',
+      difficulty: '挑戰難度',
+      startTownCountry: '起點：',
+      bestMonths: '推薦季節',
+    },
+    pavement: {
+      title: '路面鋪裝材質分佈比例：',
+      trail: '泥土碎石',
+      boardwalkOrCobble: '木棧石板',
+      asphalt: '柏油硬路',
+    },
+    sections: {
+      targetAudience: '適合族群：',
+      keyFeatures: '核心特色與亮點剖析',
+      pitfalls: '行前注意事項',
+      recommendedStart: '如何抵達起點：',
+      hubCityLabel: '主要入境中轉城市：',
+      transferTipsLabel: '轉乘建議：',
+    },
+    finisterre: {
+      title: '世界盡頭與穆希亞延伸線',
+      spanishName: 'Camino de Finisterre y Muxía',
+      badge: '加利西亞大西洋終點',
+      startTownLabel: '起步城鎮：',
+      endTownLabel: '抵達終點：',
+      distanceLabel: '總里程：',
+      daysLabel: '建議天數：',
+      highlightsTitle: '世界盡頭專屬三大體驗',
+    },
+  },
 }
