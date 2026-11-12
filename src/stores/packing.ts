@@ -10,7 +10,7 @@ export interface UserItemOverride {
   quantity?: number;
 }
 
-// 官方 9 大分類全收錄預設清單（朝聖之路全部必備裝備預設全部顯示）
+// 官方 10 大分類全收錄預設清單（朝聖之路全部必備裝備預設全部顯示）
 export const defaultActiveCategories: PackingCategory[] = [
   "PACK",
   "CLOTHING",
@@ -20,6 +20,7 @@ export const defaultActiveCategories: PackingCategory[] = [
   "HYGIENE",
   "ELECTRONICS",
   "DOCS",
+  "GEAR",
   "OTHER",
 ];
 
@@ -119,8 +120,8 @@ export function sanitizePackingState(raw: any) {
     }
   }
 
-  // 若使用者本地快取為舊版（version < 2），自動將缺漏之官方必備分類補齊
-  if (!raw?.version || raw.version < 2) {
+  // 若使用者本地快取為舊版（version < 3），自動將缺漏之官方必備分類補齊
+  if (!raw?.version || raw.version < 3) {
     const existingSet = new Set(activeCategories);
     for (const cat of defaultActiveCategories) {
       if (!existingSet.has(cat)) {
@@ -143,6 +144,7 @@ export function sanitizePackingState(raw: any) {
     "HYGIENE",
     "ELECTRONICS",
     "DOCS",
+    "GEAR",
     "OTHER",
   ];
   const categoryOrder: string[] = [];
@@ -154,8 +156,18 @@ export function sanitizePackingState(raw: any) {
     }
   }
 
+  // 若排序缺少官方分類，補在末尾之前
+  if (!raw?.version || raw.version < 3) {
+    const existingOrderSet = new Set(categoryOrder);
+    for (const cat of defaultCategoryOrder) {
+      if (!existingOrderSet.has(cat)) {
+        categoryOrder.push(cat);
+      }
+    }
+  }
+
   return {
-    version: 2,
+    version: 3,
     bodyWeightKg,
     userItemStates,
     customItems,
@@ -169,8 +181,8 @@ export function sanitizePackingState(raw: any) {
 export const usePackingStore = defineStore(
   "packing",
   () => {
-    // 0. 資料綱要版本號（升級為 2，支援 9 大必備分類預設全顯示）
-    const version = ref<number>(2);
+    // 0. 資料綱要版本號（升級為 3，支援 10 大必備分類預設全顯示）
+    const version = ref<number>(3);
 
     // 1. 使用者體重 (kg)
     const bodyWeightKg = ref<number>(60);
@@ -181,12 +193,12 @@ export const usePackingStore = defineStore(
     // 3. 使用者自訂裝備（非官方預設，需完整保存）
     const customItems = ref<PackingItem[]>([]);
 
-    // 4. 目前畫面上啟用顯示的分類清單（預設 9 大必備分類全顯示）
+    // 4. 目前畫面上啟用顯示的分類清單（預設 10 大必備分類全顯示）
     const activeCategories = ref<PackingCategory[]>([
       ...defaultActiveCategories,
     ]);
 
-    // 4.1 分類順序管理（預設 9 大官方分類順序）
+    // 4.1 分類順序管理（預設 10 大官方分類順序）
     const defaultCategoryOrder: string[] = [
       "PACK",
       "CLOTHING",
@@ -196,6 +208,7 @@ export const usePackingStore = defineStore(
       "HYGIENE",
       "ELECTRONICS",
       "DOCS",
+      "GEAR",
       "OTHER",
     ];
     const categoryOrder = ref<string[]>([...defaultCategoryOrder]);

@@ -127,7 +127,8 @@ export const OFFICIAL_CATEGORY_LABELS: Record<string, string> = {
   MEDICAL: '個人藥物',
   HYGIENE: '衛生用品',
   ELECTRONICS: '電子設備',
-  DOCS: '證件工具',
+  DOCS: '重要證件',
+  GEAR: '健行裝備',
   OTHER: '其他',
 }
 
@@ -588,7 +589,7 @@ export function decodeCompactUrlPayload(token: string): DecodeResult {
       }
 
       const sanitized = sanitizePackingState({
-        version: 2,
+        version: 3,
         bodyWeightKg: p.w,
         userItemStates: rawUserItemStates,
         customItems: rawCustomItems,
@@ -602,7 +603,7 @@ export function decodeCompactUrlPayload(token: string): DecodeResult {
         .map((c) => OFFICIAL_CATEGORY_LABELS[c] || c)
 
       result.packing = {
-        version: 2,
+        version: 3,
         bodyWeightKg: sanitized.bodyWeightKg,
         userItemStates: sanitized.userItemStates,
         customItems: sanitized.customItems,
@@ -796,7 +797,7 @@ export function parseBackupJson(rawJson: string): DecodeResult {
         .map((c) => OFFICIAL_CATEGORY_LABELS[c] || c)
 
       result.packing = {
-        version: 2,
+        version: 3,
         bodyWeightKg: sanitized.bodyWeightKg,
         userItemStates: sanitized.userItemStates,
         customItems: sanitized.customItems,

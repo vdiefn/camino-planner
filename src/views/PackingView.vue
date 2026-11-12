@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useI18n } from "vue-i18n";
 import {
   AlertOctagon,
   ShieldCheck,
@@ -23,30 +24,35 @@ import ConfirmModal from "@/components/common/ConfirmModal.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 import GoogleAd from "@/components/common/GoogleAd.vue";
 
+const { t, tm } = useI18n();
 const packingStore = usePackingStore();
 
-// 官方 9 大分類定義與圖示/中文對照
-const defaultCategories: {
+// 官方 10 大分類代碼與圖示
+const officialCategoryList: {
   id: PackingCategory;
-  label: string;
   icon: string;
 }[] = [
-  { id: "PACK", label: "背包系統", icon: "🎒" },
-  { id: "CLOTHING", label: "服飾穿搭", icon: "👕" },
-  { id: "FOOTWEAR", label: "鞋襪足部", icon: "👟" },
-  { id: "SLEEP", label: "睡眠防護", icon: "🛏️" },
-  { id: "MEDICAL", label: "個人藥物", icon: "💊" },
-  { id: "HYGIENE", label: "衛生用品", icon: "🧼" },
-  { id: "ELECTRONICS", label: "電子設備", icon: "🔌" },
-  { id: "DOCS", label: "證件工具", icon: "📄" },
-  { id: "OTHER", label: "其他", icon: "📦" },
+  { id: "PACK", icon: "🎒" },
+  { id: "CLOTHING", icon: "👕" },
+  { id: "FOOTWEAR", icon: "👟" },
+  { id: "SLEEP", icon: "🛏️" },
+  { id: "MEDICAL", icon: "💊" },
+  { id: "HYGIENE", icon: "🧼" },
+  { id: "ELECTRONICS", icon: "🔌" },
+  { id: "DOCS", icon: "📄" },
+  { id: "GEAR", icon: "🦯" },
+  { id: "OTHER", icon: "📦" },
 ];
 
-const officialCategoryIds = new Set(defaultCategories.map((c) => c.id));
+const officialCategoryIds = new Set(officialCategoryList.map((c) => c.id));
 
-// 動態聚合官方分類與使用者自訂之新分類（防重複集合）
+// 動態聚合官方分類與使用者自訂之新分類（防重複集合，官方分類依語系動態本地化）
 const allCategories = computed(() => {
-  const list = [...defaultCategories];
+  const list = officialCategoryList.map((c) => ({
+    id: c.id,
+    label: t(`packing.categories.${c.id}`),
+    icon: c.icon,
+  }));
   const knownIds = new Set(list.map((c) => c.id));
 
   for (const item of packingStore.packingItems) {
@@ -216,12 +222,9 @@ function handleTouchEnd() {
 const isWeightSettingsOpen = ref(false);
 // 減重黃金法則 Modal 顯示狀態（平板與手機模式點擊開啟）
 const isRulesModalOpen = ref(false);
-const weightRulesTips = [
-  "嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背 7kg，超重是膝蓋與足底發炎的第一元兇。",
-  "善用「穿在身上」開關：登山鞋 (850g)、登山杖 (440g) 手持穿戴不計入背包負重。",
-  "水與食物不要背過多：朝聖路上村莊密集且有公共飲水泉（Fuente），帶 1L 水瓶隨走隨補即可。",
-  "三套衣物輪替原則：一套穿身上、一套備用換洗、一套晾乾中，羊毛材質抗臭效果最佳。",
-];
+const weightRulesTips = computed(() => {
+  return (tm("packing.rulesTips") as string[]) || [];
+});
 
 // 彈窗狀態
 const isCustomModalOpen = ref(false);
@@ -295,8 +298,8 @@ onUnmounted(() => {
         <h2
           class="text-base sm:text-lg md:text-xl text-slate-800 flex items-center gap-2 truncate"
         >
-          <span class="sm:hidden">行李打包清單</span>
-          <span class="hidden sm:inline">朝聖之路行李打包清單</span>
+          <span class="sm:hidden">{{ t('packing.title') }}</span>
+          <span class="hidden sm:inline">{{ t('packing.titleLong') }}</span>
         </h2>
 
         <!-- 右側精巧功能按鈕群（手機端精簡文字防折行） -->
@@ -305,11 +308,11 @@ onUnmounted(() => {
             type="button"
             @click="isPrintModalOpen = true"
             class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-600 px-2 sm:px-2.5 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1 sm:gap-1.5"
-            title="開啟 A4 紙本預覽並列印"
+            :title="t('packing.printList')"
           >
             <Printer class="w-3.5 h-3.5 text-slate-500" />
-            <span class="sm:hidden">列印</span>
-            <span class="hidden sm:inline">列印清單</span>
+            <span class="sm:hidden">{{ t('packing.print') }}</span>
+            <span class="hidden sm:inline">{{ t('packing.printList') }}</span>
           </button>
 
           <button
@@ -318,8 +321,8 @@ onUnmounted(() => {
             class="text-xs border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 text-slate-500 px-2 sm:px-3 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1 sm:gap-1.5"
           >
             <PlusCircle class="w-3.5 h-3.5" />
-            <span class="sm:hidden">新增</span>
-            <span class="hidden sm:inline">新增自訂裝備</span>
+            <span class="sm:hidden">{{ t('packing.add') }}</span>
+            <span class="hidden sm:inline">{{ t('packing.addItem') }}</span>
           </button>
 
           <button
@@ -328,8 +331,8 @@ onUnmounted(() => {
             class="text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 px-2 sm:px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer inline-flex items-center gap-1 sm:gap-1.5"
           >
             <RotateCcw class="w-3.5 h-3.5" />
-            <span class="sm:hidden">重設</span>
-            <span class="hidden sm:inline">重設清單</span>
+            <span class="sm:hidden">{{ t('packing.reset') }}</span>
+            <span class="hidden sm:inline">{{ t('packing.resetList') }}</span>
           </button>
         </div>
       </div>
@@ -351,7 +354,7 @@ onUnmounted(() => {
             >
               <div class="flex items-center gap-1.5">
                 <h3 class="text-sm sm:text-base text-slate-800">
-                  體重與 10% 負重警戒線
+                  {{ t('packing.weightDashboard') }}
                 </h3>
 
                 <!-- 減重黃金法則符號按鈕 (僅在平板與手機模式顯示，點擊開啟 Modal) -->
@@ -359,8 +362,8 @@ onUnmounted(() => {
                   type="button"
                   @click.stop="isRulesModalOpen = true"
                   class="lg:hidden p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
-                  title="朝聖裝備減重黃金法則"
-                  aria-label="查看朝聖裝備減重黃金法則"
+                  :title="t('packing.goldenRules')"
+                  :aria-label="t('packing.goldenRules')"
                 >
                   <MessageCircleWarning class="w-4 h-4" />
                 </button>
@@ -389,12 +392,12 @@ onUnmounted(() => {
               class="lg:hidden mt-2 flex items-center justify-between text-xs text-slate-600 cursor-pointer gap-2"
             >
               <div class="flex items-center gap-1.5">
-                <span class="text-slate-400">體重</span>
+                <span class="text-slate-400">{{ t('packing.bodyWeightShort') }}</span>
                 <span class="font-bold text-slate-800 font-mono"
                   >{{ packingStore.bodyWeightKg }}kg</span
                 >
                 <span class="text-slate-300">·</span>
-                <span class="text-slate-400">淨負重</span>
+                <span class="text-slate-400">{{ t('packing.backpackNetWeightShort') }}</span>
                 <span
                   class="font-bold font-mono"
                   :class="
@@ -415,7 +418,7 @@ onUnmounted(() => {
                       : 'bg-emerald-100 text-emerald-700'
                   "
                 >
-                  {{ packingStore.isOverweight ? "超標" : "合格" }} ({{
+                  {{ packingStore.isOverweight ? t('packing.statusExceeded') : t('packing.statusQualified') }} ({{
                     packingStore.weightPercentage
                   }}%)
                 </span>
@@ -429,7 +432,7 @@ onUnmounted(() => {
             >
               <!-- 體重輸入框 -->
               <div class="rounded-xl flex items-center justify-between">
-                <label class="text-sm text-slate-500">你的體重 (kg)</label>
+                <label class="text-sm text-slate-500">{{ t('packing.bodyWeight') }}</label>
                 <div class="flex items-center gap-1.5">
                   <input
                     v-model.number="packingStore.bodyWeightKg"
@@ -447,7 +450,7 @@ onUnmounted(() => {
               <div class="space-y-2">
                 <div class="flex items-baseline justify-between text-xs">
                   <span class="text-slate-500 text-sm"
-                    >背包淨負重 (不含身上穿戴):</span
+                    >{{ t('packing.backpackNetWeight') }}</span
                   >
                   <span
                     class="font-mono text-base"
@@ -482,10 +485,9 @@ onUnmounted(() => {
                 </div>
 
                 <div class="flex justify-between text-[11px] text-slate-500">
-                  <span>目前佔體重 {{ packingStore.weightPercentage }}%</span>
+                  <span>{{ t('packing.currentWeightPercent', { pct: packingStore.weightPercentage }) }}</span>
                   <span
-                    >10% 警戒上限:
-                    {{ packingStore.maxRecommendedWeightKg }} kg</span
+                    >{{ t('packing.warningLimit', { limit: packingStore.maxRecommendedWeightKg }) }}</span
                   >
                 </div>
               </div>
@@ -511,8 +513,8 @@ onUnmounted(() => {
                   <div class="font-medium text-sm">
                     {{
                       packingStore.isOverweight
-                        ? "⚠️ 負重已超標！"
-                        : "🟢 負重合格安全！"
+                        ? t('packing.statusOverweight')
+                        : t('packing.statusSafe')
                     }}
                   </div>
                   <div
@@ -520,7 +522,9 @@ onUnmounted(() => {
                     v-if="packingStore.isOverweight"
                   >
                     {{
-                      `已超過體重 10% (+${(packingStore.backpackWeightKg - packingStore.maxRecommendedWeightKg).toFixed(2)}kg)，強烈建議精簡非必備品！`
+                      t('packing.statusOverweightDesc', {
+                        over: (packingStore.backpackWeightKg - packingStore.maxRecommendedWeightKg).toFixed(2)
+                      })
                     }}
                   </div>
                 </div>
@@ -531,7 +535,7 @@ onUnmounted(() => {
                 class="rounded-xl text-xs flex items-center justify-between"
               >
                 <div class="font-normal text-sm text-slate-500">
-                  當天穿在身上衣物重量
+                  {{ t('packing.wornWeight') }}
                 </div>
                 <div class="font-mono font-medium text-slate-500 text-sm">
                   {{ packingStore.wornWeightKg }} kg
@@ -547,37 +551,18 @@ onUnmounted(() => {
         >
           <h3 class="flex items-center gap-2 text-sm text-slate-800">
             <Sparkles class="h-4 w-4 text-amber-500" />
-            <span class="text-base">朝聖裝備減重黃金法則</span>
+            <span class="text-base">{{ t('packing.goldenRules') }}</span>
           </h3>
           <ul
             class="mt-3 space-y-2.5 text-sm text-slate-600 leading-relaxed font-normal"
           >
-            <li class="flex items-start gap-2">
+            <li
+              v-for="rule in weightRulesTips"
+              :key="rule"
+              class="flex items-start gap-2"
+            >
               <span class="text-amber-500 font-bold">•</span>
-              <span
-                >嚴格把關 10% 體重上限：60kg 體重背 6kg，70kg 背
-                7kg，超重是膝蓋與足底發炎的第一元兇。</span
-              >
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-amber-500 font-bold">•</span>
-              <span
-                >善用「穿在身上」開關：登山鞋 (850g)、登山杖 (440g)
-                手持穿戴不計入背包負重。</span
-              >
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-amber-500 font-bold">•</span>
-              <span
-                >水與食物不要背過多：朝聖路上村莊密集且有公共飲水泉（Fuente），帶
-                1L 水瓶隨走隨補即可。</span
-              >
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-amber-500 font-bold">•</span>
-              <span
-                >三套衣物輪替原則：一套穿身上、一套備用換洗、一套晾乾中，羊毛材質抗臭效果最佳。</span
-              >
+              <span>{{ rule }}</span>
             </li>
           </ul>
         </div>
@@ -593,7 +578,7 @@ onUnmounted(() => {
           class="rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-2.5"
         >
           <div>
-            <span class="text-sm font-medium text-slate-800">裝備分類篩選</span>
+            <span class="text-sm font-medium text-slate-800">{{ t('packing.categoryFilter') }}</span>
           </div>
 
           <div class="flex flex-wrap gap-1.5">
@@ -616,7 +601,7 @@ onUnmounted(() => {
                 role="button"
                 tabindex="0"
                 class="ml-0.5 -mr-1 p-0.5 rounded text-slate-400 hover:bg-rose-100 hover:text-rose-600 transition-colors"
-                title="刪除此自訂分類"
+                :title="t('packing.deleteCustomCategory')"
                 @click.stop="promptDeleteCategory(cat.id)"
               >
                 <Trash2 class="h-3 w-3" />
@@ -661,7 +646,7 @@ onUnmounted(() => {
                 <!-- 拖曳手柄（桌面與手機均可按住拖動） -->
                 <div
                   class="cursor-grab active:cursor-grabbing text-slate-300 hover:text-slate-600 p-0.5 rounded touch-none"
-                  title="按住拖曳調整順序"
+                  :title="t('packing.dragToReorder')"
                   @click.stop
                   @touchstart.stop="handleTouchStart(cat.id, $event)"
                   @touchmove.prevent="handleTouchMove($event)"
@@ -680,18 +665,21 @@ onUnmounted(() => {
 
               <div class="flex items-center gap-2">
                 <span class="text-[11px] text-slate-400 font-mono">
-                  {{ getCategoryStats(cat.id).checkedCount }}/{{
-                    getCategoryStats(cat.id).itemCount
+                  {{
+                    t('packing.statsSummary', {
+                      checked: getCategoryStats(cat.id).checkedCount,
+                      total: getCategoryStats(cat.id).itemCount,
+                      weight: getCategoryStats(cat.id).totalGrams,
+                    })
                   }}
-                  項 · {{ getCategoryStats(cat.id).totalGrams }}g
                 </span>
                 <button
                   type="button"
                   class="rounded-md p-1 text-slate-300 hover:bg-slate-100 hover:text-slate-600 cursor-pointer"
                   :title="
                     officialCategoryIds.has(cat.id)
-                      ? '從本次清單排除此分類'
-                      : '刪除此自訂分類與所屬裝備'
+                      ? t('packing.excludeCategory')
+                      : t('packing.deleteCategoryWithItems')
                   "
                   @click.stop="
                     officialCategoryIds.has(cat.id)
@@ -740,51 +728,50 @@ onUnmounted(() => {
     <!-- 二次確認排除分類對話框 -->
     <ConfirmModal
       :is-open="isRemoveCategoryModalOpen"
-      :title="`排除「${categoryToRemove?.label}」分類`"
-      confirm-text="確認排除"
-      cancel-text="取消"
+      :title="t('packing.confirmModals.removeCatTitle', { cat: categoryToRemove?.label })"
+      :confirm-text="t('packing.confirmModals.confirmRemove')"
+      :cancel-text="t('common.cancel')"
       @confirm="handleConfirmRemoveCategory"
       @close="isRemoveCategoryModalOpen = false"
     >
-      <p>確定要將「{{ categoryToRemove?.label }}」從本次清單中排除嗎？</p>
+      <p>{{ t('packing.confirmModals.removeCatMsg', { cat: categoryToRemove?.label }) }}</p>
       <p class="mt-1 text-slate-500">
-        排除後該分類將在看板隱藏，其裝備亦不計入背包負重。（您隨時可由上方標籤點擊恢復）
+        {{ t('packing.confirmModals.removeCatDesc') }}
       </p>
     </ConfirmModal>
 
     <!-- 二次確認刪除自訂分類對話框 -->
     <ConfirmModal
       :is-open="isDeleteCategoryModalOpen"
-      :title="`刪除自訂分類「${categoryToDelete}」`"
-      confirm-text="確認刪除"
-      cancel-text="取消"
+      :title="t('packing.confirmModals.deleteCatTitle', { cat: categoryToDelete })"
+      :confirm-text="t('packing.confirmModals.confirmDelete')"
+      :cancel-text="t('common.cancel')"
       @confirm="handleConfirmDeleteCategory"
       @close="isDeleteCategoryModalOpen = false"
     >
-      <p>確定要刪除「{{ categoryToDelete }}」分類嗎？</p>
+      <p>{{ t('packing.confirmModals.deleteCatMsg', { cat: categoryToDelete }) }}</p>
       <p class="mt-1 text-slate-500">
-        該分類底下的所有自訂裝備（共
-        {{ categoryToDeleteItemCount }} 項）將一併移除且無法復原。
+        {{ t('packing.confirmModals.deleteCatDesc', { count: categoryToDeleteItemCount }) }}
       </p>
     </ConfirmModal>
 
     <!-- 二次確認重設對話框 -->
     <ConfirmModal
       :is-open="isResetModalOpen"
-      title="重設整份清單"
-      confirm-text="確認重設"
-      cancel-text="取消"
+      :title="t('packing.confirmModals.resetTitle')"
+      :confirm-text="t('packing.confirmModals.confirmReset')"
+      :cancel-text="t('common.cancel')"
       @confirm="handleConfirmReset"
       @close="isResetModalOpen = false"
     >
-      <p>確定要將所有裝備勾選、實測重量與自訂項目還原為官方預設清單嗎？</p>
-      <p class="mt-1 text-slate-500">此動作將清空所有自訂設定且無法復原。</p>
+      <p>{{ t('packing.confirmModals.resetMsg') }}</p>
+      <p class="mt-1 text-slate-500">{{ t('packing.confirmModals.resetDesc') }}</p>
     </ConfirmModal>
 
     <!-- 減重黃金法則對話框 (手機與平板) -->
     <TipsModal
       :is-open="isRulesModalOpen"
-      title="朝聖裝備減重黃金法則"
+      :title="t('packing.goldenRules')"
       :tips="weightRulesTips"
       @close="isRulesModalOpen = false"
     />

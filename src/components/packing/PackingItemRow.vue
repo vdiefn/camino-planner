@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Lightbulb, Trash2, Plus, Minus } from 'lucide-vue-next'
 import type { PackingItem } from '@/types/camino'
 
@@ -6,7 +8,15 @@ interface Props {
   item: PackingItem
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const { t, locale } = useI18n()
+
+const displayName = computed(() => {
+  return locale.value === 'en'
+    ? props.item.englishName || props.item.chineseName
+    : props.item.chineseName
+})
 
 const emit = defineEmits<{
   (e: 'toggleCheck', id: string): void
@@ -41,13 +51,13 @@ const emit = defineEmits<{
                 item.isChecked ? 'text-slate-900' : 'text-slate-400 line-through'
               ]"
             >
-              {{ item.chineseName }}
+              {{ displayName }}
             </span>
             <span
               v-if="item.priority === 'ESSENTIAL'"
               class="rounded bg-rose-50 px-1 py-0.5 text-[10px] text-rose-600 hover:bg-rose-100"
             >
-              必備
+              {{ t('packing.item.essential') }}
             </span>
 
             <!-- 穿在身上行內膠囊按鈕（防冒泡避免觸發 Checkbox，未勾選時無外框） -->
@@ -59,10 +69,10 @@ const emit = defineEmits<{
                   ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100'
                   : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600'
               ]"
-              :title="item.isWornOnBody ? '點擊改為放入背包（計入背包負重）' : '點擊標記為穿在身上（不計入背包負重）'"
+              :title="item.isWornOnBody ? t('packing.item.packTitle') : t('packing.item.wearTitle')"
               @click.stop.prevent="emit('toggleWorn', item.id)"
             >
-              <span>{{ item.isWornOnBody ? '✓ 穿在身上' : '+ 穿在身上' }}</span>
+              <span>{{ item.isWornOnBody ? t('packing.item.wornOnBody') : t('packing.item.wearOnBody') }}</span>
             </button>
           </div>
         </div>
@@ -94,7 +104,7 @@ const emit = defineEmits<{
     <div class="mt-2 flex items-center justify-between gap-2 text-xs">
       <!-- 實際重量 -->
       <div class="flex items-center gap-1.5">
-        <span class="text-slate-500">實際重量:</span>
+        <span class="text-slate-500">{{ t('packing.item.actualWeight') }}</span>
         <input
           type="number"
           min="0"
@@ -113,7 +123,7 @@ const emit = defineEmits<{
           class="text-[11px] font-mono text-slate-400"
           title="總重量"
         >
-          計 {{ item.unitWeightGrams * item.quantity }}g
+          {{ t('packing.item.totalWeight', { weight: item.unitWeightGrams * item.quantity }) }}
         </span>
 
         <div class="flex items-center rounded-md border border-slate-200 bg-slate-50">

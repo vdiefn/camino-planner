@@ -72,6 +72,7 @@ export type PackingCategory =
   | 'MEDICAL'
   | 'ELECTRONICS'
   | 'DOCS'
+  | 'GEAR'
   | 'OTHER'
   | (string & {})
 

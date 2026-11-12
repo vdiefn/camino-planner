@@ -149,8 +149,8 @@ export const packingItems: PackingItem[] = [
   {
     id: 'MERINO_SOCKS',
     chineseName: '羊毛登山襪',
-    englishName: 'Merino Wool Hiking Socks',
-    spanishName: 'Calcetines de senderismo de lana merina',
+    englishName: 'Wool Hiking Socks',
+    spanishName: 'Calcetines de senderismo de lana',
     category: 'FOOTWEAR',
     priority: 'ESSENTIAL',
     referenceRangeText: '60g ~ 90g (雙)',
@@ -323,7 +323,7 @@ export const packingItems: PackingItem[] = [
     isWornOnBody: false,
   },
 
-  // --- 8. 證件隨身 (DOCS) ---
+  // --- 8. 重要證件 (DOCS) ---
   {
     id: 'PASSPORT',
     chineseName: '護照正本',
@@ -352,12 +352,14 @@ export const packingItems: PackingItem[] = [
     quantity: 1,
     isWornOnBody: true, // 貼身保管
   },
+
+  // --- 9. 健行裝備 (GEAR) ---
   {
     id: 'TREKKING_POLES',
     chineseName: '登山杖',
     englishName: 'Trekking Poles',
     spanishName: 'Bastones de senderismo',
-    category: 'DOCS',
+    category: 'GEAR',
     priority: 'ESSENTIAL',
     referenceRangeText: '380g ~ 550g (雙)',
     proTips: '下坡減輕雙膝負擔！注意：搭乘多數歐洲廉航時登山杖【禁止隨身攜帶】，必須託運或至 當地採買。',
@@ -371,7 +373,7 @@ export const packingItems: PackingItem[] = [
     chineseName: '水壺 / 水袋',
     englishName: 'Water Bottle / Hydration Bladder',
     spanishName: 'Botella de agua / Bolsa de hidratación',
-    category: 'DOCS',
+    category: 'GEAR',
     priority: 'ESSENTIAL',
     referenceRangeText: '100g ~ 180g',
     proTips: '朝聖路上村莊皆有公共飲水泉（Fuente），帶 1L 容器沿途隨時補水即可，切勿背過多水增重。',
@@ -381,18 +383,32 @@ export const packingItems: PackingItem[] = [
     isWornOnBody: false,
   },
 
-  // --- 9. 其他輔助 (OTHER) ---
+  // --- 10. 其他輔助 (OTHER) ---
   {
     id: 'ZIPLOCK_BAGS',
-    chineseName: '防水夾鏈袋 / 衣物壓縮分裝袋',
-    englishName: 'Waterproof Ziplock / Compression Bags',
-    spanishName: 'Bolsas herméticas impermeables / Bolsas de compresión',
+    chineseName: '防水夾鏈袋',
+    englishName: 'Waterproof Ziplock Bags',
+    spanishName: 'Bolsas herméticas impermeables',
+    category: 'OTHER',
+    priority: 'RECOMMENDED',
+    referenceRangeText: '10g ~ 30g',
+    proTips: '保護朝聖者護照、一般護照、現鈔與電子線材防潮，建議準備 2~3 個不同尺寸。',
+    isChecked: true,
+    unitWeightGrams: 10,
+    quantity: 3,
+    isWornOnBody: false,
+  },
+  {
+    id: 'COMPRESSION_BAGS',
+    chineseName: '衣物壓縮分裝袋',
+    englishName: 'Compression Dry Bags',
+    spanishName: 'Bolsas de compresión',
     category: 'OTHER',
     priority: 'RECOMMENDED',
     referenceRangeText: '30g ~ 60g',
-    proTips: '分類打包衣物與電子線材，並提供雨天雙重防水保護。',
+    proTips: '有效壓縮換洗衣物與保暖外套體積，並提供背包內層大面積防水保護。',
     isChecked: true,
-    unitWeightGrams: 35,
+    unitWeightGrams: 45,
     quantity: 1,
     isWornOnBody: false,
   },

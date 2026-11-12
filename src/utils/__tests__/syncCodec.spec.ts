@@ -338,7 +338,7 @@ describe('syncCodec 跨裝置同步與備份編解碼測試', () => {
     expect(res.ok).toBe(true)
     if (res.ok && res.data.packing) {
       expect(res.data.packing.activeCategories.includes('SLEEP')).toBe(false)
-      expect(res.data.packing.summary.activeCategoryCount).toBe(8)
+      expect(res.data.packing.summary.activeCategoryCount).toBe(9)
       expect(res.data.packing.summary.excludedCategoryNames).toEqual(['睡眠防護'])
       expect(res.data.packing.userItemStates.SLEEPING_BAG?.isChecked).toBe(false)
       const customEyeMask = res.data.packing.customItems.find((i) => i.chineseName === '羽絨眼罩')
@@ -348,7 +348,7 @@ describe('syncCodec 跨裝置同步與備份編解碼測試', () => {
       const receiverStore = usePackingStore()
       receiverStore.applyImportedPacking(res.data.packing)
       expect(receiverStore.activeCategories.includes('SLEEP')).toBe(false)
-      expect(receiverStore.activeCategories.length).toBe(8)
+      expect(receiverStore.activeCategories.length).toBe(9)
     }
   })
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Dialog, DialogPanel } from '@headlessui/vue'
 import { X, Sparkles } from 'lucide-vue-next'
 import type { PackingItem } from '@/types/camino'
@@ -8,7 +10,16 @@ interface Props {
   item: PackingItem | null
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+const { t, locale } = useI18n()
+
+const displayName = computed(() => {
+  if (!props.item) return ''
+  return locale.value === 'en'
+    ? props.item.englishName || props.item.chineseName
+    : props.item.chineseName
+})
+
 const emit = defineEmits<{
   (e: 'close'): void
 }>()
@@ -25,12 +36,12 @@ const emit = defineEmits<{
           <!-- 頂部標題列：品名、必備標籤與關閉按鈕水平對齊（無分隔線） -->
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <h3 class="text-base font-bold text-slate-900">{{ item.chineseName }}</h3>
+              <h3 class="text-base font-bold text-slate-900">{{ displayName }}</h3>
               <span
                 v-if="item.priority === 'ESSENTIAL'"
                 class="rounded bg-rose-100 px-1.5 py-0.5 text-[10px] font-medium text-rose-600"
               >
-                必備
+                {{ t('packing.item.essential') }}
               </span>
             </div>
             <button
@@ -46,7 +57,7 @@ const emit = defineEmits<{
           <div class="space-y-2">
             <div class="flex items-center gap-1.5 font-medium text-slate-800 text-sm">
               <Sparkles class="h-4 w-4 text-amber-500 shrink-0" />
-              <span>裝備避坑建議</span>
+              <span>{{ t('packing.proTipsModal.title') }}</span>
             </div>
             <p class="leading-relaxed text-slate-700 text-sm pl-5.5">
               {{ item.proTips }}
