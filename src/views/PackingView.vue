@@ -484,7 +484,7 @@ onUnmounted(() => {
                   />
                 </div>
 
-                <div class="flex justify-between text-[11px] text-slate-500">
+                <div class="flex justify-between text-xs sm:text-sm text-slate-500">
                   <span>{{ t('packing.currentWeightPercent', { pct: packingStore.weightPercentage }) }}</span>
                   <span
                     >{{ t('packing.warningLimit', { limit: packingStore.maxRecommendedWeightKg }) }}</span
@@ -495,7 +495,7 @@ onUnmounted(() => {
               <!-- 狀態提示框 -->
               <div
                 :class="[
-                  'flex items-start gap-2.5 rounded-xl p-3.5 text-xs',
+                  'flex items-start gap-2.5 rounded-xl p-3.5 text-xs sm:text-sm',
                   packingStore.isOverweight
                     ? 'bg-rose-50 text-rose-900 border border-rose-200'
                     : 'bg-emerald-50 text-emerald-900 border border-emerald-200',
@@ -510,7 +510,7 @@ onUnmounted(() => {
                   class="h-4 w-4 shrink-0 text-emerald-800 mt-0.5"
                 />
                 <div>
-                  <div class="font-medium text-sm">
+                  <div class="font-medium text-sm sm:text-base">
                     {{
                       packingStore.isOverweight
                         ? t('packing.statusOverweight')
@@ -518,7 +518,7 @@ onUnmounted(() => {
                     }}
                   </div>
                   <div
-                    class="mt-0.5 text-[11px] leading-relaxed opacity-90 font-normal"
+                    class="mt-0.5 text-xs sm:text-sm leading-relaxed opacity-90 font-normal"
                     v-if="packingStore.isOverweight"
                   >
                     {{
@@ -578,7 +578,7 @@ onUnmounted(() => {
           class="rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-2.5"
         >
           <div>
-            <span class="text-sm font-medium text-slate-800">{{ t('packing.categoryFilter') }}</span>
+            <span class="text-sm sm:text-base font-medium text-slate-800">{{ t('packing.categoryFilter') }}</span>
           </div>
 
           <div class="flex flex-wrap gap-1.5">
@@ -587,7 +587,7 @@ onUnmounted(() => {
               :key="cat.id"
               type="button"
               :class="[
-                'inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-normal transition-all cursor-pointer',
+                'inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs sm:text-sm font-normal transition-all cursor-pointer',
                 activeCategorySet.has(cat.id)
                   ? 'border border-amber-300 bg-amber-50 font-medium text-slate-800 shadow-xs'
                   : 'border border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100',
@@ -664,7 +664,7 @@ onUnmounted(() => {
               </div>
 
               <div class="flex items-center gap-2">
-                <span class="text-[11px] text-slate-400 font-mono">
+                <span class="text-xs sm:text-sm text-slate-400 font-mono">
                   {{
                     t('packing.statsSummary', {
                       checked: getCategoryStats(cat.id).checkedCount,

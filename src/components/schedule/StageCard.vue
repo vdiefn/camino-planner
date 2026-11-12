@@ -103,43 +103,43 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
 
           <div>
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-xs text-slate-700 font-normal">
+              <span class="text-xs sm:text-sm text-slate-700 font-normal">
                 {{ formattedDate }}
               </span>
               <span
                 v-if="stage.isRestDay"
-                class="px-2 py-0.5 rounded-full text-xs font-normal bg-purple-100 text-purple-800"
+                class="px-2 py-0.5 rounded-full text-xs sm:text-sm font-normal bg-purple-100 text-purple-800"
               >
                 {{ $t('schedule.badges.restDay') }}
               </span>
               <span
                 v-if="stage.isExtensionStage && !stage.isRestDay"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-50 border border-sky-200 text-sky-900"
+                class="px-2 py-0.5 rounded-full text-xs sm:text-sm font-medium bg-sky-50 border border-sky-200 text-sky-900"
               >
                 {{ $t('schedule.badges.extension') }}
               </span>
               <span
                 v-if="stage.routeVariant === 'NAPOLEON'"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200"
+                class="px-2 py-0.5 rounded-full text-xs sm:text-sm font-medium bg-amber-50 text-amber-900 border border-amber-200"
               >
                 {{ $t('schedule.badges.napoleon') }}
               </span>
               <span
                 v-else-if="stage.routeVariant === 'VALCARLOS'"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-sky-50 text-sky-900 border border-sky-200"
+                class="px-2 py-0.5 rounded-full text-xs sm:text-sm font-medium bg-sky-50 text-sky-900 border border-sky-200"
               >
                 {{ $t('schedule.badges.valcarlos') }}
               </span>
               <span
                 v-if="!stage.isRestDay && (stage.endWaypointId === 'SANTIAGO_DE_COMPOSTELA' || stage.endWaypointId.endsWith(':santiago'))"
-                class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200"
+                class="px-2 py-0.5 rounded-full text-xs sm:text-sm font-medium bg-amber-50 text-amber-800 border border-amber-200"
               >
                 {{ $t('schedule.badges.destination') }}
               </span>
             </div>
 
             <!-- 起訖城鎮 (西文/當地名稱為主，中文為輔) -->
-            <div class="text-base font-medium text-slate-900 mt-1 flex items-center gap-2">
+            <div class="text-base sm:text-lg font-medium text-slate-900 mt-1 flex items-center gap-2">
               <span>{{ startWaypoint?.localName || startWaypoint?.spanishName || stage.startWaypointId }}</span>
               <span class="text-slate-600 font-normal">→</span>
               <button
@@ -151,12 +151,12 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
               </button>
               <span
                 v-if="endWaypoint?.isMajorCity"
-                class="px-1.5 py-0.5 rounded text-[10px] font-normal bg-amber-100 text-amber-800"
+                class="px-1.5 py-0.5 rounded text-xs font-normal bg-amber-100 text-amber-800"
               >
                 {{ $t('schedule.badges.majorCity') }}
               </span>
             </div>
-            <div v-if="!isEnglish" class="text-xs text-slate-600 font-normal">
+            <div v-if="!isEnglish" class="text-xs sm:text-sm text-slate-600 font-normal">
               {{ startWaypoint?.chineseName }} → {{ endWaypoint?.chineseName }}
             </div>
           </div>
@@ -168,7 +168,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             <div class="text-xl font-medium text-slate-900 font-mono">
               {{ stage.distanceKm.toFixed(1) }} <span class="text-sm font-normal text-slate-700">km</span>
             </div>
-            <div class="text-xs text-slate-700 font-normal flex items-center justify-end gap-3 mt-1 font-mono">
+            <div class="text-xs sm:text-sm text-slate-700 font-normal flex items-center justify-end gap-3 mt-1 font-mono">
               <span class="flex items-center text-rose-600 gap-0.5">
                 <TrendingUp class="w-3.5 h-3.5" /> +{{ stage.elevationGainM }}m
               </span>
@@ -183,7 +183,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
       <!-- 無住宿提醒橫條 -->
       <div
         v-if="!stage.isRestDay && !endWaypoint?.hasAlbergue"
-        class="mt-3 p-2.5 bg-orange-50 border border-orange-200 rounded-xl text-xs text-orange-800 flex items-center gap-2 font-normal"
+        class="mt-3 p-2.5 bg-orange-50 border border-orange-200 rounded-xl text-xs sm:text-sm text-orange-800 flex items-center gap-2 font-normal"
       >
         <AlertTriangle class="w-4 h-4 shrink-0 text-orange-600" />
         <span>{{ $t('schedule.facilities.noAlbergueAlert') }}</span>
@@ -191,13 +191,13 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
 
       <!-- 中段：機能標籤與操作按鈕 -->
       <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between gap-4">
-        <div class="flex items-center gap-2 flex-wrap text-xs font-normal">
+        <div class="flex items-center gap-2 flex-wrap text-xs sm:text-sm font-normal">
           <MapPin class="w-4 h-4 text-amber-500 shrink-0" />
           <button
             v-if="endWaypoint?.hasAlbergue"
             type="button"
             @click.stop="emit('open-albergue', stage)"
-            class="px-2 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded text-xs cursor-pointer hover:bg-emerald-100 transition"
+            class="px-2 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded text-xs sm:text-sm cursor-pointer hover:bg-emerald-100 transition"
           >
             {{ $t('schedule.facilities.albergue') }}
           </button>
@@ -258,42 +258,42 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             <!-- 頂行：日期與機能標籤（靠左）＋ 公里數與展開箭頭（靠右） -->
             <div class="flex items-center justify-between gap-2">
               <div class="flex items-center gap-1.5 flex-wrap min-w-0">
-                <span class="text-xs text-slate-700 font-normal">
+                <span class="text-xs sm:text-sm text-slate-700 font-normal">
                   {{ formattedDate }}
                 </span>
                 <span
                   v-if="stage.isExtensionStage && !stage.isRestDay"
-                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-sky-100 text-sky-800"
+                  class="px-1.5 py-0.5 rounded text-xs font-medium bg-sky-100 text-sky-800"
                 >
                   {{ $t('schedule.badges.extension') }}
                 </span>
                 <span
                   v-if="stage.routeVariant === 'NAPOLEON'"
-                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-900 border border-amber-300"
+                  class="px-1.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-900 border border-amber-300"
                 >
                   ⛰️ {{ $t('schedule.badges.napoleon') }}
                 </span>
                 <span
                   v-else-if="stage.routeVariant === 'VALCARLOS'"
-                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-sky-100 text-sky-900 border border-sky-300"
+                  class="px-1.5 py-0.5 rounded text-xs font-medium bg-sky-100 text-sky-900 border border-sky-300"
                 >
                   🌲 {{ $t('schedule.badges.valcarlos') }}
                 </span>
                 <span
                   v-if="!stage.isRestDay && (stage.endWaypointId === 'SANTIAGO_DE_COMPOSTELA' || stage.endWaypointId.endsWith(':santiago'))"
-                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-800"
+                  class="px-1.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800"
                 >
                   {{ $t('schedule.badges.destination') }}
                 </span>
                 <span
                   v-if="endWaypoint?.isMajorCity"
-                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-800"
+                  class="px-1.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800"
                 >
                   {{ $t('schedule.badges.majorCity') }}
                 </span>
                 <span
                   v-if="stage.isRestDay"
-                  class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-purple-100 text-purple-800"
+                  class="px-1.5 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800"
                 >
                   {{ $t('schedule.badges.restDay') }}
                 </span>
@@ -301,7 +301,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
 
               <!-- 右側：公里數與折疊箭頭 -->
               <div class="flex items-center gap-1.5 shrink-0">
-                <span class="font-medium text-slate-900 font-mono text-sm whitespace-nowrap">
+                <span class="font-medium text-slate-900 font-mono text-sm sm:text-base whitespace-nowrap">
                   {{ stage.distanceKm.toFixed(1) }} km
                 </span>
                 <ChevronDown
@@ -312,9 +312,9 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             </div>
 
             <!-- 外文起訖走向（享有獨立滿寬，徹底解決地名與公里數擠壓黏著問題） -->
-            <div class="font-medium text-slate-900 text-sm flex items-center gap-x-1.5 gap-y-0.5 flex-wrap leading-tight mt-1">
+            <div class="font-medium text-slate-900 text-sm sm:text-base flex items-center gap-x-1.5 gap-y-0.5 flex-wrap leading-tight mt-1">
               <span>{{ startWaypoint?.localName || startWaypoint?.spanishName || stage.startWaypointId }}</span>
-              <span class="text-slate-400 text-xs font-normal">→</span>
+              <span class="text-slate-400 text-xs sm:text-sm font-normal">→</span>
               <button
                 type="button"
                 @click.stop="emit('change-waypoint', stage)"
@@ -325,7 +325,7 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             </div>
 
             <!-- 中文起訖走向（已過濾全形與半形括號特色冗長說明，不再被截斷） -->
-            <div v-if="!isEnglish" class="text-[11px] text-slate-500 font-normal mt-0.5 truncate">
+            <div v-if="!isEnglish" class="text-xs sm:text-sm text-slate-500 font-normal mt-0.5 truncate">
               {{ cleanChineseName(startWaypoint?.chineseName) }} → {{ cleanChineseName(endWaypoint?.chineseName) }}
             </div>
           </div>

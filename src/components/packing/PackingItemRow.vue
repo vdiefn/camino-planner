@@ -47,7 +47,7 @@ const emit = defineEmits<{
           <div class="flex flex-wrap items-center gap-1.5">
             <span
               :class="[
-                'text-sm font-medium transition-colors',
+                'text-sm sm:text-base font-medium transition-colors',
                 item.isChecked ? 'text-slate-900' : 'text-slate-400 line-through'
               ]"
             >
@@ -55,7 +55,7 @@ const emit = defineEmits<{
             </span>
             <span
               v-if="item.priority === 'ESSENTIAL'"
-              class="rounded bg-rose-50 px-1 py-0.5 text-[10px] text-rose-600 hover:bg-rose-100"
+              class="rounded bg-rose-50 px-1.5 py-0.5 text-xs text-rose-600 hover:bg-rose-100"
             >
               {{ t('packing.item.essential') }}
             </span>
@@ -63,7 +63,7 @@ const emit = defineEmits<{
             <!-- 穿在身上行內膠囊按鈕（防冒泡避免觸發 Checkbox，未勾選時無外框） -->
             <button
               type="button"
-              class="rounded px-1.5 py-0.5 text-[10px] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
+              class="rounded px-1.5 py-0.5 text-xs font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
               :class="[
                 item.isWornOnBody
                   ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100'
@@ -101,7 +101,7 @@ const emit = defineEmits<{
     </div>
 
     <!-- 下方：常駐緊湊重量與數量控制列（無分隔線） -->
-    <div class="mt-2 flex items-center justify-between gap-2 text-xs">
+    <div class="mt-2 flex items-center justify-between gap-2 text-xs sm:text-sm">
       <!-- 實際重量 -->
       <div class="flex items-center gap-1.5">
         <span class="text-slate-500">{{ t('packing.item.actualWeight') }}</span>
@@ -120,7 +120,7 @@ const emit = defineEmits<{
       <div class="flex items-center gap-2">
         <span
           v-if="item.quantity > 1"
-          class="text-[11px] font-mono text-slate-400"
+          class="text-xs font-mono text-slate-400"
           title="總重量"
         >
           {{ t('packing.item.totalWeight', { weight: item.unitWeightGrams * item.quantity }) }}

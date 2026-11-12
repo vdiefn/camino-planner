@@ -148,7 +148,7 @@ function handleInputFocus(event: FocusEvent) {
         <div class="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 shrink-0 bg-white sm:bg-transparent p-2 sm:p-0 rounded-xl border sm:border-0 border-slate-200">
           <!-- 全程預估總額 -->
           <div class="flex flex-col items-start sm:items-end">
-            <span class="text-[10px] sm:text-xs text-slate-500">{{ t('budget.grandTotal') }}</span>
+            <span class="text-xs sm:text-sm text-slate-500">{{ t('budget.grandTotal') }}</span>
             <div class="flex items-baseline gap-1 text-slate-900 font-mono text-base sm:text-xl">
               <template v-if="locale === 'en'">
                 <span>€</span>
@@ -163,8 +163,8 @@ function handleInputFocus(event: FocusEvent) {
 
           <!-- 歐洲當地開銷 -->
           <div class="flex flex-col items-start sm:items-end">
-            <span class="text-[10px] sm:text-xs text-slate-500">{{ t('budget.localTotal') }}</span>
-            <div class="flex items-baseline gap-1 text-slate-900 font-mono text-sm sm:text-base">
+            <span class="text-xs sm:text-sm text-slate-500">{{ t('budget.localTotal') }}</span>
+            <div class="flex items-baseline gap-1 text-slate-900 font-mono text-sm sm:text-lg">
               <span>€</span>
               <span>{{ budgetStore.summary.totalEur.toFixed(2) }}</span>
             </div>
@@ -172,11 +172,11 @@ function handleInputFocus(event: FocusEvent) {
 
           <!-- 路上日均 -->
           <div class="flex flex-col items-start sm:items-end">
-            <span class="text-[10px] sm:text-xs text-slate-500">{{ t('budget.dailyWalkingAvg') }}</span>
-            <div class="flex items-baseline gap-1 text-slate-900 font-mono text-sm sm:text-base">
+            <span class="text-xs sm:text-sm text-slate-500">{{ t('budget.dailyWalkingAvg') }}</span>
+            <div class="flex items-baseline gap-1 text-slate-900 font-mono text-sm sm:text-lg">
               <span>€</span>
               <span>{{ budgetStore.summary.dailyAvgEur.toFixed(2) }}</span>
-              <span class="text-[10px] text-slate-400">{{ t('budget.perDay') }}</span>
+              <span class="text-xs text-slate-400">{{ t('budget.perDay') }}</span>
             </div>
           </div>
         </div>
@@ -217,14 +217,14 @@ function handleInputFocus(event: FocusEvent) {
               ]"
             >
               <div class="flex items-center justify-between">
-                <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
+                <span class="text-sm sm:text-base font-medium text-slate-900 flex items-center gap-1.5">
                   <span>{{ getPersonaName('BUDGET') }}</span>
                 </span>
-                <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
+                <span class="text-xs sm:text-sm font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
                   {{ getPersonaTag('BUDGET') }}
                 </span>
               </div>
-              <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
+              <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
                 {{ getPersonaDesc('BUDGET') }}
               </p>
             </button>
@@ -241,17 +241,17 @@ function handleInputFocus(event: FocusEvent) {
               ]"
             >
               <div class="flex items-center justify-between">
-                <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
+                <span class="text-sm sm:text-base font-medium text-slate-900 flex items-center gap-1.5">
                   <span>{{ getPersonaName('STANDARD') }}</span>
-                  <span class="text-[9px] font-normal px-1.5 py-0.5 rounded text-emerald-800 bg-emerald-20 border border-emerald-600">
+                  <span class="text-[11px] sm:text-xs font-normal px-1.5 py-0.5 rounded text-emerald-800 bg-emerald-20 border border-emerald-600">
                     {{ t('budget.styles.STANDARD.recommended') }}
                   </span>
                 </span>
-                <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
+                <span class="text-xs sm:text-sm font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
                   {{ getPersonaTag('STANDARD') }}
                 </span>
               </div>
-              <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
+              <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
                 {{ getPersonaDesc('STANDARD') }}
               </p>
             </button>
@@ -268,14 +268,14 @@ function handleInputFocus(event: FocusEvent) {
               ]"
             >
               <div class="flex items-center justify-between">
-                <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
+                <span class="text-sm sm:text-base font-medium text-slate-900 flex items-center gap-1.5">
                   <span>{{ getPersonaName('COMFORT') }}</span>
                 </span>
-                <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
+                <span class="text-xs sm:text-sm font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
                   {{ getPersonaTag('COMFORT') }}
                 </span>
               </div>
-              <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
+              <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
                 {{ getPersonaDesc('COMFORT') }}
               </p>
             </button>
@@ -292,14 +292,14 @@ function handleInputFocus(event: FocusEvent) {
               ]"
             >
               <div class="flex items-center justify-between">
-                <span class="text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
+                <span class="text-sm sm:text-base font-medium text-slate-900 flex items-center gap-1.5">
                   <span>{{ getPersonaName('CUSTOM') }}</span>
                 </span>
-                <span class="text-[12px] font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
+                <span class="text-xs sm:text-sm font-mono font-medium px-2 py-0.5 rounded-full text-slate-600">
                   {{ getPersonaTag('CUSTOM') }}
                 </span>
               </div>
-              <p class="text-[12px] text-slate-500 mt-1 leading-relaxed">
+              <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
                 {{ getPersonaDesc('CUSTOM') }}
               </p>
             </button>
@@ -318,7 +318,7 @@ function handleInputFocus(event: FocusEvent) {
           </div>
 
           <!-- 直覺 Segmented Control 分段切換 -->
-          <div class="grid grid-cols-2 p-1 bg-slate-100 rounded-xl text-xs gap-1">
+          <div class="grid grid-cols-2 p-1 bg-slate-100 rounded-xl text-xs sm:text-sm gap-1">
             <button
               type="button"
               @click="budgetStore.syncWithSchedule()"
@@ -347,7 +347,7 @@ function handleInputFocus(event: FocusEvent) {
           </div>
 
           <!-- 模式狀態提示說明 -->
-          <div class="text-[11px] leading-relaxed text-slate-500">
+          <div class="text-xs sm:text-sm leading-relaxed text-slate-500">
             <template v-if="budgetStore.isSyncWithSchedule">
               {{ t('budget.daysControl.syncScheduleHint', { days: budgetStore.scheduleTotalDays }) }}
             </template>
@@ -416,7 +416,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 一、行前固定支出 -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base font-semibold text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Plane class="w-4 h-4 text-sky-600 shrink-0" />
               <span>{{ t('budget.categories.fixed') }}</span>
             </h3>
@@ -432,7 +432,7 @@ function handleInputFocus(event: FocusEvent) {
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.flight') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.flight') }}</label>
               <input
                 type="number"
                 :step="locale === 'en' ? 10 : 500"
@@ -440,12 +440,12 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('flightTwd')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('flightTwd', $event)"
-                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-3 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.gear') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.gear') }}</label>
               <input
                 type="number"
                 :step="locale === 'en' ? 10 : 500"
@@ -453,12 +453,12 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('gearTwd')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('gearTwd', $event)"
-                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-3 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.insuranceAndSim') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.insuranceAndSim') }}</label>
               <input
                 type="number"
                 :step="locale === 'en' ? 5 : 200"
@@ -466,7 +466,7 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('insuranceAndSimTwd')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('insuranceAndSimTwd', $event)"
-                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-3 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
           </div>
@@ -475,7 +475,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 二、徒步路上每日開銷 (EUR/天) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base font-semibold text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Footprints class="w-4 h-4 text-amber-500 shrink-0" />
               <span>{{ t('budget.categories.daily', { days: budgetStore.effectiveDays }) }}</span>
             </h3>
@@ -494,7 +494,7 @@ function handleInputFocus(event: FocusEvent) {
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.lodging') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.lodging') }}</label>
               <input
                 type="number"
                 step="1"
@@ -502,15 +502,15 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('lodgingEurPerDay')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('lodgingEurPerDay', $event)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-2.5 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+              <span class="text-xs text-slate-400 mt-0.5 block font-mono text-right">
                 {{ t('budget.categories.lodgingSubtotal', { eur: budgetStore.summary.lodgingTotalEur.toFixed(2) }) }}
               </span>
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.food') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.food') }}</label>
               <input
                 type="number"
                 step="1"
@@ -518,15 +518,15 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('foodEurPerDay')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('foodEurPerDay', $event)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-2.5 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+              <span class="text-xs text-slate-400 mt-0.5 block font-mono text-right">
                 {{ t('budget.categories.foodSubtotal', { eur: budgetStore.summary.foodTotalEur.toFixed(2) }) }}
               </span>
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.laundry') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.laundry') }}</label>
               <input
                 type="number"
                 step="1"
@@ -534,15 +534,15 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('laundryEurPerDay')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('laundryEurPerDay', $event)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-2.5 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+              <span class="text-xs text-slate-400 mt-0.5 block font-mono text-right">
                 {{ t('budget.categories.laundrySubtotal', { eur: budgetStore.summary.laundryTotalEur.toFixed(2) }) }}
               </span>
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.luggage') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.luggage') }}</label>
               <input
                 type="number"
                 step="1"
@@ -550,9 +550,9 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('luggageTransferEurPerDay')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('luggageTransferEurPerDay', $event)"
-                class="w-full px-2.5 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-2.5 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
-              <span class="text-[10px] text-slate-400 mt-0.5 block font-mono text-right">
+              <span class="text-xs text-slate-400 mt-0.5 block font-mono text-right">
                 {{ t('budget.categories.luggageSubtotal', { eur: budgetStore.summary.luggageTotalEur.toFixed(2) }) }}
               </span>
             </div>
@@ -562,7 +562,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 三、前後跨國接駁交通 (EUR) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base font-semibold text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <Train class="w-4 h-4 text-indigo-600 shrink-0" />
               <span>{{ t('budget.categories.transit') }}</span>
             </h3>
@@ -581,7 +581,7 @@ function handleInputFocus(event: FocusEvent) {
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-[11px] text-slate-500 mb-1">{{ t('budget.categories.transitToStart') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.transitToStart') }}</label>
               <input
                 type="number"
                 step="5"
@@ -589,12 +589,12 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('transitToStartEur')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('transitToStartEur', $event)"
-                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-3 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
 
             <div>
-              <label class="block text-[12px] text-slate-500 mb-1">{{ t('budget.categories.transitFromEnd') }}</label>
+              <label class="block text-xs sm:text-sm font-medium text-slate-500 mb-1">{{ t('budget.categories.transitFromEnd') }}</label>
               <input
                 type="number"
                 step="5"
@@ -602,7 +602,7 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('transitFromEndEur')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('transitFromEndEur', $event)"
-                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
+                class="w-full px-3 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden"
               />
             </div>
           </div>
@@ -611,7 +611,7 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 四、突發應急金 (EUR) -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-            <h3 class="text-xs sm:text-sm md:text-base text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <h3 class="text-xs sm:text-sm md:text-base font-semibold text-slate-800 flex items-center gap-1.5 sm:gap-2 min-w-0">
               <ShieldAlert class="w-4 h-4 text-amber-600 shrink-0" />
               <span>{{ t('budget.categories.emergency') }}</span>
             </h3>
@@ -621,7 +621,7 @@ function handleInputFocus(event: FocusEvent) {
               </span>
               <span
                 v-if="locale !== 'en'"
-                class="text-[11px] text-slate-400 font-mono block whitespace-nowrap"
+                class="text-xs text-slate-400 font-mono block whitespace-nowrap"
               >
                 約 NT$ {{ budgetStore.summary.emergencyFundTwd.toLocaleString() }}
               </span>
@@ -629,7 +629,7 @@ function handleInputFocus(event: FocusEvent) {
           </div>
 
           <div class="flex items-center justify-between gap-4">
-            <p class="text-xs text-slate-500 leading-relaxed">
+            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
               {{ t('budget.categories.emergencyDesc') }}
             </p>
             <div class="w-32 shrink-0">
@@ -640,7 +640,7 @@ function handleInputFocus(event: FocusEvent) {
                 :value="getDetailInputValue('emergencyFundEur')"
                 @focus="handleInputFocus"
                 @input="handleInputChange('emergencyFundEur', $event)"
-                class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden text-right"
+                class="w-full px-3 py-1.5 text-xs sm:text-sm font-mono rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-amber-500 outline-hidden text-right"
               />
             </div>
           </div>

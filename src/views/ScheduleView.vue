@@ -563,41 +563,41 @@ onUnmounted(() => {
 
         <!-- 右側：獨立純粹的數據看板條（左右對稱、完美平衡） -->
         <div
-          class="px-4 sm:px-6 py-2 rounded-xl bg-white border border-slate-200 shadow-2xs grid grid-cols-4 sm:flex sm:items-center sm:justify-around text-xs gap-1 sm:gap-6 shrink-0 w-full md:w-auto"
+          class="px-4 sm:px-6 py-2 rounded-xl bg-white border border-slate-200 shadow-2xs grid grid-cols-4 sm:flex sm:items-center sm:justify-around text-xs sm:text-sm gap-1 sm:gap-6 shrink-0 w-full md:w-auto"
         >
           <!-- 總徒步里程 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.totalDistance') }}</span>
+            <span class="text-slate-400 text-xs sm:text-sm whitespace-nowrap">{{ $t('schedule.stats.totalDistance') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              <span class="font-bold text-slate-900 font-mono text-sm sm:text-base">{{
                 scheduleStore.totalDistanceKm.toFixed(1)
               }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">km</span>
+              <span class="text-xs text-slate-400 font-normal">km</span>
             </div>
           </div>
 
           <!-- 日均徒步 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.dailyAverage') }}</span>
+            <span class="text-slate-400 text-xs sm:text-sm whitespace-nowrap">{{ $t('schedule.stats.dailyAverage') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              <span class="font-bold text-slate-900 font-mono text-sm sm:text-base">{{
                 dailyAverageKm.toFixed(1)
               }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">{{ $t('schedule.stats.dailyAverageUnit') }}</span>
+              <span class="text-xs text-slate-400 font-normal">{{ $t('schedule.stats.dailyAverageUnit') }}</span>
             </div>
           </div>
 
           <!-- 總天數 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.totalDays') }}</span>
+            <span class="text-slate-400 text-xs sm:text-sm whitespace-nowrap">{{ $t('schedule.stats.totalDays') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              <span class="font-bold text-slate-900 font-mono text-sm sm:text-base">{{
                 totalTripDays
               }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">{{ $t('schedule.stats.dayUnit') }}</span>
+              <span class="text-xs text-slate-400 font-normal">{{ $t('schedule.stats.dayUnit') }}</span>
               <span
                 v-if="scheduleStore.currentDraft.finisterreOption !== 'NONE' && isMainReachedSantiago"
-                class="hidden sm:inline text-[10px] text-slate-400 font-mono ml-0.5"
+                class="hidden sm:inline text-xs text-slate-400 font-mono ml-0.5"
               >
                 ({{ scheduleStore.config.targetDays }}+{{ scheduleStore.currentDraft.finisterreDays || 3 }})
               </span>
@@ -606,12 +606,12 @@ onUnmounted(() => {
 
           <!-- 休息停留 -->
           <div class="flex flex-col items-center justify-center">
-            <span class="text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{{ $t('schedule.stats.restDays') }}</span>
+            <span class="text-slate-400 text-xs sm:text-sm whitespace-nowrap">{{ $t('schedule.stats.restDays') }}</span>
             <div class="flex items-baseline gap-0.5 whitespace-nowrap">
-              <span class="font-bold text-slate-900 font-mono text-xs sm:text-sm">{{
+              <span class="font-bold text-slate-900 font-mono text-sm sm:text-base">{{
                 scheduleStore.totalRestDays
               }}</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400 font-normal">{{ $t('schedule.stats.dayUnit') }}</span>
+              <span class="text-xs text-slate-400 font-normal">{{ $t('schedule.stats.dayUnit') }}</span>
             </div>
           </div>
         </div>
@@ -683,29 +683,29 @@ onUnmounted(() => {
             class="lg:hidden mt-2.5 pt-2.5 border-t border-slate-100 flex flex-col gap-1.5 cursor-pointer"
           >
             <!-- 第一行：起訖走向（獨佔一整行，地名獲得完整伸展空間，杜絕因空間擠壓導致過度截斷） -->
-            <div class="flex items-center gap-1.5 min-w-0 text-xs text-slate-700">
+            <div class="flex items-center gap-1.5 min-w-0 text-xs sm:text-sm text-slate-700">
               <template v-for="(stop, idx) in collapsedRouteFlow" :key="idx">
                 <span class="font-medium text-slate-800 truncate">{{ stop }}</span>
                 <span
                   v-if="idx < collapsedRouteFlow.length - 1"
-                  class="text-slate-400 shrink-0 text-[11px]"
+                  class="text-slate-400 shrink-0 text-xs"
                   >→</span
                 >
               </template>
             </div>
 
             <!-- 第二行：路線中文名稱、天數明細與狀態標籤 -->
-            <div class="flex items-center justify-between text-xs text-slate-500">
+            <div class="flex items-center justify-between text-xs sm:text-sm text-slate-500">
               <div class="flex items-center gap-2 min-w-0">
-                <span class="text-[11px] text-slate-600 truncate">
+                <span class="text-xs text-slate-600 truncate">
                   {{ scheduleStore.currentRouteMetadata?.chineseName }}
                 </span>
                 <span class="text-slate-300">·</span>
-                <span class="font-bold text-slate-800 font-mono text-xs">
+                <span class="font-bold text-slate-800 font-mono text-xs sm:text-sm">
                   {{ mobileDisplayTotalDays }} {{ $t('schedule.stats.dayUnit') }}
                   <span
                     v-if="draftConfig.finisterreOption !== 'NONE'"
-                    class="text-[10px] text-slate-400 font-normal font-sans ml-0.5"
+                    class="text-[11px] text-slate-400 font-normal font-sans ml-0.5"
                   >
                     ({{ draftConfig.targetDays }}+{{ draftConfig.finisterreDays }})
                   </span>
@@ -713,7 +713,7 @@ onUnmounted(() => {
               </div>
               <span
                 v-if="isDirty"
-                class="inline-flex items-center gap-1 text-[11px] text-amber-600 font-medium shrink-0"
+                class="inline-flex items-center gap-1 text-xs text-amber-600 font-medium shrink-0"
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>{{ $t('schedule.settings.pendingApply') }}
               </span>
@@ -762,8 +762,8 @@ onUnmounted(() => {
                       : 'text-slate-600 hover:text-slate-800'
                   ]"
                 >
-                  <div class="text-sm truncate text-slate-900">{{ getRouteName(route) }}</div>
-                  <div class="text-[11px] text-slate-400 mt-0.5 truncate">
+                  <div class="text-sm sm:text-base truncate text-slate-900">{{ getRouteName(route) }}</div>
+                  <div class="text-xs text-slate-400 mt-0.5 truncate">
                     {{ scheduleStore.getRouteDisplayDistance(route.id) }}km
                   </div>
                 </button>
@@ -985,11 +985,11 @@ onUnmounted(() => {
           class="hidden lg:flex items-start gap-2.5 p-3 sm:p-3.5 rounded-xl border border-slate-200 text-xs bg-white shadow-xs"
         >
           <div class="space-y-1">
-            <h3 class="flex items-center gap-1.5 text-xs sm:text-sm text-slate-800">
+            <h3 class="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-800">
               <Sparkles class="h-4 w-4 text-amber-500 shrink-0" />
               <span>{{ $t('schedule.settings.flexibleTipsTitle') }}</span>
             </h3>
-            <p class="leading-relaxed text-slate-600 text-[11px] sm:text-xs">
+            <p class="leading-relaxed text-slate-600 text-xs sm:text-sm">
               {{ $t('schedule.settings.flexibleTipsDesc') }}
             </p>
           </div>
