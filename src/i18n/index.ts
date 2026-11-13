@@ -9,6 +9,12 @@ const STORAGE_KEY = 'camino_locale'
 export function getInitialLocale(): SupportedLocale {
   if (typeof window === 'undefined') return 'zh-TW'
 
+  const langParam = new URLSearchParams(window.location.search).get('lang')
+  if (langParam === 'zh-TW' || langParam === 'en') {
+    localStorage.setItem(STORAGE_KEY, langParam)
+    return langParam
+  }
+
   const saved = localStorage.getItem(STORAGE_KEY)
   if (saved === 'zh-TW' || saved === 'en') {
     return saved
