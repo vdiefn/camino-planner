@@ -28,6 +28,8 @@ export default {
     coreTools: "Core Planning Tools",
     encyclopedia: "Camino Guides",
     utilities: "Tools & Support",
+    drawerTitle: "Camino Plan Menu",
+    mobileNavLabel: "Mobile Navigation",
   },
   language: {
     select: "Language",
@@ -211,6 +213,43 @@ export default {
       },
       footerGuide: "Camino de Santiago · Trip Planning Guide",
       footerWish: "Buen Camino! Wishing you a peaceful journey.",
+    },
+    elevationGain: "Gain: ",
+    elevationLoss: "Loss: ",
+    waypointSearchPlaceholder: "Search town or destination...",
+    clearInput: "Clear and re-enter",
+    albergueModal: {
+      googleMapSearch: "Search Stays on Google Maps",
+      noMunicipalDesc: "Small rural hamlet or no permanent municipal albergue listed",
+      gronzeSearch: "Search on Gronze",
+      openGoogleMaps: "Open Google Maps",
+      beds: "Beds: {count}",
+      approxPrice: "Approx. €{price}",
+      types: {
+        MUNICIPAL: "Municipal",
+        PAROCHIAL: "Parochial",
+        HOTEL: "Hotel",
+        HOSTEL: "Hostel",
+        PRIVATE: "Private",
+      },
+      bookingTitle: "Open Booking.com page",
+      officialSite: "Official Website",
+      reportTitle: "Report closure, price, or contact updates",
+      reportShort: "Report Issue",
+      reportTown: "Report stay update / suggest albergue",
+      close: "Close",
+    },
+    gapWarning: {
+      finisterreName: "Cape Finisterre Lighthouse (Finisterre)",
+      muxiaName: "Sanctuary of Virxe da Barca (Muxía)",
+      mainTitle: "Main route has not reached Santiago Cathedral yet (Day {day} ends at \"{town}\")",
+      mainDesc: "Your main route ends at {town}. The Land's End extension starts from Santiago Cathedral by default. Use the shortcuts below to bridge the gap automatically:",
+      cancelMainRest: "Remove rest day (continue to Santiago)",
+      appendMainDay: "Add 1 day to reach Cathedral",
+      extTitle: "Extension route has not reached {dest} yet (Day {day} ends at \"{town}\")",
+      extDesc: "Due to rest days or waypoint adjustments, your extension ends at {town} instead of the cape. Use the shortcuts below to complete the route:",
+      cancelExtRest: "Remove rest day (continue to Cape)",
+      appendExtDay: "Add 1 day to reach Cape",
     },
   },
   packing: {
@@ -559,6 +598,8 @@ export default {
     loading: "Loading...",
     confirm: "Confirm",
     cancel: "Cancel",
+    confirmOperation: "Confirm Action",
+    sponsoredAd: "Sponsored Ad",
   },
   faq: {
     pageTitle: "Camino de Santiago FAQ",
@@ -649,5 +690,150 @@ export default {
       browseRoutes: "Explore Routes",
       startPlan: "Start Planning",
     },
+  },
+  privacy: {
+    backToPlanner: "Back to Planner",
+    title: "About This Site & Privacy Policy",
+    lastUpdated: "Last Updated: November 5, 2026",
+    about: {
+      title: "About Camino Plan",
+      p1: "Camino Plan is a free, modern web application designed for pilgrims walking the Camino de Santiago. Recognizing that pilgrimage information is often scattered and walkers frequently confront winter pass closures, fatigue, backpack weight management, and multi-modal transit planning, we compiled official distances, albergue directories, and transit guides into this dynamic interactive tool.",
+      p2: "The platform covers the Camino Francés, Camino Portugués (Central, Coastal, and Spiritual Variant), Camino del Norte, and the Finisterre & Muxía extensions. All features are free and require no registration.",
+    },
+    intro:
+      "We prioritize your data privacy. This Privacy Policy details our approach to local data storage, client-side architecture, and third-party advertising cookies.",
+    section1: {
+      title: "1. Client-Side Data Storage & Privacy Protection",
+      lead: "Camino Plan operates as a client-side web application:",
+      item1:
+        "We do not collect, process, or store sensitive personal information (such as names, emails, passwords, or GPS history) on any remote server.",
+      item2:
+        "Your custom stages, itinerary preferences, daily kilometers, and packing list checklists are stored exclusively within your device browser local storage (Local Storage).",
+      item3:
+        "When using the Cross-Device Sync & Backup feature, your data is encoded into a secure URL hash fragment and only decoded locally when you open or share that specific link.",
+    },
+    section2: {
+      title: "2. Google AdSense & Advertising Cookie Policy",
+      lead: "To offset server infrastructure and domain maintenance costs, this website utilizes Google AdSense. Third-party vendors may use cookies while you browse:",
+      item1:
+        "Third-party vendors, including Google, use cookies to serve ads based on prior visits to this website or other websites across the internet.",
+      item2:
+        "Google's use of advertising cookies enables it and its partners to serve ads based on your visit to this site and/or other sites on the Internet.",
+      item3Prefix: "Users may opt out of personalized advertising by visiting ",
+      item3Link: "Google Ads Settings",
+      item3Suffix: ".",
+      item4Prefix:
+        "Alternatively, you can opt out of third-party vendor cookies for personalized advertising by visiting ",
+      item4Link: "www.aboutads.info",
+      item4Suffix: ".",
+    },
+    section3: {
+      title: "3. Third-Party Links & External Disclaimer",
+      content:
+        "This site contains external hyperlinks to third-party transit operators (such as Renfe, ALSA), accommodation platforms (such as Gronze, Booking.com), and official pilgrim offices. We are not responsible for the privacy policies or content of external sites. Please review their terms when visiting them.",
+    },
+    section4: {
+      title: "4. Policy Revisions & Effective Date",
+      content:
+        "This Privacy Policy may be updated periodically to reflect service improvements or regulatory changes. Revisions will be published directly on this page with an updated effective date.",
+    },
+    section5: {
+      title: "5. Contact & Feedback",
+      content:
+        "We value your input. If you have questions regarding this Privacy Policy, discover errors, or wish to suggest new features, please reach out via our feedback modal:",
+      btn: "Contact & Feedback",
+    },
+  },
+  notFound: {
+    badge: "Error 404 · Page Not Found",
+    title: "Stepped Off the Yellow Arrow Trail",
+    descLine1: "The page you are looking for does not exist, has been moved, or has an invalid URL.",
+    descLine2: "Don't worry, choose an option below to find your way back.",
+    backToSchedule: "Return to Planner",
+    backToHome: "Back to Home",
+  },
+  feedback: {
+    title: "Feedback & Wishlist",
+    successTitle: "Thank You for Your Feedback!",
+    successDesc:
+      "Your suggestions and field reports have been delivered. This helps all pilgrims walk a smoother, safer Camino. ¡Buen Camino!",
+    finishBtn: "Done",
+    categoryLabel: "Category",
+    categories: {
+      featureRequest: "Feature Wishlist",
+      dataCorrection: "Data Correction",
+      bugReport: "Bug Report",
+      general: "General Feedback",
+    },
+    placeholders: {
+      featureRequest:
+        "What new routes, stage features, or gear tools would you like to see? Tell us your thoughts!",
+      dataCorrection:
+        "Albergue closures, updated phone/pricing, missing shelters, or transit changes...",
+      bugReport:
+        "Encountered an unexpected error or visual glitch? Please describe what happened and we will fix it!",
+      general:
+        "Camino experiences, encouragement for the maintainers, or anything on your mind...",
+      default: "Please enter details...",
+    },
+    targetLabel: "Subject",
+    targetPlaceholder: "e.g., Zubiri Albergue, Northern Way, Gear Calculator...",
+    contentLabel: "Description",
+    thankYou: "Thank you for your valuable feedback and contributions!",
+    requiredError: "Please enter feedback description",
+    networkError: "Network connection error, please try again later",
+    failedError: "Submission failed, please try again later",
+    cancelBtn: "Cancel",
+    submitBtn: "Submit",
+    submittingBtn: "Submitting...",
+  },
+  syncModal: {
+    title: "Cross-Device Sync & Backup",
+    importTitle: "Confirm Import Itinerary & Packing",
+    importNoticeUrl:
+      "Detected incoming Camino data from a share link / QR code. To safeguard your existing plans, select which items to import and overwrite:",
+    importNoticeFile:
+      "Detected incoming Camino data from a backup file. To safeguard your existing plans, select which items to import and overwrite:",
+    applyScheduleTitle: "Apply Itinerary: {route}",
+    scheduleSummary: "{days} Days · Start Date {date}",
+    scheduleNotice: "* Only updates this route; your other route drafts remain intact.",
+    applyPackingTitle: "Apply Packing Checklist",
+    packingSummary:
+      "Body weight {weight} kg · {categories} Categories · {customs} Custom items",
+    packingNotice:
+      "* Selecting this will replace your current packing checklist and custom items.",
+    requireImportSelection:
+      "Please select at least one item, or click Cancel to keep existing data",
+    cancelKeep: "Cancel (Keep Existing)",
+    confirmApply: "Confirm & Apply",
+    fileReadError: "Failed to read file, please try again",
+    step1Title: "1. Select Content to Pack (Shared by QR & Backup)",
+    scheduleOption: "Itinerary Plan",
+    scheduleOptionDesc: "{route} · {days} Days",
+    packingOption: "Packing Checklist",
+    packingOptionDesc:
+      "Includes body weight {weight}kg and custom gear (uncheck when sharing with others)",
+    requireExportSelection:
+      "Please check at least one item to generate share data",
+    step2Title: "2. Scan QR to Sync / Share with Companions (Current Route)",
+    qrAlt: "Cross-device sync QR code",
+    qrDesc:
+      "Scan the QR code with your mobile camera to transfer your plan directly to your mobile browser without logging in.",
+    copy: "Copy",
+    copied: "Copied",
+    copyFailed: "Auto-copy blocked by browser; please select and copy the URL manually",
+    step3Title: "3. Full Backup Export / Import (All Route Drafts)",
+    backupDescPrefix: "Export all route drafts and custom gear as a ",
+    backupDescSuffix:
+      " backup file to protect against browser cache clearing.",
+    downloadBackup: "Download Backup (.json)",
+    restoreBackup: "Restore from Backup File",
+  },
+  footer: {
+    disclaimer1: "Distances, elevations, and accommodations are for reference only. ",
+    disclaimer2: "Always consult official notices for live operations.",
+    privacy: "About & Privacy Policy",
+    sync: "QR Code Sync & Share",
+    feedback: "Feedback",
   },
 };

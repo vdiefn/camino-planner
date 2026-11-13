@@ -100,7 +100,8 @@ function handleOpenFeedback() {
             <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
               <div class="flex items-center gap-2.5">
                 <span class="text-lg font-bold tracking-tight text-slate-800">
-                  Camino Plan 導覽</span>
+                  {{ $t('nav.drawerTitle') }}
+                </span>
               </div>
               <button
                 type="button"

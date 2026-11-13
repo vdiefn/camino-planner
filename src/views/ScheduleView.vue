@@ -426,14 +426,14 @@ const isExtensionReachedDestination = computed(() => {
   return lastExt.endWaypointId === targetId;
 });
 
-// 目標海角中文名稱
+// 目標海角雙語名稱
 const targetDestinationName = computed(() => {
   const opt = scheduleStore.currentDraft.finisterreOption;
   if (opt === "FINISTERRE_ONLY" || opt === "BOTH_MUXIA_FIRST") {
-    return "菲尼斯特雷大西洋燈塔 (Finisterre)";
+    return t("schedule.gapWarning.finisterreName");
   }
   if (opt === "MUXIA_ONLY" || opt === "BOTH_FINISTERRE_FIRST") {
-    return "穆希亞聖船聖母聖殿 (Muxía)";
+    return t("schedule.gapWarning.muxiaName");
   }
   return "";
 });
@@ -1023,10 +1023,10 @@ onUnmounted(() => {
             <AlertTriangle class="w-4.5 h-4.5 text-amber-600 shrink-0 mt-0.5" />
             <div class="flex-1">
               <div class="font-bold text-sm text-amber-950">
-                朝聖主線尚未抵達聖地牙哥大教堂（Day {{ stage.dayIndex }} 落腳於「{{ lastMainWaypointName }}」）
+                {{ t("schedule.gapWarning.mainTitle", { day: stage.dayIndex, town: lastMainWaypointName }) }}
               </div>
               <div class="mt-1 text-slate-700 leading-relaxed">
-                主線行程於今日停靠在 {{ lastMainWaypointName }}。下方世界盡頭旅程預設由聖地牙哥大教堂接續啟程，若欲無縫接軌，可直接點擊下方快捷鍵自動補齊：
+                {{ t("schedule.gapWarning.mainDesc", { town: lastMainWaypointName }) }}
               </div>
               <div class="mt-2.5 flex items-center gap-2 flex-wrap">
                 <button
@@ -1036,7 +1036,7 @@ onUnmounted(() => {
                   class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 transition cursor-pointer flex items-center gap-1 shadow-2xs"
                 >
                   <Coffee class="w-3.5 h-3.5 text-amber-600" />
-                  取消此日休息（恢復直達聖地牙哥）
+                  {{ t("schedule.gapWarning.cancelMainRest") }}
                 </button>
                 <button
                   type="button"
@@ -1044,7 +1044,7 @@ onUnmounted(() => {
                   class="px-2.5 py-1 rounded-lg text-xs font-medium bg-amber-600 hover:bg-amber-700 text-white transition cursor-pointer flex items-center gap-1 shadow-xs"
                 >
                   <Plus class="w-3.5 h-3.5" />
-                  追加 1 天直達大教堂（保留前段規劃）
+                  {{ t("schedule.gapWarning.appendMainDay") }}
                 </button>
               </div>
             </div>
@@ -1058,10 +1058,10 @@ onUnmounted(() => {
             <AlertTriangle class="w-4.5 h-4.5 text-amber-600 shrink-0 mt-0.5" />
             <div class="flex-1">
               <div class="font-bold text-sm text-amber-950">
-                世界盡頭行程尚未抵達{{ targetDestinationName }}（Day {{ stage.dayIndex }} 落腳於「{{ lastExtensionWaypointName }}」）
+                {{ t("schedule.gapWarning.extTitle", { dest: targetDestinationName, day: stage.dayIndex, town: lastExtensionWaypointName }) }}
               </div>
               <div class="mt-1 text-slate-700 leading-relaxed">
-                延伸行程因設定休息停留日或城鎮調整，於最後一天停靠在 {{ lastExtensionWaypointName }}，未能抵達預定之海角終點。您可直接點擊下方快捷鍵補齊：
+                {{ t("schedule.gapWarning.extDesc", { town: lastExtensionWaypointName }) }}
               </div>
               <div class="mt-2.5 flex items-center gap-2 flex-wrap">
                 <button
@@ -1071,7 +1071,7 @@ onUnmounted(() => {
                   class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 transition cursor-pointer flex items-center gap-1 shadow-2xs"
                 >
                   <Coffee class="w-3.5 h-3.5 text-amber-600" />
-                  取消此日休息（恢復直達海角）
+                  {{ t("schedule.gapWarning.cancelExtRest") }}
                 </button>
                 <button
                   v-if="(scheduleStore.currentDraft.finisterreDays || 3) < maxFinisterreDays"
@@ -1080,7 +1080,7 @@ onUnmounted(() => {
                   class="px-2.5 py-1 rounded-lg text-xs font-medium bg-amber-600 hover:bg-amber-700 text-white transition cursor-pointer flex items-center gap-1 shadow-xs"
                 >
                   <Plus class="w-3.5 h-3.5" />
-                  追加 1 天直達海角（保留前段規劃）
+                  {{ t("schedule.gapWarning.appendExtDay") }}
                 </button>
               </div>
             </div>

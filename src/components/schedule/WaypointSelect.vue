@@ -129,7 +129,7 @@ function handleClearInput() {
           @input="query = ($event.target as HTMLInputElement).value"
           @focus="handleFocus"
           @click="handleClick"
-          placeholder="搜尋城鎮或中文名稱..."
+          :placeholder="$t('schedule.waypointSearchPlaceholder')"
         />
 
         <!-- 右側控制區：一鍵快速清空 (X) 與下拉展開箭頭 -->
@@ -139,8 +139,8 @@ function handleClearInput() {
             tabindex="-1"
             @click.stop="handleClearInput"
             class="p-1 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer"
-            title="一鍵清空並重新輸入"
-            aria-label="一鍵清空並重新輸入"
+            :title="$t('schedule.clearInput')"
+            :aria-label="$t('schedule.clearInput')"
           >
             <X class="h-3.5 w-3.5" />
           </button>

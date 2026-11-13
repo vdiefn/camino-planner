@@ -342,8 +342,8 @@ const openGoogleMapSearch = (queryType: 'supermarket' | 'pharmacy' | 'city') => 
             </div>
 
             <div class="flex items-center justify-between text-xs text-slate-700 pt-1 font-normal font-mono">
-              <span>爬升：<strong class="text-rose-600 font-normal">+{{ stage.elevationGainM }}m</strong></span>
-              <span>下降：<strong class="text-emerald-600 font-normal">-{{ stage.elevationLossM }}m</strong></span>
+              <span>{{ $t('schedule.elevationGain') }}<strong class="text-rose-600 font-normal">+{{ stage.elevationGainM }}m</strong></span>
+              <span>{{ $t('schedule.elevationLoss') }}<strong class="text-emerald-600 font-normal">-{{ stage.elevationLossM }}m</strong></span>
             </div>
 
             <!-- 機能標籤與操作按鈕：與電腦版樣式與佈局完全一致 -->
