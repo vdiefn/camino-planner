@@ -41,7 +41,7 @@ export default {
     startPlanning: "Start Planning",
     hero: {
       title: "Every Step, A Journey of Your Own",
-      desc: "A minimalist planning tool for Camino de Santiago pilgrims. Calculate daily walking stages, manage 10% backpack weight limits, navigate trailhead transit, and estimate multi-currency budgets. Offline-ready with seamless cross-device sync.",
+      desc: "A planning tool for Camino de Santiago pilgrims. Calculate daily walking stages, manage 10% backpack weight limits, navigate trailhead transit, and estimate pilgrimage budgets. Offline-ready with seamless cross-device sync.",
       startBtn: "Start Planning Now",
       faqBtn: "Camino History & FAQ",
       featureFree: "100% Free · No Sign-in",
@@ -94,8 +94,8 @@ export default {
         desc: "Comprehensive public transit guides from Paris, Madrid, and Porto to all major trailheads with high-speed rail and official booking links.",
       },
       budget: {
-        title: "Dual-Currency Budget Planner",
-        desc: "Covers flights, gear, lodging, daily meals, and emergency contingency funds with real-time EUR / TWD currency conversion.",
+        title: "Camino Budget Planner",
+        desc: "Covers flights, gear, lodging, daily meals, and emergency contingency funds to help you plan your pilgrimage expenses with clarity.",
       },
     },
     bottomCta: {
