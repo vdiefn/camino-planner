@@ -1,15 +1,17 @@
-# 🇪🇸 Camino Taiwan Guide 系統架構與技術決策規格書 (v1.3)
+# 🇪🇸 Camino Plan 系統架構與技術決策規格書 (v1.4)
 
 ## 1. 技術堆疊 (Tech Stack)
-- **前端核心**：Vue 3 (Composition API, `<script setup>`) + Vite + TypeScript
+- **前端核心**：Vue 3 (Composition API, `<script setup>`) + Vite 8 + TypeScript 6
 - **套件管理**：pnpm
-- **樣式系統**：Tailwind CSS (Utility-first)
+- **樣式系統**：Tailwind CSS v4 (Utility-first)
 - **互動元件**：@headlessui/vue (無頭無障礙浮層/開關元件，零樣式污染)
 - **圖示庫**：lucide-vue-next
+- **多語系國際化**：vue-i18n v11 (`zh-TW` / `en` 雙語即時切換，支援語系偵測與動態 SEO Meta 同步)
+- **跨端同步與壓縮**：fflate (二進位 Deflate 壓縮) + uqr (極輕量向量 QR Code 生成)
 - **狀態管理與離線**：Pinia + pinia-plugin-persistedstate + vite-plugin-pwa
+- **自動化測試**：Vitest (全站 13 個測試檔、136 項單元測試)
+- **邊緣運算與部署託管**：Cloudflare Pages + Cloudflare Pages Functions (`functions/api/feedback.ts`)
 - **自動化資料同步 (CI/CD)**：GitHub Actions 定期排程 (Cron Workflow) 自動抓取與檢驗
-- **雲端同步 (Phase 2)**：Supabase (PostgreSQL JSONB 快照)
-- **部署託管**：Cloudflare Pages / Vercel (Jamstack 靜態託管，主機維護成本 NT$ 0)
 
 ## 2. UI 設計原則 (UI Design Principles)
 - **Template-First**：所有版面結構與視覺樣式 100% 在 `<template>` 內以 Tailwind CSS 類別宣告。
@@ -92,7 +94,9 @@ export type PackingCategory =
   | 'MEDICAL'
   | 'ELECTRONICS'
   | 'DOCS'
+  | 'GEAR'
   | 'OTHER'
+  | (string & {})
 
 export interface PackingItem {
   id: string
@@ -102,7 +106,7 @@ export interface PackingItem {
   category: PackingCategory
   priority: 'ESSENTIAL' | 'RECOMMENDED' | 'OPTIONAL'
   referenceRangeText: string   // 參考重量區間文字
-  proTips?: string             // 台灣實戰避坑指南 Tooltip
+  proTips?: string             // 實戰避坑指南 Tooltip
   isChecked: boolean
   unitWeightGrams: number      // 單件重量 (克)
   quantity: number             // 數量
@@ -125,30 +129,70 @@ export interface TransportStep {
   stepOrder: number
   type: TransportType
   carrierName?: string         // 營運商/車種（如 "SNCF TGV", "ALSA"）
+  carrierNameEn?: string       // 英文營運商/車種
   from: string
+  fromEn?: string              // 英文出發地
   to: string
+  toEn?: string                // 英文目的地
   durationMinutes: number
   estimatedCostEur: { min: number; max: number }
   bookingUrl?: string
   warningTip?: string
+  warningTipEn?: string        // 英文避坑提示
 }
+
+export type TransportTargetRoute = 'frances' | 'portugues' | 'norte'
+export type OriginCity = string
 
 export interface TransportRoute {
   id: string
-  originCity: 'PARIS' | 'MADRID' | 'BARCELONA'
+  targetRoute?: TransportTargetRoute
+  destinationName?: string
+  destinationNameEn?: string
+  originCity: OriginCity
   title: string
+  titleEn?: string             // 英文方案標題
   totalDurationHours: number
   totalCostEur: { min: number; max: number }
   operatingMonths: string
+  operatingMonthsEn?: string   // 英文營運備註
   steps: TransportStep[]
 }
 
 // --- 6. 使用者全域規劃設定 ---
 export interface UserPlanConfig {
   startDate: string
+  startWaypointId: string
+  endWaypointId: string
   targetDays: number
+  restDays?: number
+  dailyTargetKm: number
   bodyWeightKg: number
   day1RouteVariant: 'NAPOLEON' | 'VALCARLOS'
+}
+
+// --- 6.1 朝聖預算試算模型 (Budget Calculator) ---
+export type BudgetPersona = 'BUDGET' | 'STANDARD' | 'COMFORT' | 'CUSTOM'
+
+export interface BudgetDetails {
+  flightTwd: number | null
+  gearTwd: number | null
+  insuranceAndSimTwd: number | null
+  lodgingEurPerDay: number | null
+  foodEurPerDay: number | null
+  laundryEurPerDay: number | null
+  luggageTransferEurPerDay: number | null
+  transitToStartEur: number | null
+  transitFromEndEur: number | null
+  emergencyFundEur: number | null
+}
+
+export interface BudgetState {
+  persona: BudgetPersona
+  isSyncWithSchedule: boolean
+  customDays: number
+  eurToTwdRate: number
+  details: BudgetDetails
 }
 
 // --- 7. 多路線、分支與世界盡頭外掛模型 (Multi-Route & Extensions) ---
@@ -359,27 +403,36 @@ export interface MultiRouteScheduleState {
   - 檢測快取若缺少 `version` 或為 v1.0 舊格式，自動觸發 `migrateLegacyStorage()`：將現有配置深拷貝搬遷至 `drafts.frances`，設定 `currentRouteId = 'frances'`，並寫入新版 schema 版本標籤，實現使用者完全無感的平滑升級。
 
 #### 2. Vitest 自動化測試金字塔 (Testing Pyramid)
-透過 `pnpm test` (Vitest) 建立 3 大專屬驗證測試套件，嚴格阻絕任何架構退化（Regression）：
-- `tests/unit/routes-data.test.ts`：
-  - 驗證所有航點 ID 具備正確命名空間前綴（`frances:*`, `portugues:*`, `norte:*`, `finisterre:*`）。
-  - 驗證各路線里程 `cumulativeKm` 單調遞增無跳空，座標與海拔皆在合法數值區間。
-  - 驗證葡萄牙之路雙分支於 Redondela 匯流之節點連續性。
-  - 驗證世界盡頭 5 種走向路徑之有向圖節點閉環性。
-- `tests/unit/schedule-calculator.test.ts`：
-  - **迴歸基準驗證**：法國之路經典 33 天推導結果（總天數、各日停靠點、總里程 774.5km、總爬升）與重構前 100% 完全相符。
-  - **葡萄牙分支切換驗證**：中央線 vs 海岸線天數與每日配額推導精準度。
-  - **世界盡頭排程鏈驗證**：延伸段 5 種走向接續天數、日期連續性、聖地牙哥停留休整日推導，以及雙向環線之爬升/下降高度動態反轉運算。
-- `tests/unit/schedule-migration.test.ts`：
-  - 模擬舊版 localStorage schema 還原，驗證自動遷移邏輯與草稿隔離性。
-  - 透過 `vi.useFakeTimers()` 鎖定非冬季時間，隔離真實世界冬季封山邊界（11/1 ~ 3/31）波動對測試穩定度之影響。
-- `tests/unit/schedule-export.test.ts`：
-  - 驗證每日行程純文字路書生成函式 `generateScheduleTextChecklist`。
-  - 驗證當地地名括號清理（去無用備註）、單日步程/爬升計算、休息日標記與延伸段標籤排版。
-- `tests/unit/packing-export.test.ts`：
-  - 驗證已勾選項目過濾、未勾選與無項目分類之動態排除。
-  - 驗證穿在身上標記、多件數量乘號計算與樣式 B（中置點連接、☐ 方框、統計摘要）之純文字排版抗破版能力。
-- `tests/unit/useAsyncLock.test.ts`：
-  - 驗證動作互斥鎖（Concurrency Lock）正常透傳、高頻連點忽略、例外必定釋放（finally）與 cooldownMs 冷卻保護機制。
+透過 `pnpm test` (Vitest) 建立 13 個測試檔案（共 136 項單元測試），嚴格阻絕任何架構退化（Regression）：
+- `tests/unit/routes-data.test.ts`：驗證所有航點 ID 命名空間前綴、里程遞增連續性、葡萄牙雙分支於 Redondela 匯流與世界盡頭 5 種走向閉環性。
+- `tests/unit/schedule-calculator.test.ts` & `tests/schedule-calculator.spec.ts`：驗證法國之路 33 天基準推導、葡萄牙分支切換與世界盡頭排程鏈推算。
+- `tests/unit/schedule-migration.test.ts`：模擬舊版 localStorage schema 還原與草稿隔離性，並以 `vi.useFakeTimers()` 隔離冬季封山邊界。
+- `tests/unit/schedule-export.test.ts`：驗證純文字路書生成函式 `generateScheduleTextChecklist`、地名清理與分段排版。
+- `tests/unit/packing-export.test.ts` & `tests/packing-calculator.spec.ts`：驗證裝備負重計算、穿戴扣除與純文字排版抗破版能力。
+- `tests/unit/budget-calculator.test.ts` & `tests/unit/budget-store-input.test.ts`：驗證預算四大象限試算、EUR/TWD 雙幣推導與輸入邊界防禦。
+- `tests/unit/faqs-data.test.ts` & `tests/data-integrity.spec.ts`：驗證 FAQ 資料結構完整性與全站路線、庇護所資料一致性。
+- `src/utils/__tests__/syncCodec.spec.ts`：驗證 `fflate` 壓縮與 Base64Url 跨裝置同步編解碼與錯誤格式防禦。
+- `tests/unit/useAsyncLock.test.ts`：驗證動作互斥鎖正常透傳、高頻連點忽略與例外釋放機制。
+
+### 4.6 全站路由、動態雙語 SEO 與 i18n 架構 (Routing, Dynamic SEO & i18n)
+- **全站頁面路由 (`src/router/index.ts`)**：
+  - 核心工具頁：`/` (`LandingView.vue`)、`/schedule/:routeId/:branchId?`、`/packing`、`/transport/:routeId/:branchId?`、`/budget`（共載於 `HomeView.vue`）。
+  - 內容與指南頁：`/routes` (`RoutesGuideView.vue`)、`/history` (`HistoryView.vue`)、`/faq` (`FaqView.vue`)、`/privacy` (`PrivacyView.vue`) 與 `404` (`NotFoundView.vue`)。
+  - 具備 `beforeEach` 路由防禦，非法 `routeId` / `branchId` 自動回退至合法預設路線。
+- **雙語國際化 (`src/i18n/index.ts`)**：
+  - 採用 `vue-i18n` v11 (`legacy: false`)，支援繁體中文（`zh-TW`）與英文（`en`），語系檔位於 `src/i18n/locales/zh-TW.ts` 與 `src/i18n/locales/en.ts`，並持久化於 `localStorage` (`camino_locale`)。
+- **動態雙語 SEO 與結構化資料 (`updateDocumentSeo`)**：
+  - 切換路由或語系時，即時更新 `document.title`、Meta Description、Open Graph 與 `WebApplication` JSON-LD 結構化資料（含 `inLanguage`）。
+
+### 4.7 邊緣 API 與意見回饋安全防護 (`functions/api/feedback.ts`)
+- 透過 Cloudflare Pages Function 提供 `/api/feedback` POST 端點，將使用者回饋轉送至 Web3Forms、Discord、Telegram 或 Resend。
+- 內建 `Origin` 白名單校驗、Honeypot 蜜罐欄位防呆、Payload 長度上限（`MAX_BODY_CHARS = 8192`）防禦跨站濫用。
+
+### 4.8 已落地核心工具箱與同步導出架構
+以下機制均已完成開發並於線上運作：
+- **裝備 A4 沙盒列印與純文字匯出**：採用隱藏 Iframe 隔離主 DOM 與貪婪雙欄瀑布流排版（`PrintPackingModal.vue`），並提供中置點對齊之抗破版純文字匯出（`packingExport.ts`）與 `useAsyncLock` 互斥鎖防護。
+- **行程 A4 橫向路書列印與純文字導出**：封裝於 `PrintScheduleModal.vue` 與 `scheduleExport.ts`，於 `onUnmounted` 強制清理 Iframe 節點與計時器；`ScheduleView.vue` 採 `ResizeObserver` 動態計算吸頂偏移並以 `Number.isFinite` 防護數值邊界。
+- **跨裝置 QR Code 與短網址同步**：透過 `syncCodec.ts`（`fflate` 壓縮 + Base64Url）與 `uqr` 向量渲染，於 `SyncBackupModal.vue` 提供免登入跨機掃描同步與完整 `.json` 匯入預覽覆寫防護。
 
 ## 5. 商業化與廣告整合架構 (Google AdSense)
 - **環境變數控制**：透過 `VITE_GOOGLE_ADSENSE_CLIENT_ID` 決定是否啟用；未配置時元件自體隱藏，零版面空間佔用。
@@ -393,16 +446,9 @@ export interface MultiRouteScheduleState {
 
 ## 6. 未來演進架構與擴充設計規格 (Architecture Evolution & Scalability: Phase 2+)
 
-為確保後續分階段迭代具備清晰之系統藍圖與資料契約，以下針對 5 大核心演進面向制定技術規格：
+以下針對尚未開發之擴充面向制定技術規格（已完成落地之 i18n、QR Code 同步、A4 列印與純文字匯出已移至第 4 節正式架構）：
 
-### 6.1 多語系國際化架構 (i18n Architecture)
-- **架構原則**：採用輕量化零外掛型別安全方案，預設為繁體中文（`zh-TW`），第一波全面提供英文（`en-US`），並保留西班牙文（`es-ES`）擴充槽位。
-- **靜態型別防護 (Type-Safe Dictionary)**：以 `src/locales/zh-TW.ts` 為唯一真實來源（SSOT），推導 `type I18nSchema = typeof zhTW`，強制其他語言定義檔在編譯時期必須 100% 實現所有 Key，徹底杜絕漏翻與破版。
-- **領域模型國際化契約**：
-  - `Waypoint` 航點模型：保留 `localName`（原名）、`spanishName`、`chineseName`，並擴充 `englishName?: string`。
-  - `PackingItem` 裝備模型：保持核心 `chineseName` 與 `englishName`。
-
-### 6.2 外掛式新經典路線擴充規格 (Route Plugin Architecture)
+### 6.1 外掛式新經典路線擴充規格 (Route Plugin Architecture)
 - **擴充路由與草稿相容性**：
   - 更新 `RouteId` 聯集型別：`export type RouteId = 'frances' | 'portugues' | 'norte' | 'ingles' | 'primitivo'`。
   - 既有 `MultiRouteScheduleState` 與 `drafts` 架構具備天然可擴充性，新路線僅需在 `src/data/routes/` 建立對應資料檔（如 `ingles.ts`、`primitivo.ts`），即可無縫掛載進排程推導核心。
@@ -410,32 +456,10 @@ export interface MultiRouteScheduleState {
   - **英國之路 (Camino Inglés)**：航點 ID 強制前綴 `ingles:*`（起點 Ferrol 至 Santiago，約 113km）。
   - **原始之路 (Camino Primitivo)**：航點 ID 強制前綴 `primitivo:*`（起點 Oviedo，於 Melide 匯入法國之路，約 321km）。
 
-### 6.3 裝備打包實戰工具箱架構 (Packing Advanced Capabilities)
-- **自訂裝備更新契約**：Store 擴充 `updateCustomItem(id, item: Partial<PackingItem>)`，支援品名、重量與分類之就地編輯。
-- **A4 所見即所得沙盒列印架構 (WYSIWYG Sandbox Iframe Print)**：
-  - 透過動態隱藏 Iframe 隔離主應用程式 DOM 與外圍滾動容器，徹底杜絕多餘頁數溢出與全域導覽列穿透，實現單頁 A4 完美收納。
-  - 採用貪婪高度平衡演算法（Greedy Height Balancing），消除 CSS Grid 列高拉伸造成的垂直空白，確保雙欄瀑布流間距緊湊一致。
-- **極簡抗破版純文字匯出（樣式 B）**：
-  - 針對手機備忘錄、LINE 與 Word 等比例字型環境，移除易折行破版的長橫線符號，以垂直中置點（`·`）緊湊連接品項與重量，杜絕右側參差漂移。
-- **非同步動作互斥防連點（`useAsyncLock`）與剪貼簿可觀測性**：
-  - 封裝 `useAsyncLock` Composable，以 `try...finally` 保證解鎖並提供 `cooldownMs` 冷卻時間，杜絕按鈕快速連按導致的 Iframe 堆疊與標題還原失敗。
-  - 剪貼簿具備三態即時 UI 反饋（預設／成功綠／失敗紅），徹底消除未獲授權時的靜默吞錯。
-
-### 6.4 住宿庇護所檢索與快速聯絡管線 (Accommodation Pipeline & Quick Actions)
+### 6.2 住宿庇護所檢索與快速聯絡管線 (Accommodation Pipeline & Quick Actions)
 - **Gronze 權威資料庫對齊**：波多雙分支與北方之路城鎮住宿依循既有階層核對 SOP 建置。
 - **多維度 Filter 複合管線**：在記憶體中建立即時過濾函式，支援 `hasKitchen`、`type`、可否預約之複合過濾。
 - **通訊協議動作列**：UI 封裝快速撥號 `tel:${phone}` 與 WhatsApp 聊天直通 `https://wa.me/${intlPhone}?text=${encodedMsg}`（預載標準西文預約模板）。
 
-### 6.5 跨裝置快速同步架構 (QR Code Fast-Sync)
-- **純前端向量 QR Code 生成**：使用極輕量 SVG/Canvas 渲染，將 `syncCodec.ts` 生成之 Base64Url 壓縮字串直接轉為 QR Code。
-- **離線相機直掃解密**：朝聖路上隊友互助時，直接以手機原生相機讀取，免連外網即刻完成行程複製。
-
-### 6.6 紙本行程路書列印與極簡導出架構 (Schedule Advanced Print & Export)
-- **A4 橫向所見即所得沙盒列印 (WYSIWYG Sandbox Iframe Print)**：
-  - 封裝於 `PrintScheduleModal.vue`，動態注入沙盒 `iframe` 實體，徹底隔絕主應用程式 DOM 與全域滾動條穿透。
-  - 透過 `onafterprint` 事件精準監聽列印預覽結束時序，並於元件 `onUnmounted` 生命週期強制清理殘留節點與計時器，杜絕記憶體洩漏。
-- **純文字行程產生器解耦 (`scheduleExport.ts`)**：
-  - 以純函式架構實現，去除航點括號雜訊，以當地地名標準化格式輸出，極致適配 LINE / 備忘錄通訊軟體分享。
-- **響應式吸頂與邊界防護加固 (`ScheduleView.vue`)**：
-  - 以 `ResizeObserver` 單一來源動態計算側邊欄吸頂偏移量，消除視窗縮放時的 Layout Thrashing（重排顛簸）。
-  - 於 `formatDateWithWeekday` 與 `draftDailyAvgKm` 導入 `isNaN` 與 `Number.isFinite` 嚴格邊界守護，徹底杜絕無效日期與數值產生 `NaN` 破圖。
+### 6.3 多語系擴充預留 (i18n Future Languages)
+- **西班牙文擴充槽位**：在現有 `vue-i18n`（`zh-TW` / `en`）架構上，預留西班牙文（`es`）字典與航點多語欄位擴充能力。
