@@ -12,8 +12,8 @@ const { openSyncModal } = useSyncBackup()
 <template>
   <footer class="mt-auto border-t border-slate-200/60 bg-slate-50/80 pt-3 pb-3 sm:pt-2.5 sm:pb-2.5 px-4 text-center">
     <div class="mx-auto max-w-[1440px] flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 text-[10px] sm:text-xs text-slate-400">
-      <div class="flex items-center justify-center gap-1.5">
-        <ShieldCheck class="w-3.5 h-3.5 text-slate-400 shrink-0" />
+      <div class="flex items-start justify-center gap-1.5">
+        <ShieldCheck class="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
         <p class="leading-normal">
           <span>{{ t('footer.disclaimer1') }}</span>
           <span>{{ t('footer.disclaimer2') }}</span>

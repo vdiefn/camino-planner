@@ -75,14 +75,14 @@ function switchLocale(target: SupportedLocale) {
   </HeadlessMenu>
 
   <!-- 模式二：平鋪切換鈕（適合手機版抽屜選單） -->
-  <div v-else class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl">
+  <div v-else class="inline-flex items-center gap-1 p-0.5 bg-slate-100 rounded-lg shrink-0">
     <button
       v-for="lang in languages"
       :key="lang.code"
       type="button"
       @click="switchLocale(lang.code)"
       :class="[
-        'flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all text-center cursor-pointer',
+        'py-1 px-2.5 rounded-md text-xs font-medium transition-all text-center whitespace-nowrap cursor-pointer',
         currentLocale === lang.code
           ? 'bg-white text-slate-800 shadow-xs font-semibold'
           : 'text-slate-500 hover:text-slate-800',

@@ -465,7 +465,7 @@ onUnmounted(() => {
             </article>
 
             <!-- 底部行動召喚卡片 -->
-            <div class="rounded-2xl bg-slate-100/90 border border-slate-200/90 p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="rounded-2xl border border-slate-200 bg-linear-to-r from-amber-50/70 via-white to-emerald-50/60 p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
               <div class="space-y-1 text-center sm:text-left">
                 <h3 class="text-lg sm:text-xl font-bold text-slate-900">
                   {{ t('history.cta.title') }}

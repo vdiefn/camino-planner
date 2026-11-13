@@ -117,8 +117,8 @@ function handleOpenFeedback() {
             <!-- 選單內容區域 -->
             <div class="flex-1 overflow-y-auto px-3 py-4 space-y-4">
               <!-- 語系切換分組 -->
-              <div class="space-y-1.5 px-1">
-                <span class="text-xs font-medium tracking-wider text-slate-400 uppercase">
+              <div class="flex items-center justify-between gap-3 px-2">
+                <span class="text-xs font-medium tracking-wider text-slate-400 uppercase shrink-0">
                   {{ $t('language.select') }}
                 </span>
                 <LanguageSwitcher mode="inline" />
