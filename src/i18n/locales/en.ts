@@ -2,6 +2,7 @@ export default {
   app: {
     title: "Camino Plan",
     subtitle: "All-in-one Camino de Santiago Planner",
+    logoAlt: "Camino Plan Logo",
   },
   nav: {
     schedule: "Itinerary",

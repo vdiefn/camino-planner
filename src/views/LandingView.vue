@@ -118,7 +118,7 @@ function navigateToRoute(routeId: RouteId) {
         <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
           <img
             src="/favicon.svg"
-            alt="Camino Plan 標誌"
+            :alt="$t('app.logoAlt')"
             width="36"
             height="36"
             class="h-8 w-8 sm:h-9 sm:w-9 shrink-0 drop-shadow-2xs"

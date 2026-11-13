@@ -2,6 +2,7 @@ export default {
   app: {
     title: 'Camino Plan',
     subtitle: '西班牙朝聖之路全方位規劃工具',
+    logoAlt: 'Camino Plan 標誌',
   },
   nav: {
     schedule: '行程規劃',

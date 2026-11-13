@@ -396,13 +396,32 @@ export function updateDocumentSeo(to?: RouteLocationNormalized) {
   document.documentElement.lang = isEn ? 'en' : 'zh-Hant-TW'
 
   upsertMeta('meta[name="description"]', 'name', 'description', seo.description)
-  upsertMeta('meta[name="keywords"]', 'name', 'keywords', seo.keywords)
   upsertMeta('meta[property="og:title"]', 'property', 'og:title', seo.title)
   upsertMeta('meta[property="og:description"]', 'property', 'og:description', seo.description)
   upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
   upsertMeta('meta[property="og:locale"]', 'property', 'og:locale', isEn ? 'en_US' : 'zh_TW')
   upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', seo.title)
   upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', seo.description)
+
+  // 同步更新全站 WebApplication JSON-LD 語系與內容
+  const appSchemaEl = document.head.querySelector<HTMLScriptElement>('#webapp-schema-jsonld')
+  if (appSchemaEl) {
+    appSchemaEl.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: isEn ? 'Camino Plan — Camino de Santiago Planner' : 'Camino Plan 朝聖之路規劃工具',
+      url: `${SITE_ORIGIN}/`,
+      inLanguage: isEn ? 'en' : 'zh-TW',
+      description: DEFAULT_SEO[isEn ? 'en' : 'zh-TW'].description,
+      applicationCategory: 'TravelApplication',
+      operatingSystem: 'All',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    }).replaceAll('<', '\\u003c')
+  }
 
   // 處理 robots 標籤：若路由宣告 noindex 則動態注入，否則安全移除防範全站誤傷
   const robotsMetaEl = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')
