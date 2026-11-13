@@ -14,12 +14,8 @@ export function getInitialLocale(): SupportedLocale {
     return saved
   }
 
-  // 根據瀏覽器偏好語系智慧偵測
-  const navLang = navigator.language.toLowerCase()
-  if (navLang.startsWith('zh')) {
-    return 'zh-TW'
-  }
-  return 'en'
+  // 未手動切換時預設以繁體中文為主，確保搜尋引擎與中文使用者優先取得完整中文內容
+  return 'zh-TW'
 }
 
 export const i18n = createI18n({

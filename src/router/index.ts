@@ -7,11 +7,11 @@ const SITE_ORIGIN = 'https://camino-plan.com'
 
 const DEFAULT_SEO = {
   'zh-TW': {
-    title: '朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
+    title: '朝聖之路規劃工具｜法國之路・葡萄牙之路・北方之路行程與裝備表 | Camino Plan',
     description:
-      '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。',
+      '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費規劃工具。涵蓋朝聖法國之路、葡萄牙之路與北方之路的每日天數行程表、里程計算、10% 體重裝備打包清單與起點交通攻略。',
     keywords:
-      '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 法國之路, 葡萄牙之路, 北方之路, 朝聖裝備清單, 庇護所, 完步證書, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte',
+      '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 朝聖法國之路, 法國之路規劃, 葡萄牙之路, 北方之路, 朝聖裝備清單, 庇護所, 完步證書, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte',
   },
   en: {
     title: 'Camino de Santiago Planner & Packing Tool | Camino Plan',
@@ -38,11 +38,11 @@ interface StaticSeoConfig {
 const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
   landing: {
     'zh-TW': {
-      title: '朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
+      title: '朝聖之路規劃工具｜法國之路・葡萄牙之路・北方之路行程與裝備表 | Camino Plan',
       description:
-        '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。',
+        '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費規劃工具。涵蓋朝聖法國之路、葡萄牙之路與北方之路的每日天數行程表、里程計算、10% 體重裝備打包清單與起點交通攻略。',
       keywords:
-        '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 法國之路, 葡萄牙之路, 北方之路, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte, Santiago de Compostela',
+        '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 朝聖法國之路, 法國之路規劃, 葡萄牙之路, 北方之路, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte, Santiago de Compostela',
     },
     en: {
       title: 'Camino de Santiago Planner & Packing Tool | Camino Plan',
@@ -298,8 +298,6 @@ function getCurrentLocale(): 'zh-TW' | 'en' {
   if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('camino_locale')
     if (saved === 'en' || saved === 'zh-TW') return saved
-    if (navigator.language.toLowerCase().startsWith('zh')) return 'zh-TW'
-    return 'en'
   }
   return 'zh-TW'
 }
@@ -341,9 +339,9 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
       }
     }
     return {
-      title: `${routeMeta.chineseName}行程規劃 (${routeMeta.name}) | Camino Plan`,
-      description: `專為${routeMeta.chineseName}徒步者打造的免費規劃工具。全長約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天，支援每日分段公里試算、爬升下降、庇護所清單與世界盡頭延伸段。`,
-      keywords: `${routeMeta.chineseName}, ${routeMeta.name}, 每日分段里程, 朝聖住宿清單, 爬升下降, 世界盡頭`,
+      title: `朝聖${routeMeta.chineseName}行程規劃與每日天數表 (${routeMeta.name}) | Camino Plan`,
+      description: `專為朝聖${routeMeta.chineseName}規劃打造的免費行程表工具。全長約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天，支援每日分段公里試算、爬升下降、庇護所住宿清單與世界盡頭延伸段。`,
+      keywords: `朝聖${routeMeta.chineseName}, ${routeMeta.chineseName}規劃, ${routeMeta.name}, 每日分段里程, 朝聖住宿清單, 爬升下降, 世界盡頭`,
     }
   }
 
