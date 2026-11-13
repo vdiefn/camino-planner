@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { CalendarDays, Backpack, TrainFront, Coins } from 'lucide-vue-next'
 import { useScheduleStore } from '@/stores/schedule'
+
+const { t } = useI18n()
 
 type TabType = 'schedule' | 'packing' | 'transport' | 'budget'
 
@@ -35,7 +38,7 @@ function handleTabClick(tab: TabType) {
 </script>
 
 <template>
-  <nav aria-label="行動端功能導覽" class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md md:hidden print:hidden">
+  <nav :aria-label="t('nav.mobileNavLabel')" class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md md:hidden print:hidden">
     <div class="grid h-16 grid-cols-4 items-center">
       <a
         :href="`/schedule/${currentRouteSlug}`"
@@ -46,7 +49,7 @@ function handleTabClick(tab: TabType) {
         @click.prevent="handleTabClick('schedule')"
       >
         <CalendarDays class="h-5 w-5" />
-        <span class="text-[11px]">行程規劃</span>
+        <span class="text-[11px]">{{ t('nav.schedule') }}</span>
       </a>
 
       <a
@@ -58,7 +61,7 @@ function handleTabClick(tab: TabType) {
         @click.prevent="handleTabClick('packing')"
       >
         <Backpack class="h-5 w-5" />
-        <span class="text-[11px]">裝備負重</span>
+        <span class="text-[11px]">{{ t('nav.packing') }}</span>
       </a>
 
       <a
@@ -70,7 +73,7 @@ function handleTabClick(tab: TabType) {
         @click.prevent="handleTabClick('transport')"
       >
         <TrainFront class="h-5 w-5" />
-        <span class="text-[11px]">起點交通</span>
+        <span class="text-[11px]">{{ t('nav.transport') }}</span>
       </a>
 
       <a
@@ -82,7 +85,7 @@ function handleTabClick(tab: TabType) {
         @click.prevent="handleTabClick('budget')"
       >
         <Coins class="h-5 w-5" />
-        <span class="text-[11px]">花費預算</span>
+        <span class="text-[11px]">{{ t('nav.budget') }}</span>
       </a>
     </div>
   </nav>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import {
   ArrowRight,
   Footprints,
@@ -17,9 +18,11 @@ import {
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 import { useScheduleStore } from '@/stores/schedule'
 import type { RouteId } from '@/types/route'
 
+const { t } = useI18n()
 const router = useRouter()
 const scheduleStore = useScheduleStore()
 const isMenuDrawerOpen = ref(false)
@@ -37,68 +40,68 @@ interface FeaturedRoute {
   desc: string
 }
 
-// 三大朝聖路線特點卡片（統一資料介面規格）
-const featuredRoutes: FeaturedRoute[] = [
+// 三大朝聖路線特點卡片（支援雙語動態計算）
+const featuredRoutes = computed<FeaturedRoute[]>(() => [
   {
     id: 'frances',
-    name: '法國之路',
-    spanishName: 'Camino Francés',
-    startTown: 'SJPP (聖讓皮耶德波爾)',
-    distanceKm: '約 779 km',
-    recommendedDays: '33 - 35 天',
-    desc: '翻越庇里牛斯山、橫越梅塞塔麥田高原，穿越千年的黃金朝聖路線。庇護所密度最高、社交氛圍最豐富，首走朝聖者最佳首選。',
+    name: t('landing.featuredRoutes.frances.name'),
+    spanishName: t('landing.featuredRoutes.frances.spanishName'),
+    startTown: t('landing.featuredRoutes.frances.startTown'),
+    distanceKm: t('landing.featuredRoutes.frances.distanceKm'),
+    recommendedDays: t('landing.featuredRoutes.frances.recommendedDays'),
+    desc: t('landing.featuredRoutes.frances.desc'),
   },
   {
     id: 'portugues',
-    name: '葡萄牙之路',
-    spanishName: 'Camino Portugués',
-    startTown: '波多 (Porto)',
-    distanceKm: '約 242 - 271 km',
-    recommendedDays: '11 - 14 天',
-    desc: '自世界遺產波多啟程，可自由選擇大西洋海景木棧道（海岸線）或古羅馬石橋森林小徑（中央線），地勢平緩舒適。',
+    name: t('landing.featuredRoutes.portugues.name'),
+    spanishName: t('landing.featuredRoutes.portugues.spanishName'),
+    startTown: t('landing.featuredRoutes.portugues.startTown'),
+    distanceKm: t('landing.featuredRoutes.portugues.distanceKm'),
+    recommendedDays: t('landing.featuredRoutes.portugues.recommendedDays'),
+    desc: t('landing.featuredRoutes.portugues.desc'),
   },
   {
     id: 'norte',
-    name: '北方之路',
-    spanishName: 'Camino del Norte',
-    startTown: '伊倫 (Irún)',
-    distanceKm: '約 820 km',
-    recommendedDays: '35 - 38 天',
-    desc: '沿著西班牙北部比斯開灣懸崖海岸一路向西，海天一色、海鮮美食與古老渡船接駁，體能挑戰度高但風景絕美難忘。',
+    name: t('landing.featuredRoutes.norte.name'),
+    spanishName: t('landing.featuredRoutes.norte.spanishName'),
+    startTown: t('landing.featuredRoutes.norte.startTown'),
+    distanceKm: t('landing.featuredRoutes.norte.distanceKm'),
+    recommendedDays: t('landing.featuredRoutes.norte.recommendedDays'),
+    desc: t('landing.featuredRoutes.norte.desc'),
   },
-]
+])
 
-// 四大核心規劃工具
-const tools = [
+// 四大核心規劃工具（支援雙語動態計算）
+const tools = computed(() => [
   {
-    title: '智慧動態分段排程',
-    desc: '支援三大經典路線與世界盡頭延伸段，每日公里與爬升自動推算，自由調整落腳城鎮與休息日。',
+    title: t('landing.tools.schedule.title'),
+    desc: t('landing.tools.schedule.desc'),
     path: `/schedule/${currentRouteId.value}`,
     icon: Footprints,
     color: 'text-amber-500 bg-amber-50 border-amber-200',
   },
   {
-    title: '10% 體重負重打包清單',
-    desc: '嚴格守護 10% 體重負重黃金法則，內建九大分類必備裝備與避坑提示，支援 A4 紙本列印。',
+    title: t('landing.tools.packing.title'),
+    desc: t('landing.tools.packing.desc'),
     path: '/packing',
     icon: Backpack,
     color: 'text-emerald-500 bg-emerald-50 border-emerald-200',
   },
   {
-    title: '起點交通決策指南',
-    desc: '收錄巴黎、馬德里、波多直達各朝聖起點的最佳大眾運輸攻略、高鐵轉乘與官方訂票連結。',
+    title: t('landing.tools.transport.title'),
+    desc: t('landing.tools.transport.desc'),
     path: `/transport/${currentRouteId.value}`,
     icon: Train,
     color: 'text-sky-500 bg-sky-50 border-sky-200',
   },
   {
-    title: '雙幣別預算計算機',
-    desc: '機票裝備、住宿飲食與緊急備用金全涵蓋，EUR / TWD 即時動態換算，輕鬆掌控朝聖預算。',
+    title: t('landing.tools.budget.title'),
+    desc: t('landing.tools.budget.desc'),
     path: '/budget',
     icon: Coins,
     color: 'text-rose-500 bg-rose-50 border-rose-200',
   },
-]
+])
 
 function navigateToRoute(routeId: RouteId) {
   scheduleStore.switchRoute(routeId)
@@ -115,7 +118,7 @@ function navigateToRoute(routeId: RouteId) {
         <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
           <img
             src="/favicon.svg"
-            alt="Camino Plan 標誌"
+            :alt="$t('app.logoAlt')"
             width="36"
             height="36"
             class="h-8 w-8 sm:h-9 sm:w-9 shrink-0 drop-shadow-2xs"
@@ -134,45 +137,51 @@ function navigateToRoute(routeId: RouteId) {
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
-            <span>歷史淵源</span>
+            <span>{{ $t('nav.history') }}</span>
           </router-link>
           <router-link
             to="/routes"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Compass class="w-4 h-4 text-amber-500" />
-            <span>路線攻略</span>
+            <span>{{ $t('nav.routes') }}</span>
           </router-link>
           <router-link
             to="/faq"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <HelpCircle class="w-4 h-4 text-emerald-600" />
-            <span>常見問題</span>
+            <span>{{ $t('nav.faq') }}</span>
           </router-link>
+
+          <LanguageSwitcher mode="dropdown" />
+
           <router-link
             :to="`/schedule/${currentRouteId}`"
-            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
+            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5 ml-1"
           >
-            <span>開始規劃</span>
+            <span>{{ $t('landing.startPlanning') }}</span>
             <ArrowRight class="w-3.5 h-3.5" />
           </router-link>
         </div>
 
-        <!-- 右側快速傳送門（手機版：開始規劃 ＋ 漢堡選單） -->
-        <div class="flex md:hidden items-center gap-1.5">
+        <!-- 右側快速傳送門（手機版：開始規劃 ＋ 語言切換 ＋ 漢堡選單） -->
+        <div class="flex md:hidden items-center gap-1">
+          <LanguageSwitcher mode="dropdown" />
+
           <router-link
             :to="`/schedule/${currentRouteId}`"
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1"
           >
-            <span>開始規劃</span>
+            <span>{{ $t('landing.startPlanning') }}</span>
             <ArrowRight class="w-3 h-3" />
           </router-link>
           <button
             type="button"
             @click="isMenuDrawerOpen = true"
             class="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
-            aria-label="開啟全站選單"
+            :title="$t('nav.openMenu')"
+            :aria-label="$t('nav.openMenu')"
           >
             <Menu class="w-5 h-5" />
           </button>
@@ -189,11 +198,11 @@ function navigateToRoute(routeId: RouteId) {
         <!-- 1. Hero 核心主視覺區塊 -->
         <section class="text-center space-y-5 sm:space-y-6 pt-2 sm:pt-4">
           <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            每一步，都是屬於你的朝聖之旅
+            {{ $t('landing.hero.title') }}
           </h1>
 
-          <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            專為華語徒步者打造的免費極簡規劃工具。涵蓋每日里程分段試算、10% 體重負重裝備清單、起點交通決策與雙幣花費預算。免登入即可離線使用與跨裝置同步。
+          <p class="text-xs sm:text-sm md:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            {{ $t('landing.hero.desc') }}
           </p>
 
           <!-- 動作按鈕群（小螢幕與電腦版均維持左右並排） -->
@@ -202,7 +211,7 @@ function navigateToRoute(routeId: RouteId) {
               :to="`/schedule/${currentRouteId}`"
               class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-base font-bold shadow-xs transition-all cursor-pointer whitespace-nowrap"
             >
-              <span>立即開始規劃行程</span>
+              <span>{{ $t('landing.hero.startBtn') }}</span>
               <ArrowRight class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </router-link>
 
@@ -211,23 +220,23 @@ function navigateToRoute(routeId: RouteId) {
               class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-base font-semibold border border-slate-200 shadow-2xs transition-all cursor-pointer whitespace-nowrap"
             >
               <HelpCircle class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
-              <span>朝聖歷史與新手攻略</span>
+              <span>{{ $t('landing.hero.faqBtn') }}</span>
             </router-link>
           </div>
 
           <!-- 貼心特色小標籤 -->
-          <div class="flex items-center justify-center gap-4 sm:gap-6 text-xs text-slate-400 pt-3 flex-wrap">
+          <div class="flex items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-slate-400 pt-3 flex-wrap">
             <span class="inline-flex items-center gap-1">
               <ShieldCheck class="w-3.5 h-3.5 text-emerald-500" />
-              完全免費・免註冊登入
+              {{ $t('landing.hero.featureFree') }}
             </span>
             <span class="inline-flex items-center gap-1">
               <CheckCircle2 class="w-3.5 h-3.5 text-emerald-500" />
-              支援離線使用與本機隱私保護
+              {{ $t('landing.hero.featureOffline') }}
             </span>
             <span class="inline-flex items-center gap-1">
               <CheckCircle2 class="w-3.5 h-3.5 text-emerald-500" />
-              跨裝置免帳號 QR Code 同步
+              {{ $t('landing.hero.featureSync') }}
             </span>
           </div>
         </section>
@@ -237,17 +246,17 @@ function navigateToRoute(routeId: RouteId) {
           <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 text-center sm:text-left">
             <div class="space-y-1">
               <h3 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
-                <span>探索熱門朝聖主路線</span>
+                <span>{{ $t('landing.featuredRoutes.title') }}</span>
               </h3>
               <p class="text-xs sm:text-sm text-slate-500">
-                點擊任一路線，即可直接帶入專屬每日里程試算與官方建議分段
+                {{ $t('landing.featuredRoutes.subtitle') }}
               </p>
             </div>
             <router-link
               to="/routes"
-              class="text-xs font-semibold text-amber-600 hover:text-amber-700 inline-flex items-center justify-center gap-1 transition-colors self-center sm:self-end"
+              class="text-xs sm:text-sm font-semibold text-amber-600 hover:text-amber-700 inline-flex items-center justify-center gap-1 transition-colors self-center sm:self-end"
             >
-              <span>查看路線攻略</span>
+              <span>{{ $t('landing.featuredRoutes.guideLink') }}</span>
               <ArrowRight class="w-3.5 h-3.5" />
             </router-link>
           </div>
@@ -280,10 +289,10 @@ function navigateToRoute(routeId: RouteId) {
                 </p>
               </div>
 
-              <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-700">
+              <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs sm:text-sm text-slate-700">
                 <span class="text-slate-600 font-mono">{{ route.distanceKm }}</span>
                 <span class="inline-flex items-center gap-1 text-slate-500 group-hover:text-slate-800 transition-colors">
-                  踏出第一步 <ArrowRight class="w-3.5 h-3.5" />
+                  {{ $t('landing.featuredRoutes.takeFirstStep') }} <ArrowRight class="w-3.5 h-3.5" />
                 </span>
               </div>
             </div>
@@ -294,10 +303,10 @@ function navigateToRoute(routeId: RouteId) {
         <section class="space-y-6">
           <div class="text-center sm:text-left space-y-1">
             <h3 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
-              <span>全方位的徒步規劃工具箱</span>
+              <span>{{ $t('landing.tools.title') }}</span>
             </h3>
             <p class="text-xs sm:text-sm text-slate-500">
-              整合行程、裝備、交通與預算，消除行前的所有未知焦慮
+              {{ $t('landing.tools.subtitle') }}
             </p>
           </div>
 
@@ -327,17 +336,17 @@ function navigateToRoute(routeId: RouteId) {
         <section class="rounded-2xl border border-slate-200 bg-linear-to-r from-amber-50/70 via-white to-emerald-50/60 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
           <div class="space-y-1 text-center sm:text-left">
             <h3 class="text-base sm:text-lg font-bold text-slate-900">
-              第一次走朝聖之路？先看看行前避坑指南
+              {{ $t('landing.bottomCta.title') }}
             </h3>
             <p class="text-xs sm:text-sm text-slate-600">
-              收錄西元 9 世紀朝聖起源歷史、官方證書申請規則、公私立庇護所入住技巧與背包減重法則。
+              {{ $t('landing.bottomCta.desc') }}
             </p>
           </div>
           <router-link
             to="/faq"
             class="shrink-0 px-5 py-2.5 rounded-xl bg-white text-slate-800 border border-slate-200 hover:border-slate-300 text-xs sm:text-sm font-bold shadow-2xs hover:bg-slate-50 transition cursor-pointer inline-flex items-center gap-1.5"
           >
-            <span>閱讀常見問題 FAQ</span>
+            <span>{{ $t('landing.bottomCta.btn') }}</span>
             <ArrowRight class="w-3.5 h-3.5 text-amber-500" />
           </router-link>
         </section>

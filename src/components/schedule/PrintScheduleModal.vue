@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   Dialog,
   DialogPanel,
@@ -48,6 +49,9 @@ function getWaypointLocalName(wp?: Waypoint): string {
   return wp.localName || wp.spanishName || ''
 }
 
+const { locale } = useI18n()
+const isEnglish = computed(() => locale.value === 'en')
+
 // 輔助函式：取得乾淨地名（移除任何括號內容，防止表格與純文字換行）
 function getCleanWaypointName(name?: string): string {
   if (!name) return ''
@@ -60,7 +64,9 @@ const exportMeta = computed<ScheduleExportMeta>(() => {
   const totalElev = props.stages.reduce((sum, s) => sum + s.elevationGainM, 0)
   const lastStage = props.stages[props.stages.length - 1]
 
-  const baseName = props.routeMeta?.chineseName || '朝聖之路'
+  const baseName = isEnglish.value
+    ? (props.routeMeta?.name || 'Camino de Santiago')
+    : (props.routeMeta?.chineseName || '朝聖之路')
   const branchPart = props.branchName ? ` · ${props.branchName}` : ''
 
   return {
@@ -87,9 +93,13 @@ function formatDateWithWeekday(dateStr: string): string {
   if (isNaN(d.getTime())) {
     return dateStr.length >= 5 ? dateStr.slice(5) : dateStr
   }
-  const weekdays = ['日', '一', '二', '三', '四', '五', '六']
   const month = String(d.getMonth() + 1).padStart(2, '0')
   const day = String(d.getDate()).padStart(2, '0')
+  if (isEnglish.value) {
+    const enWeekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    return `${month}-${day} (${enWeekdays[d.getDay()]})`
+  }
+  const weekdays = ['日', '一', '二', '三', '四', '五', '六']
   const weekday = weekdays[d.getDay()]
   return `${month}-${day} (${weekday})`
 }
@@ -101,7 +111,8 @@ async function handleCopyText() {
   const text = generateScheduleTextChecklist(
     props.stages,
     waypointMap.value,
-    exportMeta.value
+    exportMeta.value,
+    locale.value
   )
 
   if (copyResetTimer) {
@@ -189,7 +200,7 @@ const { isPrinting, handlePrint } = usePrint({
                   <Printer class="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 shrink-0" />
                   <div>
                     <h3 class="text-xs sm:text-base font-bold text-slate-900 whitespace-nowrap">
-                      行程預覽與列印
+                      {{ $t('schedule.printModal.title') }}
                     </h3>
                   </div>
                 </div>
@@ -209,7 +220,7 @@ const { isPrinting, handlePrint } = usePrint({
                           ? 'border-emerald-300 bg-emerald-50 text-emerald-700'
                           : 'border-slate-200 bg-white hover:bg-slate-50 text-slate-700',
                     ]"
-                    title="複製純文字行程至 LINE 或備忘錄"
+                    :title="$t('schedule.printModal.copyText')"
                   >
                     <AlertCircle v-if="isCopyFailed" class="w-3.5 h-3.5 text-rose-600" />
                     <Check v-else-if="isCopied" class="w-3.5 h-3.5 text-emerald-600" />
@@ -217,10 +228,10 @@ const { isPrinting, handlePrint } = usePrint({
                     <span>
                       {{
                         isCopyFailed
-                          ? '複製失敗'
+                          ? $t('schedule.printModal.copyFailed')
                           : isCopied
-                            ? '已複製！'
-                            : '複製文字'
+                            ? $t('schedule.printModal.copied')
+                            : $t('schedule.printModal.copyText')
                       }}
                     </span>
                   </button>
@@ -233,7 +244,7 @@ const { isPrinting, handlePrint } = usePrint({
                     class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1 whitespace-nowrap bg-amber-500 hover:bg-amber-600 text-white disabled:opacity-50"
                   >
                     <Printer class="w-3.5 h-3.5" />
-                    <span>{{ isPrinting ? '準備中...' : '列印' }}</span>
+                    <span>{{ isPrinting ? $t('schedule.printModal.preparing') : $t('schedule.printModal.print') }}</span>
                   </button>
 
                   <!-- 關閉按鈕 -->
@@ -241,7 +252,7 @@ const { isPrinting, handlePrint } = usePrint({
                     type="button"
                     @click="emit('close')"
                     class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer ml-0.5 sm:ml-1"
-                    aria-label="關閉預覽"
+                    :aria-label="$t('nav.closeMenu')"
                   >
                     <X class="w-5 h-5" />
                   </button>
@@ -252,7 +263,7 @@ const { isPrinting, handlePrint } = usePrint({
               <div class="overflow-y-auto overflow-x-auto p-2 sm:p-6 bg-slate-100/70">
                 <!-- 手機端橫向滑動貼心提示 -->
                 <div class="sm:hidden text-center text-[11px] text-slate-400 mb-1.5 print:hidden">
-                  ⇄ 橫向 A4 紙本，可左右滑動完整檢視
+                  {{ $t('schedule.printModal.landscapeHint') }}
                 </div>
                 <!-- 真正的 A4 橫向紙本內容區塊（所見即所得的核心畫布，最大寬度約 280mm） -->
                 <div
@@ -264,10 +275,10 @@ const { isPrinting, handlePrint } = usePrint({
                     <div class="flex items-start justify-between gap-4">
                       <div class="min-w-0 flex-1">
                         <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-                          聖雅各朝聖之路 · 每日徒步行程
+                          {{ $t('schedule.printModal.mainTitle') }}
                         </h1>
                         <p class="text-xs text-slate-500 mt-1 font-medium">
-                          出發日期：{{ exportMeta.startDate }} ｜ 預計 {{ exportMeta.arrivalDate }} 抵達
+                          {{ $t('schedule.printModal.departure') }}: {{ exportMeta.startDate }} ｜ {{ $t('schedule.printModal.estimatedArrival') }}: {{ exportMeta.arrivalDate }}
                         </p>
                       </div>
 
@@ -276,7 +287,7 @@ const { isPrinting, handlePrint } = usePrint({
                           {{ exportMeta.routeName }}
                         </div>
                         <p class="text-[10px] text-slate-400 mt-1">
-                          製表日期：{{ new Date().toISOString().split('T')[0] }}
+                          {{ $t('schedule.printModal.generatedDate') }}: {{ new Date().toISOString().split('T')[0] }}
                         </p>
                       </div>
                     </div>
@@ -287,27 +298,27 @@ const { isPrinting, handlePrint } = usePrint({
                         <tbody>
                           <tr class="divide-x divide-slate-200">
                             <td class="py-1.5 sm:py-2 px-2 w-1/4">
-                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">總規劃天數</span>
+                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">{{ $t('schedule.printModal.totalDays') }}</span>
                               <span class="text-sm sm:text-base font-bold text-slate-900 font-mono">
-                                {{ exportMeta.totalDays }} <span class="text-xs font-normal text-slate-500">天</span>
+                                {{ exportMeta.totalDays }} <span class="text-xs font-normal text-slate-500">{{ $t('schedule.stats.dayUnit') }}</span>
                               </span>
                             </td>
                             <td class="py-1.5 sm:py-2 px-2 w-1/4">
-                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">總徒步里程</span>
+                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">{{ $t('schedule.printModal.totalDistance') }}</span>
                               <span class="text-sm sm:text-base font-bold text-slate-900 font-mono">
                                 {{ exportMeta.totalDistanceKm.toFixed(1) }} <span class="text-xs font-normal text-slate-500">km</span>
                               </span>
                             </td>
                             <td class="py-1.5 sm:py-2 px-2 w-1/4">
-                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">累積總爬升</span>
+                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">{{ $t('schedule.printModal.totalElevation') }}</span>
                               <span class="text-sm sm:text-base font-bold text-slate-900 font-mono">
                                 +{{ Math.round(exportMeta.totalElevationGainM).toLocaleString() }} <span class="text-xs font-normal text-slate-500">m</span>
                               </span>
                             </td>
                             <td class="py-1.5 sm:py-2 px-2 w-1/4">
-                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">日均步程 (步行日)</span>
+                              <span class="block text-[11px] text-slate-500 font-medium mb-0.5">{{ $t('schedule.printModal.dailyAvg') }}</span>
                               <span class="text-sm sm:text-base font-bold text-slate-900 font-mono">
-                                {{ avgKmPerWalkingDay }} <span class="text-xs font-normal text-slate-500">km/天</span>
+                                {{ avgKmPerWalkingDay }} <span class="text-xs font-normal text-slate-500">{{ $t('schedule.printModal.kmPerDay') }}</span>
                               </span>
                             </td>
                           </tr>
@@ -321,13 +332,13 @@ const { isPrinting, handlePrint } = usePrint({
                     <table class="w-full border-collapse text-left">
                       <thead>
                         <tr class="border-b border-slate-200 text-xs font-normal text-slate-500 bg-white">
-                          <th class="py-2 px-2 w-[5%] whitespace-nowrap">天數</th>
-                          <th class="py-2 px-2 w-[10%] whitespace-nowrap">日期</th>
-                          <th class="py-2 px-2.5 w-[18%]">出發地 (From)</th>
-                          <th class="py-2 px-2.5 w-[18%]">抵達城鎮 (To)</th>
-                          <th class="py-2 px-2 w-[8.5%] text-right whitespace-nowrap">單日步程</th>
-                          <th class="py-2 px-2 w-[8.5%] text-right whitespace-nowrap">單日爬升</th>
-                          <th class="py-2 px-3 w-[32%]">備註</th>
+                          <th class="py-2 px-2 w-[5%] whitespace-nowrap">{{ $t('schedule.printModal.table.day') }}</th>
+                          <th class="py-2 px-2 w-[10%] whitespace-nowrap">{{ $t('schedule.printModal.table.date') }}</th>
+                          <th class="py-2 px-2.5 w-[18%]">{{ $t('schedule.printModal.table.from') }}</th>
+                          <th class="py-2 px-2.5 w-[18%]">{{ $t('schedule.printModal.table.to') }}</th>
+                          <th class="py-2 px-2 w-[8.5%] text-right whitespace-nowrap">{{ $t('schedule.printModal.table.distance') }}</th>
+                          <th class="py-2 px-2 w-[8.5%] text-right whitespace-nowrap">{{ $t('schedule.printModal.table.elevation') }}</th>
+                          <th class="py-2 px-3 w-[32%]">{{ $t('schedule.printModal.table.notes') }}</th>
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-slate-200 text-xs">
@@ -352,22 +363,28 @@ const { isPrinting, handlePrint } = usePrint({
                             {{ formatDateWithWeekday(stage.date) }}
                           </td>
 
-                          <!-- 出發地（乾淨中文名稱 + 西文副標，嚴禁換行） -->
+                          <!-- 出發地（乾淨中文名稱 + 西文副標，英文模式僅外文） -->
                           <td class="py-2 px-2.5">
                             <div class="text-slate-900 font-normal whitespace-nowrap">
-                              {{ getCleanWaypointName(getWaypoint(stage.startWaypointId)?.chineseName || stage.startWaypointId) }}
+                              {{ isEnglish
+                                ? (getWaypointLocalName(getWaypoint(stage.startWaypointId)) || stage.startWaypointId)
+                                : getCleanWaypointName(getWaypoint(stage.startWaypointId)?.chineseName || stage.startWaypointId)
+                              }}
                             </div>
-                            <div class="text-[10px] text-slate-400 font-mono whitespace-nowrap truncate">
+                            <div v-if="!isEnglish" class="text-[10px] text-slate-400 font-mono whitespace-nowrap truncate">
                               {{ getWaypointLocalName(getWaypoint(stage.startWaypointId)) }}
                             </div>
                           </td>
 
-                          <!-- 抵達城鎮（乾淨中文名稱 + 西文副標，嚴禁換行） -->
+                          <!-- 抵達城鎮（乾淨中文名稱 + 西文副標，英文模式僅外文） -->
                           <td class="py-2 px-2.5">
                             <div class="text-slate-900 font-normal whitespace-nowrap">
-                              {{ getCleanWaypointName(getWaypoint(stage.endWaypointId)?.chineseName || stage.endWaypointId) }}
+                              {{ isEnglish
+                                ? (getWaypointLocalName(getWaypoint(stage.endWaypointId)) || stage.endWaypointId)
+                                : getCleanWaypointName(getWaypoint(stage.endWaypointId)?.chineseName || stage.endWaypointId)
+                              }}
                             </div>
-                            <div class="text-[10px] text-slate-400 font-mono whitespace-nowrap truncate">
+                            <div v-if="!isEnglish" class="text-[10px] text-slate-400 font-mono whitespace-nowrap truncate">
                               {{ getWaypointLocalName(getWaypoint(stage.endWaypointId)) }}
                             </div>
                           </td>
@@ -382,13 +399,13 @@ const { isPrinting, handlePrint } = usePrint({
                             {{ stage.isRestDay ? '-' : `+${Math.round(stage.elevationGainM)}m` }}
                           </td>
 
-                          <!-- 備註欄（無粗體，休息日僅顯示「休息日」，無內容則留空） -->
+                          <!-- 備註欄（無粗體，休息日顯示對應語系備註） -->
                           <td class="py-2 px-3 text-[11px] text-slate-600 font-normal">
                             <span v-if="stage.isRestDay">
-                              休息日
+                              {{ $t('schedule.badges.restDay') }}
                             </span>
                             <span v-else-if="stage.isExtensionStage">
-                              世界盡頭延伸
+                              {{ $t('schedule.badges.extension') }}
                             </span>
                             <span v-else-if="stage.albergueName" class="truncate block">
                               {{ stage.albergueName }}
@@ -403,8 +420,8 @@ const { isPrinting, handlePrint } = usePrint({
                   <footer
                     class="mt-auto pt-3 border-t border-slate-200 text-[10px] text-slate-400 flex items-center justify-between shrink-0"
                   >
-                    <span>聖雅各朝聖之路 · 行前規劃指南</span>
-                    <span>Buen Camino! 祝朝聖之路平安順心</span>
+                    <span>{{ $t('schedule.printModal.footerGuide') }}</span>
+                    <span>{{ $t('schedule.printModal.footerWish') }}</span>
                   </footer>
                 </div>
               </div>

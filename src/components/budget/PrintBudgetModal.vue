@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   Dialog,
   DialogPanel,
@@ -21,6 +22,8 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
+const { t, locale } = useI18n()
+
 // 剪貼簿狀態
 const isCopied = ref(false)
 const isCopyFailed = ref(false)
@@ -37,7 +40,7 @@ onUnmounted(() => {
 async function handleCopyText() {
   if (isCopied.value || isCopyFailed.value) return
 
-  const text = generateBudgetTextChecklist(props.meta)
+  const text = generateBudgetTextChecklist(props.meta, locale.value)
 
   if (copyResetTimer) {
     clearTimeout(copyResetTimer)
@@ -70,9 +73,10 @@ async function handleCopyText() {
  */
 const { isPrinting, handlePrint } = usePrint({
   getFileName: () => {
-    const todayYear = new Date().getFullYear()
     const todayStr = new Date().toISOString().split('T')[0]
-    return `${todayYear} 朝聖之路預算開銷規劃表 ${todayStr}`
+    return locale.value === 'en'
+      ? `Camino Budget Sheet ${todayStr}`
+      : `${new Date().getFullYear()} 朝聖之路預算開銷規劃表 ${todayStr}`
   },
   orientation: 'portrait',
   pageMargin: '8mm 10mm 12mm 10mm',
@@ -116,8 +120,7 @@ const { isPrinting, handlePrint } = usePrint({
                 <div class="flex items-center gap-1.5 min-w-0">
                   <Printer class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 shrink-0" />
                   <h3 class="text-xs sm:text-base font-bold text-slate-900 truncate">
-                    <span class="sm:hidden">預算表預覽</span>
-                    <span class="hidden sm:inline">花費預算表預覽</span>
+                    <span>{{ t('budget.printModal.title') }}</span>
                   </h3>
                 </div>
 
@@ -138,7 +141,15 @@ const { isPrinting, handlePrint } = usePrint({
                     <Check v-if="isCopied" class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <AlertCircle v-else-if="isCopyFailed" class="w-3.5 h-3.5 text-rose-600 shrink-0" />
                     <Copy v-else class="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                    <span>{{ isCopied ? '已複製' : isCopyFailed ? '失敗' : '複製' }}</span>
+                    <span>
+                      {{
+                        isCopied
+                          ? t('schedule.printModal.copied')
+                          : isCopyFailed
+                            ? t('schedule.printModal.copyFailed')
+                            : t('schedule.printModal.copyText')
+                      }}
+                    </span>
                   </button>
 
                   <!-- 喚起列印按鈕 -->
@@ -149,7 +160,7 @@ const { isPrinting, handlePrint } = usePrint({
                     class="text-xs px-2.5 sm:px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition cursor-pointer flex items-center gap-1 shadow-xs disabled:opacity-50 whitespace-nowrap shrink-0"
                   >
                     <Printer class="w-3.5 h-3.5 shrink-0" />
-                    <span>{{ isPrinting ? '準備中...' : '列印' }}</span>
+                    <span>{{ isPrinting ? t('schedule.printModal.preparing') : t('schedule.printModal.print') }}</span>
                   </button>
 
                   <!-- 關閉按鈕 -->
@@ -157,7 +168,7 @@ const { isPrinting, handlePrint } = usePrint({
                     type="button"
                     @click="emit('close')"
                     class="p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer"
-                    aria-label="關閉預覽"
+                    :aria-label="t('common.cancel')"
                   >
                     <X class="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
@@ -175,14 +186,20 @@ const { isPrinting, handlePrint } = usePrint({
                     <div class="flex items-start justify-between gap-2">
                       <div class="min-w-0 flex-1">
                         <h1 class="text-base sm:text-2xl font-bold tracking-tight text-slate-900">
-                          聖雅各朝聖之路 · 行程花費預算表
+                          {{ t('budget.printModal.mainTitle') }}
                         </h1>
                         <p class="text-[11px] sm:text-xs text-slate-500 mt-1 font-medium leading-relaxed">
-                          路線：{{ props.meta.routeName }} ｜ 天數：{{ props.meta.totalDays }} 天 ｜ 風格：{{ props.meta.personaName }}
+                          <template v-if="locale === 'en'">
+                            Route: {{ props.meta.routeName }} ｜ Days: {{ props.meta.totalDays }} ｜ Style: {{ props.meta.personaName }}
+                          </template>
+                          <template v-else>
+                            路線：{{ props.meta.routeName }} ｜ 天數：{{ props.meta.totalDays }} 天 ｜ 風格：{{ props.meta.personaName }}
+                          </template>
                         </p>
                         <div class="flex items-center justify-between mt-1 text-[10px] sm:text-xs text-slate-400 font-mono">
-                          <span>參考匯率：1 EUR ≈ {{ props.meta.eurToTwdRate.toFixed(1) }} TWD</span>
-                          <span>製表：{{ props.meta.createdAt }}</span>
+                          <span v-if="locale !== 'en'">參考匯率：1 EUR ≈ {{ props.meta.eurToTwdRate.toFixed(1) }} TWD</span>
+                          <span v-else>{{ t('budget.printModal.generatedDate') }}: {{ props.meta.createdAt }}</span>
+                          <span v-if="locale !== 'en'">製表：{{ props.meta.createdAt }}</span>
                         </div>
                       </div>
                     </div>
@@ -190,24 +207,28 @@ const { isPrinting, handlePrint } = usePrint({
                     <!-- 2. 三大核心指標看板（防折字排版） -->
                     <div class="mt-2.5 sm:mt-4 grid grid-cols-3 gap-1.5 sm:gap-3">
                       <div class="p-1.5 sm:p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
-                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">預估總預算</span>
+                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">{{ t('budget.printModal.summaryGrandTotal') }}</span>
                         <div class="text-xs sm:text-base text-slate-900 font-mono font-bold whitespace-nowrap">
-                          NT$ {{ props.meta.grandTotalTwd.toLocaleString() }}
+                          {{
+                            locale === 'en'
+                              ? `€ ${(props.meta.totalEur + props.meta.totalFixedTwd / props.meta.eurToTwdRate).toFixed(2)}`
+                              : `NT$ ${props.meta.grandTotalTwd.toLocaleString()}`
+                          }}
                         </div>
                       </div>
 
                       <div class="p-1.5 sm:p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
-                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">歐洲總開銷</span>
+                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">{{ t('budget.printModal.summaryLocalTotal') }}</span>
                         <div class="text-xs sm:text-base text-slate-900 font-mono font-bold whitespace-nowrap">
                           €{{ props.meta.totalEur.toFixed(2) }}
                         </div>
                       </div>
 
                       <div class="p-1.5 sm:p-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-center">
-                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">日均開銷</span>
+                        <span class="block text-[10px] sm:text-[11px] text-slate-500 mb-0.5 whitespace-nowrap">{{ t('budget.printModal.summaryDailyAvg') }}</span>
                         <div class="text-xs sm:text-base text-slate-900 font-mono font-bold whitespace-nowrap">
                           €{{ props.meta.dailyAvgEur.toFixed(2) }}
-                          <span class="text-[10px] sm:text-xs font-normal text-slate-500">/天</span>
+                          <span class="text-[10px] sm:text-xs font-normal text-slate-500">{{ t('budget.perDay') }}</span>
                         </div>
                       </div>
                     </div>
@@ -219,30 +240,52 @@ const { isPrinting, handlePrint } = usePrint({
                     <div>
                       <div class="flex items-center justify-between pb-1.5 border-b border-slate-200">
                         <h4 class="text-xs font-bold text-slate-900">
-                          一、行前固定支出 (台灣出發前)
+                          {{ t('budget.categories.fixed') }}
                         </h4>
                         <span class="text-xs font-mono font-bold text-slate-800">
-                          小計：NT$ {{ props.meta.totalFixedTwd.toLocaleString() }}
+                          {{
+                            locale === 'en'
+                              ? `Subtotal: €${(props.meta.totalFixedTwd / props.meta.eurToTwdRate).toFixed(2)}`
+                              : `小計：NT$ ${props.meta.totalFixedTwd.toLocaleString()}`
+                          }}
                         </span>
                       </div>
                       <table class="w-full border-collapse text-left text-xs mt-1">
                         <tbody class="divide-y divide-slate-100">
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">台灣來回機票 (巴黎/馬德里/巴塞隆納)</td>
+                            <td class="py-1.5 px-2 text-slate-700">
+                              {{ locale === 'en' ? 'Round-trip Flights' : '台灣來回機票 (巴黎/馬德里/巴塞隆納)' }}
+                            </td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
-                              NT$ {{ props.meta.flightTwd.toLocaleString() }}
+                              {{
+                                locale === 'en'
+                                  ? `€${(props.meta.flightTwd / props.meta.eurToTwdRate).toFixed(2)}`
+                                  : `NT$ ${props.meta.flightTwd.toLocaleString()}`
+                              }}
                             </td>
                           </tr>
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">裝備增補採購 (背包、鞋襪、防雨裝備)</td>
+                            <td class="py-1.5 px-2 text-slate-700">
+                              {{ locale === 'en' ? 'Gear & Clothing' : '裝備增補採購 (背包、鞋襪、防雨裝備)' }}
+                            </td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
-                              NT$ {{ props.meta.gearTwd.toLocaleString() }}
+                              {{
+                                locale === 'en'
+                                  ? `€${(props.meta.gearTwd / props.meta.eurToTwdRate).toFixed(2)}`
+                                  : `NT$ ${props.meta.gearTwd.toLocaleString()}`
+                              }}
                             </td>
                           </tr>
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">申根旅遊不便險與歐盟 eSIM 網卡</td>
+                            <td class="py-1.5 px-2 text-slate-700">
+                              {{ locale === 'en' ? 'Travel Insurance & eSIM' : '申根旅遊不便險與歐盟 eSIM 網卡' }}
+                            </td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
-                              NT$ {{ props.meta.insuranceAndSimTwd.toLocaleString() }}
+                              {{
+                                locale === 'en'
+                                  ? `€${(props.meta.insuranceAndSimTwd / props.meta.eurToTwdRate).toFixed(2)}`
+                                  : `NT$ ${props.meta.insuranceAndSimTwd.toLocaleString()}`
+                              }}
                             </td>
                           </tr>
                         </tbody>
@@ -253,34 +296,38 @@ const { isPrinting, handlePrint } = usePrint({
                     <div>
                       <div class="flex items-center justify-between pb-1.5 border-b border-slate-200">
                         <h4 class="text-xs font-bold text-slate-900">
-                          二、徒步路上每日開銷 (共 {{ props.meta.totalDays }} 天)
+                          {{ t('budget.categories.daily', { days: props.meta.totalDays }) }}
                         </h4>
                         <span class="text-xs font-mono font-bold text-slate-800">
-                          小計：€{{ props.meta.totalDailyWalkingEur.toFixed(2) }} (約 NT$ {{ props.meta.totalDailyWalkingTwd.toLocaleString() }})
+                          {{
+                            locale === 'en'
+                              ? `Subtotal: €${props.meta.totalDailyWalkingEur.toFixed(2)}`
+                              : `小計：€${props.meta.totalDailyWalkingEur.toFixed(2)} (約 NT$ ${props.meta.totalDailyWalkingTwd.toLocaleString()})`
+                          }}
                         </span>
                       </div>
                       <table class="w-full border-collapse text-left text-xs mt-1">
                         <tbody class="divide-y divide-slate-100">
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">庇護所與住宿費用</td>
+                            <td class="py-1.5 px-2 text-slate-700">{{ locale === 'en' ? 'Lodging / Bed' : '庇護所與住宿費用' }}</td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
                               €{{ props.meta.lodgingTotalEur.toFixed(2) }}
                             </td>
                           </tr>
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">三餐飲食與沿途吧台補給</td>
+                            <td class="py-1.5 px-2 text-slate-700">{{ locale === 'en' ? 'Meals & Food' : '三餐飲食與沿途吧台補給' }}</td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
                               €{{ props.meta.foodTotalEur.toFixed(2) }}
                             </td>
                           </tr>
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">投幣洗衣與日常雜支</td>
+                            <td class="py-1.5 px-2 text-slate-700">{{ locale === 'en' ? 'Laundry & Sundries' : '投幣洗衣與日常雜支' }}</td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
                               €{{ props.meta.laundryTotalEur.toFixed(2) }}
                             </td>
                           </tr>
                           <tr v-if="props.meta.luggageTotalEur > 0">
-                            <td class="py-1.5 px-2 text-slate-700">行李托運服務 (Correos / Jacotrans)</td>
+                            <td class="py-1.5 px-2 text-slate-700">{{ locale === 'en' ? 'Luggage Transfer' : '行李托運服務 (Correos / Jacotrans)' }}</td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
                               €{{ props.meta.luggageTotalEur.toFixed(2) }}
                             </td>
@@ -293,22 +340,26 @@ const { isPrinting, handlePrint } = usePrint({
                     <div>
                       <div class="flex items-center justify-between pb-1.5 border-b border-slate-200">
                         <h4 class="text-xs font-bold text-slate-900">
-                          三、前後跨國接駁交通 (歐洲內陸鐵公路)
+                          {{ t('budget.categories.transit') }}
                         </h4>
                         <span class="text-xs font-mono font-bold text-slate-800">
-                          小計：€{{ props.meta.transitTotalEur.toFixed(2) }} (約 NT$ {{ props.meta.transitTotalTwd.toLocaleString() }})
+                          {{
+                            locale === 'en'
+                              ? `Subtotal: €${props.meta.transitTotalEur.toFixed(2)}`
+                              : `小計：€${props.meta.transitTotalEur.toFixed(2)} (約 NT$ ${props.meta.transitTotalTwd.toLocaleString()})`
+                          }}
                         </span>
                       </div>
                       <table class="w-full border-collapse text-left text-xs mt-1">
                         <tbody class="divide-y divide-slate-100">
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">門戶機場前往徒步起點 (TGV / Renfe / 巴士)</td>
+                            <td class="py-1.5 px-2 text-slate-700">{{ locale === 'en' ? 'Transit to Trailhead (Bus/Train)' : '門戶機場前往徒步起點 (TGV / Renfe / 巴士)' }}</td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
                               €{{ (props.meta.transitTotalEur / 2).toFixed(2) }}
                             </td>
                           </tr>
                           <tr>
-                            <td class="py-1.5 px-2 text-slate-700">聖地牙哥終點返回出境機場 (高鐵或境內廉航)</td>
+                            <td class="py-1.5 px-2 text-slate-700">{{ locale === 'en' ? 'Return from Santiago (Flight/Train)' : '聖地牙哥終點返回出境機場 (高鐵或境內廉航)' }}</td>
                             <td class="py-1.5 px-2 text-right font-mono text-slate-900">
                               €{{ (props.meta.transitTotalEur / 2).toFixed(2) }}
                             </td>
@@ -321,14 +372,22 @@ const { isPrinting, handlePrint } = usePrint({
                     <div>
                       <div class="flex items-center justify-between pb-1.5 border-b border-slate-200">
                         <h4 class="text-xs font-bold text-slate-900">
-                          四、突發應急預備金 (非必要不花費)
+                          {{ t('budget.categories.emergency') }}
                         </h4>
                         <span class="text-xs font-mono font-bold text-slate-800">
-                          小計：€{{ props.meta.emergencyFundEur.toFixed(2) }} (約 NT$ {{ props.meta.emergencyFundTwd.toLocaleString() }})
+                          {{
+                            locale === 'en'
+                              ? `Subtotal: €${props.meta.emergencyFundEur.toFixed(2)}`
+                              : `小計：€${props.meta.emergencyFundEur.toFixed(2)} (約 NT$ ${props.meta.emergencyFundTwd.toLocaleString()})`
+                          }}
                         </span>
                       </div>
                       <p class="text-[11px] text-slate-500 py-1.5 px-2">
-                        建議保留現金或信用卡額度，用於路上臨時醫療看診、買藥、搭乘計程車或因罷工緊急改票之預備金。
+                        {{
+                          locale === 'en'
+                            ? 'Recommended contingency reserve for unexpected medical visits, pharmacy, taxi rides, or emergency ticket changes.'
+                            : '建議保留現金或信用卡額度，用於路上臨時醫療看診、買藥、搭乘計程車或因罷工緊急改票之預備金。'
+                        }}
                       </p>
                     </div>
                   </div>
@@ -337,8 +396,8 @@ const { isPrinting, handlePrint } = usePrint({
                   <footer
                     class="print-footer mt-auto pt-3 border-t border-slate-200 text-[10px] text-slate-400 flex items-center justify-between shrink-0"
                   >
-                    <span>聖雅各朝聖之路 · 行前花費規劃</span>
-                    <span>Buen Camino! 祝朝聖之路平安順心</span>
+                    <span>{{ t('budget.printModal.footerGuide') }}</span>
+                    <span>{{ t('budget.printModal.footerWish') }}</span>
                   </footer>
                 </div>
               </div>

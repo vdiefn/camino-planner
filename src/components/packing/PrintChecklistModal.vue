@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   Dialog,
   DialogPanel,
@@ -27,6 +28,7 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
+const { t, locale } = useI18n()
 const packingStore = usePackingStore()
 const isCopied = ref(false)
 const isCopyFailed = ref(false)
@@ -48,6 +50,17 @@ const checkedItems = computed(() => {
   )
 })
 
+function getCategoryLabel(group: { id: string; label: string }) {
+  if (locale.value === 'en') {
+    const key = `packing.categories.${group.id}`
+    const translated = t(key)
+    if (translated && translated !== key) {
+      return translated
+    }
+  }
+  return group.label
+}
+
 // 依已啟用分類分組已勾選項目，並排除無任何勾選項目的分類
 const groupedCategories = computed(() => {
   const map = new Map<string, PackingItem[]>()
@@ -60,6 +73,7 @@ const groupedCategories = computed(() => {
   return props.categories
     .map((cat) => ({
       ...cat,
+      label: getCategoryLabel(cat),
       items: map.get(cat.id) || [],
     }))
     .filter((group) => group.items.length > 0)
@@ -106,7 +120,8 @@ async function handleCopyText() {
   const text = generatePackingTextChecklist(
     checkedItems.value,
     props.categories,
-    exportMeta.value
+    exportMeta.value,
+    locale.value
   )
 
   if (copyResetTimer) {
@@ -141,7 +156,9 @@ async function handleCopyText() {
 const { isPrinting, handlePrint } = usePrint({
   getFileName: () => {
     const todayStr = new Date().toISOString().split('T')[0]
-    return `2026 朝聖之路裝備清單 ${todayStr}`
+    return locale.value === 'en'
+      ? `Camino Packing Checklist ${todayStr}`
+      : `2026 朝聖之路裝備清單 ${todayStr}`
   },
   orientation: 'portrait',
   pageMargin: '8mm 10mm 12mm 10mm',
@@ -186,8 +203,7 @@ const { isPrinting, handlePrint } = usePrint({
                 <div class="flex items-center gap-1.5 min-w-0">
                   <Printer class="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 shrink-0" />
                   <h3 class="text-xs sm:text-base font-bold text-slate-900 truncate">
-                    <span class="sm:hidden">裝備清單預覽</span>
-                    <span class="hidden sm:inline">紙本清單預覽與列印</span>
+                    <span>{{ t('packing.printModal.title') }}</span>
                   </h3>
                 </div>
 
@@ -206,7 +222,7 @@ const { isPrinting, handlePrint } = usePrint({
                           ? 'border-emerald-300 bg-emerald-50 text-emerald-700'
                           : 'border-slate-200 bg-white hover:bg-slate-50 text-slate-700',
                     ]"
-                    title="複製純文字至備忘錄"
+                    :title="locale === 'en' ? 'Copy text checklist' : '複製純文字至備忘錄'"
                   >
                     <AlertCircle v-if="isCopyFailed" class="w-3.5 h-3.5 text-rose-600 shrink-0" />
                     <Check v-else-if="isCopied" class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -214,10 +230,10 @@ const { isPrinting, handlePrint } = usePrint({
                     <span>
                       {{
                         isCopyFailed
-                          ? '失敗'
+                          ? t('schedule.printModal.copyFailed')
                           : isCopied
-                            ? '已複製'
-                            : '複製'
+                            ? t('schedule.printModal.copied')
+                            : t('schedule.printModal.copyText')
                       }}
                     </span>
                   </button>
@@ -230,7 +246,7 @@ const { isPrinting, handlePrint } = usePrint({
                     class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-2xs transition-colors cursor-pointer inline-flex items-center gap-1 whitespace-nowrap shrink-0 bg-amber-500 hover:bg-amber-600 text-white disabled:opacity-50"
                   >
                     <Printer class="w-3.5 h-3.5 shrink-0" />
-                    <span>{{ isPrinting ? '準備中...' : '列印' }}</span>
+                    <span>{{ isPrinting ? t('schedule.printModal.preparing') : t('schedule.printModal.print') }}</span>
                   </button>
 
                   <!-- 關閉按鈕 -->
@@ -238,7 +254,7 @@ const { isPrinting, handlePrint } = usePrint({
                     type="button"
                     @click="emit('close')"
                     class="p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition cursor-pointer"
-                    aria-label="關閉預覽"
+                    :aria-label="t('common.cancel')"
                   >
                     <X class="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
@@ -257,10 +273,10 @@ const { isPrinting, handlePrint } = usePrint({
                     <div class="flex items-start justify-between gap-2">
                       <div class="min-w-0 flex-1">
                         <h1 class="text-base sm:text-2xl font-bold tracking-tight text-slate-900">
-                          聖雅各朝聖之路 · 裝備打包檢查清單
+                          {{ t('packing.printModal.mainTitle') }}
                         </h1>
                         <div class="flex items-center justify-between mt-1 text-[11px] sm:text-xs text-slate-500">
-                          <span>請於裝入背包時逐項於方框內打勾核對</span>
+                          <span>{{ locale === 'en' ? 'Check off items in the boxes as you pack your backpack' : '請於裝入背包時逐項於方框內打勾核對' }}</span>
                           <span class="font-mono text-slate-400 shrink-0 ml-2">
                             {{ new Date().toISOString().split('T')[0] }}
                           </span>
@@ -273,10 +289,10 @@ const { isPrinting, handlePrint } = usePrint({
                       <table class="w-full text-center border-collapse">
                         <thead>
                           <tr class="border-b border-slate-200 text-slate-500 text-[11px] sm:text-xs font-normal">
-                            <th class="py-1.5 px-1 sm:px-2 border-r border-slate-200 w-1/4 whitespace-nowrap">背包淨重</th>
-                            <th class="py-1.5 px-1 sm:px-2 border-r border-slate-200 w-1/4 whitespace-nowrap">身上穿戴</th>
-                            <th class="py-1.5 px-1 sm:px-2 border-r border-slate-200 w-1/4 whitespace-nowrap">攜帶品項</th>
-                            <th class="py-1.5 px-1 sm:px-2 w-1/4 whitespace-nowrap">10% 警戒線</th>
+                            <th class="py-1.5 px-1 sm:px-2 border-r border-slate-200 w-1/4 whitespace-nowrap">{{ t('packing.printModal.packNetWeight') }}</th>
+                            <th class="py-1.5 px-1 sm:px-2 border-r border-slate-200 w-1/4 whitespace-nowrap">{{ t('packing.printModal.wornWeight') }}</th>
+                            <th class="py-1.5 px-1 sm:px-2 border-r border-slate-200 w-1/4 whitespace-nowrap">{{ locale === 'en' ? 'Items' : '攜帶品項' }}</th>
+                            <th class="py-1.5 px-1 sm:px-2 w-1/4 whitespace-nowrap">{{ locale === 'en' ? '10% Limit' : '10% 警戒線' }}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -288,7 +304,7 @@ const { isPrinting, handlePrint } = usePrint({
                               {{ exportMeta.wornWeightKg.toFixed(2) }} <span class="text-[10px] sm:text-xs font-normal text-slate-500">kg</span>
                             </td>
                             <td class="py-1.5 px-1 sm:px-2 border-r border-slate-200 whitespace-nowrap">
-                              {{ exportMeta.totalItemCount }} <span class="text-[10px] sm:text-xs font-normal text-slate-500">件</span>
+                              {{ exportMeta.totalItemCount }} <span class="text-[10px] sm:text-xs font-normal text-slate-500">{{ locale === 'en' ? 'pcs' : '件' }}</span>
                             </td>
                             <td class="py-1.5 px-1 sm:px-2 text-slate-700 whitespace-nowrap">
                               <template v-if="exportMeta.bodyWeightKg">
@@ -317,7 +333,7 @@ const { isPrinting, handlePrint } = usePrint({
                             {{ group.label }}
                           </div>
                           <span class="text-[10px] text-slate-400 font-mono">
-                            {{ group.items.length }} 項
+                            {{ group.items.length }} {{ locale === 'en' ? 'items' : '項' }}
                           </span>
                         </div>
 
@@ -331,7 +347,7 @@ const { isPrinting, handlePrint } = usePrint({
                             <div class="flex items-center gap-1.5 min-w-0">
                               <span class="inline-block w-3.5 h-3.5 border border-slate-400 rounded-xs shrink-0" />
                               <span class="text-slate-800 font-medium">
-                                {{ item.chineseName }}
+                                {{ locale === 'en' ? (item.englishName || item.chineseName) : item.chineseName }}
                               </span>
                               <span
                                 v-if="(item.quantity ?? 1) > 1"
@@ -343,7 +359,7 @@ const { isPrinting, handlePrint } = usePrint({
                                 v-if="item.isWornOnBody"
                                 class="text-[10px] bg-slate-100 text-slate-600 px-1 py-0.2 rounded font-normal shrink-0"
                               >
-                                穿在身上
+                                {{ locale === 'en' ? 'Worn' : '穿在身上' }}
                               </span>
                             </div>
 
@@ -368,7 +384,7 @@ const { isPrinting, handlePrint } = usePrint({
                             {{ group.label }}
                           </div>
                           <span class="text-[10px] text-slate-400 font-mono">
-                            {{ group.items.length }} 項
+                            {{ group.items.length }} {{ locale === 'en' ? 'items' : '項' }}
                           </span>
                         </div>
 
@@ -382,7 +398,7 @@ const { isPrinting, handlePrint } = usePrint({
                             <div class="flex items-center gap-1.5 min-w-0">
                               <span class="inline-block w-3.5 h-3.5 border border-slate-400 rounded-xs shrink-0" />
                               <span class="text-slate-800 font-medium">
-                                {{ item.chineseName }}
+                                {{ locale === 'en' ? (item.englishName || item.chineseName) : item.chineseName }}
                               </span>
                               <span
                                 v-if="(item.quantity ?? 1) > 1"
@@ -394,7 +410,7 @@ const { isPrinting, handlePrint } = usePrint({
                                 v-if="item.isWornOnBody"
                                 class="text-[10px] bg-slate-100 text-slate-600 px-1 py-0.2 rounded font-normal shrink-0"
                               >
-                                穿在身上
+                                {{ locale === 'en' ? 'Worn' : '穿在身上' }}
                               </span>
                             </div>
 
@@ -411,8 +427,8 @@ const { isPrinting, handlePrint } = usePrint({
                   <footer
                     class="print-footer mt-auto pt-4 border-t border-slate-200 text-center text-[10px] text-slate-400 flex items-center justify-between shrink-0"
                   >
-                    <span>聖雅各朝聖之路 · 行前規劃指南</span>
-                    <span>Buen Camino! 祝朝聖之路平安順心</span>
+                    <span>{{ t('schedule.printModal.footerGuide') }}</span>
+                    <span>{{ t('schedule.printModal.footerWish') }}</span>
                   </footer>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {
   Train,
   Bus,
@@ -22,26 +23,46 @@ import { useScheduleStore } from "@/stores/schedule";
 import GoogleAd from "@/components/common/GoogleAd.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 
+const { t, locale } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const scheduleStore = useScheduleStore();
 
-// 支援的三大朝聖起點路線定義
-const targetRouteOptions: {
+// 支援的三大朝聖起點路線定義 (響應式多國語系)
+const targetRouteOptions = computed<{
   id: TransportTargetRoute;
   name: string;
   startTown: string;
+  shortTown: string;
   flag: string;
-}[] = [
-  { id: "frances", name: "法國之路", startTown: "SJPP (聖讓皮耶德波爾)", flag: "🇫🇷" },
-  { id: "portugues", name: "葡萄牙之路", startTown: "波多 (Porto 大教堂)", flag: "🇵🇹" },
-  { id: "norte", name: "北方之路", startTown: "伊倫 (Irún 邊界)", flag: "🌊" },
-];
+}[]>(() => [
+  {
+    id: "frances",
+    name: t("transport.routes.frances.name"),
+    startTown: t("transport.routes.frances.startTown"),
+    shortTown: t("transport.routes.frances.shortTown"),
+    flag: "🇫🇷",
+  },
+  {
+    id: "portugues",
+    name: t("transport.routes.portugues.name"),
+    startTown: t("transport.routes.portugues.startTown"),
+    shortTown: t("transport.routes.portugues.shortTown"),
+    flag: "🇵🇹",
+  },
+  {
+    id: "norte",
+    name: t("transport.routes.norte.name"),
+    startTown: t("transport.routes.norte.startTown"),
+    shortTown: t("transport.routes.norte.shortTown"),
+    flag: "🌊",
+  },
+]);
 
 // 依據 URL 參數或 store 預選對應起點
 const getInitialTargetRoute = (): TransportTargetRoute => {
   const param = route.params.routeId as string;
-  if (param && targetRouteOptions.some((r) => r.id === param)) {
+  if (param && (param === "frances" || param === "portugues" || param === "norte")) {
     return param as TransportTargetRoute;
   }
   const current = scheduleStore.currentRouteId || "";
@@ -56,7 +77,7 @@ const selectedTargetRoute = ref<TransportTargetRoute>(getInitialTargetRoute());
 watch(
   () => route.params.routeId,
   (newParam) => {
-    if (newParam && targetRouteOptions.some((r) => r.id === newParam)) {
+    if (newParam && (newParam === "frances" || newParam === "portugues" || newParam === "norte")) {
       selectedTargetRoute.value = newParam as TransportTargetRoute;
     }
   }
@@ -70,76 +91,78 @@ const handleSelectTargetRoute = (routeId: TransportTargetRoute) => {
   }
 };
 
-// 各路線專屬的出發城市定義字典
-const routeCityMap: Record<
-  TransportTargetRoute,
-  { id: OriginCity; flag: string; name: string; summary: string }[]
-> = {
+// 各路線專屬的出發城市定義字典 (響應式多國語系)
+const routeCityMap = computed<
+  Record<
+    TransportTargetRoute,
+    { id: OriginCity; flag: string; name: string; summary: string }[]
+  >
+>(() => ({
   frances: [
     {
       id: "PARIS",
       flag: "🇫🇷",
-      name: "巴黎 (Paris CDG / 市區)",
-      summary: "TGV 高鐵 + TER 景觀區間車 (約 6.5h)",
+      name: t("transport.cities.frances.PARIS.name"),
+      summary: t("transport.cities.frances.PARIS.summary"),
     },
     {
       id: "MADRID",
       flag: "🇪🇸",
-      name: "馬德里 (Madrid MAD)",
-      summary: "國鐵至 Pamplona + 直達季節巴士 (約 6.0h)",
+      name: t("transport.cities.frances.MADRID.name"),
+      summary: t("transport.cities.frances.MADRID.summary"),
     },
     {
       id: "BARCELONA",
       flag: "🇪🇸",
-      name: "巴塞隆納 (Barcelona BCN)",
-      summary: "鐵路至 Pamplona + 巴士/共乘 (約 7.0h)",
+      name: t("transport.cities.frances.BARCELONA.name"),
+      summary: t("transport.cities.frances.BARCELONA.summary"),
     },
   ],
   portugues: [
     {
       id: "PORTO_AIRPORT",
       flag: "🇵🇹",
-      name: "波多機場直達 (Porto OPO)",
-      summary: "市區輕軌 E 線 28 分鐘直達主教座堂 (約 0.5h)",
+      name: t("transport.cities.portugues.PORTO_AIRPORT.name"),
+      summary: t("transport.cities.portugues.PORTO_AIRPORT.summary"),
     },
     {
       id: "LISBON",
       flag: "🇵🇹",
-      name: "里斯本 (Lisboa Oriente)",
-      summary: "CP 國鐵 Alfa Pendular 高鐵直達波多 (約 3.5h)",
+      name: t("transport.cities.portugues.LISBON.name"),
+      summary: t("transport.cities.portugues.LISBON.summary"),
     },
     {
       id: "MADRID",
       flag: "🇪🇸",
-      name: "馬德里 (Madrid MAD)",
-      summary: "跨國直飛 75 分鐘 / ALSA 長途客運 (約 2.0h~8.5h)",
+      name: t("transport.cities.portugues.MADRID.name"),
+      summary: t("transport.cities.portugues.MADRID.summary"),
     },
   ],
   norte: [
     {
       id: "PARIS",
       flag: "🇫🇷",
-      name: "巴黎 (Paris Montparnasse)",
-      summary: "TGV 直達邊境 Hendaye + 4分鐘輕軌 (約 5.0h)",
+      name: t("transport.cities.norte.PARIS.name"),
+      summary: t("transport.cities.norte.PARIS.summary"),
     },
     {
       id: "MADRID",
       flag: "🇪🇸",
-      name: "馬德里 (Madrid Chamartín)",
-      summary: "Renfe Alvia 特快列車 / 客運直達 Irún (約 5.5h)",
+      name: t("transport.cities.norte.MADRID.name"),
+      summary: t("transport.cities.norte.MADRID.summary"),
     },
     {
       id: "SAN_SEBASTIAN_AIRPORT",
       flag: "🇪🇸",
-      name: "聖塞巴斯提安 / 畢爾包 (EAS/BIO)",
-      summary: "機場市郊巴士 15 分鐘直達庇護所 (約 0.5h)",
+      name: t("transport.cities.norte.SAN_SEBASTIAN_AIRPORT.name"),
+      summary: t("transport.cities.norte.SAN_SEBASTIAN_AIRPORT.summary"),
     },
   ],
-};
+}));
 
 // 當前路線可用的出發城市列表
 const currentCityOptions = computed(() => {
-  return routeCityMap[selectedTargetRoute.value] || routeCityMap.frances;
+  return routeCityMap.value[selectedTargetRoute.value] || routeCityMap.value.frances;
 });
 
 // 當前選擇的出發城市
@@ -147,38 +170,36 @@ const selectedCity = ref<OriginCity>(currentCityOptions.value[0].id);
 
 // 當路線切換時，自動將出發城市重設為該路線的第一個推薦城市
 watch(selectedTargetRoute, (newRoute) => {
-  const cities = routeCityMap[newRoute];
+  const cities = routeCityMap.value[newRoute];
   if (cities && cities.length > 0) {
     selectedCity.value = cities[0].id;
   }
 });
 
-// 各路線專屬貼心小提醒避坑攻略
-const routeTipsMap: Record<TransportTargetRoute, string[]> = {
-frances: [
-  "TGV 早鳥票：SNCF TGV INOUI 最多可提前 6 個月購票，巴黎至 Bayonne／Hendaye 建議提早查詢，熱門時段票價容易上漲。",
-  "Pamplona 至 SJPP 巴士：ALSA 季節性巴士通常於 3～10 月營運，約每日 12:00 發車；冬季停駛，出發前務必確認最新班次。",
-  "計程車共乘：若錯過 Pamplona 至 SJPP 巴士，可預約計程車或與其他朝聖者共乘，建議事先確認車資及行李空間。",
-  "SJPP 起點資訊：抵達後可前往 Rue de la Citadelle 的朝聖者辦公室領取 Credencial、蓋出發章並確認路線；冬季拿破崙路線封閉時，應改走 Valcarlos 路線。"
-],
-
-portugues: [
-  "波多機場地鐵交通：從 OPO 機場搭乘地鐵 E 線（紫線 Violeta）至 Trindade 站，車程約 27 分鐘。2026 年 Z4 單程票價為 €2.30，使用 Andante 卡須在進站前驗票；亦可於指定驗票機使用 Visa／Mastercard 感應支付。",
-  "Credencial 領取地點：波多可前往 Sé 附近的 Posto de Turismo da Sé（主教座堂旅遊服務處），詢問聖地牙哥朝聖者護照 Credencial 的領取及蓋章服務。服務時間有限，建議出發前確認開放日期與時間。",
-  "中央線與海岸線交通：葡萄牙中央線（Caminho Português Central）與海岸線（Caminho Português da Costa）出城方向不同。若走海岸線，可搭乘地鐵轉往 Matosinhos 一帶接續海岸步道；出發前請先確認路線及下車地點，避免走錯方向。",
-  "葡萄牙與西班牙時差：葡萄牙本土全年比西班牙本土慢 1 小時。若途中跨境搭乘火車或巴士，請留意車票標示的當地時間，避免因時差錯過班次。"
-],
-
-norte: [
-  "巴黎 TGV 前往 Irún：從巴黎蒙帕納斯（Paris Montparnasse）搭乘 TGV 前往 Hendaye，車程最快約 4 小時 40 分鐘。抵達後步行至附近的 Euskotren Hendaia 車站，轉乘 E2 線前往西班牙 Irún。",
-  "Irún 領取 Credencial：北方之路起點 Irún 有多個朝聖者護照領取地點，最方便的是 Jakobi 朝聖者庇護所（Calle Lesaka, 1），每年 2 月至 11 月每日 16:00～20:00 可領取及蓋章；其他時間也可詢問當地教堂或市政府。",
-  "Euskotren 跨境交通：Hendaia 至 Irún 搭乘 E2 線僅需數分鐘，無須另外搭乘長途交通工具。TGV 與 Euskotren 為不同系統，須分別購票；Irún 可依目的地選擇 Ficoba 或 Irún Colon 車站下車。",
-  "跨境轉乘注意事項：Hendaye（法文）與 Hendaia（巴斯克語）是同一地點，查詢車站及班次時可能看到不同名稱。Euskotren 班距及營運時間依日期而異，建議事先確認時刻表並預留轉乘時間。"
-],
-};
+// 各路線專屬貼心小提醒避坑攻略 (響應式多國語系)
+const routeTipsMap = computed<Record<TransportTargetRoute, string[]>>(() => ({
+  frances: [
+    t("transport.tips.frances.0"),
+    t("transport.tips.frances.1"),
+    t("transport.tips.frances.2"),
+    t("transport.tips.frances.3"),
+  ],
+  portugues: [
+    t("transport.tips.portugues.0"),
+    t("transport.tips.portugues.1"),
+    t("transport.tips.portugues.2"),
+    t("transport.tips.portugues.3"),
+  ],
+  norte: [
+    t("transport.tips.norte.0"),
+    t("transport.tips.norte.1"),
+    t("transport.tips.norte.2"),
+    t("transport.tips.norte.3"),
+  ],
+}));
 
 const currentTravelTips = computed(() => {
-  return routeTipsMap[selectedTargetRoute.value] || routeTipsMap.frances;
+  return routeTipsMap.value[selectedTargetRoute.value] || routeTipsMap.value.frances;
 });
 
 // 手機模式步驟卡片收合狀態管理
@@ -208,15 +229,15 @@ function toggleAllSteps() {
 // 手機與平板模式下的貼心小提醒 Modal 展開狀態
 const isTipsModalOpen = ref(false);
 
-// 官方購票平台快速連結設定
-const bookingPlatforms = [
-  { name: "法鐵 SNCF", url: "https://www.sncf-connect.com/" },
-  { name: "西鐵 Renfe", url: "https://www.renfe.com/" },
-  { name: "葡鐵 CP", url: "https://www.cp.pt/" },
-  { name: "ALSA 巴士", url: "https://www.alsa.es/" },
-  { name: "Euskotren 輕軌", url: "https://www.euskotren.eus/" },
-  { name: "Omio 比價", url: "https://www.omio.com/" },
-];
+// 官方購票平台快速連結設定 (響應式多國語系)
+const bookingPlatforms = computed(() => [
+  { name: t("transport.platforms.sncf"), url: "https://www.sncf-connect.com/" },
+  { name: t("transport.platforms.renfe"), url: "https://www.renfe.com/" },
+  { name: t("transport.platforms.cp"), url: "https://www.cp.pt/" },
+  { name: t("transport.platforms.alsa"), url: "https://www.alsa.es/" },
+  { name: t("transport.platforms.euskotren"), url: "https://www.euskotren.eus/" },
+  { name: t("transport.platforms.omio"), url: "https://www.omio.com/" },
+]);
 
 // 當前選擇的交通路線資料
 const currentRoute = computed(() => {
@@ -251,29 +272,29 @@ function getTransportIcon(type: TransportType) {
   }
 }
 
-// 交通工具中文標籤對應
+// 交通工具標籤對應 (多國語系)
 function getTransportBadge(type: TransportType) {
   switch (type) {
     case "TRAIN":
-      return { label: "鐵路", bg: "bg-blue-50 text-blue-700 border-blue-200" };
+      return { label: t("transport.badges.TRAIN"), bg: "bg-blue-50 text-blue-700 border-blue-200" };
     case "BUS":
       return {
-        label: "巴士",
+        label: t("transport.badges.BUS"),
         bg: "bg-emerald-50 text-emerald-700 border-emerald-200",
       };
     case "FLIGHT":
       return {
-        label: "飛機",
+        label: t("transport.badges.FLIGHT"),
         bg: "bg-purple-50 text-purple-700 border-purple-200",
       };
     case "TAXI":
       return {
-        label: "計程車",
+        label: t("transport.badges.TAXI"),
         bg: "bg-amber-50 text-amber-700 border-amber-200",
       };
     case "WALK":
       return {
-        label: "步行",
+        label: t("transport.badges.WALK"),
         bg: "bg-slate-50 text-slate-700 border-slate-200",
       };
   }
@@ -308,9 +329,9 @@ onUnmounted(() => {
     >
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <h2
-          class="text-base sm:text-lg md:text-xl text-slate-800 flex items-center gap-2 shrink-0"
+          class="text-base sm:text-lg md:text-xl font-bold text-slate-800 flex items-center gap-2 shrink-0"
         >
-          前往朝聖起點交通指南
+          {{ t('transport.title') }}
         </h2>
 
         <!-- 路線起點切換標籤膠囊列 -->
@@ -321,7 +342,7 @@ onUnmounted(() => {
               :key="route.id"
               type="button"
               :class="[
-                'inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs transition-all cursor-pointer font-medium',
+                'inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs sm:text-sm transition-all cursor-pointer font-medium',
                 selectedTargetRoute === route.id
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-500 hover:text-slate-800',
@@ -329,7 +350,7 @@ onUnmounted(() => {
               @click="handleSelectTargetRoute(route.id)"
             >
               <span>{{ route.name }}</span>
-              <span class="text-[11px] opacity-75 hidden sm:inline">（{{ route.startTown.split(' ')[0] }}）</span>
+              <span class="text-xs opacity-75 hidden sm:inline">（{{ route.shortTown }}）</span>
             </button>
           </div>
         </div>
@@ -352,7 +373,7 @@ onUnmounted(() => {
             <h3
               class="text-sm sm:text-sm md:font-normal text-slate-800"
             >
-              選擇你的歐洲抵達城市
+              {{ t('transport.selectOriginCity') }}
             </h3>
 
             <!-- 貼心小提醒按鈕 (僅在手機模式顯示，點擊開啟 Modal) -->
@@ -360,8 +381,8 @@ onUnmounted(() => {
               type="button"
               @click.stop="isTipsModalOpen = true"
               class="md:hidden p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
-              title="起點交通貼心小提醒"
-              aria-label="查看起點交通貼心小提醒"
+              :title="t('transport.mobileTipsTitle')"
+              :aria-label="t('transport.mobileTipsAria')"
             >
               <MessageCircleWarning class="w-4 h-4" />
             </button>
@@ -373,7 +394,7 @@ onUnmounted(() => {
               <select
                 v-model="selectedCity"
                 class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-amber-300 focus:border-amber-400 outline-hidden font-medium cursor-pointer transition-all"
-                aria-label="選擇抵達歐洲城市"
+                :aria-label="t('transport.selectOriginCity')"
               >
                 <option
                   v-for="city in currentCityOptions"
@@ -385,7 +406,7 @@ onUnmounted(() => {
               </select>
             </div>
             <!-- 當前選擇城市之交通概況摘要微標籤 -->
-            <p class="text-xs text-slate-500 px-1 flex items-center gap-1.5">
+            <p class="text-xs md:text-sm text-slate-500 px-1 flex items-center gap-1.5">
               {{ currentCityOptions.find((c) => c.id === selectedCity)?.summary }}
             </p>
           </div>
@@ -407,9 +428,9 @@ onUnmounted(() => {
               <div>
                 <div class="flex items-center gap-2">
                   <span class="text-base">{{ city.flag }}</span>
-                  <span class="text-slate-900 text-sm">{{ city.name }}</span>
+                  <span class="text-slate-900 text-sm md:text-base font-medium">{{ city.name }}</span>
                 </div>
-                <p class="mt-0.5 text-xs text-slate-500">
+                <p class="mt-0.5 text-xs md:text-sm text-slate-500">
                   {{ city.summary }}
                 </p>
               </div>
@@ -431,11 +452,11 @@ onUnmounted(() => {
           class="hidden md:block rounded-xl border border-slate-200 bg-white p-4 shadow-xs"
         >
           <h3
-            class="text-sm text-slate-800 mb-2.5 flex items-center gap-1.5"
+            class="text-sm md:text-base font-medium text-slate-800 mb-2.5 flex items-center gap-1.5"
           >
-            <span>官方購票平台快速傳送門</span>
+            <span>{{ t('transport.bookingPlatformsTitle') }}</span>
           </h3>
-          <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="grid grid-cols-2 gap-2 text-xs md:text-sm">
             <a
               v-for="platform in bookingPlatforms"
               :key="platform.name"
@@ -454,11 +475,11 @@ onUnmounted(() => {
         <div
           class="hidden md:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
         >
-          <h3 class="flex items-center gap-2 text-sm text-slate-800">
+          <h3 class="flex items-center gap-2 text-sm md:text-base font-medium text-slate-800">
             <Sparkles class="w-4 h-4 text-amber-500" />
-            <span>{{ targetRouteOptions.find(r => r.id === selectedTargetRoute)?.name }}起點避坑提醒</span>
+            <span>{{ t('transport.tipsSectionTitle', { route: targetRouteOptions.find(r => r.id === selectedTargetRoute)?.name }) }}</span>
           </h3>
-          <ul class="mt-3 space-y-2.5 text-xs text-slate-600 leading-relaxed">
+          <ul class="mt-3 space-y-2.5 text-xs md:text-sm text-slate-600 leading-relaxed">
             <li
               v-for="(tip, index) in currentTravelTips"
               :key="index"
@@ -482,24 +503,22 @@ onUnmounted(() => {
         >
           <!-- 第一行：路線名稱 ＋ 耗時與票價 -->
           <div class="flex flex-wrap items-center justify-between gap-3">
-            <h3 class="text-sm font-bold text-slate-900">
-              {{ currentRoute.title }}
+            <h3 class="text-sm sm:text-base md:text-lg font-bold text-slate-900">
+              {{ locale === 'en' && currentRoute.titleEn ? currentRoute.titleEn : currentRoute.title }}
             </h3>
-            <div class="flex items-center gap-4 text-sm">
+            <div class="flex items-center gap-4 text-sm sm:text-base">
               <div class="flex items-center gap-1.5 text-slate-600">
                 <Clock class="h-3.5 w-3.5 text-slate-400" />
-                <span>耗時:</span>
-                <span class="font-mono text-slate-900"
-                  >約 {{ currentRoute.totalDurationHours }} 小時</span
-                >
+                <span>{{ t('transport.durationLabel') }}</span>
+                <span class="font-mono text-slate-900">
+                  {{ t('transport.durationValue', { hours: currentRoute.totalDurationHours }) }}
+                </span>
               </div>
               <div class="flex items-center gap-1.5 text-slate-600">
                 <Euro class="h-3.5 w-3.5 text-slate-400" />
-                <span>票價:</span>
+                <span>{{ t('transport.costLabel') }}</span>
                 <span class="font-mono text-slate-900">
-                  €{{ currentRoute.totalCostEur.min }} ~ €{{
-                    currentRoute.totalCostEur.max
-                  }}
+                  {{ t('transport.costRange', { min: currentRoute.totalCostEur.min, max: currentRoute.totalCostEur.max }) }}
                 </span>
               </div>
             </div>
@@ -507,10 +526,10 @@ onUnmounted(() => {
 
           <!-- 第二行：補充資料（開行季節與營運提示） -->
           <div
-            class="flex items-center gap-1.5 text-xs text-slate-700 border-t border-slate-100 pt-2"
+            class="flex items-center gap-1.5 text-xs sm:text-sm text-slate-700 border-t border-slate-100 pt-2"
           >
             <Calendar class="h-3.5 w-3.5 shrink-0 text-amber-600" />
-            <span>{{ currentRoute.operatingMonths }}</span>
+            <span>{{ locale === 'en' && currentRoute.operatingMonthsEn ? currentRoute.operatingMonthsEn : currentRoute.operatingMonths }}</span>
           </div>
 
           <!-- 第三行：官方購票快速傳送門（僅在手機模式 md:hidden 內嵌展示） -->
@@ -534,16 +553,16 @@ onUnmounted(() => {
         </div>
 
         <div class="flex items-center justify-between">
-          <h3 class="text-base font-bold text-slate-900">
-            轉乘步驟詳情 (共 {{ currentRoute.steps.length }} 步)
+          <h3 class="text-base sm:text-lg font-bold text-slate-900">
+            {{ t('transport.stepsCount', { count: currentRoute.steps.length }) }}
           </h3>
           <!-- 手機模式專屬：一鍵全部收合/展開切換按鈕 -->
           <button
             type="button"
             @click="toggleAllSteps"
-            class="md:hidden text-xs text-slate-700 hover:text-slate-800 font-medium cursor-pointer"
+            class="md:hidden text-xs sm:text-sm text-slate-700 hover:text-slate-800 font-medium cursor-pointer"
           >
-            {{ isAllCollapsed ? "全部展開" : "全部收合" }}
+            {{ isAllCollapsed ? t('transport.expandAll') : t('transport.collapseAll') }}
           </button>
         </div>
 
@@ -560,14 +579,14 @@ onUnmounted(() => {
             >
               <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <span
-                  class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-amber-400 font-mono text-xs font-bold text-slate-700 shrink-0"
+                  class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-amber-400 font-mono text-xs sm:text-sm font-bold text-slate-700 shrink-0"
                 >
                   {{ step.stepOrder }}
                 </span>
                 <div class="flex items-center gap-2 flex-wrap min-w-0">
                   <span
                     :class="[
-                      'inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs border font-medium shrink-0',
+                      'inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs sm:text-sm border font-medium shrink-0',
                       getTransportBadge(step.type)?.bg,
                     ]"
                   >
@@ -577,8 +596,8 @@ onUnmounted(() => {
                     />
                     {{ getTransportBadge(step.type)?.label }}
                   </span>
-                  <span class="text-xs text-slate-700 truncate font-medium">
-                    {{ step.carrierName }}
+                  <span class="text-xs sm:text-sm text-slate-700 truncate font-medium">
+                    {{ locale === 'en' && step.carrierNameEn ? step.carrierNameEn : step.carrierName }}
                   </span>
                 </div>
               </div>
@@ -588,7 +607,7 @@ onUnmounted(() => {
                 type="button"
                 class="md:hidden p-1 text-slate-400 hover:text-slate-600 transition shrink-0"
                 :aria-expanded="isStepExpanded(step.stepOrder)"
-                aria-label="切換此步驟展開收合"
+                :aria-label="t('transport.toggleStepAria')"
               >
                 <ChevronDown
                   class="w-4 h-4 transition-transform duration-200"
@@ -605,42 +624,40 @@ onUnmounted(() => {
               ]"
             >
               <!-- 起訖點標示（垂直置中對齊，車站名稱採精緻小字級 text-xs sm:text-sm） -->
-              <div class="space-y-2 text-xs sm:text-sm">
+              <div class="space-y-2 text-sm sm:text-base">
                 <div class="flex items-center gap-2">
                   <span
-                    class="px-1.5 py-0.5 rounded text-[11px] font-normal bg-slate-100 text-slate-600 border border-slate-200 shrink-0"
+                    class="px-1.5 py-0.5 rounded text-xs font-normal bg-slate-100 text-slate-600 border border-slate-200 shrink-0"
                   >
-                    起
+                    {{ t('transport.badgeFrom') }}
                   </span>
-                  <span class="font-normal text-slate-800 leading-snug flex-1">
-                    {{ step.from }}
+                  <span class="font-medium text-slate-800 leading-snug flex-1">
+                    {{ locale === 'en' && step.fromEn ? step.fromEn : step.from }}
                   </span>
                 </div>
 
                 <div class="flex items-center gap-2">
                   <span
-                    class="px-1.5 py-0.5 rounded text-[11px] font-normal bg-slate-100 text-slate-600 border border-slate-200 shrink-0"
+                    class="px-1.5 py-0.5 rounded text-xs font-normal bg-slate-100 text-slate-600 border border-slate-200 shrink-0"
                   >
-                    迄
+                    {{ t('transport.badgeTo') }}
                   </span>
-                  <span class="font-normal text-slate-800 leading-snug flex-1">
-                    {{ step.to }}
+                  <span class="font-medium text-slate-800 leading-snug flex-1">
+                    {{ locale === 'en' && step.toEn ? step.toEn : step.to }}
                   </span>
                 </div>
               </div>
 
               <!-- 步驟詳細資訊（預估車程、票價、避坑提示統一以點條列） -->
-              <div class="space-y-1.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
+              <div class="space-y-1.5 text-xs sm:text-sm text-slate-600 pt-2 border-t border-slate-100">
                 <div class="flex items-start gap-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5"></span>
-                  <span>預估車程：{{ step.durationMinutes }} 分鐘</span>
+                  <span>{{ t('transport.stepDuration', { minutes: step.durationMinutes }) }}</span>
                 </div>
                 <div class="flex items-start gap-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5"></span>
                   <span>
-                    票價：€{{ step.estimatedCostEur.min }} ~ €{{
-                      step.estimatedCostEur.max
-                    }}
+                    {{ t('transport.stepCost', { min: step.estimatedCostEur.min, max: step.estimatedCostEur.max }) }}
                   </span>
                 </div>
                 <div
@@ -649,7 +666,7 @@ onUnmounted(() => {
                 >
                   <span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 mt-1.5"></span>
                   <span>
-                    避坑提示：{{ step.warningTip }}
+                    {{ t('transport.stepWarning', { tip: locale === 'en' && step.warningTipEn ? step.warningTipEn : step.warningTip }) }}
                   </span>
                 </div>
               </div>
@@ -660,9 +677,9 @@ onUnmounted(() => {
                   :href="step.bookingUrl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500 text-white text-xs font-medium hover:bg-amber-600 transition shadow-2xs cursor-pointer"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500 text-white text-xs sm:text-sm font-medium hover:bg-amber-600 transition shadow-2xs cursor-pointer"
                 >
-                  <span>前往官方預訂</span>
+                  <span>{{ t('transport.bookOfficial') }}</span>
                   <ExternalLink class="h-3.5 w-3.5" />
                 </a>
               </div>
@@ -674,34 +691,34 @@ onUnmounted(() => {
             v-if="selectedTargetRoute === 'portugues'"
             class="rounded-xl border border-sky-200 bg-sky-50/60 p-4 sm:p-5 shadow-xs space-y-3"
           >
-            <div class="flex items-center gap-2 text-sm font-bold text-sky-950">
+            <div class="flex items-center gap-2 text-sm sm:text-base font-bold text-sky-950">
               <span class="text-base">🌊</span>
-              <span>葡萄牙海岸線 (Camino de la Costa) 專屬交通錦囊</span>
+              <span>{{ t('transport.coastalTips.title') }}</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs leading-relaxed text-slate-700">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm leading-relaxed text-slate-700">
               <!-- 錦囊 1：波多出城地鐵接駁 -->
               <div class="bg-white/90 p-3.5 rounded-lg border border-sky-100 space-y-1.5">
-                <div class="font-bold text-sky-900 flex items-center gap-1.5">
+                <div class="font-bold text-sky-900 flex items-center gap-1.5 text-xs sm:text-sm">
                   <Train class="w-3.5 h-3.5 text-sky-600" />
-                  <span>波多市區 ➔ Matosinhos 濱海起步接駁</span>
+                  <span>{{ t('transport.coastalTips.tip1Title') }}</span>
                 </div>
                 <p class="text-slate-600">
-                  波多主教座堂出城前 10km 為多車流工業與硬石板路。建議自市區 <strong class="text-slate-800">Trindade 站</strong> 搭乘輕軌 <strong class="text-sky-700">Metro A 線（藍線）</strong> 至 <strong class="text-slate-800">Matosinhos Sul</strong> 站（約 25 分鐘，單程 €2.15），出站即達大西洋沙灘與木棧道起步。
+                  {{ t('transport.coastalTips.tip1Desc') }}
                 </p>
               </div>
 
               <!-- 錦囊 2：Caminha 跨國渡輪與計程快艇 -->
               <div class="bg-white/90 p-3.5 rounded-lg border border-sky-100 space-y-1.5">
-                <div class="font-bold text-sky-900 flex items-center gap-1.5">
+                <div class="font-bold text-sky-900 flex items-center gap-1.5 text-xs sm:text-sm">
                   <Compass class="w-3.5 h-3.5 text-sky-600" />
-                  <span>Caminha 跨米尼奧河至西班牙 A Guarda 渡輪</span>
+                  <span>{{ t('transport.coastalTips.tip2Title') }}</span>
                 </div>
                 <p class="text-slate-600">
-                  西葡邊境由米尼奧河阻隔：官方渡輪（Ferry Xacobeo，約 €1.50）<strong class="text-amber-800">極受潮汐影響，退潮常停駛</strong>。若遇停航可於碼頭搭乘 <strong class="text-sky-700">朝聖者計程快艇（Taxi-Boat）</strong>（約 €5~€6/人，航程 5 分鐘直達碼頭）。
+                  {{ t('transport.coastalTips.tip2Desc') }}
                 </p>
-                <p class="text-[11px] text-amber-700 font-medium">
-                  ⏰ 提醒：過河入境西班牙手錶需調快 1 小時（葡萄牙 UTC+0 ➔ 西班牙 UTC+1）。
+                <p class="text-xs sm:text-sm text-amber-700 font-medium">
+                  {{ t('transport.coastalTips.tip2TimeNotice') }}
                 </p>
               </div>
             </div>
@@ -713,7 +730,7 @@ onUnmounted(() => {
     <!-- 貼心小提醒對話框 (手機與平板) -->
     <TipsModal
       :is-open="isTipsModalOpen"
-      :title="`${targetRouteOptions.find(r => r.id === selectedTargetRoute)?.name}起點避坑提醒`"
+      :title="t('transport.tipsSectionTitle', { route: targetRouteOptions.find(r => r.id === selectedTargetRoute)?.name })"
       :tips="currentTravelTips"
       @close="isTipsModalOpen = false"
     />

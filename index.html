@@ -8,12 +8,19 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://adservice.google.com https://www.googletagservices.com https://*.google.com https://*.googlesyndication.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://pagead2.googlesyndication.com https://adservice.google.com https://*.google.com https://*.google-analytics.com https://*.googlesyndication.com; frame-src 'self' https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://*.google.com;"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://adservice.google.com https://www.googletagservices.com https://*.google.com https://*.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://cloudflareinsights.com https://pagead2.googlesyndication.com https://adservice.google.com https://*.google.com https://*.google-analytics.com https://*.googlesyndication.com; frame-src 'self' https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://*.google.com;"
+    />
+    <!-- Google Fonts: Noto Sans TC (提供 400 Regular, 500 Medium, 600 SemiBold, 700 Bold 完整字重) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
     />
     <link rel="canonical" href="https://camino-plan.com/" />
 
     <!-- 基礎 SEO 標題、描述與標準網址 -->
-    <title>朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)</title>
+    <title>朝聖之路行程與裝備規劃工具 | Camino Plan (Camino de Santiago Planner)</title>
     <meta
       name="description"
       content="專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。"
@@ -44,7 +51,7 @@
     <meta name="twitter:image" content="https://camino-plan.com/og-cover.png" />
 
     <!-- JSON-LD 結構化資料 (Schema.org WebApplication) -->
-    <script type="application/ld+json">
+    <script id="webapp-schema-jsonld" type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",

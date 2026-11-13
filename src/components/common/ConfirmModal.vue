@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import { AlertTriangle } from 'lucide-vue-next'
+
+const { t } = useI18n()
 
 interface Props {
   isOpen: boolean
@@ -12,9 +15,6 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  title: '確認操作',
-  confirmText: '確定',
-  cancelText: '取消',
   isDanger: true,
 })
 
@@ -37,7 +37,7 @@ const emit = defineEmits<{
           </div>
           <div class="space-y-1.5 flex-1 min-w-0">
             <DialogTitle class="text-base font-bold text-slate-900">
-              {{ title }}
+              {{ title ?? t('common.confirmOperation') }}
             </DialogTitle>
             <div class="text-sm text-slate-600 leading-relaxed">
               <!-- 優先渲染插槽，無插槽時回退渲染 message prop -->
@@ -54,14 +54,14 @@ const emit = defineEmits<{
             class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
             @click="emit('close')"
           >
-            {{ cancelText }}
+            {{ cancelText ?? t('common.cancel') }}
           </button>
           <button
             type="button"
             class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-white bg-orange-400 hover:bg-orange-50 hover:text-gray-700 transition-all cursor-pointer shadow-xs"
             @click="emit('confirm')"
           >
-            {{ confirmText }}
+            {{ confirmText ?? t('common.confirm') }}
           </button>
         </div>
       </DialogPanel>

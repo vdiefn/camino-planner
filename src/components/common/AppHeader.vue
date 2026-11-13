@@ -15,6 +15,7 @@ import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { useScheduleStore } from '@/stores/schedule'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 
 type TabType = 'schedule' | 'packing' | 'transport' | 'budget'
 
@@ -61,7 +62,7 @@ function handleTabClick(tab: TabType) {
       >
         <img
           src="/favicon.svg"
-          alt="Camino Plan 標誌"
+          :alt="$t('app.logoAlt')"
           width="36"
           height="36"
           class="h-8 w-8 sm:h-9 sm:w-9 shrink-0 drop-shadow-2xs"
@@ -87,7 +88,7 @@ function handleTabClick(tab: TabType) {
           ]"
           @click.prevent="handleTabClick('schedule')"
         >
-          行程規劃
+          {{ $t('nav.schedule') }}
         </a>
 
         <a
@@ -100,7 +101,7 @@ function handleTabClick(tab: TabType) {
           ]"
           @click.prevent="handleTabClick('packing')"
         >
-          裝備負重
+          {{ $t('nav.packing') }}
         </a>
 
         <a
@@ -113,7 +114,7 @@ function handleTabClick(tab: TabType) {
           ]"
           @click.prevent="handleTabClick('transport')"
         >
-          起點交通
+          {{ $t('nav.transport') }}
         </a>
 
         <a
@@ -126,7 +127,7 @@ function handleTabClick(tab: TabType) {
           ]"
           @click.prevent="handleTabClick('budget')"
         >
-          花費預算
+          {{ $t('nav.budget') }}
         </a>
       </nav>
 
@@ -138,7 +139,7 @@ function handleTabClick(tab: TabType) {
             class="text-xs text-slate-700 hover:text-amber-600 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
             <BookOpen class="w-4 h-4 text-amber-500" />
-            <span>朝聖指南</span>
+            <span>{{ $t('nav.guide') }}</span>
             <ChevronDown class="w-3.5 h-3.5 text-slate-400" />
           </MenuButton>
 
@@ -162,7 +163,7 @@ function handleTabClick(tab: TabType) {
                   ]"
                 >
                   <Sparkles class="w-4 h-4 text-amber-500 shrink-0" />
-                  <span>歷史淵源與文化</span>
+                  <span>{{ $t('nav.historyLong') }}</span>
                 </router-link>
               </MenuItem>
               <MenuItem v-slot="{ active }">
@@ -174,7 +175,7 @@ function handleTabClick(tab: TabType) {
                   ]"
                 >
                   <Compass class="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>路線攻略與評估</span>
+                  <span>{{ $t('nav.routesLong') }}</span>
                 </router-link>
               </MenuItem>
               <MenuItem v-slot="{ active }">
@@ -186,7 +187,7 @@ function handleTabClick(tab: TabType) {
                   ]"
                 >
                   <HelpCircle class="w-4 h-4 text-sky-600 shrink-0" />
-                  <span>常見問題百科</span>
+                  <span>{{ $t('nav.faqLong') }}</span>
                 </router-link>
               </MenuItem>
             </MenuItems>
@@ -200,7 +201,7 @@ function handleTabClick(tab: TabType) {
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
-            <span>歷史淵源</span>
+            <span>{{ $t('nav.history') }}</span>
           </router-link>
 
           <router-link
@@ -208,7 +209,7 @@ function handleTabClick(tab: TabType) {
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
             <Compass class="w-4 h-4 text-emerald-600" />
-            <span>路線攻略</span>
+            <span>{{ $t('nav.routes') }}</span>
           </router-link>
 
           <router-link
@@ -216,20 +217,20 @@ function handleTabClick(tab: TabType) {
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
             <HelpCircle class="w-4 h-4 text-sky-600" />
-            <span>常見問題</span>
+            <span>{{ $t('nav.faq') }}</span>
           </router-link>
         </div>
 
         <!-- 垂直細分隔線 -->
         <div class="h-4 w-px bg-slate-200 mx-1"></div>
 
-        <!-- 工具動作（同步 ＆ 回饋） -->
+        <!-- 工具動作（同步 ＆ 回饋 ＆ 語言切換） -->
         <button
           type="button"
           @click="openSyncModal"
           class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
-          title="跨裝置同步與備份"
-          aria-label="跨裝置同步與備份"
+          :title="$t('nav.sync')"
+          :aria-label="$t('nav.sync')"
         >
           <Share2 class="h-4 w-4" />
         </button>
@@ -238,11 +239,13 @@ function handleTabClick(tab: TabType) {
           type="button"
           @click="openFeedback({ category: 'feature_request' })"
           class="flex h-9 w-9 items-center justify-center text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
-          title="意見回饋與許願"
-          aria-label="意見回饋與許願"
+          :title="$t('nav.feedback')"
+          :aria-label="$t('nav.feedback')"
         >
           <MessageSquarePlus class="h-4 w-4" />
         </button>
+
+        <LanguageSwitcher mode="dropdown" />
       </div>
 
       <!-- 右側：手機版漢堡選單觸發按鈕（極致乾淨俐落） -->
@@ -251,8 +254,8 @@ function handleTabClick(tab: TabType) {
           type="button"
           @click="isMobileMenuOpen = true"
           class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
-          title="開啟選單"
-          aria-label="開啟選單"
+          :title="$t('nav.openMenu')"
+          :aria-label="$t('nav.openMenu')"
         >
           <Menu class="h-5.5 w-5.5" />
         </button>

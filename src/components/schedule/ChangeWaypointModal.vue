@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Dialog, DialogPanel, DialogTitle, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { X, MapPin, House } from 'lucide-vue-next'
 import type { UserStage, Waypoint } from '@/types/camino'
@@ -18,6 +19,8 @@ const emit = defineEmits<{
 }>()
 
 const scheduleStore = useScheduleStore()
+const { locale } = useI18n()
+const isEnglish = computed(() => locale.value === 'en')
 const selectedWaypointId = ref<string>('')
 
 // 去除中文地名中夾帶的括號歷史備註（如聖多明哥出生地等），只保留純粹中文地名
@@ -124,10 +127,10 @@ const handleConfirm = () => {
                 <div class="space-y-2">
                   <div class="space-y-0.5">
                     <label class="block text-xs font-semibold text-slate-800">
-                      選擇新結束城鎮
+                      {{ $t('schedule.changeWaypoint.title') }}
                     </label>
                     <div class="text-xs text-slate-500">
-                      出發地：{{ startWaypoint?.localName || startWaypoint?.spanishName }} / {{ cleanTownName(startWaypoint?.chineseName) }}
+                      {{ $t('schedule.changeWaypoint.startFrom') }}{{ isEnglish ? (startWaypoint?.localName || startWaypoint?.spanishName) : `${startWaypoint?.localName || startWaypoint?.spanishName} / ${cleanTownName(startWaypoint?.chineseName)}` }}
                     </div>
                   </div>
                   <div class="max-h-60 overflow-y-auto space-y-1.5 pr-1">
@@ -149,7 +152,7 @@ const handleConfirm = () => {
                           <div class="font-medium text-slate-900 text-sm leading-snug">
                             {{ wp.localName || wp.spanishName }}
                           </div>
-                          <div class="text-xs font-normal text-slate-500 truncate mt-0.5">
+                          <div v-if="!isEnglish" class="text-xs font-normal text-slate-500 truncate mt-0.5">
                             {{ cleanTownName(wp.chineseName) }}
                           </div>
                         </div>
@@ -158,10 +161,10 @@ const handleConfirm = () => {
                         <span
                           v-if="wp.hasAlbergue"
                           class="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded font-normal shrink-0"
-                          title="設有朝聖者庇護所"
+                          :title="$t('schedule.facilities.albergue')"
                         >
                           <House class="w-3 h-3 shrink-0" />
-                          <span class="hidden sm:inline">有庇護所</span>
+                          <span class="hidden sm:inline">{{ $t('schedule.changeWaypoint.hasAlbergue') }}</span>
                         </span>
                         <span class="text-xs font-mono font-medium text-slate-600 whitespace-nowrap">
                           {{ getStageDistance(wp) }} km
@@ -178,14 +181,14 @@ const handleConfirm = () => {
                   @click="emit('close')"
                   class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition cursor-pointer"
                 >
-                  取消
+                  {{ $t('common.cancel') }}
                 </button>
                 <button
                   type="button"
                   @click="handleConfirm"
                   class="px-4 py-2 text-sm font-normal text-white bg-orange-400 hover:bg-orange-100 rounded-lg hover:text-gray-700 transition shadow-xs cursor-pointer"
                 >
-                  確認變更
+                  {{ $t('schedule.changeWaypoint.confirm') }}
                 </button>
               </div>
             </DialogPanel>

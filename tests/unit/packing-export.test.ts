@@ -131,4 +131,21 @@ describe('generatePackingTextChecklist 純文字清單產生器', () => {
     expect(text).toContain('背包淨重 0.00 kg ｜ 身上穿戴 0.00 kg ｜ 共 0 件')
     expect(text).not.toContain('【背包系統】')
   })
+
+  it('TC-05: 支援英文語系 (locale = en) 輸出全英文標題、分類與項目', () => {
+    const enCategories = [
+      { id: 'PACK', label: 'Backpack System' },
+      { id: 'CLOTHING', label: 'Clothing & Apparel' },
+      { id: 'FOOTWEAR', label: 'Footwear & Socks' },
+    ]
+    const text = generatePackingTextChecklist(mockItems, enCategories, mockMeta, 'en')
+
+    expect(text).toContain('Camino de Santiago Packing List')
+    expect(text).toContain('Pack Net Weight 1.40 kg ｜ Worn on Body 0.90 kg ｜ 3 items in total ｜ 10% Limit 6.0 kg')
+    expect(text).toContain('[Backpack System]')
+    expect(text).toContain('☐ Hiking Backpack 38L · 1100g')
+    expect(text).toContain('☐ Wool T-Shirt ×2 · 300g')
+    expect(text).toContain('☐ Hiking Boots [Worn on body] · 900g')
+    expect(text).toContain('Buen Camino! Wishing you a peaceful journey.')
+  })
 })

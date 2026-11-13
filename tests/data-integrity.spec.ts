@@ -57,10 +57,11 @@ describe('跨領域靜態資料完整性與防呆檢驗 (Cross-Domain Static Dat
       'MEDICAL',
       'ELECTRONICS',
       'DOCS',
+      'GEAR',
       'OTHER',
     ]
 
-    it('所有裝備項目的分類必須屬於定義的 9 大單一名詞分類', () => {
+    it('所有裝備項目的分類必須屬於定義的 10 大單一名詞分類', () => {
       expect(packingItems.length).toBeGreaterThanOrEqual(20)
       packingItems.forEach((item) => {
         expect(validCategories).toContain(item.category)

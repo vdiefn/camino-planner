@@ -23,6 +23,7 @@ import { useRouter } from 'vue-router'
 import { useScheduleStore } from '@/stores/schedule'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 
 interface Props {
   isOpen: boolean
@@ -99,13 +100,15 @@ function handleOpenFeedback() {
             <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
               <div class="flex items-center gap-2.5">
                 <span class="text-lg font-bold tracking-tight text-slate-800">
-                  Camino Plan 導覽</span>
+                  {{ $t('nav.drawerTitle') }}
+                </span>
               </div>
               <button
                 type="button"
                 @click="close"
                 class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors cursor-pointer"
-                aria-label="關閉選單"
+                :title="$t('nav.closeMenu')"
+                :aria-label="$t('nav.closeMenu')"
               >
                 <X class="w-5 h-5" />
               </button>
@@ -113,10 +116,18 @@ function handleOpenFeedback() {
 
             <!-- 選單內容區域 -->
             <div class="flex-1 overflow-y-auto px-3 py-4 space-y-4">
+              <!-- 語系切換分組 -->
+              <div class="flex items-center justify-between gap-3 px-2">
+                <span class="text-xs font-medium tracking-wider text-slate-400 uppercase shrink-0">
+                  {{ $t('language.select') }}
+                </span>
+                <LanguageSwitcher mode="inline" />
+              </div>
+
               <!-- 核心規劃工具分組 -->
-              <div class="space-y-1">
+              <div class="space-y-1 pt-1 border-t border-slate-100">
                 <span class="p-2 text-sm tracking-wider text-slate-500 uppercase">
-                  核心規劃工具
+                  {{ $t('nav.coreTools') }}
                 </span>
                 <nav class="py-1">
                   <!-- 行程規劃 -->
@@ -130,7 +141,7 @@ function handleOpenFeedback() {
                         <CalendarDays class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-amber-700">
-                        行程規劃
+                        {{ $t('nav.schedule') }}
                       </div>
                     </div>
                   </button>
@@ -146,7 +157,7 @@ function handleOpenFeedback() {
                         <Backpack class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-emerald-700">
-                        裝備清單與負重
+                        {{ $t('nav.packingLong') }}
                       </div>
                     </div>
                   </button>
@@ -162,7 +173,7 @@ function handleOpenFeedback() {
                         <TrainFront class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-sky-700">
-                        起點交通指南
+                        {{ $t('nav.transportLong') }}
                       </div>
                     </div>
                   </button>
@@ -178,7 +189,7 @@ function handleOpenFeedback() {
                         <Coins class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-rose-700">
-                        花費預算計算機
+                        {{ $t('nav.budgetLong') }}
                       </div>
                     </div>
                   </button>
@@ -188,7 +199,7 @@ function handleOpenFeedback() {
               <!-- 第一分組：朝聖深度攻略與百科 -->
               <div class="space-y-1 pt-2 border-t border-slate-100">
                 <span class="p-2 text-sm tracking-wider text-slate-500 uppercase">
-                  朝聖百科與攻略
+                  {{ $t('nav.encyclopedia') }}
                 </span>
                 <nav class="py-1">
                   <!-- 歷史淵源 -->
@@ -202,7 +213,7 @@ function handleOpenFeedback() {
                         <Sparkles class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-amber-700">
-                        歷史淵源與文化
+                        {{ $t('nav.historyLong') }}
                       </div>
                     </div>
                   </button>
@@ -218,7 +229,7 @@ function handleOpenFeedback() {
                         <Compass class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-emerald-700">
-                        三大經典路線攻略
+                        {{ $t('nav.routesLongAlt') }}
                       </div>
                     </div>
                   </button>
@@ -234,7 +245,7 @@ function handleOpenFeedback() {
                         <HelpCircle class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-sky-700">
-                        常見問題 FAQ
+                        {{ $t('nav.faqLong') }}
                       </div>
                     </div>
                   </button>
@@ -244,7 +255,7 @@ function handleOpenFeedback() {
               <!-- 第二分組：規劃實用工具與支援 -->
               <div class="space-y-1 pt-2 border-t border-slate-100">
                 <span class="p-2 text-sm tracking-wider text-slate-500 uppercase">
-                  實用工具與支援
+                  {{ $t('nav.utilities') }}
                 </span>
                 <nav class="py-1">
                   <!-- 跨裝置同步 -->
@@ -258,7 +269,7 @@ function handleOpenFeedback() {
                         <Share2 class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800">
-                        跨裝置同步與備份
+                        {{ $t('nav.sync') }}
                       </div>
                     </div>
                   </button>
@@ -274,7 +285,7 @@ function handleOpenFeedback() {
                         <MessageSquarePlus class="w-4.5 h-4.5" />
                       </div>
                       <div class="text-sm text-slate-800">
-                        問題回報與功能許願
+                        {{ $t('nav.feedbackLong') }}
                       </div>
                     </div>
                   </button>
@@ -290,7 +301,7 @@ function handleOpenFeedback() {
                 class="inline-flex items-center gap-1.5 hover:text-slate-600 transition-colors cursor-pointer"
               >
                 <ShieldCheck class="w-3.5 h-3.5" />
-                <span>關於本站與隱私權</span>
+                <span>{{ $t('nav.privacy') }}</span>
               </button>
               <span>v1.0</span>
             </div>

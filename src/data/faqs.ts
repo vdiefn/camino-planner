@@ -6,15 +6,19 @@ export type FaqCategoryId = "all" | "shelter" | "food" | "packing" | "transport"
 export interface FaqItem {
   id: string;
   question: string;
+  questionEn?: string;
   paragraphs: string[];
+  paragraphsEn?: string[];
   tags?: string[];
 }
 
 export interface FaqCategory {
   id: Exclude<FaqCategoryId, "all">;
   name: string;
+  nameEn?: string;
   icon: Component;
   badge?: string;
+  badgeEn?: string;
   faqs: FaqItem[];
 }
 
@@ -22,12 +26,15 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: "shelter",
     name: "住宿作息",
+    nameEn: "Albergues & Lodging",
     icon: Bed,
     badge: "熱門重點",
+    badgeEn: "Popular",
     faqs: [
       {
         id: "albergue-types-and-rules",
         question: "庇護所（Albergue）有哪些種類？入住順序與規矩有什麼不同？",
+        questionEn: "What are the types of Albergues? What are the priority rules and regulations?",
         paragraphs: [
           "朝聖之路的庇護所（Albergue）主要依經營單位與收費方式區分為以下幾種：",
           "1. 公立／市政庇護所（Municipal / Public）：由地方政府或公共機構營運，價格通常較平價，床位費用可先以每晚 €10～€15 作為參考，實際依地區及住宿規定而異。許多公立庇護所採先到先得（First come, first served），部分不接受提前預訂。入住優先順序依各地規定而異，例如加利西亞自治區的公立庇護所會依其官方規則安排朝聖者入住。",
@@ -36,35 +43,64 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "4. 隨喜捐獻（Donativo）：這是一種收費方式，而非獨立的庇護所經營類型。住宿可能由宗教團體、志工或其他組織經營，旅客依個人經濟能力及住宿體驗自由捐獻。捐獻所得通常用於住宿維護、餐食及後續朝聖者接待，建議依自身能力合理奉獻。",
           "重要入住規定：許多朝聖者庇護所會要求出示有效的朝聖者護照（Credencial del Peregrino），部分住宿也會要求出示個人護照或其他身分證件。私人旅館及一般住宿則依業者規定辦理，出發前建議確認入住條件。",
         ],
+        paragraphsEn: [
+          "Albergues on the Camino are primarily categorized by management and pricing structure:",
+          "1. Municipal / Public Albergues: Operated by local governments or public institutions. Affordable, typically around €10–€15/night. Most operate on a first-come, first-served basis and do not accept advance bookings. Entry priority follows local regulations, such as in Galicia where official priority guidelines determine check-in order.",
+          "2. Parochial Albergues (Parroquial): Located within churches, monasteries, or religious foundations, run by parish volunteers. Some operate on donation (Donativo), while others charge a fixed fee. Some host communal pilgrim dinners, evening blessings, or sharing sessions.",
+          "3. Private Albergues (Privado): Privately owned and operated, typically €15–€25+/night. Advance bookings can usually be made via websites, phone, WhatsApp, or booking platforms. Many provide amenities such as individual power sockets, reading lamps, privacy curtains, and lockers.",
+          "4. Donativo (Donation-based): A payment method rather than a distinct management type. Guests contribute according to their means and experience. Donations cover operating costs, meals, and hospitality for future pilgrims; contribute generously and responsibly.",
+          "Important Rule: Most pilgrim albergues require a valid Pilgrim Credential (Credencial del Peregrino) and your passport/ID upon check-in. Always verify terms before arrival.",
+        ],
       },
       {
         id: "albergue-schedule-and-curfew",
         question: "庇護所通常幾點開門？有門禁嗎？早上最晚幾點必須離開？",
+        questionEn: "What time do Albergues open? Is there a curfew? When must I check out in the morning?",
         paragraphs: [
           "下午開門時間：許多朝聖者庇護所通常在中午至下午時段開始接待，例如 13:00～14:00 左右，但實際開放時間依住宿而異。有些住宿可以提早入住，也有些需要等候清潔作業完成後才開放。",
           "夜間熄燈與門禁：不少庇護所會在晚上 21:00～22:00 左右熄燈，部分住宿也設有夜間門禁時間。若需要外出用餐或購物，應先確認住宿的門禁規定，避免返回時無法進入。",
           "早晨退房時間：許多庇護所會要求旅客在早上 08:00～09:00 左右整理完畢並離開，以便工作人員清潔寢室及準備接待下一批朝聖者。實際退房時間應以住宿公告為準。",
           "清晨打包禮儀：通鋪寢室通常有不同國籍的朝聖者共同住宿，建議前一晚先整理好大件行李及隨身用品。清晨起床時避免開啟寢室大燈、大聲交談或製造塑膠袋摩擦聲，最後的背包整理可移至公共空間進行，盡量不影響其他旅客休息。",
         ],
+        paragraphsEn: [
+          "Opening Hours: Most albergues open for pilgrim reception around 13:00–14:00, though exact times vary. Some allow earlier luggage drop-off, while others remain closed until daily cleaning is complete.",
+          "Curfew and Lights-Out: Most albergues enforce lights-out around 21:00–22:00, and exterior doors are locked. Verify curfew times before going out for dinner to avoid being locked out.",
+          "Morning Departure: Pilgrims are generally expected to vacate bedrooms by 08:00–09:00 so staff can clean for incoming walkers.",
+          "Early Morning Etiquette: Pack your backpack the night before. If waking before dawn, do not turn on main lights, whisper quietly, and avoid rustling plastic bags in shared dorms. Complete your packing in common areas.",
+        ],
       },
       {
         id: "albergue-advance-booking-strategy",
         question: "朝聖之路需要事先把 30 多天的住宿全部預訂好嗎？",
+        questionEn: "Do I need to book all 30+ days of accommodation in advance?",
         paragraphs: [
           "一般不建議在出發前就將整趟 30 多天的住宿全部預訂完成，保留適度彈性通常更適合長途徒步。",
           "徒步過程可能遇到天候變化、腳部水泡、肌肉疲勞或臨時想延長停留時間等情況。若所有住宿都已預訂，可能需要為了趕上訂房而勉強前進，增加身體負擔及行程壓力。",
           "比較建議的方式是：先預訂抵達起點後前 1～2 晚的住宿，尤其是法國之路起點 Saint-Jean-Pied-de-Port（SJPP）及翻越庇里牛斯山後的 Roncesvalles。旺季、假期或熱門城鎮可提前預訂後續住宿；淡季則可視當日體能及行程安排保留較多彈性。",
           "需要注意的是，部分公立庇護所不接受提前預訂，私立庇護所通常較有預訂彈性。旺季不宜等到下午才開始尋找當晚住宿，建議前一天或當日上午就確認下一晚的床位。",
         ],
+        paragraphsEn: [
+          "It is generally not recommended to book the entire 30+ day journey in advance, as flexibility is key on a long-distance pilgrimage.",
+          "Weather changes, blisters, muscle fatigue, or deciding to take an extra rest day can alter your schedule. Rigid bookings create unnecessary stress and physical strain.",
+          "Recommended Strategy: Book the first 1–2 nights before departure, especially Saint-Jean-Pied-de-Port (SJPP) and Roncesvalles. In peak season or for holiday weekends, book 1–2 days ahead. In off-peak seasons, enjoy the flexibility of walking day by day.",
+          "Note that municipal albergues rarely take reservations, while private ones do. During high season, avoid waiting until late afternoon to search for lodging; secure your next night's bed the day before or early that morning.",
+        ],
       },
       {
         id: "albergue-blanket-and-sleeping-bag",
         question: "庇護所（Albergue）都有提供被子嗎？需要自己帶睡袋嗎？",
+        questionEn: "Do Albergues provide blankets? Should I bring a sleeping bag?",
         paragraphs: [
           "庇護所的床鋪用品依經營單位及住宿等級而異。有些提供床墊、枕頭及床單，有些則只提供基本床墊與拋棄式保潔床單，也有部分住宿會提供毛毯或棉被，不能假設所有庇護所都有相同配置。",
           "建議出發前攜帶輕量睡袋，尤其春季與秋季前往山區、高原或夜間氣溫較低的地區時，更應考慮保暖需求。睡袋的舒適溫度應依旅行季節、預計路線、海拔及個人耐寒程度選擇，而非所有月份都使用相同規格。",
           "盛夏（7～8 月）可考慮攜帶輕量睡袋內套（Sleeping Bag Liner），但仍須確認住宿是否提供足夠的寢具及個人保暖需求。睡袋內套主要用於增加衛生隔離及舒適度，不能視為防止床蝨叮咬的可靠防護措施。",
           "另外，入住前建議檢查床墊縫隙、床架及寢具是否有床蝨跡象，並將背包與衣物妥善放置，降低將床蝨帶至下一間住宿的風險。",
+        ],
+        paragraphsEn: [
+          "Bedding provisions vary by albergue. Some provide mattresses, pillows, and sheets, while others provide only a bare mattress with a disposable sheet. Blankets are not guaranteed across all albergues.",
+          "A lightweight sleeping bag is highly recommended, especially in spring, autumn, or mountainous stretches where nighttime temperatures drop significantly.",
+          "In mid-summer (July–August), a silk or microfiber sleeping bag liner may suffice, provided the albergue offers blankets. Liners enhance hygiene and comfort but do not prevent bedbug bites.",
+          "Check mattress seams, bed frames, and bedding for signs of bedbugs upon arrival, and keep your pack elevated or off bare carpets.",
         ],
       },
     ],
@@ -72,11 +108,13 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: "food",
     name: "飲食補給",
+    nameEn: "Food & Dining",
     icon: Utensils,
     faqs: [
       {
         id: "menu-del-peregrino-explained",
         question: "什麼是「朝聖者套餐 (Menú del Peregrino)」？通常包含哪些內容與用餐時間？",
+        questionEn: "What is the Pilgrim Menu (Menú del Peregrino)? What does it include and what are meal times?",
         paragraphs: [
           "朝聖者套餐（Menú del Peregrino）是沿途餐廳及餐酒館提供給朝聖者的套餐，通常包含前菜、主菜、甜點及飲料，價格與份量依餐廳及地區而異。一般可先以 €12～€18 作為預算參考，熱門觀光區或特殊餐廳可能超過 €20。",
           "標準套餐通常包含以下內容：",
@@ -85,10 +123,19 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "3. 甜點與飲料（Postre y Bebida）：常見手工布丁（Flan）、冰淇淋、水果或其他甜點。飲料可能包含水、葡萄酒或啤酒，但酒類種類、份量及是否包含在套餐內，依餐廳規定而異。",
           "用餐時程注意事項：西班牙的午餐及晚餐時間通常比亞洲晚。午餐約在 13:30～15:30，晚餐則常從 20:00 左右開始供應，部分小鎮餐廳可能更晚營業。若清晨出發且抵達目的地較早，可先到麵包店或超市購買水果、麵包、起司及堅果等食物補充體力，並留意餐廳的實際營業時間。",
         ],
+        paragraphsEn: [
+          "The Pilgrim Menu (Menú del Peregrino) is a fixed-price meal offered by restaurants and bars along the Camino, typically priced between €12 and €18 (higher in tourist hotspots).",
+          "A standard menu consists of three courses:",
+          "1. First Course (Primer Plato): Vegetable soup (Sopa de Verduras), Galician broth (Caldo Gallego), lentil stew (Lentejas), pasta bolognese, or a mixed salad.",
+          "2. Second Course (Segundo Plato): Pork loin, grilled chicken breast with fries, fried fish, roasted meat, or Spanish potato omelet (Tortilla de Patatas).",
+          "3. Dessert & Drink (Postre y Bebida): Flan, ice cream, fresh fruit, or yogurt. A beverage is included, usually bread and bottled water or local house wine/beer.",
+          "Spanish Dining Times: Spanish meal schedules are late by international standards. Lunch runs roughly 13:30–15:30, while dinner rarely opens before 20:00 (often 20:30 in smaller towns). If arriving early, pick up bread, cheese, fruits, and nuts at supermarkets or bakeries to tide you over.",
+        ],
       },
       {
         id: "menu-del-dia-explained",
         question: "什麼是「每日套餐 (Menú del Día)」？通常包含哪些內容與用餐時間？",
+        questionEn: "What is the Daily Menu (Menú del Día)? What does it include and when is it served?",
         paragraphs: [
           "每日套餐（Menú del Día）是西班牙餐廳提供的固定價格午餐套餐，主要服務當地居民及上班族，也適合沿途朝聖者用餐。餐廳通常會依當天供應的食材安排菜單，提供數種前菜、主菜及甜點供顧客選擇。價格與內容依餐廳及地區而異，可先以 €12～€18 作為預算參考，觀光區或較高級的餐廳可能超過 €20。",
           "標準套餐通常包含以下內容：",
@@ -98,15 +145,31 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "4. 飲料與麵包（Bebida y Pan）：通常會附麵包及一種飲料，可能是水、葡萄酒或其他飲品，但是否包含、可選種類及份量依餐廳規定而異。",
           "用餐時程注意事項：Menú del Día 主要在午餐時段供應，通常約為 13:00～15:30，部分餐廳可能延長或調整供應時間。與朝聖者套餐（Menú del Peregrino）相比，每日套餐通常更偏向當地人的日常午餐，菜色選擇也可能較多，但不代表價格一定比較便宜或份量一定較大。建議抵達城鎮後留意餐廳門口的當日菜單（Menú del Día）及實際供餐時間。",
         ],
+        paragraphsEn: [
+          "The Daily Menu (Menú del Día) is a traditional fixed-price weekday lunch designed for local workers and residents. It offers a variety of starters, mains, and desserts made with fresh daily ingredients, typically €12–€18.",
+          "A standard Menú del Día includes:",
+          "1. First Course (Primer Plato): Fresh vegetable stews, soups, pasta, rice dishes, or seasonal salads.",
+          "2. Second Course (Segundo Plato): Grilled meats, roasted poultry, fish fillets, stews, or Spanish omelet.",
+          "3. Dessert or Coffee (Postre o Café): House pudding (Flan), ice cream, fruit, or an espresso.",
+          "4. Drink & Bread (Bebida y Pan): Basket of bread with house wine or mineral water.",
+          "Key Tip: Menú del Día is strictly a lunch offering (13:00–15:30) and is often not served on weekends or holidays. It often features wider variety and more authentic regional recipes than generic tourist menus.",
+        ],
       },
       {
         id: "payment-methods-and-cash",
         question: "路上可以刷卡嗎？需要帶多少歐元現金？",
+        questionEn: "Can I pay by card on the Camino? How much Euro cash should I carry?",
         paragraphs: [
           "朝聖之路沿途的支付方式依城鎮規模及店家類型而異。大型超市、連鎖商店、現代化餐廳及許多私立住宿通常接受信用卡或感應式支付，部分店家也支援 Apple Pay、Google Pay 等行動支付。",
           "不過，部分鄉村公立庇護所、教區隨喜捐獻住宿、小型咖啡館、自助投幣洗衣設備及部分行李托運業者，仍可能只接受歐元現金。偏遠村落也不一定有 ATM，因此不建議完全依賴信用卡。",
           "建議隨身準備約 €50～€100 的現金作為日常備用，並以 €5、€10、€20 小面額紙鈔為主，方便支付住宿、餐飲及小額消費。實際現金需求可依路線、住宿類型及消費習慣調整，並避免攜帶過多現金以降低遺失或遭竊風險。",
           "另外，建議攜帶至少一張可在歐洲 ATM 使用的金融卡或提款卡，出發前確認海外提款功能、跨國提款網路（如 Visa PLUS 或 Mastercard Cirrus）、提款手續費及每日提款限額，作為緊急備用。",
+        ],
+        paragraphsEn: [
+          "Payment acceptance varies along the trail. Supermarkets, private albergues, modern bars, and restaurants widely accept credit cards, Apple Pay, and Google Pay.",
+          "However, rural municipal albergues, donativo parish shelters, coin-operated laundry machines, small village cafes, and backpack transport services frequently accept cash only. Small hamlets often lack ATMs.",
+          "Recommended Cash Amount: Carry €50–€100 in cash, preferably in small denominations (€5, €10, €20 notes).",
+          "ATM & Card Tip: Bring at least one debit card with international ATM withdrawal enabled (Visa PLUS or Mastercard Cirrus) and verify overseas fee limits before departing.",
         ],
       },
     ],
@@ -114,11 +177,13 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: "transport",
     name: "起點交通",
+    nameEn: "Transit & Credencial",
     icon: Train,
     faqs: [
       {
         id: "credencial-how-to-get-and-use",
         question: "如何取得「朝聖者護照（Credencial）」？需要事先在台灣申請嗎？",
+        questionEn: "How do I get the Pilgrim Credential (Credencial)? Do I need to apply before traveling?",
         paragraphs: [
           "朝聖者護照（Credencial del Peregrino）是朝聖者記錄旅程及沿途蓋章的官方認可文件，主要用於證明徒步路線、申請聖地牙哥朝聖者證書（La Compostela），以及部分朝聖者庇護所的入住登記。",
           "取得方式主要有以下兩種：",
@@ -127,10 +192,19 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "護照蓋章規範：一般徒步期間建議沿途持續收集印章（Sello），記錄每天的行程及住宿地點。若要申請 La Compostela，徒步者必須在符合資格的最後至少 100 公里路段內，每日至少取得 2 個有效印章；單車朝聖者則須在最後至少 200 公里路段內符合相應的蓋章要求。印章可在教堂、庇護所、旅館、餐廳及市政機關等地取得。",
           "重要提醒：並非所有市面上販售的朝聖者護照都符合認證資格。應使用聖地牙哥大教堂核發或授權組織發放的 Credencial，並保留完整的路線及日期紀錄。",
         ],
+        paragraphsEn: [
+          "The Pilgrim Credential (Credencial del Peregrino) is the official passport of the Camino. It records your journey through stamps (Sellos), grants access to pilgrim albergues, and serves as official proof when requesting the Compostela certificate.",
+          "Two ways to obtain it:",
+          "1. In advance: Purchase from recognized national pilgrim associations or authorized religious organizations.",
+          "2. At your starting town: Available for €2–€3 at major pilgrim offices (such as Saint-Jean-Pied-de-Port, Porto Cathedral, or Irún), designated churches, and official tourism counters.",
+          "Stamping Rules: Collect stamps daily from albergues, churches, cafes, and town halls. To qualify for the Compostela certificate in Santiago, walkers must collect at least two stamps per day over the final 100 km (or 200 km for cyclists).",
+          "Important: Ensure your Credencial is issued by the Cathedral of Santiago or an officially accredited Confraternity.",
+        ],
       },
       {
         id: "flight-paris-vs-madrid-entry",
         question: "走法國之路，機票買巴黎還是馬德里進比較方便？",
+        questionEn: "For the Camino Francés, is it better to fly into Paris or Madrid?",
         paragraphs: [
           "若計畫從法國之路經典起點 Saint-Jean-Pied-de-Port（SJPP）出發，可以考慮「巴黎進、馬德里出」的開口機票（Open-Jaw），減少徒步結束後返回原出發城市的交通時間。不過，實際選擇仍應比較機票價格、轉乘次數及交通班次。",
           "巴黎進入 SJPP：抵達巴黎戴高樂機場（CDG）後，可搭乘大眾運輸前往巴黎蒙帕納斯車站（Gare Montparnasse），再搭乘法國國鐵 SNCF 的 TGV 或其他列車前往巴約訥（Bayonne），之後轉乘 TER 區間列車前往 Saint-Jean-Pied-de-Port。巴黎至 Bayonne 及 Bayonne 至 SJPP 的班次、行車時間與轉乘銜接依日期而異，訂票前應確認完整行程。",
@@ -138,10 +212,18 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "徒步結束後：抵達聖地牙哥（Santiago de Compostela）後，可搭乘 Renfe 火車或長途巴士前往馬德里，再由馬德里搭乘返台航班。聖地牙哥至馬德里的車程、直達班次及票價依日期而異，建議透過 Renfe 官方網站查詢及預訂。",
           "交通規劃建議：法國及西班牙的火車班次、票價及轉乘時間可能隨季節調整，尤其是 Bayonne 至 SJPP 的區間列車，建議預留足夠轉乘時間，避免因航班延誤或列車銜接失敗而影響起步行程。",
         ],
+        paragraphsEn: [
+          "If starting from Saint-Jean-Pied-de-Port (SJPP), an Open-Jaw ticket flying into Paris and out of Madrid is often the most logistically efficient option.",
+          "From Paris: Fly into Paris CDG, take the RER/Metro to Gare Montparnasse, take the TGV high-speed train to Bayonne (~4h), and transfer to the scenic TER train into SJPP (~1h).",
+          "From Madrid: Take a Renfe train to Pamplona, then take an ALSA seasonal bus or shared taxi to SJPP. Land travel from Madrid involves more transfers unless traveling during the bus operating season (March to October).",
+          "After finishing in Santiago: Direct high-speed Renfe trains (Alvia) or domestic flights connect Santiago de Compostela to Madrid Barajas Airport (MAD) in 3.5 to 4 hours.",
+          "Booking Advice: Check train connection windows carefully, especially between Bayonne and SJPP, and allow sufficient buffer for airport and rail transfers.",
+        ],
       },
       {
         id: "luggage-transport-service-logistics",
         question: "如果中途背包過重走不動或受傷，有行李托運服務嗎？",
+        questionEn: "Is there a luggage transfer service if my backpack is too heavy or if I am injured?",
         paragraphs: [
           "有的。法國之路及部分其他朝聖路線設有行李托運服務，可將背包從當天出發的住宿運送至下一個住宿點，讓朝聖者以較輕的負重繼續徒步。常見服務包括西班牙郵政 Correos 的 Paq Mochila，以及 Jacotrans、Camino Facil 等民營業者，但各家服務範圍、營運季節及價格不同。",
           "托運費用依業者、路線及運送距離而異，建議出發前查詢最新價格及可服務的住宿地點，不應假設所有路線或所有城鎮都能提供托運服務。",
@@ -149,17 +231,25 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "Correos 的 Paq Mochila 並非所有路線全年都有服務。例如 Sarria 至 Santiago 及 Tui 至 Santiago 路段全年提供服務，其他主要路線則有季節性營運限制。預訂前應確認當年度服務範圍及營運日期。",
           "托運注意事項：務必使用業者指定的行李標籤，依照規定時間交件，並事先確認目的地住宿是否接受托運行李。護照、現金、貴重物品、藥品、手機及其他重要隨身用品應自行攜帶，不要放在托運背包內。",
         ],
+        paragraphsEn: [
+          "Yes. Professional luggage transfer services operate along the Camino Francés and other major routes, transporting packs from one lodging to the next so pilgrims can walk light.",
+          "Major operators include the Spanish Postal Service (Correos Paq Mochila), Jacotrans, and Camino Fácil. Pricing ranges from €5 to €7 per stage depending on distance and provider.",
+          "How it works: Book online or fill out an envelope tag at your albergue. Leave your pack at the albergue reception before 08:00 AM. The courier delivers it to your destination by 14:30 PM (max weight 15 kg).",
+          "Crucial Reminder: Never pack your passport, Credencial, cash, medications, phone, or essential valuables in transferred bags; always carry them on your person.",
+        ],
       },
     ],
   },
   {
     id: "packing",
     name: "裝備準備",
+    nameEn: "Gear & Packing",
     icon: Backpack,
     faqs: [
       {
         id: "ten-percent-weight-rule-explanation",
         question: "為什麼背包負重建議控制在「體重的 10%」左右？",
+        questionEn: "Why is the recommended backpack weight roughly 10% of body weight?",
         paragraphs: [
           "朝聖之路通常需要連續數週、每天徒步數十公里，長時間背負過重的行李可能增加身體負擔，使肩膀、背部、膝關節及足部更容易疲勞。因此，出發前應盡量精簡裝備，避免攜帶不必要的物品。",
           "常見的輕量化背包原則是將背包基礎重量控制在個人體重的約 10% 左右，作為裝備規劃的參考。例如體重 65 公斤的成年人，可將背包基礎重量設定在約 6.5 公斤作為初步目標。但這並不是醫學界認定的安全上限，也不是所有人都必須遵守的硬性標準。",
@@ -167,10 +257,18 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "建議出發前先背負完整裝備進行多次長距離訓練，確認肩帶、腰帶及背包重心是否合適，並依實際體感調整重量。",
           "輕量化的核心原則是：只攜帶真正需要的物品，優先選擇多用途、輕量且容易整理的裝備。減少不必要的負重，可以讓長途徒步更加舒適，也能降低因疲勞而影響行程的風險。",
         ],
+        paragraphsEn: [
+          "Walking dozens of kilometers daily for several consecutive weeks places substantial stress on the body. An overly heavy pack quickly leads to fatigue in the shoulders, back, knees, and feet.",
+          "A widely referenced ultralight principle is to aim for a base pack weight around 10% of your body weight. For instance, a 65 kg walker would aim for roughly 6.5 kg of gear. This serves as a sensible benchmark rather than a strict medical rule.",
+          "Actual carrying capacity depends on personal strength, fitness, terrain elevation gain, and pack fit. Water and food also add consumable weight during the day.",
+          "Train extensively with a fully loaded pack before your trip to ensure your hip belt, shoulder straps, and center of gravity are dialed in.",
+          "The core philosophy is simple: carry only what you truly need. Choosing lightweight, multi-purpose items minimizes fatigue and lowers the risk of strain.",
+        ],
       },
       {
         id: "clothing-and-laundry-planning",
         question: "朝聖之路應該帶幾套衣物？如何安排換洗？",
+        questionEn: "How many sets of clothes should I pack for the Camino? How do I handle laundry?",
         paragraphs: [
           "朝聖之路通常需要連續多天步行，建議以快乾、輕量及方便清洗的衣物為主，不必每天準備一套全新的衣服。一般可採取穿一套、備用一套的方式，再依照行程長度、季節及個人需求調整。衣物數量應以能夠輪替及應付天候變化為原則，避免攜帶過多造成背包負擔。",
           "一般步行者可參考以下衣物配置：",
@@ -182,10 +280,22 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "6. 睡衣及休息衣物：可準備一套輕量、舒適的衣物，作為抵達住宿地點後更換使用。",
           "洗衣安排注意事項：許多朝聖者旅舍（Albergue）及住宿設施提供洗衣機、烘衣機或手洗空間，但設備及收費依住宿地點而異。若使用手洗方式，建議攜帶少量旅行用洗衣精及輕量曬衣繩，並優先清洗隔日需要穿著的衣物。遇到潮濕、下雨或氣溫較低的天候，衣物可能不容易乾燥，因此應保留足夠的替換衣物，避免只依賴當天洗好的衣服。",
         ],
+        paragraphsEn: [
+          "Prioritize quick-drying, lightweight, and easily washable fabrics. Follow the 'wear one, carry one (or two)' rule rather than packing a fresh outfit for every day.",
+          "Recommended clothing list:",
+          "1. Tops: 2–3 quick-dry technical or merino wool t-shirts for daily rotation.",
+          "2. Bottoms: 1–2 pairs of hiking pants or convertible shorts.",
+          "3. Underwear: 2–3 pairs of moisture-wicking underwear.",
+          "4. Socks: 2–3 pairs of high-density merino wool hiking socks to prevent blisters and manage moisture.",
+          "5. Warm Layer: A lightweight fleece or ultralight down jacket for cool mornings and mountain passes.",
+          "6. Sleep / Rest Wear: A comfortable, clean change of clothes reserved for inside albergues.",
+          "Laundry Logistics: Most albergues provide coin-operated washers/dryers or outdoor hand-washing sinks. Bring travel laundry soap and a lightweight clothesline. In damp or rainy weather, clothes dry slowly, so always keep one dry set ready.",
+        ],
       },
       {
         id: "backpack-capacity-reference",
         question: "朝聖之路的背包應該選擇多大容量？",
+        questionEn: "What backpack capacity should I choose for the Camino?",
         paragraphs: [
           "背包容量應依照步行天數、季節、個人身形、裝備體積及是否使用行李運送服務決定，並沒有適用所有人的固定標準。對於自行攜帶全部行李的朝聖者，可先以 40～50L 作為容量規劃參考；身形較大、裝備較多，或在寒冷季節需要攜帶較厚衣物及睡袋的人，也可以考慮 50～60L 以上的背包。",
           "不同裝備需求可參考以下容量範圍：",
@@ -194,10 +304,19 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "3. 50～60L 以上：適合需要攜帶較多裝備、較厚衣物、睡袋或其他個人物品的人，但應特別留意背包本身重量及實際負重。",
           "容量選擇注意事項：背包標示的公升數代表收納空間，不代表適合承載的重量。容量越大也不代表越好，若裝備沒有妥善控制，容易因為多餘空間而攜帶不必要的物品。建議先列出所有必需裝備，再依照實際收納體積選擇背包，並預留少量空間放置途中補給及臨時增加的物品。",
         ],
+        paragraphsEn: [
+          "Pack volume depends on season, personal gear bulk, and whether you plan to use luggage transfer services. For self-supported pilgrims, 35L–45L is widely considered the sweet spot.",
+          "Recommended volume guidelines:",
+          "1. 30–35L: Ideal for ultralight hikers, warm summer walking, or pilgrims utilizing daily luggage transport.",
+          "2. 40–48L: The classic size for standard 30+ day self-supported journeys, comfortably holding clothing, sleeping bag, and essentials.",
+          "3. 50L+: Best reserved for winter pilgrimages requiring bulky thermal layers and heavier sleeping bags.",
+          "Key Principle: Backpack volume does not equate to required packing. Extra space tempts overpacking; layout your gear first, then select a pack that fits your kit snugly.",
+        ],
       },
       {
         id: "hiking-shoes-and-footwear",
         question: "朝聖之路應該穿什麼鞋？一定需要登山鞋嗎？",
+        questionEn: "What shoes should I wear? Do I need heavy mountaineering boots?",
         paragraphs: [
           "朝聖之路每天可能需要步行數十公里，鞋子的舒適度、合腳程度及防滑能力，通常比鞋款名稱或外觀更重要。並非所有路段都需要穿著傳統高筒登山鞋，越野跑鞋、低筒健行鞋及登山鞋都可以作為選擇，應依照路線地形、季節、天候及個人腳型決定。",
           "常見鞋款可參考以下差異：",
@@ -207,10 +326,20 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "選鞋注意事項：建議選擇腳趾前方有足夠活動空間的鞋款，因為長時間步行及下坡時，腳部可能腫脹或向前滑動。試穿時應搭配實際會使用的健行襪，並確認腳跟不會明顯滑動、腳趾不會頂到鞋頭。新鞋應在出發前充分穿著適應，避免第一次長距離步行才使用。",
           "防水鞋與非防水鞋的選擇也要考慮季節及路線。防水鞋在潮濕環境中有一定優勢，但通常透氣性較低，鞋內進水後也可能較難乾燥；非防水鞋通常較透氣、乾燥速度較快。無論選擇哪一種鞋款，都應以實際穿著舒適度、防滑表現及個人適應情況為優先。",
         ],
+        paragraphsEn: [
+          "Fit, comfort, and breathability far outweigh brand or rigid ankle support on the Camino. Heavy mountain boots are rarely necessary for most standard trail surfaces.",
+          "Popular footwear options:",
+          "1. Trail Running Shoes: Lightweight, agile, and highly breathable. Excellent for standard gravel, asphalt, and dirt trails.",
+          "2. Low-cut Hiking Shoes: Provide stiffer soles and toe-cap protection against rocks, offering a balance of durability and flexibility.",
+          "3. Mid-cut Hiking Boots: Offer ankle support for rougher descents or heavier packs, but add weight and warmth.",
+          "Fitting Advice: Buy shoes roughly a half-size to full-size larger than your regular shoe size to accommodate foot swelling over long distances. Break your shoes in thoroughly before departure.",
+          "Waterproof (Gore-Tex) vs. Non-Waterproof: Waterproof shoes keep light rain out but take much longer to dry once wet inside; non-waterproof mesh shoes breathe better and dry rapidly.",
+        ],
       },
       {
         id: "trekking-poles-and-usage",
         question: "朝聖之路有必要使用登山杖嗎？",
+        questionEn: "Are trekking poles necessary on the Camino?",
         paragraphs: [
           "登山杖（Trekking Poles）並非朝聖之路的必備裝備，但對於長距離步行、上下坡及不平整路面，能提供額外支撐與平衡，並協助分擔部分下肢負荷。是否使用應依照個人體能、膝蓋狀況、背包重量及路線地形決定。",
           "登山杖的主要用途包括：",
@@ -221,10 +350,20 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "登山杖選擇注意事項：常見款式包括伸縮式及摺疊式，建議選擇可依身高調整長度、鎖定結構穩固且重量適中的款式。一般使用雙杖可提供較對稱的支撐，單杖則適合只需要額外平衡輔助的人。初次使用者應事先練習正確握持及步行節奏，避免因操作不熟悉而影響行走。",
           "交通與攜帶注意事項：若搭乘飛機，登山杖通常不適合放入隨身行李，應依航空公司及出發機場的安檢規定辦理托運。若不想攜帶登山杖搭機，也可以考慮抵達西班牙後再購買或租借。",
         ],
+        paragraphsEn: [
+          "While not strictly mandatory, trekking poles provide significant stability, rhythm, and joint relief on long descents and steep climbs.",
+          "Core benefits of poles:",
+          "1. Downhill Relief: Reduces impact and jarring forces on knees and ankles on rocky descents.",
+          "2. Uphill Rhythm: Engages the upper body and arms to share muscular workload.",
+          "3. Balance & Stability: Adds two contact points on wet mud, loose gravel, or uneven stone tracks.",
+          "Selection Tip: Choose lightweight, collapsible poles (aluminum or carbon fiber) with secure lever locks and comfortable cork/foam grips. Use rubber tips (ferrules) on asphalt and cobblestones to prevent slipping and loud clicking.",
+          "Airport Security Note: Trekking poles with sharp metal tips are prohibited in carry-on luggage by airport security. You must check them in or buy/rent poles upon arrival in Spain.",
+        ],
       },
       {
         id: "water-bottles-and-hydration",
         question: "朝聖途中需要攜帶多少水？水壺應該準備多大容量？",
+        questionEn: "How much water should I carry? What bottle size is ideal?",
         paragraphs: [
           "朝聖途中應依照每日步行距離、氣溫、地形、流汗程度及沿途補水條件準備飲用水，沒有適用所有人的固定攜帶容量。一般可先以 1～2L 的飲水攜帶量作為規劃起點，夏季、高溫或沿途補水點較少的路段，則應提高攜水量並提前確認補給位置。",
           "常見飲水裝備包括：",
@@ -234,10 +373,17 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "飲水安排注意事項：出發前應確認當天路線上的飲水點、商店及餐廳位置，尤其經過偏遠路段或夏季高溫地區時，不應假設沿途一定有水源。公共飲水台（Fuente）是否可飲用，應留意現場標示；標示為不可飲用（No Potable）的水源不可直接飲用。若水源狀況不明，也不應直接飲用。",
           "補水時應採取少量、多次的方式，依照口渴程度、流汗情況及天候調整，不必為了達到固定數字而強迫大量飲水。長時間步行時也應留意脫水及過量飲水的風險，並適時休息。",
         ],
+        paragraphsEn: [
+          "Water requirements depend on daily mileage, temperature, gradient, and fountain availability. As a rule of thumb, carrying 1.5L to 2L is a safe starting point.",
+          "Gear Options: Lightweight reusable bottles (500ml–1L) are easy to refill at village fountains. Hydration bladders (1.5L–2L) let you sip continuously without stopping.",
+          "Fountain Safety: Water fountains (Fuentes) in Spain and Portugal marked 'Agua Potable' are safe to drink. If marked 'Agua No Potable' or unmarked in open pastures, do not drink without purification.",
+          "Drink small amounts frequently rather than chugging large volumes, and replenish electrolytes during hot summer stages.",
+        ],
       },
       {
         id: "backpack-selection-and-fitting",
         question: "背包應該如何選擇？挑選時有哪些背負細節需要注意？",
+        questionEn: "How should I choose and fit a backpack for the Camino?",
         paragraphs: [
           "朝聖之路的背包需要長時間背負，因此除了容量，也應重視背負系統、合身程度、透氣性及背包本身重量。建議選擇專為健行設計、具有腰帶及可調整肩帶的背包，讓重量能適當分散至臀部，而不是全部集中在肩膀。",
           "挑選背包時可注意以下項目：",
@@ -249,17 +395,28 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "6. 背包自重：在容量及背負舒適度相近的情況下，可優先考慮本身重量較輕的款式，但不應為了追求輕量而犧牲必要的背負支撐及耐用性。",
           "試背注意事項：購買前應將接近實際旅行重量的物品放入背包，調整腰帶、肩帶及胸扣後實際走動，確認背包不會明顯晃動、壓迫肩膀或摩擦腰部。出發前也應使用正式裝備進行多次較長距離的試走，提早發現背包不合身或重量分配不均的問題。",
         ],
+        paragraphsEn: [
+          "A well-fitted backpack transfers roughly 70–80% of its weight onto your hips rather than hanging on your shoulders.",
+          "Key fitting factors:",
+          "1. Torso Length: Match the pack to your spine length (C7 vertebra to iliac crest), not your overall height.",
+          "2. Hip Belt: Should wrap snugly over the crest of your hip bones, securely bearing the majority of pack weight.",
+          "3. Back Ventilation: Suspended mesh backpanels promote airflow and reduce sweating on warm days.",
+          "4. Rain Protection: Ensure your pack includes an integrated rain cover or pack internal dry bags to safeguard electronics and clothing.",
+          "Test before buying: Load the pack with 6–7 kg of weight and walk around the store to verify there are no pressure points or rubbing.",
+        ],
       },
     ],
   },
   {
     id: "budget",
     name: "花費預算",
+    nameEn: "Costs & Budget",
     icon: Coins,
     faqs: [
       {
         id: "thirty-three-days-camino-budget",
         question: "走一趟 33 天的朝聖之路，大約需要準備多少總預算？",
+        questionEn: "How much budget should I prepare for a 33-day Camino?",
         paragraphs: [
           "以最經典的法國之路（Camino Francés）全段、約 33～35 天為例，整體開銷可分為以下幾個部分。實際費用會受到出發季節、住宿選擇、飲食習慣、機票價格及歐元匯率影響。",
           "1. 國際機票與歐洲境內交通：台灣往返歐洲的開口機票可先以 NT$32,000～42,000 作為預算參考，巴黎至 SJPP 的交通，以及聖地牙哥返回馬德里的火車或巴士費用，另預留約 NT$4,000～6,000。實際價格依航空公司、購票時間及交通班次而異。",
@@ -268,17 +425,27 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "4. 每日預算估算：若以每日 €40～€60 作為生活費參考，33～35 天約需 €1,320～€2,100。若途中安排休息日、入住飯店或需要額外行李托運，應再增加預算。",
           "綜合上述項目，包含國際機票、歐洲境內交通、裝備及約 33～35 天的日常生活費，建議初步準備約新台幣 NT$100,000～145,000 作為規劃參考。這是依上述假設估算的預算區間，並非固定行情；若遇旺季住宿、臨時醫療、額外交通或機票漲價，建議另外準備緊急預備金。",
         ],
+        paragraphsEn: [
+          "Taking the classic 33–35 day Camino Francés as an example, total expenses break down into international travel, pre-trip gear, and daily living costs:",
+          "1. Flights & Domestic Transit: Round-trip flights from overseas typically range from €800 to €1,200 depending on airline and booking timing. Regional connections (TGV to SJPP and train back from Santiago to Madrid) cost roughly €100–€180.",
+          "2. Gear & Travel Insurance: Investing in new trail shoes, merino socks, a fitted backpack, sleeping bag, and travel health insurance costs roughly €300–€600 (significantly less if you already own hiking gear).",
+          "3. Daily On-Trail Living Costs: Albergue beds cost €10–€15 (municipal) or €15–€25 (private). Daily breakfast, cafe con leche, and pilgrim dinners total roughly €25–€35/day. Cooking in albergue kitchens can lower this substantially.",
+          "4. Daily Living Budget Estimate: Budgeting €40–€60 per day results in roughly €1,320–€2,100 for a 33–35 day journey.",
+          "Total Estimated Cost: Expect roughly €2,500–€3,800 in total (approx. NT$90,000–140,000) covering all flights, equipment, and daily trail expenses. Always keep an emergency cushion for medical needs or private rest rooms.",
+        ],
       },
     ],
   },
   {
     id: "general",
     name: "行程證書",
+    nameEn: "General & Credential",
     icon: Footprints,
     faqs: [
       {
         id: "compostela-certificate-rules",
         question: "領取官方「朝聖者證書（La Compostela）」的最低徒步公里數與蓋章規定是什麼？",
+        questionEn: "What are the distance and stamping requirements to receive the official Compostela certificate?",
         paragraphs: [
           "依據聖地牙哥大教堂朝聖者辦公室（Oficina de Acogida al Peregrino）的認證規定，申請 La Compostela 必須沿著官方認可的朝聖路線前往聖地牙哥，並符合以下最低距離要求：",
           "1. 徒步或騎馬：至少完成最後連續 100 公里，且必須包含抵達聖地牙哥主教座堂的最後一段路程。",
@@ -289,16 +456,34 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           "宗教目的條件：La Compostela 是具有宗教意義的朝聖證書，官方規定申請者須以基督宗教信仰目的完成朝聖，例如虔誠、許願或敬神等目的。若純粹以文化、觀光或運動為目的，不能直接假設符合 La Compostela 的申請資格。",
           "領取方式：抵達聖地牙哥後，可持符合規定的 Credencial 前往朝聖者接待辦公室（Oficina de Acogida al Peregrino），依現場流程取得號碼或 QR Code 排隊，經過資格確認後領取 La Compostela。官方證書本身免費，若需要額外申請記載出發地及總距離的距離證明（Certificado de Distancia），則須依當年度公告支付相關費用。",
         ],
+        paragraphsEn: [
+          "According to the Pilgrim's Reception Office (Oficina de Acogida al Peregrino) in Santiago de Compostela, pilgrims must complete an officially recognized route and meet the following minimum distances:",
+          "1. On Foot or on Horseback: Must complete at least the final continuous 100 km leading into the Cathedral of Santiago.",
+          "2. By Bicycle: Must complete at least the final continuous 200 km.",
+          "Starting Outside Spain: Pilgrims starting abroad along recognized routes must complete at least 70 km within Spain to qualify for the Compostela.",
+          "Staging in Sections: You may complete the Camino in separate stages over time, provided each subsequent section resumes geographically from where the previous one ended, verified with dated stamps.",
+          "Stamping Rule: Over the final qualifying 100 km (or 200 km for cyclists), you must collect at least TWO official stamps (Sellos) per day in your Credencial, noting the date.",
+          "Religious / Spiritual Motivation: The Compostela certificate is granted to pilgrims inspired by faith, devotion, or spiritual seeking. A generic Certificate of Welcome (Certificado de Bienvenida) is issued for purely cultural or recreational walks.",
+          "Claiming Your Certificate: Visit the Pilgrim's Office in Santiago with your completed Credencial. Obtain a queue ticket or QR code. The Compostela is free; an optional Certificate of Distance (Certificado de Distancia) listing starting point and total kilometers is available for a nominal fee (€3).",
+        ],
       },
       {
         id: "best-season-to-walk-camino",
         question: "幾月走朝聖之路最舒適宜人？四季氣候差異為何？",
+        questionEn: "What is the best season to walk the Camino? How does weather vary across seasons?",
         paragraphs: [
           "春末（5～6 月）與初秋（9～10 月）通常是體驗朝聖之路較受歡迎的季節。這段期間氣溫相對舒適，日間約可落在 15°C～25°C，但不同地區、海拔及天候仍會造成明顯差異。沿途可欣賞納瓦拉山林、里奧哈葡萄園及加利西亞鄉村景色，也能避開部分盛夏高溫。",
           "盛夏（7～8 月）：西班牙中部梅塞塔高原（Meseta）日間可能出現 35°C 以上高溫，部分路段遮蔭較少，徒步時容易發生中暑或脫水。若選擇此時出發，應留意天氣預報、提早規劃每日行程、避開午後高溫，並確認沿途水源及補給點是否開放。清晨出發時間應依日出、天氣與路線安全調整，不建議在能見度不足時貿然摸黑徒步。",
           "冬季（11 月至隔年 3 月）：沿途氣溫較低，部分山區可能降雪，降雨、強風及低溫也會增加徒步難度。部分私立庇護所及餐廳可能季節性休業，出發前應逐一確認住宿及補給是否營業。冬季較適合具備低溫徒步經驗、完善防水保暖裝備及自主應變能力的朝聖者。",
           "法國之路冬季特別注意：Saint-Jean-Pied-de-Port 至 Roncesvalles 的 Napoleon Route（拿破崙路線）在冬季有官方季節性通行限制，通常於每年 11 月 1 日至隔年 3 月 31 日封閉，期間應改走 Valcarlos 山谷路線。實際封閉日期及交通管制應以當年度法國及西班牙相關主管機關公告為準，不應冒險穿越封閉路段。",
           "季節選擇建議：第一次走朝聖之路，通常可優先考慮 5～6 月或 9 月出發。若選擇 7～8 月，需特別注意高溫及住宿需求；若選擇冬季，則應具備更完整的保暖、防水及路線應變準備。無論哪個季節，都應在出發前確認當年度住宿、交通及路線開放資訊。",
+        ],
+        paragraphsEn: [
+          "Late Spring (May–June) and Early Autumn (September–October) are widely regarded as the most pleasant seasons to walk. Daytime temperatures typically hover between 15°C and 25°C, with lush landscapes across Navarre, Rioja vineyards, and Galician forests.",
+          "Mid-Summer (July–August): The central Meseta plateau regularly exceeds 35°C (95°F) with minimal shade, creating significant risks of heat exhaustion and dehydration. Start walking at first light, carry ample water, and confirm accommodation availability in advance.",
+          "Winter (November–March): Cold temperatures, heavy rain, and mountain snow increase physical difficulty. Many seasonal albergues and cafes close for the winter. Best suited for experienced winter hikers equipped with proper thermal and waterproof layers.",
+          "Winter Mountain Closure Notice: On the Camino Francés, the high Napoleon Route over the Pyrenees (SJPP to Roncesvalles) is legally closed each winter (typically November 1 to March 31). Pilgrims must take the lower Valcarlos valley route.",
+          "Summary Recommendation: First-time pilgrims should aim for May, June, or September for the best balance of comfortable weather, open infrastructure, and trail community.",
         ],
       },
     ],

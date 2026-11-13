@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Props {
   slotId?: string
@@ -47,10 +50,10 @@ onMounted(() => {
       'overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/80 text-center transition-all',
       isSidebar ? 'min-h-[250px] p-3' : 'my-6 min-h-[100px] p-4',
     ]"
-    aria-label="贊助商廣告"
+    :aria-label="t('common.sponsoredAd')"
   >
     <div class="mb-1.5 flex items-center justify-center gap-1 text-[11px] font-medium uppercase tracking-wider text-slate-400">
-      <span>贊助商廣告</span>
+      <span>{{ t('common.sponsoredAd') }}</span>
     </div>
     <ins
       class="adsbygoogle block"

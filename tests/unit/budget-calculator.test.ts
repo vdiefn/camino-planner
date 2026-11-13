@@ -141,4 +141,45 @@ describe('budgetCalculator 預算試算與精度防禦測試', () => {
     expect(emptySummary.totalEur).toBe(0)
     expect(emptySummary.grandTotalTwd).toBe(0)
   })
+
+  it('9. 英文模式下純歐元匯出 (Pure EUR) 絕不包含 TWD 或 NT$', () => {
+    const mockMeta: BudgetExportMeta = {
+      routeName: 'Camino Francés',
+      personaName: 'Classic Balanced',
+      totalDays: 33,
+      eurToTwdRate: 35.5,
+      flightTwd: 35500, // 35500 / 35.5 = 1000 EUR
+      gearTwd: 3550, // 3550 / 35.5 = 100 EUR
+      insuranceAndSimTwd: 1775, // 50 EUR
+      totalFixedTwd: 40825, // 1150 EUR
+      lodgingTotalEur: 660,
+      foodTotalEur: 825,
+      laundryTotalEur: 165,
+      luggageTotalEur: 0,
+      totalDailyWalkingEur: 1650,
+      totalDailyWalkingTwd: 58575,
+      dailyAvgEur: 50.0,
+      transitTotalEur: 120,
+      transitTotalTwd: 4260,
+      emergencyFundEur: 300,
+      emergencyFundTwd: 10650,
+      totalEur: 2070,
+      totalEurToTwd: 73485,
+      grandTotalTwd: 114310,
+      createdAt: '2026-11-01',
+    }
+
+    const text = generateBudgetTextChecklist(mockMeta, 'en')
+
+    expect(text).toContain('[Camino de Santiago · Budget Breakdown Sheet]')
+    expect(text).toContain('Route: Camino Francés ｜ Planned Days: 33 days')
+    expect(text).toContain('1. Pre-trip Fixed Expenses: ~€1150.00')
+    expect(text).toContain('· Round-trip Flights: €1000.00')
+    expect(text).toContain('· Gear & Clothing: €100.00')
+    expect(text).toContain('· Travel Insurance & eSIM: €50.00')
+    expect(text).toContain('Grand Total: ~€3220.00') // 2070 + 1150 = 3220
+    expect(text).not.toContain('TWD')
+    expect(text).not.toContain('NT$')
+    expect(text).toContain('Buen Camino! Wishing you a peaceful journey.')
+  })
 })

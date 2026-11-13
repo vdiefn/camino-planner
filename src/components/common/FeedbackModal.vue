@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, computed, watch, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   Dialog,
   DialogPanel,
   DialogTitle,
   TransitionRoot,
-  TransitionChild
+  TransitionChild,
 } from '@headlessui/vue'
 import {
   X,
@@ -15,10 +16,11 @@ import {
   MessageCircle,
   CheckCircle2,
   AlertCircle,
-  Loader2
+  Loader2,
 } from 'lucide-vue-next'
 import { useFeedbackModal, type FeedbackCategory } from '@/composables/useFeedbackModal'
 
+const { t } = useI18n()
 const { isOpen, initialCategory, initialTarget, closeFeedback } = useFeedbackModal()
 
 const category = ref<FeedbackCategory>('feature_request')
@@ -29,52 +31,67 @@ const botField = ref('') // 蜜罐欄位 (隱形)
 const isSubmitting = ref(false)
 const isSuccess = ref(false)
 const errorMessage = ref('')
+let submitController: AbortController | null = null
 
-// 當彈窗打開時同步初始參數
+// 當彈窗關閉時中止未完成請求，開啟時同步初始參數
 watch(isOpen, (newVal) => {
-  if (newVal) {
-    category.value = initialCategory.value
-    target.value = initialTarget.value
-    content.value = ''
-    botField.value = ''
-    isSubmitting.value = false
-    isSuccess.value = false
-    errorMessage.value = ''
+  if (!newVal) {
+    submitController?.abort()
+    submitController = null
+    return
   }
+  category.value = initialCategory.value
+  target.value = initialTarget.value
+  content.value = ''
+  botField.value = ''
+  isSubmitting.value = false
+  isSuccess.value = false
+  errorMessage.value = ''
 })
 
-const categories: { id: FeedbackCategory; label: string; icon: any; placeholder: string }[] = [
+onUnmounted(() => {
+  submitController?.abort()
+  submitController = null
+})
+
+const categories = computed<
+  { id: FeedbackCategory; label: string; icon: any; placeholder: string }[]
+>(() => [
   {
     id: 'feature_request',
-    label: '功能許願',
+    label: t('feedback.categories.featureRequest'),
     icon: Sparkles,
-    placeholder: '希望新增哪些路線、行程功能或裝備工具？歡迎告訴我們您的想法！'
+    placeholder: t('feedback.placeholders.featureRequest'),
   },
   {
     id: 'data_correction',
-    label: '資料勘誤',
+    label: t('feedback.categories.dataCorrection'),
     icon: Home,
-    placeholder: '庇護所歇業、電話或價格異動、發現遺漏的庇護所、或交通班次變更...'
+    placeholder: t('feedback.placeholders.dataCorrection'),
   },
   {
     id: 'bug_report',
-    label: '問題回報',
+    label: t('feedback.categories.bugReport'),
     icon: Bug,
-    placeholder: '遇到了什麼異常狀況或排版錯誤？請描述發生情境，我們會盡快修復！'
+    placeholder: t('feedback.placeholders.bugReport'),
   },
   {
     id: 'general',
-    label: '其他回饋',
+    label: t('feedback.categories.general'),
     icon: MessageCircle,
-    placeholder: '朝聖心得分享、給開發者的鼓勵，或任何想說的話...'
-  }
-]
+    placeholder: t('feedback.placeholders.general'),
+  },
+])
 
 async function handleSubmit() {
   if (!content.value.trim()) {
-    errorMessage.value = '請輸入回饋內容'
+    errorMessage.value = t('feedback.requiredError')
     return
   }
+
+  submitController?.abort()
+  const controller = new AbortController()
+  submitController = controller
 
   isSubmitting.value = true
   errorMessage.value = ''
@@ -83,12 +100,13 @@ async function handleSubmit() {
     const res = await fetch('/api/feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
       body: JSON.stringify({
         category: category.value,
         target: target.value.trim(),
         content: content.value.trim(),
-        botField: botField.value
-      })
+        botField: botField.value,
+      }),
     })
 
     const data = await res.json().catch(() => ({}))
@@ -96,13 +114,17 @@ async function handleSubmit() {
     if (res.ok && data.success) {
       isSuccess.value = true
     } else {
-      errorMessage.value = data.error || '傳送失敗，請稍後再試'
+      errorMessage.value = data.error || t('feedback.failedError')
     }
   } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') return
     console.error('送出回饋失敗:', err)
-    errorMessage.value = '網路連線異常，請稍後再試'
+    errorMessage.value = t('feedback.networkError')
   } finally {
-    isSubmitting.value = false
+    if (submitController === controller) {
+      submitController = null
+      isSubmitting.value = false
+    }
   }
 }
 </script>
@@ -136,14 +158,15 @@ async function handleSubmit() {
             <DialogPanel class="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 shadow-2xl transition-all border border-slate-200">
               <!-- 頂部標題與關閉按鈕 -->
               <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <DialogTitle as="h3" class="text-base text-slate-800 flex items-center gap-2">
+                <DialogTitle as="h3" class="text-base font-semibold text-slate-800 flex items-center gap-2">
                   <MessageCircle class="w-5 h-5 text-amber-500" />
-                  意見回饋與許願池
+                  <span>{{ t('feedback.title') }}</span>
                 </DialogTitle>
                 <button
                   type="button"
                   @click="closeFeedback"
                   class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 transition cursor-pointer"
+                  aria-label="Close"
                 >
                   <X class="w-5 h-5" />
                 </button>
@@ -155,11 +178,11 @@ async function handleSubmit() {
                   <div class="flex items-center gap-2.5">
                     <CheckCircle2 class="w-5 h-5 text-emerald-600 shrink-0" />
                     <h4 class="text-sm sm:text-base font-bold text-slate-900">
-                      非常感謝您的回饋！
+                      {{ t('feedback.successTitle') }}
                     </h4>
                   </div>
                   <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-7.5">
-                    您的寶貴建議與情報已成功送達。這能讓所有朝聖者的規劃旅程更加踏實順利，祝您一路順風！¡Buen Camino!
+                    {{ t('feedback.successDesc') }}
                   </p>
                 </div>
 
@@ -170,7 +193,7 @@ async function handleSubmit() {
                     @click="closeFeedback"
                     class="px-5 py-2 text-xs sm:text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-xl shadow-xs transition cursor-pointer"
                   >
-                    完成
+                    {{ t('feedback.finishBtn') }}
                   </button>
                 </div>
               </div>
@@ -189,19 +212,19 @@ async function handleSubmit() {
 
                 <!-- 分類切換標籤 -->
                 <div>
-                  <label class="block text-sm text-slate-700 mb-1.5">
-                    回饋類別
+                  <label class="block text-xs sm:text-sm font-medium text-slate-700 mb-1.5">
+                    {{ t('feedback.categoryLabel') }}
                   </label>
-                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                  <div class="grid grid-cols-2 gap-2.5">
                     <button
                       v-for="cat in categories"
                       :key="cat.id"
                       type="button"
                       :class="[
-                        'flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-medium transition cursor-pointer border',
+                        'flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition cursor-pointer border',
                         category === cat.id
                           ? 'bg-amber-500 text-white border-amber-500 shadow-xs'
-                          : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                          : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100',
                       ]"
                       @click="category = cat.id"
                     >
@@ -213,34 +236,34 @@ async function handleSubmit() {
 
                 <!-- 相關城鎮/庇護所/對象 -->
                 <div>
-                  <label class="block text-sm text-slate-700 mb-1">
-                    主旨
+                  <label class="block text-xs sm:text-sm font-medium text-slate-700 mb-1">
+                    {{ t('feedback.targetLabel') }}
                   </label>
                   <input
                     v-model="target"
                     type="text"
-                    placeholder="例如：Zubiri 公立庇護所、北方之路、裝備試算..."
-                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                    :placeholder="t('feedback.targetPlaceholder')"
+                    class="w-full px-3 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
                   />
                 </div>
 
                 <!-- 詳細內容 -->
                 <div>
-                  <label class="block text-sm text-slate-700 mb-1">
-                    內容說明 <span class="text-rose-500">*</span>
+                  <label class="block text-xs sm:text-sm font-medium text-slate-700 mb-1">
+                    {{ t('feedback.contentLabel') }} <span class="text-rose-500">*</span>
                   </label>
                   <textarea
                     v-model="content"
                     rows="4"
                     required
-                    :placeholder="categories.find(c => c.id === category)?.placeholder || '請輸入詳細內容...'"
-                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 resize-none leading-relaxed"
+                    :placeholder="categories.find((c) => c.id === category)?.placeholder || t('feedback.placeholders.default')"
+                    class="w-full px-3 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 resize-none leading-relaxed"
                   />
                 </div>
 
                 <!-- 感謝回饋提示 -->
-                <p class="text-sm text-slate-700 leading-relaxed">
-                  感謝您的寶貴回饋與建議！
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  {{ t('feedback.thankYou') }}
                 </p>
 
                 <!-- 錯誤訊息提示 -->
@@ -254,17 +277,17 @@ async function handleSubmit() {
                   <button
                     type="button"
                     @click="closeFeedback"
-                    class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer"
                   >
-                    取消
+                    {{ t('feedback.cancelBtn') }}
                   </button>
                   <button
                     type="submit"
                     :disabled="isSubmitting"
-                    class="px-4 py-2 text-xs font-medium text-white bg-amber-500 hover:bg-amber-600 disabled:opacity-60 rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 disabled:opacity-60 rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer"
                   >
                     <Loader2 v-if="isSubmitting" class="w-3.5 h-3.5 animate-spin" />
-                    <span>{{ isSubmitting ? '傳送中...' : '送出' }}</span>
+                    <span>{{ isSubmitting ? t('feedback.submittingBtn') : t('feedback.submitBtn') }}</span>
                   </button>
                 </div>
               </form>

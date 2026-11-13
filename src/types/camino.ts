@@ -72,6 +72,7 @@ export type PackingCategory =
   | 'MEDICAL'
   | 'ELECTRONICS'
   | 'DOCS'
+  | 'GEAR'
   | 'OTHER'
   | (string & {})
 
@@ -100,12 +101,16 @@ export interface TransportStep {
   stepOrder: number
   type: TransportType
   carrierName?: string // 營運商/車種（如 "SNCF TGV", "ALSA"）
+  carrierNameEn?: string // 英文營運商/車種
   from: string
+  fromEn?: string // 英文出發地
   to: string
+  toEn?: string // 英文目的地
   durationMinutes: number
   estimatedCostEur: { min: number; max: number }
   bookingUrl?: string
   warningTip?: string
+  warningTipEn?: string // 英文避坑提示
 }
 
 export type TransportTargetRoute = 'frances' | 'portugues' | 'norte'
@@ -116,11 +121,14 @@ export interface TransportRoute {
   id: string
   targetRoute?: TransportTargetRoute
   destinationName?: string
+  destinationNameEn?: string
   originCity: OriginCity
   title: string
+  titleEn?: string // 英文方案標題
   totalDurationHours: number
   totalCostEur: { min: number; max: number }
   operatingMonths: string
+  operatingMonthsEn?: string // 英文營運備註
   steps: TransportStep[]
 }
 

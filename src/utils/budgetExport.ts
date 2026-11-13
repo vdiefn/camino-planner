@@ -4,8 +4,66 @@ import type { BudgetExportMeta } from '@/types/budget'
  * 產生供通訊軟體（LINE / 備忘錄）分享之繁體中文極簡預算清單
  * 格式抗破版、無長折線、資訊分層清晰，雙幣清楚對照
  */
-export function generateBudgetTextChecklist(meta: BudgetExportMeta): string {
+export function generateBudgetTextChecklist(
+  meta: BudgetExportMeta,
+  locale: string = 'zh-TW'
+): string {
+  const isEn = locale === 'en'
   const lines: string[] = []
+
+  if (isEn) {
+    const totalFixedEur = meta.totalFixedTwd / meta.eurToTwdRate
+    const grandTotalEur = meta.totalEur + totalFixedEur
+    const flightEur = meta.flightTwd / meta.eurToTwdRate
+    const gearEur = meta.gearTwd / meta.eurToTwdRate
+    const insEur = meta.insuranceAndSimTwd / meta.eurToTwdRate
+
+    lines.push('[Camino de Santiago · Budget Breakdown Sheet]')
+    lines.push(`Route: ${meta.routeName} ｜ Planned Days: ${meta.totalDays} days`)
+    lines.push(`Budget Style: ${meta.personaName}`)
+    lines.push('')
+    lines.push('----------------------------------------')
+    lines.push('[Budget Breakdown]')
+    lines.push('')
+
+    // 1. Pre-trip Fixed Expenses
+    lines.push(`1. Pre-trip Fixed Expenses: ~€${totalFixedEur.toFixed(2)}`)
+    lines.push(`  · Round-trip Flights: €${flightEur.toFixed(2)}`)
+    lines.push(`  · Gear & Clothing: €${gearEur.toFixed(2)}`)
+    lines.push(`  · Travel Insurance & eSIM: €${insEur.toFixed(2)}`)
+    lines.push('')
+
+    // 2. Daily Walking Expenses
+    const dailyAvgStr = meta.dailyAvgEur.toFixed(2)
+    lines.push(`2. Daily Walking Expenses (${meta.totalDays} days, ~€${dailyAvgStr}/day):`)
+    lines.push(`  Subtotal: ~€${meta.totalDailyWalkingEur.toFixed(2)}`)
+    lines.push(`  · Lodging / Bed: €${meta.lodgingTotalEur.toFixed(2)}`)
+    lines.push(`  · Meals & Food: €${meta.foodTotalEur.toFixed(2)}`)
+    lines.push(`  · Laundry & Sundries: €${meta.laundryTotalEur.toFixed(2)}`)
+    if (meta.luggageTotalEur > 0) {
+      lines.push(`  · Luggage Transfer: €${meta.luggageTotalEur.toFixed(2)}`)
+    }
+    lines.push('')
+
+    // 3. Transit
+    lines.push(`3. Trailhead & Return Transit: ~€${meta.transitTotalEur.toFixed(2)}`)
+    lines.push('')
+
+    // 4. Emergency Fund
+    lines.push(`4. Emergency Contingency Fund: ~€${meta.emergencyFundEur.toFixed(2)}`)
+    lines.push('----------------------------------------')
+    lines.push('')
+
+    // Summary
+    lines.push('[Total Estimated Expenses (EUR)]')
+    lines.push(`  · On-Trail Expenses: ~€${meta.totalEur.toFixed(2)}`)
+    lines.push(`  · Pre-trip Fixed: ~€${totalFixedEur.toFixed(2)}`)
+    lines.push(`  · Grand Total: ~€${grandTotalEur.toFixed(2)}`)
+    lines.push('')
+    lines.push('Buen Camino! Wishing you a peaceful journey.')
+
+    return lines.join('\n')
+  }
 
   lines.push('【聖雅各朝聖之路 · 行程花費預算表】')
   lines.push(`路線：${meta.routeName} ｜ 規劃天數：${meta.totalDays} 天`)

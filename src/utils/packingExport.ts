@@ -19,8 +19,11 @@ export interface CategoryInfo {
 export function generatePackingTextChecklist(
   items: PackingItem[],
   categories: CategoryInfo[],
-  meta: PackingExportMeta
+  meta: PackingExportMeta,
+  locale: string = 'zh-TW'
 ): string {
+  const isEn = locale === 'en'
+
   // 1. 僅保留勾選要攜帶之項目
   const checkedItems = items.filter((item) => item.isChecked)
 
@@ -35,15 +38,24 @@ export function generatePackingTextChecklist(
   // 3. 組裝文字內容（樣式 B：極簡俐落，適配各類文字編輯器與通訊軟體，零破版）
   const todayStr = new Date().toISOString().split('T')[0]
   const lines: string[] = []
-  lines.push(`聖雅各朝聖之路 裝備清單（${todayStr}）`)
+  lines.push(
+    isEn
+      ? `Camino de Santiago Packing List (${todayStr})`
+      : `聖雅各朝聖之路 裝備清單（${todayStr}）`
+  )
   lines.push('')
 
   // 數據摘要區塊
   const limitStr = meta.bodyWeightKg
-    ? ` ｜ 10% 警戒線 ${(meta.bodyWeightKg * 0.1).toFixed(1)} kg`
+    ? isEn
+      ? ` ｜ 10% Limit ${(meta.bodyWeightKg * 0.1).toFixed(1)} kg`
+      : ` ｜ 10% 警戒線 ${(meta.bodyWeightKg * 0.1).toFixed(1)} kg`
     : ''
+
   lines.push(
-    `背包淨重 ${meta.backpackWeightKg.toFixed(2)} kg ｜ 身上穿戴 ${meta.wornWeightKg.toFixed(2)} kg ｜ 共 ${meta.totalItemCount} 件${limitStr}`
+    isEn
+      ? `Pack Net Weight ${meta.backpackWeightKg.toFixed(2)} kg ｜ Worn on Body ${meta.wornWeightKg.toFixed(2)} kg ｜ ${meta.totalItemCount} items in total${limitStr}`
+      : `背包淨重 ${meta.backpackWeightKg.toFixed(2)} kg ｜ 身上穿戴 ${meta.wornWeightKg.toFixed(2)} kg ｜ 共 ${meta.totalItemCount} 件${limitStr}`
   )
 
   // 4. 逐一輸出有內容的分類（無項目的分類自動排除）
@@ -52,20 +64,25 @@ export function generatePackingTextChecklist(
     if (!catItems || catItems.length === 0) continue
 
     lines.push('')
-    lines.push(`【${cat.label}】`)
+    lines.push(isEn ? `[${cat.label}]` : `【${cat.label}】`)
 
     for (const item of catItems) {
-      const wornTag = item.isWornOnBody ? ' [穿在身上]' : ''
+      const wornTag = item.isWornOnBody ? (isEn ? ' [Worn on body]' : ' [穿在身上]') : ''
       const qtyPart = (item.quantity ?? 1) > 1 ? ` ×${item.quantity}` : ''
       const totalWeight = item.unitWeightGrams * (item.quantity ?? 1)
       const weightPart = `${totalWeight}g`
+      const itemName = isEn ? item.englishName || item.chineseName : item.chineseName
 
-      lines.push(`☐ ${item.chineseName}${qtyPart}${wornTag} · ${weightPart}`)
+      lines.push(`☐ ${itemName}${qtyPart}${wornTag} · ${weightPart}`)
     }
   }
 
   lines.push('')
-  lines.push('Buen Camino! 祝朝聖之路平安順心')
+  lines.push(
+    isEn
+      ? 'Buen Camino! Wishing you a peaceful journey.'
+      : 'Buen Camino! 祝朝聖之路平安順心'
+  )
 
   return lines.join('\n')
 }
