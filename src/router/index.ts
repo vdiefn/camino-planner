@@ -296,6 +296,8 @@ function upsertMeta(selector: string, attr: 'name' | 'property', key: string, co
 
 function getCurrentLocale(): 'zh-TW' | 'en' {
   if (typeof window !== 'undefined') {
+    const langParam = new URLSearchParams(window.location.search).get('lang')
+    if (langParam === 'en' || langParam === 'zh-TW') return langParam
     const saved = localStorage.getItem('camino_locale')
     if (saved === 'en' || saved === 'zh-TW') return saved
   }
