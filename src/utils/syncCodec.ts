@@ -549,9 +549,11 @@ export function decodeCompactUrlPayload(token: string): DecodeResult {
 
     if (raw.p && typeof raw.p === 'object') {
       const p = raw.p as NonNullable<CompactSyncPayload['p']>
+      const DANGEROUS_KEYS = new Set(['__proto__', 'constructor', 'prototype'])
       const rawUserItemStates: Record<string, UserItemOverride> = {}
       if (p.u && typeof p.u === 'object') {
         for (const [id, tuple] of Object.entries(p.u)) {
+          if (DANGEROUS_KEYS.has(id)) continue
           if (Array.isArray(tuple) && tuple.length >= 4) {
             rawUserItemStates[id] = {
               isChecked: Boolean(tuple[0]),
