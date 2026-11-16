@@ -8,7 +8,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT_DIR = path.resolve(__dirname, '..')
 const DIST_DIR = path.join(ROOT_DIR, 'dist')
 const SITEMAP_PATH = path.join(ROOT_DIR, 'public', 'sitemap.xml')
-const SPA_SHELL_PATH = path.join(DIST_DIR, '_spa.html')
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -45,32 +44,20 @@ function parseSitemapRoutes() {
 }
 
 /**
- * 保留原始空白 SPA 外殼為 _spa.html，並更新 _redirects 避免未預渲染路由誤用首頁快照。
+ * 讀取原始空白 SPA 外殼至記憶體，避免改動 dist/_redirects 觸發 Cloudflare Pages 308 迴圈。
  */
-function prepareSpaShell() {
+function loadSpaShell() {
   const indexPath = path.join(DIST_DIR, 'index.html')
   if (!fs.existsSync(indexPath)) {
     throw new Error('找不到 dist/index.html，請先執行 vite build')
   }
-
-  if (!fs.existsSync(SPA_SHELL_PATH)) {
-    fs.copyFileSync(indexPath, SPA_SHELL_PATH)
-  }
-
-  const redirectsPath = path.join(DIST_DIR, '_redirects')
-  if (fs.existsSync(redirectsPath)) {
-    const redirects = fs.readFileSync(redirectsPath, 'utf-8')
-    const updated = redirects.replace(/\/\*\s+\/index\.html\s+200/g, '/* /_spa.html 200')
-    fs.writeFileSync(redirectsPath, updated, 'utf-8')
-  }
+  return fs.readFileSync(indexPath)
 }
 
 /**
- * 啟動本機靜態伺服器伺服 dist/，找不到靜態資產時一律回傳乾淨的 _spa.html。
+ * 啟動本機靜態伺服器伺服 dist/，找不到靜態資產時一律回傳乾淨的 SPA 外殼。
  */
-function startStaticServer() {
-  const spaHtml = fs.readFileSync(SPA_SHELL_PATH)
-
+function startStaticServer(spaHtml) {
   const server = http.createServer((req, res) => {
     const reqUrl = new URL(req.url || '/', 'http://127.0.0.1')
     const safePath = decodeURIComponent(reqUrl.pathname).replace(/^\/+/, '')
@@ -111,8 +98,8 @@ function resolveOutputPath(routePath) {
 
 async function prerender() {
   const routes = parseSitemapRoutes()
-  prepareSpaShell()
-  const { server, port } = await startStaticServer()
+  const spaHtml = loadSpaShell()
+  const { server, port } = await startStaticServer(spaHtml)
   const origin = `http://127.0.0.1:${port}`
 
   const browser = await chromium.launch({ headless: true })
