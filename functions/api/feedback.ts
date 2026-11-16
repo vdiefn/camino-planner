@@ -1,3 +1,5 @@
+import { EmailMessage } from 'cloudflare:email'
+
 interface Env {
   WEB3FORMS_ACCESS_KEY?: string
   DISCORD_WEBHOOK_URL?: string
@@ -5,6 +7,9 @@ interface Env {
   TELEGRAM_CHAT_ID?: string
   RESEND_API_KEY?: string
   FEEDBACK_TO_EMAIL?: string
+  EMAIL?: {
+    send: (message: unknown) => Promise<void>
+  }
 }
 
 interface FeedbackPayload {
@@ -26,6 +31,35 @@ const ALLOWED_ORIGIN_REGEX = /^https:\/\/([a-z0-9-]+\.)?camino-plan\.com$|^http:
 const MAX_BODY_CHARS = 8192
 const MAX_CONTENT_LENGTH = 2000
 const MAX_FIELD_LENGTH = 120
+
+/** 將 UTF-8 字串轉為 Base64，避免 btoa 處理中文時拋出錯誤 */
+function toBase64Utf8(text: string): string {
+  const bytes = new TextEncoder().encode(text)
+  let binary = ''
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte)
+  }
+  return btoa(binary)
+}
+
+/** 組裝符合 RFC 5322 與 UTF-8 編碼的原始郵件字串 */
+function buildRawEmail(from: string, to: string, subject: string, body: string): string {
+  const encodedSubject = `=?UTF-8?B?${toBase64Utf8(subject)}?=`
+  const encodedBody = toBase64Utf8(body)
+  const messageId = `<${crypto.randomUUID()}@camino-plan.com>`
+  return [
+    `From: Camino Plan <${from}>`,
+    `To: ${to}`,
+    `Subject: ${encodedSubject}`,
+    `Date: ${new Date().toUTCString()}`,
+    `Message-ID: ${messageId}`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    encodedBody
+  ].join('\r\n')
+}
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
@@ -217,6 +251,22 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       } catch (err) {
         console.error('Resend 發送失敗:', err)
         failedChannels.push('Resend')
+      }
+    }
+
+    // 6.5 通道 E：Cloudflare Email Routing (若有綁定 env.EMAIL 與收件信箱)
+    if (env.EMAIL && env.FEEDBACK_TO_EMAIL) {
+      configuredChannels.push('CloudflareEmail')
+      const fromEmail = 'feedback@camino-plan.com'
+      const fullMessage = `【Camino Plan 收到新回饋】${categoryText}${targetText}${contactText}\n\n📝 內容：\n${formattedContent}`
+      try {
+        const rawEmail = buildRawEmail(fromEmail, env.FEEDBACK_TO_EMAIL, emailSubject, fullMessage)
+        const message = new EmailMessage(fromEmail, env.FEEDBACK_TO_EMAIL, rawEmail)
+        await env.EMAIL.send(message)
+        isAnyChannelSuccess = true
+      } catch (err) {
+        console.error('Cloudflare Email 發送失敗:', err)
+        failedChannels.push('CloudflareEmail')
       }
     }
 
