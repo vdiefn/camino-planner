@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
   ArrowRight,
@@ -11,7 +11,9 @@ import {
   ChevronRight,
   MapPin,
   CheckCircle2,
+  Compass,
   HelpCircle,
+  BookOpen,
   Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
@@ -26,13 +28,30 @@ import type { RouteId } from '@/types/route'
 import { useScheduleStore } from '@/stores/schedule'
 
 const { t, locale } = useI18n()
+const route = useRoute()
 const router = useRouter()
 const scheduleStore = useScheduleStore()
 
-// 當前選取之路線（預設為法國之路 'frances'）
-const activeRouteId = ref<RouteId>('frances')
+const VALID_ROUTE_IDS = new Set<RouteId>(['frances', 'portugues', 'norte'])
+
+function parseRouteId(param: unknown): RouteId {
+  if (typeof param === 'string' && VALID_ROUTE_IDS.has(param as RouteId)) {
+    return param as RouteId
+  }
+  return 'frances'
+}
+
+// 當前選取之路線（與網址參數 /routes/:routeId 雙向同步，預設為法國之路 'frances'）
+const activeRouteId = ref<RouteId>(parseRouteId(route.params.routeId))
 // 手機版全站漢堡選單抽屜開關狀態
 const isMenuDrawerOpen = ref(false)
+
+watch(
+  () => route.params.routeId,
+  (nextParam) => {
+    activeRouteId.value = parseRouteId(nextParam)
+  },
+)
 
 const currentRoute = computed<RouteGuideItem>(() => {
   return (
@@ -43,6 +62,7 @@ const currentRoute = computed<RouteGuideItem>(() => {
 
 function selectRoute(id: RouteId) {
   activeRouteId.value = id
+  router.push(`/routes/${id}`)
 }
 
 // 點擊「開始此路線規劃」跳轉至排程頁並切換 Store 路線
@@ -80,19 +100,37 @@ function goToTransport(routeId: RouteId) {
         </router-link>
 
         <!-- 右側傳送門（電腦版完整展示） -->
-        <div class="hidden md:flex items-center gap-1.5 sm:gap-2">
+        <div class="hidden lg:flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
           <router-link
             to="/history"
+            active-class="!text-slate-800 bg-amber-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
             <span>{{ t('routesGuide.historyLink') }}</span>
           </router-link>
           <router-link
-            to="/faq"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+            to="/routes"
+            active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
-            <HelpCircle class="w-4 h-4 text-emerald-600" />
+            <Compass class="w-4 h-4 text-emerald-600" />
+            <span>{{ t('nav.routes') }}</span>
+          </router-link>
+          <router-link
+            to="/guides"
+            active-class="!text-slate-800 bg-violet-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <BookOpen class="w-4 h-4 text-violet-400" />
+            <span>{{ t('nav.guides') }}</span>
+          </router-link>
+          <router-link
+            to="/faq"
+            active-class="!text-slate-800 bg-sky-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ t('routesGuide.faqLink') }}</span>
           </router-link>
           <button
@@ -106,9 +144,8 @@ function goToTransport(routeId: RouteId) {
           <LanguageSwitcher />
         </div>
 
-        <!-- 右側傳送門（手機版：開始規劃 ＋ 語言切換 ＋ 漢堡選單） -->
-        <div class="flex md:hidden items-center gap-1.5">
-          <LanguageSwitcher />
+        <!-- 右側傳送門（手機與平板：開始規劃 ＋ 漢堡選單） -->
+        <div class="flex lg:hidden items-center gap-1.5">
           <button
             type="button"
             @click="startSchedule(activeRouteId)"
@@ -414,6 +451,54 @@ function goToTransport(routeId: RouteId) {
             </div>
           </div>
         </article>
+
+        <!-- 三大經典路線完整文字總覽（確保 /routes 頁面一次完整呈現三條路線核心資訊） -->
+        <section class="space-y-4">
+          <div class="space-y-1">
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900">
+              {{ t('routesGuide.overviewTitle') }}
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {{ t('routesGuide.overviewSubtitle') }}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div
+              v-for="item in ROUTES_GUIDE_LIST"
+              :key="`overview-${item.id}`"
+              class="rounded-2xl bg-white border border-slate-200/90 p-5 shadow-2xs flex flex-col justify-between gap-4"
+            >
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between gap-2">
+                  <h3 class="text-base font-bold text-slate-900">
+                    {{ locale === 'en' && item.nameEn ? item.nameEn : item.name }}
+                  </h3>
+                  <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700">
+                    {{ item.totalDistanceKm }} km
+                  </span>
+                </div>
+                <p class="text-xs text-slate-500">
+                  {{ locale === 'en' && item.recommendedDaysEn ? item.recommendedDaysEn : item.recommendedDays }} ・
+                  {{ locale === 'en' && item.difficultyEn ? item.difficultyEn : item.difficulty }}
+                </p>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  {{ locale === 'en' && item.summaryEn ? item.summaryEn : item.summary }}
+                </p>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                  {{ locale === 'en' && item.targetAudienceEn ? item.targetAudienceEn : item.targetAudience }}
+                </p>
+              </div>
+              <router-link
+                :to="`/routes/${item.id}`"
+                class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-amber-600 hover:text-amber-700"
+              >
+                <span>{{ t('routesGuide.viewDetail') }}</span>
+                <ArrowRight class="w-3.5 h-3.5" />
+              </router-link>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
 

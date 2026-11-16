@@ -76,8 +76,8 @@ function handleTabClick(tab: TabType) {
         </div>
       </router-link>
 
-      <!-- 中間：電腦與平板頂部 Tab 導覽列（平板緊湊自適應，居中對齊） -->
-      <nav aria-label="主要功能導覽" class="hidden md:flex items-center gap-0.5 lg:gap-1 rounded-xl bg-slate-100 p-0.5 lg:p-1 absolute left-1/2 -translate-x-1/2">
+      <!-- 中間：桌面頂部 Tab 導覽列（>= 1024px 展開，居中對齊） -->
+      <nav aria-label="主要功能導覽" class="hidden lg:flex items-center gap-0.5 lg:gap-1 rounded-xl bg-slate-100 p-0.5 lg:p-1 absolute left-1/2 -translate-x-1/2">
         <a
           :href="`/schedule/${currentRouteSlug}`"
           :class="[
@@ -131,10 +131,10 @@ function handleTabClick(tab: TabType) {
         </a>
       </nav>
 
-      <!-- 右側：電腦與平板完整功能導覽群組 -->
-      <div class="hidden md:flex items-center gap-1 lg:gap-1.5 shrink-0">
-        <!-- 平板專用（768px ~ 1199px）：智慧收合為「朝聖指南 ▾」下拉選單 -->
-        <HeadlessMenu as="div" class="relative inline-block text-left xl:hidden">
+      <!-- 右側：桌面完整功能導覽群組 -->
+      <div class="hidden lg:flex items-center gap-1 lg:gap-1.5 shrink-0">
+        <!-- 桌面與平板（>= 768px）：統一收合為「朝聖指南 ▾」下拉選單，避免與中央工具切換列重疊 -->
+        <HeadlessMenu as="div" class="relative inline-block text-left">
           <MenuButton
             class="text-xs text-slate-700 hover:text-amber-600 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
@@ -180,6 +180,18 @@ function handleTabClick(tab: TabType) {
               </MenuItem>
               <MenuItem v-slot="{ active }">
                 <router-link
+                  to="/guides"
+                  :class="[
+                    active ? 'bg-violet-50 text-violet-700' : 'text-slate-700',
+                    'flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg transition-colors cursor-pointer',
+                  ]"
+                >
+                  <BookOpen class="w-4 h-4 text-violet-400 shrink-0" />
+                  <span>{{ $t('nav.guidesLong') }}</span>
+                </router-link>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <router-link
                   to="/faq"
                   :class="[
                     active ? 'bg-sky-50 text-sky-700' : 'text-slate-700',
@@ -193,33 +205,6 @@ function handleTabClick(tab: TabType) {
             </MenuItems>
           </transition>
         </HeadlessMenu>
-
-        <!-- 寬螢幕桌面（>= 1280px / xl）：完整展開圖示與文字 -->
-        <div class="hidden xl:flex items-center gap-1 lg:gap-1.5">
-          <router-link
-            to="/history"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
-          >
-            <Sparkles class="w-4 h-4 text-amber-500" />
-            <span>{{ $t('nav.history') }}</span>
-          </router-link>
-
-          <router-link
-            to="/routes"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
-          >
-            <Compass class="w-4 h-4 text-emerald-600" />
-            <span>{{ $t('nav.routes') }}</span>
-          </router-link>
-
-          <router-link
-            to="/faq"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2 sm:px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
-          >
-            <HelpCircle class="w-4 h-4 text-sky-600" />
-            <span>{{ $t('nav.faq') }}</span>
-          </router-link>
-        </div>
 
         <!-- 垂直細分隔線 -->
         <div class="h-4 w-px bg-slate-200 mx-1"></div>
@@ -248,8 +233,8 @@ function handleTabClick(tab: TabType) {
         <LanguageSwitcher mode="dropdown" />
       </div>
 
-      <!-- 右側：手機版漢堡選單觸發按鈕（極致乾淨俐落） -->
-      <div class="flex md:hidden items-center shrink-0">
+      <!-- 右側：手機與平板漢堡選單觸發按鈕 -->
+      <div class="flex lg:hidden items-center shrink-0">
         <button
           type="button"
           @click="isMobileMenuOpen = true"

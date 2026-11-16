@@ -38,7 +38,7 @@ function handleTabClick(tab: TabType) {
 </script>
 
 <template>
-  <nav :aria-label="t('nav.mobileNavLabel')" class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md md:hidden print:hidden">
+  <nav :aria-label="t('nav.mobileNavLabel')" class="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 pb-safe backdrop-blur-md lg:hidden print:hidden">
     <div class="grid h-16 grid-cols-4 items-center">
       <a
         :href="`/schedule/${currentRouteSlug}`"

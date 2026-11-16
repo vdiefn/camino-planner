@@ -5,7 +5,10 @@ import {
   ArrowLeft,
   Sparkles,
   Compass,
+  BookOpen,
+  HelpCircle,
   ShieldAlert,
+  ChevronRight,
   Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
@@ -90,9 +93,10 @@ onUnmounted(() => {
         </router-link>
 
         <!-- 右側快速傳送門（電腦版完整展示） -->
-        <div class="hidden md:flex items-center gap-2">
+        <div class="hidden lg:flex items-center gap-2 whitespace-nowrap">
           <router-link
             to="/history"
+            active-class="!text-slate-800 bg-amber-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
@@ -100,24 +104,40 @@ onUnmounted(() => {
           </router-link>
           <router-link
             to="/routes"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
+            active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Compass class="w-4 h-4 text-emerald-600" />
             <span>{{ t('faq.routesLink') }}</span>
           </router-link>
           <router-link
-            to="/"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200/90 text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
+            to="/guides"
+            active-class="!text-slate-800 bg-violet-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
-            <ArrowLeft class="w-4 h-4" />
-            <span>{{ t('faq.backToPlanner') }}</span>
+            <BookOpen class="w-4 h-4 text-violet-400" />
+            <span>{{ t('nav.guides') }}</span>
+          </router-link>
+          <router-link
+            to="/faq"
+            active-class="!text-slate-800 bg-sky-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
+          >
+            <HelpCircle class="w-4 h-4 text-sky-600" />
+            <span>{{ t('nav.faq') }}</span>
           </router-link>
           <LanguageSwitcher />
+          <router-link
+            to="/schedule/frances"
+            class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
+          >
+            <span>{{ t('landing.startPlanning') }}</span>
+            <ChevronRight class="w-3.5 h-3.5" />
+          </router-link>
         </div>
 
-        <!-- 右側快速傳送門（手機版：返回按鈕 ＋ 漢堡選單） -->
-        <div class="flex md:hidden items-center gap-1.5">
-          <LanguageSwitcher />
+        <!-- 右側快速傳送門（手機與平板：返回按鈕 ＋ 漢堡選單） -->
+        <div class="flex lg:hidden items-center gap-1.5">
           <router-link
             to="/"
             class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200/90 text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
