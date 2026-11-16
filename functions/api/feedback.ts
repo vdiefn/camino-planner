@@ -5,6 +5,9 @@ interface Env {
   TELEGRAM_CHAT_ID?: string
   RESEND_API_KEY?: string
   FEEDBACK_TO_EMAIL?: string
+  EMAIL_WORKER?: {
+    fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
+  }
 }
 
 interface FeedbackPayload {
@@ -217,6 +220,31 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       } catch (err) {
         console.error('Resend 發送失敗:', err)
         failedChannels.push('Resend')
+      }
+    }
+
+    // 6.5 通道 E：Cloudflare Email Worker (透過 Service Binding 內部呼叫)
+    if (env.EMAIL_WORKER) {
+      configuredChannels.push('CloudflareEmailWorker')
+      const fullMessage = `【Camino Plan 收到新回饋】${categoryText}${targetText}${contactText}\n\n📝 內容：\n${formattedContent}`
+      try {
+        const workerRes = await env.EMAIL_WORKER.fetch('https://internal/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: emailSubject,
+            body: fullMessage
+          })
+        })
+        if (workerRes.ok) {
+          isAnyChannelSuccess = true
+        } else {
+          console.error('Cloudflare Email Worker 回應錯誤:', workerRes.status)
+          failedChannels.push('CloudflareEmailWorker')
+        }
+      } catch (err) {
+        console.error('Cloudflare Email Worker 呼叫失敗:', err)
+        failedChannels.push('CloudflareEmailWorker')
       }
     }
 
