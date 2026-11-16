@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
   ArrowRight,
@@ -24,7 +23,6 @@ import { useScheduleStore } from '@/stores/schedule'
 import type { RouteId } from '@/types/route'
 
 const { t } = useI18n()
-const router = useRouter()
 const scheduleStore = useScheduleStore()
 const isMenuDrawerOpen = ref(false)
 
@@ -104,9 +102,8 @@ const tools = computed(() => [
   },
 ])
 
-function navigateToRoute(routeId: RouteId) {
+function handleRouteSelect(routeId: RouteId) {
   scheduleStore.switchRoute(routeId)
-  router.push(`/schedule/${routeId}`)
 }
 </script>
 
@@ -268,10 +265,11 @@ function navigateToRoute(routeId: RouteId) {
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-            <div
+            <router-link
               v-for="route in featuredRoutes"
               :key="route.id"
-              @click="navigateToRoute(route.id)"
+              :to="`/schedule/${route.id}`"
+              @click="handleRouteSelect(route.id)"
               class="group relative rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-slate-300 hover:bg-slate-50/40 transition-all cursor-pointer flex flex-col justify-between"
             >
               <div class="space-y-3">
@@ -301,7 +299,7 @@ function navigateToRoute(routeId: RouteId) {
                   {{ $t('landing.featuredRoutes.takeFirstStep') }} <ArrowRight class="w-3.5 h-3.5" />
                 </span>
               </div>
-            </div>
+            </router-link>
           </div>
         </section>
 
