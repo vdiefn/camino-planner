@@ -10,6 +10,7 @@ import {
   X,
   Sparkles,
   Compass,
+  BookOpen,
   HelpCircle,
   Share2,
   MessageSquarePlus,
@@ -70,7 +71,7 @@ function handleOpenFeedback() {
 
 <template>
   <TransitionRoot as="template" :show="isOpen">
-    <Dialog as="div" class="relative z-50 md:hidden" @close="close">
+    <Dialog as="div" class="relative z-50 lg:hidden" @close="close">
       <!-- 背景暗化遮罩 -->
       <TransitionChild
         as="template"
@@ -230,6 +231,22 @@ function handleOpenFeedback() {
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-emerald-700">
                         {{ $t('nav.routesLongAlt') }}
+                      </div>
+                    </div>
+                  </button>
+
+                  <!-- 行前指南 -->
+                  <button
+                    type="button"
+                    @click="navigateTo('/guides')"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-violet-50/70 text-slate-700 hover:text-violet-700 transition-colors text-left group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-violet-400 shrink-0">
+                        <BookOpen class="w-4.5 h-4.5" />
+                      </div>
+                      <div class="text-sm text-slate-800 group-hover:text-violet-700">
+                        {{ $t('nav.guidesLong') }}
                       </div>
                     </div>
                   </button>

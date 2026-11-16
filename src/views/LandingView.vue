@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   Sparkles,
   Compass,
+  BookOpen,
   Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
@@ -131,7 +132,7 @@ function navigateToRoute(routeId: RouteId) {
         </router-link>
 
         <!-- 右側快速傳送門（電腦版完整展示） -->
-        <div class="hidden md:flex items-center gap-1 sm:gap-2">
+        <div class="hidden lg:flex items-center gap-1 sm:gap-2 whitespace-nowrap">
           <router-link
             to="/history"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
@@ -141,16 +142,23 @@ function navigateToRoute(routeId: RouteId) {
           </router-link>
           <router-link
             to="/routes"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
-            <Compass class="w-4 h-4 text-amber-500" />
+            <Compass class="w-4 h-4 text-emerald-600" />
             <span>{{ $t('nav.routes') }}</span>
           </router-link>
           <router-link
-            to="/faq"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
+            to="/guides"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
-            <HelpCircle class="w-4 h-4 text-emerald-600" />
+            <BookOpen class="w-4 h-4 text-violet-400" />
+            <span>{{ $t('nav.guides') }}</span>
+          </router-link>
+          <router-link
+            to="/faq"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
+          >
+            <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ $t('nav.faq') }}</span>
           </router-link>
 
@@ -165,10 +173,8 @@ function navigateToRoute(routeId: RouteId) {
           </router-link>
         </div>
 
-        <!-- 右側快速傳送門（手機版：開始規劃 ＋ 語言切換 ＋ 漢堡選單） -->
-        <div class="flex md:hidden items-center gap-1">
-          <LanguageSwitcher mode="dropdown" />
-
+        <!-- 右側快速傳送門（手機與平板：開始規劃 ＋ 漢堡選單） -->
+        <div class="flex lg:hidden items-center gap-1.5">
           <router-link
             :to="`/schedule/${currentRouteId}`"
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1"
@@ -342,6 +348,13 @@ function navigateToRoute(routeId: RouteId) {
               {{ $t('landing.bottomCta.desc') }}
             </p>
           </div>
+          <router-link
+            to="/guides"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
+          >
+            <BookOpen class="w-4 h-4 text-violet-400" />
+            <span>{{ $t('nav.guides') }}</span>
+          </router-link>
           <router-link
             to="/faq"
             class="shrink-0 px-5 py-2.5 rounded-xl bg-white text-slate-800 border border-slate-200 hover:border-slate-300 text-xs sm:text-sm font-bold shadow-2xs hover:bg-slate-50 transition cursor-pointer inline-flex items-center gap-1.5"

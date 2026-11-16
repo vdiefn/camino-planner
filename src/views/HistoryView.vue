@@ -6,6 +6,7 @@ import {
   Scroll,
   ChevronRight,
   Bookmark,
+  BookOpen,
   HelpCircle,
   Menu,
 } from 'lucide-vue-next'
@@ -203,19 +204,37 @@ onUnmounted(() => {
         </router-link>
 
         <!-- 右側快速傳送門（電腦版完整展示） -->
-        <div class="hidden md:flex items-center gap-1.5 sm:gap-2">
+        <div class="hidden lg:flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
           <router-link
-            to="/routes"
+            to="/history"
+            active-class="!text-slate-800 bg-amber-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
-            <Compass class="w-4 h-4 text-amber-500" />
+            <Scroll class="w-4 h-4 text-amber-500" />
+            <span>{{ t('nav.history') }}</span>
+          </router-link>
+          <router-link
+            to="/routes"
+            active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <Compass class="w-4 h-4 text-emerald-600" />
             <span>{{ t('history.routesLink') }}</span>
           </router-link>
           <router-link
-            to="/faq"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+            to="/guides"
+            active-class="!text-slate-800 bg-violet-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
-            <HelpCircle class="w-4 h-4 text-emerald-600" />
+            <BookOpen class="w-4 h-4 text-violet-400" />
+            <span>{{ t('nav.guides') }}</span>
+          </router-link>
+          <router-link
+            to="/faq"
+            active-class="!text-slate-800 bg-sky-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ t('history.faqLink') }}</span>
           </router-link>
           <LanguageSwitcher />
@@ -228,9 +247,8 @@ onUnmounted(() => {
           </router-link>
         </div>
 
-        <!-- 右側快速傳送門（手機版：語言切換 ＋ 開始規劃 ＋ 漢堡選單） -->
-        <div class="flex md:hidden items-center gap-1.5">
-          <LanguageSwitcher />
+        <!-- 右側快速傳送門（手機與平板：開始規劃 ＋ 漢堡選單） -->
+        <div class="flex lg:hidden items-center gap-1.5">
           <router-link
             to="/schedule/frances"
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1"

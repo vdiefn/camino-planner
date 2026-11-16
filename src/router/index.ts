@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import { AVAILABLE_ROUTES, getRouteMetadata } from '@/data/routes'
+import { getGuideBySlug } from '@/data/guides'
 import type { RouteId } from '@/types/route'
 
 const SITE_ORIGIN = 'https://camino-plan.com'
@@ -144,6 +145,48 @@ const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
       keywords: 'Privacy Policy, local storage privacy, Camino Plan terms',
     },
   },
+  about: {
+    'zh-TW': {
+      title: '關於我們 | Camino Plan 朝聖之路規劃工具',
+      description:
+        '認識 Camino Plan 的創立初衷、朝聖之路里程與庇護所資料校對原則，以及免費免登入的社群工具定位。',
+      keywords: '關於 Camino Plan, 朝聖之路工具介紹, 庇護所資料校對, Camino de Santiago planner',
+    },
+    en: {
+      title: 'About Us | Camino Plan',
+      description:
+        'Learn about Camino Plan, our mission, trail and albergue verification standards, and independent community project statement.',
+      keywords: 'About Camino Plan, Camino guide verification, Camino de Santiago community tool',
+    },
+  },
+  contact: {
+    'zh-TW': {
+      title: '聯絡我們與資料勘誤 | Camino Plan',
+      description:
+        '回報朝聖之路庇護所異動、里程勘誤、交通班次更新、功能建議或合作洽談的官方聯絡管道。',
+      keywords: '聯絡 Camino Plan, 朝聖之路資料勘誤, 庇護所異動回報, Contact Camino Plan',
+    },
+    en: {
+      title: 'Contact & Data Corrections | Camino Plan',
+      description:
+        'Reach out to Camino Plan to report albergue updates, trail data corrections, feature requests, or partnership inquiries.',
+      keywords: 'Contact Camino Plan, Camino data correction, albergue update report',
+    },
+  },
+  guides: {
+    'zh-TW': {
+      title: '朝聖之路實戰攻略專區 | Camino Plan',
+      description:
+        '從四季氣候、庇里牛斯山路線、最後 100 公里雙章規則，到庇護所入住、選鞋防泡與每日花費預算拆解的完整行前實戰指南。',
+      keywords: '朝聖之路攻略, 庇里牛斯山, 最後100公里, 庇護所入住, 朝聖之路花費, 越野跑鞋',
+    },
+    en: {
+      title: 'Camino Field Guides & Practical Tips | Camino Plan',
+      description:
+        'Practical Camino de Santiago guides covering best seasons, crossing the Pyrenees, the last 100 km rules, albergue etiquette, footwear, and daily costs.',
+      keywords: 'Camino field guides, Camino tips, Pyrenees crossing, last 100km, albergue guide',
+    },
+  },
   'not-found': {
     'zh-TW': {
       title: '找不到頁面 (404) | Camino Plan',
@@ -220,13 +263,48 @@ const router = createRouter({
       },
     },
     {
-      path: '/routes',
+      path: '/routes/:routeId?',
       name: 'routes',
       component: () => import('@/views/RoutesGuideView.vue'),
       meta: {
         title: '聖雅各三大經典朝聖路線攻略與難度評估 | Camino Plan',
         description:
           '法國之路、葡萄牙之路與北方之路深度攻略剖析。提供總里程、徒步天數、地形難度、路面鋪裝材質比例、最佳行走月份與避坑防禦提醒。',
+      },
+    },
+    {
+      path: '/guides',
+      name: 'guides',
+      component: () => import('@/views/GuidesView.vue'),
+      meta: {
+        title: '朝聖之路實戰攻略專區 | Camino Plan',
+        description:
+          '從四季氣候、庇里牛斯山路線、最後 100 公里雙章規則，到庇護所入住、選鞋防泡與每日花費預算拆解的完整行前實戰指南。',
+      },
+    },
+    {
+      path: '/guides/:slug',
+      name: 'guide-detail',
+      component: () => import('@/views/GuideDetailView.vue'),
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('@/views/AboutView.vue'),
+      meta: {
+        title: '關於我們 | Camino Plan 朝聖之路規劃工具',
+        description:
+          '認識 Camino Plan 的創立初衷、朝聖之路里程與庇護所資料校對原則，以及免費免登入的社群工具定位。',
+      },
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('@/views/ContactView.vue'),
+      meta: {
+        title: '聯絡我們與資料勘誤 | Camino Plan',
+        description:
+          '回報朝聖之路庇護所異動、里程勘誤、交通班次更新、功能建議或合作洽談的官方聯絡管道。',
       },
     },
     {
@@ -264,8 +342,20 @@ const router = createRouter({
   },
 })
 
-// 路由防禦：確保 /schedule/:routeId/:branchId? 與 /transport/:routeId/:branchId? 為合法收錄之路線與分支，否則自動 fallback
+// 路由防禦：確保 /schedule/:routeId/:branchId?、/transport/:routeId/:branchId?、/routes/:routeId? 與 /guides/:slug 為合法路徑，否則自動 fallback
 router.beforeEach((to, _from, next) => {
+  if (to.name === 'guide-detail') {
+    const slug = to.params.slug as string
+    if (!getGuideBySlug(slug)) {
+      return next('/guides')
+    }
+  }
+  if (to.name === 'routes') {
+    const routeId = to.params.routeId as string | undefined
+    if (routeId && !AVAILABLE_ROUTES.some((r) => r.id === routeId)) {
+      return next('/routes')
+    }
+  }
   if (to.name === 'schedule' || to.name === 'transport') {
     const routeId = to.params.routeId as string
     const branchId = to.params.branchId as string | undefined
@@ -374,6 +464,39 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
       title: `${routeMeta.chineseName}起點交通攻略與轉乘指南 (${routeMeta.name}) | Camino Plan`,
       description: `提供抵達${routeMeta.chineseName}起點的最佳大眾運輸交通指南、高鐵與巴士班次規劃、跨國轉乘避坑提醒與官方訂票連結。`,
       keywords: `${routeMeta.chineseName}交通, 起點轉乘, 機場接駁, 高鐵巴士班次, 官方訂票`,
+    }
+  }
+
+  if (to.name === 'routes' && routeId && routeMeta) {
+    if (isEn) {
+      return {
+        title: `${routeMeta.name} Route Guide, Difficulty & Trail Tips | Camino Plan`,
+        description: `Complete guide to ${routeMeta.name} (~${routeMeta.totalDistanceKm}km, ${routeMeta.recommendedDays} days): terrain breakdown, best walking months, trailhead transit, and key pitfalls.`,
+        keywords: `${routeMeta.name} guide, ${routeMeta.name} difficulty, Camino route guide, Santiago de Compostela`,
+      }
+    }
+    return {
+      title: `朝聖${routeMeta.chineseName}深度攻略與難度評估 (${routeMeta.name}) | Camino Plan`,
+      description: `完整解析朝聖${routeMeta.chineseName}（約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天）之地形特色、鋪裝材質比例、最佳行走季節、起點交通銜接與實戰避坑提醒。`,
+      keywords: `朝聖${routeMeta.chineseName}攻略, ${routeMeta.chineseName}難度, ${routeMeta.name}, 朝聖之路路線比較`,
+    }
+  }
+
+  if (to.name === 'guide-detail') {
+    const article = getGuideBySlug(String(to.params.slug || ''))
+    if (article) {
+      if (isEn) {
+        return {
+          title: `${article.titleEn} | Camino Plan`,
+          description: article.seoDescriptionEn,
+          keywords: article.keywordsEn,
+        }
+      }
+      return {
+        title: `${article.title} | Camino Plan`,
+        description: article.seoDescription,
+        keywords: article.keywords,
+      }
     }
   }
 

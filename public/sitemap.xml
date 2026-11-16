@@ -58,7 +58,56 @@
   </url>
   <url>
     <loc>https://camino-plan.com/routes</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/routes/frances</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/routes/portugues</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/routes/norte</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <!-- 實戰攻略文章專區 -->
+  <url>
+    <loc>https://camino-plan.com/guides</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/guides/best-seasons</loc>
+    <lastmod>2026-11-03</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/guides/pyrenees-crossing</loc>
     <lastmod>2026-11-06</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/guides/last-100km-guide</loc>
+    <lastmod>2026-11-09</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/guides/albergue-guide</loc>
+    <lastmod>2026-11-11</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/guides/footwear-and-luggage</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/guides/budget-breakdown</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/about</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://camino-plan.com/contact</loc>
+    <lastmod>2026-11-16</lastmod>
   </url>
   <url>
     <loc>https://camino-plan.com/privacy</loc>
