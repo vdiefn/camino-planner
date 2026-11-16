@@ -64,18 +64,6 @@ function selectRoute(id: RouteId) {
   activeRouteId.value = id
   router.push(`/routes/${id}`)
 }
-
-// 點擊「開始此路線規劃」跳轉至排程頁並切換 Store 路線
-function startSchedule(routeId: RouteId) {
-  scheduleStore.switchRoute(routeId)
-  router.push(`/schedule/${routeId}`)
-}
-
-// 點擊「前往交通指南」跳轉至對應起點交通頁
-function goToTransport(routeId: RouteId) {
-  scheduleStore.switchRoute(routeId)
-  router.push(`/transport/${routeId}`)
-}
 </script>
 
 <template>
@@ -133,27 +121,27 @@ function goToTransport(routeId: RouteId) {
             <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ t('routesGuide.faqLink') }}</span>
           </router-link>
-          <button
-            type="button"
-            @click="startSchedule(activeRouteId)"
+          <router-link
+            :to="`/schedule/${activeRouteId}`"
+            @click="scheduleStore.switchRoute(activeRouteId)"
             class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
             <span>{{ t('routesGuide.startPlanning') }}</span>
             <ChevronRight class="w-3.5 h-3.5" />
-          </button>
+          </router-link>
           <LanguageSwitcher />
         </div>
 
         <!-- 右側傳送門（手機與平板：開始規劃 ＋ 漢堡選單） -->
         <div class="flex lg:hidden items-center gap-1.5">
-          <button
-            type="button"
-            @click="startSchedule(activeRouteId)"
+          <router-link
+            :to="`/schedule/${activeRouteId}`"
+            @click="scheduleStore.switchRoute(activeRouteId)"
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1 cursor-pointer"
           >
             <span>{{ t('routesGuide.startPlanning') }}</span>
             <ChevronRight class="w-3 h-3" />
-          </button>
+          </router-link>
           <button
             type="button"
             @click="isMenuDrawerOpen = true"
@@ -318,24 +306,24 @@ function goToTransport(routeId: RouteId) {
 
             <!-- 兩大快捷動作按鈕（品牌琥珀黃自適應按鈕） -->
             <div class="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                type="button"
-                @click="startSchedule(currentRoute.id)"
+              <router-link
+                :to="`/schedule/${currentRoute.id}`"
+                @click="scheduleStore.switchRoute(currentRoute.id)"
                 class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-medium text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
               >
                 <Footprints class="w-4 h-4" />
                 <span>{{ t('routesGuide.startPlanning') }}</span>
                 <ArrowRight class="w-3.5 h-3.5" />
-              </button>
+              </router-link>
 
-              <button
-                type="button"
-                @click="goToTransport(currentRoute.id)"
+              <router-link
+                :to="`/transport/${currentRoute.id}`"
+                @click="scheduleStore.switchRoute(currentRoute.id)"
                 class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
               >
                 <Train class="w-4 h-4 text-sky-700" />
                 <span>{{ t('routesGuide.viewTransport') }}</span>
-              </button>
+              </router-link>
             </div>
           </div>
 
@@ -397,13 +385,13 @@ function goToTransport(routeId: RouteId) {
                 <Train class="w-4.5 h-4.5 text-sky-600" />
                 <span>{{ t('routesGuide.sections.recommendedStart') }} {{ locale === 'en' && currentRoute.startTownEn ? currentRoute.startTownEn : currentRoute.startTown }}</span>
               </h3>
-              <button
-                type="button"
-                @click="goToTransport(currentRoute.id)"
+              <router-link
+                :to="`/transport/${currentRoute.id}`"
+                @click="scheduleStore.switchRoute(currentRoute.id)"
                 class="text-xs sm:text-sm text-slate-600 hover:text-slate-900 underline-offset-2 cursor-pointer"
               >
                 {{ t('routesGuide.viewTransport') }} ➔
-              </button>
+              </router-link>
             </div>
 
             <div class="space-y-1 text-xs sm:text-sm text-slate-700 pt-1 leading-relaxed">
