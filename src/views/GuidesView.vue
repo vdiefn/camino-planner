@@ -125,13 +125,13 @@ const filteredArticles = computed(() => {
         </div>
 
         <!-- 分類篩選列 -->
-        <div class="flex flex-wrap items-center justify-center gap-2">
+        <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
           <button
             v-for="cat in categories"
             :key="cat"
             type="button"
             @click="activeCategory = cat"
-            class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors cursor-pointer border"
+            class="px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-colors cursor-pointer border"
             :class="[
               activeCategory === cat
                 ? 'bg-slate-900 text-white border-slate-900'
