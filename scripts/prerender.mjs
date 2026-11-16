@@ -107,6 +107,10 @@ async function prerender() {
     const context = await browser.newContext()
     const page = await context.newPage()
 
+    page.on('pageerror', (err) => {
+      console.error('[prerender] 頁面執行階段錯誤:', err.message)
+    })
+
     // 封鎖所有外部網路請求（AdSense、字型、分析腳本等），確保離線純淨渲染
     await page.route('**/*', (route) => {
       const url = route.request().url()
@@ -133,7 +137,9 @@ async function prerender() {
       // 預留短暫時間讓 router.afterEach 與 watchEffect 完成 SEO Meta / JSON-LD 寫入
       await page.waitForTimeout(150)
 
-      const html = await page.content()
+      const rawHtml = await page.content()
+      // 清除預渲染本機伺服器 Origin，避免動態 modulepreload 殘留 http://127.0.0.1:<port>
+      const html = rawHtml.replaceAll(origin, '')
       const title = await page.title()
       const outPath = resolveOutputPath(routePath)
 
