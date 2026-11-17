@@ -171,6 +171,9 @@ pie title 系統核心功能劃分比重
    - 支援依「是否有廚房 (hasKitchen)」、「公立 / 教區 / 私立類型」、「是否接受預約」快速篩選城鎮住宿。
 3. **快速通訊動作列 (Quick Contact Actions)**：
    - 提供一鍵電話直撥（`tel:`）、一鍵開啟 WhatsApp 聊天室（自動帶入標準西文/葡文訂房範本）。
+4. **住宿資料與外部連結自動化定期巡檢 (GitHub Actions Cron)**：
+   - 透過 `.github/workflows/` 設定定期排程（`schedule`，如每週／每月執行）與手動觸發（`workflow_dispatch`），讀取 `src/data/accommodations.ts` 內所有庇護所官網、訂房網與 Gronze 連結進行 HTTP 狀態與有效性檢查。
+   - 偵測到 404 失效連結或異常狀態時，自動透過 Webhook（Discord / Telegram）通報或自動建立 GitHub Issue 提醒維護更新。
 
 #### 🎯 【面向四：基礎設施與協同防護 (Core & Undo)】
 1. **歷史快照與防呆復原 (Snapshot & Undo)**：

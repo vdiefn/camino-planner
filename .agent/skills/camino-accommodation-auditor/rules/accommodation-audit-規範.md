@@ -15,6 +15,7 @@
 | **`GHOST_DUPLICATE`** | 同一實體住宿因西文、葡文、加利西亞文或中文譯名差異而重複建檔 | 整併為單一物件，將別名合併至 `notes` |
 
 - **季節性休業絕對保護**：朝聖之路多數庇護所僅於每年 4～10 月開放、冬季休館（`Cerrado en invierno / por temporada`）或短期內部整修（`Cerrado por reformas`），**嚴禁將季節性休業或短期整修誤判為幽靈住宿而剔除**。
+- **批次連續自主查證鐵律**：執行指定航點或路線稽核時，必須依序連續完成全部目標之 4 維度交叉查證至整批結束，**嚴禁在查證途中停下來詢問使用者「是否繼續下一城鎮」或「是否同意繼續驗證」**；確認保留或無異動之項目亦須記錄查證結果，嚴禁省略任何維度。
 - **Exception（例外豁免）**：若某住宿點於 Gronze 標註 `Cerrado por reformas` 已逾 3 年以上，且經 Google Maps 街景與地方官署雙重確認建築已轉作私宅或永久歇業，得升級歸類為 `GHOST_PERMANENTLY_CLOSED` 提案移除。
 
 ## Good Example
@@ -53,7 +54,7 @@
 
 # Rule 2 - [MUST] 住宿收錄優先順序矩陣與 Casa 民宿型別映射規範 (Inclusion Priority Matrix & Type Mapping)
 
-- 執行逆向探勘補齊缺漏住宿時，為防止大城鎮一般觀光飯店湧入導致資料庫失焦，必須嚴格依據以下 **`P0` ～ `P3` 收錄優先順序矩陣** 篩選並映射至 [`AccommodationType`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/types/camino.ts#L9)（`'MUNICIPAL' | 'PAROCHIAL' | 'PRIVATE' | 'HOSTEL' | 'HOTEL'`）：
+- 執行逆向探勘補齊缺漏住宿時，為防止大城鎮一般觀光飯店湧入導致資料庫失焦，必須嚴格依據以下 **`P0` ～ `P3` 收錄優先順序矩陣** 篩選並映射至 [`AccommodationType`](../../../src/types/camino.ts#L9)（`'MUNICIPAL' | 'PAROCHIAL' | 'PRIVATE' | 'HOSTEL' | 'HOTEL'`）：
 
 | 優先等級 | 適用住宿型態 | 判定條件與收錄原則 | 強制映射之 `AccommodationType` |
 | :---: | :--- | :--- | :--- |
@@ -111,8 +112,11 @@
 
 # Rule 3 - [MUST] 住宿變更報告固定輸出模板 (Mandatory Accommodation Change Report Template)
 
-- 於對話主戰場向使用者申請修改 [`src/data/accommodations.ts`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/data/accommodations.ts) 授權時，必須嚴格輸出以下結構之住宿變更報告。
-- **禁止事項 (Never)**：嚴禁省略「佐證來源」或「聯絡管道」欄位，亦嚴禁在未獲使用者明確核准前先行呼叫 `edit_file` 修改 [`src/data/accommodations.ts`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/data/accommodations.ts)。
+- 輸出 [`src/data/accommodations.ts`](../../../src/data/accommodations.ts) 變更報告時，必須嚴格遵守以下結構，且每筆異動項目須明確列出分類代碼／優先級（`P0`～`P2`）、聯絡管道（新增或修訂聯絡資訊時）與四維佐證來源。
+- **禁止事項 (Never)**：嚴禁省略「佐證來源」或「聯絡管道」欄位，亦嚴禁於多航點查證途中逐鎮中斷發問。
+- **Exception（例外豁免）**：
+  1. **多航點批次彙整**：一次稽核多個航點時，必須待整批查證完畢後彙整為**單一份**變更報告一次呈交，嚴禁逐鎮分段停等確認。
+  2. **事前明確授權免停等**：當使用者於對話中已直接授權執行（例如「直接驗證並更新」、「不要一直問同意」），得跳過暫停核准直接執行 `edit_file` 寫入，並於完成後輸出彙整結果。
 
 ## Good Example
 
@@ -147,7 +151,7 @@ bedCount: 240,
 # Rule 4 - [MUST] 純 Node.js 工具鏈與單次整併驗證鐵律 (Node.js-Only Toolchain & Single-Shot Verification)
 
 - **嚴禁使用 Python**：本專案為純 Node.js / TypeScript 生態系（本機未安裝 Python），絕對禁止於終端機執行 `python`、`python3` 或撰寫 `.py` 腳本驗證資料。
-- **單次整併驗證（Single-Shot Verification）**：於 Phase 1 初篩或 Phase 2 寫入 [`src/data/accommodations.ts`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/data/accommodations.ts) 後執行驗證時，必須於**單一 `run_command`** 中使用分號 `;` 整併執行健康度稽核腳本 [`audit_accommodations.mjs`](file:///c:/Users/user/Desktop/file/Project/camino-planner/.agent/skills/camino-accommodation-auditor/scripts/audit_accommodations.mjs) 與 Vitest 單元測試，嚴禁拆分為多次終端機呼叫。
+- **單次整併驗證（Single-Shot Verification）**：於 Phase 1 初篩或 Phase 2 寫入 [`src/data/accommodations.ts`](../../../src/data/accommodations.ts) 後執行驗證時，必須於**單一 `run_command`** 中使用分號 `;` 整併執行健康度稽核腳本 [`audit_accommodations.mjs`](../scripts/audit_accommodations.mjs) 與 Vitest 單元測試，嚴禁拆分為多次終端機呼叫。
 
 ## Good Example
 
@@ -176,7 +180,7 @@ npm run test
 # Rule 5 - [MUST] 跨平台 CRLF 換行防禦與大檔案單行錨點寫入鐵律 (CRLF Defense & Single-Line Anchor)
 
 - **跨平台換行陷阱防禦**：Windows 環境下 Git 工作目錄之程式碼檔案預設轉換為 CRLF（`\r\n`）。呼叫原生 `edit_file` 時，若 `Target` 參數包含多行字串，將因 JSON 傳遞之 `\n` 與磁碟實體之 `\r\n` 不相符而百分之百拋出 `target content not found in the file` 錯誤。
-- **單行唯一錨點原則（Single-Line Unique Anchor）**：修改 [`src/data/accommodations.ts`](file:///c:/Users/user/Desktop/file/Project/camino-planner/src/data/accommodations.ts)（超過 1.7 萬行之超大檔案）時，`Target` 必須嚴格鎖定為**不包含任何換行符之單行唯一識別錨點**（例如前一筆物件的專屬 ID `    id: 'ACC_XXX',`）。
+- **單行唯一錨點原則（Single-Line Unique Anchor）**：修改 [`src/data/accommodations.ts`](../../../src/data/accommodations.ts)（超過 1.7 萬行之超大檔案）時，`Target` 必須嚴格鎖定為**不包含任何換行符之單行唯一識別錨點**（例如前一筆物件的專屬 ID `    id: 'ACC_XXX',`）。
 - **事前航點 ID 存在性檢核**：新增任何住宿物件前，必須先在對應路線航點檔案（`src/data/routes/*.ts`）檢索確認該城鎮之 `waypointId` 字面值完全相符（例如安科拉之真實 ID 為 `portugues:vila-praia-de-ancora`，嚴禁憑直覺臆測縮寫），杜絕無效航點污染。
 
 ## Good Example
