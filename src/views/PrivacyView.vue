@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { ShieldCheck, ArrowLeft, ExternalLink, MessageSquare } from 'lucide-vue-next'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
+import AppFooter from '@/components/common/AppFooter.vue'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 
 const { t } = useI18n()
@@ -161,9 +162,6 @@ const { openFeedback } = useFeedbackModal()
       </article>
     </main>
 
-    <!-- 底部精簡版權資訊 -->
-    <footer class="border-t border-slate-200/60 bg-white/50 py-4 text-center text-xs text-slate-400">
-      <p>© {{ new Date().getFullYear() }} Camino Plan. All rights reserved.</p>
-    </footer>
+    <AppFooter />
   </div>
 </template>
