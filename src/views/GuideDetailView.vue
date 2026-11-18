@@ -16,7 +16,7 @@ import {
 import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
-import { GUIDE_ARTICLES, getGuideBySlug } from '@/data/guides'
+import { GUIDE_ARTICLES, GUIDE_CATEGORY_STYLES, getGuideBySlug } from '@/data/guides'
 
 const route = useRoute()
 const { t, locale } = useI18n()
@@ -158,7 +158,10 @@ onUnmounted(() => {
           <!-- 文章標頭 -->
           <header class="space-y-4 pb-6 border-b border-slate-100">
             <div class="flex flex-wrap items-center gap-2 text-xs">
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 font-semibold">
+              <span
+                class="px-2.5 py-0.5 rounded-full font-semibold"
+                :class="GUIDE_CATEGORY_STYLES[article.category].badge"
+              >
                 {{ t(`guides.categories.${article.category}`) }}
               </span>
               <span class="inline-flex items-center gap-1 text-slate-400">

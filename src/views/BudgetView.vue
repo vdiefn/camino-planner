@@ -5,6 +5,7 @@ import { useBudgetStore } from '@/stores/budget'
 import { useScheduleStore } from '@/stores/schedule'
 import PrintBudgetModal from '@/components/budget/PrintBudgetModal.vue'
 import GoogleAd from '@/components/common/GoogleAd.vue'
+import TipsModal from '@/components/common/TipsModal.vue'
 import type { BudgetExportMeta, BudgetDetails, BudgetPersona } from '@/types/budget'
 import {
   Printer,
@@ -14,6 +15,7 @@ import {
   Train,
   ShieldAlert,
   Info,
+  MessageCircleWarning,
 } from 'lucide-vue-next'
 
 const { t, locale } = useI18n()
@@ -22,6 +24,16 @@ const scheduleStore = useScheduleStore()
 
 // 列印彈窗狀態
 const isPrintModalOpen = ref(false)
+// 朝聖預算小提醒彈窗狀態
+const isTipsModalOpen = ref(false)
+
+// 預算規劃小提醒條列清單（支援中英雙語）
+const budgetTips = computed(() => [
+  t('budget.tips.0'),
+  t('budget.tips.1'),
+  t('budget.tips.2'),
+  t('budget.tips.3'),
+])
 
 // 英文模式下的全程預估總歐元 (行前固定換算歐元 + 歐洲當地總開銷)
 const grandTotalEur = computed(() => {
@@ -190,9 +202,20 @@ function handleInputFocus(event: FocusEvent) {
         <!-- 1. 三大風格選擇卡片 -->
         <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm sm:text-base text-slate-800">
-              {{ t('budget.budgetStyle') }}
-            </h3>
+            <div class="flex items-center gap-1.5">
+              <h3 class="text-sm sm:text-base text-slate-800">
+                {{ t('budget.budgetStyle') }}
+              </h3>
+              <button
+                type="button"
+                @click.stop="isTipsModalOpen = true"
+                class="p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
+                :title="t('budget.tipsTitle')"
+                :aria-label="t('budget.tipsTitle')"
+              >
+                <MessageCircleWarning class="w-4 h-4" />
+              </button>
+            </div>
             <button
               type="button"
               @click="budgetStore.resetToDefaults()"
@@ -650,6 +673,14 @@ function handleInputFocus(event: FocusEvent) {
         <GoogleAd slot-id="budget-bottom-ad" format="rectangle" />
       </div>
     </div>
+
+    <!-- 朝聖預算規劃小提醒對話框 -->
+    <TipsModal
+      :is-open="isTipsModalOpen"
+      :title="t('budget.tipsTitle')"
+      :tips="budgetTips"
+      @close="isTipsModalOpen = false"
+    />
 
     <!-- A4 紙本列印對話框 -->
     <PrintBudgetModal

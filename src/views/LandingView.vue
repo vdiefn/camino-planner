@@ -219,11 +219,11 @@ function handleRouteSelect(routeId: RouteId) {
             </router-link>
 
             <router-link
-              to="/faq"
+              to="/guides"
               class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-base font-semibold border border-slate-200 shadow-2xs transition-all cursor-pointer whitespace-nowrap"
             >
-              <HelpCircle class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
-              <span>{{ $t('landing.hero.faqBtn') }}</span>
+              <BookOpen class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-500" />
+              <span>{{ $t('landing.hero.guidesBtn') }}</span>
             </router-link>
           </div>
 
@@ -346,13 +346,6 @@ function handleRouteSelect(routeId: RouteId) {
               {{ $t('landing.bottomCta.desc') }}
             </p>
           </div>
-          <router-link
-            to="/guides"
-            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
-          >
-            <BookOpen class="w-4 h-4 text-violet-400" />
-            <span>{{ $t('nav.guides') }}</span>
-          </router-link>
           <router-link
             to="/faq"
             class="shrink-0 px-5 py-2.5 rounded-xl bg-white text-slate-800 border border-slate-200 hover:border-slate-300 text-xs sm:text-sm font-bold shadow-2xs hover:bg-slate-50 transition cursor-pointer inline-flex items-center gap-1.5"

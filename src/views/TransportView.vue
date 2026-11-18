@@ -14,7 +14,6 @@ import {
   Calendar,
   Compass,
   MessageCircleWarning,
-  Sparkles,
   ChevronDown,
 } from "lucide-vue-next";
 import { transportRoutes } from "@/data/transportRoutes";
@@ -22,6 +21,7 @@ import type { OriginCity, TransportType, TransportTargetRoute } from "@/types/ca
 import { useScheduleStore } from "@/stores/schedule";
 import GoogleAd from "@/components/common/GoogleAd.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
+import { useStickySidebar } from "@/composables/useStickySidebar";
 
 const { t, locale } = useI18n();
 const route = useRoute();
@@ -306,6 +306,9 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 10;
 };
 
+const stickyHeaderRef = ref<HTMLElement | null>(null);
+const sidebarTopOffset = useStickySidebar(stickyHeaderRef);
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
@@ -320,6 +323,7 @@ onUnmounted(() => {
   <div class="container mx-auto px-4 pt-0 pb-6 max-w-[1440px]">
     <!-- 頂部吸頂列：標題 ＋ 路線起點切換（Sticky 零位移、無底線、無陰影，滾動純毛玻璃） -->
     <div
+      ref="stickyHeaderRef"
       :class="[
         'sticky top-14 sm:top-16 z-30 -mx-4 px-4 py-2 sm:py-2.5 mb-1.5 sm:mb-3 transition-[background-color,backdrop-filter] duration-200',
         isScrolled
@@ -362,7 +366,10 @@ onUnmounted(() => {
       class="grid grid-cols-1 md:grid-cols-12 gap-2.5 sm:gap-4 lg:gap-6 items-start"
     >
       <!-- 左欄：出發城市切換、方案概況、實戰避坑與廣告 (md: 5 欄, lg: 4 欄) -->
-      <div class="md:col-span-5 lg:col-span-4 space-y-3 sm:space-y-4 md:sticky md:top-28">
+      <div
+        class="md:col-span-5 lg:col-span-4 space-y-3 sm:space-y-4 md:sticky"
+        :style="{ top: `${sidebarTopOffset}px` }"
+      >
         <!-- 城市選擇卡片群 -->
         <div
           class="rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-xs"
@@ -376,11 +383,11 @@ onUnmounted(() => {
               {{ t('transport.selectOriginCity') }}
             </h3>
 
-            <!-- 貼心小提醒按鈕 (僅在手機模式顯示，點擊開啟 Modal) -->
+            <!-- 貼心小提醒按鈕 (點擊開啟 Modal) -->
             <button
               type="button"
               @click.stop="isTipsModalOpen = true"
-              class="md:hidden p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
+              class="p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
               :title="t('transport.mobileTipsTitle')"
               :aria-label="t('transport.mobileTipsAria')"
             >
@@ -469,26 +476,6 @@ onUnmounted(() => {
               <ExternalLink class="h-3.5 w-3.5 text-slate-400 shrink-0" />
             </a>
           </div>
-        </div>
-
-        <!-- 朝聖起點交通實戰避坑（平板與桌機雙欄展開） -->
-        <div
-          class="hidden md:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
-        >
-          <h3 class="flex items-center gap-2 text-sm md:text-base font-medium text-slate-800">
-            <Sparkles class="w-4 h-4 text-amber-500" />
-            <span>{{ t('transport.tipsSectionTitle', { route: targetRouteOptions.find(r => r.id === selectedTargetRoute)?.name }) }}</span>
-          </h3>
-          <ul class="mt-3 space-y-2.5 text-xs md:text-sm text-slate-600 leading-relaxed">
-            <li
-              v-for="(tip, index) in currentTravelTips"
-              :key="index"
-              class="flex items-start gap-2"
-            >
-              <span class="text-amber-500 font-bold">•</span>
-              <span>{{ tip }}</span>
-            </li>
-          </ul>
         </div>
 
         <!-- 側邊商業廣告欄位 -->
@@ -691,9 +678,8 @@ onUnmounted(() => {
             v-if="selectedTargetRoute === 'portugues'"
             class="rounded-xl border border-sky-200 bg-sky-50/60 p-4 sm:p-5 shadow-xs space-y-3"
           >
-            <div class="flex items-center gap-2 text-sm sm:text-base font-bold text-sky-950">
-              <span class="text-base">🌊</span>
-              <span>{{ t('transport.coastalTips.title') }}</span>
+            <div class="text-sm sm:text-base font-bold text-sky-950">
+              {{ t('transport.coastalTips.title') }}
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm leading-relaxed text-slate-700">
@@ -727,7 +713,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- 貼心小提醒對話框 (手機與平板) -->
+    <!-- 貼心小提醒對話框 -->
     <TipsModal
       :is-open="isTipsModalOpen"
       :title="t('transport.tipsSectionTitle', { route: targetRouteOptions.find(r => r.id === selectedTargetRoute)?.name })"

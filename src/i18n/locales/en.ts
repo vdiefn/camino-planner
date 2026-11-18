@@ -45,7 +45,7 @@ export default {
       title: "Every Step, A Journey of Your Own",
       desc: "A planning tool for Camino de Santiago pilgrims. Calculate daily walking stages, manage 10% backpack weight limits, navigate trailhead transit, and estimate pilgrimage budgets. Offline-ready with seamless cross-device sync.",
       startBtn: "Start Planning Now",
-      faqBtn: "Camino History & FAQ",
+      guidesBtn: "Camino Prep Guides",
       featureFree: "100% Free · No Sign-in",
       featureOffline: "Offline-Ready · Privacy Protected",
       featureSync: "Cross-Device QR Code Sync",
@@ -101,8 +101,8 @@ export default {
       },
     },
     bottomCta: {
-      title: "First Time on the Camino? Check the Essential Guide",
-      desc: "Explore 9th-century origins, official Compostela certificate rules, albergue etiquette, and ultralight packing principles.",
+      title: "Still Have Questions? Check the Camino FAQ",
+      desc: "Answers on 9th-century origins, official Compostela certificate rules, albergue etiquette, and ultralight packing.",
       btn: "Read Camino FAQ",
     },
   },
@@ -439,6 +439,13 @@ export default {
       emergencyFund: "Contingency Fund (€)",
       emergencyDesc: "Recommended contingency cash or credit line for unexpected medical needs, taxi fares, or emergency ticket rebooking due to strikes.",
     },
+    tipsTitle: "Camino Budget Planning Tips",
+    tips: [
+      "Municipal and parish albergues typically cost €10–€15/night (some are donation-based / Donativo), while private albergues or guesthouses range from €18–€45+.",
+      "Budgeting €15–€25/day for meals is comfortable: many towns offer a €12–€16 Pilgrim Menu (Menú del Peregrino) with starter, main, dessert, and drink.",
+      "Rural municipal albergues and small village bars often accept cash only. Carry €100–€150 in small bills and coins, and use cards for larger expenses.",
+      "Keep €200–€300 as an emergency contingency fund for unexpected medical care, luggage transfers, or transit rebooking due to weather or strikes.",
+    ],
     chart: {
       title: "Expense Breakdown by Category",
       fixed: "Pre-trip Fixed",

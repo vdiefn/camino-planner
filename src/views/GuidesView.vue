@@ -14,14 +14,18 @@ import {
 import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
-import { GUIDE_ARTICLES, type GuideCategory } from '@/data/guides'
+import {
+  GUIDE_ARTICLES,
+  GUIDE_CATEGORY_STYLES,
+  type GuideCategoryFilter,
+} from '@/data/guides'
 
 const { t, locale } = useI18n()
 const isEn = computed(() => locale.value.startsWith('en'))
 const isMenuDrawerOpen = ref(false)
-const activeCategory = ref<'all' | GuideCategory>('all')
+const activeCategory = ref<GuideCategoryFilter>('all')
 
-const categories: Array<'all' | GuideCategory> = [
+const categories: GuideCategoryFilter[] = [
   'all',
   'route-strategy',
   'accommodation',
@@ -134,8 +138,8 @@ const filteredArticles = computed(() => {
             class="px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-colors cursor-pointer border"
             :class="[
               activeCategory === cat
-                ? 'bg-slate-900 text-white border-slate-900'
-                : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:text-slate-900',
+                ? GUIDE_CATEGORY_STYLES[cat].activeBtn
+                : `bg-white text-slate-600 border-slate-200 ${GUIDE_CATEGORY_STYLES[cat].inactiveHover}`,
             ]"
           >
             {{ cat === 'all' ? t('guides.allCategories') : t(`guides.categories.${cat}`) }}
@@ -151,7 +155,10 @@ const filteredArticles = computed(() => {
           >
             <div class="space-y-3">
               <div class="flex items-center justify-between gap-2 text-xs">
-                <span class="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 font-semibold">
+                <span
+                  class="px-2.5 py-0.5 rounded-full font-semibold"
+                  :class="GUIDE_CATEGORY_STYLES[article.category].badge"
+                >
                   {{ t(`guides.categories.${article.category}`) }}
                 </span>
                 <span class="inline-flex items-center gap-1 text-slate-400">
