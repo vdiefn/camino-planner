@@ -6,7 +6,6 @@ import {
   ShieldCheck,
   PlusCircle,
   RotateCcw,
-  Sparkles,
   X,
   ChevronDown,
   Trash2,
@@ -22,6 +21,7 @@ import AddCustomItemModal from "@/components/packing/AddCustomItemModal.vue";
 import PrintChecklistModal from "@/components/packing/PrintChecklistModal.vue";
 import ConfirmModal from "@/components/common/ConfirmModal.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
+import { useStickySidebar } from "@/composables/useStickySidebar";
 import GoogleAd from "@/components/common/GoogleAd.vue";
 
 const { t, tm } = useI18n();
@@ -152,12 +152,42 @@ const sortedActiveCategories = computed(() => {
 
 // 分類卡片拖曳排序狀態（同時支援桌面與手機觸控）
 const draggedCatId = ref<string | null>(null);
-let lastTargetId: string | null = null;
+const REORDER_COOLDOWN_MS = 220;
+const REORDER_MIN_MOVE_PX = 8;
+let lastSwapAt = 0;
+let lastSwapPos = { x: 0, y: 0 };
+let initialOrderSnapshot: string[] | null = null;
+let hasDropped = false;
+
+/** 檢查是否滿足交換冷卻時間與游標位移閾值，避免 DOM 重排瞬間來回閃爍 */
+function canTriggerReorder(clientX: number, clientY: number): boolean {
+  const now = Date.now();
+  if (now - lastSwapAt < REORDER_COOLDOWN_MS) return false;
+  const dx = clientX - lastSwapPos.x;
+  const dy = clientY - lastSwapPos.y;
+  if (Math.hypot(dx, dy) < REORDER_MIN_MOVE_PX) return false;
+  return true;
+}
+
+function recordReorder(clientX: number, clientY: number) {
+  lastSwapAt = Date.now();
+  lastSwapPos = { x: clientX, y: clientY };
+}
+
+function resetDragState() {
+  draggedCatId.value = null;
+  lastSwapAt = 0;
+  lastSwapPos = { x: 0, y: 0 };
+  initialOrderSnapshot = null;
+  hasDropped = false;
+}
 
 // 桌面 HTML5 Drag & Drop（即時插入式平滑排序）
 function handleDragStart(catId: string, event: DragEvent) {
   draggedCatId.value = catId;
-  lastTargetId = catId;
+  initialOrderSnapshot = [...packingStore.categoryOrder];
+  hasDropped = false;
+  recordReorder(event.clientX, event.clientY);
   if (event.dataTransfer) {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", catId);
@@ -166,56 +196,58 @@ function handleDragStart(catId: string, event: DragEvent) {
 
 function handleDragOver(catId: string, event: DragEvent) {
   event.preventDefault();
-  if (!draggedCatId.value || draggedCatId.value === catId) return;
-  if (lastTargetId === catId) return; // 避免在同一個目標節點上重複觸發
-
   if (event.dataTransfer) {
     event.dataTransfer.dropEffect = "move";
   }
-  lastTargetId = catId;
+  if (!draggedCatId.value || draggedCatId.value === catId) return;
+  if (!canTriggerReorder(event.clientX, event.clientY)) return;
+
+  recordReorder(event.clientX, event.clientY);
   packingStore.reorderCategories(draggedCatId.value, catId);
 }
 
 function handleDrop() {
-  draggedCatId.value = null;
-  lastTargetId = null;
+  hasDropped = true;
+  resetDragState();
 }
 
 function handleDragEnd() {
-  draggedCatId.value = null;
-  lastTargetId = null;
+  if (!hasDropped && initialOrderSnapshot) {
+    packingStore.categoryOrder = initialOrderSnapshot;
+  }
+  resetDragState();
 }
 
 // 行動裝置 Touch 觸控拖曳支援（滑動過程中即時插入移動）
-function handleTouchStart(catId: string, _event: TouchEvent) {
+function handleTouchStart(catId: string, event: TouchEvent) {
   draggedCatId.value = catId;
-  lastTargetId = catId;
+  initialOrderSnapshot = [...packingStore.categoryOrder];
+  hasDropped = true;
+  const touch = event.touches[0];
+  recordReorder(touch?.clientX ?? 0, touch?.clientY ?? 0);
 }
 
 function handleTouchMove(event: TouchEvent) {
   if (!draggedCatId.value) return;
   const touch = event.touches[0];
   if (!touch) return;
+  if (!canTriggerReorder(touch.clientX, touch.clientY)) return;
+
   const element = document.elementFromPoint(touch.clientX, touch.clientY);
   const cardElement = element?.closest(
     "[data-category-id]",
   ) as HTMLElement | null;
   if (cardElement) {
     const targetId = cardElement.dataset.categoryId;
-    if (
-      targetId &&
-      targetId !== draggedCatId.value &&
-      targetId !== lastTargetId
-    ) {
-      lastTargetId = targetId;
+    if (targetId && targetId !== draggedCatId.value) {
+      recordReorder(touch.clientX, touch.clientY);
       packingStore.reorderCategories(draggedCatId.value, targetId);
     }
   }
 }
 
 function handleTouchEnd() {
-  draggedCatId.value = null;
-  lastTargetId = null;
+  resetDragState();
 }
 
 // 手機與平板折疊狀態（預設收合以釋放垂直空間，桌機版始終展開）
@@ -273,6 +305,9 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 10;
 };
 
+const stickyHeaderRef = ref<HTMLElement | null>(null);
+const sidebarTopOffset = useStickySidebar(stickyHeaderRef);
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
@@ -287,6 +322,7 @@ onUnmounted(() => {
   <div class="container mx-auto px-4 pt-0 pb-6 max-w-7xl">
     <!-- 頂部吸頂列：標題 ＋ 功能按鈕群（Sticky 零位移、無底線、無陰影，滾動純毛玻璃） -->
     <div
+      ref="stickyHeaderRef"
       :class="[
         'sticky top-14 sm:top-16 z-30 -mx-4 px-4 py-2 sm:py-2.5 mb-1.5 sm:mb-3 transition-[background-color,backdrop-filter] duration-200',
         isScrolled
@@ -341,7 +377,10 @@ onUnmounted(() => {
     <!-- 二欄式響應式佈局 (左:負重儀表板與減重法則 / 右:裝備分類清單) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-4 lg:gap-6 items-start">
       <!-- 左欄：Sticky 負重儀表板、減重法則與廣告 (lg: 4 欄) -->
-      <div class="lg:col-span-4 space-y-3 sm:space-y-4 lg:sticky lg:top-28">
+      <div
+        class="lg:col-span-4 space-y-3 sm:space-y-4 lg:sticky"
+        :style="{ top: `${sidebarTopOffset}px` }"
+      >
         <!-- 負重儀表板卡片 (獨佔整行) -->
         <div
           class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between"
@@ -357,11 +396,11 @@ onUnmounted(() => {
                   {{ t('packing.weightDashboard') }}
                 </h3>
 
-                <!-- 減重黃金法則符號按鈕 (僅在平板與手機模式顯示，點擊開啟 Modal) -->
+                <!-- 減重黃金法則符號按鈕 (點擊開啟 Modal) -->
                 <button
                   type="button"
                   @click.stop="isRulesModalOpen = true"
-                  class="lg:hidden p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
+                  class="p-1 rounded-full text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition cursor-pointer flex items-center"
                   :title="t('packing.goldenRules')"
                   :aria-label="t('packing.goldenRules')"
                 >
@@ -543,28 +582,6 @@ onUnmounted(() => {
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- 電腦模式 (lg:) 下顯示之朝聖裝備減重黃金法則實體卡片 -->
-        <div
-          class="hidden lg:block rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
-        >
-          <h3 class="flex items-center gap-2 text-sm text-slate-800">
-            <Sparkles class="h-4 w-4 text-amber-500" />
-            <span class="text-base">{{ t('packing.goldenRules') }}</span>
-          </h3>
-          <ul
-            class="mt-3 space-y-2.5 text-sm text-slate-600 leading-relaxed font-normal"
-          >
-            <li
-              v-for="rule in weightRulesTips"
-              :key="rule"
-              class="flex items-start gap-2"
-            >
-              <span class="text-amber-500 font-bold">•</span>
-              <span>{{ rule }}</span>
-            </li>
-          </ul>
         </div>
 
         <!-- 側邊商業廣告欄位 -->
@@ -768,7 +785,7 @@ onUnmounted(() => {
       <p class="mt-1 text-slate-500">{{ t('packing.confirmModals.resetDesc') }}</p>
     </ConfirmModal>
 
-    <!-- 減重黃金法則對話框 (手機與平板) -->
+    <!-- 減重黃金法則對話框 -->
     <TipsModal
       :is-open="isRulesModalOpen"
       :title="t('packing.goldenRules')"
