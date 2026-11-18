@@ -13,6 +13,7 @@ dist-ssr
 *.local
 .env
 .antigravityrules
+scratch/
 
 # Editor directories and files
 .vscode/*
