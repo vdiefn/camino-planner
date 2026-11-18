@@ -19,7 +19,6 @@ import {
   Plus,
   Minus,
   RotateCcw,
-  Sparkles,
   CheckCircle2,
   ChevronDown,
   MessageCircleWarning,
@@ -57,7 +56,7 @@ const getFinisterreTitle = (key: FinisterreOption) => {
 
 // 手機版折疊狀態（預設收合以釋放手機垂直空間）
 const isMobileSettingsOpen = ref(false);
-// 彈性排程小提醒 Modal 狀態（手機與平板點擊開啟）
+// 彈性排程小提醒 Modal 狀態
 const isScheduleTipsModalOpen = ref(false);
 // 紙本行程路書預覽與列印 Modal 狀態
 const isPrintScheduleModalOpen = ref(false);
@@ -980,21 +979,6 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <!-- 彈性排程小提醒（電腦模式：自適應緊湊設計，隨螢幕高度伸縮） -->
-        <div
-          class="hidden lg:flex items-start gap-2.5 p-3 sm:p-3.5 rounded-xl border border-slate-200 text-xs bg-white shadow-xs"
-        >
-          <div class="space-y-1">
-            <h3 class="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-800">
-              <Sparkles class="h-4 w-4 text-amber-500 shrink-0" />
-              <span>{{ $t('schedule.settings.flexibleTipsTitle') }}</span>
-            </h3>
-            <p class="leading-relaxed text-slate-600 text-xs sm:text-sm">
-              {{ $t('schedule.settings.flexibleTipsDesc') }}
-            </p>
-          </div>
-        </div>
-
         <!-- 側邊商業廣告欄位 -->
         <GoogleAd slot-id="schedule-sidebar-ad" format="rectangle" />
       </div>
@@ -1103,7 +1087,7 @@ onUnmounted(() => {
       @close="isAlbergueModalOpen = false"
     />
 
-    <!-- 彈性排程小提醒對話框 (手機與平板) -->
+    <!-- 彈性排程小提醒對話框 -->
     <TipsModal
       :is-open="isScheduleTipsModalOpen"
       :title="$t('schedule.settings.flexibleTipsTitle')"

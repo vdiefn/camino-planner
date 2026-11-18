@@ -24,15 +24,15 @@ const emit = defineEmits<{
 
     <div class="fixed inset-0 flex items-center justify-center p-4">
       <DialogPanel
-        class="w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl space-y-4 border border-slate-100"
+        class="w-full max-w-md rounded-2xl bg-white p-5 sm:p-6 shadow-xl space-y-4 border border-slate-100"
       >
         <!-- 標頭：圖示、標題與關閉按鈕 -->
         <div
           class="flex items-center justify-between border-b border-slate-100 pb-3"
         >
           <div class="flex items-center gap-2 text-slate-900">
-            <Sparkles class="w-4 h-4 text-amber-500 shrink-0" />
-            <DialogTitle class="text-sm font-bold text-slate-900">
+            <Sparkles class="w-5 h-5 text-amber-500 shrink-0" />
+            <DialogTitle class="text-base sm:text-lg font-bold text-slate-900">
               {{ title }}
             </DialogTitle>
           </div>
@@ -42,14 +42,14 @@ const emit = defineEmits<{
             @click="emit('close')"
             aria-label="關閉視窗"
           >
-            <X class="h-4 w-4" />
+            <X class="h-5 w-5" />
           </button>
         </div>
 
         <!-- 內容區：條列清單或自訂插槽 -->
-        <div class="text-xs text-slate-600 leading-relaxed space-y-2.5">
+        <div class="text-sm sm:text-base text-slate-600 leading-relaxed space-y-3">
           <slot>
-            <ul v-if="tips && tips.length > 0" class="space-y-2">
+            <ul v-if="tips && tips.length > 0" class="space-y-2.5">
               <li
                 v-for="(tip, idx) in tips"
                 :key="idx"
