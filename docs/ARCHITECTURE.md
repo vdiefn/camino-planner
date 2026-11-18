@@ -18,8 +18,8 @@
 - **極致輕量化**：不引入肥大全域樣式庫，表格與卡片採用原生 HTML5 標籤實作，確保 PWA 離線秒級載入。
 - **無障礙與狀態管理**：彈窗（Dialog）、開關（Switch）、手風琴折疊（Disclosure）統一採用 `@headlessui/vue`。
 - **直覺極簡常駐控制 (Zero-Friction In-Place Controls)**：裝備清單卡片採用常駐單行控制項，徹底移除多餘摺疊箭頭與內部橫線；直接並排「實測克數」與「數量微調」，多件時自動計算小計總重；全面移除主畫面上無實質助益之外文與參考重量，未穿在身上時採無外框輕量文字按鈕呈現，杜絕視覺雜訊。
-- **純粹情境式彈窗 (Contextual Distraction-Free Modals)**：避坑指南彈窗（`ProTipsModal`）移除非必要之外文標籤與重複之建議重量，移除多餘框線、底色與內部中線，以通透留白排版 100% 聚焦於前輩實務避坑攻略。
-- **低疲勞視覺語義**：分類標籤與過濾按鈕採用柔和的琥珀暖色（Soft Amber），取代刺眼的高飽和色，兼顧戶外強光下的閱讀對比與視覺舒適度。
+- **純粹情境式彈窗 (Contextual Distraction-Free Modals)**：避坑指南彈窗（`ProTipsModal`）移除非必要之外文標籤與重複之建議重量，移除多餘框線、底色與內部中線，以通透留白排版 100% 聚焦於前輩實務避坑攻略；四大核心工具（行程、裝備、交通、預算）的行前小提醒亦全面收斂為共用 `TipsModal` 彈窗（14–16px 標準閱讀字級），並透過 `useStickySidebar` 動態計算左側欄吸頂偏移量，確保右側滾動時左側零位移。
+- **低疲勞視覺語義**：主要工具的分類標籤與過濾按鈕採用柔和的琥珀暖色（Soft Amber），行前指南（`/guides`）則依主題採分色識別（路線季節翠綠、庇護住宿琥珀金、裝備預算天空藍），兼顧戶外強光下的閱讀對比與視覺舒適度。
 
 ## 3. 核心資料模型 (TypeScript Models)
 
@@ -438,10 +438,11 @@ export interface MultiRouteScheduleState {
 - **環境變數控制**：透過 `VITE_GOOGLE_ADSENSE_CLIENT_ID` 決定是否啟用；未配置時元件自體隱藏，零版面空間佔用。
 - **離線安靜降級**：PWA 離線環境下使用 `try-catch` 捕獲請求例外，絕不阻塞主執行緒或產生錯誤。
 - **CLS 防護**：容器設定 `min-h-[100px]` 預留高度，防止廣告載入時推擠操作按鈕。
-- **3 大預留插槽位置**：
-  1. `ScheduleView.vue` 頁尾（33天分段清單底部）
-  2. `PackingView.vue` 頁尾（裝備打包清單底部）
-  3. `TransportView.vue` 頁尾（起點交通決策步驟卡片底部）
+- **4 大預留插槽位置**：
+  1. `ScheduleView.vue` 側邊欄底部（`schedule-sidebar-ad`）
+  2. `PackingView.vue` 側邊欄底部（`packing-sidebar-ad`）
+  3. `TransportView.vue` 側邊欄底部（`transport-sidebar-ad`）
+  4. `BudgetView.vue` 頁尾（`budget-bottom-ad`）
 
 
 ## 6. 未來演進架構與擴充設計規格 (Architecture Evolution & Scalability: Phase 2+)
