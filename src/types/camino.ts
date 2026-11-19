@@ -8,6 +8,8 @@ export interface BookingChannels {
 
 export type AccommodationType = 'MUNICIPAL' | 'PAROCHIAL' | 'PRIVATE' | 'HOSTEL' | 'HOTEL'
 
+export type AccommodationStatus = 'OPEN' | 'SEASONAL' | 'TEMPORARILY_CLOSED'
+
 export interface Accommodation {
   id: string
   waypointId: string // 關聯所屬城鎮 ID
@@ -18,6 +20,9 @@ export interface Accommodation {
   bedCount?: number // 總床位數
   hasKitchen?: boolean // 是否有廚房
   bookingChannels: BookingChannels
+  operatingStatus?: AccommodationStatus // 營運狀態（未填視為 'OPEN'）
+  openMonths?: [number, number] // 季節性開放月份區間 [起始月, 結束月]，支援跨年如 [10, 5]
+  lastVerifiedAt?: string // 最後查核年月（YYYY-MM，追蹤整修期限）
   notes?: string // 實戰備註
 }
 
