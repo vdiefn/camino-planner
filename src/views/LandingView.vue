@@ -248,9 +248,9 @@ function handleRouteSelect(routeId: RouteId) {
         <section class="space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 text-center sm:text-left">
             <div class="space-y-1">
-              <h3 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
                 <span>{{ $t('landing.featuredRoutes.title') }}</span>
-              </h3>
+              </h2>
               <p class="text-xs sm:text-sm text-slate-500">
                 {{ $t('landing.featuredRoutes.subtitle') }}
               </p>
@@ -275,9 +275,9 @@ function handleRouteSelect(routeId: RouteId) {
               <div class="space-y-3">
                 <div>
                   <div class="flex items-center justify-between gap-2">
-                    <h4 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-slate-800 transition-colors whitespace-nowrap">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-slate-800 transition-colors whitespace-nowrap">
                       {{ route.name }}
-                    </h4>
+                    </h3>
                     <span class="text-xs text-slate-400 font-mono shrink-0 flex items-center gap-1 whitespace-nowrap">
                       <Clock class="w-3.5 h-3.5" />
                       {{ route.recommendedDays }}
@@ -306,9 +306,9 @@ function handleRouteSelect(routeId: RouteId) {
         <!-- 3. 四大核心規劃工具矩陣 -->
         <section class="space-y-6">
           <div class="text-center sm:text-left space-y-1">
-            <h3 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
               <span>{{ $t('landing.tools.title') }}</span>
-            </h3>
+            </h2>
             <p class="text-xs sm:text-sm text-slate-500">
               {{ $t('landing.tools.subtitle') }}
             </p>
@@ -339,9 +339,9 @@ function handleRouteSelect(routeId: RouteId) {
         <!-- 4. 底部知識庫導航橫幅 -->
         <section class="rounded-2xl border border-slate-200 bg-linear-to-r from-amber-50/70 via-white to-emerald-50/60 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
           <div class="space-y-1 text-center sm:text-left">
-            <h3 class="text-base sm:text-lg font-bold text-slate-900">
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">
               {{ $t('landing.bottomCta.title') }}
-            </h3>
+            </h2>
             <p class="text-xs sm:text-sm text-slate-600">
               {{ $t('landing.bottomCta.desc') }}
             </p>

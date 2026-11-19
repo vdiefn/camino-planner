@@ -125,11 +125,18 @@ async function prerender() {
     for (const routePath of routes) {
       await page.goto(`${origin}${routePath}`, { waitUntil: 'domcontentloaded' })
 
-      // 等待 Vue 接管 #app 並完成元件掛載
+      // 等待 Vue 接管 #app 且 <main> 內非同步元件完成實質內容渲染，避免抓到空殼
       await page.waitForFunction(
         () => {
           const app = document.querySelector('#app')
-          return Boolean(app && app.children.length > 0 && !app.querySelector('noscript'))
+          const main = document.querySelector('#app main')
+          return Boolean(
+            app &&
+              !app.querySelector('noscript') &&
+              main &&
+              main.textContent &&
+              main.textContent.trim().length > 50,
+          )
         },
         { timeout: 15000 },
       )

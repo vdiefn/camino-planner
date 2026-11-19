@@ -555,12 +555,16 @@ export function updateDocumentSeo(to?: RouteLocationNormalized) {
   }
 
   let canonicalEl = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-  if (!canonicalEl) {
-    canonicalEl = document.createElement('link')
-    canonicalEl.setAttribute('rel', 'canonical')
-    document.head.appendChild(canonicalEl)
+  if (activeRoute.meta?.robots) {
+    canonicalEl?.remove()
+  } else {
+    if (!canonicalEl) {
+      canonicalEl = document.createElement('link')
+      canonicalEl.setAttribute('rel', 'canonical')
+      document.head.appendChild(canonicalEl)
+    }
+    canonicalEl.setAttribute('href', canonicalUrl)
   }
-  canonicalEl.setAttribute('href', canonicalUrl)
 }
 
 router.afterEach((to) => {
