@@ -25,20 +25,35 @@ const CATEGORY_LABELS: Record<string, string> = {
   general: '💬 其他回饋 / 朝聖心得'
 }
 
-const ALLOWED_ORIGIN_REGEX = /^https:\/\/([a-z0-9-]+\.)?camino-plan\.com$|^http:\/\/(localhost|127\.0\.0\.1):\d+$/
+const PROD_ORIGIN_REGEX = /^https:\/\/([a-z0-9-]+\.)?camino-plan\.com$/
+const LOCAL_ORIGIN_REGEX = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/
 const MAX_BODY_CHARS = 8192
 const MAX_CONTENT_LENGTH = 2000
 const MAX_FIELD_LENGTH = 120
+const UPSTREAM_TIMEOUT_MS = 5000
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     const { request, env } = context
 
-    // 0. 來源標頭 (Origin) 白名單校驗與 Payload 長度限制（防範跨站濫用與超大請求 DoS）
+    // 0. 強制來源標頭 (Origin) 白名單校驗與 Content-Length 前置攔截（防範跨站濫用與超大請求 DoS）
+    const reqHost = new URL(request.url).hostname
+    const isLocalReq = reqHost === 'localhost' || reqHost === '127.0.0.1'
     const origin = request.headers.get('Origin')
-    if (origin && !ALLOWED_ORIGIN_REGEX.test(origin)) {
+    const isAllowedOrigin =
+      Boolean(origin) &&
+      (PROD_ORIGIN_REGEX.test(origin!) || (isLocalReq && LOCAL_ORIGIN_REGEX.test(origin!)))
+    if (!isAllowedOrigin) {
       return new Response(JSON.stringify({ success: false, error: '非法請求來源' }), {
         status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
+
+    const contentLength = Number(request.headers.get('Content-Length') || 0)
+    if (contentLength > MAX_BODY_CHARS) {
+      return new Response(JSON.stringify({ success: false, error: '回饋內容超過長度上限' }), {
+        status: 413,
         headers: { 'Content-Type': 'application/json' }
       })
     }
@@ -101,6 +116,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       try {
         const web3Res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
+          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json'
@@ -140,6 +156,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       try {
         const discordRes = await fetch(env.DISCORD_WEBHOOK_URL, {
           method: 'POST',
+          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             content: fullMessage.slice(0, 1950),
@@ -177,6 +194,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       try {
         const tgRes = await fetch(telegramUrl, {
           method: 'POST',
+          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             chat_id: env.TELEGRAM_CHAT_ID,
@@ -201,6 +219,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       try {
         const resendRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
+          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${env.RESEND_API_KEY}`
@@ -230,6 +249,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       try {
         const workerRes = await env.EMAIL_WORKER.fetch('https://internal/send', {
           method: 'POST',
+          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             subject: emailSubject,

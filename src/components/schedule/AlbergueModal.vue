@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Dialog, DialogPanel, DialogTitle, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { X, BedDouble, ExternalLink, Phone, MessageSquare, Flag } from 'lucide-vue-next'
-import type { UserStage, Waypoint } from '@/types/camino'
+import type { Accommodation, UserStage, Waypoint } from '@/types/camino'
 import { useScheduleStore } from '@/stores/schedule'
 import { accommodations } from '@/data/accommodations'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
@@ -22,16 +22,66 @@ const emit = defineEmits<{
 const scheduleStore = useScheduleStore()
 const { openFeedback } = useFeedbackModal()
 
+const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const
+
+type CardClosureState = 'OPEN' | 'SEASONAL_OPEN' | 'OFF_SEASON' | 'TEMPORARILY_CLOSED'
+
+// 從 YYYY-MM-DD 純字串解析行程抵達月份（1~12），避免時區偏移誤判
+const stageMonth = computed<number | null>(() => {
+  const raw = props.stage?.date
+  if (!raw) return null
+  const parts = raw.split('-')
+  if (parts.length < 2) return null
+  const m = Number(parts[1])
+  return Number.isInteger(m) && m >= 1 && m <= 12 ? m : null
+})
+
+function formatMonthLabel(month: number): string {
+  if (locale.value === 'en') {
+    return EN_MONTHS[month - 1] ?? String(month)
+  }
+  return String(month)
+}
+
+function isMonthInRange(month: number, [start, end]: [number, number]): boolean {
+  return start <= end
+    ? month >= start && month <= end
+    : month >= start || month <= end
+}
+
+function getCardClosureState(acc: Accommodation): CardClosureState {
+  if (acc.operatingStatus === 'TEMPORARILY_CLOSED') return 'TEMPORARILY_CLOSED'
+  if (acc.operatingStatus === 'SEASONAL' || acc.openMonths) {
+    if (acc.openMonths && stageMonth.value !== null && !isMonthInRange(stageMonth.value, acc.openMonths)) {
+      return 'OFF_SEASON'
+    }
+    return 'SEASONAL_OPEN'
+  }
+  return 'OPEN'
+}
+
+function isDimmedCard(acc: Accommodation): boolean {
+  const state = getCardClosureState(acc)
+  return state === 'TEMPORARILY_CLOSED' || state === 'OFF_SEASON'
+}
+
 // 取得該分段結束城鎮（向 Store 集中查找）
 const endWaypoint = computed<Waypoint | undefined>(() => {
   if (!props.stage) return undefined
   return scheduleStore.getWaypoint(props.stage.endWaypointId)
 })
 
-// 取得該分段結束城鎮的所有庇護所
+// 取得該分段結束城鎮的所有庇護所（現役優先、季節休館次之、整修暫閉沉底）
 const localAlbergues = computed(() => {
   if (!props.stage) return []
-  return accommodations.filter(a => a.waypointId === props.stage!.endWaypointId)
+  const matched = accommodations.filter(a => a.waypointId === props.stage!.endWaypointId)
+  const getSortRank = (acc: Accommodation): number => {
+    const state = getCardClosureState(acc)
+    if (state === 'TEMPORARILY_CLOSED') return 2
+    if (state === 'OFF_SEASON') return 1
+    return 0
+  }
+  return [...matched].sort((a, b) => getSortRank(a) - getSortRank(b))
 })
 
 // 開啟回報住宿資訊彈窗
@@ -136,7 +186,14 @@ function handleReport(albergueName?: string) {
                 <div
                   v-for="albergue in localAlbergues"
                   :key="albergue.id"
-                  class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2.5"
+                  class="px-3 py-2 rounded-xl border space-y-2.5"
+                  :class="
+                    getCardClosureState(albergue) === 'TEMPORARILY_CLOSED'
+                      ? 'border-dashed border-rose-300 bg-slate-100/80 opacity-80'
+                      : isDimmedCard(albergue)
+                      ? 'border-dashed border-amber-300 bg-slate-100/80 opacity-80'
+                      : 'border-slate-200 bg-slate-50/50'
+                  "
                 >
                   <div class="flex items-start justify-between gap-2">
                     <div class="min-w-0 flex-1">
@@ -152,22 +209,67 @@ function handleReport(albergueName?: string) {
                       </div>
                     </div>
 
-                    <span
-                      class="px-2 py-0.5 rounded text-[11px] font-medium shrink-0"
-                      :class="[
-                        albergue.type === 'MUNICIPAL'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : albergue.type === 'PAROCHIAL'
-                          ? 'bg-purple-100 text-purple-800'
-                          : albergue.type === 'HOTEL'
-                          ? 'bg-indigo-100 text-indigo-800'
-                          : albergue.type === 'HOSTEL'
-                          ? 'bg-sky-100 text-sky-800'
-                          : 'bg-amber-100 text-amber-800'
-                      ]"
-                    >
-                      {{ t(`schedule.albergueModal.types.${albergue.type || 'PRIVATE'}`) }}
-                    </span>
+                    <div class="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
+                      <span
+                        v-if="getCardClosureState(albergue) === 'TEMPORARILY_CLOSED'"
+                        class="px-2 py-0.5 rounded text-[11px] font-medium bg-rose-100 text-rose-800 border border-rose-200"
+                      >
+                        {{ t('schedule.albergueModal.status.temporarilyClosed') }}
+                      </span>
+                      <span
+                        v-else-if="getCardClosureState(albergue) === 'OFF_SEASON'"
+                        class="px-2 py-0.5 rounded text-[11px] font-medium bg-amber-100 text-amber-900 border border-amber-300"
+                      >
+                        {{ t('schedule.albergueModal.status.offSeason') }}
+                      </span>
+                      <span
+                        v-else-if="getCardClosureState(albergue) === 'SEASONAL_OPEN'"
+                        class="px-2 py-0.5 rounded text-[11px] font-medium bg-sky-50 text-sky-800 border border-sky-200"
+                      >
+                        {{
+                          albergue.openMonths
+                            ? t('schedule.albergueModal.status.openMonthsShort', {
+                                start: formatMonthLabel(albergue.openMonths[0]),
+                                end: formatMonthLabel(albergue.openMonths[1]),
+                              })
+                            : t('schedule.albergueModal.status.seasonal')
+                        }}
+                      </span>
+                      <span
+                        class="px-2 py-0.5 rounded text-[11px] font-medium"
+                        :class="[
+                          albergue.type === 'MUNICIPAL'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : albergue.type === 'PAROCHIAL'
+                            ? 'bg-purple-100 text-purple-800'
+                            : albergue.type === 'HOTEL'
+                            ? 'bg-indigo-100 text-indigo-800'
+                            : albergue.type === 'HOSTEL'
+                            ? 'bg-sky-100 text-sky-800'
+                            : 'bg-amber-100 text-amber-800'
+                        ]"
+                      >
+                        {{ t(`schedule.albergueModal.types.${albergue.type || 'PRIVATE'}`) }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div
+                    v-if="getCardClosureState(albergue) === 'TEMPORARILY_CLOSED'"
+                    class="text-xs text-rose-800 bg-rose-50 border border-rose-200 rounded-lg px-2.5 py-1.5 leading-relaxed"
+                  >
+                    {{ t('schedule.albergueModal.temporarilyClosedNotice') }}
+                  </div>
+                  <div
+                    v-else-if="getCardClosureState(albergue) === 'OFF_SEASON' && albergue.openMonths"
+                    class="text-xs text-amber-900 bg-amber-50 border border-amber-200 rounded-lg px-2.5 py-1.5 leading-relaxed"
+                  >
+                    {{
+                      t('schedule.albergueModal.offSeasonNotice', {
+                        start: formatMonthLabel(albergue.openMonths[0]),
+                        end: formatMonthLabel(albergue.openMonths[1]),
+                      })
+                    }}
                   </div>
 
                   <div v-if="albergue.notes" class="text-xs text-slate-600 leading-relaxed">

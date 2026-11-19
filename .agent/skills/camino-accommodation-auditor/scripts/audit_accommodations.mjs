@@ -34,8 +34,10 @@ function parseTypeScriptArray(filePath, arrayName) {
   const rawJs = match[1]
     // 移除純註解行（避免誤截斷 https:// 等合法網址）
     .replace(/^\s*\/\/.*$/gm, '')
-    // 移除型別斷言（如果有）
-    .replace(/as\s+[A-Za-z0-9_<>]+/g, '')
+    // 僅移除字串字面值之外的 TypeScript 型別斷言，避免誤刪西語／葡語名稱中的 "as ..." 片段
+    .replace(/'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`|\bas\s+[A-Za-z0-9_<>]+(?:\[\])?/g, (token) =>
+      token.startsWith("'") || token.startsWith('"') || token.startsWith('`') ? token : '',
+    )
     // 補齊 key 雙引號與結尾逗號處理，改用 Function 安全執行 evaluator
   
   try {
@@ -44,6 +46,19 @@ function parseTypeScriptArray(filePath, arrayName) {
   } catch (err) {
     throw new Error(`解析 ${arrayName} 失敗: ${err.message}`)
   }
+}
+
+const VALID_OPERATING_STATUSES = ['OPEN', 'SEASONAL', 'TEMPORARILY_CLOSED']
+const VERIFIED_MONTH_REGEX = /^\d{4}-(0[1-9]|1[0-2])$/
+
+function isValidMonth(m) {
+  return Number.isInteger(m) && m >= 1 && m <= 12
+}
+
+function getElapsedMonths(verifiedAt, now = new Date()) {
+  if (!verifiedAt || !VERIFIED_MONTH_REGEX.test(verifiedAt)) return null
+  const [y, m] = verifiedAt.split('-').map(Number)
+  return (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m)
 }
 
 function runAudit() {
@@ -79,8 +94,26 @@ function runAudit() {
   const duplicateIds = []
   const invalidWaypoints = []
   const anomalies = []
+  const temporarilyClosedList = []
+  const waypointClosedStats = new Map()
+  const now = new Date()
 
   accommodations.forEach((acc, index) => {
+    const wpStat = waypointClosedStats.get(acc.waypointId) || { total: 0, closed: 0 }
+    wpStat.total += 1
+    if (acc.operatingStatus === 'TEMPORARILY_CLOSED') {
+      wpStat.closed += 1
+      temporarilyClosedList.push({
+        id: acc.id,
+        name: acc.name,
+        waypointId: acc.waypointId,
+        lastVerifiedAt: acc.lastVerifiedAt || null,
+        elapsedMonths: getElapsedMonths(acc.lastVerifiedAt, now),
+        notes: acc.notes || '',
+      })
+    }
+    waypointClosedStats.set(acc.waypointId, wpStat)
+
     // 1. 檢查 ID 唯一性
     if (seenIds.has(acc.id)) {
       duplicateIds.push({
@@ -112,6 +145,21 @@ function runAudit() {
     if (acc.bedCount !== undefined && (acc.bedCount <= 0 || acc.bedCount > 1000)) {
       issues.push(`異常床位數: ${acc.bedCount}`)
     }
+    if (acc.operatingStatus !== undefined && !VALID_OPERATING_STATUSES.includes(acc.operatingStatus)) {
+      issues.push(`不合法的營運狀態 (operatingStatus: ${acc.operatingStatus})`)
+    }
+    if (
+      acc.openMonths !== undefined &&
+      (!Array.isArray(acc.openMonths) ||
+        acc.openMonths.length !== 2 ||
+        !isValidMonth(acc.openMonths[0]) ||
+        !isValidMonth(acc.openMonths[1]))
+    ) {
+      issues.push(`不合法的開放月份區間 (openMonths: ${JSON.stringify(acc.openMonths)})`)
+    }
+    if (acc.lastVerifiedAt !== undefined && !VERIFIED_MONTH_REGEX.test(acc.lastVerifiedAt)) {
+      issues.push(`不合法的查核年月格式 (lastVerifiedAt: ${acc.lastVerifiedAt})`)
+    }
 
     // 4. 檢查 URL 格式
     if (acc.bookingChannels) {
@@ -132,12 +180,20 @@ function runAudit() {
     }
   })
 
+  const allClosedWaypoints = []
+  for (const [wpId, stat] of waypointClosedStats.entries()) {
+    if (stat.total > 0 && stat.closed === stat.total) {
+      allClosedWaypoints.push({ waypointId: wpId, count: stat.total })
+    }
+  }
+
   // 輸出結果
   console.log('📊 【稽核報告摘要】')
   console.log(`- 總住宿筆數：${accommodations.length}`)
   console.log(`- 重複 ID 數：${duplicateIds.length}`)
   console.log(`- 無效航點關聯數：${invalidWaypoints.length}`)
-  console.log(`- 資料異常/待補全數：${anomalies.length}\n`)
+  console.log(`- 資料異常/待補全數：${anomalies.length}`)
+  console.log(`- 暫閉追蹤筆數：${temporarilyClosedList.length}\n`)
 
   if (duplicateIds.length > 0) {
     console.log('⚠️ 【發現重複 ID】')
@@ -163,6 +219,28 @@ function runAudit() {
     if (anomalies.length > 10) {
       console.log(`  ... 以及其餘 ${anomalies.length - 10} 筆`)
     }
+    console.log('')
+  }
+
+  if (temporarilyClosedList.length > 0) {
+    console.log('🔧 【整修暫閉追蹤清單】')
+    temporarilyClosedList.forEach(item => {
+      const verifiedLabel = item.lastVerifiedAt || '未標註查核年月'
+      const overdueHint =
+        item.elapsedMonths !== null && item.elapsedMonths >= 36
+          ? ` ⚠️ 已滿 ${item.elapsedMonths} 個月，建議複查是否轉列 GHOST_PERMANENTLY_CLOSED`
+          : ''
+      const noteText = item.notes ? ` — ${item.notes}` : ''
+      console.log(`  • [${item.id}] ${item.name} (${item.waypointId}) | 查核: ${verifiedLabel}${overdueHint}${noteText}`)
+    })
+    console.log('')
+  }
+
+  if (allClosedWaypoints.length > 0) {
+    console.log('🚨 【全數暫閉無處過夜警示】')
+    allClosedWaypoints.forEach(item => {
+      console.log(`  • 航點 ${item.waypointId} 所收錄之 ${item.count} 筆住宿全數為 TEMPORARILY_CLOSED`)
+    })
     console.log('')
   }
 

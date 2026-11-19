@@ -44,22 +44,59 @@ watchEffect(() => {
 
   if (!article.value) return
   const item = article.value
+  const articleUrl = `https://camino-plan.com/guides/${item.slug}`
+  const articleTitle = isEn.value ? item.titleEn : item.title
   const schemaData = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: isEn.value ? item.titleEn : item.title,
-    description: isEn.value ? item.seoDescriptionEn : item.seoDescription,
-    dateModified: item.updatedAt,
-    inLanguage: isEn.value ? 'en' : 'zh-TW',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://camino-plan.com/guides/${item.slug}`,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Camino Plan',
-      url: 'https://camino-plan.com/',
-    },
+    '@graph': [
+      {
+        '@type': 'Article',
+        headline: articleTitle,
+        description: isEn.value ? item.seoDescriptionEn : item.seoDescription,
+        image: ['https://camino-plan.com/og-cover.png'],
+        dateModified: item.updatedAt,
+        inLanguage: isEn.value ? 'en' : 'zh-TW',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': articleUrl,
+        },
+        author: [
+          {
+            '@type': 'Organization',
+            name: 'Camino Plan',
+            url: 'https://camino-plan.com/',
+          },
+        ],
+        publisher: {
+          '@type': 'Organization',
+          name: 'Camino Plan',
+          url: 'https://camino-plan.com/',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Camino Plan',
+            item: 'https://camino-plan.com/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: isEn.value ? 'Guides' : '實戰攻略',
+            item: 'https://camino-plan.com/guides',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: articleTitle,
+            item: articleUrl,
+          },
+        ],
+      },
+    ],
   }
 
   const script = document.createElement('script')

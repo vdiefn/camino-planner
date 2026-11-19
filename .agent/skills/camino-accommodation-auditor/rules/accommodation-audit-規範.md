@@ -14,9 +14,11 @@
 | **`GHOST_RENAMED`** | 同一實體地址或電話已由新團隊頂讓接手並改名經營 | 保留原物件並更新 `name`、`chineseName` 與聯絡管道，且於 `notes` 註記「原名 XXX，於 YYYY 年更名接手」 |
 | **`GHOST_DUPLICATE`** | 同一實體住宿因西文、葡文、加利西亞文或中文譯名差異而重複建檔 | 整併為單一物件，將別名合併至 `notes` |
 
-- **季節性休業絕對保護**：朝聖之路多數庇護所僅於每年 4～10 月開放、冬季休館（`Cerrado en invierno / por temporada`）或短期內部整修（`Cerrado por reformas`），**嚴禁將季節性休業或短期整修誤判為幽靈住宿而剔除**。
+- **季節性休業與整修暫閉保護**：朝聖之路多數庇護所僅於每年 4～10 月開放、冬季休館（`Cerrado en invierno / por temporada`）或短期內部整修（`Cerrado por reformas`），**嚴禁將季節性休業或短期整修誤判為幽靈住宿而剔除**。建議依情境標註選填欄位以連動前端顯示：
+  - 季節性開放可標註 `operatingStatus: 'SEASONAL'` 與 `openMonths: [startMonth, endMonth]`（支援跨年冬季開放，例如 `[10, 5]`），前端會依行程月份自動區分當月開放或季節休館。
+  - 未滿 3 年之整修暫閉應保留／補入物件並標註 `operatingStatus: 'TEMPORARILY_CLOSED'` 與 `lastVerifiedAt: 'YYYY-MM'`（並於 `notes` 註記關閉起點或整修備註），供前端沉底降噪提示並追蹤 3 年到期規則。
 - **批次連續自主查證鐵律**：執行指定航點或路線稽核時，必須依序連續完成全部目標之 4 維度交叉查證至整批結束，**嚴禁在查證途中停下來詢問使用者「是否繼續下一城鎮」或「是否同意繼續驗證」**；確認保留或無異動之項目亦須記錄查證結果，嚴禁省略任何維度。
-- **Exception（例外豁免）**：若某住宿點於 Gronze 標註 `Cerrado por reformas` 已逾 3 年以上，且經 Google Maps 街景與地方官署雙重確認建築已轉作私宅或永久歇業，得升級歸類為 `GHOST_PERMANENTLY_CLOSED` 提案移除。
+- **Exception（例外豁免）**：若某住宿點於 Gronze 標註 `Cerrado por reformas` 已逾 3 年（`lastVerifiedAt` 距今滿 36 個月）以上，且經 Google Maps 街景與地方官署雙重確認建築已轉作私宅或永久歇業，得升級歸類為 `GHOST_PERMANENTLY_CLOSED` 提案移除。
 
 ## Good Example
 

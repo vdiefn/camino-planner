@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
   ArrowRight,
@@ -29,7 +29,6 @@ import { useScheduleStore } from '@/stores/schedule'
 
 const { t, locale } = useI18n()
 const route = useRoute()
-const router = useRouter()
 const scheduleStore = useScheduleStore()
 
 const VALID_ROUTE_IDS = new Set<RouteId>(['frances', 'portugues', 'norte'])
@@ -59,11 +58,6 @@ const currentRoute = computed<RouteGuideItem>(() => {
     ROUTES_GUIDE_LIST[0]
   )
 })
-
-function selectRoute(id: RouteId) {
-  activeRouteId.value = id
-  router.push(`/routes/${id}`)
-}
 </script>
 
 <template>
@@ -163,7 +157,13 @@ function selectRoute(id: RouteId) {
         <!-- 頁面標題區 -->
         <div class="text-center space-y-3">
           <h1 class="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-            {{ t('routesGuide.pageTitle') }}
+            {{
+              route.params.routeId
+                ? locale === 'en' && currentRoute.nameEn
+                  ? `${currentRoute.nameEn} Route Guide`
+                  : `${currentRoute.name}深度攻略與難度評估`
+                : t('routesGuide.pageTitle')
+            }}
           </h1>
           <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
             {{ t('routesGuide.pageDescription') }}
@@ -171,24 +171,23 @@ function selectRoute(id: RouteId) {
         </div>
 
         <!-- 路線切換標籤列 -->
-        <div class="flex items-center justify-center">
+        <nav aria-label="Routes" class="flex items-center justify-center">
           <div class="inline-flex items-center gap-1.5 p-1 bg-slate-200/80 rounded-2xl text-xs sm:text-sm font-medium shadow-2xs">
-            <button
-              v-for="route in ROUTES_GUIDE_LIST"
-              :key="route.id"
-              type="button"
-              @click="selectRoute(route.id)"
+            <router-link
+              v-for="item in ROUTES_GUIDE_LIST"
+              :key="item.id"
+              :to="`/routes/${item.id}`"
               class="px-4 sm:px-6 py-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-2"
               :class="[
-                activeRouteId === route.id
+                activeRouteId === item.id
                   ? 'bg-white text-slate-900 shadow-2xs font-bold'
                   : 'text-slate-600 hover:text-slate-900',
               ]"
             >
-              <span>{{ locale === 'en' && route.nameEn ? route.nameEn : route.name }}</span>
-            </button>
+              <span>{{ locale === 'en' && item.nameEn ? item.nameEn : item.name }}</span>
+            </router-link>
           </div>
-        </div>
+        </nav>
 
         <!-- 當前選定路線之核心詳情全攻略（整合成單一白色大卡片） -->
         <article class="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-10 shadow-xs space-y-8">

@@ -146,5 +146,25 @@ describe('跨領域靜態資料完整性與防呆檢驗 (Cross-Domain Static Dat
         expect(hasContact).toBe(true)
       })
     })
+
+    it('選填營運狀態 operatingStatus、開放月份 openMonths 與查核年月 lastVerifiedAt 格式必須合法', () => {
+      accommodations.forEach((acc) => {
+        if (acc.operatingStatus !== undefined) {
+          expect(['OPEN', 'SEASONAL', 'TEMPORARILY_CLOSED']).toContain(acc.operatingStatus)
+        }
+        if (acc.openMonths !== undefined) {
+          expect(Array.isArray(acc.openMonths)).toBe(true)
+          expect(acc.openMonths).toHaveLength(2)
+          acc.openMonths.forEach((month) => {
+            expect(Number.isInteger(month)).toBe(true)
+            expect(month).toBeGreaterThanOrEqual(1)
+            expect(month).toBeLessThanOrEqual(12)
+          })
+        }
+        if (acc.lastVerifiedAt !== undefined) {
+          expect(acc.lastVerifiedAt).toMatch(/^\d{4}-(0[1-9]|1[0-2])$/)
+        }
+      })
+    })
   })
 })
