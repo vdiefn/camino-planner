@@ -23,7 +23,11 @@ import { renderSVG } from 'uqr'
 import { useSyncBackup } from '@/composables/useSyncBackup'
 import { usePackingStore } from '@/stores/packing'
 import { useScheduleStore } from '@/stores/schedule'
-import { createFullBackupJson, encodeCompactUrlPayload } from '@/utils/syncCodec'
+import {
+  MAX_DECOMPRESSED_BYTES,
+  createFullBackupJson,
+  encodeCompactUrlPayload,
+} from '@/utils/syncCodec'
 
 const { t, locale } = useI18n()
 
@@ -203,6 +207,12 @@ function handleFileChange(event: Event) {
   const input = event.target as HTMLInputElement
   const file = input.files?.[0]
   if (!file) return
+
+  if (file.size > MAX_DECOMPRESSED_BYTES * 2) {
+    importError.value = t('syncModal.fileReadError')
+    input.value = ''
+    return
+  }
 
   const reader = new FileReader()
   reader.onload = () => {

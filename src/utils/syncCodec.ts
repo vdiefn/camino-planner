@@ -1,4 +1,4 @@
-import { strFromU8, strToU8, unzlibSync, zlibSync } from 'fflate'
+import { Unzlib, strFromU8, strToU8, zlibSync } from 'fflate'
 import { packingItems as defaultPackingItems } from '@/data/packingItems'
 import {
   AVAILABLE_ROUTES,
@@ -519,6 +519,30 @@ function reconstructSingleRouteSchedule(
 }
 
 /**
+ * 串流解壓縮並即時檢核容量上限，防範高壓縮比 Zip Bomb 耗盡瀏覽器記憶體
+ */
+function safeUnzlibWithLimit(compressed: Uint8Array, maxBytes: number): Uint8Array {
+  const chunks: Uint8Array[] = []
+  let totalBytes = 0
+  const inflater = new Unzlib((chunk) => {
+    totalBytes += chunk.byteLength
+    if (totalBytes > maxBytes) {
+      throw new Error('DECOMPRESSED_LIMIT_EXCEEDED')
+    }
+    chunks.push(chunk)
+  })
+  inflater.push(compressed, true)
+
+  const merged = new Uint8Array(totalBytes)
+  let offset = 0
+  for (const chunk of chunks) {
+    merged.set(chunk, offset)
+    offset += chunk.byteLength
+  }
+  return merged
+}
+
+/**
  * 解壓縮並驗證 URL / QR Code 濃縮字串
  */
 export function decodeCompactUrlPayload(token: string): DecodeResult {
@@ -527,9 +551,14 @@ export function decodeCompactUrlPayload(token: string): DecodeResult {
       return { ok: false, error: '同步連結長度無效或超過安全上限' }
     }
     const compressed = base64UrlToUint8(token)
-    const decompressed = unzlibSync(compressed)
-    if (decompressed.byteLength > MAX_DECOMPRESSED_BYTES) {
-      return { ok: false, error: '同步資料超過安全容量上限' }
+    let decompressed: Uint8Array
+    try {
+      decompressed = safeUnzlibWithLimit(compressed, MAX_DECOMPRESSED_BYTES)
+    } catch (err) {
+      if (err instanceof Error && err.message === 'DECOMPRESSED_LIMIT_EXCEEDED') {
+        return { ok: false, error: '同步資料超過安全容量上限' }
+      }
+      throw err
     }
 
     const raw = JSON.parse(strFromU8(decompressed))
