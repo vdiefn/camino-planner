@@ -123,11 +123,13 @@ async function prerender() {
     console.log(`[prerender] 開始預渲染 ${routes.length} 個路由...`)
 
     for (const routePath of routes) {
+      const expectedLang = routePath === '/en' || routePath.startsWith('/en/') ? 'en' : 'zh-Hant-TW'
+
       await page.goto(`${origin}${routePath}`, { waitUntil: 'domcontentloaded' })
 
-      // 等待 Vue 接管 #app 且 <main> 內非同步元件完成實質內容渲染，避免抓到空殼
+      // 等待 Vue 接管 #app、<main> 內實質內容渲染完畢，且 <html lang> 與目標語系完全一致
       await page.waitForFunction(
-        () => {
+        (targetLang) => {
           const app = document.querySelector('#app')
           const main = document.querySelector('#app main')
           return Boolean(
@@ -135,13 +137,15 @@ async function prerender() {
               !app.querySelector('noscript') &&
               main &&
               main.textContent &&
-              main.textContent.trim().length > 50,
+              main.textContent.trim().length > 50 &&
+              document.documentElement.lang === targetLang,
           )
         },
+        expectedLang,
         { timeout: 15000 },
       )
 
-      // 預留短暫時間讓 router.afterEach 與 watchEffect 完成 SEO Meta / JSON-LD 寫入
+      // 預留短暫時間讓 router.afterEach 與 watchEffect 完成 SEO Meta / hreflang / JSON-LD 寫入
       await page.waitForTimeout(150)
 
       const rawHtml = await page.content()
@@ -154,7 +158,7 @@ async function prerender() {
       fs.writeFileSync(outPath, html, 'utf-8')
 
       const relOut = path.relative(ROOT_DIR, outPath).replace(/\\/g, '/')
-      console.log(`  ✓ ${routePath.padEnd(28)} -> ${relOut} (${title})`)
+      console.log(`  ✓ [${expectedLang}] ${routePath.padEnd(32)} -> ${relOut} (${title})`)
     }
 
     console.log('[prerender] 全部路由預渲染完成。')
