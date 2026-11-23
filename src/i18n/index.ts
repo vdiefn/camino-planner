@@ -1,26 +1,27 @@
 import { createI18n } from 'vue-i18n'
 import zhTW from './locales/zh-TW'
 import en from './locales/en'
+import { extractLocaleFromPath, type SupportedLocale } from '@/utils/localeRoute'
 
-export type SupportedLocale = 'zh-TW' | 'en'
+export type { SupportedLocale }
 
 const STORAGE_KEY = 'camino_locale'
 
 export function getInitialLocale(): SupportedLocale {
   if (typeof window === 'undefined') return 'zh-TW'
 
+  const pathLocale = extractLocaleFromPath(window.location.pathname)
+  if (pathLocale === 'en') {
+    return 'en'
+  }
+
+  // 向下相容舊版 ?lang=en 連結，實際網址重導向交由 router.beforeEach 處理
   const langParam = new URLSearchParams(window.location.search).get('lang')
-  if (langParam === 'zh-TW' || langParam === 'en') {
-    localStorage.setItem(STORAGE_KEY, langParam)
+  if (langParam === 'en' || langParam === 'zh-TW') {
     return langParam
   }
 
-  const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved === 'zh-TW' || saved === 'en') {
-    return saved
-  }
-
-  // 未手動切換時預設以繁體中文為主，確保搜尋引擎與中文使用者優先取得完整中文內容
+  // URL 為語系唯一真實來源，無 /en 前綴時預設繁體中文，不因 localStorage 覆寫網址語系
   return 'zh-TW'
 }
 
@@ -35,16 +36,12 @@ export const i18n = createI18n({
 })
 
 export function setAppLocale(locale: SupportedLocale) {
-  i18n.global.locale.value = locale
+  if (i18n.global.locale.value !== locale) {
+    i18n.global.locale.value = locale
+  }
   if (typeof window !== 'undefined') {
     localStorage.setItem(STORAGE_KEY, locale)
     document.documentElement.lang = locale === 'zh-TW' ? 'zh-Hant-TW' : 'en'
-    // 即時動態連動更新瀏覽器分頁標題與 Meta 標籤
-    import('@/router')
-      .then(({ updateDocumentSeo }) => {
-        updateDocumentSeo()
-      })
-      .catch(() => {})
   }
 }
 

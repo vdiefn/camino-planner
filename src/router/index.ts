@@ -2,6 +2,13 @@ import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vu
 import HomeView from '@/views/HomeView.vue'
 import { AVAILABLE_ROUTES, getRouteMetadata } from '@/data/routes'
 import { getGuideBySlug } from '@/data/guides'
+import { setAppLocale } from '@/i18n'
+import {
+  buildBilingualSeoUrls,
+  extractLocaleFromPath,
+  localizePath,
+  type SupportedLocale,
+} from '@/utils/localeRoute'
 import type { RouteId } from '@/types/route'
 
 const SITE_ORIGIN = 'https://camino-plan.com'
@@ -205,126 +212,139 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
-      name: 'landing',
-      component: () => import('@/views/LandingView.vue'),
-      meta: {
-        title: '朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
-        description:
-          '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。',
-      },
-    },
-    {
-      path: '/schedule',
-      redirect: '/schedule/frances',
-    },
-    {
-      path: '/schedule/:routeId/:branchId?',
-      name: 'schedule',
-      component: HomeView,
-    },
-    {
-      path: '/packing',
-      name: 'packing',
-      component: HomeView,
-      meta: {
-        title: '裝備清單與負重計算機 (10% 體重法則) | Camino Plan',
-        description:
-          '科學化朝聖者背包負重計算機，嚴格把關 10% 體重負重警戒線，內建九大必備裝備分類與減重避坑指南。',
-      },
-    },
-    {
-      path: '/transport',
-      redirect: '/transport/frances',
-    },
-    {
-      path: '/transport/:routeId/:branchId?',
-      name: 'transport',
-      component: HomeView,
-    },
-    {
-      path: '/budget',
-      name: 'budget',
-      component: HomeView,
-      meta: {
-        title: '朝聖花費與預算計算機 (全雙幣試算) | Camino Plan',
-        description:
-          '專為聖雅各朝聖之路設計的免費預算計算機，全雙幣 EUR/TWD 動態試算，涵蓋機票裝備、公私立庇護所住宿、朝聖者套餐伙食與突發應急金。',
-      },
-    },
-    {
-      path: '/history',
-      name: 'history',
-      component: () => import('@/views/HistoryView.vue'),
-      meta: {
-        title: '聖雅各朝聖之路歷史淵源與文化象徵 | Camino Plan',
-        description:
-          '深度解析聖雅各朝聖之路（Camino de Santiago）千年歷史：繁星原野聖骨發現、第一位朝聖者阿方索二世、中世紀朝聖風潮、扇貝殼與黃色箭頭文化象徵典故。',
-      },
-    },
-    {
-      path: '/routes/:routeId?',
-      name: 'routes',
-      component: () => import('@/views/RoutesGuideView.vue'),
-      meta: {
-        title: '聖雅各三大經典朝聖路線攻略與難度評估 | Camino Plan',
-        description:
-          '法國之路、葡萄牙之路與北方之路深度攻略剖析。提供總里程、徒步天數、地形難度、路面鋪裝材質比例、最佳行走月份與避坑防禦提醒。',
-      },
-    },
-    {
-      path: '/guides',
-      name: 'guides',
-      component: () => import('@/views/GuidesView.vue'),
-      meta: {
-        title: '朝聖之路實戰攻略專區 | Camino Plan',
-        description:
-          '從四季氣候、庇里牛斯山路線、最後 100 公里雙章規則，到庇護所入住、選鞋防泡與每日花費預算拆解的完整行前實戰指南。',
-      },
-    },
-    {
-      path: '/guides/:slug',
-      name: 'guide-detail',
-      component: () => import('@/views/GuideDetailView.vue'),
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('@/views/AboutView.vue'),
-      meta: {
-        title: '關於我們 | Camino Plan 朝聖之路規劃工具',
-        description:
-          '認識 Camino Plan 的創立初衷、朝聖之路里程與庇護所資料校對原則，以及免費免登入的社群工具定位。',
-      },
-    },
-    {
-      path: '/contact',
-      name: 'contact',
-      component: () => import('@/views/ContactView.vue'),
-      meta: {
-        title: '聯絡我們與資料勘誤 | Camino Plan',
-        description:
-          '回報朝聖之路庇護所異動、里程勘誤、交通班次更新、功能建議或合作洽談的官方聯絡管道。',
-      },
-    },
-    {
-      path: '/faq',
-      name: 'faq',
-      component: () => import('@/views/FaqView.vue'),
-      meta: {
-        title: '常見問題百科 (FAQ) | Camino Plan',
-        description:
-          '專為聖雅各朝聖之路徒步者整理的問答百科，收錄證書規定、庇護所入住技巧、行李減重與交通銜接全指南。',
-      },
-    },
-    {
-      path: '/privacy',
-      name: 'privacy',
-      component: () => import('@/views/PrivacyView.vue'),
-      meta: {
-        title: '隱私權政策 | Camino Plan',
-        description: 'Camino Plan 朝聖規劃工具之本機資料儲存、隱私保護與 Cookie 政策說明。',
-      },
+      path: '/:locale(en)?',
+      children: [
+        {
+          path: '',
+          name: 'landing',
+          component: () => import('@/views/LandingView.vue'),
+          meta: {
+            title: '朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
+            description:
+              '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。',
+          },
+        },
+        {
+          path: 'schedule',
+          redirect: (to) => ({
+            path: localizePath('/schedule/frances', extractLocaleFromPath(to.path)),
+            query: to.query,
+            hash: to.hash,
+          }),
+        },
+        {
+          path: 'schedule/:routeId/:branchId?',
+          name: 'schedule',
+          component: HomeView,
+        },
+        {
+          path: 'packing',
+          name: 'packing',
+          component: HomeView,
+          meta: {
+            title: '裝備清單與負重計算機 (10% 體重法則) | Camino Plan',
+            description:
+              '科學化朝聖者背包負重計算機，嚴格把關 10% 體重負重警戒線，內建九大必備裝備分類與減重避坑指南。',
+          },
+        },
+        {
+          path: 'transport',
+          redirect: (to) => ({
+            path: localizePath('/transport/frances', extractLocaleFromPath(to.path)),
+            query: to.query,
+            hash: to.hash,
+          }),
+        },
+        {
+          path: 'transport/:routeId/:branchId?',
+          name: 'transport',
+          component: HomeView,
+        },
+        {
+          path: 'budget',
+          name: 'budget',
+          component: HomeView,
+          meta: {
+            title: '朝聖花費與預算計算機 (全雙幣試算) | Camino Plan',
+            description:
+              '專為聖雅各朝聖之路設計的免費預算計算機，全雙幣 EUR/TWD 動態試算，涵蓋機票裝備、公私立庇護所住宿、朝聖者套餐伙食與突發應急金。',
+          },
+        },
+        {
+          path: 'history',
+          name: 'history',
+          component: () => import('@/views/HistoryView.vue'),
+          meta: {
+            title: '聖雅各朝聖之路歷史淵源與文化象徵 | Camino Plan',
+            description:
+              '深度解析聖雅各朝聖之路（Camino de Santiago）千年歷史：繁星原野聖骨發現、第一位朝聖者阿方索二世、中世紀朝聖風潮、扇貝殼與黃色箭頭文化象徵典故。',
+          },
+        },
+        {
+          path: 'routes/:routeId?',
+          name: 'routes',
+          component: () => import('@/views/RoutesGuideView.vue'),
+          meta: {
+            title: '聖雅各三大經典朝聖路線攻略與難度評估 | Camino Plan',
+            description:
+              '法國之路、葡萄牙之路與北方之路深度攻略剖析。提供總里程、徒步天數、地形難度、路面鋪裝材質比例、最佳行走月份與避坑防禦提醒。',
+          },
+        },
+        {
+          path: 'guides',
+          name: 'guides',
+          component: () => import('@/views/GuidesView.vue'),
+          meta: {
+            title: '朝聖之路實戰攻略專區 | Camino Plan',
+            description:
+              '從四季氣候、庇里牛斯山路線、最後 100 公里雙章規則，到庇護所入住、選鞋防泡與每日花費預算拆解的完整行前實戰指南。',
+          },
+        },
+        {
+          path: 'guides/:slug',
+          name: 'guide-detail',
+          component: () => import('@/views/GuideDetailView.vue'),
+        },
+        {
+          path: 'about',
+          name: 'about',
+          component: () => import('@/views/AboutView.vue'),
+          meta: {
+            title: '關於我們 | Camino Plan 朝聖之路規劃工具',
+            description:
+              '認識 Camino Plan 的創立初衷、朝聖之路里程與庇護所資料校對原則，以及免費免登入的社群工具定位。',
+          },
+        },
+        {
+          path: 'contact',
+          name: 'contact',
+          component: () => import('@/views/ContactView.vue'),
+          meta: {
+            title: '聯絡我們與資料勘誤 | Camino Plan',
+            description:
+              '回報朝聖之路庇護所異動、里程勘誤、交通班次更新、功能建議或合作洽談的官方聯絡管道。',
+          },
+        },
+        {
+          path: 'faq',
+          name: 'faq',
+          component: () => import('@/views/FaqView.vue'),
+          meta: {
+            title: '常見問題百科 (FAQ) | Camino Plan',
+            description:
+              '專為聖雅各朝聖之路徒步者整理的問答百科，收錄證書規定、庇護所入住技巧、行李減重與交通銜接全指南。',
+          },
+        },
+        {
+          path: 'privacy',
+          name: 'privacy',
+          component: () => import('@/views/PrivacyView.vue'),
+          meta: {
+            title: '隱私權政策 | Camino Plan',
+            description: 'Camino Plan 朝聖規劃工具之本機資料儲存、隱私保護與 Cookie 政策說明。',
+          },
+        },
+      ],
     },
     {
       path: '/:pathMatch(.*)*',
@@ -342,18 +362,37 @@ const router = createRouter({
   },
 })
 
-// 路由防禦：確保 /schedule/:routeId/:branchId?、/transport/:routeId/:branchId?、/routes/:routeId? 與 /guides/:slug 為合法路徑，否則自動 fallback
-router.beforeEach((to, _from, next) => {
+// 路由防禦與語系同步：
+// 1. 舊版 ?lang=en / ?lang=zh-TW 自動轉址至對應語系 URL 並保留其餘 Query / Hash
+// 2. 強制以 URL pathname 同步 i18n 語系（URL 為唯一真實來源）
+// 3. 驗證動態參數合法性，非法時 fallback 並維持原語系前綴
+router.beforeEach((to) => {
+  const rawLangQuery = Array.isArray(to.query.lang) ? to.query.lang[0] : to.query.lang
+  if (rawLangQuery === 'en' || rawLangQuery === 'zh-TW') {
+    const restQuery = { ...to.query }
+    delete restQuery.lang
+    const targetPath = localizePath(to.path, rawLangQuery)
+    return {
+      path: targetPath,
+      query: restQuery,
+      hash: to.hash,
+      replace: true,
+    }
+  }
+
+  const urlLocale: SupportedLocale = extractLocaleFromPath(to.path)
+  setAppLocale(urlLocale)
+
   if (to.name === 'guide-detail') {
     const slug = to.params.slug as string
     if (!getGuideBySlug(slug)) {
-      return next('/guides')
+      return localizePath('/guides', urlLocale)
     }
   }
   if (to.name === 'routes') {
     const routeId = to.params.routeId as string | undefined
     if (routeId && !AVAILABLE_ROUTES.some((r) => r.id === routeId)) {
-      return next('/routes')
+      return localizePath('/routes', urlLocale)
     }
   }
   if (to.name === 'schedule' || to.name === 'transport') {
@@ -361,16 +400,16 @@ router.beforeEach((to, _from, next) => {
     const branchId = to.params.branchId as string | undefined
     const routeMeta = AVAILABLE_ROUTES.find((r) => r.id === routeId)
     if (!routeMeta) {
-      return next(`/${String(to.name)}/frances`)
+      return localizePath(`/${String(to.name)}/frances`, urlLocale)
     }
     if (branchId && routeMeta.branches) {
       const isValidBranch = routeMeta.branches.some((b) => b.id === branchId)
       if (!isValidBranch) {
-        return next(`/${String(to.name)}/${routeId}`)
+        return localizePath(`/${String(to.name)}/${routeId}`, urlLocale)
       }
     }
   }
-  next()
+  return true
 })
 
 function upsertMeta(selector: string, attr: 'name' | 'property', key: string, content: string) {
@@ -384,14 +423,25 @@ function upsertMeta(selector: string, attr: 'name' | 'property', key: string, co
   el.setAttribute('content', content)
 }
 
-function getCurrentLocale(): 'zh-TW' | 'en' {
-  if (typeof window !== 'undefined') {
-    const langParam = new URLSearchParams(window.location.search).get('lang')
-    if (langParam === 'en' || langParam === 'zh-TW') return langParam
-    const saved = localStorage.getItem('camino_locale')
-    if (saved === 'en' || saved === 'zh-TW') return saved
+function upsertHreflangLink(hreflang: string, href: string) {
+  if (typeof document === 'undefined') return
+  let el = document.head.querySelector<HTMLLinkElement>(
+    `link[rel="alternate"][hreflang="${hreflang}"]`,
+  )
+  if (!el) {
+    el = document.createElement('link')
+    el.setAttribute('rel', 'alternate')
+    el.setAttribute('hreflang', hreflang)
+    document.head.appendChild(el)
   }
-  return 'zh-TW'
+  el.setAttribute('href', href)
+}
+
+function removeHreflangLinks() {
+  if (typeof document === 'undefined') return
+  document.head
+    .querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang]')
+    .forEach((el) => el.remove())
 }
 
 /**
@@ -511,9 +561,10 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
 export function updateDocumentSeo(to?: RouteLocationNormalized) {
   if (typeof document === 'undefined') return
   const activeRoute = to || router.currentRoute.value
-  const isEn = getCurrentLocale() === 'en'
+  const seoUrls = buildBilingualSeoUrls(SITE_ORIGIN, activeRoute.path)
+  const isEn = seoUrls.locale === 'en'
   const seo = resolveRouteSeoMeta(activeRoute, isEn)
-  const canonicalUrl = `${SITE_ORIGIN}${activeRoute.path}`
+  const ogImageUrl = `${SITE_ORIGIN}/${isEn ? 'og-cover-en.png' : 'og-cover.png'}`
 
   document.title = seo.title
   document.documentElement.lang = isEn ? 'en' : 'zh-Hant-TW'
@@ -521,10 +572,12 @@ export function updateDocumentSeo(to?: RouteLocationNormalized) {
   upsertMeta('meta[name="description"]', 'name', 'description', seo.description)
   upsertMeta('meta[property="og:title"]', 'property', 'og:title', seo.title)
   upsertMeta('meta[property="og:description"]', 'property', 'og:description', seo.description)
-  upsertMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
+  upsertMeta('meta[property="og:url"]', 'property', 'og:url', seoUrls.canonicalUrl)
   upsertMeta('meta[property="og:locale"]', 'property', 'og:locale', isEn ? 'en_US' : 'zh_TW')
+  upsertMeta('meta[property="og:image"]', 'property', 'og:image', ogImageUrl)
   upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', seo.title)
   upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', seo.description)
+  upsertMeta('meta[name="twitter:image"]', 'name', 'twitter:image', ogImageUrl)
 
   // 同步更新全站 WebApplication JSON-LD 語系與內容
   const appSchemaEl = document.head.querySelector<HTMLScriptElement>('#webapp-schema-jsonld')
@@ -533,7 +586,7 @@ export function updateDocumentSeo(to?: RouteLocationNormalized) {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       name: isEn ? 'Camino Plan — Camino de Santiago Planner' : 'Camino Plan 朝聖之路規劃工具',
-      url: `${SITE_ORIGIN}/`,
+      url: isEn ? `${SITE_ORIGIN}/en` : `${SITE_ORIGIN}/`,
       inLanguage: isEn ? 'en' : 'zh-TW',
       description: DEFAULT_SEO[isEn ? 'en' : 'zh-TW'].description,
       applicationCategory: 'TravelApplication',
@@ -557,13 +610,17 @@ export function updateDocumentSeo(to?: RouteLocationNormalized) {
   let canonicalEl = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
   if (activeRoute.meta?.robots) {
     canonicalEl?.remove()
+    removeHreflangLinks()
   } else {
     if (!canonicalEl) {
       canonicalEl = document.createElement('link')
       canonicalEl.setAttribute('rel', 'canonical')
       document.head.appendChild(canonicalEl)
     }
-    canonicalEl.setAttribute('href', canonicalUrl)
+    canonicalEl.setAttribute('href', seoUrls.canonicalUrl)
+    upsertHreflangLink('zh-Hant-TW', seoUrls.zhUrl)
+    upsertHreflangLink('en', seoUrls.enUrl)
+    upsertHreflangLink('x-default', seoUrls.xDefaultUrl)
   }
 }
 
