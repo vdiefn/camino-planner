@@ -11,7 +11,7 @@ const { t } = useI18n()
   <div class="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans">
     <!-- 頂部簡約導覽列 -->
     <header class="h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between">
-      <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
+      <LocaleLink to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
         <img
           src="/favicon.svg"
           :alt="$t('app.logoAlt')"
@@ -22,7 +22,7 @@ const { t } = useI18n()
         <span class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
           Camino Plan
         </span>
-      </router-link>
+      </LocaleLink>
 
       <LanguageSwitcher />
     </header>
@@ -58,20 +58,20 @@ const { t } = useI18n()
 
         <!-- 導覽引導按鈕群 -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-20 pt-2">
-          <router-link
+          <LocaleLink
             to="/"
             class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-white text-slate-700 text-xs sm:text-sm font-medium transition-colors inline-flex items-center justify-center gap-1.5 cursor-pointer"
           >
             <Home class="w-4 h-4 text-slate-500" />
             <span>{{ t('notFound.backToHome') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/schedule/frances"
             class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-sm font-semibold transition-colors shadow-xs inline-flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>{{ t('notFound.backToSchedule') }}</span>
             <ArrowRight class="w-4 h-4" />
-          </router-link>
+          </LocaleLink>
         </div>
       </div>
     </main>

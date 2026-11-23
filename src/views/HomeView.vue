@@ -10,6 +10,7 @@ import { useSyncBackup } from '@/composables/useSyncBackup'
 import { usePackingStore } from '@/stores/packing'
 import { useScheduleStore } from '@/stores/schedule'
 import { AVAILABLE_ROUTES } from '@/data/routes'
+import { extractLocaleFromPath, localizePath, stripLocalePrefix } from '@/utils/localeRoute'
 import type { RouteId } from '@/types/route'
 
 // 非首屏分頁採用非同步載入（Code Splitting），降低首屏主執行緒負擔
@@ -21,11 +22,12 @@ const route = useRoute()
 const router = useRouter()
 const scheduleStore = useScheduleStore()
 
-// 依據當前 URL Path 初始化分頁狀態
+// 依據當前 URL Path 初始化分頁狀態（剝離 /en 語系前綴）
 const getTabFromRoute = (path: string): 'schedule' | 'packing' | 'transport' | 'budget' => {
-  if (path.startsWith('/packing')) return 'packing'
-  if (path.startsWith('/transport')) return 'transport'
-  if (path.startsWith('/budget')) return 'budget'
+  const basePath = stripLocalePrefix(path)
+  if (basePath.startsWith('/packing')) return 'packing'
+  if (basePath.startsWith('/transport')) return 'transport'
+  if (basePath.startsWith('/budget')) return 'budget'
   return 'schedule'
 }
 
@@ -75,8 +77,9 @@ watch(currentTab, (newTab) => {
       targetPath = `/${newTab}/${routeId}`
     }
   }
-  if (route.path !== targetPath) {
-    router.push(targetPath)
+  const localizedTargetPath = localizePath(targetPath, extractLocaleFromPath(route.path))
+  if (route.path !== localizedTargetPath) {
+    router.push(localizedTargetPath)
   }
 })
 

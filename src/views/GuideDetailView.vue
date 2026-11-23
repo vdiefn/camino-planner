@@ -17,6 +17,7 @@ import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 import { GUIDE_ARTICLES, GUIDE_CATEGORY_STYLES, getGuideBySlug } from '@/data/guides'
+import { localizePath } from '@/utils/localeRoute'
 
 const route = useRoute()
 const { t, locale } = useI18n()
@@ -44,7 +45,11 @@ watchEffect(() => {
 
   if (!article.value) return
   const item = article.value
-  const articleUrl = `https://camino-plan.com/guides/${item.slug}`
+  const currentLocale = isEn.value ? 'en' : 'zh-TW'
+  const articleUrl = `https://camino-plan.com${localizePath(`/guides/${item.slug}`, currentLocale)}`
+  const homeUrl = `https://camino-plan.com${localizePath('/', currentLocale)}`
+  const guidesUrl = `https://camino-plan.com${localizePath('/guides', currentLocale)}`
+  const ogImageUrl = `https://camino-plan.com/${isEn.value ? 'og-cover-en.png' : 'og-cover.png'}`
   const articleTitle = isEn.value ? item.titleEn : item.title
   const schemaData = {
     '@context': 'https://schema.org',
@@ -53,9 +58,9 @@ watchEffect(() => {
         '@type': 'Article',
         headline: articleTitle,
         description: isEn.value ? item.seoDescriptionEn : item.seoDescription,
-        image: ['https://camino-plan.com/og-cover.png'],
+        image: [ogImageUrl],
         dateModified: item.updatedAt,
-        inLanguage: isEn.value ? 'en' : 'zh-TW',
+        inLanguage: currentLocale,
         mainEntityOfPage: {
           '@type': 'WebPage',
           '@id': articleUrl,
@@ -64,13 +69,13 @@ watchEffect(() => {
           {
             '@type': 'Organization',
             name: 'Camino Plan',
-            url: 'https://camino-plan.com/',
+            url: homeUrl,
           },
         ],
         publisher: {
           '@type': 'Organization',
           name: 'Camino Plan',
-          url: 'https://camino-plan.com/',
+          url: homeUrl,
         },
       },
       {
@@ -80,13 +85,13 @@ watchEffect(() => {
             '@type': 'ListItem',
             position: 1,
             name: 'Camino Plan',
-            item: 'https://camino-plan.com/',
+            item: homeUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: isEn.value ? 'Guides' : '實戰攻略',
-            item: 'https://camino-plan.com/guides',
+            item: guidesUrl,
           },
           {
             '@type': 'ListItem',
@@ -116,7 +121,7 @@ onUnmounted(() => {
   <div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
-        <router-link
+        <LocaleLink
           to="/"
           class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity"
         >
@@ -130,49 +135,49 @@ onUnmounted(() => {
           <span class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900">
             Camino Plan
           </span>
-        </router-link>
+        </LocaleLink>
 
         <div class="hidden lg:flex items-center gap-2 whitespace-nowrap">
-          <router-link
+          <LocaleLink
             to="/history"
             active-class="!text-slate-800 bg-amber-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
             <span>{{ t('nav.history') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/routes"
             active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Compass class="w-4 h-4 text-emerald-600" />
             <span>{{ t('nav.routes') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/guides"
             active-class="!text-slate-800 bg-violet-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <BookOpen class="w-4 h-4 text-violet-400" />
             <span>{{ t('nav.guides') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/faq"
             active-class="!text-slate-800 bg-sky-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ t('nav.faq') }}</span>
-          </router-link>
+          </LocaleLink>
           <LanguageSwitcher />
-          <router-link
+          <LocaleLink
             to="/guides"
             class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200/90 text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
           >
             <ArrowLeft class="w-4 h-4" />
             <span>{{ t('guides.backToList') }}</span>
-          </router-link>
+          </LocaleLink>
         </div>
 
         <div class="flex lg:hidden items-center gap-1.5">
@@ -263,19 +268,19 @@ onUnmounted(() => {
                 {{ isEn ? article.relatedTool.descriptionEn : article.relatedTool.description }}
               </p>
             </div>
-            <router-link
+            <LocaleLink
               :to="article.relatedTool.path"
               class="shrink-0 self-start sm:self-center whitespace-nowrap inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors"
             >
               <span>{{ isEn ? article.relatedTool.labelEn : article.relatedTool.label }}</span>
               <ArrowRight class="w-3.5 h-3.5 shrink-0" />
-            </router-link>
+            </LocaleLink>
           </section>
         </article>
 
         <!-- 上下篇閱讀導覽 -->
         <nav class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <router-link
+          <LocaleLink
             v-if="adjacentArticles.prev"
             :to="`/guides/${adjacentArticles.prev.slug}`"
             class="rounded-xl bg-white border border-slate-200/80 p-4 hover:border-amber-300 transition-colors space-y-1"
@@ -284,10 +289,10 @@ onUnmounted(() => {
             <p class="text-sm font-semibold text-slate-800 line-clamp-1">
               {{ isEn ? adjacentArticles.prev.titleEn : adjacentArticles.prev.title }}
             </p>
-          </router-link>
+          </LocaleLink>
           <div v-else class="hidden sm:block" />
 
-          <router-link
+          <LocaleLink
             v-if="adjacentArticles.next"
             :to="`/guides/${adjacentArticles.next.slug}`"
             class="rounded-xl bg-white border border-slate-200/80 p-4 hover:border-amber-300 transition-colors space-y-1 sm:text-right"
@@ -296,7 +301,7 @@ onUnmounted(() => {
             <p class="text-sm font-semibold text-slate-800 line-clamp-1">
               {{ isEn ? adjacentArticles.next.titleEn : adjacentArticles.next.title }}
             </p>
-          </router-link>
+          </LocaleLink>
         </nav>
       </div>
 
@@ -307,13 +312,13 @@ onUnmounted(() => {
       >
         <h1 class="text-xl font-bold text-slate-900">{{ t('guides.notFoundTitle') }}</h1>
         <p class="text-sm text-slate-600">{{ t('guides.notFoundDesc') }}</p>
-        <router-link
+        <LocaleLink
           to="/guides"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold"
         >
           <ArrowLeft class="w-4 h-4" />
           <span>{{ t('guides.backToList') }}</span>
-        </router-link>
+        </LocaleLink>
       </div>
     </main>
 

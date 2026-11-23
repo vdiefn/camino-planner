@@ -56,7 +56,7 @@ function handleTabClick(tab: TabType) {
   <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md print:hidden">
     <div class="relative mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
       <!-- 左側：品牌標誌與標題（點選返回首頁） -->
-      <router-link
+      <LocaleLink
         to="/"
         class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity cursor-pointer"
       >
@@ -74,7 +74,7 @@ function handleTabClick(tab: TabType) {
             </span>
           </div>
         </div>
-      </router-link>
+      </LocaleLink>
 
       <!-- 中間：桌面頂部 Tab 導覽列（>= 1024px 展開，居中對齊） -->
       <nav aria-label="主要功能導覽" class="hidden lg:flex items-center gap-0.5 lg:gap-1 rounded-xl bg-slate-100 p-0.5 lg:p-1 absolute left-1/2 -translate-x-1/2">
@@ -155,7 +155,7 @@ function handleTabClick(tab: TabType) {
               class="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-slate-100 rounded-xl bg-white p-1.5 shadow-lg border border-slate-200/90 focus:outline-hidden z-50"
             >
               <MenuItem v-slot="{ active }">
-                <router-link
+                <LocaleLink
                   to="/history"
                   :class="[
                     active ? 'bg-amber-50 text-amber-700' : 'text-slate-700',
@@ -164,10 +164,10 @@ function handleTabClick(tab: TabType) {
                 >
                   <Sparkles class="w-4 h-4 text-amber-500 shrink-0" />
                   <span>{{ $t('nav.historyLong') }}</span>
-                </router-link>
+                </LocaleLink>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <router-link
+                <LocaleLink
                   to="/routes"
                   :class="[
                     active ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700',
@@ -176,10 +176,10 @@ function handleTabClick(tab: TabType) {
                 >
                   <Compass class="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>{{ $t('nav.routesLong') }}</span>
-                </router-link>
+                </LocaleLink>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <router-link
+                <LocaleLink
                   to="/guides"
                   :class="[
                     active ? 'bg-violet-50 text-violet-700' : 'text-slate-700',
@@ -188,10 +188,10 @@ function handleTabClick(tab: TabType) {
                 >
                   <BookOpen class="w-4 h-4 text-violet-400 shrink-0" />
                   <span>{{ $t('nav.guidesLong') }}</span>
-                </router-link>
+                </LocaleLink>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <router-link
+                <LocaleLink
                   to="/faq"
                   :class="[
                     active ? 'bg-sky-50 text-sky-700' : 'text-slate-700',
@@ -200,7 +200,7 @@ function handleTabClick(tab: TabType) {
                 >
                   <HelpCircle class="w-4 h-4 text-sky-600 shrink-0" />
                   <span>{{ $t('nav.faqLong') }}</span>
-                </router-link>
+                </LocaleLink>
               </MenuItem>
             </MenuItems>
           </transition>
