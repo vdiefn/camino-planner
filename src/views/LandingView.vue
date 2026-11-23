@@ -14,6 +14,7 @@ import {
   Sparkles,
   Compass,
   BookOpen,
+  CloudSun,
   Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
@@ -150,6 +151,13 @@ function handleRouteSelect(routeId: RouteId) {
           >
             <BookOpen class="w-4 h-4 text-violet-400" />
             <span>{{ $t('nav.guides') }}</span>
+          </LocaleLink>
+          <LocaleLink
+            to="/weather"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-teal-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
+          >
+            <CloudSun class="w-4 h-4 text-teal-600" />
+            <span>{{ $t('nav.weather') }}</span>
           </LocaleLink>
           <LocaleLink
             to="/faq"

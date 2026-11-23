@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
   BookOpen,
+  CloudSun,
   ArrowRight,
   Clock,
   Compass,
@@ -83,6 +84,14 @@ const filteredArticles = computed(() => {
           >
             <BookOpen class="w-4 h-4 text-violet-400" />
             <span>{{ t('nav.guides') }}</span>
+          </LocaleLink>
+          <LocaleLink
+            to="/weather"
+            active-class="!text-slate-800 bg-teal-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-teal-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <CloudSun class="w-4 h-4 text-teal-600" />
+            <span>{{ t('nav.weather') }}</span>
           </LocaleLink>
           <LocaleLink
             to="/faq"
