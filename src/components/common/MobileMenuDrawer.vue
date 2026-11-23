@@ -20,10 +20,11 @@ import {
   TrainFront,
   Coins,
 } from 'lucide-vue-next'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useScheduleStore } from '@/stores/schedule'
 import { useFeedbackModal } from '@/composables/useFeedbackModal'
 import { useSyncBackup } from '@/composables/useSyncBackup'
+import { extractLocaleFromPath, localizePath } from '@/utils/localeRoute'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 
 interface Props {
@@ -35,6 +36,7 @@ const emit = defineEmits<{
   (e: 'update:isOpen', value: boolean): void
 }>()
 
+const route = useRoute()
 const router = useRouter()
 const scheduleStore = useScheduleStore()
 const { openFeedback } = useFeedbackModal()
@@ -55,7 +57,7 @@ function close() {
 
 function navigateTo(path: string) {
   close()
-  router.push(path)
+  router.push(localizePath(path, extractLocaleFromPath(route.path)))
 }
 
 function handleOpenSync() {

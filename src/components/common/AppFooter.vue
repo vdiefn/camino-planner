@@ -20,28 +20,28 @@ const { openSyncModal } = useSyncBackup()
         </p>
       </div>
       <span class="text-slate-300 hidden sm:inline">|</span>
-      <router-link
+      <LocaleLink
         to="/about"
         class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
       >
         {{ t('footer.about') }}
-      </router-link>
+      </LocaleLink>
       <span class="text-slate-300 hidden sm:inline">|</span>
-      <router-link
+      <LocaleLink
         to="/contact"
         class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
       >
         {{ t('footer.contact') }}
-      </router-link>
+      </LocaleLink>
       <span class="text-slate-300 hidden sm:inline">|</span>
-      <router-link
+      <LocaleLink
         to="/privacy"
         target="_blank"
         rel="noopener"
         class="text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors cursor-pointer shrink-0"
       >
         {{ t('footer.privacy') }}
-      </router-link>
+      </LocaleLink>
       <span class="text-slate-300 hidden sm:inline">|</span>
       <button
         type="button"

@@ -22,6 +22,7 @@ import { useScheduleStore } from "@/stores/schedule";
 import GoogleAd from "@/components/common/GoogleAd.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 import { useStickySidebar } from "@/composables/useStickySidebar";
+import { extractLocaleFromPath, localizePath } from "@/utils/localeRoute";
 
 const { t, locale } = useI18n();
 const route = useRoute();
@@ -87,7 +88,7 @@ watch(
 const handleSelectTargetRoute = (routeId: TransportTargetRoute) => {
   selectedTargetRoute.value = routeId;
   if (route.params.routeId !== routeId) {
-    router.push(`/transport/${routeId}`);
+    router.push(localizePath(`/transport/${routeId}`, extractLocaleFromPath(route.path)));
   }
 };
 

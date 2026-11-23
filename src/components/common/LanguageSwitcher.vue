@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 import { Menu as HeadlessMenu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { Globe, Check } from 'lucide-vue-next'
-import { setAppLocale, type SupportedLocale } from '@/i18n'
+import { type SupportedLocale } from '@/i18n'
+import { localizePath } from '@/utils/localeRoute'
 
 interface Props {
   mode?: 'dropdown' | 'inline'
@@ -14,6 +16,8 @@ withDefaults(defineProps<Props>(), {
 })
 
 const { locale } = useI18n()
+const route = useRoute()
+const router = useRouter()
 
 const currentLocale = computed(() => locale.value as SupportedLocale)
 
@@ -23,7 +27,15 @@ const languages: { code: SupportedLocale; label: string; shortLabel: string }[] 
 ]
 
 function switchLocale(target: SupportedLocale) {
-  setAppLocale(target)
+  if (target === currentLocale.value) return
+  const targetPath = localizePath(route.path, target)
+  const nextQuery = { ...route.query }
+  delete nextQuery.lang
+  router.push({
+    path: targetPath,
+    query: nextQuery,
+    hash: route.hash,
+  })
 }
 </script>
 

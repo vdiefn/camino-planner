@@ -12,7 +12,7 @@ const { t } = useI18n()
     <!-- 頂部獨立標準導覽列 -->
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
-        <router-link
+        <LocaleLink
           to="/"
           class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity"
         >
@@ -28,17 +28,17 @@ const { t } = useI18n()
               Camino Plan
             </span>
           </div>
-        </router-link>
+        </LocaleLink>
 
         <div class="flex items-center gap-2">
           <LanguageSwitcher />
-          <router-link
+          <LocaleLink
             to="/"
             class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200/90 text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
           >
             <ArrowLeft class="w-4 h-4" />
             <span>{{ t('about.backToPlanner') }}</span>
-          </router-link>
+          </LocaleLink>
         </div>
       </div>
     </header>
@@ -98,20 +98,20 @@ const { t } = useI18n()
         </section>
 
         <div class="flex flex-wrap items-center gap-3 pt-2">
-          <router-link
+          <LocaleLink
             to="/routes"
             class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors"
           >
             <BookOpen class="w-4 h-4" />
             <span>{{ t('about.ctaRoutes') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/contact"
             class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-medium transition-colors"
           >
             <Mail class="w-4 h-4" />
             <span>{{ t('about.ctaContact') }}</span>
-          </router-link>
+          </LocaleLink>
         </div>
       </article>
     </main>

@@ -77,7 +77,7 @@ onUnmounted(() => {
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
         <!-- 品牌標誌 -->
-        <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
+        <LocaleLink to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
           <img
             src="/favicon.svg"
             :alt="$t('app.logoAlt')"
@@ -90,61 +90,61 @@ onUnmounted(() => {
               Camino Plan
             </span>
           </div>
-        </router-link>
+        </LocaleLink>
 
         <!-- 右側快速傳送門（電腦版完整展示） -->
         <div class="hidden lg:flex items-center gap-2 whitespace-nowrap">
-          <router-link
+          <LocaleLink
             to="/history"
             active-class="!text-slate-800 bg-amber-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Sparkles class="w-4 h-4 text-amber-500" />
             <span>{{ t('faq.historyLink') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/routes"
             active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Compass class="w-4 h-4 text-emerald-600" />
             <span>{{ t('faq.routesLink') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/guides"
             active-class="!text-slate-800 bg-violet-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <BookOpen class="w-4 h-4 text-violet-400" />
             <span>{{ t('nav.guides') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/faq"
             active-class="!text-slate-800 bg-sky-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ t('nav.faq') }}</span>
-          </router-link>
+          </LocaleLink>
           <LanguageSwitcher />
-          <router-link
+          <LocaleLink
             to="/schedule/frances"
             class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
           >
             <span>{{ t('landing.startPlanning') }}</span>
             <ChevronRight class="w-3.5 h-3.5" />
-          </router-link>
+          </LocaleLink>
         </div>
 
         <!-- 右側快速傳送門（手機與平板：返回按鈕 ＋ 漢堡選單） -->
         <div class="flex lg:hidden items-center gap-1.5">
-          <router-link
+          <LocaleLink
             to="/"
             class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200/90 text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
           >
             <ArrowLeft class="w-3.5 h-3.5" />
             <span>{{ t('faq.back') }}</span>
-          </router-link>
+          </LocaleLink>
           <button
             type="button"
             @click="isMenuDrawerOpen = true"

@@ -15,7 +15,7 @@ const CONTACT_EMAIL = 'contact@camino-plan.com'
     <!-- 頂部獨立標準導覽列 -->
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
-        <router-link
+        <LocaleLink
           to="/"
           class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity"
         >
@@ -31,17 +31,17 @@ const CONTACT_EMAIL = 'contact@camino-plan.com'
               Camino Plan
             </span>
           </div>
-        </router-link>
+        </LocaleLink>
 
         <div class="flex items-center gap-2">
           <LanguageSwitcher />
-          <router-link
+          <LocaleLink
             to="/"
             class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200/90 text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shadow-2xs"
           >
             <ArrowLeft class="w-4 h-4" />
             <span>{{ t('contact.backToPlanner') }}</span>
-          </router-link>
+          </LocaleLink>
         </div>
       </div>
     </header>

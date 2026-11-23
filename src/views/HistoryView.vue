@@ -18,6 +18,7 @@ import {
   CULTURAL_SYMBOLS,
   CREDENCIAL_INFO,
 } from '@/data/history'
+import { localizePath } from '@/utils/localeRoute'
 
 const { t, locale } = useI18n()
 const isEn = computed(() => locale.value.startsWith('en'))
@@ -108,20 +109,24 @@ function updateArticleSchema() {
     existing.remove()
   }
 
+  const currentLocale = locale.value === 'en' ? 'en' : 'zh-TW'
+  const historyUrl = `https://camino-plan.com${localizePath('/history', currentLocale)}`
+  const homeUrl = `https://camino-plan.com${localizePath('/', currentLocale)}`
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: t('history.pageTitle'),
     description: t('history.pageDescription'),
-    inLanguage: locale.value,
+    inLanguage: currentLocale,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': 'https://camino-plan.com/history',
+      '@id': historyUrl,
     },
     publisher: {
       '@type': 'Organization',
       name: 'Camino Plan',
-      url: 'https://camino-plan.com/',
+      url: homeUrl,
     },
   }
 
@@ -188,7 +193,7 @@ onUnmounted(() => {
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
         <!-- 品牌標誌 -->
-        <router-link to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
+        <LocaleLink to="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity">
           <img
             src="/favicon.svg"
             :alt="$t('app.logoAlt')"
@@ -201,61 +206,61 @@ onUnmounted(() => {
               Camino Plan
             </span>
           </div>
-        </router-link>
+        </LocaleLink>
 
         <!-- 右側快速傳送門（電腦版完整展示） -->
         <div class="hidden lg:flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-          <router-link
+          <LocaleLink
             to="/history"
             active-class="!text-slate-800 bg-amber-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-amber-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Scroll class="w-4 h-4 text-amber-500" />
             <span>{{ t('nav.history') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/routes"
             active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <Compass class="w-4 h-4 text-emerald-600" />
             <span>{{ t('history.routesLink') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/guides"
             active-class="!text-slate-800 bg-violet-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <BookOpen class="w-4 h-4 text-violet-400" />
             <span>{{ t('nav.guides') }}</span>
-          </router-link>
-          <router-link
+          </LocaleLink>
+          <LocaleLink
             to="/faq"
             active-class="!text-slate-800 bg-sky-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
             <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ t('history.faqLink') }}</span>
-          </router-link>
+          </LocaleLink>
           <LanguageSwitcher />
-          <router-link
+          <LocaleLink
             to="/schedule/frances"
             class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
           >
             <span>{{ t('history.startPlanning') }}</span>
             <ChevronRight class="w-3.5 h-3.5" />
-          </router-link>
+          </LocaleLink>
         </div>
 
         <!-- 右側快速傳送門（手機與平板：開始規劃 ＋ 漢堡選單） -->
         <div class="flex lg:hidden items-center gap-1.5">
-          <router-link
+          <LocaleLink
             to="/schedule/frances"
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1"
           >
             <span>{{ t('history.startPlanning') }}</span>
             <ChevronRight class="w-3 h-3" />
-          </router-link>
+          </LocaleLink>
           <button
             type="button"
             @click="isMenuDrawerOpen = true"
@@ -493,18 +498,18 @@ onUnmounted(() => {
                 </p>
               </div>
               <div class="flex items-center gap-2.5 shrink-0">
-                <router-link
+                <LocaleLink
                   to="/routes"
                   class="px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs sm:text-sm transition-colors border border-slate-200 shadow-2xs cursor-pointer"
                 >
                   {{ t('history.cta.browseRoutes') }}
-                </router-link>
-                <router-link
+                </LocaleLink>
+                <LocaleLink
                   to="/schedule/frances"
                   class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs sm:text-sm transition-colors shadow-xs cursor-pointer"
                 >
                   {{ t('history.cta.startPlan') }}
-                </router-link>
+                </LocaleLink>
               </div>
             </div>
           </div>

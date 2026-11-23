@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { extractLocaleFromPath, localizePath } from "@/utils/localeRoute";
 import { useScheduleStore } from "@/stores/schedule";
 import StageCard from "@/components/schedule/StageCard.vue";
 import ChangeWaypointModal from "@/components/schedule/ChangeWaypointModal.vue";
@@ -27,6 +28,7 @@ import {
 } from "lucide-vue-next";
 
 const scheduleStore = useScheduleStore();
+const route = useRoute();
 const router = useRouter();
 const { t, locale } = useI18n();
 
@@ -196,22 +198,24 @@ const finisterreDailyAvgKm = computed(() => {
 // 處理路線切換（同步更新 URL 路由，確保長尾網址與瀏覽器歷程一致）
 const handleSwitchRoute = (routeId: RouteId) => {
   scheduleStore.switchRoute(routeId);
+  const currentLocale = extractLocaleFromPath(route.path);
   const branchId = scheduleStore.currentDraft?.branchId;
   if (routeId === "portugues" && branchId === "costa") {
-    router.push(`/schedule/portugues/costa`);
+    router.push(localizePath(`/schedule/portugues/costa`, currentLocale));
   } else {
-    router.push(`/schedule/${routeId}`);
+    router.push(localizePath(`/schedule/${routeId}`, currentLocale));
   }
 };
 
 // 處理分支切換（葡萄牙中央線 vs 海岸線等長尾路徑連動）
 const handleSwitchBranch = (branchId: string) => {
   scheduleStore.switchBranch(branchId);
+  const currentLocale = extractLocaleFromPath(route.path);
   if (scheduleStore.currentRouteId === "portugues") {
     if (branchId === "costa") {
-      router.push(`/schedule/portugues/costa`);
+      router.push(localizePath(`/schedule/portugues/costa`, currentLocale));
     } else {
-      router.push(`/schedule/portugues/central`);
+      router.push(localizePath(`/schedule/portugues/central`, currentLocale));
     }
   }
 };

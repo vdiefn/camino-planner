@@ -1,116 +1,381 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- 網站核心首頁 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://camino-plan.com/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en" />
   </url>
-  <!-- 行程規劃三大路線專屬著陸頁 -->
+  <url>
+    <loc>https://camino-plan.com/en</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en" />
+  </url>
   <url>
     <loc>https://camino-plan.com/schedule/frances</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/frances" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/frances" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/frances" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/schedule/frances</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/frances" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/frances" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/frances" />
   </url>
   <url>
     <loc>https://camino-plan.com/schedule/portugues</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/portugues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/portugues" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/portugues" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/schedule/portugues</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/portugues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/portugues" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/portugues" />
   </url>
   <url>
     <loc>https://camino-plan.com/schedule/portugues/costa</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/portugues/costa" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/schedule/portugues/costa</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/portugues/costa" />
   </url>
   <url>
     <loc>https://camino-plan.com/schedule/norte</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/norte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/norte" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/norte" />
   </url>
-  <!-- 起點交通三大路線專屬著陸頁 -->
+  <url>
+    <loc>https://camino-plan.com/en/schedule/norte</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/schedule/norte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/schedule/norte" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/schedule/norte" />
+  </url>
   <url>
     <loc>https://camino-plan.com/transport/frances</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/frances" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/frances" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/frances" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/transport/frances</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/frances" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/frances" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/frances" />
   </url>
   <url>
     <loc>https://camino-plan.com/transport/portugues</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/portugues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/portugues" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/portugues" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/transport/portugues</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/portugues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/portugues" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/portugues" />
   </url>
   <url>
     <loc>https://camino-plan.com/transport/portugues/costa</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/portugues/costa" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/transport/portugues/costa</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/portugues/costa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/portugues/costa" />
   </url>
   <url>
     <loc>https://camino-plan.com/transport/norte</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/norte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/norte" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/norte" />
   </url>
-  <!-- 裝備負重、花費預算與隱私權政策 -->
+  <url>
+    <loc>https://camino-plan.com/en/transport/norte</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/transport/norte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/transport/norte" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/transport/norte" />
+  </url>
   <url>
     <loc>https://camino-plan.com/packing</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/packing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/packing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/packing" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/packing</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/packing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/packing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/packing" />
   </url>
   <url>
     <loc>https://camino-plan.com/budget</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/budget" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/budget" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/budget" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/budget</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/budget" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/budget" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/budget" />
   </url>
   <url>
     <loc>https://camino-plan.com/faq</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/faq" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/faq</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/faq" />
   </url>
   <url>
     <loc>https://camino-plan.com/history</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/history" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/history" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/history</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/history" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/history" />
   </url>
   <url>
     <loc>https://camino-plan.com/routes</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/routes</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes" />
   </url>
   <url>
     <loc>https://camino-plan.com/routes/frances</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes/frances" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes/frances" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes/frances" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/routes/frances</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes/frances" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes/frances" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes/frances" />
   </url>
   <url>
     <loc>https://camino-plan.com/routes/portugues</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes/portugues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes/portugues" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes/portugues" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/routes/portugues</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes/portugues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes/portugues" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes/portugues" />
   </url>
   <url>
     <loc>https://camino-plan.com/routes/norte</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes/norte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes/norte" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes/norte" />
   </url>
-  <!-- 實戰攻略文章專區 -->
+  <url>
+    <loc>https://camino-plan.com/en/routes/norte</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes/norte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes/norte" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes/norte" />
+  </url>
   <url>
     <loc>https://camino-plan.com/guides</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/guides</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides" />
   </url>
   <url>
     <loc>https://camino-plan.com/guides/best-seasons</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/best-seasons" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/best-seasons" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/best-seasons" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/guides/best-seasons</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/best-seasons" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/best-seasons" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/best-seasons" />
   </url>
   <url>
     <loc>https://camino-plan.com/guides/pyrenees-crossing</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/pyrenees-crossing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/pyrenees-crossing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/pyrenees-crossing" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/guides/pyrenees-crossing</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/pyrenees-crossing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/pyrenees-crossing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/pyrenees-crossing" />
   </url>
   <url>
     <loc>https://camino-plan.com/guides/last-100km-guide</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/last-100km-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/last-100km-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/last-100km-guide" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/guides/last-100km-guide</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/last-100km-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/last-100km-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/last-100km-guide" />
   </url>
   <url>
     <loc>https://camino-plan.com/guides/albergue-guide</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/albergue-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/albergue-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/albergue-guide" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/guides/albergue-guide</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/albergue-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/albergue-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/albergue-guide" />
   </url>
   <url>
     <loc>https://camino-plan.com/guides/footwear-and-luggage</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/footwear-and-luggage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/footwear-and-luggage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/footwear-and-luggage" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/guides/footwear-and-luggage</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/footwear-and-luggage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/footwear-and-luggage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/footwear-and-luggage" />
   </url>
   <url>
     <loc>https://camino-plan.com/guides/budget-breakdown</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/budget-breakdown" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/budget-breakdown" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/budget-breakdown" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/guides/budget-breakdown</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/guides/budget-breakdown" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/guides/budget-breakdown" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/guides/budget-breakdown" />
   </url>
   <url>
     <loc>https://camino-plan.com/about</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/about" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/about</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/about" />
   </url>
   <url>
     <loc>https://camino-plan.com/contact</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/contact" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/contact</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/contact" />
   </url>
   <url>
     <loc>https://camino-plan.com/privacy</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/privacy" />
+  </url>
+  <url>
+    <loc>https://camino-plan.com/en/privacy</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/privacy" />
   </url>
 </urlset>
