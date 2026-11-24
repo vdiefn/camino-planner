@@ -331,12 +331,12 @@ onUnmounted(() => {
       ]"
     >
       <div class="flex items-center justify-between gap-2 sm:gap-3">
-        <h2
+        <h1
           class="text-base sm:text-lg md:text-xl text-slate-800 flex items-center gap-2 truncate"
         >
           <span class="sm:hidden">{{ t('packing.title') }}</span>
           <span class="hidden sm:inline font-bold">{{ t('packing.titleLong') }}</span>
-        </h2>
+        </h1>
 
         <!-- 右側精巧功能按鈕群（手機端精簡文字防折行） -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">

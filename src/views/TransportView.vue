@@ -333,11 +333,11 @@ onUnmounted(() => {
       ]"
     >
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <h2
+        <h1
           class="text-base sm:text-lg md:text-xl font-bold text-slate-800 flex items-center gap-2 shrink-0"
         >
           {{ t('transport.title') }}
-        </h2>
+        </h1>
 
         <!-- 路線起點切換標籤膠囊列 -->
         <div class="flex items-center gap-1.5 shrink-0 overflow-x-auto no-scrollbar py-0.5">

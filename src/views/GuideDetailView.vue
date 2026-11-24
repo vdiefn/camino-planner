@@ -44,7 +44,21 @@ watchEffect(() => {
   const existing = document.head.querySelector('#guide-article-schema')
   if (existing) existing.remove()
 
-  if (!article.value) return
+  if (!article.value) {
+    let robotsEl = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')
+    if (!robotsEl) {
+      robotsEl = document.createElement('meta')
+      robotsEl.setAttribute('name', 'robots')
+      document.head.appendChild(robotsEl)
+    }
+    robotsEl.setAttribute('content', 'noindex, nofollow')
+    document.head.querySelector('link[rel="canonical"]')?.remove()
+    document.head
+      .querySelectorAll('link[rel="alternate"][hreflang]')
+      .forEach((el) => el.remove())
+    document.title = `${t('guides.notFoundTitle')} | Camino Plan`
+    return
+  }
   const item = article.value
   const currentLocale = isEn.value ? 'en' : 'zh-TW'
   const articleUrl = `https://camino-plan.com${localizePath(`/guides/${item.slug}`, currentLocale)}`
