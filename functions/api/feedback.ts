@@ -32,6 +32,22 @@ const MAX_CONTENT_LENGTH = 2000
 const MAX_FIELD_LENGTH = 120
 const UPSTREAM_TIMEOUT_MS = 5000
 
+/** 移除換行與不可見控制字元，防止郵件主旨斷行與日誌注入 */
+function stripControlChars(value: string): string {
+  return value.replace(/[\r\n\x00-\x1f\x7f]/g, ' ').trim()
+}
+
+function jsonResponse(payload: unknown, status: number): Response {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-Content-Type-Options': 'nosniff',
+      'Cache-Control': 'no-store'
+    }
+  })
+}
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     const { request, env } = context
@@ -44,59 +60,45 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       Boolean(origin) &&
       (PROD_ORIGIN_REGEX.test(origin!) || (isLocalReq && LOCAL_ORIGIN_REGEX.test(origin!)))
     if (!isAllowedOrigin) {
-      return new Response(JSON.stringify({ success: false, error: '非法請求來源' }), {
-        status: 403,
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return jsonResponse({ success: false, error: '非法請求來源' }, 403)
     }
 
     const contentLength = Number(request.headers.get('Content-Length') || 0)
     if (contentLength > MAX_BODY_CHARS) {
-      return new Response(JSON.stringify({ success: false, error: '回饋內容超過長度上限' }), {
-        status: 413,
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return jsonResponse({ success: false, error: '回饋內容超過長度上限' }, 413)
     }
 
     const rawText = await request.text()
     if (rawText.length > MAX_BODY_CHARS) {
-      return new Response(JSON.stringify({ success: false, error: '回饋內容超過長度上限' }), {
-        status: 413,
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return jsonResponse({ success: false, error: '回饋內容超過長度上限' }, 413)
     }
 
     let body: FeedbackPayload
     try {
       body = JSON.parse(rawText) as FeedbackPayload
     } catch {
-      return new Response(JSON.stringify({ success: false, error: '無效的 JSON 格式' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return jsonResponse({ success: false, error: '無效的 JSON 格式' }, 400)
     }
 
     // 1. 防機器人蜜罐檢查 (若機器人填寫了隱藏欄位直接靜默忽略，避免垃圾信)
     if (body.botField) {
-      return new Response(JSON.stringify({ success: true, message: 'Received' }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return jsonResponse({ success: true, message: 'Received' }, 200)
     }
 
     // 2. 嚴格型別與長度清洗
     const formattedContent =
       typeof body.content === 'string' ? body.content.trim().slice(0, MAX_CONTENT_LENGTH) : ''
     const safeTarget =
-      typeof body.target === 'string' ? body.target.trim().slice(0, MAX_FIELD_LENGTH) : ''
+      typeof body.target === 'string'
+        ? stripControlChars(body.target).slice(0, MAX_FIELD_LENGTH)
+        : ''
     const safeContact =
-      typeof body.contact === 'string' ? body.contact.trim().slice(0, MAX_FIELD_LENGTH) : ''
+      typeof body.contact === 'string'
+        ? stripControlChars(body.contact).slice(0, MAX_FIELD_LENGTH)
+        : ''
 
     if (!formattedContent) {
-      return new Response(JSON.stringify({ success: false, error: '請輸入回饋內容' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return jsonResponse({ success: false, error: '請輸入回饋內容' }, 400)
     }
 
     const categoryText = CATEGORY_LABELS[body.category] || '💬 意見回饋'
@@ -271,36 +273,24 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     // 7. 本機測試模式（若完全未配置任何通道環境變數，印至主控台以利本地開發）
     if (configuredChannels.length === 0) {
       console.log('[Feedback Received - Local/Dev Mode]:', emailSubject, formattedContent)
-      return new Response(JSON.stringify({ success: true, message: '本機測試模式：已接收回饋' }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return jsonResponse({ success: true, message: '本機測試模式：已接收回饋' }, 200)
     }
 
     // 8. 生產環境結果判定（獵殺靜默吞錯）：若配置了發送管道但全數發送失敗，主動回傳錯誤
     if (!isAnyChannelSuccess) {
       console.error('所有回饋轉發通道皆失敗:', failedChannels.join(', '))
-      return new Response(
-        JSON.stringify({
+      return jsonResponse(
+        {
           success: false,
           error: '回饋發送服務暫時無法連線，請稍後再試或直接發送至聯絡信箱'
-        }),
-        {
-          status: 502,
-          headers: { 'Content-Type': 'application/json' }
-        }
+        },
+        502
       )
     }
 
-    return new Response(JSON.stringify({ success: true, message: '感謝您的回饋！' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    })
+    return jsonResponse({ success: true, message: '感謝您的回饋！' }, 200)
   } catch (error) {
     console.error('處理回饋時發生例外:', error)
-    return new Response(JSON.stringify({ success: false, error: '伺服器處理回饋時發生錯誤，請稍後再試' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    })
+    return jsonResponse({ success: false, error: '伺服器處理回饋時發生錯誤，請稍後再試' }, 500)
   }
 }
