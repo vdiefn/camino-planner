@@ -154,7 +154,7 @@ const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
   },
   weather: {
     'zh-TW': {
-      title: '朝聖之路過往天氣與區域氣候查詢 | Camino Plan',
+      title: '朝聖之路過往天氣查詢 | Camino Plan',
       description:
         '依西班牙 AEMET 與葡萄牙 IPMA 1991–2020 官方區域測站統計，比較法國之路、葡萄牙之路、北方之路與世界盡頭各月份溫度與降雨變化，精準準備睡袋與雨具。',
       keywords:
@@ -163,7 +163,7 @@ const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
     en: {
       title: 'Camino Historical Weather & Regional Climate | Camino Plan',
       description:
-        'Compare 1991–2020 official AEMET & IPMA station normals across Camino Francés, Portugués, del Norte, and Finisterre by month and elevation to pack the right gear.',
+        'Compare 1991–2020 official AEMET & IPMA station normals by month and elevation across Camino Francés, Portugués, del Norte, and Finisterre.',
       keywords:
         'Camino de Santiago weather, Camino historical weather, Camino climate by month, Camino packing weather, AEMET IPMA Camino',
     },
