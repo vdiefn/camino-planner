@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import {
   Compass,
   Scroll,
-  ChevronRight,
+  ArrowRight,
   Bookmark,
   BookOpen,
   CloudSun,
@@ -257,7 +257,7 @@ onUnmounted(() => {
             class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
           >
             <span>{{ t('history.startPlanning') }}</span>
-            <ChevronRight class="w-3.5 h-3.5" />
+            <ArrowRight class="w-3.5 h-3.5" />
           </LocaleLink>
         </div>
 
@@ -268,7 +268,7 @@ onUnmounted(() => {
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1"
           >
             <span>{{ t('history.startPlanning') }}</span>
-            <ChevronRight class="w-3 h-3" />
+            <ArrowRight class="w-3 h-3" />
           </LocaleLink>
           <button
             type="button"

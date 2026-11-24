@@ -99,7 +99,7 @@ function handleOpenFeedback() {
           leave-from="translate-x-0"
           leave-to="translate-x-full"
         >
-          <DialogPanel class="relative flex w-full max-w-xs flex-col bg-white pb-4 pt-3 shadow-2xl">
+          <DialogPanel class="relative flex w-64 max-w-[72vw] flex-col bg-white pb-4 pt-3 shadow-2xl">
             <!-- 抽屜頂部：品牌與關閉按鈕 -->
             <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
               <div class="flex items-center gap-2.5">

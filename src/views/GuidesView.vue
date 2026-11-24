@@ -9,7 +9,6 @@ import {
   Compass,
   Sparkles,
   HelpCircle,
-  ChevronRight,
   Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
@@ -107,7 +106,7 @@ const filteredArticles = computed(() => {
             class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5"
           >
             <span>{{ t('landing.startPlanning') }}</span>
-            <ChevronRight class="w-3.5 h-3.5" />
+            <ArrowRight class="w-3.5 h-3.5" />
           </LocaleLink>
         </div>
 
