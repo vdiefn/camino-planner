@@ -128,7 +128,7 @@ function toggleMobileZone(zoneId: string) {
   <div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
     <!-- 頂部導覽列 -->
     <header class="sticky top-0 z-40 h-14 sm:h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-      <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
+      <div class="mx-auto flex h-full max-w-360 items-center justify-between px-4 sm:px-6">
         <LocaleLink
           to="/"
           class="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-85 transition-opacity"

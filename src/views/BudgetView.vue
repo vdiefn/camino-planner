@@ -266,7 +266,7 @@ function handleInputFocus(event: FocusEvent) {
               <div class="flex items-center justify-between">
                 <span class="text-sm sm:text-base font-medium text-slate-900 flex items-center gap-1.5">
                   <span>{{ getPersonaName('STANDARD') }}</span>
-                  <span class="text-[11px] sm:text-xs font-normal px-1.5 py-0.5 rounded text-emerald-800 bg-emerald-20 border border-emerald-600">
+                  <span class="text-[11px] sm:text-xs font-medium px-2 py-0.5 rounded-md text-emerald-700 bg-emerald-50 border border-emerald-200">
                     {{ t('budget.styles.STANDARD.recommended') }}
                   </span>
                 </span>
