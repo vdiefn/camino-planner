@@ -8,12 +8,12 @@ import {
   Train,
   AlertTriangle,
   Sparkles,
-  ChevronRight,
   MapPin,
   CheckCircle2,
   Compass,
   HelpCircle,
   BookOpen,
+  CloudSun,
   Menu,
 } from 'lucide-vue-next'
 import AppFooter from '@/components/common/AppFooter.vue'
@@ -108,6 +108,14 @@ const currentRoute = computed<RouteGuideItem>(() => {
             <span>{{ t('nav.guides') }}</span>
           </LocaleLink>
           <LocaleLink
+            to="/weather"
+            active-class="!text-slate-800 bg-teal-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-teal-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <CloudSun class="w-4 h-4 text-teal-600" />
+            <span>{{ t('nav.weather') }}</span>
+          </LocaleLink>
+          <LocaleLink
             to="/faq"
             active-class="!text-slate-800 bg-sky-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-sky-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
@@ -115,15 +123,15 @@ const currentRoute = computed<RouteGuideItem>(() => {
             <HelpCircle class="w-4 h-4 text-sky-600" />
             <span>{{ t('routesGuide.faqLink') }}</span>
           </LocaleLink>
+          <LanguageSwitcher />
           <LocaleLink
             :to="`/schedule/${activeRouteId}`"
             @click="scheduleStore.switchRoute(activeRouteId)"
             class="text-xs sm:text-sm font-medium bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-1.5 rounded-xl shadow-xs transition-colors inline-flex items-center gap-1.5 cursor-pointer"
           >
             <span>{{ t('routesGuide.startPlanning') }}</span>
-            <ChevronRight class="w-3.5 h-3.5" />
+            <ArrowRight class="w-3.5 h-3.5" />
           </LocaleLink>
-          <LanguageSwitcher />
         </div>
 
         <!-- 右側傳送門（手機與平板：開始規劃 ＋ 漢堡選單） -->
@@ -134,7 +142,7 @@ const currentRoute = computed<RouteGuideItem>(() => {
             class="text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg shadow-xs transition-colors inline-flex items-center gap-1 cursor-pointer"
           >
             <span>{{ t('routesGuide.startPlanning') }}</span>
-            <ChevronRight class="w-3 h-3" />
+            <ArrowRight class="w-3 h-3" />
           </LocaleLink>
           <button
             type="button"

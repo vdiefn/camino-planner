@@ -11,10 +11,12 @@
     "build:prerender": "node scripts/generate-sitemap.mjs && vue-tsc -b && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "node tests/e2e/weather.e2e.mjs"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
+    "chart.js": "^4.6.1",
     "fflate": "^0.8.3",
     "lucide-vue-next": "^1.0.0",
     "pinia": "^4.0.3",

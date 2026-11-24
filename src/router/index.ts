@@ -152,6 +152,22 @@ const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
       keywords: 'Privacy Policy, local storage privacy, Camino Plan terms',
     },
   },
+  weather: {
+    'zh-TW': {
+      title: '朝聖之路過往天氣查詢 | Camino Plan',
+      description:
+        '依西班牙 AEMET 與葡萄牙 IPMA 1991–2020 官方區域測站統計，比較法國之路、葡萄牙之路、北方之路與世界盡頭各月份溫度與降雨變化，精準準備睡袋與雨具。',
+      keywords:
+        '朝聖之路天氣, 朝聖之路過往天氣, 法國之路氣候, 葡萄牙之路天氣, 朝聖之路幾月去, Camino weather, Camino historical climate, AEMET Camino',
+    },
+    en: {
+      title: 'Camino Historical Weather & Regional Climate | Camino Plan',
+      description:
+        'Compare 1991–2020 official AEMET & IPMA station normals by month and elevation across Camino Francés, Portugués, del Norte, and Finisterre.',
+      keywords:
+        'Camino de Santiago weather, Camino historical weather, Camino climate by month, Camino packing weather, AEMET IPMA Camino',
+    },
+  },
   about: {
     'zh-TW': {
       title: '關於我們 | Camino Plan 朝聖之路規劃工具',
@@ -304,6 +320,11 @@ const router = createRouter({
           path: 'guides/:slug',
           name: 'guide-detail',
           component: () => import('@/views/GuideDetailView.vue'),
+        },
+        {
+          path: 'weather',
+          name: 'weather',
+          component: () => import('@/views/WeatherView.vue'),
         },
         {
           path: 'about',

@@ -8,6 +8,7 @@ import {
   Compass,
   Sparkles,
   BookOpen,
+  CloudSun,
   ChevronDown,
   Menu,
 } from 'lucide-vue-next'
@@ -188,6 +189,18 @@ function handleTabClick(tab: TabType) {
                 >
                   <BookOpen class="w-4 h-4 text-violet-400 shrink-0" />
                   <span>{{ $t('nav.guidesLong') }}</span>
+                </LocaleLink>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <LocaleLink
+                  to="/weather"
+                  :class="[
+                    active ? 'bg-teal-50 text-teal-700' : 'text-slate-700',
+                    'flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg transition-colors cursor-pointer',
+                  ]"
+                >
+                  <CloudSun class="w-4 h-4 text-teal-600 shrink-0" />
+                  <span>{{ $t('nav.weatherLong') }}</span>
                 </LocaleLink>
               </MenuItem>
               <MenuItem v-slot="{ active }">

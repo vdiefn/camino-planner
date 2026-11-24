@@ -41,6 +41,7 @@ const PUBLIC_ROUTES = [
   { path: '/guides/albergue-guide', lastmod: '2026-11-23' },
   { path: '/guides/footwear-and-luggage', lastmod: '2026-11-23' },
   { path: '/guides/budget-breakdown', lastmod: '2026-11-23' },
+  { path: '/weather', lastmod: '2026-11-23' },
   // 關於、聯絡與隱私權
   { path: '/about', lastmod: '2026-11-23' },
   { path: '/contact', lastmod: '2026-11-23' },

@@ -10,6 +10,7 @@ import {
   Sparkles,
   Compass,
   BookOpen,
+  CloudSun,
   HelpCircle,
   Menu,
 } from 'lucide-vue-next'
@@ -43,7 +44,21 @@ watchEffect(() => {
   const existing = document.head.querySelector('#guide-article-schema')
   if (existing) existing.remove()
 
-  if (!article.value) return
+  if (!article.value) {
+    let robotsEl = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')
+    if (!robotsEl) {
+      robotsEl = document.createElement('meta')
+      robotsEl.setAttribute('name', 'robots')
+      document.head.appendChild(robotsEl)
+    }
+    robotsEl.setAttribute('content', 'noindex, nofollow')
+    document.head.querySelector('link[rel="canonical"]')?.remove()
+    document.head
+      .querySelectorAll('link[rel="alternate"][hreflang]')
+      .forEach((el) => el.remove())
+    document.title = `${t('guides.notFoundTitle')} | Camino Plan`
+    return
+  }
   const item = article.value
   const currentLocale = isEn.value ? 'en' : 'zh-TW'
   const articleUrl = `https://camino-plan.com${localizePath(`/guides/${item.slug}`, currentLocale)}`
@@ -161,6 +176,14 @@ onUnmounted(() => {
           >
             <BookOpen class="w-4 h-4 text-violet-400" />
             <span>{{ t('nav.guides') }}</span>
+          </LocaleLink>
+          <LocaleLink
+            to="/weather"
+            active-class="!text-slate-800 bg-teal-50/80 font-semibold"
+            class="text-xs sm:text-sm font-medium text-slate-600 hover:text-teal-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
+          >
+            <CloudSun class="w-4 h-4 text-teal-600" />
+            <span>{{ t('nav.weather') }}</span>
           </LocaleLink>
           <LocaleLink
             to="/faq"

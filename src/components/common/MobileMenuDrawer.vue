@@ -11,6 +11,7 @@ import {
   Sparkles,
   Compass,
   BookOpen,
+  CloudSun,
   HelpCircle,
   Share2,
   MessageSquarePlus,
@@ -98,7 +99,7 @@ function handleOpenFeedback() {
           leave-from="translate-x-0"
           leave-to="translate-x-full"
         >
-          <DialogPanel class="relative flex w-full max-w-xs flex-col bg-white pb-4 pt-3 shadow-2xl">
+          <DialogPanel class="relative flex w-64 max-w-[72vw] flex-col bg-white pb-4 pt-3 shadow-2xl">
             <!-- 抽屜頂部：品牌與關閉按鈕 -->
             <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
               <div class="flex items-center gap-2.5">
@@ -249,6 +250,22 @@ function handleOpenFeedback() {
                       </div>
                       <div class="text-sm text-slate-800 group-hover:text-violet-700">
                         {{ $t('nav.guidesLong') }}
+                      </div>
+                    </div>
+                  </button>
+
+                  <!-- 歷史氣候 -->
+                  <button
+                    type="button"
+                    @click="navigateTo('/weather')"
+                    class="w-full flex items-center justify-between py-1 px-2.5 rounded-lg hover:bg-teal-50/70 text-slate-700 hover:text-teal-700 transition-colors text-left group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-2.5">
+                      <div class="p-1.5 rounded-md text-teal-600 shrink-0">
+                        <CloudSun class="w-4.5 h-4.5" />
+                      </div>
+                      <div class="text-sm text-slate-800 group-hover:text-teal-700">
+                        {{ $t('nav.weatherLong') }}
                       </div>
                     </div>
                   </button>

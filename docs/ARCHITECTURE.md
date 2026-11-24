@@ -9,7 +9,7 @@
 - **多語系國際化**：vue-i18n v11 (`zh-TW` / `en` 雙語即時切換，支援語系偵測與動態 SEO Meta 同步)
 - **跨端同步與壓縮**：fflate (二進位 Deflate 壓縮) + uqr (極輕量向量 QR Code 生成)
 - **狀態管理與離線**：Pinia + pinia-plugin-persistedstate + vite-plugin-pwa
-- **自動化測試**：Vitest (全站 13 個測試檔、136 項單元測試)
+- **自動化測試**：Vitest (全站 14 個測試檔、142 項單元測試)
 - **邊緣運算與部署託管**：Cloudflare Pages + Cloudflare Pages Functions (`functions/api/feedback.ts`)
 - **自動化資料同步 (CI/CD)**：GitHub Actions 定期排程 (Cron Workflow) 自動抓取與檢驗
 
@@ -392,7 +392,7 @@ export interface MultiRouteScheduleState {
 2. **UI 子元件依賴倒置 (Dependency Inversion)**：
    - 子元件全面移除對 `src/data/waypoints.ts` 的靜態引用，一律改由 Store 的 `getWaypoint` 或 Props 傳遞，使元件完全正交並具備跨路線通用能力。
 3. **庇護所空狀態優雅降級**：
-   - 針對尚未建置完整本機住宿清單之新路線航點，`AlbergueModal.vue` 提供友善空狀態提示，並提供精確直通 Gronze 該城鎮之官方外連，保障前端零拋錯與流暢的使用者體驗。
+   - 針對無收錄本機住宿之小型聚落航點，`AlbergueModal.vue` 提供友善空狀態提示，並提供精確直通 Gronze 該城鎮之官方外連，保障前端零拋錯與流暢的使用者體驗。
 
 ### 4.5 本機快取遷移管線與自動化測試架構 (Storage Migration & Vitest Testing Pipeline)
 
@@ -403,7 +403,7 @@ export interface MultiRouteScheduleState {
   - 檢測快取若缺少 `version` 或為 v1.0 舊格式，自動觸發 `migrateLegacyStorage()`：將現有配置深拷貝搬遷至 `drafts.frances`，設定 `currentRouteId = 'frances'`，並寫入新版 schema 版本標籤，實現使用者完全無感的平滑升級。
 
 #### 2. Vitest 自動化測試金字塔 (Testing Pyramid)
-透過 `pnpm test` (Vitest) 建立 13 個測試檔案（共 136 項單元測試），嚴格阻絕任何架構退化（Regression）：
+透過 `pnpm test` (Vitest) 建立 14 個測試檔案（共 142 項單元測試），嚴格阻絕任何架構退化（Regression）：
 - `tests/unit/routes-data.test.ts`：驗證所有航點 ID 命名空間前綴、里程遞增連續性、葡萄牙雙分支於 Redondela 匯流與世界盡頭 5 種走向閉環性。
 - `tests/unit/schedule-calculator.test.ts` & `tests/schedule-calculator.spec.ts`：驗證法國之路 33 天基準推導、葡萄牙分支切換與世界盡頭排程鏈推算。
 - `tests/unit/schedule-migration.test.ts`：模擬舊版 localStorage schema 還原與草稿隔離性，並以 `vi.useFakeTimers()` 隔離冬季封山邊界。
@@ -412,17 +412,19 @@ export interface MultiRouteScheduleState {
 - `tests/unit/budget-calculator.test.ts` & `tests/unit/budget-store-input.test.ts`：驗證預算四大象限試算、EUR/TWD 雙幣推導與輸入邊界防禦。
 - `tests/unit/faqs-data.test.ts` & `tests/data-integrity.spec.ts`：驗證 FAQ 資料結構完整性與全站路線、庇護所資料一致性。
 - `src/utils/__tests__/syncCodec.spec.ts`：驗證 `fflate` 壓縮與 Base64Url 跨裝置同步編解碼與錯誤格式防禦。
+- `src/utils/__tests__/localeRoute.spec.ts`：驗證雙語 URL 路徑前綴解析、語系切換與導覽連結保持機制。
 - `tests/unit/useAsyncLock.test.ts`：驗證動作互斥鎖正常透傳、高頻連點忽略與例外釋放機制。
 
 ### 4.6 全站路由、動態雙語 SEO 與 i18n 架構 (Routing, Dynamic SEO & i18n)
 - **全站頁面路由 (`src/router/index.ts`)**：
   - 核心工具頁：`/` (`LandingView.vue`)、`/schedule/:routeId/:branchId?`、`/packing`、`/transport/:routeId/:branchId?`、`/budget`（共載於 `HomeView.vue`）。
-  - 內容與指南頁：`/routes` (`RoutesGuideView.vue`)、`/history` (`HistoryView.vue`)、`/faq` (`FaqView.vue`)、`/privacy` (`PrivacyView.vue`) 與 `404` (`NotFoundView.vue`)。
-  - 具備 `beforeEach` 路由防禦，非法 `routeId` / `branchId` 自動回退至合法預設路線。
+  - 內容與指南頁：`/routes` (`RoutesGuideView.vue`)、`/guides` (`GuidesView.vue`)、`/guides/:slug` (`GuideDetailView.vue`)、`/history` (`HistoryView.vue`)、`/faq` (`FaqView.vue`)、`/privacy` (`PrivacyView.vue`) 與 `404` (`NotFoundView.vue`)。
+  - 支援雙語 URL 路由前綴（`/:locale(zh-TW|en)/...`），並具備 `beforeEach` 路由防禦，非法 `routeId` / `branchId` 自動回退至合法預設路線。
 - **雙語國際化 (`src/i18n/index.ts`)**：
   - 採用 `vue-i18n` v11 (`legacy: false`)，支援繁體中文（`zh-TW`）與英文（`en`），語系檔位於 `src/i18n/locales/zh-TW.ts` 與 `src/i18n/locales/en.ts`，並持久化於 `localStorage` (`camino_locale`)。
-- **動態雙語 SEO 與結構化資料 (`updateDocumentSeo`)**：
-  - 切換路由或語系時，即時更新 `document.title`、Meta Description、Open Graph 與 `WebApplication` JSON-LD 結構化資料（含 `inLanguage`）。
+- **動態雙語 SEO、結構化資料與 SSG 預渲染 (`updateDocumentSeo` & Build Scripts)**：
+  - 切換路由或語系時，即時更新 `document.title`、Meta Description、Canonical、`hreflang` 標籤、Open Graph 與 `WebApplication` JSON-LD 結構化資料（含 `inLanguage`）。
+  - 建置管線整合 `scripts/generate-sitemap.mjs` 與 `scripts/prerender.mjs`（`pnpm build:prerender`），自動產生雙語 `sitemap.xml` 並預渲染各語系靜態 HTML 頁面。
 
 ### 4.7 邊緣 API 與意見回饋安全防護 (`functions/api/feedback.ts`)
 - 透過 Cloudflare Pages Function 提供 `/api/feedback` POST 端點，將使用者回饋轉送至 Web3Forms、Discord、Telegram 或 Resend。
@@ -458,7 +460,7 @@ export interface MultiRouteScheduleState {
   - **原始之路 (Camino Primitivo)**：航點 ID 強制前綴 `primitivo:*`（起點 Oviedo，於 Melide 匯入法國之路，約 321km）。
 
 ### 6.2 住宿庇護所檢索與快速聯絡管線 (Accommodation Pipeline & Quick Actions)
-- **Gronze 權威資料庫對齊**：波多雙分支與北方之路城鎮住宿依循既有階層核對 SOP 建置。
+- **Gronze 權威資料庫定期復核**：全線 1,204 筆住宿已完成首輪盤點，後續依既有階層核對 SOP 進行週期性復核與失效連結自動化巡檢。
 - **多維度 Filter 複合管線**：在記憶體中建立即時過濾函式，支援 `hasKitchen`、`type`、可否預約之複合過濾。
 - **通訊協議動作列**：UI 封裝快速撥號 `tel:${phone}` 與 WhatsApp 聊天直通 `https://wa.me/${intlPhone}?text=${encodedMsg}`（預載標準西文預約模板）。
 

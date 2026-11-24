@@ -136,9 +136,9 @@ function handleInputFocus(event: FocusEvent) {
         <div class="flex items-center justify-between md:justify-start gap-2.5 sm:gap-3">
           <div class="flex items-center gap-2">
             <div>
-              <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-800 leading-tight">
+              <h1 class="text-base sm:text-lg md:text-xl font-bold text-slate-800 leading-tight">
                 {{ t('budget.title') }}
-              </h2>
+              </h1>
             </div>
           </div>
 
