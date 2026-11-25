@@ -29,7 +29,6 @@ const PUBLIC_ROUTES = [
   { path: '/budget', lastmod: '2026-11-23' },
   { path: '/faq', lastmod: '2026-11-23' },
   { path: '/history', lastmod: '2026-11-23' },
-  { path: '/routes', lastmod: '2026-11-23' },
   { path: '/routes/frances', lastmod: '2026-11-23' },
   { path: '/routes/portugues', lastmod: '2026-11-23' },
   { path: '/routes/norte', lastmod: '2026-11-23' },

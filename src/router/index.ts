@@ -297,7 +297,15 @@ const router = createRouter({
           },
         },
         {
-          path: 'routes/:routeId?',
+          path: 'routes',
+          redirect: (to) => ({
+            path: localizePath('/routes/frances', extractLocaleFromPath(to.path)),
+            query: to.query,
+            hash: to.hash,
+          }),
+        },
+        {
+          path: 'routes/:routeId',
           name: 'routes',
           component: () => import('@/views/RoutesGuideView.vue'),
           meta: {
@@ -412,8 +420,8 @@ router.beforeEach((to) => {
   }
   if (to.name === 'routes') {
     const routeId = to.params.routeId as string | undefined
-    if (routeId && !AVAILABLE_ROUTES.some((r) => r.id === routeId)) {
-      return localizePath('/routes', urlLocale)
+    if (!routeId || !AVAILABLE_ROUTES.some((r) => r.id === routeId)) {
+      return localizePath('/routes/frances', urlLocale)
     }
   }
   if (to.name === 'schedule' || to.name === 'transport') {

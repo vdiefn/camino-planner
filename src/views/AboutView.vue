@@ -99,7 +99,7 @@ const { t } = useI18n()
 
         <div class="flex flex-wrap items-center gap-3 pt-2">
           <LocaleLink
-            to="/routes"
+            to="/routes/frances"
             class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors"
           >
             <BookOpen class="w-4 h-4" />

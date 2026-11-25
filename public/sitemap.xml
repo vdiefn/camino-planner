@@ -183,20 +183,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/history" />
   </url>
   <url>
-    <loc>https://camino-plan.com/routes</loc>
-    <lastmod>2026-11-23</lastmod>
-    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes" />
-  </url>
-  <url>
-    <loc>https://camino-plan.com/en/routes</loc>
-    <lastmod>2026-11-23</lastmod>
-    <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://camino-plan.com/en/routes" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://camino-plan.com/en/routes" />
-  </url>
-  <url>
     <loc>https://camino-plan.com/routes/frances</loc>
     <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant-TW" href="https://camino-plan.com/routes/frances" />
