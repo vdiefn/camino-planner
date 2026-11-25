@@ -1,10 +1,4 @@
 interface Env {
-  WEB3FORMS_ACCESS_KEY?: string
-  DISCORD_WEBHOOK_URL?: string
-  TELEGRAM_BOT_TOKEN?: string
-  TELEGRAM_CHAT_ID?: string
-  RESEND_API_KEY?: string
-  FEEDBACK_TO_EMAIL?: string
   EMAIL_WORKER?: {
     fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
   }
@@ -87,7 +81,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     // 2. 嚴格型別與長度清洗
     const formattedContent =
-      typeof body.content === 'string' ? body.content.trim().slice(0, MAX_CONTENT_LENGTH) : ''
+      typeof body.content === 'string'
+        ? body.content.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim().slice(0, MAX_CONTENT_LENGTH)
+        : ''
     const safeTarget =
       typeof body.target === 'string'
         ? stripControlChars(body.target).slice(0, MAX_FIELD_LENGTH)
@@ -101,184 +97,44 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse({ success: false, error: '請輸入回饋內容' }, 400)
     }
 
-    const categoryText = CATEGORY_LABELS[body.category] || '💬 意見回饋'
+    const categoryText = Object.hasOwn(CATEGORY_LABELS, body.category)
+      ? CATEGORY_LABELS[body.category]
+      : '💬 意見回饋'
     const targetText = safeTarget ? `\n📌 相關對象：${safeTarget}` : ''
     const contactText = safeContact ? `\n👤 聯絡方式：${safeContact}` : '\n👤 聯絡方式：未填寫（匿名）'
 
     const emailSubject = `[Camino Plan 回饋] ${categoryText}${safeTarget ? ' - ' + safeTarget : ''}`
+    const fullMessage = `【Camino Plan 收到新回饋】${categoryText}${targetText}${contactText}\n\n📝 內容：\n${formattedContent}`
 
-    // 追蹤各通道的發送結果
-    let isAnyChannelSuccess = false
-    const configuredChannels: string[] = []
-    const failedChannels: string[] = []
-
-    // 3. 通道 A：Web3Forms (優先轉發至設定好的 Email 信箱)
-    if (env.WEB3FORMS_ACCESS_KEY) {
-      configuredChannels.push('Web3Forms')
-      try {
-        const web3Res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          body: JSON.stringify({
-            access_key: env.WEB3FORMS_ACCESS_KEY,
-            subject: emailSubject,
-            from_name: 'Camino Plan 網站回饋通知',
-            回饋類別: categoryText,
-            關聯目標: safeTarget || '全站 / 無特定',
-            聯絡資訊: safeContact || '匿名',
-            回饋內容: formattedContent
-          })
-        })
-
-        const web3Data = (await web3Res.json().catch(() => ({}))) as {
-          success?: boolean
-          message?: string
-        }
-
-        if (web3Res.ok && web3Data.success) {
-          isAnyChannelSuccess = true
-        } else {
-          console.error('Web3Forms API 拒絕或失敗:', web3Data.message || web3Res.statusText)
-          failedChannels.push('Web3Forms')
-        }
-      } catch (err) {
-        console.error('Web3Forms 網路請求失敗:', err)
-        failedChannels.push('Web3Forms')
-      }
-    }
-
-    // 4. 通道 B：Discord Webhook (若有配置)
-    if (env.DISCORD_WEBHOOK_URL) {
-      configuredChannels.push('Discord')
-      const fullMessage = `【Camino Plan 收到新回饋】${categoryText}${targetText}${contactText}\n\n📝 內容：\n${formattedContent}`
-      try {
-        const discordRes = await fetch(env.DISCORD_WEBHOOK_URL, {
-          method: 'POST',
-          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            content: fullMessage.slice(0, 1950),
-            allowed_mentions: { parse: [] },
-            embeds: [
-              {
-                title: categoryText,
-                color: body.category === 'feature_request' ? 0xf59e0b : body.category === 'data_correction' ? 0x10b981 : body.category === 'bug_report' ? 0xef4444 : 0x6366f1,
-                fields: [
-                  ...(safeTarget ? [{ name: '相關對象', value: safeTarget, inline: true }] : []),
-                  { name: '聯絡方式', value: safeContact || '匿名', inline: true },
-                  { name: '詳細內容', value: formattedContent.slice(0, 1024) }
-                ],
-                timestamp: new Date().toISOString()
-              }
-            ]
-          })
-        })
-        if (discordRes.ok) {
-          isAnyChannelSuccess = true
-        } else {
-          failedChannels.push('Discord')
-        }
-      } catch (err) {
-        console.error('Discord Webhook 發送失敗:', err)
-        failedChannels.push('Discord')
-      }
-    }
-
-    // 5. 通道 C：Telegram Bot (若有配置)
-    if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
-      configuredChannels.push('Telegram')
-      const telegramUrl = `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`
-      const fullMessage = `【Camino Plan 收到新回饋】${categoryText}${targetText}${contactText}\n\n📝 內容：\n${formattedContent}`
-      try {
-        const tgRes = await fetch(telegramUrl, {
-          method: 'POST',
-          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: env.TELEGRAM_CHAT_ID,
-            text: fullMessage
-          })
-        })
-        if (tgRes.ok) {
-          isAnyChannelSuccess = true
-        } else {
-          failedChannels.push('Telegram')
-        }
-      } catch (err) {
-        console.error('Telegram 發送失敗:', err)
-        failedChannels.push('Telegram')
-      }
-    }
-
-    // 6. 通道 D：Resend 寄信 (若有配置)
-    if (env.RESEND_API_KEY && env.FEEDBACK_TO_EMAIL) {
-      configuredChannels.push('Resend')
-      const fullMessage = `【Camino Plan 收到新回饋】${categoryText}${targetText}${contactText}\n\n📝 內容：\n${formattedContent}`
-      try {
-        const resendRes = await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${env.RESEND_API_KEY}`
-          },
-          body: JSON.stringify({
-            from: 'Camino Plan <onboarding@resend.dev>',
-            to: [env.FEEDBACK_TO_EMAIL],
-            subject: emailSubject,
-            text: fullMessage
-          })
-        })
-        if (resendRes.ok) {
-          isAnyChannelSuccess = true
-        } else {
-          failedChannels.push('Resend')
-        }
-      } catch (err) {
-        console.error('Resend 發送失敗:', err)
-        failedChannels.push('Resend')
-      }
-    }
-
-    // 6.5 通道 E：Cloudflare Email Worker (透過 Service Binding 內部呼叫)
-    if (env.EMAIL_WORKER) {
-      configuredChannels.push('CloudflareEmailWorker')
-      const fullMessage = `【Camino Plan 收到新回饋】${categoryText}${targetText}${contactText}\n\n📝 內容：\n${formattedContent}`
-      try {
-        const workerRes = await env.EMAIL_WORKER.fetch('https://internal/send', {
-          method: 'POST',
-          signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            subject: emailSubject,
-            body: fullMessage
-          })
-        })
-        if (workerRes.ok) {
-          isAnyChannelSuccess = true
-        } else {
-          console.error('Cloudflare Email Worker 回應錯誤:', workerRes.status)
-          failedChannels.push('CloudflareEmailWorker')
-        }
-      } catch (err) {
-        console.error('Cloudflare Email Worker 呼叫失敗:', err)
-        failedChannels.push('CloudflareEmailWorker')
-      }
-    }
-
-    // 7. 本機測試模式（若完全未配置任何通道環境變數，印至主控台以利本地開發）
-    if (configuredChannels.length === 0) {
+    // 3. 本機測試模式（若未綁定 EMAIL_WORKER，印至主控台以利本地開發）
+    if (!env.EMAIL_WORKER) {
       console.log('[Feedback Received - Local/Dev Mode]:', emailSubject, formattedContent)
       return jsonResponse({ success: true, message: '本機測試模式：已接收回饋' }, 200)
     }
 
-    // 8. 生產環境結果判定（獵殺靜默吞錯）：若配置了發送管道但全數發送失敗，主動回傳錯誤
-    if (!isAnyChannelSuccess) {
-      console.error('所有回饋轉發通道皆失敗:', failedChannels.join(', '))
+    // 4. 生產環境：透過 Cloudflare Email Worker (Service Binding) 轉發信件
+    try {
+      const workerRes = await env.EMAIL_WORKER.fetch('https://internal/send', {
+        method: 'POST',
+        signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subject: emailSubject,
+          body: fullMessage
+        })
+      })
+      if (!workerRes.ok) {
+        console.error('Cloudflare Email Worker 回應錯誤:', workerRes.status)
+        return jsonResponse(
+          {
+            success: false,
+            error: '回饋發送服務暫時無法連線，請稍後再試或直接發送至聯絡信箱'
+          },
+          502
+        )
+      }
+    } catch (err) {
+      console.error('Cloudflare Email Worker 呼叫失敗:', err)
       return jsonResponse(
         {
           success: false,
