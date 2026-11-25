@@ -5,6 +5,7 @@ import { useBudgetStore } from '@/stores/budget'
 import { useScheduleStore } from '@/stores/schedule'
 import PrintBudgetModal from '@/components/budget/PrintBudgetModal.vue'
 import GoogleAd from '@/components/common/GoogleAd.vue'
+import EditorialGuideSection from '@/components/common/EditorialGuideSection.vue'
 import TipsModal from '@/components/common/TipsModal.vue'
 import type { BudgetExportMeta, BudgetDetails, BudgetPersona } from '@/types/budget'
 import {
@@ -673,6 +674,9 @@ function handleInputFocus(event: FocusEvent) {
         <GoogleAd slot-id="budget-bottom-ad" format="rectangle" />
       </div>
     </div>
+
+    <!-- 朝聖花費結構與省錢避坑攻略（提升頁面文字深度） -->
+    <EditorialGuideSection i18n-prefix="editorial.budgetGuide" />
 
     <!-- 朝聖預算規劃小提醒對話框 -->
     <TipsModal

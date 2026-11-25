@@ -964,4 +964,144 @@ export default {
       heavy: "Full poncho + pack cover",
     },
   },
+  editorial: {
+    landingGuides: {
+      title: "Featured In-Depth Camino Guides",
+      subtitle: "Practical field notes on seasonal timing, crossing the Pyrenees, albergue etiquette, and packing strategy",
+      viewAll: "Browse All Guides",
+      readMin: "{min} min read",
+      readMore: "Read Guide",
+    },
+    landingOverview: {
+      title: "Before You Walk: Essential Overview of the Camino de Santiago",
+      subtitle: "Understand the thousand-year pilgrimage network, how to pick the right route, and core preparation benchmarks",
+      blocks: [
+        {
+          heading: "What is the Camino de Santiago?",
+          paragraphs: [
+            "The Camino de Santiago (Way of St. James) is an ancient network of pilgrimage routes across Europe leading to the Cathedral of Santiago de Compostela in northwestern Spain, traditionally believed to house the remains of the Apostle St. James. Recognized by the Council of Europe as the first European Cultural Route in 1987, the French Way and northern Spanish routes are also UNESCO World Heritage sites.",
+            "Today, pilgrims walk for spiritual reflection, personal challenge, cultural immersion, or simply a slower pace of life. Well-maintained yellow arrows (flechas amarillas) and scallop shell markers guide walkers through historic villages and countryside, making solo navigation straightforward even for first-time long-distance hikers.",
+          ],
+        },
+        {
+          heading: "Choosing Among the Three Classic Routes",
+          paragraphs: [
+            "For first-timers seeking strong infrastructure, frequent towns, and vibrant pilgrim camaraderie, the Camino Francés (French Way, ~780 km from Saint-Jean-Pied-de-Port) remains the gold standard. Even walking just the final 100 km from Sarria offers plentiful albergues and services.",
+            "If you have one to two weeks and prefer gentler elevation with coastal scenery, the Camino Portugués from Porto offers both the traditional Central Way and the oceanfront Coastal Way (Caminho da Costa). Experienced hikers drawn to dramatic cliffs and greener mountain stages often choose the Camino del Norte along Spain's Bay of Biscay.",
+          ],
+        },
+        {
+          heading: "Weight, Climate, and Budget Benchmarks",
+          paragraphs: [
+            "Most preventable injuries on the Camino stem from an overweight pack and poorly fitted footwear. Aim to keep your total pack weight—including water and daily snacks—within 10% of your body weight, relying on a simple three-set clothing rotation washed daily at albergues.",
+            "Weather-wise, April–May and September–October deliver the most balanced walking temperatures. July and August bring intense heat and minimal shade across the central Meseta plateau, requiring pre-dawn starts. Daily expenses typically average €35–€55 depending on whether you stay in municipal albergues (€8–€15) or private hostels (€15–€25) and dine on pilgrim menus or cook.",
+          ],
+        },
+        {
+          heading: "Credencial (Pilgrim Passport) & Compostela Rules",
+          paragraphs: [
+            "Carry an official Credencial del Peregrino and collect stamps (sellos) at albergues, churches, cafes, and town halls along the way. To qualify for the official Compostela certificate in Santiago, walkers must complete at least the final 100 km on foot (200 km by bicycle) and obtain at least two stamps per day throughout that final stretch.",
+          ],
+        },
+      ],
+      links: {
+        routes: "Compare Route Profiles",
+        history: "Explore Camino History",
+        faq: "Read Camino FAQ",
+      },
+    },
+    packingGuide: {
+      title: "Packing Strategy & Field-Tested Gear Principles",
+      subtitle: "Protect your knees and feet over weeks of walking by avoiding the most common beginner packing traps",
+      blocks: [
+        {
+          heading: "1. Why Stick to the 10% Body Weight Rule?",
+          paragraphs: [
+            "Walking 20 to 30 km a day for several consecutive weeks multiplies every extra gram in your backpack into tens of thousands of additional impacts on your knees and arches. Keeping your loaded pack (with water and snacks) under 10% of your body weight—for example, under 6 kg for a 60 kg walker—dramatically reduces plantar fasciitis and tendon strain.",
+            "The biggest weight culprits are bringing too many spare clothes, heavy cotton towels, full-size toiletries, and redundant electronics. Nearly every albergue provides hand-washing sinks and drying lines (or paid washers and dryers), so a simple rotation of one worn outfit, one spare outfit, and one sleep layer is all you need.",
+          ],
+        },
+        {
+          heading: "2. Footwear Selection & Blister Prevention",
+          paragraphs: [
+            "Unlike pure alpine trails, the Camino includes significant stretches of asphalt, gravel farm tracks, and stone cobbles. Stiff, heavy mountaineering boots often trap heat and cause blisters on hard pavement. Most pilgrims prefer breathable trail runners or lightweight hiking shoes sized half to one full size larger than everyday shoes to accommodate afternoon foot swelling.",
+            "Pair your shoes with merino wool blend socks for superior moisture wicking and odor control. If you are prone to toe friction, consider wearing thin liner toe-socks underneath wool hiking socks and applying leukotape or anti-chafe balm proactively to hot spots.",
+          ],
+        },
+        {
+          heading: "3. Layering Across Microclimates & Rain Protection",
+          paragraphs: [
+            "Even in summer, early morning starts in northern Spain and Galicia can dip to 8–12°C before climbing past 28°C by midday. Build a modular layering system: a quick-dry base layer, a lightweight fleece or synthetic mid-layer, and a breathable windproof/waterproof shell.",
+            "For wet stretches along the Camino del Norte, Coastal Portuguese Way, and Galicia, choose between a full-coverage poncho that shields both you and your backpack or a waterproof jacket paired with a dedicated pack cover and internal dry sacks to keep your sleeping bag bone dry.",
+          ],
+        },
+      ],
+      links: [
+        { to: "/guides/footwear-and-luggage", label: "Read: Footwear & Ultralight Packing Guide" },
+        { to: "/weather", label: "Check Monthly Temperatures & Rain Data" },
+      ],
+    },
+    budgetGuide: {
+      title: "Camino Cost Breakdown & Smart Money Tips",
+      subtitle: "Plan realistic daily expenses across Spain and Portugal and avoid common cash and banking pitfalls",
+      blocks: [
+        {
+          heading: "1. Daily Lodging & Meal Cost Structure",
+          paragraphs: [
+            "Accommodation forms the largest daily variable. Municipal and parish albergues (Albergue Municipal / Parroquial) cost around €8–€15 per night (some operate on a donativo basis), cannot be booked in advance, and fill first-come, first-served. Private albergues range from €15–€25 per night, accept reservations, and typically offer larger bunks and better-equipped kitchens.",
+            "For meals, many bars and restaurants along the trail serve a three-course Pilgrim Menu (Menú del Peregrino) for €12–€16 including bread and a drink. Cooking simple dinners in albergue kitchens and buying breakfast or picnic lunches (fruit, cheese, jamón, bread) at local supermarkets can comfortably keep daily food spending around €15–€20.",
+          ],
+        },
+        {
+          heading: "2. Hidden Costs & Pre-Trip Contingencies",
+          paragraphs: [
+            "Beyond daily trail spending, remember to factor in international flights, domestic rail or bus transfers to your starting town, replacement gear, travel medical insurance, and extra nights in Santiago at the end of your walk. If you occasionally use backpack transfer services on steep stages, budget roughly €5–€8 per stage.",
+            "Setting aside a 10%–15% emergency buffer gives you peace of mind for pharmacy supplies (blister plasters, ibuprofen gel), unexpected taxi rides, or upgrading to a private room when albergues are full during peak season.",
+          ],
+        },
+        {
+          heading: "3. Cash, Cards & Sunday Shop Closures",
+          paragraphs: [
+            "While urban supermarkets and private hostels widely accept contactless cards, rural bars, municipal albergues, vending machines, and donativo stops often require cash. Carry €50–€100 in small bills (€10, €20) and coins so small cafes can easily make change.",
+            "When withdrawing euros from local ATMs, decline Dynamic Currency Conversion (DCC) and always choose to be billed in EUR to avoid poor exchange rates. Also keep in mind that many small-town supermarkets and pharmacies in Spain close on Sundays and public holidays—stock up on Saturday afternoon for Sunday snacks and water.",
+          ],
+        },
+      ],
+      links: [
+        { to: "/guides/budget-breakdown", label: "Read: Detailed Camino Budget Breakdown" },
+        { to: "/guides/albergue-guide", label: "Read: Municipal vs Private Albergue Guide" },
+      ],
+    },
+    weatherGuide: {
+      title: "Seasonal Climate & Route Packing Guide",
+      subtitle: "Translate historical station normals into practical sleeping bag, clothing, and rain gear decisions",
+      blocks: [
+        {
+          heading: "1. Walking Conditions Across All Four Seasons",
+          paragraphs: [
+            "Spring (April–May) brings lush green landscapes and mild daytime temperatures, though Atlantic fronts can bring frequent showers and crisp mornings with occasional mountain frost. Autumn (September–October) is widely favored for more stable skies and comfortable temperatures, though popular stages see heavier pilgrim traffic.",
+            "Summer (July–August) poses heat and sun exposure challenges across the treeless Meseta plateau, where afternoon highs often exceed 32–35°C—start before 6:00 AM and carry extra water. Winter (November–March) brings shorter daylight and seasonal albergue closures, suited mainly to experienced cold-weather hikers.",
+          ],
+        },
+        {
+          heading: "2. Three Key Microclimates to Watch",
+          paragraphs: [
+            "Conditions can shift dramatically within a single route. Crossing the Pyrenees on Day 1 of the Camino Francés (SJPP to Roncesvalles) climbs above 1,400 meters, where sudden fog, high winds, and sharp wind-chill drops are common—always check mountain pass status before setting out.",
+            "Further west, entering Galicia or walking the Atlantic coast along the Camino del Norte and Coastal Portuguese Way brings noticeably higher humidity, sea breezes, and passing showers even in midsummer. Windproof shells and quick-dry synthetics outperform cotton in every season.",
+          ],
+        },
+        {
+          heading: "3. Matching Your Sleeping Bag & Rain Gear to the Month",
+          paragraphs: [
+            "Most albergues provide mattresses and pillows, but blankets and heating vary. From late May through mid-September, a 300–500 g sleeping bag rated around 10–15°C comfort (or a warm liner) is usually sufficient. For April, late October, or winter walks, upgrade to a 5°C-rated down bag and pack a dedicated thermal sleep layer.",
+            "In months averaging 10 or more rainy days—especially spring and autumn in Galicia and northern Spain—line the inside of your backpack with dry bags to protect electronics and spare clothes, and carry two pairs of wool socks plus breathable recovery sandals for wet evenings.",
+          ],
+        },
+      ],
+      links: [
+        { to: "/guides/best-seasons", label: "Read: Best Months & Crowd Analysis" },
+        { to: "/guides/pyrenees-crossing", label: "Read: Crossing the Pyrenees Safety Guide" },
+      ],
+    },
+  },
 };
