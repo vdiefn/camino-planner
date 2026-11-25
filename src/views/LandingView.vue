@@ -20,12 +20,26 @@ import {
 import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
+import { GUIDE_ARTICLES, GUIDE_CATEGORY_STYLES } from '@/data/guides'
 import { useScheduleStore } from '@/stores/schedule'
 import type { RouteId } from '@/types/route'
 
-const { t } = useI18n()
+interface EditorialBlock {
+  heading: string
+  paragraphs: string[]
+}
+
+const { t, tm, locale } = useI18n()
+const isEn = computed(() => locale.value === 'en')
 const scheduleStore = useScheduleStore()
 const isMenuDrawerOpen = ref(false)
+
+const overviewBlocks = computed<EditorialBlock[]>(() => {
+  const raw = tm('editorial.landingOverview.blocks')
+  return Array.isArray(raw) ? (raw as EditorialBlock[]) : []
+})
+
+const featuredGuides = computed(() => GUIDE_ARTICLES.slice(0, 6))
 
 // 依據目前 Store 中選定的路線決定「繼續規劃」的目的地
 const currentRouteId = computed(() => scheduleStore.currentRouteId || 'frances')
@@ -139,7 +153,7 @@ function handleRouteSelect(routeId: RouteId) {
             <span>{{ $t('nav.history') }}</span>
           </LocaleLink>
           <LocaleLink
-            to="/routes"
+            to="/routes/frances"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1"
           >
             <Compass class="w-4 h-4 text-emerald-600" />
@@ -264,7 +278,7 @@ function handleRouteSelect(routeId: RouteId) {
               </p>
             </div>
             <LocaleLink
-              to="/routes"
+              to="/routes/frances"
               class="text-xs sm:text-sm font-semibold text-amber-600 hover:text-amber-700 inline-flex items-center justify-center gap-1 transition-colors self-center sm:self-end"
             >
               <span>{{ $t('landing.featuredRoutes.guideLink') }}</span>
@@ -344,7 +358,121 @@ function handleRouteSelect(routeId: RouteId) {
           </div>
         </section>
 
-        <!-- 4. 底部知識庫導航橫幅 -->
+        <!-- 4. 精選朝聖之路深度攻略列表 -->
+        <section class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 text-center sm:text-left">
+            <div class="space-y-1">
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
+                <BookOpen class="w-5 h-5 text-amber-500" />
+                <span>{{ $t('editorial.landingGuides.title') }}</span>
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500">
+                {{ $t('editorial.landingGuides.subtitle') }}
+              </p>
+            </div>
+            <LocaleLink
+              to="/guides"
+              class="text-xs sm:text-sm font-semibold text-amber-600 hover:text-amber-700 inline-flex items-center justify-center gap-1 transition-colors self-center sm:self-end"
+            >
+              <span>{{ $t('editorial.landingGuides.viewAll') }}</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </LocaleLink>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            <LocaleLink
+              v-for="guide in featuredGuides"
+              :key="guide.slug"
+              :to="`/guides/${guide.slug}`"
+              class="group rounded-2xl bg-white border border-slate-200/90 p-5 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between gap-4"
+            >
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between gap-2 text-[11px]">
+                  <span
+                    class="inline-flex items-center rounded-md px-2 py-0.5 font-semibold"
+                    :class="GUIDE_CATEGORY_STYLES[guide.category].badge"
+                  >
+                    {{ $t(`guides.categories.${guide.category}`) }}
+                  </span>
+                  <span class="text-slate-400 font-mono flex items-center gap-1">
+                    <Clock class="w-3 h-3" />
+                    {{ $t('editorial.landingGuides.readMin', { min: guide.readingMinutes }) }}
+                  </span>
+                </div>
+                <h3 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-amber-700 transition-colors leading-snug">
+                  {{ isEn ? guide.titleEn : guide.title }}
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
+                  {{ isEn ? guide.seoDescriptionEn : guide.seoDescription }}
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-end text-xs font-semibold text-slate-500 group-hover:text-amber-600 transition-colors">
+                <span class="inline-flex items-center gap-1">
+                  {{ $t('editorial.landingGuides.readMore') }}
+                  <ArrowRight class="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </LocaleLink>
+          </div>
+        </section>
+
+        <!-- 5. 朝聖之路行前總覽導讀（編輯性核心長文） -->
+        <article class="rounded-2xl bg-white border border-slate-200/80 p-6 sm:p-8 md:p-10 shadow-xs space-y-6">
+          <header class="space-y-2 border-b border-slate-100 pb-5">
+            <h2 class="text-lg sm:text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
+              <Compass class="w-5 h-5 sm:w-6 sm:h-6 text-amber-500 shrink-0" />
+              <span>{{ $t('editorial.landingOverview.title') }}</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+              {{ $t('editorial.landingOverview.subtitle') }}
+            </p>
+          </header>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <section
+              v-for="block in overviewBlocks"
+              :key="block.heading"
+              class="space-y-2.5"
+            >
+              <h3 class="text-sm sm:text-base font-bold text-slate-800">
+                {{ block.heading }}
+              </h3>
+              <p
+                v-for="(paragraph, pIdx) in block.paragraphs"
+                :key="pIdx"
+                class="text-xs sm:text-sm text-slate-600 leading-relaxed"
+              >
+                {{ paragraph }}
+              </p>
+            </section>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3">
+            <LocaleLink
+              to="/routes/frances"
+              class="inline-flex items-center gap-1.5 rounded-xl bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:text-amber-700 transition-colors"
+            >
+              <span>{{ $t('editorial.landingOverview.links.routes') }}</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </LocaleLink>
+            <LocaleLink
+              to="/history"
+              class="inline-flex items-center gap-1.5 rounded-xl bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:text-amber-700 transition-colors"
+            >
+              <span>{{ $t('editorial.landingOverview.links.history') }}</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </LocaleLink>
+            <LocaleLink
+              to="/faq"
+              class="inline-flex items-center gap-1.5 rounded-xl bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:text-amber-700 transition-colors"
+            >
+              <span>{{ $t('editorial.landingOverview.links.faq') }}</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </LocaleLink>
+          </div>
+        </article>
+
+        <!-- 6. 底部知識庫導航橫幅 -->
         <section class="rounded-2xl border border-slate-200 bg-linear-to-r from-amber-50/70 via-white to-emerald-50/60 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
           <div class="space-y-1 text-center sm:text-left">
             <h2 class="text-base sm:text-lg font-bold text-slate-900">

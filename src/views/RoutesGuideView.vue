@@ -92,7 +92,7 @@ const currentRoute = computed<RouteGuideItem>(() => {
             <span>{{ t('routesGuide.historyLink') }}</span>
           </LocaleLink>
           <LocaleLink
-            to="/routes"
+            to="/routes/frances"
             active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >

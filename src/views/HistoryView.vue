@@ -220,7 +220,7 @@ onUnmounted(() => {
             <span>{{ t('nav.history') }}</span>
           </LocaleLink>
           <LocaleLink
-            to="/routes"
+            to="/routes/frances"
             active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
@@ -508,7 +508,7 @@ onUnmounted(() => {
               </div>
               <div class="flex items-center gap-2.5 shrink-0">
                 <LocaleLink
-                  to="/routes"
+                  to="/routes/frances"
                   class="px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs sm:text-sm transition-colors border border-slate-200 shadow-2xs cursor-pointer"
                 >
                   {{ t('history.cta.browseRoutes') }}

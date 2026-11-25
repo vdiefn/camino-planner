@@ -23,6 +23,7 @@ import ConfirmModal from "@/components/common/ConfirmModal.vue";
 import TipsModal from "@/components/common/TipsModal.vue";
 import { useStickySidebar } from "@/composables/useStickySidebar";
 import GoogleAd from "@/components/common/GoogleAd.vue";
+import EditorialGuideSection from "@/components/common/EditorialGuideSection.vue";
 
 const { t, tm } = useI18n();
 const packingStore = usePackingStore();
@@ -726,6 +727,9 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
+
+      <!-- 裝備打包原則與實戰攻略（提升頁面文字深度） -->
+      <EditorialGuideSection i18n-prefix="editorial.packingGuide" />
     </div>
 
     <!-- 彈窗群 -->

@@ -148,6 +148,23 @@ async function prerender() {
       // 預留短暫時間讓 router.afterEach 與 watchEffect 完成 SEO Meta / hreflang / JSON-LD 寫入
       await page.waitForTimeout(150)
 
+      // 自動化 SEO 迴歸檢查：確保每頁僅有唯一 <h1>、具備正確 canonical 且未誤掛 noindex
+      const seoAudit = await page.evaluate(() => {
+        const h1Count = document.querySelectorAll('h1').length
+        const canonicalHref = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || ''
+        const robotsContent = document.querySelector('meta[name="robots"]')?.getAttribute('content') || ''
+        return { h1Count, canonicalHref, robotsContent }
+      })
+      if (seoAudit.h1Count !== 1) {
+        throw new Error(`[SEO Audit] ${routePath} 的 <h1> 數量應為 1，實際為 ${seoAudit.h1Count}`)
+      }
+      if (!seoAudit.canonicalHref.startsWith('https://camino-plan.com/')) {
+        throw new Error(`[SEO Audit] ${routePath} 缺少有效的 canonical URL: "${seoAudit.canonicalHref}"`)
+      }
+      if (seoAudit.robotsContent.toLowerCase().includes('noindex')) {
+        throw new Error(`[SEO Audit] 公開路由 ${routePath} 誤掛了 noindex: "${seoAudit.robotsContent}"`)
+      }
+
       const rawHtml = await page.content()
       // 清除預渲染本機伺服器 Origin，避免動態 modulepreload 殘留 http://127.0.0.1:<port>
       const html = rawHtml.replaceAll(origin, '')

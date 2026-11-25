@@ -11,4 +11,18 @@ export default defineConfig({
       '@': path.resolve(import.meta.dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (/[\\/]node_modules[\\/](vue|vue-router|pinia|vue-i18n)[\\/]/.test(id)) {
+            return 'vue-vendor'
+          }
+          if (/[\\/]node_modules[\\/]chart\.js[\\/]/.test(id)) {
+            return 'chart-vendor'
+          }
+        },
+      },
+    },
+  },
 })

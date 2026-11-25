@@ -24,6 +24,7 @@ import AppFooter from '@/components/common/AppFooter.vue'
 import MobileMenuDrawer from '@/components/common/MobileMenuDrawer.vue'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
 import ClimateChart from '@/components/weather/ClimateChart.vue'
+import EditorialGuideSection from '@/components/common/EditorialGuideSection.vue'
 import { getClimateZonesByRoute } from '@/data/climate'
 import { buildWeatherAdvisory, summarizeRouteMonth } from '@/utils/weatherAdvisor'
 import { useScheduleStore } from '@/stores/schedule'
@@ -155,7 +156,7 @@ function toggleMobileZone(zoneId: string) {
             <span>{{ t('nav.history') }}</span>
           </LocaleLink>
           <LocaleLink
-            to="/routes"
+            to="/routes/frances"
             active-class="!text-slate-800 bg-emerald-50/80 font-semibold"
             class="text-xs sm:text-sm font-medium text-slate-600 hover:text-emerald-600 px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
           >
@@ -752,6 +753,9 @@ function toggleMobileZone(zoneId: string) {
           </button>
         </div>
       </section>
+
+      <!-- 四季氣候特徵與路線穿衣裝備指南（提升頁面文字深度） -->
+      <EditorialGuideSection i18n-prefix="editorial.weatherGuide" />
     </main>
 
     <AppFooter />
