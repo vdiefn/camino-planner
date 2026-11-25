@@ -90,7 +90,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
         headingEn: "Spring (April to June): Wildflowers and Mild Walking Conditions",
         paragraphs: [
           "5 月至 6 月上旬是法國之路與葡萄牙之路相當受歡迎的徒步時段，氣溫通常適合長時間步行，沿途植被逐漸轉綠，納瓦拉（Navarra）與里奧哈（La Rioja）也能欣賞春季田野景觀。不過，各路段的氣溫差異很大，庇里牛斯山、梅塞塔高原與加利西亞不能使用同一組氣溫數據概括。春季早晚仍可能偏冷，建議準備薄刷毛、防風外套及雨具。",
-          "4 月初至 5 月初，庇里牛斯山高海拔區域仍可能遇到降雪、強風及低溫，出發前應確認山區天候與路線開放狀況。5 月至 6 月則逐漸進入熱門徒步季節，尤其熱門城鎮及 Sarria 至 Santiago 的最後 100 公里，住宿需求較高。公立與私立庇護所的預約規則不同，應事先確認入住方式，並適度提早抵達目的地。",
+          "4 月初至 5 月初，庇里牛斯山高海拔區域仍可能遇到降雪、強風及低溫，出發前應確認山區天候與路線開放狀況。5 月至 6 月則逐漸進入熱門徒步季節，尤其熱門城鎮及 Sarria 至 Santiago 的最後 100 公里，住宿需求較高。公立與私立庇護所的預約規則不同，應事先確認入住方式，並盡量提早抵達目的地。",
         ],
         paragraphsEn: [
           "May through early June is a popular walking period for the Camino Francés and Portuguese routes. Temperatures are generally comfortable for long-distance walking, vegetation becomes greener, and the countryside of Navarra and La Rioja is especially attractive in spring. However, temperatures vary considerably between regions, so the Pyrenees, Meseta, and Galicia should not be treated as having the same climate. Mornings and evenings can still be cool, so bring a light fleece, a windproof jacket, and rain protection.",
@@ -102,7 +102,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
         headingEn: "Summer (July to August): Coastal Alternatives and Meseta Heat Precautions",
         paragraphs: [
           "7、8 月的西班牙內陸，特別是 Burgos 至 León 之間的梅塞塔高原（Meseta），日照強烈、遮蔭有限，熱浪期間氣溫可能超過 35°C。長時間暴露在烈日下容易增加脫水與熱傷害風險。若在盛夏徒步，應依照日出時間與路況安排清晨出發，盡量避開正午高溫時段，並在高溫時段前完成主要徒步路段。飲水量應依照氣溫、行走距離、個人流汗量及沿途補水機會調整，不能只依賴固定的飲水容量。",
-          "如果只能在暑假出發，可以考慮沿大西洋海岸前進的北方之路（Camino del Norte）或葡萄牙海岸之路（Camino Portugués de la Costa）。相較於西班牙內陸，海岸地區通常受到海洋氣候調節，氣溫較為溫和，但仍可能遇到熱浪、強風及降雨。西班牙北部 8 月適逢暑假與旅遊旺季，部分熱門海岸城鎮住宿需求較高，建議提早確認房況並預訂。",
+          "如果只能在暑假出發，可以考慮沿大西洋海岸前進的北方之路（Camino del Norte）或葡萄牙海岸之路（Camino Portugués de la Costa）。相較於西班牙內陸，海岸地區通常受到海洋氣候調節，氣溫較為溫和，但仍可能遇到熱浪、強風及降雨。西班牙北部 8 月適逢暑假與旅遊旺季，部分熱門海岸城鎮住宿需求較高，建議提早確認住房狀況並進行預訂。",
         ],
         paragraphsEn: [
           "In July and August, inland Spain, particularly the exposed Meseta plateau between Burgos and León, experiences strong sunshine and limited shade. Temperatures can exceed 35°C during heatwaves, increasing the risk of dehydration and heat-related illness. If walking in midsummer, plan an early start according to sunrise and trail conditions, avoid the hottest part of the day, and aim to complete the main walking section before peak afternoon heat. Water requirements depend on temperature, distance, individual sweat loss, and opportunities to refill; do not rely on a fixed quantity for every stage.",
@@ -113,8 +113,8 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
         heading: "秋季（9 月至 10 月）：葡萄採收季與舒適徒步窗口",
         headingEn: "Autumn (September to October): Harvest Season and Comfortable Walking Conditions",
         paragraphs: [
-          "9 月中旬至 10 月中旬是許多朝聖者喜愛的徒步時段。夏季酷熱逐漸消退，白天氣溫通常較適合長距離步行，里奧哈產區也進入葡萄採收季，可以欣賞葡萄園及秋季田野景觀。不過，進入 10 月後，加利西亞（Galicia）的降雨日數通常會明顯增加，尤其 10 月下旬更需要留意連續降雨及濕滑路面，建議準備可靠的防水外套、背包防水套與快乾衣物。",
-          "9 月是朝聖之路全年人潮最集中的月份之一。根據 2025 年朝聖者辦公室統計，9 月抵達聖地牙哥的人數為 81,533 人，排名全年第一，其次為 5 月的 78,648 人及 8 月的 77,095 人。這些數字是依照抵達聖地牙哥並取得 Compostela 的月份統計，而非各月份的出發人數。從 Sarria 出發的最後 100 公里尤其熱門，建議提早預訂熱門住宿。進入 10 月中下旬後，整體人潮通常逐漸減少，但天候與庇護所營運狀況也需要更加留意。",
+          "9 月中旬至 10 月中旬是許多朝聖者喜愛的徒步時段。夏季酷熱逐漸消退，白天氣溫通常較適合長距離步行，里奧哈產區也進入葡萄採收季，可以欣賞葡萄園及秋季田野景觀。不過，進入 10 月後，加利西亞（Galicia）的降雨日數通常會明顯增加，尤其 10 月下旬更需要留意連續降雨及濕滑路面，建議準備裝備包含防水外套、背包防水套與快乾衣物。",
+          "9 月是朝聖之路全年人潮最集中的月份之一。根據 2025 年朝聖者辦公室統計，9 月抵達聖地牙哥的人數為 81,533 人，排名全年第一，其次為 5 月的 78,648 人及 8 月的 77,095 人。這些數字是依照抵達聖地牙哥並取得朝聖證書 Compostela 的月份統計，而非各月份的出發人數。從 Sarria 出發的最後 100 公里尤其熱門，建議提早預訂住宿。進入 10 月中下旬後，整體人潮通常逐漸減少，但天候與庇護所營運狀況也需要更加留意。",
         ],
         paragraphsEn: [
           "Mid-September through mid-October is a favorite walking period for many pilgrims. Summer heat gradually subsides, daytime temperatures are generally more comfortable for long-distance walking, and the La Rioja region enters its grape harvest season. However, rainfall in Galicia typically increases in October, particularly toward the end of the month. Prepare a reliable waterproof jacket, backpack cover, and quick-drying clothing for prolonged rain and slippery trails.",
@@ -126,12 +126,12 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
         headingEn: "Winter (November to March): Quiet Trails and Logistical Challenges",
         paragraphs: [
           "每年 11 月 1 日至隔年 3 月 31 日，法國之路起點 Saint-Jean-Pied-de-Port 翻越庇里牛斯山的拿破崙山脊路線（Route Napoléon）依法限制通行，朝聖者必須改走海拔較低的 Valcarlos 河谷路線。這項限制僅適用於拿破崙路線，並不代表整條法國之路冬季封閉。即使選擇 Valcarlos，仍應留意山區降雪、結冰與強風等天候風險。",
-          "冬季沿途部分季節性私立庇護所、餐廳及商店會縮短營業時間或暫停營業，但實際情況依路線、城鎮及住宿業者而異，不能假設所有地區都有相同比例的休館情況。出發前應逐日確認預定住宿是否營業、是否需要預約，以及附近是否有餐飲與補給設施。依各庇護所提供的寢具及住宿規定，準備適當的睡袋或睡袋內套，並攜帶備用糧食與足夠的保暖裝備。",
+          "冬季沿途部分私立庇護所、餐廳及商店會縮短營業時間或暫停營業，但實際情況仍依路線、城鎮及住宿業者而異。出發前應逐日確認預定住宿是否營業、是否需要預約，以及附近是否有餐飲與補給設施。依各庇護所提供的寢具及住宿規定，準備合適的睡袋或睡袋內套，並攜帶備用糧食與足夠的保暖裝備。",
           "冬季的日照時間較短，部分高海拔路段可能遇到積雪、結冰或濃霧，公車與其他交通班次也可能減少。適合具備低溫徒步經驗、能彈性調整每日距離，且願意提前確認住宿及補給安排的朝聖者。若缺乏冬季登山經驗，不建議僅為了避開人潮而選擇高風險的山區路段。",
         ],
         paragraphsEn: [
           "From November 1 to March 31 each year, the Napoleon Route over the Pyrenees from Saint-Jean-Pied-de-Port is legally restricted. Pilgrims must use the lower-altitude Valcarlos Valley Route instead. This restriction applies to the Napoleon Route only; it does not mean that the entire Camino Francés is closed in winter. Even on the Valcarlos route, be prepared for snow, ice, and strong winds.",
-          "Some seasonal private albergues, restaurants, and shops reduce their opening hours or close during winter. Actual availability varies by route, town, and individual provider, so there is no single closure percentage that applies to the entire Camino. Before departure, verify each night's accommodation, booking requirements, and nearby food and supply options. Bring an appropriate sleeping bag or liner according to the bedding and accommodation policies of each albergue, along with spare food and adequate warm clothing.",
+          "Some private albergues, restaurants, and shops along the route reduce their opening hours or close during winter. Actual availability varies by route, town, and individual provider. Before departure, verify each night's accommodation, booking requirements, and nearby food and supply options. Bring an appropriate sleeping bag or liner according to the bedding and accommodation policies of each albergue, along with spare food and adequate warm clothing.",
           "Winter brings shorter daylight hours, and high-altitude sections may experience snow, ice, or dense fog. Bus services and other transport connections may also be reduced. Winter walking is best suited to pilgrims with cold-weather hiking experience, flexible daily distances, and the willingness to verify accommodation and supply arrangements in advance. If you lack winter mountain experience, do not choose a hazardous mountain route simply to avoid crowds.",
         ],
       },
@@ -139,13 +139,13 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     pitfallTitle: "挑選出發月份最常忽略的三件事",
     pitfallTitleEn: "3 Common Seasonal Pitfalls to Avoid",
     pitfallPoints: [
-      "不要只參考聖地牙哥的氣溫安排衣物。庇里牛斯山、梅塞塔高原與加利西亞的海拔及氣候差異很大，即使同一天也可能出現明顯溫差。建議採用洋蔥式穿搭，準備防風、防雨及保暖衣物。",
-      "留意西班牙聖週（Semana Santa）及國定連假。熱門城市與觀光地區的住宿、交通需求可能明顯增加，若行程需要搭乘火車或預訂熱門住宿，建議提前確認並安排。",
-      "加利西亞受大西洋氣候影響，全年都有降雨可能，尤其秋冬及春季降雨較頻繁。無論哪個月份出發，都應準備防水外套、背包防水套及快乾衣物。",
+      "不要只參考聖地牙哥的氣溫準備衣物。庇里牛斯山、梅塞塔高原與加利西亞的海拔及氣候差異很大，即使同一天也可能出現明顯溫差。建議採用洋蔥式穿搭，準備防風、防雨及保暖衣物。",
+      "留意西班牙聖週（Semana Santa）及國定連假。熱門城市與觀光地區的住宿、交通需求可能明顯增加，若行程需要搭乘火車或預訂熱門住宿，建議提前確認並進行安排。",
+      "加利西亞地區受大西洋氣候影響，全年都有降雨可能，尤其秋冬及春季降雨較頻繁。無論哪個月份出發，都應準備防水外套、背包防水套及快乾衣物。",
     ],
     pitfallPointsEn: [
-      "Do not plan your clothing based solely on temperatures in Santiago. The Pyrenees, Meseta, and Galicia have different elevations and climates, and temperatures can vary significantly even on the same day. Use a layering system and bring windproof, waterproof, and warm clothing.",
-      "Watch out for Semana Santa (Holy Week) and Spanish public holidays. Accommodation and transport demand can increase significantly in popular cities and tourist areas. Check availability and book ahead if your itinerary requires trains or popular accommodation.",
+      "Do not plan your clothing based solely on temperatures in Santiago. The Pyrenees, Meseta, and Galicia have different elevations and climates, and temperatures can vary significantly even on the same day. Dress in layers and bring windproof, waterproof, and insulating clothing.",
+      "Watch out for Semana Santa (Holy Week) and Spanish public holidays. Accommodation and transport demand can increase significantly in popular cities and tourist areas. Check availability and make arrangements in advance if your itinerary requires train travel or stays at popular accommodations.",
       "Galicia has an Atlantic climate and can experience rain throughout the year, with more frequent rainfall in autumn, winter, and spring. Regardless of your departure month, bring a waterproof jacket, backpack cover, and quick-drying clothing.",
     ],
     relatedTool: {
@@ -163,10 +163,8 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     category: "route-strategy",
     title: "翻越庇里牛斯山：拿破崙路線 vs. 河谷路線",
     titleEn: "Crossing the Pyrenees: Napoleon Route vs. Valcarlos Valley Route",
-    subtitle:
-      "法國之路最具挑戰性的路段之一：第一天就要翻越庇里牛斯山，一次搞懂兩條路線的季節限制、補給點與分段拆解技巧。",
-    subtitleEn:
-      "One of the toughest stages of the Camino Francés: Day 1 crosses the Pyrenees. Learn the seasonal restrictions, supply points, and how to split the stage.",
+    subtitle: "法國之路第一天：翻越庇里牛斯山的兩條路線與行程安排",
+    subtitleEn: "Day 1 on the Camino Francés: Crossing the Pyrenees via Two Routes",
     seoDescription:
       "法國之路第一天 SJPP 到 Roncesvalles 完整攻略：比較拿破崙山脊路線與 Valcarlos 河谷路線的距離、海拔爬升、冬季封路規定、Orisson 與 Borda 分段住宿策略。",
     seoDescriptionEn:
@@ -177,43 +175,45 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     updatedAt: "2026-11-16",
     sections: [
       {
-        heading: "為什麼第一天被稱為「朝聖之路最硬的一關」？",
-        headingEn: "Why Day 1 Is One of the Toughest Stages",
+        heading: "為什麼法國之路的第一天特別具有挑戰性？",
+        headingEn: "Why Is the First Day of the Camino Francés So Challenging?",
         paragraphs: [
-          "法國之路傳統起點 Saint-Jean-Pied-de-Port（SJPP）海拔約 170 公尺，拿破崙路線需要在約 24.2 公里的路程中翻越 Col de Lepoeder（約 1,430 公尺），累積爬升約 1,250 公尺。實際距離與爬升數據會因 GPX 路線及測量方式而有所差異。對剛搭乘長途飛機、尚未適應時差與背包重量的徒步者來說，第一天就挑戰長距離爬坡，容易增加肌肉、肌腱及膝關節的負荷。",
-          "這段路並非一定要在一天內完成，可以選擇在 Orisson 或 Borda 住宿，將翻山行程拆成兩天；也可以依照季節與當日天候，選擇海拔較低的 Valcarlos 河谷路線。不要為了趕行程而勉強完成翻山，應優先考量身體狀況與山區安全。",
+          "法國之路傳統起點 Saint-Jean-Pied-de-Port（SJPP）海拔約 170 公尺，若走拿破崙路線需要在約 24.2 公里的路程中翻越 Col de Lepoeder（Lepoeder 山口，約 1,430 公尺），累積爬升約 1,250 公尺。實際距離與爬升數據會因 GPX 路線及測量方式而有所差異。但對剛搭乘長途飛機、尚未適應時差與背包重量的徒步者來說，第一天就挑戰長距離爬坡，容易增加肌肉、肌腱及膝關節的負擔。",
+          "若時間充裕，這段路並非一定要在一天內完成，可以選擇在 Orisson 或 Borda 住宿，將此段行程拆成兩天；也可以依照季節與當日天候，選擇海拔較低的 Valcarlos 河谷路線。不要為了趕行程而勉強完成翻山，應優先考量身體狀況與山區安全。",
         ],
         paragraphsEn: [
-          "Starting at approximately 170m in Saint-Jean-Pied-de-Port (SJPP), the Napoleon Route covers around 24.2 km and climbs to Col de Lepoeder at approximately 1,430m, with about 1,250m of cumulative ascent. Actual figures vary depending on the GPX track and measurement method. For pilgrims arriving after a long-haul flight, jet lag, an unfamiliar backpack, and sustained climbing can place considerable strain on muscles, tendons, and knees.",
-          "You do not have to complete the entire crossing in one day. Staying overnight at Orisson or Borda allows you to split the climb into two stages. Alternatively, choose the lower-altitude Valcarlos Route depending on the season and weather. Prioritize your physical condition and mountain safety over your itinerary.",
+          "Starting at approximately 170m in Saint-Jean-Pied-de-Port (SJPP), the Napoleon Route covers around 24.2 km and climbs to Col de Lepoeder at approximately 1,430m, with about 1,250m of cumulative ascent. Actual figures vary depending on the GPX track and measurement method. For pilgrims arriving after a long-haul flight, jet lag, an unaccustomed backpack load, and a long-distance climb on the first day can place considerable strain on muscles, tendons, and knee joints.",
+          "If you have enough time, you do not have to complete the entire crossing in one day. Staying overnight at Orisson or Borda allows you to spread the crossing over two days. Alternatively, you can choose the lower-altitude Valcarlos Route depending on the season and weather conditions. Do not push yourself to complete the mountain crossing just to stay on schedule. Prioritize your physical condition and mountain safety.",
         ],
       },
       {
-        heading: "拿破崙路線（Route Napoléon）：風景壯闊但受季節嚴格管制",
-        headingEn: "Route Napoléon: Sweeping Views with Strict Seasonal Restrictions",
+        heading: "拿破崙路線（Route Napoléon）：路線特色與季節通行限制",
+        headingEn: "Route Napoléon: Route Features and Seasonal Access Restrictions",
         paragraphs: [
-          "拿破崙路線沿庇里牛斯山高地與山脊推進，視野開闊，可以欣賞壯麗的山脈及高山草原景觀，是春夏季熱門的朝聖路線。但由於高海拔區段天候變化劇烈，容易受到降雪、濃霧及強風影響，每年 11 月 1 日至隔年 3 月 31 日，納瓦拉政府依法限制通行，必須改走 Valcarlos 河谷路線。2026 年 11 月 1 日至 2027 年 3 月 31 日的限制，依據納瓦拉政府 Resolución 7001E/2026 執行。",
+          "拿破崙路線沿著庇里牛斯山的高地與山脊前進，沿途可以欣賞開闊的山景與高山草原，因此吸引不少朝聖者在春夏季選擇這條路線。不過，山區天候變化較大，高海拔路段可能遇到降雪、濃霧及強風，冬季通行尤其需要注意。為了確保朝聖者安全，納瓦拉政府規定，每年 11 月 1 日至隔年 3 月 31 日禁止通行拿破崙路線，期間必須改走海拔較低的 Valcarlos 河谷路線",
           "即使在 4 月至 10 月的開放期間，高海拔山區仍可能因暴風雪、濃霧、強風等惡劣天候而不適合通行。出發前應先向 Saint-Jean-Pied-de-Port 朝聖者辦公室（39 Rue de la Citadelle）確認當日天候與路線狀況。若官方發布封閉或安全警告，應遵循指示改走 Valcarlos 路線，必要時延後出發。",
           "越過 Orisson 與 Borda 後，沿途幾乎沒有村莊及可靠的商業補給點。出發前應準備足夠飲水、食物與保暖裝備，並留意手機訊號在部分高山路段可能不穩定。",
+          "需要注意的是，3 月 31 日只是法定冬季管制期間的結束日期，並不代表隔天就一定適合通行。即使管制期結束，高山路段仍可能受到積雪、結冰、強風或其他惡劣天候影響。實際能否通行，應以出發當時的天候、路況及主管機關公告為準，不要只依照日曆日期判斷是否可以走拿破崙路線。",
         ],
         paragraphsEn: [
-          "The Napoleon Route crosses the high mountain terrain and ridges of the Pyrenees, offering sweeping views of alpine meadows and mountain scenery. It is a popular choice during spring and summer. However, the high-altitude sections are exposed to rapidly changing weather, including snow, dense fog, and strong winds. From November 1 to March 31 each year, the Government of Navarre restricts access to this eastern variant, making the Valcarlos Route mandatory. The 2026–2027 restriction is covered by Navarre Resolution 7001E/2026.",
-          "Even when the route is officially open between April and October, severe weather can still make the crossing unsafe. Before departure, check the latest weather and trail conditions at the Saint-Jean-Pied-de-Port Pilgrim Office (39 Rue de la Citadelle). Follow official closure notices and safety instructions, use the Valcarlos alternative when required, or postpone your departure if necessary.",
-          "Beyond Orisson and Borda, there are virtually no villages or reliable commercial supply points. Carry sufficient water, food, and warm clothing. Mobile phone reception may also be unreliable in some mountain sections.",
+          "The Napoleon Route crosses the high-altitude terrain and ridges of the Pyrenees, offering sweeping views of the mountains and alpine meadows. It is a popular choice among pilgrims in spring and summer. However, weather conditions in the mountains can change rapidly, and the high-altitude sections are exposed to snow, dense fog, and strong winds. For safety reasons, the Government of Navarre prohibits access to the Napoleon Route from November 1 to March 31 each year. During this period, pilgrims must take the lower-altitude Valcarlos Route instead.",
+          "Even during the official open season from April to October, severe weather such as snowstorms, dense fog, and strong winds can make the high-altitude crossing unsafe. Before departure, check the latest weather and route conditions with the Saint-Jean-Pied-de-Port Pilgrim Office (39 Rue de la Citadelle). If an official closure or safety warning is issued, follow the instructions and take the Valcarlos Route instead. Postpone your departure if necessary.",
+          "Beyond Orisson and Borda, there are virtually no villages or reliable commercial supply points along the route. Carry sufficient water, food, and warm clothing before setting out. Mobile phone reception may also be unreliable in some mountain sections.",
+          "Keep in mind that March 31 marks the end of the official winter restriction period, but it does not mean that the route will automatically be safe to cross the following day. Even after the restriction period ends, high-altitude sections may still be affected by snow, ice, strong winds, or other severe weather conditions. Whether the route is safe to use depends on the weather, trail conditions, and official notices at the time of departure. Do not rely on calendar dates alone when deciding whether to take the Napoleon Route.",
         ],
       },
       {
         heading: "拆成兩天走的黃金策略：停留在 Orisson 或 Borda",
         headingEn: "Splitting the Crossing: Staying at Orisson or Auberge Borda",
         paragraphs: [
-          "如果希望降低單日爬坡及膝蓋負荷，可以將拿破崙路線拆成兩天，第一晚選擇住宿於 Refuge Orisson 或 Auberge Borda。兩處都位於 SJPP 至 Roncesvalles 的山路上，但位置並不相同：Orisson 距離 SJPP 約 7.5 公里，Borda 則約 8.5 公里。兩處住宿床位有限，旺季建議提前數週至數月預約，實際訂房情況應以住宿方公告為準。",
-          "第一天從 SJPP 出發，完成前段持續爬升的山路後，在 Orisson 或 Borda 休息過夜。第二天再繼續翻越 Bentartea 與 Lepoeder，最後下坡抵達 Roncesvalles。若住在 Orisson，第二天約需行走 16.7 公里；若住在 Borda，則約需行走 15.7 公里。實際距離依住宿位置及選擇的下山路線而異。",
-          "這種分段方式可以減少單日長時間連續爬坡的負擔，但第二天仍須翻越高海拔山區，並不是平緩的休閒步道。出發前仍應確認天候、日照時間及個人體能，不要為了欣賞日出而在天色未明時冒險進入山區。",
+          "如果希望減少單日行走距離及長時間爬坡造成的疲勞，可以將拿破崙路線拆成兩天，第一晚選擇住宿於 Refuge Orisson 或 Auberge Borda。兩處都位於 SJPP 至 Roncesvalles 的山路上：Orisson 距離 SJPP 約 7.5 公里，Borda 則約 8.5 公里。由於床位有限，旺季應盡早預約，熱門日期可能需要提前數週或更久。訂房前也應確認住宿日期是否營業，以及是否提供晚餐與早餐。",
+          "第一天從 SJPP 出發，完成前段持續爬升的山路後，在 Orisson 或 Borda 住宿。第二天繼續翻越 Col de Bentartea 與 Col de Lepoeder，最後下坡抵達 Roncesvalles。若住在 Orisson，第二天約需行走 16.7 公里；若住在 Borda，則約需行走 15.7 公里。實際距離會因住宿位置、GPX 路線及下山路線而有所差異。第二天仍有高海拔爬升與長距離下坡，規劃時不應只考慮行走距離，也要評估自己的體能與當日天候。",
+          "分成兩天行走，可以減少單日長時間連續爬坡造成的疲勞，但並不代表整段路線會變得輕鬆。第二天仍須翻越高海拔山區，並承受下坡路段對膝關節的負擔。出發前應確認天候、路況及日照時間，安排足夠的行走時間，不要為了欣賞日出而在天色未明時冒險進入山區。",
         ],
         paragraphsEn: [
-          "To reduce the physical strain of a long climbing day, consider splitting the Napoleon Route into two stages by staying overnight at Refuge Orisson or Auberge Borda. Although both are located along the route from SJPP to Roncesvalles, they are not at the same distance: Orisson is approximately 7.5 km from SJPP, while Borda is around 8.5 km. Both have limited accommodation, so booking several weeks or even months ahead is advisable during peak season. Actual availability depends on the accommodation provider.",
-          "On Day 1, walk from SJPP through the initial sustained climb and stay overnight at Orisson or Borda. On Day 2, continue over the Bentartea and Lepoeder passes before descending to Roncesvalles. The remaining distance is approximately 16.7 km from Orisson or 15.7 km from Borda. Actual distances vary according to the accommodation location and descent option.",
-          "Splitting the stage reduces the burden of continuous climbing in one day, but Day 2 still involves high-altitude mountain terrain. It is not an easy or flat walk. Check weather conditions, daylight hours, and your physical condition before setting off. Do not enter the mountains in darkness simply to catch the sunrise.",
+          "If you want to reduce daily walking distances and fatigue from prolonged climbing, consider splitting the Napoleon Route into two days by staying overnight at Refuge Orisson or Auberge Borda. Both accommodations are located along the mountain route from SJPP to Roncesvalles, but at different distances from the starting point: Orisson is approximately 7.5 km from SJPP, while Borda is around 8.5 km. Both accommodations have limited capacity, so booking well in advance is recommended during peak season, particularly for popular dates. Before booking, check whether the accommodation will be open on your intended dates and whether dinner and breakfast are available.",
+          "On Day 1, walk from SJPP through the initial sustained climb and stay overnight at Orisson or Borda. On Day 2, continue over Col de Bentartea and Col de Lepoeder before descending to Roncesvalles. The remaining distance is approximately 16.7 km from Orisson or 15.7 km from Borda. Actual distances vary depending on the accommodation location, GPX track, and descent route. Day 2 still involves significant climbing at high altitude followed by a long descent, so consider your physical condition and the weather rather than judging the difficulty by distance alone.",
+          "Splitting the route over two days can reduce fatigue from prolonged climbing in a single day, but it does not make the entire crossing easy. Day 2 still involves crossing high-altitude mountain terrain, with additional strain on the knees during the descent. Before setting off, check the weather, trail conditions, and daylight hours, and allow enough time to complete the walk. Do not enter the mountains in darkness simply to catch the sunrise.",
         ],
       },
       {
@@ -231,17 +231,17 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
         ],
       },
     ],
-    pitfallTitle: "翻山前的實戰補給提醒",
+    pitfallTitle: "翻山前的補給提醒",
     pitfallTitleEn: "Pre-Climb Supply and Safety Checklist",
     pitfallPoints: [
-      "離開 Orisson 或 Borda 後，直到 Roncesvalles 前幾乎沒有可靠的商業補給點。沿途可能出現季節性餐飲服務，但不保證每日營業，不應將流動餐車視為固定補給來源。建議至少準備 2L 飲水，炎熱天氣或個人需求較高時應增加水量，並攜帶午餐、堅果、香蕉等行動糧。",
-      "從 Col de Lepoeder 下山有兩種主要走法：一條是穿越森林的較短捷徑，坡度較陡，雨天容易濕滑；另一條是先經過 Ibañeta 埡口，再繼續前往 Roncesvalles，距離較長，但可避開部分陡峭的森林捷徑。建議使用雙登山杖，並依天候、路況與膝蓋狀況選擇下山路線。",
-      "Roncesvalles 的修道院朝聖者庇護所床位較多，但旺季仍可能客滿，建議提前確認開放情況並預約。當地缺乏大型超市及完整的生活補給設施，抵達後可選擇修道院附設餐廳或當地餐飲設施用餐，不要預期能在村內進行完整的物資採購。",
+      "離開 Orisson 或 Borda 後，直到 Roncesvalles 前幾乎沒有可靠的商業補給點。沿途可能出現季節性餐飲服務，例如流動餐車，但不保證每日營業，因此不應將此視為固定補給來源。建議至少準備 1~2L 飲水，天氣炎熱或個人需求較高時應增加水量，並攜帶午餐、堅果、香蕉等行動糧。",
+      "從 Col de Lepoeder 下山有兩種主要走法：一條是穿越森林的捷徑，該路線坡度較陡，雨天容易濕滑；另一條是先經過 Ibañeta 埡口，再繼續前往 Roncesvalles，距離較長，但可避開部分陡峭的森林路段。建議可以使用雙登山杖，並依照天候、路況與個人身體狀況選擇下山路線。",
+      "Roncesvalles 的修道院朝聖者庇護所床位較多，但旺季仍可能會客滿，建議提前確認開放情況並進行預約。由於當地僅有修道院建築群與少數幾間餐廳、旅館，沒有超市或藥局，晚餐建議直接預訂朝聖者晚餐或在當地餐廳用餐；若有採買生活物資或提款需求，需再往前步行約 2.5～3 公里（約 30～40 分鐘）前往下一個城鎮 Burguete（Auritz）。",
     ],
     pitfallPointsEn: [
-      "Beyond Orisson or Borda, there are virtually no reliable commercial supply points before Roncesvalles. Seasonal food services may appear along the route, but they do not operate every day and should never be treated as guaranteed supply stops. Carry at least 2L of water, increasing this amount in hot weather or according to your personal needs. Bring lunch and trail snacks such as nuts and bananas.",
-      "There are two main descent options from Col de Lepoeder. The shorter route goes through the forest and is steeper, becoming slippery in wet weather. The alternative passes via the Ibañeta Pass before continuing to Roncesvalles. It is longer but avoids part of the steep forest shortcut. Trekking poles are recommended, and your choice should depend on weather, trail conditions, and your knee condition.",
-      "Roncesvalles has a relatively large pilgrim hostel, but beds can still fill up during peak season. Check opening arrangements and book ahead. The village has limited shopping and supply facilities, so do not expect to buy all your provisions there. Pilgrims can look for dining options at the monastery restaurant or other local establishments.",
+      "Beyond Orisson or Borda, there are virtually no reliable commercial supply points before Roncesvalles. Seasonal food services, such as mobile food trucks, may occasionally appear along the route, but they are not guaranteed to operate every day and should not be relied on as regular supply stops. Carry at least 1–2L of water, increasing this amount in hot weather or according to your personal needs. Bring lunch and trail snacks such as nuts and bananas.",
+      "There are two main descent options from Col de Lepoeder. The shorter route goes through the forest and is steeper, becoming slippery in wet weather. The alternative passes via the Ibañeta Pass before continuing to Roncesvalles. It is longer but avoids part of the steep forest descent. Trekking poles are recommended, and your choice should depend on weather, trail conditions, and your physical condition.",
+      "Roncesvalles has a relatively large pilgrim hostel at the monastery, but beds can still fill up during peak season. Check its opening arrangements and book ahead. Local facilities are limited to the monastery complex and a small number of restaurants and accommodation options, with no supermarket or pharmacy. It is advisable to book a pilgrim dinner in advance or eat at a local restaurant. If you need to buy supplies or withdraw cash, you will need to walk approximately 2.5–3 km (30–40 minutes) further to the next village, Burguete (Auritz).",
     ],
     relatedTool: {
       path: "/schedule/frances",
@@ -277,7 +277,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
         headingEn: "Why Start Within the Final 100 km?",
         paragraphs: [
           "根據聖地牙哥朝聖者接待辦公室（Oficina del Peregrino）的規定，步行者或騎馬者必須沿著同一條獲認可的朝聖路線，連續完成至少最後 100 公里，並抵達聖地牙哥大教堂，才符合申請官方拉丁文完步證書（Compostela）的距離條件。申請者也必須具有宗教或靈性目的，並以朝聖者護照（Credencial）記錄行程。",
-          "因此，Sarria（法國之路）與 Tui（葡萄牙之路）成為兩個常見的百公里起點。Sarria 至聖地牙哥約 114.2 公里，Tui 約 116 公里，兩者都超過 100 公里的最低門檻。對假期有限的旅人而言，安排 5～7 天步行，再預留交通與抵達後的緩衝時間，是較實際的規劃方式。",
+          "因此，Sarria（法國之路）與 Tui（葡萄牙之路）成為兩個常見的百公里起點。Sarria 至聖地牙哥約 114.2 公里，Tui 約 116 公里，兩者都超過 100 公里的最低門檻。對假期有限的旅人而言，安排 5～7 天步行，再預留交通與抵達後的緩衝時間，是最為實際的規劃方式。",
           "注意：完步證書並不是只要走滿 100 公里就一定能領取。除了距離與蓋章要求，也必須符合官方對路線連續性、抵達終點及朝聖目的的規定。若分成多次完成，必須依照地理位置及時間順序接續行走。",
         ],
         paragraphsEn: [
@@ -290,34 +290,44 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
         heading: "起點對決：法國之路 Sarria vs. 葡萄牙之路 Tui",
         headingEn: "Sarria (French Way) vs. Tui (Portuguese Way)",
         paragraphs: [
-          "Sarria（至聖地牙哥約 114.2 km）是法國之路最熱門的百公里起點之一。沿途城鎮、住宿、餐飲與補給設施相對密集，對第一次走朝聖之路的人較容易安排。不過，這也是人潮最集中的路段之一，旺季住宿需求高，熱門城鎮可能需要提早規劃。根據 2025 年朝聖者統計，約有 161,882 人從 Sarria 出發。",
-          "Tui（至聖地牙哥約 116 km）位於西班牙加利西亞與葡萄牙的邊境，隔著米尼奧河（Río Miño）與葡萄牙 Valença 相望。這條葡萄牙中部之路沿途可經過森林、村落、歷史城鎮與石橋，地形整體起伏相對溫和，但仍有部分上坡路段。2025 年約有 41,643 人從 Tui 出發，出發人數明顯少於 Sarria，但仍是相當成熟的朝聖路線。",
-          "從波多前往 Tui，可考慮巴士或火車接駁。巴士車程約 2 小時，實際時間依班次及交通狀況而異；火車並非直達，通常需要轉乘。若從波多機場抵達，還要另外計算機場至市區或巴士站的接駁時間，不宜只用波多市區至 Tui 的車程估算整段交通。",
-          "簡單來說：想體驗熱鬧的朝聖者社群、沿途補給選擇多，且不介意人潮，可考慮 Sarria；偏好葡萄牙路線文化、邊境城鎮風景，以及相對較少的出發人數，可考慮 Tui。",
+          "Sarria（至聖地牙哥約 114.2 km）是法國之路最熱門的百公里起點之一。沿途城鎮、住宿、餐飲與補給設施相對密集，對第一次走朝聖之路的人來說，行程安排與物資補給都較為容易。不過，這也是法國之路人潮最集中的路段之一，尤其在旅遊旺季，熱門城鎮的住宿需求較高，建議提早規劃並預訂住宿。根據 2025 年聖地牙哥朝聖者接待處的出發地統計資料，約有 161,882 人從 Sarria 出發前往聖地牙哥。",
+          "Tui（至聖地牙哥約 116 km）位於西班牙加利西亞與葡萄牙的邊境，隔著米尼奧河（Río Miño）與葡萄牙 Valença 相望。這段葡萄牙中部之路（Camino Portugués Central）沿途經過森林、村落、歷史城鎮與石橋，整體地形起伏相對溫和，但仍有部分上坡路段。根據 2025 年聖地牙哥朝聖者接待處的出發地統計資料，約有 41,643 人從 Tui 出發，出發人數明顯少於 Sarria，但仍是住宿、餐飲與朝聖服務相當成熟的路線。",
+          "從波多前往 Tui，可選擇巴士或火車。巴士車程約 2 小時，實際時間依班次及交通狀況而異；火車則沒有直達班次，通常需要轉乘，整體車程約 2 小時以上。若從波多機場抵達，還需要另外計算機場至市區或巴士站、火車站的接駁時間，不宜只以波多市區至 Tui 的車程估算整段交通時間。",
+          "簡單來說：想體驗熱鬧的朝聖者社群、享有較密集的住宿與補給選擇，且不介意人潮，可考慮 Sarria；偏好葡萄牙路線文化、邊境城鎮風景，以及相對較少的出發人數，可考慮 Tui。",
         ],
         paragraphsEn: [
-          "Sarria (approximately 114.2 km from Santiago) is one of the most popular starting points on the French Way. Towns, accommodation, restaurants, and supply stops are relatively frequent, making this route easier to organise for first-time pilgrims. However, it is also one of the busiest sections of the Camino, and accommodation in popular towns can be in high demand during peak season. Around 161,882 pilgrims started in Sarria in 2025.",
-          "Tui (approximately 116 km from Santiago) lies on the border between Galicia in Spain and Portugal, facing the Portuguese town of Valença across the River Miño. The Central Portuguese Way passes through woodland, villages, historic towns, and stone bridges. Its overall profile is relatively moderate, although some uphill sections remain. Around 41,643 pilgrims started in Tui in 2025, considerably fewer than in Sarria, but it is still an established and well-travelled route.",
-          "From Porto, you can reach Tui by bus or train connections. The bus journey takes approximately two hours, depending on the service and traffic. Trains are not direct and require a transfer. If you are arriving at Porto Airport, allow extra time to travel between the airport, the city, and the departure station or bus terminal.",
-          "In short: choose Sarria if you want a lively pilgrim atmosphere and frequent services, and do not mind larger crowds. Choose Tui if you prefer the Portuguese route's culture, border-town scenery, and a lower number of starting pilgrims.",
+          "Sarria (approximately 114.2 km from Santiago) is one of the most popular starting points on the French Way (Camino Francés). Towns, accommodation, restaurants, and supply facilities are relatively frequent along this section, making it easier for first-time pilgrims to plan their journey and replenish supplies. However, it is also one of the busiest sections of the Camino, and accommodation in popular towns can be in high demand during peak season. According to 2025 statistics from the Pilgrim Reception Office in Santiago de Compostela, approximately 161,882 pilgrims received their Compostela after starting in Sarria.",
+          "Tui (approximately 116 km from Santiago) lies on the border between Galicia in Spain and Portugal, facing the Portuguese town of Valença across the River Miño. The Central Portuguese Way (Camino Portugués Central) passes through woodland, villages, historic towns, and stone bridges. The terrain is generally undulating but relatively gentle, although some uphill sections remain. According to 2025 statistics from the Pilgrim Reception Office in Santiago de Compostela, approximately 41,643 pilgrims received their Compostela after starting in Tui. This is considerably fewer than the number starting in Sarria, but Tui remains a well-established Camino starting point with established accommodation, dining, and pilgrim services.",
+          "From Porto, you can reach Tui by bus or train. The bus journey takes approximately two hours, depending on the service and traffic conditions. There are no direct train services, so at least one transfer is required, with the overall journey generally taking more than two hours. If you are arriving at Porto Airport, allow extra time for the transfer to the city centre and the relevant bus terminal or train station.",
+          "In short: choose Sarria if you want a lively pilgrim atmosphere, convenient accommodation and supply options, and do not mind larger crowds. Choose Tui if you prefer Portuguese Camino culture, border-town scenery, and fewer pilgrims starting from your chosen point.",
         ],
       },
       {
         heading: "5～7 天怎麼安排？兩條路線的分段建議",
         headingEn: "How to Plan 5–7 Days: Suggested Stage Splits",
+
         paragraphs: [
-          "【Sarria：法國之路】全程約 114.2 km。5 天走法是較緊湊的經典安排，常見分段約為 Sarria → Portomarín（22.2 km）、Portomarín → Palas de Rei（24.8 km）、Palas de Rei → Arzúa（28.5 km）、Arzúa → O Pedrouzo（19.3 km）、O Pedrouzo → Santiago（19.4 km）。其中 Palas de Rei 至 Arzúa 路段較長，對體力與腳部耐受度有一定要求。",
-          "若希望降低每日負擔，可改安排 6 天，最長單日距離可縮短至約 22.3 km；若有較充裕時間，7 天行程則能將每日距離控制在約 20 km 以內，適合希望放慢腳步、保留休息時間或初次長距離徒步的人。",
-          "【Tui：葡萄牙之路】全程約 116 km。6 天是常見且較均衡的安排，分段可參考 Tui → O Porriño（約 16.1 km）、O Porriño → Redondela（約 16 km）、Redondela → Pontevedra（約 19.8 km）、Pontevedra → Caldas de Reis（約 21.1 km）、Caldas de Reis → Padrón（約 18.6 km）、Padrón → Santiago（約 24.4 km）。實際距離會因路線版本與測量方式而略有差異。",
-          "Tui 若壓縮成 5 天，部分路段會超過 25 km，甚至接近 29 km，較適合已有長距離徒步經驗、體能與腳部狀況良好的人。若安排 7 天，則能將每日距離縮短，較容易兼顧沿途景點、休息與住宿安排。",
-          "以上是規劃參考，不代表固定或唯一的官方分段。每日距離應依個人體能、天候、住宿位置及庇護所營業情況調整。尤其旺季期間，建議先確認住宿是否需要預訂，以及抵達時間是否符合入住規定。",
+          "Sarria｜法國之路：全程約 114.2 km。5 天是較緊湊的經典安排，每日分段如下：\nDay 1｜Sarria → Portomarín：22.2 km\nDay 2｜Portomarín → Palas de Rei：24.8 km\nDay 3｜Palas de Rei → Arzúa：28.5 km\nDay 4｜Arzúa → O Pedrouzo：19.3 km\nDay 5｜O Pedrouzo → Santiago：19.4 km\n其中 Day 3 是全程較長的一天，對體力與腳部耐受度有一定要求。",
+
+          "Sarria 也可以安排 6 或 7 天。6 天行程可將最長單日距離縮短至約 22.3 km，適合希望降低每日負擔的人；7 天則可將每日距離控制在約 20 km 以內，適合希望放慢腳步、保留休息時間或初次長距離徒步的人。",
+
+          "Tui｜葡萄牙之路：全程約 116 km。6 天是常見且較均衡的安排，每日分段如下：\nDay 1｜Tui → O Porriño：約 16.1 km\nDay 2｜O Porriño → Redondela：約 16 km\nDay 3｜Redondela → Pontevedra：約 19.8 km\nDay 4｜Pontevedra → Caldas de Reis：約 21.1 km\nDay 5｜Caldas de Reis → Padrón：約 18.6 km\nDay 6｜Padrón → Santiago：約 24.4 km",
+
+          "Tui 也可以安排 5 或 7 天。若壓縮成 5 天，部分路段會超過 25 km，甚至接近 29 km，較適合已有長距離徒步經驗、體能與腳部狀況良好的人；若安排 7 天，則能進一步縮短每日距離，較容易兼顧沿途景點、休息與住宿安排。",
+
+          "行程規劃提醒：以上分段僅供規劃參考，並非固定或唯一的官方安排。實際距離會因路線版本、測量方式及住宿位置而略有差異。每日行程應依個人體能、天候、住宿位置及庇護所營業情況調整。尤其旺季期間，建議提早確認住宿供應情況、是否需要預訂，以及抵達時間是否符合入住規定。",
         ],
+
         paragraphsEn: [
-          "[Sarria – French Way] The total distance is approximately 114.2 km. A five-day itinerary is a relatively compact and popular option. A typical split is Sarria → Portomarín (22.2 km), Portomarín → Palas de Rei (24.8 km), Palas de Rei → Arzúa (28.5 km), Arzúa → O Pedrouzo (19.3 km), and O Pedrouzo → Santiago (19.4 km). The Palas de Rei–Arzúa stage is particularly long and requires good stamina and foot endurance.",
-          "For a more balanced pace, a six-day itinerary reduces the longest daily stage to approximately 22.3 km. With seven days, daily distances can generally be kept below around 20 km, allowing more time for breaks and a less demanding first long-distance pilgrimage.",
-          "[Tui – Portuguese Way] The total distance is approximately 116 km. Six days is a common and relatively balanced option. Suggested stages are Tui → O Porriño (about 16.1 km), O Porriño → Redondela (about 16 km), Redondela → Pontevedra (about 19.8 km), Pontevedra → Caldas de Reis (about 21.1 km), Caldas de Reis → Padrón (about 18.6 km), and Padrón → Santiago (about 24.4 km). Actual distances may vary slightly depending on the route version and measurement method.",
-          "Compressing the Tui route into five days creates several stages longer than 25 km, with some approaching 29 km. This is more suitable for experienced long-distance walkers with good fitness and foot endurance. A seven-day itinerary shortens the daily distances and leaves more time for sightseeing, rest, and accommodation arrangements.",
-          "These are planning examples, not fixed or official stage requirements. Adjust each day according to your fitness, weather, accommodation locations, and hostel opening schedules. During peak season, check whether accommodation needs to be booked in advance and confirm its check-in arrangements.",
+          "Sarria – French Way： The total distance is approximately 114.2 km. A five-day itinerary is a relatively compact and popular option. Suggested daily stages are:\nDay 1 | Sarria → Portomarín: 22.2 km\nDay 2 | Portomarín → Palas de Rei: 24.8 km\nDay 3 | Palas de Rei → Arzúa: 28.5 km\nDay 4 | Arzúa → O Pedrouzo: 19.3 km\nDay 5 | O Pedrouzo → Santiago: 19.4 km\nDay 3 is the longest stage and requires good stamina and foot endurance.",
+
+          "Sarria can also be completed in six or seven days. A six-day itinerary reduces the longest daily stage to approximately 22.3 km, making it a more manageable option. With seven days, daily distances can generally be kept below 20 km, allowing more time for breaks and a more relaxed pace. This is particularly suitable for first-time long-distance pilgrims.",
+
+          "Tui – Portuguese Way： The total distance is approximately 116 km. Six days is a common and relatively balanced option. Suggested daily stages are:\nDay 1 | Tui → O Porriño: approximately 16.1 km\nDay 2 | O Porriño → Redondela: approximately 16 km\nDay 3 | Redondela → Pontevedra: approximately 19.8 km\nDay 4 | Pontevedra → Caldas de Reis: approximately 21.1 km\nDay 5 | Caldas de Reis → Padrón: approximately 18.6 km\nDay 6 | Padrón → Santiago: approximately 24.4 km",
+
+          "Tui can also be completed in five or seven days. A five-day itinerary involves several stages exceeding 25 km, with some approaching 29 km. This is more suitable for experienced long-distance walkers with good fitness and foot endurance. A seven-day itinerary allows shorter daily stages, making it easier to balance walking with sightseeing, rest, and accommodation arrangements.",
+
+          "Itinerary Planning Tips: These stage breakdowns are intended as planning references, not fixed or official requirements. Actual distances may vary depending on the route variant, measurement method, and accommodation locations. Adjust your daily stages according to your fitness, weather conditions, accommodation options, and albergue opening schedules. During peak season, check accommodation availability in advance, confirm whether reservations are required, and verify check-in times.",
         ],
       },
       {
