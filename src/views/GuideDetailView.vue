@@ -74,6 +74,7 @@ watchEffect(() => {
         headline: articleTitle,
         description: isEn.value ? item.seoDescriptionEn : item.seoDescription,
         image: [ogImageUrl],
+        datePublished: item.updatedAt,
         dateModified: item.updatedAt,
         inLanguage: currentLocale,
         mainEntityOfPage: {
