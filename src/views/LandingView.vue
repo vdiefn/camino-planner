@@ -39,7 +39,7 @@ const overviewBlocks = computed<EditorialBlock[]>(() => {
   return Array.isArray(raw) ? (raw as EditorialBlock[]) : []
 })
 
-const featuredGuides = computed(() => GUIDE_ARTICLES)
+const featuredGuides = computed(() => GUIDE_ARTICLES.slice(0, 6))
 
 // 依據目前 Store 中選定的路線決定「繼續規劃」的目的地
 const currentRouteId = computed(() => scheduleStore.currentRouteId || 'frances')

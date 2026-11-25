@@ -40,6 +40,12 @@ const PUBLIC_ROUTES = [
   { path: '/guides/albergue-guide', lastmod: '2026-11-23' },
   { path: '/guides/footwear-and-luggage', lastmod: '2026-11-23' },
   { path: '/guides/budget-breakdown', lastmod: '2026-11-23' },
+  { path: '/guides/credencial-and-compostela', lastmod: '2026-11-25' },
+  { path: '/guides/finisterre-muxia-extension', lastmod: '2026-11-25' },
+  { path: '/guides/bedbug-prevention-and-hygiene', lastmod: '2026-11-25' },
+  { path: '/guides/solo-pilgrim-safety-and-etiquette', lastmod: '2026-11-25' },
+  { path: '/guides/pilgrim-menu-and-food', lastmod: '2026-11-25' },
+  { path: '/guides/sim-card-and-navigation', lastmod: '2026-11-25' },
   { path: '/weather', lastmod: '2026-11-23' },
   // 關於、聯絡與隱私權
   { path: '/about', lastmod: '2026-11-23' },
