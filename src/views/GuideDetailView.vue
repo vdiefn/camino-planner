@@ -74,8 +74,12 @@ watchEffect(() => {
         headline: articleTitle,
         description: isEn.value ? item.seoDescriptionEn : item.seoDescription,
         image: [ogImageUrl],
-        datePublished: item.updatedAt,
-        dateModified: item.updatedAt,
+        datePublished: item.updatedAt.includes('T')
+          ? item.updatedAt
+          : `${item.updatedAt}T00:00:00+08:00`,
+        dateModified: item.updatedAt.includes('T')
+          ? item.updatedAt
+          : `${item.updatedAt}T00:00:00+08:00`,
         inLanguage: currentLocale,
         mainEntityOfPage: {
           '@type': 'WebPage',

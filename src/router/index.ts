@@ -15,14 +15,14 @@ const SITE_ORIGIN = 'https://camino-plan.com'
 
 const DEFAULT_SEO = {
   'zh-TW': {
-    title: '朝聖之路規劃工具｜法國之路・葡萄牙之路・北方之路行程與裝備表 | Camino Plan',
+    title: 'Camino Plan 朝聖之路規劃工具｜行程天數・裝備清單・預算試算',
     description:
       '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費規劃工具。涵蓋朝聖法國之路、葡萄牙之路與北方之路的每日天數行程表、里程計算、10% 體重裝備打包清單與起點交通攻略。',
     keywords:
       '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 朝聖法國之路, 法國之路規劃, 葡萄牙之路, 北方之路, 朝聖裝備清單, 庇護所, 完步證書, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte',
   },
   en: {
-    title: 'Camino de Santiago Planner & Packing Tool | Camino Plan',
+    title: 'Free Camino de Santiago Planner & Packing Tools | Camino Plan',
     description:
       'Free minimalist planner for Camino de Santiago pilgrims. Daily stage distance calculator, 10% body weight packing checklist, and trailhead transport guides for French, Portuguese, and Northern ways. Works offline.',
     keywords:
@@ -46,14 +46,14 @@ interface StaticSeoConfig {
 const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
   landing: {
     'zh-TW': {
-      title: '朝聖之路規劃工具｜法國之路・葡萄牙之路・北方之路行程與裝備表 | Camino Plan',
+      title: 'Camino Plan 朝聖之路規劃工具｜行程天數・裝備清單・預算試算',
       description:
         '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費規劃工具。涵蓋朝聖法國之路、葡萄牙之路與北方之路的每日天數行程表、里程計算、10% 體重裝備打包清單與起點交通攻略。',
       keywords:
         '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 朝聖法國之路, 法國之路規劃, 葡萄牙之路, 北方之路, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte, Santiago de Compostela',
     },
     en: {
-      title: 'Camino de Santiago Planner & Packing Tool | Camino Plan',
+      title: 'Free Camino de Santiago Planner & Packing Tools | Camino Plan',
       description:
         'Free minimalist planner for Camino de Santiago pilgrims. Daily stage distance calculator, 10% body weight packing checklist, and trailhead transport guides for French, Portuguese, and Northern ways. Works offline.',
       keywords:
@@ -154,9 +154,9 @@ const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
   },
   weather: {
     'zh-TW': {
-      title: '朝聖之路過往天氣查詢 | Camino Plan',
+      title: '朝聖之路幾月去？過往天氣與四季降雨月曆查詢 | Camino Plan',
       description:
-        '依西班牙 AEMET 與葡萄牙 IPMA 1991–2020 官方區域測站統計，比較法國之路、葡萄牙之路、北方之路與世界盡頭各月份溫度與降雨變化，精準準備睡袋與雨具。',
+        '依西班牙 AEMET 與葡萄牙 IPMA 1991–2020 官方區域測站統計，比較法國之路、葡萄牙之路、北方之路與世界盡頭各月份溫度與降雨變化，快速找出最適合你的出發月份。',
       keywords:
         '朝聖之路天氣, 朝聖之路過往天氣, 法國之路氣候, 葡萄牙之路天氣, 朝聖之路幾月去, Camino weather, Camino historical climate, AEMET Camino',
     },
@@ -235,7 +235,7 @@ const router = createRouter({
           name: 'landing',
           component: () => import('@/views/LandingView.vue'),
           meta: {
-            title: '朝聖之路行程與裝備規劃工具 | Camino Plan (法國之路 / 葡萄牙之路 / 北方之路)',
+            title: 'Camino Plan 朝聖之路規劃工具｜行程天數・裝備清單・預算試算',
             description:
               '專為聖雅各朝聖之路（Camino de Santiago）徒步者打造的免費極簡規劃工具。提供法國之路、葡萄牙之路與北方之路的每日分段里程計算、10% 體重負重裝備打包清單，以及各起點交通避坑指南。支援離線使用與跨裝置免登入同步。',
           },
@@ -510,8 +510,8 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
       }
     }
     return {
-      title: `朝聖${routeMeta.chineseName}行程規劃與每日天數表 (${routeMeta.name}) | Camino Plan`,
-      description: `專為朝聖${routeMeta.chineseName}規劃打造的免費行程表工具。全長約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天，支援每日分段公里試算、爬升下降、庇護所住宿清單與世界盡頭延伸段。`,
+      title: `${routeMeta.chineseName}行程規劃表：每日里程與庇護所清單 | Camino Plan`,
+      description: `免登入免費使用！專為${routeMeta.chineseName}（${routeMeta.name}）打造的行程表工具，全長約 ${routeMeta.totalDistanceKm}km、建議 ${routeMeta.recommendedDays} 天，含每日里程試算、爬升與庇護所清單。`,
       keywords: `朝聖${routeMeta.chineseName}, ${routeMeta.chineseName}規劃, ${routeMeta.name}, 每日分段里程, 朝聖住宿清單, 爬升下降, 世界盡頭`,
     }
   }
@@ -540,8 +540,8 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
       }
     }
     return {
-      title: `${routeMeta.chineseName}起點交通攻略與轉乘指南 (${routeMeta.name}) | Camino Plan`,
-      description: `提供抵達${routeMeta.chineseName}起點的最佳大眾運輸交通指南、高鐵與巴士班次規劃、跨國轉乘避坑提醒與官方訂票連結。`,
+      title: `${routeMeta.chineseName}起點交通攻略：高鐵巴士與機場接駁指南 | Camino Plan`,
+      description: `提供抵達${routeMeta.chineseName}（${routeMeta.name}）起點的大眾運輸攻略、巴黎/馬德里/波多轉乘火車巴士班次、避坑提醒與官方訂票連結。`,
       keywords: `${routeMeta.chineseName}交通, 起點轉乘, 機場接駁, 高鐵巴士班次, 官方訂票`,
     }
   }
@@ -549,7 +549,7 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
   if (to.name === 'routes' && routeId && routeMeta) {
     if (isEn) {
       return {
-        title: `${routeMeta.name} Route Guide, Difficulty & Trail Tips | Camino Plan`,
+        title: `${routeMeta.name} Route Map, Stages & Difficulty Guide | Camino Plan`,
         description: `Complete guide to ${routeMeta.name} (~${routeMeta.totalDistanceKm}km, ${routeMeta.recommendedDays} days): terrain breakdown, best walking months, trailhead transit, and key pitfalls.`,
         keywords: `${routeMeta.name} guide, ${routeMeta.name} difficulty, Camino route guide, Santiago de Compostela`,
       }

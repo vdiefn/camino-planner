@@ -3,7 +3,7 @@ import type { GuideArticle } from "./types";
 export const bedbugPreventionGuide: GuideArticle = {
   slug: "bedbug-prevention-and-hygiene",
   category: "accommodation",
-  title: "庇護所床蟲預防、睡袋衛生與洗衣實務",
+  title: "朝聖之路床蟲預防：庇護所床位檢查、睡袋與洗衣",
   titleEn: "Albergue Hygiene: Bed Bug Prevention, Sleeping Bags & Laundry",
   subtitle: "入住多人宿舍最擔心的床蟲問題該如何預防？從進房檢查、背包擺放位置，到發現後的隔離處理方式一次整理。",
   subtitleEn:
