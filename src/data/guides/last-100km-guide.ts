@@ -3,7 +3,7 @@ import type { GuideArticle } from "./types";
 export const last100kmGuide: GuideArticle = {
   slug: "last-100km-guide",
   category: "route-strategy",
-  title: "最後 100 公里怎麼走？Sarria 與 Tui 路線及行程規劃",
+  title: "朝聖之路最後 100 公里：法國之路 Sarria 與葡萄牙 Tui 攻略",
   titleEn: "Walking the Last 100 km: Sarria vs. Tui Routes & Itinerary Planning",
   subtitle:
     "假期只有一週，也能挑戰朝聖之路！比較法國之路 Sarria 與葡萄牙之路 Tui 的路線特色、交通接駁、5～7 天分段安排，以及申請完步證書（Compostela）的官方規定。",

@@ -3,7 +3,7 @@ import type { GuideArticle } from "./types";
 export const bestSeasonsGuide: GuideArticle = {
   slug: "best-seasons",
   category: "route-strategy",
-  title: "朝聖之路什麼時候去最好？四季氣候與出發月份分析",
+  title: "2026 朝聖之路適合月份：5月/9月最佳時機與四季氣候比較",
   titleEn: "When to Walk the Camino de Santiago: Seasonal Weather & Best Months",
   subtitle:
     "比較春、夏、秋、冬四季氣溫、降雨、人潮與庇護所營運狀況，了解不同季節的徒步優勢與風險，找出最適合你的出發月份。",
