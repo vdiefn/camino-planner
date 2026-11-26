@@ -3,7 +3,7 @@ import type { GuideArticle } from "./types";
 export const simCardAndNavigationGuide: GuideArticle = {
   slug: "sim-card-and-navigation",
   category: "gear-budget",
-  title: "朝聖之路網路 eSIM、離線地圖與指標辨識",
+  title: "2026 朝聖之路網路 eSIM 推薦與離線地圖導航",
   titleEn: "Connectivity & Navigation: eSIMs, Offline Maps & Trail Markers",
   subtitle: "手機用 eSIM 還是去西班牙買實體 SIM 卡？山區沒訊號怎麼用離線地圖導航，以及怎麼看懂黃色箭頭與扇貝殼的方向。",
   subtitleEn:
