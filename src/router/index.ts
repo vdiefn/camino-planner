@@ -22,7 +22,7 @@ const DEFAULT_SEO = {
       '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 朝聖法國之路, 法國之路規劃, 葡萄牙之路, 北方之路, 朝聖裝備清單, 庇護所, 完步證書, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte',
   },
   en: {
-    title: 'Camino de Santiago Planner & Packing Tool | Camino Plan',
+    title: 'Free Camino de Santiago Planner & Packing Tools | Camino Plan',
     description:
       'Free minimalist planner for Camino de Santiago pilgrims. Daily stage distance calculator, 10% body weight packing checklist, and trailhead transport guides for French, Portuguese, and Northern ways. Works offline.',
     keywords:
@@ -53,7 +53,7 @@ const STATIC_ROUTE_SEO: Record<string, StaticSeoConfig> = {
         '朝聖之路, 聖雅各朝聖之路, 朝聖之路規劃, 朝聖法國之路, 法國之路規劃, 葡萄牙之路, 北方之路, Camino de Santiago, Camino planner, Camino Francés, Camino Portugués, Camino del Norte, Santiago de Compostela',
     },
     en: {
-      title: 'Camino de Santiago Planner & Packing Tool | Camino Plan',
+      title: 'Free Camino de Santiago Planner & Packing Tools | Camino Plan',
       description:
         'Free minimalist planner for Camino de Santiago pilgrims. Daily stage distance calculator, 10% body weight packing checklist, and trailhead transport guides for French, Portuguese, and Northern ways. Works offline.',
       keywords:
@@ -540,8 +540,8 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
       }
     }
     return {
-      title: `${routeMeta.chineseName}起點交通攻略與轉乘指南 (${routeMeta.name}) | Camino Plan`,
-      description: `提供抵達${routeMeta.chineseName}起點的最佳大眾運輸交通指南、高鐵與巴士班次規劃、跨國轉乘避坑提醒與官方訂票連結。`,
+      title: `${routeMeta.chineseName}起點交通攻略：高鐵巴士與機場接駁指南 | Camino Plan`,
+      description: `提供抵達${routeMeta.chineseName}（${routeMeta.name}）起點的大眾運輸攻略、巴黎/馬德里/波多轉乘火車巴士班次、避坑提醒與官方訂票連結。`,
       keywords: `${routeMeta.chineseName}交通, 起點轉乘, 機場接駁, 高鐵巴士班次, 官方訂票`,
     }
   }
@@ -549,7 +549,7 @@ function resolveRouteSeoMeta(to: RouteLocationNormalized, isEn: boolean) {
   if (to.name === 'routes' && routeId && routeMeta) {
     if (isEn) {
       return {
-        title: `${routeMeta.name} Route Guide, Difficulty & Trail Tips | Camino Plan`,
+        title: `${routeMeta.name} Route Map, Stages & Difficulty Guide | Camino Plan`,
         description: `Complete guide to ${routeMeta.name} (~${routeMeta.totalDistanceKm}km, ${routeMeta.recommendedDays} days): terrain breakdown, best walking months, trailhead transit, and key pitfalls.`,
         keywords: `${routeMeta.name} guide, ${routeMeta.name} difficulty, Camino route guide, Santiago de Compostela`,
       }
